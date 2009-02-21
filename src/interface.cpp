@@ -90,7 +90,7 @@ using namespace Qt;
 
 /* The main interface widget */
 EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *name) 
- : Q3MainWindow (parent, name),
+ : QMainWindow (parent, name),
 	m_player(0),
 	m_dataLocationMgr(dlm),
 	m_mapMgr(0),
@@ -134,15 +134,17 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	m_messageFilterDialog(0),
 	m_guildListWindow(0)
 {
+	// set central widget to just a blank widget
+	setCentralWidget(new QWidget(this, "filler"));
+	
 	// disable the dock menu
-	setDockMenuEnabled(false);
+	//setDockMenuEnabled(false);
 	
 	// make sure the windows menus list autodeletes
 	m_windowsMenus.setAutoDelete(true);
 	
-	setCentralWidget(new QWidget(this, "filler"));
-	
-	//setSizePolicy(QSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum, false));
+	QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum, false);
+	setSizePolicy(sizePolicy);
 	
 	for (int l = 0; l < maxNumMaps; l++)
 		m_map[l] = 0;
@@ -153,6 +155,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	QString tempStr;
 	QString section = "Interface";
 	
+	// Shouldn't these be declared somewehere else...
 	m_selectOnConsider = pSEQPrefs->getPrefBool("SelectOnCon", section, false);
 	m_selectOnTarget = pSEQPrefs->getPrefBool("SelectOnTarget", section, false);
 	
@@ -175,7 +178,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	if (pSEQPrefs->isPreference("Font", section))
 	{
 		QFont appFont = pSEQPrefs->getPrefFont("Font", section, qApp->font());
-		qApp->setFont( appFont, true );
+		qApp->setFont(appFont, true);
 	}
 	
 	// initialize packet count
@@ -189,8 +192,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	m_messageFilters = new MessageFilters(this, "messagefilters");
 	
 	// Create Messages storage
-	m_messages = new Messages(m_dateTimeMgr, m_messageFilters, 
-							  this, "messages");
+	m_messages = new Messages(m_dateTimeMgr, m_messageFilters, this, "messages");
 	
 	// Create the terminal object
 	m_terminal = new Terminal(m_messages, this, "terminal");
@@ -202,42 +204,35 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	section = "Network";
 	QString vpsection = "VPacket";
 	
-	fileName = pSEQPrefs->getPrefString("WorldOPCodes", section, 
-										"worldopcodes.xml");
-	
+	/* get world opcodes file */
+	fileName = pSEQPrefs->getPrefString("WorldOPCodes", section, "worldopcodes.xml");
 	fileInfo = m_dataLocationMgr->findExistingFile(".", fileName);
-	
-	fileName2 = pSEQPrefs->getPrefString("ZoneOPCodes", section, 
-										 "zoneopcodes.xml");
-	
+
+	/* get zone opcodes file */
+	fileName2 = pSEQPrefs->getPrefString("ZoneOPCodes", section, "zoneopcodes.xml");
 	fileInfo2 = m_dataLocationMgr->findExistingFile(".", fileName2);
 	
+	// make packet object
 	m_packet = new EQPacket(fileInfo.absFilePath(),
 							fileInfo2.absFilePath(),
 							pSEQPrefs->getPrefInt("ArqSeqGiveUp", section, 512),
 							pSEQPrefs->getPrefString("Device", section, "eth0"),
-							pSEQPrefs->getPrefString("IP", section,
-													 AUTOMATIC_CLIENT_IP),
+							pSEQPrefs->getPrefString("IP", section, AUTOMATIC_CLIENT_IP),
 							pSEQPrefs->getPrefString("MAC", section, "0"),
-							pSEQPrefs->getPrefBool("RealTimeThread", section,
-												   false),
-							pSEQPrefs->getPrefBool("SessionTracking", 
-												   section, false),
+							pSEQPrefs->getPrefBool("RealTimeThread", section, false),
+							pSEQPrefs->getPrefBool("SessionTracking", section, false),
 							pSEQPrefs->getPrefBool("Record", vpsection, false),
-							pSEQPrefs->getPrefInt("Playback", vpsection,
-												  PLAYBACK_OFF),
-							pSEQPrefs->getPrefInt("PlaybackRate", vpsection, 
-												  false),
+							pSEQPrefs->getPrefInt("Playback", vpsection, PLAYBACK_OFF),
+							pSEQPrefs->getPrefInt("PlaybackRate", vpsection, false),
 							this, "packet");
 	
 	ipstr[0] = m_packet->ip();	//Retrieves last IP used in previous session 
-	for( int i = 1; i < 5; i++) 
+	for (int i = 1; i < 5; i++) 
 		ipstr[i] = "0.0.0.0";
 	
 	macstr[0] = m_packet->mac();	//Retrieves last MAC used in previous session
-	for( int i = 1; i < 5; i++)  
+	for (int i = 1; i < 5; i++)  
 		macstr[i] = "00:00:00:00:00:00";
-	
 	
 	// setup the user directory
 	m_dataLocationMgr->setupUserDirectory();
@@ -245,9 +240,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	section = "Interface";
 	
 	// Create the Spells object
-	fileName = pSEQPrefs->getPrefString("SpellsFile", section,
-										"spells_us.txt");
-	
+	fileName = pSEQPrefs->getPrefString("SpellsFile", section, "spells_us.txt");
 	fileInfo = m_dataLocationMgr->findExistingFile(".", fileName);
 	
 	m_spells = new Spells(fileInfo.absFilePath());
@@ -259,23 +252,18 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	m_zoneMgr = new ZoneMgr(this, "zonemgr");
 	
 	// Create GuildMgr object
-	fileName = pSEQPrefs->getPrefString("GuildsFile", "Interface",
-										"guilds2.dat");
-	
+	fileName = pSEQPrefs->getPrefString("GuildsFile", "Interface", "guilds2.dat");
 	fileInfo = m_dataLocationMgr->findWriteFile("tmp", fileName);
 	
-	m_guildmgr = new GuildMgr(fileInfo.absFilePath(), 
-							  this, "guildmgr");
+	m_guildmgr = new GuildMgr(fileInfo.absFilePath(), this, "guildmgr");
 	
 	// Create our player object
 	m_player = new Player(this, m_zoneMgr, m_guildmgr);
 	
 	// Create the filter manager
-	m_filterMgr = new FilterMgr(m_dataLocationMgr,
-								pSEQPrefs->getPrefString("FilterFile", 
-														 section, "global.xml"),
-								pSEQPrefs->getPrefBool("IsCaseSensitive", 
-													   section, false));
+	m_filterMgr = new FilterMgr(m_dataLocationMgr, 
+								pSEQPrefs->getPrefString("FilterFile", section, "global.xml"),
+								pSEQPrefs->getPrefBool("IsCaseSensitive", section, false));
 	
 	// if there is a short zone name already, try to load its filters
 	QString shortZoneName = m_zoneMgr->shortZoneName();
@@ -291,8 +279,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	m_categoryMgr = new CategoryMgr();
 	
 	// Create the map manager
-	m_mapMgr = new MapMgr(m_dataLocationMgr, m_spawnShell, m_player, m_zoneMgr,
-						  this);
+	m_mapMgr = new MapMgr(m_dataLocationMgr, m_spawnShell, m_player, m_zoneMgr, this);
 	
 	// Create the spell shell
 	m_spellShell = new SpellShell(m_player, m_spawnShell, m_spells);
@@ -349,55 +336,11 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	
 	section = "Interface";
 	
-	// create window menu
-	m_windowMenu = new Q3PopupMenu;
-	
-	// Initialize the experience window;
-	m_expWindow = new ExperienceWindow(m_dataLocationMgr, m_player, m_groupMgr,
-									   m_zoneMgr);
-	setDockEnabled(m_expWindow, 
-				   pSEQPrefs->getPrefBool("DockableExperienceWindow",
-										  section, false));
-	Qt::ToolBarDock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", 
-																  m_expWindow->preferenceName(),
-																  Qt::DockUnmanaged);
-	addDockWindow(m_expWindow, edge, false);
-	m_expWindow->undock();
-	
-	m_expWindow->restoreSize();
-	
-	// move window to new position
-	if (pSEQPrefs->getPrefBool("UseWindowPos", section, true))
-		m_expWindow->restorePosition();
-	
-	if (pSEQPrefs->getPrefBool("ShowExpWindow", section, false))
-		m_expWindow->show();
-	
-    // insert its menu into the window menu
-	insertWindowMenu(m_expWindow);
+	// Initialize the experience window
+	setupExperienceWindow();
 	
 	// Initialize the combat window
-	m_combatWindow = new CombatWindow(m_player);
-	setDockEnabled(m_combatWindow, 
-				   pSEQPrefs->getPrefBool("DockableCombatWindow",
-										  section, false));
-	edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", 
-												  m_combatWindow->preferenceName(),
-												  Qt::DockUnmanaged);
-	addDockWindow(m_combatWindow, edge, false);
-	m_combatWindow->undock();
-	
-	m_combatWindow->restoreSize();
-	
-	// move window to new position
-	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
-		m_combatWindow->restorePosition();
-	
-	if (pSEQPrefs->getPrefBool("ShowCombatWindow", section, false))
-		m_combatWindow->show();
-	
-    // insert its menu into the window menu
-	insertWindowMenu(m_combatWindow);
+	setupCombatWindow();
 	
 	/////////////////
 	// Main widgets
@@ -434,8 +377,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 		QString tmpPrefName = QString("DockedMessageWindow") + tmpPrefSuffix;
 		
 		// retrieve if the message window should be docked
-		m_isMessageWindowDocked[i] = 
-		pSEQPrefs->getPrefBool(tmpPrefName, section, false);
+		m_isMessageWindowDocked[i] = pSEQPrefs->getPrefBool(tmpPrefName, section, false);
 		
 		// construct the preference name
 		tmpPrefName = QString("ShowMessageWindow") + tmpPrefSuffix;
@@ -444,9 +386,6 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 		if (pSEQPrefs->getPrefBool(tmpPrefName, section, false))
 			showMessageWindow(i);
 	}
-	
-	// should the compass be docked if it's created
-	m_isCompassDocked = pSEQPrefs->getPrefBool("DockedCompass", section, true);
 	
 	//
 	// Create the Player Skills listview (ONLY CREATED WHEN NEEDED FLOYD!!!!)
@@ -465,6 +404,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	//
 	// Create the compass as required
 	//
+	m_isCompassDocked = pSEQPrefs->getPrefBool("DockedCompass", section, true);	
 	if (pSEQPrefs->getPrefBool("ShowCompass", section, false))
 		showCompass();
 	
@@ -510,36 +450,111 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	
 	/////////////////////
 	// QMenuBar
+	QAction* action = NULL;
+	QMenuBar* menu = menuBar();
 	
 	// The first call to menuBar() makes it exist
-	menuBar()->setSeparator(QMenuBar::InWindowsStyle);
+	//menu->setSeparator(QMenuBar::InWindowsStyle);
 	
+	////////////////////////////////////////////////////////////////
 	// File Menu
-	//pFileMenu = new QPopupMenu;
-	Q3PopupMenu* pFileMenu = new Q3PopupMenu;
-	menuBar()->insertItem("&File", pFileMenu);
-	pFileMenu->insertItem("&Save Preferences", this, SLOT(savePrefs()), CTRL+Key_S);
-	pFileMenu->insertItem("Open &Map", m_mapMgr, SLOT(loadMap()), Key_F1);
-	pFileMenu->insertItem("&Import &Map", m_mapMgr, SLOT(importMap()));
-	pFileMenu->insertItem("Sa&ve Map", m_mapMgr, SLOT(saveMap()), Key_F2);
-	pFileMenu->insertItem("Save SOE Map", m_mapMgr, SLOT(saveSOEMap()));
-	pFileMenu->insertItem("Reload Guilds File", m_guildmgr, SLOT(readGuildList()));
-	pFileMenu->insertItem("Add Spawn Category", this, SLOT(addCategory()) , ALT+Key_C);
-	pFileMenu->insertItem("Rebuild SpawnList", this, SLOT(rebuildSpawnList()) , ALT+Key_R);
-	pFileMenu->insertItem("Reload Categories", this, SLOT(reloadCategories()) , CTRL+Key_R);
-	pFileMenu->insertItem("Select Next", this, SLOT(selectNext()), CTRL+Key_Right);
-	pFileMenu->insertItem("Select Prev", this, SLOT(selectPrev()), CTRL+Key_Left);
-	pFileMenu->insertItem("Save Selected Spawns Path", 
-						  this, SLOT(saveSelectedSpawnPath(void)));
-	pFileMenu->insertItem("Save NPC Spawn Paths",
-						  this, SLOT(saveSpawnPaths(void)));
+	QMenu* pFileMenu = menuBar()->addMenu("&File");
+
+	// Save Preferences
+	action = new QAction("&Save Preferences", this);
+	action->setShortcut(CTRL + Key_S);
+	connect(action, SIGNAL(triggered()), this, SLOT(savePrefs()));
+	pFileMenu->addAction(action);
+
+	// Open Map
+	action = new QAction("Open &Map", this);
+	action->setShortcut(Key_F1);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(loadMap()));
+	pFileMenu->addAction(action);
+	
+	// Import Map
+	action = new QAction("&Import Map", this);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(importMap()));
+	pFileMenu->addAction(action);
+	
+	// Save Map
+	action = new QAction("Sa&ve Map", this);
+	action->setShortcut(Key_F2);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(saveMap()));
+	pFileMenu->addAction(action);
+	
+	// Save SOE Map
+	action = new QAction("Save SOE Map", this);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(saveSOEMap()));
+	pFileMenu->addAction(action);
+	
+	// Reload Guilds File
+	action = new QAction("Reload Guilds File", this);
+	connect(action, SIGNAL(triggered()), m_guildmgr, SLOT(readGuildList()));
+	pFileMenu->addAction(action);
+	
+	// Add Spawn Category
+	action = new QAction("Add Spawn Category", this);
+	action->setShortcut(ALT + Key_C);
+	connect(action, SIGNAL(triggered()), this, SLOT(addCategory()));
+	pFileMenu->addAction(action);
+	
+	// Rebuild Spawn List
+	action = new QAction("Rebuild SpawnList", this);
+	action->setShortcut(ALT + Key_R);
+	connect(action, SIGNAL(triggered()), this, SLOT(rebuildSpawnList()));
+	pFileMenu->addAction(action);
+	
+	// Reload Categories
+	action = new QAction("Reload Categories", this);
+	action->setShortcut(CTRL + Key_R);
+	connect(action, SIGNAL(triggered()), this, SLOT(reloadCategories()));
+	pFileMenu->addAction(action);
+	
+	// Select Next
+	action = new QAction("Select Next", this);
+	action->setShortcut(CTRL + Key_Right);
+	connect(action, SIGNAL(triggered()), this, SLOT(selectNext()));
+	pFileMenu->addAction(action);
+	
+	// Select Prev
+	action = new QAction("Select Prev", this);
+	action->setShortcut(CTRL + Key_Left);
+	connect(action, SIGNAL(triggered()), this, SLOT(selectPrev()));
+	pFileMenu->addAction(action);
+	
+	// Save Selected Spawns Path
+	action = new QAction("Save Selected Spawns Path", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(saveSelectedSpawnPath()));
+	pFileMenu->addAction(action);
+	
+	// Save NPC Spawn Paths
+	action = new QAction("Save NPC Spawn Paths", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(saveSpawnPaths()));
+	pFileMenu->addAction(action);
+	
 	if (m_packet->playbackPackets() != PLAYBACK_OFF)
 	{
-		pFileMenu->insertItem("Inc Playback Speed", m_packet, SLOT(incPlayback()), CTRL+Key_X);
-		pFileMenu->insertItem("Dec Playback Speed", m_packet, SLOT(decPlayback()), CTRL+Key_Z);
+		// Inc Playback Speed
+		action = new QAction("Increase Playback Speed", this);
+		action->setShortcut(CTRL + Key_X);
+		connect(action, SIGNAL(triggered()), m_packet, SLOT(incPlayback()));
+		pFileMenu->addAction(action);
+		
+		// Dec Playback Speed
+		action = new QAction("Decrease Playback Speed", this);
+		action->setShortcut(CTRL + Key_Z);
+		connect(action, SIGNAL(triggered()), m_packet, SLOT(decPlayback()));
+		pFileMenu->addAction(action);
 	}
-	pFileMenu->insertItem("&Quit", qApp, SLOT(quit()));
 	
+	// Quit
+	action = new QAction("&Quit", this);
+	connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
+	pFileMenu->addAction(action);	
+	
+	
+	////////////////////////////////////////////////////////////////
 	// View menu
 	Q3PopupMenu* pViewMenu = new Q3PopupMenu;
 	menuBar()->insertItem("&View", pViewMenu);
@@ -1378,6 +1393,9 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	pInterfaceMenu->insertItem( "Spells File...", 
 							   this, SLOT(select_main_SpellsFile(int)));
 	
+	// create window menu
+	m_windowMenu = new Q3PopupMenu;
+	
 	// insert Window menu
 	menuBar()->insertItem("&Window", m_windowMenu);
 	
@@ -2202,8 +2220,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	// TODO: Add % replacement values and a signal to update, for ip address currently
 	// TODO: being monitored.
 	
-	Q3MainWindow::setCaption(pSEQPrefs->getPrefString("Caption", section, 
-													  "ShowEQ - Main (ctrl+alt+t to toggle menubar)"));
+	QMainWindow::setCaption(pSEQPrefs->getPrefString("Caption", section, "ShowEQ - Main (ctrl+alt+t to toggle menubar)"));
 	
 	// load the format strings for display
 	loadFormatStrings();
@@ -3092,7 +3109,7 @@ void EQInterface::saveDockAreaPrefs(Q3DockArea* a, Qt::ToolBarDock edge)
 
 void EQInterface::setCaption(const QString& text)
 {
-	Q3MainWindow::setCaption(text);
+	QMainWindow::setCaption(text);
 	
 	pSEQPrefs->setPrefString("Caption", "Interface", caption());
 }
@@ -6131,10 +6148,60 @@ void EQInterface::removeWindowMenu(SEQWindow* window)
 
 void EQInterface::setDockEnabled(Q3DockWindow* dw, bool enable)
 {
-	Q3MainWindow::setDockEnabled(dw, DockTop, enable);
-	Q3MainWindow::setDockEnabled(dw, DockBottom, enable);
-	Q3MainWindow::setDockEnabled(dw, DockLeft, enable);
-	Q3MainWindow::setDockEnabled(dw, DockRight, enable);
+	QMainWindow::setDockEnabled(dw, DockTop, enable);
+	QMainWindow::setDockEnabled(dw, DockBottom, enable);
+	QMainWindow::setDockEnabled(dw, DockLeft, enable);
+	QMainWindow::setDockEnabled(dw, DockRight, enable);
+}
+
+void EQInterface::setupExperienceWindow()
+{
+	QString section = "Interface";
+	
+	// Initialize the experience window;
+	m_expWindow = new ExperienceWindow(m_dataLocationMgr, m_player, m_groupMgr, m_zoneMgr);
+	
+	setDockEnabled(m_expWindow, pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
+	Qt::ToolBarDock edge = 
+		(Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_expWindow->preferenceName(), Qt::DockUnmanaged);
+	addDockWindow(m_expWindow, edge, false);
+	m_expWindow->undock();
+	m_expWindow->restoreSize();
+	
+	// move window to new position
+	if (pSEQPrefs->getPrefBool("UseWindowPos", section, true))
+		m_expWindow->restorePosition();
+	
+	if (pSEQPrefs->getPrefBool("ShowExpWindow", section, false))
+		m_expWindow->show();
+	
+    // insert its menu into the window menu
+	insertWindowMenu(m_expWindow);	
+}
+
+void EQInterface::setupCombatWindow()
+{
+	QString section = "Interface";
+	
+	// Initialize the combat window
+	m_combatWindow = new CombatWindow(m_player);
+	
+	setDockEnabled(m_combatWindow, pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
+	Qt::ToolBarDock edge = 
+		(Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_combatWindow->preferenceName(), Qt::DockUnmanaged);
+	addDockWindow(m_combatWindow, edge, false);
+	m_combatWindow->undock();
+	m_combatWindow->restoreSize();
+	
+	// move window to new position
+	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
+		m_combatWindow->restorePosition();
+	
+	if (pSEQPrefs->getPrefBool("ShowCombatWindow", section, false))
+		m_combatWindow->show();
+	
+    // insert its menu into the window menu
+	insertWindowMenu(m_combatWindow);
 }
 
 #ifndef QMAKEBUILD
