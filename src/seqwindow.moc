@@ -1,0 +1,86 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'seqwindow.h'
+**
+** Created: Thu Feb 19 01:03:15 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "seqwindow.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'seqwindow.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_SEQWindow[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       7,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      11,   10,   10,   10, 0x0a,
+      31,   10,   10,   10, 0x0a,
+      52,   10,   10,   10, 0x0a,
+      66,   10,   10,   10, 0x0a,
+      84,   10,   10,   10, 0x0a,
+      98,   10,   10,   10, 0x0a,
+     112,  110,   10,   10, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_SEQWindow[] = {
+    "SEQWindow\0\0setCaption(QString)\0"
+    "setWindowFont(QFont)\0restoreSize()\0"
+    "restorePosition()\0restoreFont()\0"
+    "savePrefs()\0e\0mousePressEvent(QMouseEvent*)\0"
+};
+
+const QMetaObject SEQWindow::staticMetaObject = {
+    { &Q3DockWindow::staticMetaObject, qt_meta_stringdata_SEQWindow,
+      qt_meta_data_SEQWindow, 0 }
+};
+
+const QMetaObject *SEQWindow::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *SEQWindow::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_SEQWindow))
+        return static_cast<void*>(const_cast< SEQWindow*>(this));
+    return Q3DockWindow::qt_metacast(_clname);
+}
+
+int SEQWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = Q3DockWindow::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: setCaption((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: setWindowFont((*reinterpret_cast< const QFont(*)>(_a[1]))); break;
+        case 2: restoreSize(); break;
+        case 3: restorePosition(); break;
+        case 4: restoreFont(); break;
+        case 5: savePrefs(); break;
+        case 6: mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
+        }
+        _id -= 7;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

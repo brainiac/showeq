@@ -1,0 +1,268 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'packetlog.h'
+**
+** Created: Thu Feb 19 01:03:16 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "packetlog.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'packetlog.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_PacketLog[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      10,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      19,   11,   10,   10, 0x0a,
+      55,   39,   10,   10, 0x0a,
+     103,   94,   10,   10, 0x2a,
+     165,  134,   10,   10, 0x0a,
+     241,  221,   10,   10, 0x2a,
+     332,  289,   10,   10, 0x0a,
+     442,  410,   10,   10, 0x2a,
+     519,  512,   10,   10, 0x0a,
+     548,  134,   10,   10, 0x0a,
+     606,  221,   10,   10, 0x2a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_PacketLog[] = {
+    "PacketLog\0\0message\0logMessage(QString)\0"
+    "data,len,prefix\0logData(const uint8_t*,size_t,QString)\0"
+    "data,len\0logData(const uint8_t*,size_t)\0"
+    "data,len,dir,opcode,origPrefix\0"
+    "logData(const uint8_t*,size_t,uint8_t,uint16_t,QString)\0"
+    "data,len,dir,opcode\0"
+    "logData(const uint8_t*,size_t,uint8_t,uint16_t)\0"
+    "data,len,dir,opcode,opcodeEntry,origPrefix\0"
+    "logData(const uint8_t*,size_t,uint8_t,uint16_t,const EQPacketOPCode*,Q"
+    "String)\0"
+    "data,len,dir,opcode,opcodeEntry\0"
+    "logData(const uint8_t*,size_t,uint8_t,uint16_t,const EQPacketOPCode*)\0"
+    "packet\0logData(EQUDPIPPacketFormat)\0"
+    "printData(const uint8_t*,size_t,uint8_t,uint16_t,QString)\0"
+    "printData(const uint8_t*,size_t,uint8_t,uint16_t)\0"
+};
+
+const QMetaObject PacketLog::staticMetaObject = {
+    { &SEQLogger::staticMetaObject, qt_meta_stringdata_PacketLog,
+      qt_meta_data_PacketLog, 0 }
+};
+
+const QMetaObject *PacketLog::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *PacketLog::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_PacketLog))
+        return static_cast<void*>(const_cast< PacketLog*>(this));
+    return SEQLogger::qt_metacast(_clname);
+}
+
+int PacketLog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = SEQLogger::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: logMessage((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: logData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 2: logData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2]))); break;
+        case 3: logData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const QString(*)>(_a[5]))); break;
+        case 4: logData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4]))); break;
+        case 5: logData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const EQPacketOPCode*(*)>(_a[5])),(*reinterpret_cast< const QString(*)>(_a[6]))); break;
+        case 6: logData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const EQPacketOPCode*(*)>(_a[5]))); break;
+        case 7: logData((*reinterpret_cast< const EQUDPIPPacketFormat(*)>(_a[1]))); break;
+        case 8: printData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const QString(*)>(_a[5]))); break;
+        case 9: printData((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4]))); break;
+        }
+        _id -= 10;
+    }
+    return _id;
+}
+static const uint qt_meta_data_PacketStreamLog[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       2,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      37,   17,   16,   16, 0x0a,
+     125,   93,   16,   16, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_PacketStreamLog[] = {
+    "PacketStreamLog\0\0data,len,dir,opcode\0"
+    "rawStreamPacket(const uint8_t*,size_t,uint8_t,uint16_t)\0"
+    "data,len,dir,opcode,opcodeEntry\0"
+    "decodedStreamPacket(const uint8_t*,size_t,uint8_t,uint16_t,const EQPac"
+    "ketOPCode*)\0"
+};
+
+const QMetaObject PacketStreamLog::staticMetaObject = {
+    { &PacketLog::staticMetaObject, qt_meta_stringdata_PacketStreamLog,
+      qt_meta_data_PacketStreamLog, 0 }
+};
+
+const QMetaObject *PacketStreamLog::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *PacketStreamLog::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_PacketStreamLog))
+        return static_cast<void*>(const_cast< PacketStreamLog*>(this));
+    return PacketLog::qt_metacast(_clname);
+}
+
+int PacketStreamLog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = PacketLog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: rawStreamPacket((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4]))); break;
+        case 1: decodedStreamPacket((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const EQPacketOPCode*(*)>(_a[5]))); break;
+        }
+        _id -= 2;
+    }
+    return _id;
+}
+static const uint qt_meta_data_UnknownPacketLog[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      58,   18,   17,   17, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_UnknownPacketLog[] = {
+    "UnknownPacketLog\0\0"
+    "data,len,dir,opcode,opcodeEntry,unknown\0"
+    "packet(const uint8_t*,size_t,uint8_t,uint16_t,const EQPacketOPCode*,bo"
+    "ol)\0"
+};
+
+const QMetaObject UnknownPacketLog::staticMetaObject = {
+    { &PacketLog::staticMetaObject, qt_meta_stringdata_UnknownPacketLog,
+      qt_meta_data_UnknownPacketLog, 0 }
+};
+
+const QMetaObject *UnknownPacketLog::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *UnknownPacketLog::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_UnknownPacketLog))
+        return static_cast<void*>(const_cast< UnknownPacketLog*>(this));
+    return PacketLog::qt_metacast(_clname);
+}
+
+int UnknownPacketLog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = PacketLog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: packet((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const EQPacketOPCode*(*)>(_a[5])),(*reinterpret_cast< bool(*)>(_a[6]))); break;
+        }
+        _id -= 1;
+    }
+    return _id;
+}
+static const uint qt_meta_data_OPCodeMonitorPacketLog[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      64,   24,   23,   23, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_OPCodeMonitorPacketLog[] = {
+    "OPCodeMonitorPacketLog\0\0"
+    "data,len,dir,opcode,opcodeEntry,unknown\0"
+    "packet(const uint8_t*,size_t,uint8_t,uint16_t,const EQPacketOPCode*,bo"
+    "ol)\0"
+};
+
+const QMetaObject OPCodeMonitorPacketLog::staticMetaObject = {
+    { &PacketLog::staticMetaObject, qt_meta_stringdata_OPCodeMonitorPacketLog,
+      qt_meta_data_OPCodeMonitorPacketLog, 0 }
+};
+
+const QMetaObject *OPCodeMonitorPacketLog::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *OPCodeMonitorPacketLog::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_OPCodeMonitorPacketLog))
+        return static_cast<void*>(const_cast< OPCodeMonitorPacketLog*>(this));
+    return PacketLog::qt_metacast(_clname);
+}
+
+int OPCodeMonitorPacketLog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = PacketLog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: packet((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2])),(*reinterpret_cast< uint8_t(*)>(_a[3])),(*reinterpret_cast< uint16_t(*)>(_a[4])),(*reinterpret_cast< const EQPacketOPCode*(*)>(_a[5])),(*reinterpret_cast< bool(*)>(_a[6]))); break;
+        }
+        _id -= 1;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

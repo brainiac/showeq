@@ -1,0 +1,117 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'mapicon.h'
+**
+** Created: Thu Feb 19 01:03:17 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "mapicon.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'mapicon.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_MapIcons[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      12,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // signals: signature, parameters, type, tag, flags
+      10,    9,    9,    9, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+      24,   20,    9,    9, 0x0a,
+      41,   20,    9,    9, 0x0a,
+      67,   20,    9,    9, 0x0a,
+      91,   20,    9,    9, 0x0a,
+     125,  111,    9,    9, 0x0a,
+     150,  146,    9,    9, 0x0a,
+     210,  174,    9,    9, 0x0a,
+     313,  286,    9,    9, 0x0a,
+     417,  380,    9,    9, 0x0a,
+     527,  494,    9,    9, 0x0a,
+     606,    9,    9,    9, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_MapIcons[] = {
+    "MapIcons\0\0changed()\0val\0setDrawSize(int)\0"
+    "setShowNPCWalkPaths(bool)\0"
+    "setShowSpawnNames(bool)\0setFOVDistance(int)\0"
+    "iconType,icon\0setIcon(int,MapIcon)\0"
+    "out\0dumpInfo(Q3TextStream&)\0"
+    "param,p,mapIcon,item,itemName,point\0"
+    "paintIcon(MapParameters&,QPainter&,MapIcon,Point3D<int16_t>,QString,QP"
+    "oint)\0"
+    "param,p,mapIcon,item,point\0"
+    "paintItemIcon(MapParameters&,QPainter&,MapIcon,const Item*,QPoint)\0"
+    "param,p,mapIcon,spawn,location,point\0"
+    "paintSpawnIcon(MapParameters&,QPainter&,MapIcon,const Spawn*,EQPoint,Q"
+    "Point)\0"
+    "param,p,mapIcon,spawnpoint,point\0"
+    "paintSpawnPointIcon(MapParameters&,QPainter&,MapIcon,const SpawnPoint*"
+    ",QPoint)\0"
+    "flashTick()\0"
+};
+
+const QMetaObject MapIcons::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_MapIcons,
+      qt_meta_data_MapIcons, 0 }
+};
+
+const QMetaObject *MapIcons::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *MapIcons::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_MapIcons))
+        return static_cast<void*>(const_cast< MapIcons*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int MapIcons::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: changed(); break;
+        case 1: setDrawSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: setShowNPCWalkPaths((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 3: setShowSpawnNames((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 4: setFOVDistance((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: setIcon((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const MapIcon(*)>(_a[2]))); break;
+        case 6: dumpInfo((*reinterpret_cast< Q3TextStream(*)>(_a[1]))); break;
+        case 7: paintIcon((*reinterpret_cast< MapParameters(*)>(_a[1])),(*reinterpret_cast< QPainter(*)>(_a[2])),(*reinterpret_cast< const MapIcon(*)>(_a[3])),(*reinterpret_cast< const Point3D<int16_t>(*)>(_a[4])),(*reinterpret_cast< const QString(*)>(_a[5])),(*reinterpret_cast< const QPoint(*)>(_a[6]))); break;
+        case 8: paintItemIcon((*reinterpret_cast< MapParameters(*)>(_a[1])),(*reinterpret_cast< QPainter(*)>(_a[2])),(*reinterpret_cast< const MapIcon(*)>(_a[3])),(*reinterpret_cast< const Item*(*)>(_a[4])),(*reinterpret_cast< const QPoint(*)>(_a[5]))); break;
+        case 9: paintSpawnIcon((*reinterpret_cast< MapParameters(*)>(_a[1])),(*reinterpret_cast< QPainter(*)>(_a[2])),(*reinterpret_cast< const MapIcon(*)>(_a[3])),(*reinterpret_cast< const Spawn*(*)>(_a[4])),(*reinterpret_cast< const EQPoint(*)>(_a[5])),(*reinterpret_cast< const QPoint(*)>(_a[6]))); break;
+        case 10: paintSpawnPointIcon((*reinterpret_cast< MapParameters(*)>(_a[1])),(*reinterpret_cast< QPainter(*)>(_a[2])),(*reinterpret_cast< const MapIcon(*)>(_a[3])),(*reinterpret_cast< const SpawnPoint*(*)>(_a[4])),(*reinterpret_cast< const QPoint(*)>(_a[5]))); break;
+        case 11: flashTick(); break;
+        }
+        _id -= 12;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void MapIcons::changed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+QT_END_MOC_NAMESPACE

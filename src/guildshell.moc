@@ -1,0 +1,123 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'guildshell.h'
+**
+** Created: Thu Feb 19 01:03:17 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "guildshell.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'guildshell.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_GuildShell[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       7,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // signals: signature, parameters, type, tag, flags
+      12,   11,   11,   11, 0x05,
+      22,   11,   11,   11, 0x05,
+      34,   31,   11,   11, 0x05,
+      60,   31,   11,   11, 0x05,
+      88,   31,   11,   11, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+     125,  116,   11,   11, 0x0a,
+     164,  116,   11,   11, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_GuildShell[] = {
+    "GuildShell\0\0cleared()\0loaded()\0gm\0"
+    "added(const GuildMember*)\0"
+    "removed(const GuildMember*)\0"
+    "updated(const GuildMember*)\0data,len\0"
+    "guildMemberList(const uint8_t*,size_t)\0"
+    "guildMemberUpdate(const uint8_t*,size_t)\0"
+};
+
+const QMetaObject GuildShell::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_GuildShell,
+      qt_meta_data_GuildShell, 0 }
+};
+
+const QMetaObject *GuildShell::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *GuildShell::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_GuildShell))
+        return static_cast<void*>(const_cast< GuildShell*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int GuildShell::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: cleared(); break;
+        case 1: loaded(); break;
+        case 2: added((*reinterpret_cast< const GuildMember*(*)>(_a[1]))); break;
+        case 3: removed((*reinterpret_cast< const GuildMember*(*)>(_a[1]))); break;
+        case 4: updated((*reinterpret_cast< const GuildMember*(*)>(_a[1]))); break;
+        case 5: guildMemberList((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2]))); break;
+        case 6: guildMemberUpdate((*reinterpret_cast< const uint8_t*(*)>(_a[1])),(*reinterpret_cast< size_t(*)>(_a[2]))); break;
+        }
+        _id -= 7;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void GuildShell::cleared()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void GuildShell::loaded()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, 0);
+}
+
+// SIGNAL 2
+void GuildShell::added(const GuildMember * _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void GuildShell::removed(const GuildMember * _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void GuildShell::updated(const GuildMember * _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
+}
+QT_END_MOC_NAMESPACE

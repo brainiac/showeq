@@ -1,0 +1,96 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'terminal.h'
+**
+** Created: Thu Feb 19 21:51:39 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "terminal.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'terminal.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_Terminal[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      10,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      16,   10,    9,    9, 0x0a,
+      50,   42,    9,    9, 0x0a,
+      86,   42,    9,    9, 0x0a,
+     131,  122,    9,    9, 0x0a,
+     158,  122,    9,    9, 0x0a,
+     194,  187,    9,    9, 0x0a,
+     215,  187,    9,    9, 0x0a,
+     240,  187,    9,    9, 0x0a,
+     267,  187,    9,    9, 0x0a,
+     293,  285,    9,    9, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_Terminal[] = {
+    "Terminal\0\0types\0setEnabledTypes(uint64_t)\0"
+    "filters\0setEnabledShowUserFilters(uint32_t)\0"
+    "setEnabledHideUserFilters(uint32_t)\0"
+    "dateTime\0setDateTimeForamt(QString)\0"
+    "setEQDateTimeFormat(QString)\0enable\0"
+    "setDisplayType(bool)\0setDisplayDateTime(bool)\0"
+    "setDisplayEQDateTime(bool)\0setUseColor(bool)\0"
+    "message\0newMessage(MessageEntry)\0"
+};
+
+const QMetaObject Terminal::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Terminal,
+      qt_meta_data_Terminal, 0 }
+};
+
+const QMetaObject *Terminal::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *Terminal::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_Terminal))
+        return static_cast<void*>(const_cast< Terminal*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int Terminal::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: setEnabledTypes((*reinterpret_cast< uint64_t(*)>(_a[1]))); break;
+        case 1: setEnabledShowUserFilters((*reinterpret_cast< uint32_t(*)>(_a[1]))); break;
+        case 2: setEnabledHideUserFilters((*reinterpret_cast< uint32_t(*)>(_a[1]))); break;
+        case 3: setDateTimeForamt((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: setEQDateTimeFormat((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 5: setDisplayType((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: setDisplayDateTime((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: setDisplayEQDateTime((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 8: setUseColor((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 9: newMessage((*reinterpret_cast< const MessageEntry(*)>(_a[1]))); break;
+        }
+        _id -= 10;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

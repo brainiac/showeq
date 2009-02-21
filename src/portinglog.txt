@@ -1,0 +1,1176 @@
+//Added by qt3to4:
+#include <Q3StrList>
+#include <Q3Frame>
+#include <Q3MemArray>
+Log for qt3to4 on Wed Feb 18 20:14:15 2009. Number of log entries: 1123
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/CMakeLists.txt
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/Makefile.am
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/bazaarlog.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/bazaarlog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 90 column 13: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 90 column 42: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 91 column 13: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 91 column 43: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 92 column 13: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 92 column 43: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 93 column 13: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 93 column 43: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 94 column 13: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 94 column 43: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 95 column 13: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp at line 95 column 43: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp: Added the following include directives:
+	#include <Q3HBoxLayout> 	#include <Q3BoxLayout> 	#include <QLabel> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.h at line 33 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.h at line 34 column 15: qvbox.h -> q3vbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.cpp at line 19 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.cpp at line 46 column 15: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.cpp at line 46 column 45: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.cpp at line 49 column 38: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.cpp at line 137 column 28: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.cpp at line 140 column 15: Q3TextStream -> Q3TextStream
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/cgiconv.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/classes.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 20 column 15: qgrid.h -> q3grid.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 22 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 23 column 20: qvgroupbox.h -> q3vgroupbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 256 column 12: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 256 column 38: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 273 column 30: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 292 column 35: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 294 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 294 column 37: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 319 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 319 column 40: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 322 column 6: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 322 column 31: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 342 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 343 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 352 column 35: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 354 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 354 column 42: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 357 column 6: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 357 column 33: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 377 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 378 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 379 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 382 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 382 column 43: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 385 column 6: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 385 column 34: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 396 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 397 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 398 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 401 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 401 column 40: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 404 column 6: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 404 column 31: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 415 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 416 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 417 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 427 column 31: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 429 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 429 column 37: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 454 column 10: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 454 column 40: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 457 column 6: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 457 column 31: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 471 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 472 column 14: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 592 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 592 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 732 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp at line 732 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp: Added the following include directives:
+	#include <QLabel> 	#include <Q3GridLayout> 	#include <Q3PopupMenu> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.h at line 18 column 20: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.h at line 200 column 12: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.h at line 201 column 12: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.h at line 202 column 12: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.h at line 238 column 11: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.h: Added the following include directives:
+	#include <Q3PopupMenu> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compass.cpp: Added the following include directives:
+	#include <QPaintEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compass.h: Added the following include directives:
+	#include <QPaintEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.cpp at line 22 column 13: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.cpp at line 22 column 39: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.cpp at line 25 column 7: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.cpp at line 25 column 30: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.cpp: Added the following include directives:
+	#include <Q3VBoxLayout> 	#include <QLabel> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.h at line 11 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.h at line 12 column 15: qvbox.h -> q3vbox.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/crctab.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/datalocationmgr.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/datalocationmgr.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/datetimemgr.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/datetimemgr.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/db3conv.cpp at line 407 column 15: Q3DictIterator -> Q3DictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/db3conv.h at line 26 column 15: qdict.h -> q3dict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/db3conv.h at line 78 column 8: Q3Dict -> Q3Dict
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/dbcommon.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/decode.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/deity.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/diagnosticmessages.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/diagnosticmessages.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/diagnosticmessageslight.cpp
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/drawmap.cpp at line 19 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/drawmap.cpp at line 578 column 15: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/drawmap.cpp at line 578 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/drawmap.cpp at line 579 column 31: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/drawmap.cpp at line 580 column 25: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/drawmap.cpp at line 580 column 49: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 24 column 18: qtoolbar.h -> q3toolbar.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 26 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 28 column 21: qmainwindow.h -> q3mainwindow.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 29 column 21: qfiledialog.h -> q3filedialog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 31 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 34 column 24: qmultilineedit.h -> q3multilineedit.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 88 column 18: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 88 column 59: Qt::WDestructiveClose -> Qt::WDestructiveClose
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 94 column 29: Q3ToolBar -> Q3ToolBar
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 106 column 15: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 106 column 39: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 118 column 27: Q3MultiLineEdit -> Q3MultiLineEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 135 column 29: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 146 column 30: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 152 column 16: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 177 column 31: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 183 column 16: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp at line 196 column 29: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp: Added the following include directives:
+	#include <QPixmap> 	#include <QCloseEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 17 column 21: qmainwindow.h -> q3mainwindow.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 19 column 20: Q3MultiLineEdit -> Q3MultiLineEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 20 column 14: Q3ToolBar -> Q3ToolBar
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 21 column 16: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 23 column 38: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 41 column 18: Q3MultiLineEdit -> Q3MultiLineEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h at line 42 column 12: Q3ToolBar -> Q3ToolBar
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.h: Added the following include directives:
+	#include <QCloseEvent> 	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.cpp at line 22 column 22: qvaluevector.h -> q3valuevector.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.cpp at line 47 column 34: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.cpp at line 55 column 10: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.cpp at line 157 column 16: Q3ValueVector -> Q3ValueVector
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.cpp: Added the following include directives:
+	#include <Q3CString> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.h at line 16 column 18: qintdict.h -> q3intdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.h at line 34 column 11: Q3IntDict -> Q3IntDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/everquest.h at line 370 column 20: Qt::blue -> Qt::blue
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/everquest.h at line 371 column 19: Qt::red -> Qt::red
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/everquest.h at line 372 column 21: Qt::green -> Qt::green
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 29 column 15: qgrid.h -> q3grid.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 31 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 32 column 20: qvgroupbox.h -> q3vgroupbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 164 column 31: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 172 column 35: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 182 column 30: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 190 column 29: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 197 column 12: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 197 column 39: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 215 column 12: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 215 column 40: Q3VGroupBox -> Q3VGroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 218 column 8: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 218 column 31: Q3Grid -> Q3Grid
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 250 column 16: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 251 column 16: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 345 column 16: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp at line 346 column 22: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp: Added the following include directives:
+	#include <QResizeEvent> 	#include <Q3GridLayout> 	#include <QLabel> 	#include <Q3PopupMenu> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.h at line 22 column 20: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.h at line 122 column 14: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.h at line 131 column 11: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.h at line 134 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.h: Added the following include directives:
+	#include <QResizeEvent> 	#include <Q3VBoxLayout> 	#include <Q3PopupMenu> 	#include <Q3PtrList> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 202 column 50: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 294 column 46: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 517 column 29: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 521 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 524 column 29: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 527 column 22: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp at line 527 column 41: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp: Added the following include directives:
+	#include <Q3TextStream> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.h at line 23 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.h at line 50 column 41: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.h at line 79 column 41: Q3TextStream -> Q3TextStream
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter2xml.pl
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filteredspawnlog.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filteredspawnlog.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filtermgr.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filtermgr.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filternotifications.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/filternotifications.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/fixpt.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/gdbmconv.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/gdbmconv.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/group.cpp at line 312 column 35: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/group.cpp: Added the following include directives:
+	#include <Q3TextStream> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/group.h at line 57 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/group.h: Added the following include directives:
+	#include <Q3TextStream> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.cpp at line 23 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.cpp at line 65 column 34: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.cpp at line 82 column 33: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.cpp at line 113 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.cpp at line 123 column 36: QIODevice::WriteOnly -> QIODevice::WriteOnly
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 25 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 32 column 38: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 35 column 17: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 58 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 61 column 40: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 98 column 24: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 158 column 12: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 158 column 39: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 159 column 13: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 159 column 39: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 217 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 222 column 25: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 223 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp at line 223 column 47: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp: Added the following include directives:
+	#include <Q3HBoxLayout> 	#include <Q3BoxLayout> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 26 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 27 column 18: qptrdict.h -> q3ptrdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 39 column 16: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 56 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 59 column 25: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 67 column 36: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 91 column 20: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 119 column 10: Q3PtrDict -> Q3PtrDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h at line 120 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.h: Added the following include directives:
+	#include <QLabel> 	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.cpp at line 179 column 40: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.cpp: Added the following include directives:
+	#include <Q3TextStream> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.h at line 21 column 15: qdict.h -> q3dict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.h at line 25 column 17: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.h at line 78 column 13: Q3Dict -> Q3Dict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.h at line 79 column 21: Q3DictIterator -> Q3DictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.h at line 92 column 30: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.h: Added the following include directives:
+	#include <Q3TextStream> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/h2info.pl
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 69 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 70 column 22: qvaluevector.h -> q3valuevector.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 72 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 75 column 21: qfiledialog.h -> q3filedialog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 76 column 16: qaccel.h -> q3accel.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 79 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 83 column 19: qdockarea.h -> q3dockarea.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 96 column 15: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 353 column 32: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 361 column 20: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 384 column 15: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 519 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 519 column 41: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 544 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 544 column 41: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 559 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 559 column 39: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 571 column 27: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 595 column 33: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 673 column 34: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 684 column 36: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 737 column 35: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 784 column 37: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 855 column 27: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 876 column 27: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 902 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 902 column 40: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 929 column 27: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 947 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 947 column 46: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 963 column 27: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 976 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 976 column 48: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1001 column 29: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1015 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1015 column 40: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1027 column 40: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1048 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1048 column 43: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1051 column 50: Qt::CTRL -> Qt::CTRL
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1051 column 54: Qt::ALT -> Qt::ALT
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1051 column 60: Qt::Key_O -> Qt::Key_O
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1074 column 27: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1075 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1075 column 42: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1086 column 30: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1093 column 35: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1104 column 35: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1116 column 34: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1136 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1136 column 42: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1161 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1161 column 45: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1183 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1183 column 45: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1203 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1203 column 46: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1210 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1210 column 42: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1236 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1236 column 45: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1282 column 34: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1285 column 44: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1312 column 47: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1321 column 47: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1380 column 39: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1431 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1431 column 46: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1503 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 1503 column 42: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2177 column 9: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2177 column 29: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2186 column 16: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2186 column 43: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2194 column 14: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2865 column 15: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 2887 column 15: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3044 column 16: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3044 column 44: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3067 column 45: Q3DockArea -> Q3DockArea
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3067 column 54: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3069 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3069 column 22: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3070 column 18: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3080 column 13: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3102 column 34: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3219 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3219 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3235 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3235 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3251 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3251 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3276 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3276 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3295 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3295 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3312 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3312 column 40: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3333 column 24: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3334 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3353 column 24: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3354 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3374 column 24: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3375 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3414 column 24: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3415 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3470 column 24: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3471 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3490 column 24: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 3491 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4189 column 15: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4741 column 32: QIODevice::Append -> QIODevice::Append
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4741 column 47: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4743 column 15: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4761 column 34: QIODevice::Truncate -> QIODevice::Truncate
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4761 column 49: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4763 column 15: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 4783 column 43: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5087 column 15: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5428 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5487 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5524 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5571 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5618 column 6: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5657 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5696 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5735 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5784 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5821 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 5855 column 21: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 6089 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 6115 column 44: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 6117 column 13: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 6118 column 13: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 6119 column 13: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp at line 6120 column 13: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp: Added the following include directives:
+	#include <Q3PtrList> 	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 16 column 16: qframe.h -> q3frame.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 18 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 21 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 22 column 21: qmainwindow.h -> q3mainwindow.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 23 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 24 column 15: qvbox.h -> q3vbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 26 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 28 column 18: qptrlist.h -> q3ptrlist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 30 column 20: qtabdialog.h -> q3tabdialog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 32 column 18: qintdict.h -> q3intdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 33 column 18: qptrdict.h -> q3ptrdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 87 column 18: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 112 column 36: Q3MainWindow -> Q3MainWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 162 column 35: Q3DockArea -> Q3DockArea
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 162 column 44: Qt::ToolBarDock -> Qt::ToolBarDock
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 171 column 33: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 332 column 34: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 377 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 378 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 379 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 380 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 381 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 382 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 383 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 384 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 385 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 386 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 388 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 389 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 390 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 391 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 392 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 393 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 394 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 395 column 11: Q3PtrDict -> Q3PtrDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 396 column 13: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h at line 422 column 11: Q3IntDict -> Q3IntDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.h: Added the following include directives:
+	#include <Q3TextStream> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/itemdb.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/itemdb.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/itemdbtool.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/languages.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 14 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 22 column 28: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 96 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 96 column 38: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 97 column 29: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 98 column 23: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 98 column 47: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 497 column 36: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listitem.cpp at line 508 column 28: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listspawn.cpp at line 7 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listspawn.cpp at line 61 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listspawn.cpp at line 61 column 38: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listspawn.cpp at line 62 column 29: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listspawn.cpp at line 63 column 23: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/listspawn.cpp at line 63 column 47: Q3TextStream -> Q3TextStream
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/log2raw.c
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/logger.cpp at line 58 column 28: QIODevice::Append -> QIODevice::Append
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/logger.cpp at line 58 column 43: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/logger.h at line 13 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/logger.h at line 40 column 14: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/main.cpp at line 37 column 16: qaccel.h -> q3accel.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/main.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 55 column 21: qfiledialog.h -> q3filedialog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 59 column 18: qtoolbar.h -> q3toolbar.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 60 column 16: qaccel.h -> q3accel.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 64 column 18: qstrlist.h -> q3strlist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 96 column 12: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 96 column 41: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 97 column 12: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 97 column 42: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 98 column 12: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 98 column 42: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 129 column 29: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 130 column 38: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 130 column 50: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 185 column 23: Qt::WStyle_Customize -> Qt::WStyle_Customize
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 185 column 43: Qt::WStyle_NoBorder -> Qt::WStyle_NoBorder
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 185 column 57: Qt::WStyle_Tool -> Qt::WStyle_Tool
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 185 column 74: Qt::WType_TopLevel -> Qt::WType_TopLevel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 186 column 22: Qt::WType_Dialog -> Qt::WType_Dialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 186 column 37: Qt::WX11BypassWM -> Qt::WX11BypassWM
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 192 column 23: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 192 column 39: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 385 column 24: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 408 column 24: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 689 column 33: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 717 column 14: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 727 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 728 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 730 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 742 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 759 column 29: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 773 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 796 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 841 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 864 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 872 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 873 column 7: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 873 column 28: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 883 column 29: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 919 column 29: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 933 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 1450 column 70: QBrush -> Qt
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 1531 column 8: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 1531 column 28: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 2692 column 30: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 3511 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 3864 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 3894 column 18: Qt::yellow -> Qt::yellow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4277 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4364 column 10: Q3StrList -> Q3StrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4369 column 13: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4371 column 29: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4407 column 30: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4410 column 29: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4430 column 32: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4440 column 23: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4457 column 33: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4461 column 40: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4461 column 56: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4474 column 32: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4478 column 39: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4478 column 55: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4489 column 25: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4507 column 28: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4525 column 22: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4546 column 31: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4569 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4587 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4588 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4604 column 26: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4624 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4721 column 35: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp at line 4747 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp: Added the following include directives:
+	#include <Q3BoxLayout> 	#include <QPaintEvent> 	#include <Q3VBoxLayout> 	#include <Q3PointArray> 	#include <Q3Frame> 	#include <QResizeEvent> 	#include <QLabel> 	#include <Q3PopupMenu> 	#include <Q3HBoxLayout> 	#include <Q3TextStream> 	#include <QMouseEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 36 column 18: qintdict.h -> q3intdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 37 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 43 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 47 column 15: qvbox.h -> q3vbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 48 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 112 column 9: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 192 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 206 column 10: Q3IntDict -> Q3IntDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 215 column 33: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 546 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 698 column 21: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 713 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 741 column 14: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 742 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 743 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 745 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 747 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 749 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 752 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 753 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 755 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h at line 758 column 8: Q3HBox -> Q3HBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.h: Added the following include directives:
+	#include <QResizeEvent> 	#include <QMouseEvent> 	#include <QEvent> 	#include <Q3VBoxLayout> 	#include <Q3Frame> 	#include <QPaintEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 289 column 15: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 300 column 15: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 480 column 31: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 491 column 10: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 925 column 31: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 936 column 10: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1157 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1197 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1221 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1242 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1286 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1320 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1348 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1379 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1509 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1520 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1540 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1551 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1689 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1743 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1829 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1890 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 1994 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 2072 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp at line 2171 column 18: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp: Added the following include directives:
+	#include <Q3PointArray> 	#include <Q3CString> 	#include <QPixmap> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 35 column 18: qptrlist.h -> q3ptrlist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 36 column 21: qpointarray.h -> q3pointarray.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 427 column 53: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 441 column 44: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 534 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 535 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 536 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 537 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 582 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 583 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 585 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.h at line 587 column 10: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 502 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 512 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 522 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 532 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 552 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 810 column 35: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp at line 1197 column 17: Qt::gray -> Qt::gray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp: Added the following include directives:
+	#include <Q3TextStream> 	#include <Q3PointArray> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.h at line 308 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.h: Added the following include directives:
+	#include <Q3TextStream> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 127 column 43: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 279 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 410 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 499 column 43: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 664 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 795 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 962 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 1099 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 1226 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui at line 1381 column 47: QFrame::StyledPanel -> Q3Frame::StyledPanel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 33 column 25: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 38 column 29: Qt::BrushStyle -> Qt::BrushStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 48 column 25: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 53 column 29: Qt::BrushStyle -> Qt::BrushStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 59 column 25: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 64 column 25: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 69 column 25: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 78 column 25: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 119 column 18: Qt::black -> Qt::black
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 119 column 32: Qt::SolidLine -> Qt::SolidLine
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 119 column 43: Qt::SquareCap -> Qt::SquareCap
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 119 column 54: Qt::BevelJoin -> Qt::BevelJoin
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 122 column 15: Qt::white -> Qt::white
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 125 column 23: Qt::gray -> Qt::gray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 153 column 20: Qt::black -> Qt::black
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 153 column 34: Qt::SolidLine -> Qt::SolidLine
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 153 column 45: Qt::SquareCap -> Qt::SquareCap
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 153 column 56: Qt::BevelJoin -> Qt::BevelJoin
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 154 column 22: Qt::NoPen -> Qt::NoPen
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 154 column 43: Qt::DashDotDotLine -> Qt::DashDotDotLine
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 156 column 15: Qt::white -> Qt::white
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 158 column 22: Qt::PenStyle -> Qt::PenStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 160 column 23: Qt::gray -> Qt::gray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 193 column 20: Qt::black -> Qt::black
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 193 column 34: Qt::SolidLine -> Qt::SolidLine
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 193 column 45: Qt::SquareCap -> Qt::SquareCap
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 193 column 56: Qt::BevelJoin -> Qt::BevelJoin
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 195 column 24: Qt::NoBrush -> Qt::NoBrush
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 195 column 47: Qt::DiagCrossPattern -> Qt::DiagCrossPattern
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 197 column 15: Qt::white -> Qt::white
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h at line 200 column 29: Qt::BrushStyle -> Qt::BrushStyle
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h: Added the following include directives:
+	#include <QPixmap> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/message.cpp
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/message.h at line 18 column 22: qvaluevector.h -> q3valuevector.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilter.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilter.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 26 column 19: qgroupbox.h -> q3groupbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 30 column 18: qlistbox.h -> q3listbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 34 column 52: Q3ListBoxText -> Q3ListBoxText
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 37 column 35: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 40 column 35: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 40 column 59: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 52 column 59: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 55 column 16: Q3ListBoxText -> Q3ListBoxText
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 60 column 59: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 61 column 21: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 64 column 16: Q3ListBoxText -> Q3ListBoxText
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 79 column 45: Qt::WType_Dialog -> Qt::WType_Dialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 98 column 13: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 98 column 44: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 99 column 13: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 99 column 45: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 100 column 13: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 100 column 46: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 107 column 34: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 110 column 46: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 111 column 65: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 112 column 57: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 119 column 31: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 123 column 8: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 123 column 28: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 125 column 13: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 125 column 45: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 145 column 31: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 148 column 43: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 216 column 19: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 248 column 21: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 310 column 69: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 330 column 21: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 348 column 19: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 376 column 19: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 421 column 23: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp at line 454 column 23: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp: Added the following include directives:
+	#include <Q3HBoxLayout> 	#include <Q3GridLayout> 	#include <Q3Frame> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 26 column 14: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 27 column 18: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 28 column 15: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 49 column 51: Q3ListBoxItem -> Q3ListBoxItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 58 column 10: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 60 column 11: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h at line 63 column 10: Q3ListBox -> Q3ListBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.h: Added the following include directives:
+	#include <QLabel> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messages.cpp
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messages.h at line 21 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messages.h at line 29 column 18: Q3ValueList -> Q3ValueList
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messageshell.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messageshell.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 23 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 33 column 19: qgroupbox.h -> q3groupbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 34 column 21: qfiledialog.h -> q3filedialog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 36 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 41 column 13: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 55 column 20: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 66 column 18: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 94 column 11: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 110 column 13: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 110 column 37: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 130 column 13: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 130 column 39: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 243 column 13: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 243 column 37: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 289 column 11: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 289 column 39: Q3GroupBox -> Q3GroupBox
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 294 column 33: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 295 column 34: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 311 column 13: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 311 column 39: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 411 column 24: Qt::black -> Qt::black
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 412 column 26: Qt::white -> Qt::white
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 466 column 39: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 466 column 55: Q3Frame -> Q3Frame
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 486 column 19: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 486 column 44: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 489 column 42: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 514 column 25: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 515 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 515 column 44: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 517 column 35: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 548 column 39: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 557 column 39: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 628 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 753 column 39: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 777 column 39: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 809 column 15: Q3FileDialog -> Q3FileDialog
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 816 column 30: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 818 column 15: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 1046 column 19: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp at line 1046 column 44: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp: Added the following include directives:
+	#include <Q3HBoxLayout> 	#include <QKeyEvent> 	#include <Q3GridLayout> 	#include <Q3Frame> 	#include <QMouseEvent> 	#include <QEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 21 column 19: qtextedit.h -> q3textedit.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 33 column 16: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 40 column 39: Q3TextEdit -> Q3TextEdit
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 157 column 20: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 198 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 199 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 200 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h at line 201 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.h: Added the following include directives:
+	#include <QLabel> 	#include <QMouseEvent> 	#include <Q3PopupMenu> 	#include <QKeyEvent> 	#include <QEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp at line 16 column 16: qaccel.h -> q3accel.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp at line 30 column 13: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp at line 30 column 40: Q3GridLayout -> Q3GridLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp at line 153 column 10: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp at line 153 column 30: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp: Added the following include directives:
+	#include <Q3GridLayout> 	#include <QLabel> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netstream.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/netstream.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/opcodetable.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packet.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packet.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetcapture.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetcapture.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetcommon.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetformat.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetformat.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetfragment.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetfragment.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 18 column 18: qstrlist.h -> q3strlist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 118 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 312 column 29: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 316 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 319 column 29: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 322 column 22: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 322 column 41: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 339 column 18: Q3IntDictIterator -> Q3IntDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 351 column 10: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 379 column 12: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 380 column 12: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 383 column 20: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 435 column 18: Q3IntDictIterator -> Q3IntDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp at line 461 column 20: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp: Added the following include directives:
+	#include <Q3TextStream> 	#include <Q3CString> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 17 column 18: qptrdict.h -> q3ptrdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 18 column 18: qptrlist.h -> q3ptrlist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 19 column 20: qasciidict.h -> q3asciidict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 20 column 18: qintdict.h -> q3intdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 21 column 18: qcstring.h -> q3cstring.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 22 column 18: qstrlist.h -> q3strlist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 24 column 15: qdict.h -> q3dict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 25 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 60 column 12: Q3AsciiDict -> Q3AsciiDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 95 column 16: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 106 column 10: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 113 column 16: Q3PtrList -> Q3PtrList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 114 column 24: Q3PtrListIterator -> Q3PtrListIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 116 column 21: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 274 column 16: Q3IntDict -> Q3IntDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 277 column 10: Q3IntDict -> Q3IntDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 278 column 7: Q3Dict -> Q3Dict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.h at line 311 column 21: Q3IntDict -> Q3IntDict
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetlog.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetlog.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetstream.cpp at line 148 column 12: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetstream.cpp: Added the following include directives:
+	#include <Q3CString> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetstream.h at line 124 column 10: Q3PtrDict -> Q3PtrDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/player.cpp at line 1242 column 31: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/player.cpp at line 1326 column 30: QIODevice::ReadOnly -> QIODevice::ReadOnly
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/player.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/point.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 29 column 19: qmemarray.h -> q3memarray.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 34 column 37: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 38 column 36: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 39 column 57: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 58 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 70 column 15: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 73 column 28: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 81 column 20: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 100 column 27: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 109 column 18: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 115 column 11: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 121 column 11: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 127 column 16: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 142 column 16: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 172 column 35: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 173 column 18: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 188 column 35: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 189 column 18: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 217 column 11: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 220 column 13: Q3PointArray -> Q3PointArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 220 column 27: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h at line 223 column 36: Q3MemArray -> Q3MemArray
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/pointarray.h: Added the following include directives:
+	#include <Q3PointArray> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/races.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/s_everquest.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 15 column 17: qheader.h -> q3header.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 22 column 45: Qt::WFlags -> Qt::WFlags
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 23 column 13: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 62 column 24: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 74 column 11: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 87 column 11: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 152 column 32: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 159 column 37: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp at line 214 column 38: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.h at line 18 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.h at line 22 column 36: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.h at line 28 column 56: Qt::WFlags -> Qt::WFlags
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 20 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 23 column 48: Qt::WFlags -> Qt::WFlags
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 24 column 15: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 28 column 13: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 45 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 53 column 13: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 146 column 14: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 150 column 17: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp at line 153 column 15: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp: Added the following include directives:
+	#include <QMouseEvent> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.h at line 23 column 21: qdockwindow.h -> q3dockwindow.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.h at line 25 column 16: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.h at line 27 column 36: Q3DockWindow -> Q3DockWindow
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.h at line 33 column 54: Qt::WFlags -> Qt::WFlags
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.h at line 36 column 20: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.h: Added the following include directives:
+	#include <Q3PopupMenu> 	#include <QMouseEvent> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawn.cpp
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.cpp at line 312 column 59: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.cpp at line 1507 column 31: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.cpp at line 1554 column 30: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.cpp: Added the following include directives:
+	#include <Q3TextStream> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 73 column 54: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 74 column 39: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 76 column 62: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 77 column 57: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 79 column 52: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 80 column 58: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 162 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 205 column 24: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 234 column 52: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 239 column 30: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 271 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 415 column 22: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 415 column 58: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 430 column 24: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 442 column 20: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 443 column 20: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 491 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 505 column 19: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 561 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 578 column 46: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 585 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 621 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 658 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 698 column 11: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 781 column 11: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 818 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 834 column 22: Q3PtrDictIterator -> Q3PtrDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 1026 column 40: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 1038 column 57: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 1061 column 51: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 1110 column 22: Q3PtrDictIterator -> Q3PtrDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp at line 1150 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp: Added the following include directives:
+	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 129 column 16: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 147 column 16: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 165 column 17: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 445 column 20: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 459 column 16: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 488 column 18: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp at line 516 column 12: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp: Added the following include directives:
+	#include <Q3ValueList> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 21 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 21 column 67: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 27 column 38: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 27 column 63: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 49 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 129 column 52: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 130 column 48: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 131 column 56: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 132 column 47: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 135 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 141 column 25: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 184 column 13: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 246 column 16: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 289 column 12: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 296 column 16: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 311 column 48: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 322 column 48: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 325 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp at line 385 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp: Added the following include directives:
+	#include <Q3ValueList> 	#include <Q3PopupMenu> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/vpacket.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/util.cpp
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.cpp at line 104 column 23: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.cpp at line 127 column 23: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.cpp at line 174 column 23: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.cpp at line 202 column 23: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/statlist.cpp at line 313 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 28 column 16: qaccel.h -> q3accel.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 203 column 18: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 379 column 37: Qt::red -> Qt::red
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 380 column 41: Qt::green -> Qt::green
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 381 column 39: Qt::blue -> Qt::blue
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 388 column 43: Qt::red -> Qt::red
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 389 column 47: Qt::green -> Qt::green
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 390 column 45: Qt::blue -> Qt::blue
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 400 column 45: Qt::red -> Qt::red
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 401 column 49: Qt::green -> Qt::green
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp at line 402 column 47: Qt::blue -> Qt::blue
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 24 column 16: qaccel.h -> q3accel.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 29 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 110 column 25: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 279 column 24: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 330 column 15: Q3DictIterator -> Q3DictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 372 column 17: Q3DictIterator -> Q3DictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 453 column 26: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 460 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 463 column 29: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 467 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 467 column 50: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 687 column 12: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp at line 710 column 18: Q3Accel -> Q3Accel
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/zonemgr.cpp at line 126 column 31: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/zonemgr.cpp at line 141 column 30: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 24 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 184 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 288 column 31: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 294 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 296 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 363 column 30: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp at line 369 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 28 column 48: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 29 column 17: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 122 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 161 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 180 column 55: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 181 column 46: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 182 column 54: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 183 column 44: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 194 column 51: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 210 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 234 column 53: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 344 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 359 column 20: Q3AsciiDictIterator -> Q3AsciiDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 400 column 14: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 411 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 411 column 42: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 552 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp at line 561 column 20: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp: Added the following include directives:
+	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 32 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 32 column 67: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 39 column 38: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 39 column 63: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 105 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 113 column 40: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 450 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 450 column 47: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 507 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 507 column 41: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 527 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp at line 527 column 45: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp: Added the following include directives:
+	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 58 column 12: Q3BoxLayout -> Q3BoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 58 column 39: Q3VBoxLayout -> Q3VBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 59 column 13: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 59 column 39: Q3HBoxLayout -> Q3HBoxLayout
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 124 column 60: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 125 column 38: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 126 column 68: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 127 column 49: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 128 column 58: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 129 column 50: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 212 column 10: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 491 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 515 column 23: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 740 column 47: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 752 column 64: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 774 column 58: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 839 column 53: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp at line 846 column 15: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp: Added the following include directives:
+	#include <Q3HBoxLayout> 	#include <Q3BoxLayout> 	#include <Q3PopupMenu> 	#include <Q3VBoxLayout> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.cpp at line 28 column 19: qptrqueue.h -> q3ptrqueue.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.cpp at line 247 column 33: QIODevice::ReadOnly -> QIODevice::ReadOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.cpp at line 250 column 13: Q3PtrQueue -> Q3PtrQueue
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.cpp at line 254 column 12: Q3CString -> Q3CString
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.cpp: Added the following include directives:
+	#include <Q3CString> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlog.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/terminal.cpp
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/vpacket.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skills.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/util.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawn.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.h at line 28 column 18: qintdict.h -> q3intdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.h at line 30 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.h at line 55 column 16: Q3IntDict -> Q3IntDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.h at line 56 column 24: Q3IntDictIterator -> Q3IntDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.h at line 57 column 24: Q3IntDictIterator -> Q3IntDictIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.h at line 78 column 50: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 25 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 26 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 27 column 18: qptrdict.h -> q3ptrdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 28 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 35 column 15: qhbox.h -> q3hbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 36 column 15: qvbox.h -> q3vbox.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 69 column 44: Q3ListViewItemIterator -> Q3ListViewItemIterator
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 105 column 32: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 107 column 50: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 108 column 43: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 111 column 38: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 122 column 11: Q3PtrDict -> Q3PtrDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h at line 138 column 20: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.h: Added the following include directives:
+	#include <Q3PopupMenu> 
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.h at line 17 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.h at line 18 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.h at line 193 column 12: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 13 column 20: qvaluelist.h -> q3valuelist.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 14 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 15 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 33 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 36 column 29: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 37 column 25: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 59 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 83 column 39: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 84 column 39: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 93 column 12: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 94 column 12: Q3ValueList -> Q3ValueList
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 95 column 12: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.h at line 110 column 20: Q3PopupMenu -> Q3PopupMenu
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons1.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons27.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons28.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons29.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons2a.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons2b.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/weapons2c.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.h at line 12 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.h at line 51 column 16: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.h at line 54 column 16: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/statlist.h at line 12 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/statlist.h at line 54 column 16: Q3ListViewItem -> Q3ListViewItem
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/zones.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.h at line 27 column 15: qdict.h -> q3dict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.h at line 51 column 13: Q3Dict -> Q3Dict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.h at line 52 column 13: Q3Dict -> Q3Dict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.h at line 54 column 13: Q3Dict -> Q3Dict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.h at line 55 column 13: Q3Dict -> Q3Dict
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/zonemgr.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.h at line 44 column 20: qasciidict.h -> q3asciidict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.h at line 107 column 18: Q3AsciiDict -> Q3AsciiDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.h at line 108 column 18: Q3AsciiDict -> Q3AsciiDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.h at line 136 column 12: Q3AsciiDict -> Q3AsciiDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.h at line 137 column 12: Q3AsciiDict -> Q3AsciiDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 19 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 42 column 46: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 45 column 30: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 64 column 44: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 104 column 39: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 109 column 37: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.h at line 130 column 20: Q3PopupMenu -> Q3PopupMenu
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/typenames.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 19 column 19: qlistview.h -> q3listview.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 21 column 20: qpopupmenu.h -> q3popupmenu.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 60 column 42: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 63 column 30: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 64 column 26: Q3ListView -> Q3ListView
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 81 column 36: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.h at line 93 column 39: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 13 column 18: qptrdict.h -> q3ptrdict.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 42 column 21: Q3PopupMenu -> Q3PopupMenu
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 85 column 32: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 87 column 50: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 88 column 43: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 98 column 38: Q3ListViewItem -> Q3ListViewItem
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h at line 121 column 11: Q3PtrDict -> Q3PtrDict
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.h: Added the following include directives:
+	#include <Q3PopupMenu> 
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlog.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/terminal.h
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/staticspells.h
+In file showeq.pro: Added entry QT += xml  qt3support 
+In file showeq.pro: Added entry CONFIG += uic3
+
+In file showeq.pro: Renamed FORMS to FORMS3
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showitem.cpp at line 14 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showitem.cpp at line 21 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showitem.cpp at line 26 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showitem.cpp at line 26 column 38: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showitem.cpp at line 390 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 15 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 22 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 70 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 70 column 38: QIODevice::WriteOnly -> QIODevice::WriteOnly
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 71 column 29: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 72 column 23: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 72 column 47: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/showspawn.cpp at line 263 column 27: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/sortitem.cpp at line 11 column 21: qtextstream.h -> q3textstream.h
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/sortitem.cpp at line 21 column 13: Q3TextStream -> Q3TextStream
+In file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/sortitem.cpp at line 21 column 38: QIODevice::WriteOnly -> QIODevice::WriteOnly
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells_en2spellsh.pl
+No changes made to file /Users/brainiac/Development/ShowEQ-5.13.1.0/src/strnlen.h
+

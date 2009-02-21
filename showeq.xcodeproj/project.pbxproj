@@ -1,0 +1,1287 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		6DD5906DD5906DD590000000 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6DE7F06DE7F06DE7F0000000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				6DD7706DD7706DD770000000 /* CMake ReRun */,
+				6DDE606DDE606DDE60000000 /* CMake Rules */,
+			);
+			dependencies = (
+				103FF20103FF20103FF20000 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		100065010006501000650000 /* seqlistview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10000B010000B010000B0000 /* seqlistview.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100100010010001001000000 /* zonemgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1000B901000B901000B90000 /* zonemgr.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1001BF01001BF01001BF0000 /* spawnmonitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100165010016501001650000 /* spawnmonitor.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10026E010026E010026E0000 /* spawnpointlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100213010021301002130000 /* spawnpointlist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10031B010031B010031B0000 /* spawnlistcommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1002C001002C001002C00000 /* spawnlistcommon.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1003C701003C701003C70000 /* spawnlist2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10036D010036D010036D0000 /* spawnlist2.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100462010046201004620000 /* spells.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10041B010041B010041B0000 /* spells.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100521010052101005210000 /* datetimemgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1004C701004C701004C70000 /* datetimemgr.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1005BC01005BC01005BC0000 /* spawnlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100575010057501005750000 /* spawnlog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10067B010067B010067B0000 /* packetlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100621010062101006210000 /* packetlog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10072A010072A010072A0000 /* datalocationmgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1006CF01006CF01006CF0000 /* datalocationmgr.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1007C301007C301007C30000 /* eqstr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10077C010077C010077C0000 /* eqstr.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100871010087101008710000 /* messages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10082A010082A010082A0000 /* messages.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10091D010091D010091D0000 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1008D601008D601008D60000 /* message.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1009DC01009DC01009DC0000 /* messagefilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100982010098201009820000 /* messagefilter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100A8A0100A8A0100A8A0000 /* messagewindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100A300100A300100A300000 /* messagewindow.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100B380100B380100B380000 /* messageshell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100ADE0100ADE0100ADE0000 /* messageshell.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100BD30100BD30100BD30000 /* terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100B8C0100B8C0100B8C0000 /* terminal.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100C7F0100C7F0100C7F0000 /* filteredspawnlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100C380100C380100C380000 /* filteredspawnlog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100D430100D430100D430000 /* messagefilterdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100D2B0100D2B0100D2B0000 /* messagefilterdialog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100DE20100DE20100DE20000 /* diagnosticmessages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100DDA0100DDA0100DDA0000 /* diagnosticmessages.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100E920100E920100E920000 /* mapicon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100E8B0100E8B0100E8B0000 /* mapicon.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100F3A0100F3A0100F3A0000 /* filternotifications.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100EF30100EF30100EF30000 /* filternotifications.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		100FF40100FF40100FF40000 /* netstream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100FE60100FE60100FE60000 /* netstream.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101097010109701010970000 /* guildshell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10104C010104C010104C0000 /* guildshell.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101154010115401011540000 /* guildlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1010FA01010FA01010FA0000 /* guildlist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		101202010120201012020000 /* bazaarlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1011A801011A801011A80000 /* bazaarlog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		1012AD01012AD01012AD0000 /* mapicondialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101256010125601012560000 /* mapicondialog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		10135D010135D010135D0000 /* mapicondialog.moc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101304010130401013040000 /* mapicondialog.moc.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E4C606E4C606E4C60000000 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A706E4A706E4A70000000 /* main.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E56706E56706E5670000000 /* spawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E51C06E51C06E51C0000000 /* spawn.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E61506E61506E6150000000 /* spawnshell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C906E5C906E5C90000000 /* spawnshell.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E6CC06E6CC06E6CC0000000 /* spawnlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E67706E67706E6770000000 /* spawnlist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E77806E77806E7780000000 /* spellshell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E72306E72306E7230000000 /* spellshell.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E82B06E82B06E82B0000000 /* spelllist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D206E7D206E7D20000000 /* spelllist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E8CC06E8CC06E8CC0000000 /* vpacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E88106E88106E8810000000 /* vpacket.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6E97806E97806E9780000000 /* editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E92D06E92D06E92D0000000 /* editor.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EA2E06EA2E06EA2E0000000 /* filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D906E9D906E9D90000000 /* filter.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EAE106EAE106EAE10000000 /* packetfragment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8606EA8606EA860000000 /* packetfragment.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EB8806EB8806EB880000000 /* packetstream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3306EB3306EB330000000 /* packetstream.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EC3406EC3406EC340000000 /* packetinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBDF06EBDF06EBDF0000000 /* packetinfo.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6ECD606ECD606ECD60000000 /* packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8B06EC8B06EC8B0000000 /* packet.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6ED8C06ED8C06ED8C0000000 /* packetcapture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3706ED3706ED370000000 /* packetcapture.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EE3806EE3806EE380000000 /* packetformat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE306EDE306EDE30000000 /* packetformat.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EEE406EEE406EEE40000000 /* interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8F06EE8F06EE8F0000000 /* interface.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6EF8606EF8606EF860000000 /* compass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF3B06EF3B06EF3B0000000 /* compass.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F03D06F03D06F03D0000000 /* map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F03106F03106F0310000000 /* map.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F0ED06F0ED06F0ED0000000 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F09906F09906F0990000000 /* util.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F19906F19906F1990000000 /* experiencelog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F14406F14406F1440000000 /* experiencelog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F24506F24506F2450000000 /* combatlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F006F1F006F1F00000000 /* combatlog.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F2E706F2E706F2E70000000 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F29C06F29C06F29C0000000 /* player.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F39D06F39D06F39D0000000 /* skilllist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F34806F34806F3480000000 /* skilllist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F43F06F43F06F43F0000000 /* statlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F406F3F406F3F40000000 /* statlist.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F4F506F4F506F4F50000000 /* filtermgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A006F4A006F4A00000000 /* filtermgr.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F59706F59706F5970000000 /* mapcore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C06F54C06F54C0000000 /* mapcore.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F64306F64306F6430000000 /* category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F806F5F806F5F80000000 /* category.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F6F906F6F906F6F90000000 /* compassframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A406F6A406F6A40000000 /* compassframe.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F7A406F7A406F7A40000000 /* group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F75006F75006F7500000000 /* group.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F84F06F84F06F84F0000000 /* guild.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7FB06F7FB06F7FB0000000 /* guild.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F8F106F8F106F8F10000000 /* netdiag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A606F8A606F8A60000000 /* netdiag.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6F99D06F99D06F99D0000000 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F95206F95206F9520000000 /* logger.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6FA4906FA4906FA490000000 /* xmlconv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9FE06F9FE06F9FE0000000 /* xmlconv.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6FB0B06FB0B06FB0B0000000 /* xmlpreferences.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB306FAB306FAB30000000 /* xmlpreferences.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		6FBBC06FBBC06FBBC0000000 /* seqwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6706FB6706FB670000000 /* seqwindow.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		103FB20103FB20103FB20000 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D40D06D40D06D40D0000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10356E010356E010356E0000;
+			remoteInfo = showeq;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		10000B010000B010000B0000 /* seqlistview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seqlistview.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.cpp"; sourceTree = "<absolute>"; };
+		1000B901000B901000B90000 /* zonemgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zonemgr.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/zonemgr.cpp"; sourceTree = "<absolute>"; };
+		100165010016501001650000 /* spawnmonitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnmonitor.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.cpp"; sourceTree = "<absolute>"; };
+		100213010021301002130000 /* spawnpointlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnpointlist.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.cpp"; sourceTree = "<absolute>"; };
+		1002C001002C001002C00000 /* spawnlistcommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnlistcommon.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.cpp"; sourceTree = "<absolute>"; };
+		10036D010036D010036D0000 /* spawnlist2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnlist2.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.cpp"; sourceTree = "<absolute>"; };
+		10041B010041B010041B0000 /* spells.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spells.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spells.cpp"; sourceTree = "<absolute>"; };
+		1004C701004C701004C70000 /* datetimemgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = datetimemgr.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/datetimemgr.cpp"; sourceTree = "<absolute>"; };
+		100575010057501005750000 /* spawnlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnlog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlog.cpp"; sourceTree = "<absolute>"; };
+		100621010062101006210000 /* packetlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packetlog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetlog.cpp"; sourceTree = "<absolute>"; };
+		1006CF01006CF01006CF0000 /* datalocationmgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = datalocationmgr.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/datalocationmgr.cpp"; sourceTree = "<absolute>"; };
+		10077C010077C010077C0000 /* eqstr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eqstr.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/eqstr.cpp"; sourceTree = "<absolute>"; };
+		10082A010082A010082A0000 /* messages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = messages.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messages.cpp"; sourceTree = "<absolute>"; };
+		1008D601008D601008D60000 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = message.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/message.cpp"; sourceTree = "<absolute>"; };
+		100982010098201009820000 /* messagefilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = messagefilter.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilter.cpp"; sourceTree = "<absolute>"; };
+		100A300100A300100A300000 /* messagewindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = messagewindow.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.cpp"; sourceTree = "<absolute>"; };
+		100ADE0100ADE0100ADE0000 /* messageshell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = messageshell.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messageshell.cpp"; sourceTree = "<absolute>"; };
+		100B8C0100B8C0100B8C0000 /* terminal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = terminal.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/terminal.cpp"; sourceTree = "<absolute>"; };
+		100C380100C380100C380000 /* filteredspawnlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filteredspawnlog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filteredspawnlog.cpp"; sourceTree = "<absolute>"; };
+		100D2B0100D2B0100D2B0000 /* messagefilterdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = messagefilterdialog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.cpp"; sourceTree = "<absolute>"; };
+		100DDA0100DDA0100DDA0000 /* diagnosticmessages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = diagnosticmessages.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/diagnosticmessages.cpp"; sourceTree = "<absolute>"; };
+		100E8B0100E8B0100E8B0000 /* mapicon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mapicon.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.cpp"; sourceTree = "<absolute>"; };
+		100EF30100EF30100EF30000 /* filternotifications.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filternotifications.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filternotifications.cpp"; sourceTree = "<absolute>"; };
+		100FE60100FE60100FE60000 /* netstream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = netstream.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/netstream.cpp"; sourceTree = "<absolute>"; };
+		10104C010104C010104C0000 /* guildshell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = guildshell.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.cpp"; sourceTree = "<absolute>"; };
+		1010FA01010FA01010FA0000 /* guildlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = guildlist.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.cpp"; sourceTree = "<absolute>"; };
+		1011A801011A801011A80000 /* bazaarlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bazaarlog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/bazaarlog.cpp"; sourceTree = "<absolute>"; };
+		101256010125601012560000 /* mapicondialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mapicondialog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.cpp"; sourceTree = "<absolute>"; };
+		101304010130401013040000 /* mapicondialog.moc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mapicondialog.moc.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.moc.cpp"; sourceTree = "<absolute>"; };
+		1013F701013F701013F70000 /* spawnshell.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnshell.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.moc.rule"; sourceTree = "<absolute>"; };
+		1014A301014A301014A30000 /* spawnlist.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnlist.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.moc.rule"; sourceTree = "<absolute>"; };
+		101550010155001015500000 /* spellshell.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spellshell.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.moc.rule"; sourceTree = "<absolute>"; };
+		1015FD01015FD01015FD0000 /* spelllist.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spelllist.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.moc.rule"; sourceTree = "<absolute>"; };
+		1016A801016A801016A80000 /* editor.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = editor.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.moc.rule"; sourceTree = "<absolute>"; };
+		101714010171401017140000 /* packetstream.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = packetstream.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetstream.moc.rule"; sourceTree = "<absolute>"; };
+		101806010180601018060000 /* packetinfo.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = packetinfo.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.moc.rule"; sourceTree = "<absolute>"; };
+		1018B101018B101018B10000 /* packet.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = packet.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packet.moc.rule"; sourceTree = "<absolute>"; };
+		10195E010195E010195E0000 /* interface.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = interface.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.moc.rule"; sourceTree = "<absolute>"; };
+		101A0D0101A0D0101A0D0000 /* compass.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = compass.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/compass.moc.rule"; sourceTree = "<absolute>"; };
+		101AB80101AB80101AB80000 /* map.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = map.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.moc.rule"; sourceTree = "<absolute>"; };
+		101B220101B220101B220000 /* experiencelog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = experiencelog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.moc.rule"; sourceTree = "<absolute>"; };
+		101C120101C120101C120000 /* combatlog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = combatlog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.moc.rule"; sourceTree = "<absolute>"; };
+		101C7B0101C7B0101C7B0000 /* player.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = player.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/player.moc.rule"; sourceTree = "<absolute>"; };
+		101D6B0101D6B0101D6B0000 /* skilllist.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = skilllist.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.moc.rule"; sourceTree = "<absolute>"; };
+		101E160101E160101E160000 /* statlist.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = statlist.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/statlist.moc.rule"; sourceTree = "<absolute>"; };
+		101EC10101EC10101EC10000 /* filtermgr.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = filtermgr.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filtermgr.moc.rule"; sourceTree = "<absolute>"; };
+		101F710101F710101F710000 /* category.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = category.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.moc.rule"; sourceTree = "<absolute>"; };
+		10201C010201C010201C0000 /* compassframe.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = compassframe.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.moc.rule"; sourceTree = "<absolute>"; };
+		102089010208901020890000 /* group.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = group.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/group.moc.rule"; sourceTree = "<absolute>"; };
+		102136010213601021360000 /* guild.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = guild.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.moc.rule"; sourceTree = "<absolute>"; };
+		102226010222601022260000 /* netdiag.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = netdiag.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.moc.rule"; sourceTree = "<absolute>"; };
+		1022D101022D101022D10000 /* logger.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = logger.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/logger.moc.rule"; sourceTree = "<absolute>"; };
+		10237E010237E010237E0000 /* xmlpreferences.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = xmlpreferences.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.moc.rule"; sourceTree = "<absolute>"; };
+		1023EB01023EB01023EB0000 /* seqwindow.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = seqwindow.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.moc.rule"; sourceTree = "<absolute>"; };
+		102498010249801024980000 /* seqlistview.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = seqlistview.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqlistview.moc.rule"; sourceTree = "<absolute>"; };
+		10258A010258A010258A0000 /* zonemgr.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = zonemgr.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/zonemgr.moc.rule"; sourceTree = "<absolute>"; };
+		102635010263501026350000 /* spawnmonitor.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnmonitor.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnmonitor.moc.rule"; sourceTree = "<absolute>"; };
+		1026A201026A201026A20000 /* spawnpointlist.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnpointlist.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnpointlist.moc.rule"; sourceTree = "<absolute>"; };
+		102751010275101027510000 /* spawnlistcommon.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnlistcommon.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlistcommon.moc.rule"; sourceTree = "<absolute>"; };
+		102800010280001028000000 /* spawnlist2.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnlist2.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist2.moc.rule"; sourceTree = "<absolute>"; };
+		1028AD01028AD01028AD0000 /* datetimemgr.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = datetimemgr.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/datetimemgr.moc.rule"; sourceTree = "<absolute>"; };
+		10299F010299F010299F0000 /* spawnlog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = spawnlog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlog.moc.rule"; sourceTree = "<absolute>"; };
+		102A110102A110102A110000 /* packetlog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = packetlog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetlog.moc.rule"; sourceTree = "<absolute>"; };
+		102B010102B010102B010000 /* messages.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = messages.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messages.moc.rule"; sourceTree = "<absolute>"; };
+		102BAC0102BAC0102BAC0000 /* messagefilter.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = messagefilter.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilter.moc.rule"; sourceTree = "<absolute>"; };
+		102C190102C190102C190000 /* messagewindow.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = messagewindow.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagewindow.moc.rule"; sourceTree = "<absolute>"; };
+		102CC80102CC80102CC80000 /* messageshell.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = messageshell.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messageshell.moc.rule"; sourceTree = "<absolute>"; };
+		102D770102D770102D770000 /* terminal.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = terminal.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/terminal.moc.rule"; sourceTree = "<absolute>"; };
+		102E240102E240102E240000 /* filteredspawnlog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = filteredspawnlog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filteredspawnlog.moc.rule"; sourceTree = "<absolute>"; };
+		102F160102F160102F160000 /* messagefilterdialog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = messagefilterdialog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/messagefilterdialog.moc.rule"; sourceTree = "<absolute>"; };
+		102F830102F830102F830000 /* mapicon.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = mapicon.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicon.moc.rule"; sourceTree = "<absolute>"; };
+		103030010303001030300000 /* filternotifications.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = filternotifications.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filternotifications.moc.rule"; sourceTree = "<absolute>"; };
+		103122010312201031220000 /* guildshell.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = guildshell.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildshell.moc.rule"; sourceTree = "<absolute>"; };
+		1031CD01031CD01031CD0000 /* guildlist.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = guildlist.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/guildlist.moc.rule"; sourceTree = "<absolute>"; };
+		103278010327801032780000 /* bazaarlog.moc.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = bazaarlog.moc.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/bazaarlog.moc.rule"; sourceTree = "<absolute>"; };
+		103323010332301033230000 /* mapicondialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = mapicondialog.h; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.h"; sourceTree = "<absolute>"; };
+		10338E010338E010338E0000 /* mapicondialog.moc.cpp.rule */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = mapicondialog.moc.cpp.rule; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.moc.cpp.rule"; sourceTree = "<absolute>"; };
+		103440010344001034400000 /* mapicondialog.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode; name = mapicondialog.ui; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui"; sourceTree = "<absolute>"; };
+		103E6B0103E6B0103E6B0000 /* showeq */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = showeq; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E4A706E4A706E4A70000000 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/main.cpp"; sourceTree = "<absolute>"; };
+		6E51C06E51C06E51C0000000 /* spawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawn.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawn.cpp"; sourceTree = "<absolute>"; };
+		6E5C906E5C906E5C90000000 /* spawnshell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnshell.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnshell.cpp"; sourceTree = "<absolute>"; };
+		6E67706E67706E6770000000 /* spawnlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spawnlist.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spawnlist.cpp"; sourceTree = "<absolute>"; };
+		6E72306E72306E7230000000 /* spellshell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spellshell.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spellshell.cpp"; sourceTree = "<absolute>"; };
+		6E7D206E7D206E7D20000000 /* spelllist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spelllist.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/spelllist.cpp"; sourceTree = "<absolute>"; };
+		6E88106E88106E8810000000 /* vpacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vpacket.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/vpacket.cpp"; sourceTree = "<absolute>"; };
+		6E92D06E92D06E92D0000000 /* editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = editor.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/editor.cpp"; sourceTree = "<absolute>"; };
+		6E9D906E9D906E9D90000000 /* filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filter.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filter.cpp"; sourceTree = "<absolute>"; };
+		6EA8606EA8606EA860000000 /* packetfragment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packetfragment.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetfragment.cpp"; sourceTree = "<absolute>"; };
+		6EB3306EB3306EB330000000 /* packetstream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packetstream.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetstream.cpp"; sourceTree = "<absolute>"; };
+		6EBDF06EBDF06EBDF0000000 /* packetinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packetinfo.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetinfo.cpp"; sourceTree = "<absolute>"; };
+		6EC8B06EC8B06EC8B0000000 /* packet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packet.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packet.cpp"; sourceTree = "<absolute>"; };
+		6ED3706ED3706ED370000000 /* packetcapture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packetcapture.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetcapture.cpp"; sourceTree = "<absolute>"; };
+		6EDE306EDE306EDE30000000 /* packetformat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = packetformat.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/packetformat.cpp"; sourceTree = "<absolute>"; };
+		6EE8F06EE8F06EE8F0000000 /* interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interface.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp"; sourceTree = "<absolute>"; };
+		6EF3B06EF3B06EF3B0000000 /* compass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compass.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/compass.cpp"; sourceTree = "<absolute>"; };
+		6F03106F03106F0310000000 /* map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = map.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/map.cpp"; sourceTree = "<absolute>"; };
+		6F09906F09906F0990000000 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/util.cpp"; sourceTree = "<absolute>"; };
+		6F14406F14406F1440000000 /* experiencelog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = experiencelog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/experiencelog.cpp"; sourceTree = "<absolute>"; };
+		6F1F006F1F006F1F00000000 /* combatlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = combatlog.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/combatlog.cpp"; sourceTree = "<absolute>"; };
+		6F29C06F29C06F29C0000000 /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = player.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/player.cpp"; sourceTree = "<absolute>"; };
+		6F34806F34806F3480000000 /* skilllist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skilllist.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/skilllist.cpp"; sourceTree = "<absolute>"; };
+		6F3F406F3F406F3F40000000 /* statlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = statlist.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/statlist.cpp"; sourceTree = "<absolute>"; };
+		6F4A006F4A006F4A00000000 /* filtermgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filtermgr.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/filtermgr.cpp"; sourceTree = "<absolute>"; };
+		6F54C06F54C06F54C0000000 /* mapcore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mapcore.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapcore.cpp"; sourceTree = "<absolute>"; };
+		6F5F806F5F806F5F80000000 /* category.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = category.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/category.cpp"; sourceTree = "<absolute>"; };
+		6F6A406F6A406F6A40000000 /* compassframe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compassframe.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/compassframe.cpp"; sourceTree = "<absolute>"; };
+		6F75006F75006F7500000000 /* group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/group.cpp"; sourceTree = "<absolute>"; };
+		6F7FB06F7FB06F7FB0000000 /* guild.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = guild.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/guild.cpp"; sourceTree = "<absolute>"; };
+		6F8A606F8A606F8A60000000 /* netdiag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = netdiag.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/netdiag.cpp"; sourceTree = "<absolute>"; };
+		6F95206F95206F9520000000 /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = logger.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/logger.cpp"; sourceTree = "<absolute>"; };
+		6F9FE06F9FE06F9FE0000000 /* xmlconv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xmlconv.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp"; sourceTree = "<absolute>"; };
+		6FAB306FAB306FAB30000000 /* xmlpreferences.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xmlpreferences.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp"; sourceTree = "<absolute>"; };
+		6FB6706FB6706FB670000000 /* seqwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seqwindow.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp"; sourceTree = "<absolute>"; };
+		F79EC89F0F4D61FD0084CA06 /* bazaarlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bazaarlog.h; path = src/bazaarlog.h; sourceTree = "<group>"; };
+		F79EC8A00F4D62380084CA06 /* filternotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filternotifications.h; path = src/filternotifications.h; sourceTree = "<group>"; };
+		F79EC8A10F4D62380084CA06 /* everquest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = everquest.h; path = src/everquest.h; sourceTree = "<group>"; };
+		F79EC8A20F4D62380084CA06 /* category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = category.h; path = src/category.h; sourceTree = "<group>"; };
+		F79EC8A30F4D62380084CA06 /* compass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compass.h; path = src/compass.h; sourceTree = "<group>"; };
+		F79EC8A40F4D62380084CA06 /* diagnosticmessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diagnosticmessages.h; path = src/diagnosticmessages.h; sourceTree = "<group>"; };
+		F79EC8A50F4D62380084CA06 /* decode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decode.h; path = src/decode.h; sourceTree = "<group>"; };
+		F79EC8A60F4D62380084CA06 /* crctab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crctab.h; path = src/crctab.h; sourceTree = "<group>"; };
+		F79EC8A70F4D62390084CA06 /* db3conv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db3conv.h; path = src/db3conv.h; sourceTree = "<group>"; };
+		F79EC8A80F4D62390084CA06 /* fixpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fixpt.h; path = src/fixpt.h; sourceTree = "<group>"; };
+		F79EC8A90F4D62390084CA06 /* editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editor.h; path = src/editor.h; sourceTree = "<group>"; };
+		F79EC8AA0F4D62390084CA06 /* eqstr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eqstr.h; path = src/eqstr.h; sourceTree = "<group>"; };
+		F79EC8AB0F4D62390084CA06 /* filteredspawnlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filteredspawnlog.h; path = src/filteredspawnlog.h; sourceTree = "<group>"; };
+		F79EC8AC0F4D62390084CA06 /* experiencelog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = experiencelog.h; path = src/experiencelog.h; sourceTree = "<group>"; };
+		F79EC8AD0F4D62390084CA06 /* compassframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compassframe.h; path = src/compassframe.h; sourceTree = "<group>"; };
+		F79EC8AE0F4D62390084CA06 /* datetimemgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = datetimemgr.h; path = src/datetimemgr.h; sourceTree = "<group>"; };
+		F79EC8AF0F4D62390084CA06 /* classes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classes.h; path = src/classes.h; sourceTree = "<group>"; };
+		F79EC8B00F4D62390084CA06 /* cgiconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cgiconv.h; path = src/cgiconv.h; sourceTree = "<group>"; };
+		F79EC8B10F4D62390084CA06 /* combatlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = combatlog.h; path = src/combatlog.h; sourceTree = "<group>"; };
+		F79EC8B20F4D62390084CA06 /* deity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deity.h; path = src/deity.h; sourceTree = "<group>"; };
+		F79EC8B30F4D62390084CA06 /* datalocationmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = datalocationmgr.h; path = src/datalocationmgr.h; sourceTree = "<group>"; };
+		F79EC8B40F4D62390084CA06 /* dbcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbcommon.h; path = src/dbcommon.h; sourceTree = "<group>"; };
+		F79EC8B50F4D62390084CA06 /* filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filter.h; path = src/filter.h; sourceTree = "<group>"; };
+		F79EC8B60F4D62390084CA06 /* filtermgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filtermgr.h; path = src/filtermgr.h; sourceTree = "<group>"; };
+		F79EC8B70F4D625B0084CA06 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = logger.h; path = src/logger.h; sourceTree = "<group>"; };
+		F79EC8B80F4D625B0084CA06 /* itemdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = itemdb.h; path = src/itemdb.h; sourceTree = "<group>"; };
+		F79EC8B90F4D625B0084CA06 /* interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interface.h; path = src/interface.h; sourceTree = "<group>"; };
+		F79EC8BA0F4D625B0084CA06 /* guildshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = guildshell.h; path = src/guildshell.h; sourceTree = "<group>"; };
+		F79EC8BB0F4D625B0084CA06 /* gdbmconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gdbmconv.h; path = src/gdbmconv.h; sourceTree = "<group>"; };
+		F79EC8BC0F4D625B0084CA06 /* group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = group.h; path = src/group.h; sourceTree = "<group>"; };
+		F79EC8BD0F4D625B0084CA06 /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = message.h; path = src/message.h; sourceTree = "<group>"; };
+		F79EC8BE0F4D625B0084CA06 /* languages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = languages.h; path = src/languages.h; sourceTree = "<group>"; };
+		F79EC8BF0F4D625B0084CA06 /* guild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = guild.h; path = src/guild.h; sourceTree = "<group>"; };
+		F79EC8C00F4D625B0084CA06 /* mapicon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapicon.h; path = src/mapicon.h; sourceTree = "<group>"; };
+		F79EC8C10F4D625B0084CA06 /* mapcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapcore.h; path = src/mapcore.h; sourceTree = "<group>"; };
+		F79EC8C20F4D625B0084CA06 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/main.h; sourceTree = "<group>"; };
+		F79EC8C30F4D625B0084CA06 /* mapicondialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapicondialog.h; path = src/mapicondialog.h; sourceTree = "<group>"; };
+		F79EC8C40F4D625B0084CA06 /* guildlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = guildlist.h; path = src/guildlist.h; sourceTree = "<group>"; };
+		F79EC8C50F4D625B0084CA06 /* map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = map.h; path = src/map.h; sourceTree = "<group>"; };
+		F79EC8C60F4D62840084CA06 /* packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packet.h; path = src/packet.h; sourceTree = "<group>"; };
+		F79EC8C70F4D62840084CA06 /* pointarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pointarray.h; path = src/pointarray.h; sourceTree = "<group>"; };
+		F79EC8C80F4D62840084CA06 /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point.h; path = src/point.h; sourceTree = "<group>"; };
+		F79EC8C90F4D62840084CA06 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = src/player.h; sourceTree = "<group>"; };
+		F79EC8CA0F4D62840084CA06 /* packetstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetstream.h; path = src/packetstream.h; sourceTree = "<group>"; };
+		F79EC8CB0F4D62840084CA06 /* messageshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageshell.h; path = src/messageshell.h; sourceTree = "<group>"; };
+		F79EC8CC0F4D62840084CA06 /* packetlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetlog.h; path = src/packetlog.h; sourceTree = "<group>"; };
+		F79EC8CD0F4D62840084CA06 /* messagefilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messagefilter.h; path = src/messagefilter.h; sourceTree = "<group>"; };
+		F79EC8CE0F4D62840084CA06 /* skilllist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skilllist.h; path = src/skilllist.h; sourceTree = "<group>"; };
+		F79EC8CF0F4D62850084CA06 /* packetformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetformat.h; path = src/packetformat.h; sourceTree = "<group>"; };
+		F79EC8D00F4D62850084CA06 /* opcodetable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opcodetable.h; path = src/opcodetable.h; sourceTree = "<group>"; };
+		F79EC8D10F4D62850084CA06 /* netstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netstream.h; path = src/netstream.h; sourceTree = "<group>"; };
+		F79EC8D20F4D62850084CA06 /* packetinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetinfo.h; path = src/packetinfo.h; sourceTree = "<group>"; };
+		F79EC8D30F4D62850084CA06 /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = message.h; path = src/message.h; sourceTree = "<group>"; };
+		F79EC8D40F4D62850084CA06 /* netdiag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netdiag.h; path = src/netdiag.h; sourceTree = "<group>"; };
+		F79EC8D50F4D62850084CA06 /* messagewindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messagewindow.h; path = src/messagewindow.h; sourceTree = "<group>"; };
+		F79EC8D60F4D62850084CA06 /* packetfragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetfragment.h; path = src/packetfragment.h; sourceTree = "<group>"; };
+		F79EC8D70F4D62850084CA06 /* messagefilterdialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messagefilterdialog.h; path = src/messagefilterdialog.h; sourceTree = "<group>"; };
+		F79EC8D80F4D62850084CA06 /* seqwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = seqwindow.h; path = src/seqwindow.h; sourceTree = "<group>"; };
+		F79EC8D90F4D62850084CA06 /* packetcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetcommon.h; path = src/packetcommon.h; sourceTree = "<group>"; };
+		F79EC8DA0F4D62850084CA06 /* packetcapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetcapture.h; path = src/packetcapture.h; sourceTree = "<group>"; };
+		F79EC8DB0F4D62850084CA06 /* messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messages.h; path = src/messages.h; sourceTree = "<group>"; };
+		F79EC8DC0F4D62850084CA06 /* spawnlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlist.h; path = src/spawnlist.h; sourceTree = "<group>"; };
+		F79EC8DD0F4D62850084CA06 /* spawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawn.h; path = src/spawn.h; sourceTree = "<group>"; };
+		F79EC8DE0F4D62850084CA06 /* skills.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skills.h; path = src/skills.h; sourceTree = "<group>"; };
+		F79EC8DF0F4D62850084CA06 /* seqlistview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = seqlistview.h; path = src/seqlistview.h; sourceTree = "<group>"; };
+		F79EC8E00F4D62850084CA06 /* s_everquest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = s_everquest.h; path = src/s_everquest.h; sourceTree = "<group>"; };
+		F79EC8E10F4D62850084CA06 /* races.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = races.h; path = src/races.h; sourceTree = "<group>"; };
+		F79EC8E20F4D62920084CA06 /* spelllist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spelllist.h; path = src/spelllist.h; sourceTree = "<group>"; };
+		F79EC8E30F4D62920084CA06 /* spells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spells.h; path = src/spells.h; sourceTree = "<group>"; };
+		F79EC8E40F4D62920084CA06 /* spawnpointlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnpointlist.h; path = src/spawnpointlist.h; sourceTree = "<group>"; };
+		F79EC8E50F4D62930084CA06 /* spawnshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnshell.h; path = src/spawnshell.h; sourceTree = "<group>"; };
+		F79EC8E60F4D62930084CA06 /* spawnmonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnmonitor.h; path = src/spawnmonitor.h; sourceTree = "<group>"; };
+		F79EC8E70F4D62930084CA06 /* spawnlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlog.h; path = src/spawnlog.h; sourceTree = "<group>"; };
+		F79EC8E80F4D62930084CA06 /* spawnlistcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlistcommon.h; path = src/spawnlistcommon.h; sourceTree = "<group>"; };
+		F79EC8E90F4D62930084CA06 /* spawnlist2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlist2.h; path = src/spawnlist2.h; sourceTree = "<group>"; };
+		F79EC8EA0F4D62AD0084CA06 /* weapons29.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons29.h; path = src/weapons29.h; sourceTree = "<group>"; };
+		F79EC8EB0F4D62AD0084CA06 /* weapons28.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons28.h; path = src/weapons28.h; sourceTree = "<group>"; };
+		F79EC8EC0F4D62AD0084CA06 /* weapons27.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons27.h; path = src/weapons27.h; sourceTree = "<group>"; };
+		F79EC8ED0F4D62AD0084CA06 /* weapons1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons1.h; path = src/weapons1.h; sourceTree = "<group>"; };
+		F79EC8EE0F4D62AD0084CA06 /* weapons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons.h; path = src/weapons.h; sourceTree = "<group>"; };
+		F79EC8EF0F4D62AD0084CA06 /* vpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vpacket.h; path = src/vpacket.h; sourceTree = "<group>"; };
+		F79EC8F00F4D62AD0084CA06 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
+		F79EC8F10F4D62AD0084CA06 /* typenames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = typenames.h; path = src/typenames.h; sourceTree = "<group>"; };
+		F79EC8F20F4D62AD0084CA06 /* terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = terminal.h; path = src/terminal.h; sourceTree = "<group>"; };
+		F79EC8F30F4D62AD0084CA06 /* strnlen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = strnlen.h; path = src/strnlen.h; sourceTree = "<group>"; };
+		F79EC8F40F4D62AD0084CA06 /* xmlpreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xmlpreferences.h; path = src/xmlpreferences.h; sourceTree = "<group>"; };
+		F79EC8F50F4D62AD0084CA06 /* xmlconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xmlconv.h; path = src/xmlconv.h; sourceTree = "<group>"; };
+		F79EC8F60F4D62AD0084CA06 /* statlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = statlist.h; path = src/statlist.h; sourceTree = "<group>"; };
+		F79EC8F70F4D62AD0084CA06 /* staticspells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = staticspells.h; path = src/staticspells.h; sourceTree = "<group>"; };
+		F79EC8F80F4D62AD0084CA06 /* spellshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spellshell.h; path = src/spellshell.h; sourceTree = "<group>"; };
+		F79EC8F90F4D62AE0084CA06 /* zones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zones.h; path = src/zones.h; sourceTree = "<group>"; };
+		F79EC8FA0F4D62AE0084CA06 /* zonemgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zonemgr.h; path = src/zonemgr.h; sourceTree = "<group>"; };
+		F79EC8FB0F4D62AE0084CA06 /* weapons2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons2c.h; path = src/weapons2c.h; sourceTree = "<group>"; };
+		F79EC8FC0F4D62AE0084CA06 /* weapons2b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons2b.h; path = src/weapons2b.h; sourceTree = "<group>"; };
+		F79EC8FD0F4D62AE0084CA06 /* weapons2a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons2a.h; path = src/weapons2a.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		6D33706D33706D3370000000 = {
+			isa = PBXGroup;
+			children = (
+				6D36406D36406D3640000000 /* Sources */,
+				6DBB206DBB206DBB20000000 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D36406D36406D3640000000 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6D41E06D41E06D41E0000000 /* showeq */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		6D41E06D41E06D41E0000000 /* showeq */ = {
+			isa = PBXGroup;
+			children = (
+				6D46406D46406D4640000000 /* Source Files */,
+				6D6BB06D6BB06D6BB0000000 /* CMake Rules */,
+				6DB3F06DB3F06DB3F0000000 /* Header Files */,
+				103440010344001034400000 /* mapicondialog.ui */,
+			);
+			name = showeq;
+			sourceTree = "<group>";
+		};
+		6D46406D46406D4640000000 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E4A706E4A706E4A70000000 /* main.cpp */,
+				6E51C06E51C06E51C0000000 /* spawn.cpp */,
+				6E5C906E5C906E5C90000000 /* spawnshell.cpp */,
+				6E67706E67706E6770000000 /* spawnlist.cpp */,
+				6E72306E72306E7230000000 /* spellshell.cpp */,
+				6E7D206E7D206E7D20000000 /* spelllist.cpp */,
+				6E88106E88106E8810000000 /* vpacket.cpp */,
+				6E92D06E92D06E92D0000000 /* editor.cpp */,
+				6E9D906E9D906E9D90000000 /* filter.cpp */,
+				6EA8606EA8606EA860000000 /* packetfragment.cpp */,
+				6EB3306EB3306EB330000000 /* packetstream.cpp */,
+				6EBDF06EBDF06EBDF0000000 /* packetinfo.cpp */,
+				6EC8B06EC8B06EC8B0000000 /* packet.cpp */,
+				6ED3706ED3706ED370000000 /* packetcapture.cpp */,
+				6EDE306EDE306EDE30000000 /* packetformat.cpp */,
+				6EE8F06EE8F06EE8F0000000 /* interface.cpp */,
+				6EF3B06EF3B06EF3B0000000 /* compass.cpp */,
+				6F03106F03106F0310000000 /* map.cpp */,
+				6F09906F09906F0990000000 /* util.cpp */,
+				6F14406F14406F1440000000 /* experiencelog.cpp */,
+				6F1F006F1F006F1F00000000 /* combatlog.cpp */,
+				6F29C06F29C06F29C0000000 /* player.cpp */,
+				6F34806F34806F3480000000 /* skilllist.cpp */,
+				6F3F406F3F406F3F40000000 /* statlist.cpp */,
+				6F4A006F4A006F4A00000000 /* filtermgr.cpp */,
+				6F54C06F54C06F54C0000000 /* mapcore.cpp */,
+				6F5F806F5F806F5F80000000 /* category.cpp */,
+				6F6A406F6A406F6A40000000 /* compassframe.cpp */,
+				6F75006F75006F7500000000 /* group.cpp */,
+				6F7FB06F7FB06F7FB0000000 /* guild.cpp */,
+				6F8A606F8A606F8A60000000 /* netdiag.cpp */,
+				6F95206F95206F9520000000 /* logger.cpp */,
+				6F9FE06F9FE06F9FE0000000 /* xmlconv.cpp */,
+				6FAB306FAB306FAB30000000 /* xmlpreferences.cpp */,
+				6FB6706FB6706FB670000000 /* seqwindow.cpp */,
+				10000B010000B010000B0000 /* seqlistview.cpp */,
+				1000B901000B901000B90000 /* zonemgr.cpp */,
+				100165010016501001650000 /* spawnmonitor.cpp */,
+				100213010021301002130000 /* spawnpointlist.cpp */,
+				1002C001002C001002C00000 /* spawnlistcommon.cpp */,
+				10036D010036D010036D0000 /* spawnlist2.cpp */,
+				10041B010041B010041B0000 /* spells.cpp */,
+				1004C701004C701004C70000 /* datetimemgr.cpp */,
+				100575010057501005750000 /* spawnlog.cpp */,
+				100621010062101006210000 /* packetlog.cpp */,
+				1006CF01006CF01006CF0000 /* datalocationmgr.cpp */,
+				10077C010077C010077C0000 /* eqstr.cpp */,
+				10082A010082A010082A0000 /* messages.cpp */,
+				1008D601008D601008D60000 /* message.cpp */,
+				100982010098201009820000 /* messagefilter.cpp */,
+				100A300100A300100A300000 /* messagewindow.cpp */,
+				100ADE0100ADE0100ADE0000 /* messageshell.cpp */,
+				100B8C0100B8C0100B8C0000 /* terminal.cpp */,
+				100C380100C380100C380000 /* filteredspawnlog.cpp */,
+				100D2B0100D2B0100D2B0000 /* messagefilterdialog.cpp */,
+				100DDA0100DDA0100DDA0000 /* diagnosticmessages.cpp */,
+				100E8B0100E8B0100E8B0000 /* mapicon.cpp */,
+				100EF30100EF30100EF30000 /* filternotifications.cpp */,
+				100FE60100FE60100FE60000 /* netstream.cpp */,
+				10104C010104C010104C0000 /* guildshell.cpp */,
+				1010FA01010FA01010FA0000 /* guildlist.cpp */,
+				1011A801011A801011A80000 /* bazaarlog.cpp */,
+				101256010125601012560000 /* mapicondialog.cpp */,
+				101304010130401013040000 /* mapicondialog.moc.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		6D6BB06D6BB06D6BB0000000 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				1013F701013F701013F70000 /* spawnshell.moc.rule */,
+				1014A301014A301014A30000 /* spawnlist.moc.rule */,
+				101550010155001015500000 /* spellshell.moc.rule */,
+				1015FD01015FD01015FD0000 /* spelllist.moc.rule */,
+				1016A801016A801016A80000 /* editor.moc.rule */,
+				101714010171401017140000 /* packetstream.moc.rule */,
+				101806010180601018060000 /* packetinfo.moc.rule */,
+				1018B101018B101018B10000 /* packet.moc.rule */,
+				10195E010195E010195E0000 /* interface.moc.rule */,
+				101A0D0101A0D0101A0D0000 /* compass.moc.rule */,
+				101AB80101AB80101AB80000 /* map.moc.rule */,
+				101B220101B220101B220000 /* experiencelog.moc.rule */,
+				101C120101C120101C120000 /* combatlog.moc.rule */,
+				101C7B0101C7B0101C7B0000 /* player.moc.rule */,
+				101D6B0101D6B0101D6B0000 /* skilllist.moc.rule */,
+				101E160101E160101E160000 /* statlist.moc.rule */,
+				101EC10101EC10101EC10000 /* filtermgr.moc.rule */,
+				101F710101F710101F710000 /* category.moc.rule */,
+				10201C010201C010201C0000 /* compassframe.moc.rule */,
+				102089010208901020890000 /* group.moc.rule */,
+				102136010213601021360000 /* guild.moc.rule */,
+				102226010222601022260000 /* netdiag.moc.rule */,
+				1022D101022D101022D10000 /* logger.moc.rule */,
+				10237E010237E010237E0000 /* xmlpreferences.moc.rule */,
+				1023EB01023EB01023EB0000 /* seqwindow.moc.rule */,
+				102498010249801024980000 /* seqlistview.moc.rule */,
+				10258A010258A010258A0000 /* zonemgr.moc.rule */,
+				102635010263501026350000 /* spawnmonitor.moc.rule */,
+				1026A201026A201026A20000 /* spawnpointlist.moc.rule */,
+				102751010275101027510000 /* spawnlistcommon.moc.rule */,
+				102800010280001028000000 /* spawnlist2.moc.rule */,
+				1028AD01028AD01028AD0000 /* datetimemgr.moc.rule */,
+				10299F010299F010299F0000 /* spawnlog.moc.rule */,
+				102A110102A110102A110000 /* packetlog.moc.rule */,
+				102B010102B010102B010000 /* messages.moc.rule */,
+				102BAC0102BAC0102BAC0000 /* messagefilter.moc.rule */,
+				102C190102C190102C190000 /* messagewindow.moc.rule */,
+				102CC80102CC80102CC80000 /* messageshell.moc.rule */,
+				102D770102D770102D770000 /* terminal.moc.rule */,
+				102E240102E240102E240000 /* filteredspawnlog.moc.rule */,
+				102F160102F160102F160000 /* messagefilterdialog.moc.rule */,
+				102F830102F830102F830000 /* mapicon.moc.rule */,
+				103030010303001030300000 /* filternotifications.moc.rule */,
+				103122010312201031220000 /* guildshell.moc.rule */,
+				1031CD01031CD01031CD0000 /* guildlist.moc.rule */,
+				103278010327801032780000 /* bazaarlog.moc.rule */,
+				10338E010338E010338E0000 /* mapicondialog.moc.cpp.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		6DB3F06DB3F06DB3F0000000 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				F79EC8A00F4D62380084CA06 /* filternotifications.h */,
+				F79EC8B70F4D625B0084CA06 /* logger.h */,
+				F79EC8B80F4D625B0084CA06 /* itemdb.h */,
+				F79EC8B90F4D625B0084CA06 /* interface.h */,
+				F79EC8BA0F4D625B0084CA06 /* guildshell.h */,
+				F79EC8BB0F4D625B0084CA06 /* gdbmconv.h */,
+				F79EC8BC0F4D625B0084CA06 /* group.h */,
+				F79EC8BD0F4D625B0084CA06 /* message.h */,
+				F79EC8C60F4D62840084CA06 /* packet.h */,
+				F79EC8C70F4D62840084CA06 /* pointarray.h */,
+				F79EC8C80F4D62840084CA06 /* point.h */,
+				F79EC8C90F4D62840084CA06 /* player.h */,
+				F79EC8CA0F4D62840084CA06 /* packetstream.h */,
+				F79EC8CB0F4D62840084CA06 /* messageshell.h */,
+				F79EC8CC0F4D62840084CA06 /* packetlog.h */,
+				F79EC8CD0F4D62840084CA06 /* messagefilter.h */,
+				F79EC8CE0F4D62840084CA06 /* skilllist.h */,
+				F79EC8EA0F4D62AD0084CA06 /* weapons29.h */,
+				F79EC8EB0F4D62AD0084CA06 /* weapons28.h */,
+				F79EC8EC0F4D62AD0084CA06 /* weapons27.h */,
+				F79EC8ED0F4D62AD0084CA06 /* weapons1.h */,
+				F79EC8EE0F4D62AD0084CA06 /* weapons.h */,
+				F79EC8EF0F4D62AD0084CA06 /* vpacket.h */,
+				F79EC8F00F4D62AD0084CA06 /* util.h */,
+				F79EC8F10F4D62AD0084CA06 /* typenames.h */,
+				F79EC8F20F4D62AD0084CA06 /* terminal.h */,
+				F79EC8F30F4D62AD0084CA06 /* strnlen.h */,
+				F79EC8F40F4D62AD0084CA06 /* xmlpreferences.h */,
+				F79EC8F50F4D62AD0084CA06 /* xmlconv.h */,
+				F79EC8F60F4D62AD0084CA06 /* statlist.h */,
+				F79EC8F70F4D62AD0084CA06 /* staticspells.h */,
+				F79EC8F80F4D62AD0084CA06 /* spellshell.h */,
+				F79EC8F90F4D62AE0084CA06 /* zones.h */,
+				F79EC8FA0F4D62AE0084CA06 /* zonemgr.h */,
+				F79EC8FB0F4D62AE0084CA06 /* weapons2c.h */,
+				F79EC8FC0F4D62AE0084CA06 /* weapons2b.h */,
+				F79EC8FD0F4D62AE0084CA06 /* weapons2a.h */,
+				F79EC8CF0F4D62850084CA06 /* packetformat.h */,
+				F79EC8D00F4D62850084CA06 /* opcodetable.h */,
+				F79EC8D10F4D62850084CA06 /* netstream.h */,
+				F79EC8E20F4D62920084CA06 /* spelllist.h */,
+				F79EC8E30F4D62920084CA06 /* spells.h */,
+				F79EC8E40F4D62920084CA06 /* spawnpointlist.h */,
+				F79EC8E50F4D62930084CA06 /* spawnshell.h */,
+				F79EC8E60F4D62930084CA06 /* spawnmonitor.h */,
+				F79EC8E70F4D62930084CA06 /* spawnlog.h */,
+				F79EC8E80F4D62930084CA06 /* spawnlistcommon.h */,
+				F79EC8E90F4D62930084CA06 /* spawnlist2.h */,
+				F79EC8D20F4D62850084CA06 /* packetinfo.h */,
+				F79EC8D30F4D62850084CA06 /* message.h */,
+				F79EC8D40F4D62850084CA06 /* netdiag.h */,
+				F79EC8D50F4D62850084CA06 /* messagewindow.h */,
+				F79EC8D60F4D62850084CA06 /* packetfragment.h */,
+				F79EC8D70F4D62850084CA06 /* messagefilterdialog.h */,
+				F79EC8D80F4D62850084CA06 /* seqwindow.h */,
+				F79EC8D90F4D62850084CA06 /* packetcommon.h */,
+				F79EC8DA0F4D62850084CA06 /* packetcapture.h */,
+				F79EC8DB0F4D62850084CA06 /* messages.h */,
+				F79EC8DC0F4D62850084CA06 /* spawnlist.h */,
+				F79EC8DD0F4D62850084CA06 /* spawn.h */,
+				F79EC8DE0F4D62850084CA06 /* skills.h */,
+				F79EC8DF0F4D62850084CA06 /* seqlistview.h */,
+				F79EC8E00F4D62850084CA06 /* s_everquest.h */,
+				F79EC8E10F4D62850084CA06 /* races.h */,
+				F79EC8BE0F4D625B0084CA06 /* languages.h */,
+				F79EC8BF0F4D625B0084CA06 /* guild.h */,
+				F79EC8C00F4D625B0084CA06 /* mapicon.h */,
+				F79EC8C10F4D625B0084CA06 /* mapcore.h */,
+				F79EC8C20F4D625B0084CA06 /* main.h */,
+				F79EC8C30F4D625B0084CA06 /* mapicondialog.h */,
+				F79EC8C40F4D625B0084CA06 /* guildlist.h */,
+				F79EC8C50F4D625B0084CA06 /* map.h */,
+				F79EC8A10F4D62380084CA06 /* everquest.h */,
+				F79EC8A20F4D62380084CA06 /* category.h */,
+				F79EC8A30F4D62380084CA06 /* compass.h */,
+				F79EC8A40F4D62380084CA06 /* diagnosticmessages.h */,
+				F79EC8A50F4D62380084CA06 /* decode.h */,
+				F79EC8A60F4D62380084CA06 /* crctab.h */,
+				F79EC8A70F4D62390084CA06 /* db3conv.h */,
+				F79EC8A80F4D62390084CA06 /* fixpt.h */,
+				F79EC8A90F4D62390084CA06 /* editor.h */,
+				F79EC8AA0F4D62390084CA06 /* eqstr.h */,
+				F79EC8AB0F4D62390084CA06 /* filteredspawnlog.h */,
+				F79EC8AC0F4D62390084CA06 /* experiencelog.h */,
+				F79EC8AD0F4D62390084CA06 /* compassframe.h */,
+				F79EC8AE0F4D62390084CA06 /* datetimemgr.h */,
+				F79EC8AF0F4D62390084CA06 /* classes.h */,
+				F79EC8B00F4D62390084CA06 /* cgiconv.h */,
+				F79EC8B10F4D62390084CA06 /* combatlog.h */,
+				F79EC8B20F4D62390084CA06 /* deity.h */,
+				F79EC8B30F4D62390084CA06 /* datalocationmgr.h */,
+				F79EC8B40F4D62390084CA06 /* dbcommon.h */,
+				F79EC8B50F4D62390084CA06 /* filter.h */,
+				F79EC8B60F4D62390084CA06 /* filtermgr.h */,
+				F79EC89F0F4D61FD0084CA06 /* bazaarlog.h */,
+				103323010332301033230000 /* mapicondialog.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		6DBB206DBB206DBB20000000 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				103E6B0103E6B0103E6B0000 /* showeq */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		10356E010356E010356E0000 /* showeq */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 103591010359101035910000 /* Build configuration list for PBXNativeTarget "showeq" */;
+			buildPhases = (
+				1035C401035C401035C40000 /* CMake ReRun */,
+				1036CF01036CF01036CF0000 /* CMake Rules */,
+				1034ED01034ED01034ED0000 /* Sources */,
+				10373E010373E010373E0000 /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = showeq;
+			productName = showeq;
+			productReference = 103E6B0103E6B0103E6B0000 /* showeq */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D40D06D40D06D40D0000000 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6DC1106DC1106DC110000000 /* Build configuration list for PBXProject "showeq" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 0;
+			mainGroup = 6D33706D33706D3370000000;
+			projectDirPath = "";
+			projectRoot = "/Users/brainiac/Development/ShowEQ-5.13.1.0";
+			targets = (
+				6DD5906DD5906DD590000000 /* ALL_BUILD */,
+				10356E010356E010356E0000 /* showeq */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1035C401035C401035C40000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/brainiac/Development/ShowEQ-5.13.1.0 -f /Users/brainiac/Development/ShowEQ-5.13.1.0/CMakeScripts/ReRunCMake.make";
+		};
+		1036CF01036CF01036CF0000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/brainiac/Development/ShowEQ-5.13.1.0/src -f /Users/brainiac/Development/ShowEQ-5.13.1.0/src/CMakeScripts/showeq_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+		10373E010373E010373E0000 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/brainiac/Development/ShowEQ-5.13.1.0/src -f /Users/brainiac/Development/ShowEQ-5.13.1.0/src/CMakeScripts/showeq_postBuildPhase.make$CONFIGURATION all";
+		};
+		6DD7706DD7706DD770000000 /* CMake ReRun */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake ReRun";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/brainiac/Development/ShowEQ-5.13.1.0 -f /Users/brainiac/Development/ShowEQ-5.13.1.0/CMakeScripts/ReRunCMake.make";
+		};
+		6DDE606DDE606DDE60000000 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/brainiac/Development/ShowEQ-5.13.1.0 -f /Users/brainiac/Development/ShowEQ-5.13.1.0/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1034ED01034ED01034ED0000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E4C606E4C606E4C60000000 /* main.cpp in Sources */,
+				6E56706E56706E5670000000 /* spawn.cpp in Sources */,
+				6E61506E61506E6150000000 /* spawnshell.cpp in Sources */,
+				6E6CC06E6CC06E6CC0000000 /* spawnlist.cpp in Sources */,
+				6E77806E77806E7780000000 /* spellshell.cpp in Sources */,
+				6E82B06E82B06E82B0000000 /* spelllist.cpp in Sources */,
+				6E8CC06E8CC06E8CC0000000 /* vpacket.cpp in Sources */,
+				6E97806E97806E9780000000 /* editor.cpp in Sources */,
+				6EA2E06EA2E06EA2E0000000 /* filter.cpp in Sources */,
+				6EAE106EAE106EAE10000000 /* packetfragment.cpp in Sources */,
+				6EB8806EB8806EB880000000 /* packetstream.cpp in Sources */,
+				6EC3406EC3406EC340000000 /* packetinfo.cpp in Sources */,
+				6ECD606ECD606ECD60000000 /* packet.cpp in Sources */,
+				6ED8C06ED8C06ED8C0000000 /* packetcapture.cpp in Sources */,
+				6EE3806EE3806EE380000000 /* packetformat.cpp in Sources */,
+				6EEE406EEE406EEE40000000 /* interface.cpp in Sources */,
+				6EF8606EF8606EF860000000 /* compass.cpp in Sources */,
+				6F03D06F03D06F03D0000000 /* map.cpp in Sources */,
+				6F0ED06F0ED06F0ED0000000 /* util.cpp in Sources */,
+				6F19906F19906F1990000000 /* experiencelog.cpp in Sources */,
+				6F24506F24506F2450000000 /* combatlog.cpp in Sources */,
+				6F2E706F2E706F2E70000000 /* player.cpp in Sources */,
+				6F39D06F39D06F39D0000000 /* skilllist.cpp in Sources */,
+				6F43F06F43F06F43F0000000 /* statlist.cpp in Sources */,
+				6F4F506F4F506F4F50000000 /* filtermgr.cpp in Sources */,
+				6F59706F59706F5970000000 /* mapcore.cpp in Sources */,
+				6F64306F64306F6430000000 /* category.cpp in Sources */,
+				6F6F906F6F906F6F90000000 /* compassframe.cpp in Sources */,
+				6F7A406F7A406F7A40000000 /* group.cpp in Sources */,
+				6F84F06F84F06F84F0000000 /* guild.cpp in Sources */,
+				6F8F106F8F106F8F10000000 /* netdiag.cpp in Sources */,
+				6F99D06F99D06F99D0000000 /* logger.cpp in Sources */,
+				6FA4906FA4906FA490000000 /* xmlconv.cpp in Sources */,
+				6FB0B06FB0B06FB0B0000000 /* xmlpreferences.cpp in Sources */,
+				6FBBC06FBBC06FBBC0000000 /* seqwindow.cpp in Sources */,
+				100065010006501000650000 /* seqlistview.cpp in Sources */,
+				100100010010001001000000 /* zonemgr.cpp in Sources */,
+				1001BF01001BF01001BF0000 /* spawnmonitor.cpp in Sources */,
+				10026E010026E010026E0000 /* spawnpointlist.cpp in Sources */,
+				10031B010031B010031B0000 /* spawnlistcommon.cpp in Sources */,
+				1003C701003C701003C70000 /* spawnlist2.cpp in Sources */,
+				100462010046201004620000 /* spells.cpp in Sources */,
+				100521010052101005210000 /* datetimemgr.cpp in Sources */,
+				1005BC01005BC01005BC0000 /* spawnlog.cpp in Sources */,
+				10067B010067B010067B0000 /* packetlog.cpp in Sources */,
+				10072A010072A010072A0000 /* datalocationmgr.cpp in Sources */,
+				1007C301007C301007C30000 /* eqstr.cpp in Sources */,
+				100871010087101008710000 /* messages.cpp in Sources */,
+				10091D010091D010091D0000 /* message.cpp in Sources */,
+				1009DC01009DC01009DC0000 /* messagefilter.cpp in Sources */,
+				100A8A0100A8A0100A8A0000 /* messagewindow.cpp in Sources */,
+				100B380100B380100B380000 /* messageshell.cpp in Sources */,
+				100BD30100BD30100BD30000 /* terminal.cpp in Sources */,
+				100C7F0100C7F0100C7F0000 /* filteredspawnlog.cpp in Sources */,
+				100D430100D430100D430000 /* messagefilterdialog.cpp in Sources */,
+				100DE20100DE20100DE20000 /* diagnosticmessages.cpp in Sources */,
+				100E920100E920100E920000 /* mapicon.cpp in Sources */,
+				100F3A0100F3A0100F3A0000 /* filternotifications.cpp in Sources */,
+				100FF40100FF40100FF40000 /* netstream.cpp in Sources */,
+				101097010109701010970000 /* guildshell.cpp in Sources */,
+				101154010115401011540000 /* guildlist.cpp in Sources */,
+				101202010120201012020000 /* bazaarlog.cpp in Sources */,
+				1012AD01012AD01012AD0000 /* mapicondialog.cpp in Sources */,
+				10135D010135D010135D0000 /* mapicondialog.moc.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		103FF20103FF20103FF20000 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10356E010356E010356E0000 /* showeq */;
+			targetProxy = 103FB20103FB20103FB20000 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		10361F010361F010361F0000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1 = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2 = "'HAVE_CONFIG_H'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3 = "'QT3_SUPPORT'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4 = "'QT_3SUPPORT_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5 = "'QT_GUI_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6 = "'QT_CORE_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7 = "'QT_DEBUG'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0",
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0/src",
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+					"/usr/local/Trolltech/Qt-4.4.3/include",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtCore",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/usr/lib/libz.dylib,
+					"-lpcap",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					Qt3Support,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtGui,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtXml,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtSql,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtNetwork,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtCore,
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = showeq;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		103647010364701036470000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1 = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2 = "'HAVE_CONFIG_H'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3 = "'QT3_SUPPORT'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4 = "'QT_3SUPPORT_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5 = "'QT_GUI_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6 = "'QT_CORE_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7 = "'QT_NO_DEBUG'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0",
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0/src",
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+					"/usr/local/Trolltech/Qt-4.4.3/include",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtCore",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-DNDEBUG",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"-DQT_NO_DEBUG",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/usr/lib/libz.dylib,
+					"-lpcap",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					Qt3Support,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtGui,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtXml,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtSql,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtNetwork,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtCore,
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = showeq;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		10391A010391A010391A0000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1 = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2 = "'HAVE_CONFIG_H'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3 = "'QT3_SUPPORT'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4 = "'QT_3SUPPORT_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5 = "'QT_GUI_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6 = "'QT_CORE_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7 = "'QT_NO_DEBUG'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0",
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0/src",
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+					"/usr/local/Trolltech/Qt-4.4.3/include",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtCore",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-DNDEBUG",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"-DQT_NO_DEBUG",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/usr/lib/libz.dylib,
+					"-lpcap",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					Qt3Support,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtGui,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtXml,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtSql,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtNetwork,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtCore,
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = showeq;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		1039C701039C701039C70000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6)",
+					"$(GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_1 = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_2 = "'HAVE_CONFIG_H'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_3 = "'QT3_SUPPORT'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_4 = "'QT_3SUPPORT_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_5 = "'QT_GUI_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_6 = "'QT_CORE_LIB'";
+				GCC_PREPROCESSOR_DEFINITIONS_QUOTED_FOR_TARGET_7 = "'QT_NO_DEBUG'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0",
+					"/Users/brainiac/Development/ShowEQ-5.13.1.0/src",
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+					"/usr/local/Trolltech/Qt-4.4.3/include",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.4.3/include/QtCore",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DQT_NO_DEBUG",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-headerpad_max_install_names",
+					/usr/lib/libz.dylib,
+					"-lpcap",
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					Qt3Support,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtGui,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtXml,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtSql,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtNetwork,
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-framework",
+					QtCore,
+					"-lpthread",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = showeq;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		6DC1F06DC1F06DC1F0000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		6DC3B06DC3B06DC3B0000000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		6DC5606DC5606DC560000000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = MinSizeRel;
+		};
+		6DC7E06DC7E06DC7E0000000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = RelWithDebInfo;
+		};
+		6DEB306DEB306DEB30000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		6DF7706DF7706DF770000000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		6E0A206E0A206E0A20000000 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		6E1CF06E1CF06E1CF0000000 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (
+					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
+					"-L/usr/local/Trolltech/Qt-4.4.3/lib",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		103591010359101035910000 /* Build configuration list for PBXNativeTarget "showeq" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10361F010361F010361F0000 /* Debug */,
+				103647010364701036470000 /* Release */,
+				10391A010391A010391A0000 /* MinSizeRel */,
+				1039C701039C701039C70000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6DC1106DC1106DC110000000 /* Build configuration list for PBXProject "showeq" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DC1F06DC1F06DC1F0000000 /* Debug */,
+				6DC3B06DC3B06DC3B0000000 /* Release */,
+				6DC5606DC5606DC560000000 /* MinSizeRel */,
+				6DC7E06DC7E06DC7E0000000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6DE7F06DE7F06DE7F0000000 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DEB306DEB306DEB30000000 /* Debug */,
+				6DF7706DF7706DF770000000 /* Release */,
+				6E0A206E0A206E0A20000000 /* MinSizeRel */,
+				6E1CF06E1CF06E1CF0000000 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D40D06D40D06D40D0000000 /* Project object */;
+}

@@ -1,0 +1,825 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'map.h'
+**
+** Created: Thu Feb 19 01:03:13 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "map.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'map.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_CLineDlg[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      10,    9,    9,    9, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_CLineDlg[] = {
+    "CLineDlg\0\0changeColor(QString)\0"
+};
+
+const QMetaObject CLineDlg::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_CLineDlg,
+      qt_meta_data_CLineDlg, 0 }
+};
+
+const QMetaObject *CLineDlg::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *CLineDlg::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_CLineDlg))
+        return static_cast<void*>(const_cast< CLineDlg*>(this));
+    return QDialog::qt_metacast(_clname);
+}
+
+int CLineDlg::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDialog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: changeColor((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        }
+        _id -= 1;
+    }
+    return _id;
+}
+static const uint qt_meta_data_MapMgr[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      30,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // signals: signature, parameters, type, tag, flags
+       8,    7,    7,    7, 0x05,
+      20,    7,    7,    7, 0x05,
+      34,    7,    7,    7, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+      61,   47,    7,    7, 0x0a,
+      80,   47,    7,    7, 0x0a,
+     128,  101,    7,    7, 0x0a,
+     153,   47,    7,    7, 0x0a,
+     174,    7,    7,    7, 0x0a,
+     184,    7,    7,    7, 0x0a,
+     218,  196,    7,    7, 0x0a,
+     265,  249,    7,    7, 0x2a,
+     300,  291,    7,    7, 0x2a,
+     321,    7,    7,    7, 0x0a,
+     331,    7,    7,    7, 0x0a,
+     349,  344,    7,    7, 0x0a,
+     370,  344,    7,    7, 0x0a,
+     391,  344,    7,    7, 0x0a,
+     430,  414,    7,    7, 0x0a,
+     463,    7,    7,    7, 0x0a,
+     489,  476,    7,    7, 0x0a,
+     526,  520,    7,    7, 0x0a,
+     546,  520,    7,    7, 0x0a,
+     569,    7,    7,    7, 0x0a,
+     584,    7,    7,    7, 0x0a,
+     605,    7,    7,    7, 0x0a,
+     634,  627,    7,    7, 0x0a,
+     656,    7,    7,    7, 0x0a,
+     676,    7,    7,    7, 0x0a,
+     694,    7,    7,    7, 0x0a,
+     710,  706,    7,    7, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_MapMgr[] = {
+    "MapMgr\0\0mapLoaded()\0mapUnloaded()\0"
+    "mapUpdated()\0shortZoneName\0"
+    "zoneBegin(QString)\0zoneChanged(QString)\0"
+    "shortZoneName,longZoneName\0"
+    "zoneEnd(QString,QString)\0loadZoneMap(QString)\0"
+    "loadMap()\0importMap()\0fileName,import,force\0"
+    "loadFileMap(QString,bool,bool)\0"
+    "fileName,import\0loadFileMap(QString,bool)\0"
+    "fileName\0loadFileMap(QString)\0saveMap()\0"
+    "saveSOEMap()\0item\0addItem(const Item*)\0"
+    "delItem(const Item*)\0killSpawn(const Item*)\0"
+    "item,changeType\0changeItem(const Item*,uint32_t)\0"
+    "clearItems()\0parent,point\0"
+    "addLocation(QWidget*,MapPoint)\0point\0"
+    "startLine(MapPoint)\0addLinePoint(MapPoint)\0"
+    "delLinePoint()\0setLineName(QString)\0"
+    "setLineColor(QString)\0parent\0"
+    "showLineDlg(QWidget*)\0scaleDownZ(int16_t)\0"
+    "scaleUpZ(int16_t)\0savePrefs()\0out\0"
+    "dumpInfo(Q3TextStream&)\0"
+};
+
+const QMetaObject MapMgr::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_MapMgr,
+      qt_meta_data_MapMgr, 0 }
+};
+
+const QMetaObject *MapMgr::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *MapMgr::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_MapMgr))
+        return static_cast<void*>(const_cast< MapMgr*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int MapMgr::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: mapLoaded(); break;
+        case 1: mapUnloaded(); break;
+        case 2: mapUpdated(); break;
+        case 3: zoneBegin((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: zoneChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 5: zoneEnd((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 6: loadZoneMap((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: loadMap(); break;
+        case 8: importMap(); break;
+        case 9: loadFileMap((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 10: loadFileMap((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 11: loadFileMap((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 12: saveMap(); break;
+        case 13: saveSOEMap(); break;
+        case 14: addItem((*reinterpret_cast< const Item*(*)>(_a[1]))); break;
+        case 15: delItem((*reinterpret_cast< const Item*(*)>(_a[1]))); break;
+        case 16: killSpawn((*reinterpret_cast< const Item*(*)>(_a[1]))); break;
+        case 17: changeItem((*reinterpret_cast< const Item*(*)>(_a[1])),(*reinterpret_cast< uint32_t(*)>(_a[2]))); break;
+        case 18: clearItems(); break;
+        case 19: addLocation((*reinterpret_cast< QWidget*(*)>(_a[1])),(*reinterpret_cast< const MapPoint(*)>(_a[2]))); break;
+        case 20: startLine((*reinterpret_cast< const MapPoint(*)>(_a[1]))); break;
+        case 21: addLinePoint((*reinterpret_cast< const MapPoint(*)>(_a[1]))); break;
+        case 22: delLinePoint(); break;
+        case 23: setLineName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 24: setLineColor((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 25: showLineDlg((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
+        case 26: scaleDownZ((*reinterpret_cast< int16_t(*)>(_a[1]))); break;
+        case 27: scaleUpZ((*reinterpret_cast< int16_t(*)>(_a[1]))); break;
+        case 28: savePrefs(); break;
+        case 29: dumpInfo((*reinterpret_cast< Q3TextStream(*)>(_a[1]))); break;
+        }
+        _id -= 30;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void MapMgr::mapLoaded()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void MapMgr::mapUnloaded()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, 0);
+}
+
+// SIGNAL 2
+void MapMgr::mapUpdated()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, 0);
+}
+static const uint qt_meta_data_MapMenu[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      42,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+       9,    8,    8,    8, 0x09,
+      21,    8,    8,    8, 0x09,
+      43,   36,    8,    8, 0x09,
+      62,   36,    8,    8, 0x09,
+      82,   36,    8,    8, 0x09,
+     111,   36,    8,    8, 0x09,
+     131,   36,    8,    8, 0x09,
+     152,   36,    8,    8, 0x09,
+     168,   36,    8,    8, 0x09,
+     189,   36,    8,    8, 0x09,
+     209,   36,    8,    8, 0x09,
+     228,   36,    8,    8, 0x09,
+     257,   36,    8,    8, 0x09,
+     280,   36,    8,    8, 0x09,
+     302,   36,    8,    8, 0x09,
+     324,   36,    8,    8, 0x09,
+     346,   36,    8,    8, 0x09,
+     365,   36,    8,    8, 0x09,
+     387,   36,    8,    8, 0x09,
+     413,   36,    8,    8, 0x09,
+     431,   36,    8,    8, 0x09,
+     449,   36,    8,    8, 0x09,
+     487,   36,    8,    8, 0x09,
+     510,   36,    8,    8, 0x09,
+     531,   36,    8,    8, 0x09,
+     547,   36,    8,    8, 0x09,
+     568,   36,    8,    8, 0x09,
+     588,   36,    8,    8, 0x09,
+     609,   36,    8,    8, 0x09,
+     634,   36,    8,    8, 0x09,
+     656,    8,    8,    8, 0x09,
+     684,    8,    8,    8, 0x09,
+     706,   36,    8,    8, 0x09,
+     732,   36,    8,    8, 0x09,
+     767,   36,    8,    8, 0x09,
+     795,   36,    8,    8, 0x09,
+     821,   36,    8,    8, 0x09,
+     847,   36,    8,    8, 0x09,
+     875,   36,    8,    8, 0x09,
+     892,   36,    8,    8, 0x09,
+     913,   36,    8,    8, 0x09,
+     934,   36,    8,    8, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_MapMenu[] = {
+    "MapMenu\0\0init_Menu()\0init_fovMenu()\0"
+    "itemId\0select_follow(int)\0select_mapLine(int)\0"
+    "toggle_spawnDepthFilter(int)\0"
+    "toggle_tooltip(int)\0toggle_filtered(int)\0"
+    "toggle_map(int)\0toggle_velocity(int)\0"
+    "toggle_animate(int)\0toggle_player(int)\0"
+    "toggle_playerBackground(int)\0"
+    "toggle_playerView(int)\0toggle_gridLines(int)\0"
+    "toggle_gridTicks(int)\0toggle_locations(int)\0"
+    "toggle_spawns(int)\0toggle_spawnPnts(int)\0"
+    "toggle_unknownSpawns(int)\0toggle_drops(int)\0"
+    "toggle_doors(int)\0"
+    "toggle_highlightConsideredSpawns(int)\0"
+    "toggle_spawnNames(int)\0toggle_mapImage(int)\0"
+    "toggle_pvp(int)\0toggle_deityPvP(int)\0"
+    "toggle_racePvP(int)\0toggle_walkPath(int)\0"
+    "toggle_npcWalkPaths(int)\0toggle_debugInfo(int)\0"
+    "toggle_cacheAlwaysRepaint()\0"
+    "toggle_cacheChanges()\0toggle_zoneSafePoint(int)\0"
+    "toggle_instanceLocationMarker(int)\0"
+    "select_mapOptimization(int)\0"
+    "select_gridTickColor(int)\0"
+    "select_gridLineColor(int)\0"
+    "select_backgroundColor(int)\0"
+    "select_font(int)\0select_fovColor(int)\0"
+    "select_fovStyle(int)\0select_fovMode(int)\0"
+};
+
+const QMetaObject MapMenu::staticMetaObject = {
+    { &Q3PopupMenu::staticMetaObject, qt_meta_stringdata_MapMenu,
+      qt_meta_data_MapMenu, 0 }
+};
+
+const QMetaObject *MapMenu::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *MapMenu::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_MapMenu))
+        return static_cast<void*>(const_cast< MapMenu*>(this));
+    return Q3PopupMenu::qt_metacast(_clname);
+}
+
+int MapMenu::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = Q3PopupMenu::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: init_Menu(); break;
+        case 1: init_fovMenu(); break;
+        case 2: select_follow((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: select_mapLine((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: toggle_spawnDepthFilter((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: toggle_tooltip((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: toggle_filtered((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: toggle_map((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: toggle_velocity((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: toggle_animate((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: toggle_player((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: toggle_playerBackground((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: toggle_playerView((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: toggle_gridLines((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: toggle_gridTicks((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: toggle_locations((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: toggle_spawns((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: toggle_spawnPnts((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: toggle_unknownSpawns((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: toggle_drops((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: toggle_doors((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 21: toggle_highlightConsideredSpawns((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 22: toggle_spawnNames((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 23: toggle_mapImage((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 24: toggle_pvp((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: toggle_deityPvP((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: toggle_racePvP((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 27: toggle_walkPath((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: toggle_npcWalkPaths((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 29: toggle_debugInfo((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 30: toggle_cacheAlwaysRepaint(); break;
+        case 31: toggle_cacheChanges(); break;
+        case 32: toggle_zoneSafePoint((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 33: toggle_instanceLocationMarker((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 34: select_mapOptimization((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 35: select_gridTickColor((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 36: select_gridLineColor((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 37: select_backgroundColor((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 38: select_font((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 39: select_fovColor((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: select_fovStyle((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 41: select_fovMode((*reinterpret_cast< int(*)>(_a[1]))); break;
+        }
+        _id -= 42;
+    }
+    return _id;
+}
+static const uint qt_meta_data_Map[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      93,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // signals: signature, parameters, type, tag, flags
+       9,    5,    4,    4, 0x05,
+      45,   40,    4,    4, 0x05,
+      77,   72,    4,    4, 0x05,
+      94,   72,    4,    4, 0x05,
+     128,  118,    4,    4, 0x05,
+     152,  150,    4,    4, 0x05,
+     171,  169,    4,    4, 0x05,
+     197,  188,    4,    4, 0x05,
+     228,  218,    4,    4, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+     250,    4,    4,    4, 0x0a,
+     262,    4,    4,    4, 0x0a,
+     277,   40,    4,    4, 0x0a,
+     302,   40,    4,    4, 0x0a,
+     339,  323,    4,    4, 0x0a,
+     372,    4,    4,    4, 0x0a,
+     385,    4,    4,    4, 0x0a,
+     397,    4,    4,    4, 0x0a,
+     411,    4,    4,    4, 0x0a,
+     424,    4,    4,    4, 0x0a,
+     438,    4,    4,    4, 0x0a,
+     450,    4,    4,    4, 0x0a,
+     465,    4,    4,    4, 0x0a,
+     480,    4,    4,    4, 0x0a,
+     495,    4,    4,    4, 0x0a,
+     509,    4,    4,    4, 0x0a,
+     525,    4,    4,    4, 0x0a,
+     539,    4,    4,    4, 0x0a,
+     548,    4,    4,    4, 0x0a,
+     558,    4,    4,    4, 0x0a,
+     583,    4,    4,    4, 0x0a,
+     608,    4,    4,    4, 0x0a,
+     619,    4,    4,    4, 0x0a,
+     629,    4,    4,    4, 0x0a,
+     639,    4,    4,    4, 0x0a,
+     647,    4,    4,    4, 0x0a,
+     660,    4,    4,    4, 0x0a,
+     672,    4,    4,    4, 0x0a,
+     687,    4,    4,    4, 0x0a,
+     701,    4,    4,    4, 0x0a,
+     714,    4,    4,    4, 0x0a,
+     725,    4,    4,    4, 0x0a,
+     749,    4,    4,    4, 0x0a,
+     760,    4,    4,    4, 0x0a,
+     778,  773,    4,    4, 0x0a,
+     808,  804,    4,    4, 0x0a,
+     830,  804,    4,    4, 0x0a,
+     848,  804,    4,    4, 0x0a,
+     871,  865,    4,    4, 0x0a,
+     891,  773,    4,    4, 0x0a,
+     911,  804,    4,    4, 0x0a,
+     933,  804,    4,    4, 0x0a,
+     953,  804,    4,    4, 0x0a,
+     983,  804,    4,    4, 0x0a,
+    1007,  804,    4,    4, 0x0a,
+    1028,  804,    4,    4, 0x0a,
+    1048,  804,    4,    4, 0x0a,
+    1073,  804,    4,    4, 0x0a,
+    1100,  804,    4,    4, 0x0a,
+    1119,  804,    4,    4, 0x0a,
+    1138,  804,    4,    4, 0x0a,
+    1165,  804,    4,    4, 0x0a,
+    1188,  804,    4,    4, 0x0a,
+    1210,  804,    4,    4, 0x0a,
+    1227,  804,    4,    4, 0x0a,
+    1253,  804,    4,    4, 0x0a,
+    1288,  804,    4,    4, 0x0a,
+    1310,  804,    4,    4, 0x0a,
+    1338,  804,    4,    4, 0x0a,
+    1351,  804,    4,    4, 0x0a,
+    1369,  804,    4,    4, 0x0a,
+    1392, 1386,    4,    4, 0x0a,
+    1429, 1422,    4,    4, 0x0a,
+    1471,  804,    4,    4, 0x0a,
+    1484,  804,    4,    4, 0x0a,
+    1504,  804,    4,    4, 0x0a,
+    1523,  804,    4,    4, 0x0a,
+    1542,  804,    4,    4, 0x0a,
+    1565,  865,    4,    4, 0x0a,
+    1590,  865,    4,    4, 0x0a,
+    1615,  865,    4,    4, 0x0a,
+    1647, 1642,    4,    4, 0x0a,
+    1662,  804,    4,    4, 0x0a,
+    1679,  804,    4,    4, 0x0a,
+    1697,  804,    4,    4, 0x0a,
+    1726,  804,    4,    4, 0x0a,
+    1749,  804,    4,    4, 0x0a,
+    1768,  804,    4,    4, 0x0a,
+    1791,  804,    4,    4, 0x0a,
+    1814,  804,    4,    4, 0x0a,
+    1842,  804,    4,    4, 0x0a,
+    1869,  804,    4,    4, 0x0a,
+    1909, 1905,    4,    4, 0x0a,
+    1933,    4,    4,    4, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_Map[] = {
+    "Map\0\0x,y\0mouseLocation(int16_t,int16_t)\0"
+    "item\0spawnSelected(const Item*)\0zoom\0"
+    "zoomChanged(int)\0zoomDefaultChanged(int)\0"
+    "frameRate\0frameRateChanged(int)\0x\0"
+    "panXChanged(int)\0y\0panYChanged(int)\0"
+    "headRoom\0headRoomChanged(int)\0floorRoom\0"
+    "floorRoomChanged(int)\0savePrefs()\0"
+    "saveMapImage()\0selectSpawn(const Item*)\0"
+    "delItem(const Item*)\0item,changeType\0"
+    "changeItem(const Item*,uint32_t)\0"
+    "clearItems()\0mapLoaded()\0mapUnloaded()\0"
+    "mapUpdated()\0addLocation()\0startLine()\0"
+    "addLinePoint()\0delLinePoint()\0"
+    "addPathPoint()\0showLineDlg()\0"
+    "scaleDownZ(int)\0scaleUpZ(int)\0zoomIn()\0"
+    "zoomOut()\0increaseGridResolution()\0"
+    "decreaseGridResolution()\0panRight()\0"
+    "panLeft()\0panDown()\0panUp()\0panUpRight()\0"
+    "panUpLeft()\0panDownRight()\0panDownLeft()\0"
+    "viewTarget()\0viewLock()\0reAdjustAndRefreshMap()\0"
+    "reAdjust()\0refreshMap()\0mode\0"
+    "setFollowMode(FollowMode)\0val\0"
+    "setShowFiltered(bool)\0setFrameRate(int)\0"
+    "setFOVStyle(int)\0color\0setFOVColor(QColor)\0"
+    "setFOVMode(FOVMode)\0setShowMapLines(bool)\0"
+    "setShowPlayer(bool)\0setShowPlayerBackground(bool)\0"
+    "setShowPlayerView(bool)\0setShowHeading(bool)\0"
+    "setShowSpawns(bool)\0setShowSpawnPoints(bool)\0"
+    "setShowUnknownSpawns(bool)\0"
+    "setShowDrops(bool)\0setShowDoors(bool)\0"
+    "setShowVelocityLines(bool)\0"
+    "setShowDebugInfo(bool)\0setCacheChanges(bool)\0"
+    "setAnimate(bool)\0setSpawnDepthFilter(bool)\0"
+    "setHighlightConsideredSpawns(bool)\0"
+    "setShowTooltips(bool)\0setWalkPathShowSelect(bool)\0"
+    "setPvP(bool)\0setDeityPvP(bool)\0"
+    "setRacePvP(bool)\0style\0"
+    "setMapLineStyle(MapLineStyle)\0method\0"
+    "setMapOptimization(MapOptimizationMethod)\0"
+    "setZoom(int)\0setZoomDefault(int)\0"
+    "setPanOffsetX(int)\0setPanOffsetY(int)\0"
+    "setGridResolution(int)\0setGridTickColor(QColor)\0"
+    "setGridLineColor(QColor)\0"
+    "setBackgroundColor(QColor)\0font\0"
+    "setFont(QFont)\0setHeadRoom(int)\0"
+    "setFloorRoom(int)\0setShowBackgroundImage(bool)\0"
+    "setShowLocations(bool)\0setShowLines(bool)\0"
+    "setShowGridLines(bool)\0setShowGridTicks(bool)\0"
+    "setCacheAlwaysRepaint(bool)\0"
+    "setShowZoneSafePoint(bool)\0"
+    "setShowInstanceLocationMarker(bool)\0"
+    "out\0dumpInfo(Q3TextStream&)\0"
+    "showMapIconDialog()\0"
+};
+
+const QMetaObject Map::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_Map,
+      qt_meta_data_Map, 0 }
+};
+
+const QMetaObject *Map::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *Map::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_Map))
+        return static_cast<void*>(const_cast< Map*>(this));
+    return QWidget::qt_metacast(_clname);
+}
+
+int Map::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: mouseLocation((*reinterpret_cast< int16_t(*)>(_a[1])),(*reinterpret_cast< int16_t(*)>(_a[2]))); break;
+        case 1: spawnSelected((*reinterpret_cast< const Item*(*)>(_a[1]))); break;
+        case 2: zoomChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: zoomDefaultChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: frameRateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: panXChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: panYChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: headRoomChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: floorRoomChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: savePrefs(); break;
+        case 10: saveMapImage(); break;
+        case 11: selectSpawn((*reinterpret_cast< const Item*(*)>(_a[1]))); break;
+        case 12: delItem((*reinterpret_cast< const Item*(*)>(_a[1]))); break;
+        case 13: changeItem((*reinterpret_cast< const Item*(*)>(_a[1])),(*reinterpret_cast< uint32_t(*)>(_a[2]))); break;
+        case 14: clearItems(); break;
+        case 15: mapLoaded(); break;
+        case 16: mapUnloaded(); break;
+        case 17: mapUpdated(); break;
+        case 18: addLocation(); break;
+        case 19: startLine(); break;
+        case 20: addLinePoint(); break;
+        case 21: delLinePoint(); break;
+        case 22: addPathPoint(); break;
+        case 23: showLineDlg(); break;
+        case 24: scaleDownZ((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: scaleUpZ((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: zoomIn(); break;
+        case 27: zoomOut(); break;
+        case 28: increaseGridResolution(); break;
+        case 29: decreaseGridResolution(); break;
+        case 30: panRight(); break;
+        case 31: panLeft(); break;
+        case 32: panDown(); break;
+        case 33: panUp(); break;
+        case 34: panUpRight(); break;
+        case 35: panUpLeft(); break;
+        case 36: panDownRight(); break;
+        case 37: panDownLeft(); break;
+        case 38: viewTarget(); break;
+        case 39: viewLock(); break;
+        case 40: reAdjustAndRefreshMap(); break;
+        case 41: reAdjust(); break;
+        case 42: refreshMap(); break;
+        case 43: setFollowMode((*reinterpret_cast< FollowMode(*)>(_a[1]))); break;
+        case 44: setShowFiltered((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 45: setFrameRate((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 46: setFOVStyle((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 47: setFOVColor((*reinterpret_cast< const QColor(*)>(_a[1]))); break;
+        case 48: setFOVMode((*reinterpret_cast< FOVMode(*)>(_a[1]))); break;
+        case 49: setShowMapLines((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 50: setShowPlayer((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 51: setShowPlayerBackground((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 52: setShowPlayerView((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 53: setShowHeading((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 54: setShowSpawns((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 55: setShowSpawnPoints((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 56: setShowUnknownSpawns((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 57: setShowDrops((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 58: setShowDoors((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 59: setShowVelocityLines((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 60: setShowDebugInfo((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 61: setCacheChanges((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 62: setAnimate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 63: setSpawnDepthFilter((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 64: setHighlightConsideredSpawns((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 65: setShowTooltips((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 66: setWalkPathShowSelect((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 67: setPvP((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 68: setDeityPvP((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 69: setRacePvP((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 70: setMapLineStyle((*reinterpret_cast< MapLineStyle(*)>(_a[1]))); break;
+        case 71: setMapOptimization((*reinterpret_cast< MapOptimizationMethod(*)>(_a[1]))); break;
+        case 72: setZoom((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 73: setZoomDefault((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 74: setPanOffsetX((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 75: setPanOffsetY((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 76: setGridResolution((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 77: setGridTickColor((*reinterpret_cast< const QColor(*)>(_a[1]))); break;
+        case 78: setGridLineColor((*reinterpret_cast< const QColor(*)>(_a[1]))); break;
+        case 79: setBackgroundColor((*reinterpret_cast< const QColor(*)>(_a[1]))); break;
+        case 80: setFont((*reinterpret_cast< const QFont(*)>(_a[1]))); break;
+        case 81: setHeadRoom((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 82: setFloorRoom((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 83: setShowBackgroundImage((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 84: setShowLocations((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 85: setShowLines((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 86: setShowGridLines((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 87: setShowGridTicks((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 88: setCacheAlwaysRepaint((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 89: setShowZoneSafePoint((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 90: setShowInstanceLocationMarker((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 91: dumpInfo((*reinterpret_cast< Q3TextStream(*)>(_a[1]))); break;
+        case 92: showMapIconDialog(); break;
+        }
+        _id -= 93;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void Map::mouseLocation(int16_t _t1, int16_t _t2)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void Map::spawnSelected(const Item * _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void Map::zoomChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void Map::zoomDefaultChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void Map::frameRateChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
+}
+
+// SIGNAL 5
+void Map::panXChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 5, _a);
+}
+
+// SIGNAL 6
+void Map::panYChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 6, _a);
+}
+
+// SIGNAL 7
+void Map::headRoomChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 7, _a);
+}
+
+// SIGNAL 8
+void Map::floorRoomChanged(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 8, _a);
+}
+static const uint qt_meta_data_MapFrame[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      18,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      13,   10,    9,    9, 0x0a,
+      27,    9,    9,    9, 0x0a,
+      46,    9,    9,    9, 0x0a,
+      68,   64,    9,    9, 0x0a,
+     122,   99,    9,    9, 0x0a,
+     189,    9,    9,    9, 0x0a,
+     205,  201,    9,    9, 0x0a,
+     229,    9,    9,    9, 0x09,
+     244,  241,    9,    9, 0x09,
+     269,  241,    9,    9, 0x09,
+     297,  241,    9,    9, 0x09,
+     314,  241,    9,    9, 0x09,
+     341,  241,    9,    9, 0x09,
+     367,  241,    9,    9, 0x09,
+     386,  241,    9,    9, 0x09,
+     408,  241,    9,    9, 0x09,
+     424,  241,    9,    9, 0x09,
+     450,  241,    9,    9, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_MapFrame[] = {
+    "MapFrame\0\0ok\0regexpok(int)\0"
+    "setregexp(QString)\0filterConfirmed()\0"
+    "x,y\0mouseLocation(int16_t,int16_t)\0"
+    "x,y,z,Dx,Dy,Dz,degrees\0"
+    "setPlayer(int16_t,int16_t,int16_t,int16_t,int16_t,int16_t,int32_t)\0"
+    "savePrefs()\0out\0dumpInfo(Q3TextStream&)\0"
+    "init_Menu()\0id\0toggle_top_controls(int)\0"
+    "toggle_bottom_controls(int)\0"
+    "toggle_zoom(int)\0toggle_playerLocation(int)\0"
+    "toggle_mouseLocation(int)\0toggle_filter(int)\0"
+    "toggle_frameRate(int)\0toggle_pan(int)\0"
+    "toggle_depthControls(int)\0set_font(int)\0"
+};
+
+const QMetaObject MapFrame::staticMetaObject = {
+    { &SEQWindow::staticMetaObject, qt_meta_stringdata_MapFrame,
+      qt_meta_data_MapFrame, 0 }
+};
+
+const QMetaObject *MapFrame::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *MapFrame::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_MapFrame))
+        return static_cast<void*>(const_cast< MapFrame*>(this));
+    return SEQWindow::qt_metacast(_clname);
+}
+
+int MapFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = SEQWindow::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: regexpok((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: setregexp((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: filterConfirmed(); break;
+        case 3: mouseLocation((*reinterpret_cast< int16_t(*)>(_a[1])),(*reinterpret_cast< int16_t(*)>(_a[2]))); break;
+        case 4: setPlayer((*reinterpret_cast< int16_t(*)>(_a[1])),(*reinterpret_cast< int16_t(*)>(_a[2])),(*reinterpret_cast< int16_t(*)>(_a[3])),(*reinterpret_cast< int16_t(*)>(_a[4])),(*reinterpret_cast< int16_t(*)>(_a[5])),(*reinterpret_cast< int16_t(*)>(_a[6])),(*reinterpret_cast< int32_t(*)>(_a[7]))); break;
+        case 5: savePrefs(); break;
+        case 6: dumpInfo((*reinterpret_cast< Q3TextStream(*)>(_a[1]))); break;
+        case 7: init_Menu(); break;
+        case 8: toggle_top_controls((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: toggle_bottom_controls((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: toggle_zoom((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: toggle_playerLocation((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: toggle_mouseLocation((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: toggle_filter((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: toggle_frameRate((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: toggle_pan((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: toggle_depthControls((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: set_font((*reinterpret_cast< int(*)>(_a[1]))); break;
+        }
+        _id -= 18;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

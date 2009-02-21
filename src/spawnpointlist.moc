@@ -1,0 +1,211 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'spawnpointlist.h'
+**
+** Created: Thu Feb 19 01:03:15 2009
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.4.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "spawnpointlist.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'spawnpointlist.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.4.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_SpawnPointListMenu[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       7,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      20,   19,   19,   19, 0x09,
+      35,   32,   19,   19, 0x09,
+      52,   32,   19,   19, 0x09,
+      69,   32,   19,   19, 0x09,
+      85,   32,   19,   19, 0x09,
+      99,   32,   19,   19, 0x09,
+     116,   32,   19,   19, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_SpawnPointListMenu[] = {
+    "SpawnPointListMenu\0\0init_menu()\0id\0"
+    "rename_item(int)\0delete_item(int)\0"
+    "toggle_col(int)\0set_font(int)\0"
+    "set_caption(int)\0toggle_keepSorted(int)\0"
+};
+
+const QMetaObject SpawnPointListMenu::staticMetaObject = {
+    { &Q3PopupMenu::staticMetaObject, qt_meta_stringdata_SpawnPointListMenu,
+      qt_meta_data_SpawnPointListMenu, 0 }
+};
+
+const QMetaObject *SpawnPointListMenu::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *SpawnPointListMenu::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_SpawnPointListMenu))
+        return static_cast<void*>(const_cast< SpawnPointListMenu*>(this));
+    return Q3PopupMenu::qt_metacast(_clname);
+}
+
+int SpawnPointListMenu::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = Q3PopupMenu::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: init_menu(); break;
+        case 1: rename_item((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: delete_item((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: toggle_col((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: set_font((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: set_caption((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: toggle_keepSorted((*reinterpret_cast< int(*)>(_a[1]))); break;
+        }
+        _id -= 7;
+    }
+    return _id;
+}
+static const uint qt_meta_data_SpawnPointList[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       9,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      19,   16,   15,   15, 0x0a,
+      71,   66,   15,   15, 0x0a,
+     109,   66,   15,   15, 0x0a,
+     147,   15,   15,   15, 0x0a,
+     160,   15,   15,   15, 0x0a,
+     170,   66,   15,   15, 0x0a,
+     207,  204,   15,   15, 0x0a,
+     240,   15,   15,   15, 0x0a,
+     248,  204,   15,   15, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_SpawnPointList[] = {
+    "SpawnPointList\0\0,,\0"
+    "rightButtonClicked(Q3ListViewItem*,QPoint,int)\0"
+    "item\0renameItem(const SpawnPointListItem*)\0"
+    "deleteItem(const SpawnPointListItem*)\0"
+    "clearItems()\0refresh()\0"
+    "handleSelectItem(Q3ListViewItem*)\0sp\0"
+    "newSpawnPoint(const SpawnPoint*)\0"
+    "clear()\0handleSelChanged(const SpawnPoint*)\0"
+};
+
+const QMetaObject SpawnPointList::staticMetaObject = {
+    { &SEQListView::staticMetaObject, qt_meta_stringdata_SpawnPointList,
+      qt_meta_data_SpawnPointList, 0 }
+};
+
+const QMetaObject *SpawnPointList::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *SpawnPointList::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_SpawnPointList))
+        return static_cast<void*>(const_cast< SpawnPointList*>(this));
+    return SEQListView::qt_metacast(_clname);
+}
+
+int SpawnPointList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = SEQListView::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: rightButtonClicked((*reinterpret_cast< Q3ListViewItem*(*)>(_a[1])),(*reinterpret_cast< const QPoint(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 1: renameItem((*reinterpret_cast< const SpawnPointListItem*(*)>(_a[1]))); break;
+        case 2: deleteItem((*reinterpret_cast< const SpawnPointListItem*(*)>(_a[1]))); break;
+        case 3: clearItems(); break;
+        case 4: refresh(); break;
+        case 5: handleSelectItem((*reinterpret_cast< Q3ListViewItem*(*)>(_a[1]))); break;
+        case 6: newSpawnPoint((*reinterpret_cast< const SpawnPoint*(*)>(_a[1]))); break;
+        case 7: clear(); break;
+        case 8: handleSelChanged((*reinterpret_cast< const SpawnPoint*(*)>(_a[1]))); break;
+        }
+        _id -= 9;
+    }
+    return _id;
+}
+static const uint qt_meta_data_SpawnPointWindow[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      18,   17,   17,   17, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_SpawnPointWindow[] = {
+    "SpawnPointWindow\0\0savePrefs()\0"
+};
+
+const QMetaObject SpawnPointWindow::staticMetaObject = {
+    { &SEQWindow::staticMetaObject, qt_meta_stringdata_SpawnPointWindow,
+      qt_meta_data_SpawnPointWindow, 0 }
+};
+
+const QMetaObject *SpawnPointWindow::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *SpawnPointWindow::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_SpawnPointWindow))
+        return static_cast<void*>(const_cast< SpawnPointWindow*>(this));
+    return SEQWindow::qt_metacast(_clname);
+}
+
+int SpawnPointWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = SEQWindow::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: savePrefs(); break;
+        }
+        _id -= 1;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE
