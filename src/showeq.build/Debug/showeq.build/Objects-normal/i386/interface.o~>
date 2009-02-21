@@ -1,3 +1,0 @@
-/Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp: In constructor 'EQInterface::EQInterface(DataLocationMgr*, QWidget*, const char*)':
-/Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp:279: error: expected primary-expression before '.' token
-/Users/brainiac/Development/ShowEQ-5.13.1.0/src/interface.cpp:279: error: expected unqualified-id before 'this'
