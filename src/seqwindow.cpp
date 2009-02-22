@@ -23,16 +23,13 @@ SEQWindow::SEQWindow(const QString prefName, const QString caption,
 	m_preferenceName(prefName)
 {
 	// set the windows caption
-	setCaption(pSEQPrefs->getPrefString("Caption", preferenceName(), caption));
-	
+	setWindowTitle(pSEQPrefs->getPrefString("Caption", preferenceName(), caption));
+
 	// windows default to resizable
-	//setResizeEnabled(true);
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 	
 	// windows default to be closable when not docked
-	//setCloseMode(Always);
 	setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable);
-	
 	
 	// restore the font
 	restoreFont();

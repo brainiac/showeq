@@ -545,7 +545,7 @@ SpawnPointWindow::SpawnPointWindow(SpawnMonitor* spawnMonitor,
   
   m_spawnPointList = new SpawnPointList(spawnMonitor, this, name );
   setWidget(m_spawnPointList);
-};
+}
 
 SpawnPointWindow::~SpawnPointWindow()
 {

@@ -665,15 +665,15 @@ private:
 //----------------------------------------------------------------------
 // MapFilterLineEdit
 class MapFilterLineEdit : public QLineEdit
-	{
-	public:
-		MapFilterLineEdit(QWidget* parent = 0, const char* name = 0)
-		: QLineEdit(parent, name) {}
-		~MapFilterLineEdit() {} ;
+{
+public:
+	MapFilterLineEdit(QWidget* parent = 0, const char* name = 0)
+	  : QLineEdit(parent, name) {}
+	~MapFilterLineEdit() {} ;
 		
-	protected:
-		virtual void leaveEvent(QEvent* ev) { emit returnPressed(); }
-	};
+protected:
+	virtual void leaveEvent(QEvent* ev) { emit returnPressed(); }
+};
 
 //----------------------------------------------------------------------
 // MapFrame
@@ -720,6 +720,7 @@ public:
 	void set_font(int id);
 	
 private:
+	void createMenu();
 	
 	// pointer to the Map that this frame contains/controls
 	Map* m_map;

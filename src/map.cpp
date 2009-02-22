@@ -4432,222 +4432,305 @@ MapFrame::MapFrame(FilterMgr* filterMgr,
 	
 	QString prefString = MapFrame::preferenceName();
 	QString tmpPrefString;
-	
 	QLabel* tmpLabel;
 	
 	// setup runtime filter
 	m_filterMgr->registerRuntimeFilter(m_mapPreferenceName, m_runtimeFilterFlag, m_runtimeFilterFlagMask);
 	
-	// setup the vertical box
-	// TODO: Fix box layout
-	
-	m_vertical = new QVBoxLayout();
-	
-	// setup the top control window in a horizontal box
-	m_topControlBox = new QWidget();
-	QHBoxLayout* topControlBoxLayout = new QHBoxLayout();
-	topControlBoxLayout->setSpacing(1);
-	topControlBoxLayout->setMargin(0);
-	if (!pSEQPrefs->getPrefBool("ShowTopControlBox", prefString, 1))
-		m_topControlBox->hide();
-	m_topControlBox->setLayout(topControlBoxLayout);
-	m_vertical->addWidget(m_topControlBox);
-	
-	// Create map
+	// Create the map widget
 	m_map = new Map(mapMgr, player, spawnshell, zoneMgr, spawnMonitor, m_mapPreferenceName, m_runtimeFilterFlagMask, this, mapName);
-	m_vertical->addWidget(m_map);
-	
-	// setup bottom control window
-	m_bottomControlBox = new QWidget();	
-	QHBoxLayout* bottomControlBoxLayout = new QHBoxLayout();
-	bottomControlBoxLayout->setSpacing(1);
-	bottomControlBoxLayout->setMargin(0);
-	if (!pSEQPrefs->getPrefBool("ShowBottomControlBox", prefString, 1))
-		m_bottomControlBox->hide();	
-	m_bottomControlBox->setLayout(bottomControlBoxLayout);
-	m_vertical->addWidget(m_bottomControlBox);
 	
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	// Set up Top Control Box
 	
-	
-	// setup Zoom control
-	m_zoomBox = new Q3HBox(m_topControlBox);
-	tmpLabel = new QLabel(m_zoomBox);
-	tmpLabel->setText("Zoom:");
-	
-	m_zoom = new QSpinBox(1, 32, 1, m_zoomBox);
+	// ----------------------------------------------------------------------------------------------
+	// set up the zoom controls
+	m_zoom = new QSpinBox();
+	m_zoom->setRange(1, 32);
 	m_zoom->setWrapping(true);
 	m_zoom->setSuffix("x");
 	m_zoom->setValue(m_map->zoom());
-	tmpLabel->setBuddy(m_zoom);
-	
-	tmpPrefString = "ShowZoom";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-		m_zoomBox->hide();
-	
 	connect(m_zoom, SIGNAL(valueChanged(int)), m_map, SLOT(setZoom(int)));
 	connect(m_map, SIGNAL(zoomChanged(int)), m_zoom, SLOT(setValue(int)));
 	
+	tmpLabel = new QLabel();
+	tmpLabel->setText("Zoom:");
+	tmpLabel->setBuddy(m_zoom);	
+
+	// setup Zoom control layout
+	QHBoxLayout* zoomBoxLayout = new QHBoxLayout();
+	zoomBoxLayout->setSpacing(1);
+	zoomBoxLayout->setMargin(0);
+	zoomBoxLayout->addWidget(tmpLabel);
+	zoomBoxLayout->addWidget(m_zoom);
+	
+	m_zoomBox = new QWidget();	
+	m_zoomBox->setLayout(zoomBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowZoom", prefString, 1))
+		m_zoomBox->hide();	
+
+	// ----------------------------------------------------------------------------------------------	
 	// setup Player Location display
-	m_playerLocationBox = new Q3HBox(m_topControlBox);
-	tmpLabel = new QLabel(m_playerLocationBox);
-	tmpLabel->setText("You:");
-	m_playerLocation = new QLabel(m_playerLocationBox);
+	m_playerLocation = new QLabel();
 	m_playerLocation->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
 	m_playerLocation->setText("0      0      0      ");
 	m_playerLocation->setMinimumWidth(90);
+	
+	tmpLabel = new QLabel();
+	tmpLabel->setText("You:");
 	tmpLabel->setBuddy(m_playerLocation);
 	
-	tmpPrefString = "ShowPlayerLocation";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, false))
+	QHBoxLayout* playerLocationBoxLayout = new QHBoxLayout();
+	playerLocationBoxLayout->setSpacing(1);
+	playerLocationBoxLayout->setMargin(0);
+	playerLocationBoxLayout->addWidget(tmpLabel);
+	playerLocationBoxLayout->addWidget(m_playerLocation);
+	
+	m_playerLocationBox = new QWidget();
+	m_playerLocationBox->setLayout(playerLocationBoxLayout);	
+	if (!pSEQPrefs->getPrefBool("ShowPlayerLocation", prefString, false))
 		m_playerLocationBox->hide();
 	
 	connect(player, SIGNAL(posChanged(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)), 
 			 this, SLOT(setPlayer(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)));
 	
+	// ----------------------------------------------------------------------------------------------		
 	// setup Mouse Location display
-	m_mouseLocationBox = new Q3HBox(m_topControlBox);
-	tmpLabel = new QLabel(m_mouseLocationBox);
-	tmpLabel->setText("Cursor:");
-	m_mouseLocation = new QLabel(m_mouseLocationBox);
+	m_mouseLocation = new QLabel();
 	m_mouseLocation->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
 	m_mouseLocation->setText("0      0      ");
 	m_mouseLocation->setMinimumWidth(70);
+	
+	tmpLabel = new QLabel();
+	tmpLabel->setText("Cursor:");
 	tmpLabel->setBuddy(m_mouseLocationBox);
 	
-	tmpPrefString = "ShowMouseLocation";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+	QHBoxLayout* mouseLocationBoxLayout = new QHBoxLayout();
+	mouseLocationBoxLayout->setSpacing(1);
+	mouseLocationBoxLayout->setMargin(0);
+	mouseLocationBoxLayout->addWidget(tmpLabel);
+	mouseLocationBoxLayout->addWidget(m_mouseLocation);
+	
+	m_mouseLocationBox = new QWidget();
+	m_mouseLocationBox->setLayout(mouseLocationBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowMouseLocation", prefString, 1))
 		m_mouseLocationBox->hide();
 	
 	connect(m_map, SIGNAL(mouseLocation(int16_t, int16_t)), this, SLOT(mouseLocation(int16_t, int16_t)));
 	
+	// ----------------------------------------------------------------------------------------------
 	// setup Filter
-	m_filterBox = new Q3HBox(m_topControlBox);
-	tmpLabel = new QLabel(m_filterBox);
+	m_filter = new MapFilterLineEdit();
+	
+	tmpLabel = new QLabel();
 	tmpLabel->setText("Find:");
-	m_filter = new MapFilterLineEdit(m_filterBox);
-	//  m_filter->setAlignment(Qt::AlignCenter);
 	tmpLabel->setBuddy(m_filter);
-	tmpPrefString = "ShowFilter";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-		m_filterBox->hide();
+	
+	QHBoxLayout* filterBoxLayout = new QHBoxLayout();
+	filterBoxLayout->setSpacing(1);
+	filterBoxLayout->setMargin(0);
+	filterBoxLayout->addWidget(tmpLabel);
+	filterBoxLayout->addWidget(m_filter);
+
+	m_filterBox = new QWidget();
+	m_filterBox->setLayout(filterBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowFilter", prefString, 1))
+		m_filterBox->hide();	
+	
 #ifdef MAPFRAME_IMMEDIATE_REGEX
-	connect(m_filter, SIGNAL(textChanged (const QString &)), 
-			 this, SLOT(setregexp(const QString &)));
+	connect(m_filter, SIGNAL(textChanged (const QString &)), this, SLOT(setregexp(const QString &)));
 #else
 	connect(m_filter, SIGNAL(returnPressed()), this, SLOT(filterConfirmed()));
 #endif
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	// Set up Bottom Control Box
+	
+	// ----------------------------------------------------------------------------------------------
 	// setup Frame Rate control
-	m_frameRateBox = new Q3HBox(m_bottomControlBox);
-	tmpLabel = new QLabel(m_frameRateBox);
-	tmpLabel->setText("Frame Rate:");
-	m_frameRate = new QSpinBox(1, 60, 1, m_frameRateBox);
+	m_frameRate = new QSpinBox();
+	m_frameRate->setRange(1, 60);
 	m_frameRate->setWrapping(true);
 	m_frameRate->setSuffix(" fps");
 	m_frameRate->setValue(m_map->frameRate());
-	tmpLabel->setBuddy(m_frameRate);
-	tmpPrefString = "ShowFrameRate";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-		m_frameRateBox->hide();
 	m_frameRate->setValue(m_map->frameRate());
 	connect(m_frameRate, SIGNAL(valueChanged(int)), m_map, SLOT(setFrameRate(int)));
 	connect(m_map, SIGNAL(frameRateChanged(int)), m_frameRate, SLOT(setValue(int)));
 	
+	tmpLabel = new QLabel();
+	tmpLabel->setText("Frame Rate:");
+	tmpLabel->setBuddy(m_frameRate);
+	
+	QHBoxLayout* frameRateBoxLayout = new QHBoxLayout();
+	frameRateBoxLayout->setSpacing(1);
+	frameRateBoxLayout->setMargin(0);
+	frameRateBoxLayout->addWidget(tmpLabel);
+	frameRateBoxLayout->addWidget(m_frameRate);
+	
+	m_frameRateBox = new QWidget();
+	m_frameRateBox->setLayout(frameRateBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowFrameRate", prefString, 1))
+		m_frameRateBox->hide();
+
+	// ----------------------------------------------------------------------------------------------
 	// setup Pan Controls
-	m_panBox = new Q3HBox(m_bottomControlBox);
-	tmpLabel = new QLabel(m_panBox);
-	tmpLabel->setText("Pan X:");
-	m_panX = new QSpinBox(-8192, 8192, 16, m_panBox);
+	m_panX = new QSpinBox();
+	m_panX->setRange(-8192, 8192);
+	m_panX->setSingleStep(16);
 	m_panX->setValue(m_map->panOffsetX());
-	tmpLabel = new QLabel(m_panBox);
-	tmpLabel->setText("Y:");
-	m_panY = new QSpinBox(-8192, 8192, 16, m_panBox);
-	m_panY->setValue(m_map->panOffsetY());
-	tmpPrefString = "ShowPanControls";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-		m_panBox->hide();
 	connect(m_panX, SIGNAL(valueChanged(int)), m_map, SLOT(setPanOffsetX(int)));
-	connect(m_panY, SIGNAL(valueChanged(int)), m_map, SLOT(setPanOffsetY(int)));
 	connect(m_map, SIGNAL(panXChanged(int)), m_panX, SLOT(setValue(int)));
+	
+	m_panY = new QSpinBox();
+	m_panY->setRange(-8192, 8192);
+	m_panY->setSingleStep(16);
+	m_panY->setValue(m_map->panOffsetY());
+	connect(m_panY, SIGNAL(valueChanged(int)), m_map, SLOT(setPanOffsetY(int)));
 	connect(m_map, SIGNAL(panYChanged(int)), m_panY, SLOT(setValue(int)));
 	
-	m_depthControlBox = new Q3HBox(m_bottomControlBox);
-	tmpLabel = new QLabel(m_depthControlBox);
-	tmpLabel->setText("Head:");
-	m_head = new QSpinBox(5, 3000, 10, m_depthControlBox);
+	tmpLabel = new QLabel();
+	tmpLabel->setText("Pan X:");
+	tmpLabel->setBuddy(m_panX);
+	
+	QLabel* tmpLabel2 = new QLabel();
+	tmpLabel2->setText("Y:");
+	tmpLabel2->setBuddy(m_panY);
+	
+	QHBoxLayout* panBoxLayout = new QHBoxLayout();
+	panBoxLayout->setSpacing(1);
+	panBoxLayout->setMargin(0);
+	panBoxLayout->addWidget(tmpLabel);
+	panBoxLayout->addWidget(m_panX);
+	panBoxLayout->addWidget(tmpLabel2);
+	panBoxLayout->addWidget(m_panY);
+	
+	m_panBox = new QWidget();
+	m_panBox->setLayout(panBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowPanControls", prefString, 1))
+		m_panBox->hide();
+
+	// ----------------------------------------------------------------------------------------------	
+	// Depth control
+	m_head = new QSpinBox();
+	m_head->setRange(5, 3000);
+	m_head->setSingleStep(10);
 	m_head->setValue(m_map->headRoom());
-	tmpLabel = new QLabel(m_depthControlBox);
-	tmpLabel->setText("Floor:");
-	m_floor = new QSpinBox(5, 3000, 10, m_depthControlBox);
+	connect(m_head, SIGNAL(valueChanged(int)), m_map, SLOT(setHeadRoom(int)));
+	connect(m_map, SIGNAL(headRoomChanged(int)), m_head, SLOT(setValue(int)));
+	
+	m_floor = new QSpinBox();
+	m_floor->setRange(5, 3000);
+	m_floor->setSingleStep(10);
 	m_floor->setValue(m_map->floorRoom());
-	tmpPrefString = "ShowDepthFilterControls";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 
-								(m_map->mapLineStyle() == tMap_DepthFiltered)))
+	connect(m_floor, SIGNAL(valueChanged(int)),	m_map, SLOT(setFloorRoom(int)));
+	connect(m_map, SIGNAL(floorRoomChanged(int)), m_floor, SLOT(setValue(int)));
+	
+	tmpLabel = new QLabel();
+	tmpLabel->setText("Head:");
+	tmpLabel->setBuddy(m_head);
+	
+	tmpLabel2 = new QLabel();
+	tmpLabel2->setText("Floor:");
+	tmpLabel2->setBuddy(m_floor);
+	
+	QHBoxLayout* depthControlBoxLayout = new QHBoxLayout();
+	depthControlBoxLayout->setSpacing(1);
+	depthControlBoxLayout->setMargin(0);
+	depthControlBoxLayout->addWidget(tmpLabel);
+	depthControlBoxLayout->addWidget(m_head);
+	depthControlBoxLayout->addWidget(tmpLabel2);
+	depthControlBoxLayout->addWidget(m_floor);
+	
+	m_depthControlBox = new QWidget();
+	m_depthControlBox->setLayout(depthControlBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowDepthFilterControls", prefString, m_map->mapLineStyle() == tMap_DepthFiltered))
 		m_depthControlBox->hide();
-	connect(m_head, SIGNAL(valueChanged(int)),
-			m_map, SLOT(setHeadRoom(int)));
-	connect(m_map, SIGNAL(headRoomChanged(int)),
-			m_head, SLOT(setValue(int)));
-	connect(m_floor, SIGNAL(valueChanged(int)),
-			m_map, SLOT(setFloorRoom(int)));
-	connect(m_map, SIGNAL(floorRoomChanged(int)),
-			m_floor, SLOT(setValue(int)));
+
+	// ----------------------------------------------------------------------------------------------	
+	// create the top layout box
+	QHBoxLayout* topControlBoxLayout = new QHBoxLayout();
+	topControlBoxLayout->setSpacing(0);
+	topControlBoxLayout->setContentsMargins(0, 1, 0, 1);
+	topControlBoxLayout->addWidget(m_zoomBox);
+	topControlBoxLayout->addWidget(m_playerLocationBox);		
+	topControlBoxLayout->addWidget(m_mouseLocationBox);	
+	topControlBoxLayout->addWidget(m_filterBox);
 	
-	// add our own menu items to the maps menu
-	Q3PopupMenu* mapMenu = m_map->menu();
+	m_topControlBox = new QWidget();	
+	m_topControlBox->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+	m_topControlBox->setLayout(topControlBoxLayout);	
+	if (!pSEQPrefs->getPrefBool("ShowTopControlBox", prefString, 1))
+		m_topControlBox->hide();
 	
-	// insert a seperator to seperate our stuff from the rest
-	mapMenu->insertSeparator(-1);
-	m_id_topControl = mapMenu->insertItem("Show Top Controls",
-										  this, SLOT(toggle_top_controls(int)));
+	// ----------------------------------------------------------------------------------------------
+	// create the bottom layout box
+	QHBoxLayout* bottomControlBoxLayout = new QHBoxLayout();
+	bottomControlBoxLayout->setSpacing(0);
+	bottomControlBoxLayout->setContentsMargins(0, 1, 10, 1);	
+	bottomControlBoxLayout->addWidget(m_frameRateBox);	
+	bottomControlBoxLayout->addWidget(m_panBox);
+	bottomControlBoxLayout->addWidget(m_depthControlBox);
+
+	m_bottomControlBox = new QWidget();
+	m_bottomControlBox->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+	m_bottomControlBox->setLayout(bottomControlBoxLayout);
+	if (!pSEQPrefs->getPrefBool("ShowBottomControlBox", prefString, 1))
+		m_bottomControlBox->hide();
 	
-	m_id_bottomControl = mapMenu->insertItem("Show Bottom Controls",
-											 this, 
-											 SLOT(toggle_bottom_controls(int)));
+	// create the menu
+	createMenu();
 	
-	mapMenu->insertItem("Status Font...",
-						this, 
-						SLOT(set_font(int)));
+	// set up the vertical layout
+	m_vertical = new QVBoxLayout();	
+	m_vertical->setMargin(0);
+	m_vertical->setSpacing(0);
+	m_vertical->addWidget(m_topControlBox);	
+	m_vertical->addWidget(m_map);
+	m_vertical->addWidget(m_bottomControlBox);
 	
-	// insert a seperator to seperate main controls from sub-menus
-	mapMenu->insertSeparator(-1);
-	
-	Q3PopupMenu* subMenu;
-	subMenu = new Q3PopupMenu();
-	subMenu->setCheckable(true);
-	m_id_zoom = subMenu->insertItem("Show Zoom Controls", 
-									this, SLOT(toggle_zoom(int)));
-	m_id_playerLocation = subMenu->insertItem("Show Player Location",
-											  this, 
-											  SLOT(toggle_playerLocation(int)));
-	m_id_mouseLocation = subMenu->insertItem("Show Mouse Location",
-											 this, 
-											 SLOT(toggle_mouseLocation(int)));
-	
-	m_id_filter = subMenu->insertItem("Show Find",
-									  this, SLOT(toggle_filter(int)));
-	
-	m_id_topControl_Options = mapMenu->insertItem("Top Controls", subMenu);
-	
-	subMenu = new Q3PopupMenu();
-	subMenu->setCheckable(true);
-	m_id_frameRate = subMenu->insertItem("Show Frame Rate",
-										 this, SLOT(toggle_frameRate(int)));
-	m_id_pan = subMenu->insertItem("Show Pan",
-								   this, SLOT(toggle_pan(int)));
-	m_id_depthControlRoom = subMenu->insertItem("Show Depth Filter Controls",
-												this, 
-												SLOT(toggle_depthControls(int)));
-	m_id_bottomControl_Options = mapMenu->insertItem("Bottom Controls", subMenu);
-	
-	// setup signal to initialize menu items when the map is about to be displayeed
-	connect(mapMenu, SIGNAL(aboutToShow()),
-			this, SLOT(init_Menu()));
+	// assign the layout to this widget
+	QWidget* pWidget = new QWidget();
+	pWidget->setLayout(m_vertical);
+	setWidget(pWidget);
 }
 
 MapFrame::~MapFrame()
 {
+}
+
+void MapFrame::createMenu()
+{
+	// add our own menu items to the maps menu
+	QMenu* mapMenu = m_map->menu();
+	
+	// insert a seperator to seperate our stuff from the rest
+	mapMenu->insertSeparator(-1);
+	m_id_topControl = mapMenu->insertItem("Show Top Controls", this, SLOT(toggle_top_controls(int)));
+	m_id_bottomControl = mapMenu->insertItem("Show Bottom Controls", this, SLOT(toggle_bottom_controls(int)));
+	mapMenu->insertItem("Status Font...", this, SLOT(set_font(int)));
+	
+	// insert a seperator to seperate main controls from sub-menus
+	mapMenu->insertSeparator(-1);
+	
+	QMenu* subMenu;
+	subMenu = new QMenu();
+	subMenu->setCheckable(true);
+	m_id_zoom = subMenu->insertItem("Show Zoom Controls", this, SLOT(toggle_zoom(int)));
+	m_id_playerLocation = subMenu->insertItem("Show Player Location", this, SLOT(toggle_playerLocation(int)));
+	m_id_mouseLocation = subMenu->insertItem("Show Mouse Location", this, SLOT(toggle_mouseLocation(int)));
+	m_id_filter = subMenu->insertItem("Show Find", this, SLOT(toggle_filter(int)));
+	m_id_topControl_Options = mapMenu->insertItem("Top Controls", subMenu);
+	
+	subMenu = new QMenu();
+	subMenu->setCheckable(true);
+	m_id_frameRate = subMenu->insertItem("Show Frame Rate", this, SLOT(toggle_frameRate(int)));
+	m_id_pan = subMenu->insertItem("Show Pan", this, SLOT(toggle_pan(int)));
+	m_id_depthControlRoom = subMenu->insertItem("Show Depth Filter Controls", this, SLOT(toggle_depthControls(int)));
+	m_id_bottomControl_Options = mapMenu->insertItem("Bottom Controls", subMenu);
+	
+	// setup signal to initialize menu items when the map is about to be displayeed
+	connect(mapMenu, SIGNAL(aboutToShow()),	this, SLOT(init_Menu()));
 }
 
 QMenu* MapFrame::menu()

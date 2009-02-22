@@ -190,7 +190,7 @@ ExperienceWindow::ExperienceWindow(const DataLocationMgr* dataLocMgr,
    m_view_menu->insertItem( "Calculate ZEM on next kill", this, SLOT(calcZEMNextKill()) );
 
   // TODO: Fix box layout
-   m_layout = new Q3VBoxLayout(layout());
+   m_layout = new Q3VBoxLayout();
 
    m_menu_bar = new QMenuBar( this );
    m_menu_bar->insertItem( "&View", m_view_menu );
@@ -277,6 +277,11 @@ ExperienceWindow::ExperienceWindow(const DataLocationMgr* dataLocMgr,
    fileInfo = m_dataLocMgr->findWriteFile("logs", "newexp.log");
 
    m_newExpLogFile = fileInfo.absFilePath();
+	
+	QWidget* pWidget = new QWidget();
+	pWidget->setLayout(m_layout);
+	m_layout->setContentsMargins(0, 0, 0, 0);
+	setWidget(pWidget);
 
    // Clear the exp list on removes and deletes.
    m_exp_list.setAutoDelete(true);  

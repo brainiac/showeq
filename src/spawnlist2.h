@@ -9,7 +9,7 @@
 #define SPAWNLIST2_H
 
 #include <q3ptrdict.h>
-//Added by qt3to4:
+
 #include <Q3PopupMenu>
 
 #include "seqwindow.h"
@@ -27,6 +27,7 @@ class FilterMgr;
 class QComboBox;
 class QTimer;
 class QSpinBox;
+class QLabel;
 
 class SpawnListWindow2 : public SEQWindow
 {

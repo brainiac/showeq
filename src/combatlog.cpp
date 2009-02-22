@@ -256,7 +256,7 @@ void CombatWindow::initUI()
 	seqDebug("CombatWindow::initUI: starting...");
 #endif
 	// TODO: Fix layout
-	Q3VBoxLayout* pLayout = new Q3VBoxLayout(layout());
+	Q3VBoxLayout* pLayout = new Q3VBoxLayout();
 
 	m_menu_bar = new QMenuBar(this);
 	pLayout->addWidget(m_menu_bar);
@@ -282,6 +282,10 @@ void CombatWindow::initUI()
 	updateOffense();
 	updateDefense();
 	updateMob();
+	
+	QWidget* pWidget = new QWidget();
+	pWidget->setLayout(pLayout);
+	setWidget(pWidget);
 
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::initUI: finished...");

@@ -64,7 +64,7 @@ SpawnList::SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* catego
 		addColumn ("X", "Coord1");
 		addColumn ("Y", "Coord2");
 	}
-	
+
 	addColumn ("Z", "Coord3");
 	addColumn ("ID");
 	addColumn ("Dist");

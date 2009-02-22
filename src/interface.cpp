@@ -135,8 +135,14 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	m_messageFilterDialog(0),
 	m_guildListWindow(0)
 {
-	// set central widget to just a blank widget
-	setCentralWidget(new QWidget(this, "filler"));
+	// set central widget to a QMainWindow so we can stack left and right
+	// over the top and bottom...
+	//setCentralWidget(new QWidget(this, "filler"));
+	QMainWindow* pFiller = new QMainWindow(this);
+	pFiller->setCentralWidget(new QWidget());
+	pFiller->setWindowFlags(Qt::Widget);
+	setCentralWidget(pFiller);
+
 	
 	// disable the dock menu
 	//setDockMenuEnabled(false);
@@ -5327,9 +5333,9 @@ void EQInterface::showMap(int i)
 		
 		// TODO: Fix Docking of Window
 		setDockEnabled(m_map[i], pSEQPrefs->getPrefBool(QString("Dockable") + mapPrefName, "Interface", true));
-		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_map[i]->preferenceName(), Left);
+		//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_map[i]->preferenceName(), Left);
 		//addDockWindow(m_map[i], mapName, edge, true);
-		addDockWidget(edge, m_map[i]);
+		addDockWidget(Qt::TopDockWidgetArea, m_map[i]);
 		
 		if (!m_isMapDocked[i])
 			m_map[i]->undock();
