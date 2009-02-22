@@ -5915,7 +5915,7 @@ void EQInterface::createOPCodeMonitorLog(const QString& opCodeList)
 
 void EQInterface::insertWindowMenu(SEQWindow* window)
 {
-	Q3PopupMenu* menu = window->menu();
+	QMenu* menu = window->menu();
 	if (menu)
 	{
 		// insert the windows menu into the window menu

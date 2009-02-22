@@ -32,8 +32,8 @@
 #include <q3listview.h>
 #include <q3ptrdict.h>
 #include <q3textstream.h>
-//Added by qt3to4:
-#include <Q3PopupMenu>
+
+#include <QMenu>
 
 // these are all used for the CFilterDlg
 #include <regex.h>
@@ -66,91 +66,86 @@ class SpawnListMenu;
 // SpawnList
 class SpawnList : public SEQListView
 {
-   Q_OBJECT
+	Q_OBJECT
 public:
-   SpawnList(Player* player, 
-	     SpawnShell* spawnShell, 
-	     CategoryMgr* categoryMgr,
-	     QWidget *parent = 0, const char * name = 0);
-
-   SpawnListItem* Selected();
-   SpawnListItem* Find(Q3ListViewItemIterator& it, 
-		       const Item* item, 
-		       bool first = false);
-
-   const Category* getCategory(SpawnListItem *);
-
-   SpawnListMenu* menu();
-
+	SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr,
+			  QWidget *parent = 0, const char * name = 0);
+	
+	SpawnListItem* Selected();
+	SpawnListItem* Find(Q3ListViewItemIterator& it, const Item* item, bool first = false);
+	
+	const Category* getCategory(SpawnListItem *);
+	
+	SpawnListMenu* menu();
+	
 signals:
-   void listUpdated();   // flags in spawns have changed
-   void listChanged();   // categories have changed
-   void spawnSelected(const Item* item);
-   void keepUpdated(bool on);
-
-public slots: 
-   void setPlayer(int16_t x, int16_t y, int16_t z, 
-		  int16_t deltaX, int16_t deltaY, int16_t deltaZ, 
-		  int32_t degrees); 
-   void selectNext(void);
-   void selectPrev(void);
-   // SpawnShell signals
-   void addItem(const Item *);
-   void delItem(const Item *);
-   void changeItem(const Item *, uint32_t changeType);
-   void killSpawn(const Item *);
-   void selectSpawn(const Item *);
-   void clear();
-   void addCategory(const Category* cat);
-   void delCategory(const Category* cat);
-   void clearedCategories(void);
-   void loadedCategories(void);
-   
-   void rebuildSpawnList();
-   void playerLevelChanged(uint8_t);
-   
-private slots:
-   void selChanged(Q3ListViewItem*);
-
-   void mousePressEvent (int button, Q3ListViewItem *litem, const QPoint &point, int col);
-   void mouseDoubleClickEvent(Q3ListViewItem *litem);
-
+	void listUpdated();   // flags in spawns have changed
+	void listChanged();   // categories have changed
+	void spawnSelected(const Item* item);
+	void keepUpdated(bool on);
+	
+	public slots: 
+	void setPlayer(int16_t x, int16_t y, int16_t z, 
+				   int16_t deltaX, int16_t deltaY, int16_t deltaZ, 
+				   int32_t degrees); 
+	void selectNext(void);
+	void selectPrev(void);
+	// SpawnShell signals
+	void addItem(const Item *);
+	void delItem(const Item *);
+	void changeItem(const Item *, uint32_t changeType);
+	void killSpawn(const Item *);
+	void selectSpawn(const Item *);
+	void clear();
+	void addCategory(const Category* cat);
+	void delCategory(const Category* cat);
+	void clearedCategories(void);
+	void loadedCategories(void);
+	
+	void rebuildSpawnList();
+	void playerLevelChanged(uint8_t);
+	
+	private slots:
+	void selChanged(Q3ListViewItem*);
+	
+	void mousePressEvent (int button, Q3ListViewItem *litem, const QPoint &point, int col);
+	void mouseDoubleClickEvent(Q3ListViewItem *litem);
+	
 private:
-   void setSelectedQuiet(Q3ListViewItem* item, bool selected);
-   void populateSpawns(void);
-   void populateCategory(const Category* cat);
-   QString filterString(const Item *item, int flags = 0);
-
-   void selectAndOpen(SpawnListItem *);
-   CategoryMgr* m_categoryMgr;
-   Player *m_player;
-   SpawnShell* m_spawnShell;
-
-   // category pointer used as keys to look up the associated SpawnListItem
-   Q3PtrDict<SpawnListItem> m_categoryListItems;
-
-   SpawnListMenu* m_menu;
-
+	void setSelectedQuiet(Q3ListViewItem* item, bool selected);
+	void populateSpawns(void);
+	void populateCategory(const Category* cat);
+	QString filterString(const Item *item, int flags = 0);
+	
+	void selectAndOpen(SpawnListItem *);
+	CategoryMgr* m_categoryMgr;
+	Player *m_player;
+	SpawnShell* m_spawnShell;
+	
+	// category pointer used as keys to look up the associated SpawnListItem
+	Q3PtrDict<SpawnListItem> m_categoryListItems;
+	
+	SpawnListMenu* m_menu;
+	
 };
 
 class SpawnListWindow : public SEQWindow
 {
-  Q_OBJECT
+	Q_OBJECT
 
- public:
-  SpawnListWindow(Player* player, 
-		  SpawnShell* spawnShell, 
-		  CategoryMgr* categoryMgr,
-		  QWidget* parent = 0, const char* name = 0);
-  ~SpawnListWindow();
-  virtual Q3PopupMenu* menu();
-  SpawnList* spawnList() { return m_spawnList; }
+public:
+	SpawnListWindow(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr,
+					QWidget* parent = 0, const char* name = 0);
+	~SpawnListWindow();
 
- public slots:
-  virtual void savePrefs(void);
+	virtual QMenu* menu();
+	SpawnList* spawnList() { return m_spawnList; }
 
- protected:
-  SpawnList* m_spawnList;
+public slots:
+	virtual void savePrefs(void);
+
+protected:
+	SpawnList* m_spawnList;
 };
 
 #endif // SPAWNLIST_H

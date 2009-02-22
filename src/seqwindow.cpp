@@ -22,137 +22,136 @@
 using namespace Qt;
 
 SEQWindow::SEQWindow(const QString prefName, const QString caption,
-		     QWidget* parent, const char* name, Qt::WFlags f)
+					 QWidget* parent, const char* name, Qt::WFlags f)
   : Q3DockWindow(parent, name, f),
-    m_preferenceName(prefName)
+	m_preferenceName(prefName)
 {
-  // set the windows caption
-  Q3DockWindow::setCaption(pSEQPrefs->getPrefString("Caption", preferenceName(),
-					       caption));
-
-  // windows default to resizable
-  setResizeEnabled(true);
-
-  // windows default to be closable when not docked
-  setCloseMode(Always);
-
-  // restore the font
-  restoreFont();
+	// set the windows caption
+	Q3DockWindow::setCaption(pSEQPrefs->getPrefString("Caption", preferenceName(), caption));
+	
+	// windows default to resizable
+	setResizeEnabled(true);
+	
+	// windows default to be closable when not docked
+	setCloseMode(Always);
+	
+	// restore the font
+	restoreFont();
 }
 
 SEQWindow::~SEQWindow()
 {
 }
 
-Q3PopupMenu* SEQWindow::menu()
+QMenu* SEQWindow::menu()
 {
-  return 0;
+	return 0;
 }
 
 void SEQWindow::setCaption(const QString& text)
 {
-  // set the caption
-  Q3DockWindow::setCaption(text);
-  setName((const char*)caption());
-
-  // set the preference
-  pSEQPrefs->setPrefString("Caption", preferenceName(), caption());
+	// set the caption
+	Q3DockWindow::setCaption(text);
+	setName((const char*)caption());
+	
+	// set the preference
+	pSEQPrefs->setPrefString("Caption", preferenceName(), caption());
 }
 
 void SEQWindow::setWindowFont(const QFont& font)
 {
-  // set the font preference
-  pSEQPrefs->setPrefFont("Font", preferenceName(), font);
-
-  // restore the font to the preference
-  restoreFont();
+	// set the font preference
+	pSEQPrefs->setPrefFont("Font", preferenceName(), font);
+	
+	// restore the font to the preference
+	restoreFont();
 }
 
 void SEQWindow::restoreFont()
 {
-  // set the applications default font
-  if (pSEQPrefs->isPreference("Font", preferenceName()))
-  {
-    // use the font specified in the preferences
-    QFont font = pSEQPrefs->getPrefFont("Font", preferenceName());
-    setFont( font);
-  }
+	// set the applications default font
+	if (pSEQPrefs->isPreference("Font", preferenceName()))
+	{
+		// use the font specified in the preferences
+		QFont font = pSEQPrefs->getPrefFont("Font", preferenceName());
+		setFont( font);
+	}
 }
 
 void SEQWindow::restoreSize()
 {
-  if (place() == InDock)
-  {
-    QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), 
-				     fixedExtent());
-    setFixedExtentWidth(s.width());
-    setFixedExtentHeight(s.height());
-  }
-  else
-  {
-    // retrieve the saved size information
-    QSize s = pSEQPrefs->getPrefSize("WindowSize", preferenceName(), size());
-    
-    resize(s);
-  }
-
-  if (pSEQPrefs->getPrefBool("DockVisible", preferenceName(), !isHidden()))
-    show();
-  else
-    hide();
+	if (place() == InDock)
+	{
+		QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), 
+										 fixedExtent());
+		setFixedExtentWidth(s.width());
+		setFixedExtentHeight(s.height());
+	}
+	else
+	{
+		// retrieve the saved size information
+		QSize s = pSEQPrefs->getPrefSize("WindowSize", preferenceName(), size());
+		
+		resize(s);
+	}
+	
+	if (pSEQPrefs->getPrefBool("DockVisible", preferenceName(), !isHidden()))
+		show();
+	else
+		hide();
 }
 
 void SEQWindow::restorePosition()
 {
-  if (place() == InDock)
-  {
-    setNewLine(pSEQPrefs->getPrefBool("DockNewLine", preferenceName(),
-				      newLine()));
-    setOffset(pSEQPrefs->getPrefInt("DockOffset", preferenceName(), offset()));
-  }
-  else
-  {
-    // retrieve the saved position information
-    QPoint p = pSEQPrefs->getPrefPoint("WindowPos", preferenceName(), pos());
-    
-    // Move window to new position
-    move(p);
-  }
+	if (place() == InDock)
+	{
+		setNewLine(pSEQPrefs->getPrefBool("DockNewLine", preferenceName(),
+										  newLine()));
+		setOffset(pSEQPrefs->getPrefInt("DockOffset", preferenceName(), offset()));
+	}
+	else
+	{
+		// retrieve the saved position information
+		QPoint p = pSEQPrefs->getPrefPoint("WindowPos", preferenceName(), pos());
+		
+		// Move window to new position
+		move(p);
+	}
 }
 
 void SEQWindow::savePrefs(void)
 {
-  if (pSEQPrefs->getPrefBool("SavePosition", "Interface", true))
-  {
-    if (place() == InDock)
-    {
-      pSEQPrefs->setPrefBool("DockNewLine", preferenceName(), newLine());
-      pSEQPrefs->setPrefInt("DockOffset", preferenceName(), offset());
-      pSEQPrefs->setPrefSize("DockFixedExtent", preferenceName(), fixedExtent());
-    }
-    else
-    {
-      // save the windows size and position information
-      pSEQPrefs->setPrefSize("WindowSize", preferenceName(), size());
-      pSEQPrefs->setPrefPoint("WindowPos", preferenceName(), pos());
-    }
-
-    pSEQPrefs->setPrefBool("DockVisible", preferenceName(), !isHidden());
-  }
+	if (pSEQPrefs->getPrefBool("SavePosition", "Interface", true))
+	{
+		if (place() == InDock)
+		{
+			pSEQPrefs->setPrefBool("DockNewLine", preferenceName(), newLine());
+			pSEQPrefs->setPrefInt("DockOffset", preferenceName(), offset());
+			pSEQPrefs->setPrefSize("DockFixedExtent", preferenceName(), fixedExtent());
+		}
+		else
+		{
+			// save the windows size and position information
+			pSEQPrefs->setPrefSize("WindowSize", preferenceName(), size());
+			pSEQPrefs->setPrefPoint("WindowPos", preferenceName(), pos());
+		}
+		
+		pSEQPrefs->setPrefBool("DockVisible", preferenceName(), !isHidden());
+	}
 }
 
 void SEQWindow::mousePressEvent(QMouseEvent* e)
 {
-  if (e->button() == RightButton)
-  {
-    Q3PopupMenu* popupMenu = menu();
-    if (popupMenu)
-      popupMenu->popup(mapToGlobal(e->pos()));
-    else
-      Q3DockWindow::mousePressEvent(e);
-  }
-  else
-    Q3DockWindow::mousePressEvent(e);
+	if (e->button() == RightButton)
+	{
+		QMenu* popupMenu = menu();
+		if (popupMenu)
+			popupMenu->popup(mapToGlobal(e->pos()));
+		else
+			Q3DockWindow::mousePressEvent(e);
+	}
+	else
+		Q3DockWindow::mousePressEvent(e);
 }
 
 #ifndef QMAKEBUILD

@@ -15,40 +15,37 @@
 #ifndef SEQWINDOW_H
 #define SEQWINDOW_H
 
-#include <qwidget.h>
-#include <qstring.h>
+#include <QWidget>
 #include <q3dockwindow.h>
-//Added by qt3to4:
-#include <Q3PopupMenu>
+#include <QString>
+#include <QMenu>
 #include <QMouseEvent>
-
-class Q3PopupMenu;
 
 class SEQWindow : public Q3DockWindow
 {
-   Q_OBJECT
-
- public:
-   SEQWindow(const QString prefName, const QString caption,
-	    QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0);
-  ~SEQWindow();
-
-  virtual Q3PopupMenu* menu();
-
-  const QString& preferenceName() const { return m_preferenceName; }
-
- public slots:
-   virtual void setCaption(const QString&);
-   virtual void setWindowFont(const QFont&);
-   virtual void restoreSize();
-   virtual void restorePosition();
-   virtual void restoreFont();
-   virtual void savePrefs(void);
-  
-   virtual void mousePressEvent(QMouseEvent* e);
-
- private:
-  QString m_preferenceName;
+	Q_OBJECT
+	
+public:
+	SEQWindow(const QString prefName, const QString caption,
+			  QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0);
+	~SEQWindow();
+	
+	virtual QMenu* menu();
+	
+	const QString& preferenceName() const { return m_preferenceName; }
+	
+public slots:
+	virtual void setCaption(const QString&);
+	virtual void setWindowFont(const QFont&);
+	virtual void restoreSize();
+	virtual void restorePosition();
+	virtual void restoreFont();
+	virtual void savePrefs(void);
+	
+	virtual void mousePressEvent(QMouseEvent* e);
+	
+private:
+	QString m_preferenceName;
 };
 
 #endif // SEQWINDOW_H
