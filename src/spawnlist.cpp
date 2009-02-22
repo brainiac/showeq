@@ -53,7 +53,8 @@ SpawnList::SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* catego
 	addColumn ("Lvl", "Level");
 	addColumn ("Hp", "HP");
 	addColumn ("MaxHP");
-	if(showeq_params->retarded_coords) 
+	
+	if (showeq_params->retarded_coords) 
 	{
 		addColumn ("N/S", "Coord1");
 		addColumn ("E/W", "Coord2");
@@ -63,6 +64,7 @@ SpawnList::SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* catego
 		addColumn ("X", "Coord1");
 		addColumn ("Y", "Coord2");
 	}
+	
 	addColumn ("Z", "Coord3");
 	addColumn ("ID");
 	addColumn ("Dist");

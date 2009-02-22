@@ -15,25 +15,24 @@
 #include "seqwindow.h"
 #include "main.h"
 
-#include <q3popupmenu.h>
-//Added by qt3to4:
-#include <QMouseEvent>
-
 using namespace Qt;
 
 SEQWindow::SEQWindow(const QString prefName, const QString caption,
 					 QWidget* parent, const char* name, Qt::WFlags f)
-  : Q3DockWindow(parent, name, f),
+  : QDockWidget(name, parent, f),
 	m_preferenceName(prefName)
 {
 	// set the windows caption
-	Q3DockWindow::setCaption(pSEQPrefs->getPrefString("Caption", preferenceName(), caption));
+	setCaption(pSEQPrefs->getPrefString("Caption", preferenceName(), caption));
 	
 	// windows default to resizable
-	setResizeEnabled(true);
+	//setResizeEnabled(true);
+	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 	
 	// windows default to be closable when not docked
-	setCloseMode(Always);
+	//setCloseMode(Always);
+	setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable);
+	
 	
 	// restore the font
 	restoreFont();
@@ -48,10 +47,28 @@ QMenu* SEQWindow::menu()
 	return 0;
 }
 
+void SEQWindow::dock()
+{
+	setFloating(false);
+}
+
+void SEQWindow::undock()
+{
+	setFloating(true);
+}
+
+void SEQWindow::setDockEnabled(bool enabled)
+{	
+	if (enabled)
+		setAllowedAreas(Qt::AllDockWidgetAreas);
+	else
+		setAllowedAreas(Qt::NoDockWidgetArea);
+}
+
 void SEQWindow::setCaption(const QString& text)
 {
 	// set the caption
-	Q3DockWindow::setCaption(text);
+	//Q3DockWindow::setCaption(text);
 	setName((const char*)caption());
 	
 	// set the preference
@@ -80,12 +97,12 @@ void SEQWindow::restoreFont()
 
 void SEQWindow::restoreSize()
 {
-	if (place() == InDock)
+	// TODO: FIXME
+	if (!isFloating())
 	{
-		QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), 
-										 fixedExtent());
-		setFixedExtentWidth(s.width());
-		setFixedExtentHeight(s.height());
+		//QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), fixedExtent());
+		////setFixedExtentWidth(s.width());
+		//setFixedExtentHeight(s.height());
 	}
 	else
 	{
@@ -103,11 +120,11 @@ void SEQWindow::restoreSize()
 
 void SEQWindow::restorePosition()
 {
-	if (place() == InDock)
+	// TODO: FIXME
+	if (!isFloating())
 	{
-		setNewLine(pSEQPrefs->getPrefBool("DockNewLine", preferenceName(),
-										  newLine()));
-		setOffset(pSEQPrefs->getPrefInt("DockOffset", preferenceName(), offset()));
+		//setNewLine(pSEQPrefs->getPrefBool("DockNewLine", preferenceName(), newLine()));
+		//setOffset(pSEQPrefs->getPrefInt("DockOffset", preferenceName(), offset()));
 	}
 	else
 	{
@@ -123,6 +140,8 @@ void SEQWindow::savePrefs(void)
 {
 	if (pSEQPrefs->getPrefBool("SavePosition", "Interface", true))
 	{
+		// TODO: FIXME
+#if 0
 		if (place() == InDock)
 		{
 			pSEQPrefs->setPrefBool("DockNewLine", preferenceName(), newLine());
@@ -135,7 +154,7 @@ void SEQWindow::savePrefs(void)
 			pSEQPrefs->setPrefSize("WindowSize", preferenceName(), size());
 			pSEQPrefs->setPrefPoint("WindowPos", preferenceName(), pos());
 		}
-		
+#endif
 		pSEQPrefs->setPrefBool("DockVisible", preferenceName(), !isHidden());
 	}
 }
@@ -148,10 +167,10 @@ void SEQWindow::mousePressEvent(QMouseEvent* e)
 		if (popupMenu)
 			popupMenu->popup(mapToGlobal(e->pos()));
 		else
-			Q3DockWindow::mousePressEvent(e);
+			/*Q3DockWindow::*/mousePressEvent(e);
 	}
 	else
-		Q3DockWindow::mousePressEvent(e);
+		/*Q3DockWindow::*/mousePressEvent(e);
 }
 
 #ifndef QMAKEBUILD

@@ -189,7 +189,8 @@ ExperienceWindow::ExperienceWindow(const DataLocationMgr* dataLocMgr,
    m_view_menu->insertItem( "ZEM View Options", m_ZEM_menu );
    m_view_menu->insertItem( "Calculate ZEM on next kill", this, SLOT(calcZEMNextKill()) );
 
-   m_layout = new Q3VBoxLayout(boxLayout());
+  // TODO: Fix box layout
+   m_layout = new Q3VBoxLayout(layout());
 
    m_menu_bar = new QMenuBar( this );
    m_menu_bar->insertItem( "&View", m_view_menu );

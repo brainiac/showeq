@@ -21,11 +21,13 @@ using namespace Qt;
 CompassFrame::CompassFrame(Player* player, QWidget* parent, const char* name)
   : SEQWindow("Compass", "ShowEQ - Compass", parent, name)
 {
-  Q3VBoxLayout* layout = new Q3VBoxLayout(boxLayout());
+  Q3VBoxLayout* pLayout = new Q3VBoxLayout(layout());
   m_compass = new Compass (this, "compass");
-  layout->addWidget(m_compass);
+  pLayout->addWidget(m_compass);
+	
   Q3HBox* coordsbox = new Q3HBox(this);
-  layout->addWidget(coordsbox);
+  pLayout->addWidget(coordsbox);
+	
   m_compass->setFixedWidth(120);
   m_compass->setFixedHeight(120);
 

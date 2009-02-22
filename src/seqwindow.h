@@ -16,12 +16,12 @@
 #define SEQWINDOW_H
 
 #include <QWidget>
-#include <q3dockwindow.h>
 #include <QString>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QDockWidget>
 
-class SEQWindow : public Q3DockWindow
+class SEQWindow : public QDockWidget
 {
 	Q_OBJECT
 	
@@ -33,6 +33,11 @@ public:
 	virtual QMenu* menu();
 	
 	const QString& preferenceName() const { return m_preferenceName; }
+	
+	virtual void dock();
+	virtual void undock();
+	//virtual void setDockEnabled(bool);
+	virtual void setDockEnabled(bool enabled);
 	
 public slots:
 	virtual void setCaption(const QString&);

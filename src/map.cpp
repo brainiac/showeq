@@ -4428,534 +4428,534 @@ MapFrame::MapFrame(FilterMgr* filterMgr,
   : SEQWindow(prefName + "Frame", defCaption, parent, name),
     m_mapPreferenceName(prefName)
 {
-  m_filterMgr = filterMgr;
-  
-  QString prefString = MapFrame::preferenceName();
-  QString tmpPrefString;
-
-  QLabel* tmpLabel;
-
-  // setup the vertical box
-  m_vertical = new Q3VBoxLayout(boxLayout());
-
-  // setup the top control window
-  m_topControlBox = new Q3HBox(this);
-  m_vertical->addWidget(m_topControlBox);
-  m_topControlBox->setSpacing(1);
-  m_topControlBox->setMargin(0);
-  tmpPrefString = "ShowTopControlBox";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_topControlBox->hide();
-
-  // setup runtime filter
-  m_filterMgr->registerRuntimeFilter(m_mapPreferenceName, 
-                     m_runtimeFilterFlag,
-                     m_runtimeFilterFlagMask);
-
-  // Create map
-  m_map = new Map(mapMgr, player, spawnshell, zoneMgr, spawnMonitor,
-          m_mapPreferenceName, m_runtimeFilterFlagMask, 
-          this, mapName);
-  m_vertical->addWidget(m_map);
-
-  // setup bottom control window
-  m_bottomControlBox = new Q3HBox(this);
-  m_vertical->addWidget(m_bottomControlBox);
-  m_bottomControlBox->setSpacing(1);
-  m_bottomControlBox->setMargin(0);
-  tmpPrefString = "ShowBottomControlBox";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_bottomControlBox->hide();
-
-  
-  // setup Zoom control
-  m_zoomBox = new Q3HBox(m_topControlBox);
-  tmpLabel = new QLabel(m_zoomBox);
-  tmpLabel->setText("Zoom:");
-  m_zoom = new QSpinBox(1, 32, 1, m_zoomBox);
-  m_zoom->setWrapping(true);
-  m_zoom->setSuffix("x");
-  m_zoom->setValue(m_map->zoom());
-  tmpLabel->setBuddy(m_zoom);
-  tmpPrefString = "ShowZoom";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_zoomBox->hide();
-  connect(m_zoom, SIGNAL(valueChanged(int)),
-      m_map, SLOT(setZoom(int)));
-  connect(m_map, SIGNAL(zoomChanged(int)),
-      m_zoom, SLOT(setValue(int)));
-
-  // setup Player Location display
-  m_playerLocationBox = new Q3HBox(m_topControlBox);
-  tmpLabel = new QLabel(m_playerLocationBox);
-  tmpLabel->setText("You:");
-  m_playerLocation = new QLabel(m_playerLocationBox);
-  m_playerLocation->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
-  m_playerLocation->setText("0      0      0      ");
-  m_playerLocation->setMinimumWidth(90);
-  tmpLabel->setBuddy(m_playerLocation);
-  tmpPrefString = "ShowPlayerLocation";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, false))
-    m_playerLocationBox->hide();
-  connect (player, SIGNAL(posChanged(int16_t,int16_t,int16_t,
-                    int16_t,int16_t,int16_t,int32_t)), 
-       this, SLOT(setPlayer(int16_t,int16_t,int16_t,
-                int16_t,int16_t,int16_t,int32_t)));
-
-  // setup Mouse Location display
-  m_mouseLocationBox = new Q3HBox(m_topControlBox);
-  tmpLabel = new QLabel(m_mouseLocationBox);
-  tmpLabel->setText("Cursor:");
-  m_mouseLocation = new QLabel(m_mouseLocationBox);
-  m_mouseLocation->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
-  m_mouseLocation->setText("0      0      ");
-  m_mouseLocation->setMinimumWidth(70);
-  tmpLabel->setBuddy(m_mouseLocationBox);
-  tmpPrefString = "ShowMouseLocation";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_mouseLocationBox->hide();
-  connect (m_map, SIGNAL(mouseLocation(int16_t, int16_t)), 
-       this, SLOT(mouseLocation(int16_t, int16_t)));
-
-  // setup Filter
-  m_filterBox = new Q3HBox(m_topControlBox);
-  tmpLabel = new QLabel(m_filterBox);
-  tmpLabel->setText("Find:");
-  m_filter = new MapFilterLineEdit(m_filterBox);
-  //  m_filter->setAlignment(Qt::AlignCenter);
-  tmpLabel->setBuddy(m_filter);
-  tmpPrefString = "ShowFilter";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_filterBox->hide();
+	m_filterMgr = filterMgr;
+	
+	QString prefString = MapFrame::preferenceName();
+	QString tmpPrefString;
+	
+	QLabel* tmpLabel;
+	
+	// setup the vertical box
+	// TODO: Fix box layout
+	
+	m_vertical = new Q3VBoxLayout(this);
+	
+	// setup the top control window
+	m_topControlBox = new Q3HBox(this);
+	m_topControlBox->setSpacing(1);
+	m_topControlBox->setMargin(0);
+	m_vertical->addWidget(m_topControlBox);
+	
+	tmpPrefString = "ShowTopControlBox";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_topControlBox->hide();
+	
+	// setup runtime filter
+	m_filterMgr->registerRuntimeFilter(m_mapPreferenceName, m_runtimeFilterFlag, m_runtimeFilterFlagMask);
+	
+	// Create map
+	m_map = new Map(mapMgr, player, spawnshell, zoneMgr, spawnMonitor,
+					m_mapPreferenceName, m_runtimeFilterFlagMask, this, mapName);
+	m_vertical->addWidget(m_map);
+	
+	// setup bottom control window
+	m_bottomControlBox = new Q3HBox(this);
+	m_bottomControlBox->setSpacing(1);
+	m_bottomControlBox->setMargin(0);
+	m_vertical->addWidget(m_bottomControlBox);
+	
+	tmpPrefString = "ShowBottomControlBox";	
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_bottomControlBox->hide();
+	
+	
+	// setup Zoom control
+	m_zoomBox = new Q3HBox(m_topControlBox);
+	tmpLabel = new QLabel(m_zoomBox);
+	tmpLabel->setText("Zoom:");
+	
+	m_zoom = new QSpinBox(1, 32, 1, m_zoomBox);
+	m_zoom->setWrapping(true);
+	m_zoom->setSuffix("x");
+	m_zoom->setValue(m_map->zoom());
+	tmpLabel->setBuddy(m_zoom);
+	
+	tmpPrefString = "ShowZoom";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_zoomBox->hide();
+	
+	connect(m_zoom, SIGNAL(valueChanged(int)), m_map, SLOT(setZoom(int)));
+	connect(m_map, SIGNAL(zoomChanged(int)), m_zoom, SLOT(setValue(int)));
+	
+	// setup Player Location display
+	m_playerLocationBox = new Q3HBox(m_topControlBox);
+	tmpLabel = new QLabel(m_playerLocationBox);
+	tmpLabel->setText("You:");
+	m_playerLocation = new QLabel(m_playerLocationBox);
+	m_playerLocation->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
+	m_playerLocation->setText("0      0      0      ");
+	m_playerLocation->setMinimumWidth(90);
+	tmpLabel->setBuddy(m_playerLocation);
+	
+	tmpPrefString = "ShowPlayerLocation";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, false))
+		m_playerLocationBox->hide();
+	
+	connect(player, SIGNAL(posChanged(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)), 
+			 this, SLOT(setPlayer(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)));
+	
+	// setup Mouse Location display
+	m_mouseLocationBox = new Q3HBox(m_topControlBox);
+	tmpLabel = new QLabel(m_mouseLocationBox);
+	tmpLabel->setText("Cursor:");
+	m_mouseLocation = new QLabel(m_mouseLocationBox);
+	m_mouseLocation->setFrameStyle(Q3Frame::Panel | Q3Frame::Sunken);
+	m_mouseLocation->setText("0      0      ");
+	m_mouseLocation->setMinimumWidth(70);
+	tmpLabel->setBuddy(m_mouseLocationBox);
+	
+	tmpPrefString = "ShowMouseLocation";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_mouseLocationBox->hide();
+	
+	connect(m_map, SIGNAL(mouseLocation(int16_t, int16_t)), this, SLOT(mouseLocation(int16_t, int16_t)));
+	
+	// setup Filter
+	m_filterBox = new Q3HBox(m_topControlBox);
+	tmpLabel = new QLabel(m_filterBox);
+	tmpLabel->setText("Find:");
+	m_filter = new MapFilterLineEdit(m_filterBox);
+	//  m_filter->setAlignment(Qt::AlignCenter);
+	tmpLabel->setBuddy(m_filter);
+	tmpPrefString = "ShowFilter";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_filterBox->hide();
 #ifdef MAPFRAME_IMMEDIATE_REGEX
-  connect (m_filter, SIGNAL(textChanged (const QString &)), 
-       this, SLOT(setregexp(const QString &)));
+	connect(m_filter, SIGNAL(textChanged (const QString &)), 
+			 this, SLOT(setregexp(const QString &)));
 #else
-  connect (m_filter, SIGNAL(returnPressed()),
-       this, SLOT(filterConfirmed()));
+	connect(m_filter, SIGNAL(returnPressed()), this, SLOT(filterConfirmed()));
 #endif
-
-  // setup Frame Rate control
-  m_frameRateBox = new Q3HBox(m_bottomControlBox);
-  tmpLabel = new QLabel(m_frameRateBox);
-  tmpLabel->setText("Frame Rate:");
-  m_frameRate = new QSpinBox(1, 60, 1, m_frameRateBox);
-  m_frameRate->setWrapping(true);
-  m_frameRate->setSuffix(" fps");
-  m_frameRate->setValue(m_map->frameRate());
-  tmpLabel->setBuddy(m_frameRate);
-  tmpPrefString = "ShowFrameRate";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_frameRateBox->hide();
-  m_frameRate->setValue(m_map->frameRate());
-  connect(m_frameRate, SIGNAL(valueChanged(int)),
-      m_map, SLOT(setFrameRate(int)));
-  connect(m_map, SIGNAL(frameRateChanged(int)),
-      m_frameRate, SLOT(setValue(int)));
-
-  // setup Pan Controls
-  m_panBox = new Q3HBox(m_bottomControlBox);
-  tmpLabel = new QLabel(m_panBox);
-  tmpLabel->setText("Pan X:");
-  m_panX = new QSpinBox(-8192, 8192, 16, m_panBox);
-  m_panX->setValue(m_map->panOffsetX());
-  tmpLabel = new QLabel(m_panBox);
-  tmpLabel->setText("Y:");
-  m_panY = new QSpinBox(-8192, 8192, 16, m_panBox);
-  m_panY->setValue(m_map->panOffsetY());
-  tmpPrefString = "ShowPanControls";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-    m_panBox->hide();
-  connect(m_panX, SIGNAL(valueChanged(int)),
-      m_map, SLOT(setPanOffsetX(int)));
-  connect(m_panY, SIGNAL(valueChanged(int)),
-      m_map, SLOT(setPanOffsetY(int)));
-  connect(m_map, SIGNAL(panXChanged(int)),
-      m_panX, SLOT(setValue(int)));
-  connect(m_map, SIGNAL(panYChanged(int)),
-      m_panY, SLOT(setValue(int)));
-
-  m_depthControlBox = new Q3HBox(m_bottomControlBox);
-  tmpLabel = new QLabel(m_depthControlBox);
-  tmpLabel->setText("Head:");
-  m_head = new QSpinBox(5, 3000, 10, m_depthControlBox);
-  m_head->setValue(m_map->headRoom());
-  tmpLabel = new QLabel(m_depthControlBox);
-  tmpLabel->setText("Floor:");
-  m_floor = new QSpinBox(5, 3000, 10, m_depthControlBox);
-  m_floor->setValue(m_map->floorRoom());
-  tmpPrefString = "ShowDepthFilterControls";
-  if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 
-                  (m_map->mapLineStyle() == tMap_DepthFiltered)))
-    m_depthControlBox->hide();
-  connect(m_head, SIGNAL(valueChanged(int)),
-      m_map, SLOT(setHeadRoom(int)));
-  connect(m_map, SIGNAL(headRoomChanged(int)),
-      m_head, SLOT(setValue(int)));
-  connect(m_floor, SIGNAL(valueChanged(int)),
-      m_map, SLOT(setFloorRoom(int)));
-  connect(m_map, SIGNAL(floorRoomChanged(int)),
-      m_floor, SLOT(setValue(int)));
-
-  // add our own menu items to the maps menu
-  Q3PopupMenu* mapMenu = m_map->menu();
-
-  // insert a seperator to seperate our stuff from the rest
-  mapMenu->insertSeparator(-1);
-  m_id_topControl = mapMenu->insertItem("Show Top Controls",
-                    this, SLOT(toggle_top_controls(int)));
-
-  m_id_bottomControl = mapMenu->insertItem("Show Bottom Controls",
-                       this, 
-                       SLOT(toggle_bottom_controls(int)));
-
-  mapMenu->insertItem("Status Font...",
-              this, 
-              SLOT(set_font(int)));
-
-  // insert a seperator to seperate main controls from sub-menus
-  mapMenu->insertSeparator(-1);
-  
-  Q3PopupMenu* subMenu;
-  subMenu = new Q3PopupMenu();
-  subMenu->setCheckable(true);
-  m_id_zoom = subMenu->insertItem("Show Zoom Controls", 
-                  this, SLOT(toggle_zoom(int)));
-  m_id_playerLocation = subMenu->insertItem("Show Player Location",
-                        this, 
-                        SLOT(toggle_playerLocation(int)));
-  m_id_mouseLocation = subMenu->insertItem("Show Mouse Location",
-                       this, 
-                       SLOT(toggle_mouseLocation(int)));
-
-  m_id_filter = subMenu->insertItem("Show Find",
-                    this, SLOT(toggle_filter(int)));
-
-  m_id_topControl_Options = mapMenu->insertItem("Top Controls", subMenu);
-
-  subMenu = new Q3PopupMenu();
-  subMenu->setCheckable(true);
-  m_id_frameRate = subMenu->insertItem("Show Frame Rate",
-                       this, SLOT(toggle_frameRate(int)));
-  m_id_pan = subMenu->insertItem("Show Pan",
-                 this, SLOT(toggle_pan(int)));
-  m_id_depthControlRoom = subMenu->insertItem("Show Depth Filter Controls",
-                       this, 
-                       SLOT(toggle_depthControls(int)));
-  m_id_bottomControl_Options = mapMenu->insertItem("Bottom Controls", subMenu);
-
-  // setup signal to initialize menu items when the map is about to be displayeed
-  connect(mapMenu, SIGNAL(aboutToShow()),
-      this, SLOT(init_Menu()));
+	
+	// setup Frame Rate control
+	m_frameRateBox = new Q3HBox(m_bottomControlBox);
+	tmpLabel = new QLabel(m_frameRateBox);
+	tmpLabel->setText("Frame Rate:");
+	m_frameRate = new QSpinBox(1, 60, 1, m_frameRateBox);
+	m_frameRate->setWrapping(true);
+	m_frameRate->setSuffix(" fps");
+	m_frameRate->setValue(m_map->frameRate());
+	tmpLabel->setBuddy(m_frameRate);
+	tmpPrefString = "ShowFrameRate";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_frameRateBox->hide();
+	m_frameRate->setValue(m_map->frameRate());
+	connect(m_frameRate, SIGNAL(valueChanged(int)), m_map, SLOT(setFrameRate(int)));
+	connect(m_map, SIGNAL(frameRateChanged(int)), m_frameRate, SLOT(setValue(int)));
+	
+	// setup Pan Controls
+	m_panBox = new Q3HBox(m_bottomControlBox);
+	tmpLabel = new QLabel(m_panBox);
+	tmpLabel->setText("Pan X:");
+	m_panX = new QSpinBox(-8192, 8192, 16, m_panBox);
+	m_panX->setValue(m_map->panOffsetX());
+	tmpLabel = new QLabel(m_panBox);
+	tmpLabel->setText("Y:");
+	m_panY = new QSpinBox(-8192, 8192, 16, m_panBox);
+	m_panY->setValue(m_map->panOffsetY());
+	tmpPrefString = "ShowPanControls";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
+		m_panBox->hide();
+	connect(m_panX, SIGNAL(valueChanged(int)),
+			m_map, SLOT(setPanOffsetX(int)));
+	connect(m_panY, SIGNAL(valueChanged(int)),
+			m_map, SLOT(setPanOffsetY(int)));
+	connect(m_map, SIGNAL(panXChanged(int)),
+			m_panX, SLOT(setValue(int)));
+	connect(m_map, SIGNAL(panYChanged(int)),
+			m_panY, SLOT(setValue(int)));
+	
+	m_depthControlBox = new Q3HBox(m_bottomControlBox);
+	tmpLabel = new QLabel(m_depthControlBox);
+	tmpLabel->setText("Head:");
+	m_head = new QSpinBox(5, 3000, 10, m_depthControlBox);
+	m_head->setValue(m_map->headRoom());
+	tmpLabel = new QLabel(m_depthControlBox);
+	tmpLabel->setText("Floor:");
+	m_floor = new QSpinBox(5, 3000, 10, m_depthControlBox);
+	m_floor->setValue(m_map->floorRoom());
+	tmpPrefString = "ShowDepthFilterControls";
+	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 
+								(m_map->mapLineStyle() == tMap_DepthFiltered)))
+		m_depthControlBox->hide();
+	connect(m_head, SIGNAL(valueChanged(int)),
+			m_map, SLOT(setHeadRoom(int)));
+	connect(m_map, SIGNAL(headRoomChanged(int)),
+			m_head, SLOT(setValue(int)));
+	connect(m_floor, SIGNAL(valueChanged(int)),
+			m_map, SLOT(setFloorRoom(int)));
+	connect(m_map, SIGNAL(floorRoomChanged(int)),
+			m_floor, SLOT(setValue(int)));
+	
+	// add our own menu items to the maps menu
+	Q3PopupMenu* mapMenu = m_map->menu();
+	
+	// insert a seperator to seperate our stuff from the rest
+	mapMenu->insertSeparator(-1);
+	m_id_topControl = mapMenu->insertItem("Show Top Controls",
+										  this, SLOT(toggle_top_controls(int)));
+	
+	m_id_bottomControl = mapMenu->insertItem("Show Bottom Controls",
+											 this, 
+											 SLOT(toggle_bottom_controls(int)));
+	
+	mapMenu->insertItem("Status Font...",
+						this, 
+						SLOT(set_font(int)));
+	
+	// insert a seperator to seperate main controls from sub-menus
+	mapMenu->insertSeparator(-1);
+	
+	Q3PopupMenu* subMenu;
+	subMenu = new Q3PopupMenu();
+	subMenu->setCheckable(true);
+	m_id_zoom = subMenu->insertItem("Show Zoom Controls", 
+									this, SLOT(toggle_zoom(int)));
+	m_id_playerLocation = subMenu->insertItem("Show Player Location",
+											  this, 
+											  SLOT(toggle_playerLocation(int)));
+	m_id_mouseLocation = subMenu->insertItem("Show Mouse Location",
+											 this, 
+											 SLOT(toggle_mouseLocation(int)));
+	
+	m_id_filter = subMenu->insertItem("Show Find",
+									  this, SLOT(toggle_filter(int)));
+	
+	m_id_topControl_Options = mapMenu->insertItem("Top Controls", subMenu);
+	
+	subMenu = new Q3PopupMenu();
+	subMenu->setCheckable(true);
+	m_id_frameRate = subMenu->insertItem("Show Frame Rate",
+										 this, SLOT(toggle_frameRate(int)));
+	m_id_pan = subMenu->insertItem("Show Pan",
+								   this, SLOT(toggle_pan(int)));
+	m_id_depthControlRoom = subMenu->insertItem("Show Depth Filter Controls",
+												this, 
+												SLOT(toggle_depthControls(int)));
+	m_id_bottomControl_Options = mapMenu->insertItem("Bottom Controls", subMenu);
+	
+	// setup signal to initialize menu items when the map is about to be displayeed
+	connect(mapMenu, SIGNAL(aboutToShow()),
+			this, SLOT(init_Menu()));
 }
 
 MapFrame::~MapFrame()
 {
 }
 
-Q3PopupMenu* MapFrame::menu()
+QMenu* MapFrame::menu()
 {
-  return m_map->menu();
+	return m_map->menu();
 }
 
 void MapFrame::filterConfirmed()
 {
-  setregexp(m_filter->text());
+	setregexp(m_filter->text());
 }
 
 void MapFrame::setregexp(const QString &str)
 {
-  if (m_filterMgr == NULL)
-    return;
-
-  // quick check to see if this is the same as the last filter
-  if (str == m_lastFilter)
-    return;
+	if (m_filterMgr == NULL)
+		return;
+	
+	// quick check to see if this is the same as the last filter
+	if (str == m_lastFilter)
+		return;
     
-  //seqDebug("New Filter: %s", (const char*)str);
-
-  bool needCommit = false;
-
-  if (!m_lastFilter.isEmpty())
-  {
-    m_filterMgr->runtimeFilterRemFilter(m_runtimeFilterFlag,
-                    m_lastFilter);
-    needCommit = true;
-  }
-
-  if(str.isEmpty()) 
-    regexpok(0);
-  else
-  {
-    m_lastFilter = str;
-
-    bool valid = m_filterMgr->runtimeFilterAddFilter(m_runtimeFilterFlag, str);
-    
-    needCommit = true;
-    
-    if (valid) 
-      regexpok(1);
-    else 
-      regexpok(2);
-  }
-
-  if (needCommit)
-    m_filterMgr->runtimeFilterCommit(m_runtimeFilterFlag);
+	//seqDebug("New Filter: %s", (const char*)str);
+	
+	bool needCommit = false;
+	
+	if (!m_lastFilter.isEmpty())
+	{
+		m_filterMgr->runtimeFilterRemFilter(m_runtimeFilterFlag,
+											m_lastFilter);
+		needCommit = true;
+	}
+	
+	if(str.isEmpty()) 
+		regexpok(0);
+	else
+	{
+		m_lastFilter = str;
+		
+		bool valid = m_filterMgr->runtimeFilterAddFilter(m_runtimeFilterFlag, str);
+		
+		needCommit = true;
+		
+		if (valid) 
+			regexpok(1);
+		else 
+			regexpok(2);
+	}
+	
+	if (needCommit)
+		m_filterMgr->runtimeFilterCommit(m_runtimeFilterFlag);
 }
 
 void MapFrame::regexpok(int ok) 
 {
-  static int ook=0;
-  if(ok == ook)
-    return;
-
-  ook=ok;
-
-  switch(ok)
-  {
-  case 0: // no text at all
-    m_filter->setPalette( QPalette( QColor(200,200,200) ) );
-    break;
-  case 1: // Ok
-    m_filter->setPalette( QPalette( QColor(0,0,255) ) );
-    break;
-  case 2:  // Bad
-  default:
-    m_filter->setPalette( QPalette( QColor(255,0,0) ) );
-    break;
-  } 
+	static int ook=0;
+	if(ok == ook)
+		return;
+	
+	ook=ok;
+	
+	switch(ok)
+	{
+		case 0: // no text at all
+			m_filter->setPalette( QPalette( QColor(200,200,200) ) );
+			break;
+		case 1: // Ok
+			m_filter->setPalette( QPalette( QColor(0,0,255) ) );
+			break;
+		case 2:  // Bad
+		default:
+			m_filter->setPalette( QPalette( QColor(255,0,0) ) );
+			break;
+	} 
 }
 
 void MapFrame::mouseLocation(int16_t x, int16_t y)
 {
-  QString cursorPos;
-  cursorPos.sprintf(" %+5hd, %+5hd", y, x);
-  m_mouseLocation->setText(cursorPos);
+	QString cursorPos;
+	cursorPos.sprintf(" %+5hd, %+5hd", y, x);
+	m_mouseLocation->setText(cursorPos);
 }
 
 void MapFrame::setPlayer(int16_t x, int16_t y, int16_t z, 
-             int16_t Dx, int16_t Dy, int16_t Dz, int32_t degrees)
+						 int16_t Dx, int16_t Dy, int16_t Dz, int32_t degrees)
 {
-  QString playerPos;
-  playerPos.sprintf(" %+5hd, %+5hd, %+5hd", y, x, z);
-  m_playerLocation->setText(playerPos);
+	QString playerPos;
+	playerPos.sprintf(" %+5hd, %+5hd, %+5hd", y, x, z);
+	m_playerLocation->setText(playerPos);
 }
 
 void MapFrame::savePrefs(void)
 {
-  SEQWindow::savePrefs();
-
-  // make the map belonging to this frame save it's preferences
-  if (m_map)
-    m_map->savePrefs();
+	SEQWindow::savePrefs();
+	
+	// make the map belonging to this frame save it's preferences
+	if (m_map)
+		m_map->savePrefs();
 }
 
 void MapFrame::dumpInfo(Q3TextStream& out)
 {
-  // first dump information about the map frame
-  out << "[" << preferenceName() << "]" << endl;
-  out << "Caption: " << caption() << endl;
-  out << "ShowStatusBox: " << m_topControlBox->isVisible() << endl;
-  out << "ShowZoom: " << m_zoomBox->isVisible() << endl;
-  out << "ShowPlayerLocation: " << m_playerLocationBox->isVisible() << endl;
-  out << "ShowMouseLocation: " << m_mouseLocationBox->isVisible() << endl;
-  out << "ShowFilter: " << m_filterBox->isVisible() << endl;
-  out << "ShowControlBox: " << m_bottomControlBox->isVisible() << endl;
-  out << "ShowFrameRate: " << m_frameRateBox->isVisible() << endl;
-  out << "ShowPanControls: " << m_panBox->isVisible() << endl; 
-  out << "ShowDepthFilterControls: " << m_depthControlBox->isVisible() << endl;
-  out << "CurrentFilter: '" << m_lastFilter << "'" << endl;
-  out << "RuntimeFilterFlag: " << m_runtimeFilterFlag << endl;
-  out << "RuntimeFilterFlagMask: " << m_runtimeFilterFlagMask << endl;
-  out << endl;
-
-  // dump information about the map
-  if (m_map)
-    m_map->dumpInfo(out);
+	// first dump information about the map frame
+	out << "[" << preferenceName() << "]" << endl;
+	out << "Caption: " << caption() << endl;
+	out << "ShowStatusBox: " << m_topControlBox->isVisible() << endl;
+	out << "ShowZoom: " << m_zoomBox->isVisible() << endl;
+	out << "ShowPlayerLocation: " << m_playerLocationBox->isVisible() << endl;
+	out << "ShowMouseLocation: " << m_mouseLocationBox->isVisible() << endl;
+	out << "ShowFilter: " << m_filterBox->isVisible() << endl;
+	out << "ShowControlBox: " << m_bottomControlBox->isVisible() << endl;
+	out << "ShowFrameRate: " << m_frameRateBox->isVisible() << endl;
+	out << "ShowPanControls: " << m_panBox->isVisible() << endl; 
+	out << "ShowDepthFilterControls: " << m_depthControlBox->isVisible() << endl;
+	out << "CurrentFilter: '" << m_lastFilter << "'" << endl;
+	out << "RuntimeFilterFlag: " << m_runtimeFilterFlag << endl;
+	out << "RuntimeFilterFlagMask: " << m_runtimeFilterFlagMask << endl;
+	out << endl;
+	
+	// dump information about the map
+	if (m_map)
+		m_map->dumpInfo(out);
 }
 
 void MapFrame::init_Menu(void)
 {
-  Q3PopupMenu* mapMenu = m_map->menu();
-  mapMenu->setItemEnabled(m_id_topControl_Options, 
-              m_topControlBox->isVisible());
-  mapMenu->setItemChecked(m_id_topControl,
-              m_topControlBox->isVisible());
-  if (m_topControlBox->isVisible())
-  {
-    mapMenu->setItemChecked(m_id_zoom, m_zoomBox->isVisible());
-    mapMenu->setItemChecked(m_id_playerLocation, 
-                m_playerLocationBox->isVisible());
-    mapMenu->setItemChecked(m_id_mouseLocation, 
-                m_mouseLocation->isVisible());
-    mapMenu->setItemChecked(m_id_filter, m_filterBox->isVisible());
-  }
-
-  mapMenu->setItemEnabled(m_id_bottomControl_Options,
-              m_bottomControlBox->isVisible());
-  mapMenu->setItemChecked(m_id_bottomControl,
-              m_bottomControlBox->isVisible());
-  if (m_bottomControlBox->isVisible())
-  {
-    mapMenu->setItemChecked(m_id_frameRate, m_frameRateBox->isVisible());
-    mapMenu->setItemChecked(m_id_pan, m_panBox->isVisible());
-    mapMenu->setItemChecked(m_id_depthControlRoom, 
-                m_depthControlBox->isVisible());
-  }
+	Q3PopupMenu* mapMenu = m_map->menu();
+	mapMenu->setItemEnabled(m_id_topControl_Options, 
+							m_topControlBox->isVisible());
+	mapMenu->setItemChecked(m_id_topControl,
+							m_topControlBox->isVisible());
+	if (m_topControlBox->isVisible())
+	{
+		mapMenu->setItemChecked(m_id_zoom, m_zoomBox->isVisible());
+		mapMenu->setItemChecked(m_id_playerLocation, 
+								m_playerLocationBox->isVisible());
+		mapMenu->setItemChecked(m_id_mouseLocation, 
+								m_mouseLocation->isVisible());
+		mapMenu->setItemChecked(m_id_filter, m_filterBox->isVisible());
+	}
+	
+	mapMenu->setItemEnabled(m_id_bottomControl_Options,
+							m_bottomControlBox->isVisible());
+	mapMenu->setItemChecked(m_id_bottomControl,
+							m_bottomControlBox->isVisible());
+	if (m_bottomControlBox->isVisible())
+	{
+		mapMenu->setItemChecked(m_id_frameRate, m_frameRateBox->isVisible());
+		mapMenu->setItemChecked(m_id_pan, m_panBox->isVisible());
+		mapMenu->setItemChecked(m_id_depthControlRoom, 
+								m_depthControlBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_top_controls(int id)
 {
-  if (m_topControlBox->isVisible())
-    m_topControlBox->hide();
-  else
-    m_topControlBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowStatusBox";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_topControlBox->isVisible());
-  }
+	if (m_topControlBox->isVisible())
+		m_topControlBox->hide();
+	else
+		m_topControlBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowStatusBox";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_topControlBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_bottom_controls(int id)
 {
-  if (m_bottomControlBox->isVisible())
-    m_bottomControlBox->hide();
-  else
-    m_bottomControlBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowControlBox";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_bottomControlBox->isVisible());
-  }
+	if (m_bottomControlBox->isVisible())
+		m_bottomControlBox->hide();
+	else
+		m_bottomControlBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowControlBox";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_bottomControlBox->isVisible());
+	}
 }
 
 void MapFrame::set_font(int id)
 {
-  QString name = caption() + " Font";
-  bool ok = false;
-
-  // setup a default new status font
-  QFont newFont;
-  newFont.setPointSize(8);
-
-  // get new status font
-  newFont = QFontDialog::getFont(&ok, 
-                 font(),
-                 this, name);
-
-  // if the user clicked ok and selected a valid font, set it
-  if (ok)
-    setWindowFont(newFont);
+	QString name = caption() + " Font";
+	bool ok = false;
+	
+	// setup a default new status font
+	QFont newFont;
+	newFont.setPointSize(8);
+	
+	// get new status font
+	newFont = QFontDialog::getFont(&ok, 
+								   font(),
+								   this, name);
+	
+	// if the user clicked ok and selected a valid font, set it
+	if (ok)
+		setWindowFont(newFont);
 }
 
 void MapFrame::toggle_zoom(int id)
 {
-  if (m_zoomBox->isVisible())
-    m_zoomBox->hide();
-  else
-    m_zoomBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowZoom";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_zoomBox->isVisible());
-  }
+	if (m_zoomBox->isVisible())
+		m_zoomBox->hide();
+	else
+		m_zoomBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowZoom";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_zoomBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_playerLocation(int id)
 {
-  if (m_playerLocationBox->isVisible())
-    m_playerLocationBox->hide();
-  else
-    m_playerLocationBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowPlayerLocation";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_playerLocationBox->isVisible());
-  }
+	if (m_playerLocationBox->isVisible())
+		m_playerLocationBox->hide();
+	else
+		m_playerLocationBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowPlayerLocation";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_playerLocationBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_mouseLocation(int id)
 {
-  if (m_mouseLocationBox->isVisible())
-    m_mouseLocationBox->hide();
-  else
-    m_mouseLocationBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowMouseLocation";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_mouseLocationBox->isVisible());
-  }
+	if (m_mouseLocationBox->isVisible())
+		m_mouseLocationBox->hide();
+	else
+		m_mouseLocationBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowMouseLocation";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_mouseLocationBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_filter(int id)
 {
-  if (m_filterBox->isVisible())
-    m_filterBox->hide();
-  else
-    m_filterBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowFilter";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_filterBox->isVisible());
-  }
+	if (m_filterBox->isVisible())
+		m_filterBox->hide();
+	else
+		m_filterBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowFilter";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_filterBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_frameRate(int id)
 {
-  if (m_frameRateBox->isVisible())
-    m_frameRateBox->hide();
-  else
-    m_frameRateBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowFrameRate";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_frameRateBox->isVisible());
-  }
+	if (m_frameRateBox->isVisible())
+		m_frameRateBox->hide();
+	else
+		m_frameRateBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowFrameRate";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_frameRateBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_pan(int id)
 {
-  if (m_panBox->isVisible())
-    m_panBox->hide();
-  else
-    m_panBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowPanControls";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_panBox->isVisible());
-  }
+	if (m_panBox->isVisible())
+		m_panBox->hide();
+	else
+		m_panBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowPanControls";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_panBox->isVisible());
+	}
 }
 
 void MapFrame::toggle_depthControls(int id)
 {
-  if (m_depthControlBox->isVisible())
-    m_depthControlBox->hide();
-  else
-    m_depthControlBox->show();
-
-  QString tmpPrefString = "SaveControls";
-  if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
-  {
-    tmpPrefString = "ShowDepthFilterControls";
-    pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_depthControlBox->isVisible()); 
- }
+	if (m_depthControlBox->isVisible())
+		m_depthControlBox->hide();
+	else
+		m_depthControlBox->show();
+	
+	QString tmpPrefString = "SaveControls";
+	if (pSEQPrefs->getPrefBool(tmpPrefString, preferenceName(), true))
+	{
+		tmpPrefString = "ShowDepthFilterControls";
+		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_depthControlBox->isVisible()); 
+	}
 }
 
 

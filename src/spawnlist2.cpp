@@ -26,155 +26,135 @@
 
 using namespace Qt;
 
-SpawnListWindow2::SpawnListWindow2(Player* player, 
-				   SpawnShell* spawnShell,
-				   CategoryMgr* categoryMgr,
-				   QWidget* parent, const char* name)
+SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr,
+								   QWidget* parent, const char* name)
   : SEQWindow("SpawnList2", "ShowEQ - Spawns", parent, name),
-    m_player(player),
-    m_categoryMgr(categoryMgr),
-    m_spawnShell(spawnShell),
-    m_currentCategory(NULL),
-    m_selectedItem(NULL),
-    m_menu(NULL),
-    m_spawnListItemDict(709),
-    m_immediateUpdate(true)
+	m_player(player),
+	m_categoryMgr(categoryMgr),
+	m_spawnShell(spawnShell),
+	m_currentCategory(NULL),
+	m_selectedItem(NULL),
+	m_menu(NULL),
+	m_spawnListItemDict(709),
+	m_immediateUpdate(true)
 {
-  m_spawnListItemDict.setAutoDelete(false);
-
-  // get whether to keep the list sorted or not
-  m_keepSorted = pSEQPrefs->getPrefBool("KeepSorted", preferenceName(), false);
-
-  // get whether to make sure the selected item is visible
-  m_keepSelectedVisible = 
-    pSEQPrefs->getPrefBool("KeepSelectedVisible", preferenceName(), true);
-
-  // get the immediate update setting
-  m_immediateUpdate = pSEQPrefs->getPrefBool("ImmediateUpdate", 
-					     preferenceName(), false);
-
-  // get framerate 
-  int fpm = pSEQPrefs->getPrefInt("FPM", preferenceName(), 10);
-  m_delay = 60000L / fpm;
-
-  Q3BoxLayout* vLayout = new Q3VBoxLayout(boxLayout());
-  Q3HBoxLayout* hLayout= new Q3HBoxLayout(vLayout);
-
-  // create the spawn list combo box
-  m_categoryCombo = new QComboBox(false, this, "spawnlistcombo");
-  m_categoryCombo->setDuplicatesEnabled(false);
-  hLayout->addWidget(m_categoryCombo, 0, AlignLeft);
-  connect(m_categoryCombo, SIGNAL(activated(int)),
-	  this, SLOT(categorySelected(int)));
-
-  // Create the Spawn Counter
-  m_totalSpawns = new QLineEdit(this);
-  m_totalSpawns->setReadOnly(TRUE);
-  m_totalSpawns->setAlignment(AlignCenter);
-  m_totalSpawns->setMinimumWidth(5);
-  m_totalSpawns->setMaximumWidth(50);
-  hLayout->addWidget(m_totalSpawns, 0, AlignCenter);  
-
-  // setup spinbox to control frame rate (FPM)
-  m_fpmSpinBox = new QSpinBox(5, 60, 1, this, "fpmSpinBox");
-  m_fpmSpinBox->setValue(fpm);
-  m_fpmSpinBox->setSuffix("FPM");
-  hLayout->addWidget(m_fpmSpinBox, 0, AlignRight);
-  connect(m_fpmSpinBox, SIGNAL(valueChanged(int)),
-	  this, SLOT(setFPM(int)));
-
-  // enable/disable the spin box
-  m_fpmSpinBox->setEnabled(!m_immediateUpdate);
-
-  // create the spawn listview
-  m_spawnList = new SEQListView(preferenceName(), 
-				this, "spawnlistview");
-  vLayout->addWidget(m_spawnList);
-
-  m_spawnList->addColumn ("Name");
-  m_spawnList->addColumn ("Lvl", "Level");
-  m_spawnList->addColumn ("Hp", "HP");
-  m_spawnList->addColumn ("MaxHP");
-  if(showeq_params->retarded_coords) 
-  {
-    m_spawnList->addColumn ("N/S", "Coord1");
-    m_spawnList->addColumn ("E/W", "Coord2");
-  } 
-  else 
-  {
-    m_spawnList->addColumn ("X", "Coord1");
-    m_spawnList->addColumn ("Y", "Coord2");
-  }
-  m_spawnList->addColumn ("Z", "Coord3");
-  m_spawnList->addColumn ("ID");
-  m_spawnList->addColumn ("Dist");
-  m_spawnList->addColumn ("Race");
-  m_spawnList->addColumn ("Class");
-  m_spawnList->addColumn ("Info");
-  m_spawnList->addColumn ("SpawnTime");
-  m_spawnList->addColumn("Deity");
-  m_spawnList->addColumn("Body Type", "BodyType");
-  m_spawnList->addColumn("Guild Tag", "GuildTag");
-  
-  // restore the columns settings from preferences
-  m_spawnList->restoreColumns();
-
-  // setup timer for refreshing the spawn list
-  m_timer = new QTimer(this, "spawnlist2timer");
-
-  // connect a QListView signal to ourselves
-  connect(m_spawnList, SIGNAL(selectionChanged(Q3ListViewItem*)),
-	  this, SLOT(selChanged(Q3ListViewItem*)));
-  connect (m_spawnList, SIGNAL(mouseButtonPressed(int, Q3ListViewItem*, const QPoint&, int)),
-	   this, SLOT(mousePressEvent(int, Q3ListViewItem*, const QPoint&, int)));
-  connect (m_spawnList, SIGNAL(doubleClicked(Q3ListViewItem*)),
-	   this, SLOT(mouseDoubleClickEvent(Q3ListViewItem*)));
-
-  // connect SpawnList slots to SpawnShell signals
-  connect(m_spawnShell, SIGNAL(addItem(const Item *)),
-	  this, SLOT(addItem(const Item *)));
-  connect(m_spawnShell, SIGNAL(delItem(const Item *)),
-	  this, SLOT(delItem(const Item *)));
-  connect(m_spawnShell, SIGNAL(killSpawn(const Item *, const Item*, uint16_t)),
-	  this, SLOT(killSpawn(const Item *)));
-  connect(m_spawnShell, SIGNAL(selectSpawn(const Item *)),
-	  this, SLOT(selectSpawn(const Item *)));
-  connect(m_spawnShell, SIGNAL(clearItems()),
-	  this, SLOT(clear()));
-  if (m_immediateUpdate)
-    connect(m_spawnShell, SIGNAL(changeItem(const Item *, uint32_t)),
-	    this, SLOT(changeItem(const Item *, uint32_t)));
-  
-  // connect SpawnList slots to Player signals
-  connect(m_player, SIGNAL(posChanged(int16_t,int16_t,int16_t,
-				      int16_t,int16_t,int16_t,int32_t)), 
-	  this, SLOT(setPlayer(int16_t,int16_t,int16_t,
-			       int16_t,int16_t,int16_t,int32_t)));
-  connect(m_player, SIGNAL(levelChanged(uint8_t)),
-	  this, SLOT(playerLevelChanged(uint8_t)));
-  
-  // connect SpawnList slots to CategoryMgr signals
-  connect(m_categoryMgr, SIGNAL(addCategory(const Category*)),
-	  this, SLOT(addCategory(const Category*)));
-  connect(m_categoryMgr, SIGNAL(delCategory(const Category*)),
-	  this, SLOT(delCategory(const Category*)));
-  connect(m_categoryMgr, SIGNAL(clearedCategories()),
-	  this, SLOT(clearedCategories()));
-  connect(m_categoryMgr, SIGNAL(loadedCategories()),
-	  this, SLOT(loadedCategories()));
-
-  // connect SpawnList slots to QTimer signals
-  connect(m_timer, SIGNAL(timeout()),
-	  this, SLOT(refresh()));
-
-  // populate the categories list which will in turn populate the spawn list
-  loadedCategories();
-
-  // enable/disable the spin box
-  m_fpmSpinBox->setEnabled(!m_immediateUpdate);
-
-  if (!m_immediateUpdate)
-    m_timer->start(m_delay);
+	m_spawnListItemDict.setAutoDelete(false);
+	
+	// get whether to keep the list sorted or not
+	m_keepSorted = pSEQPrefs->getPrefBool("KeepSorted", preferenceName(), false);
+	
+	// get whether to make sure the selected item is visible
+	m_keepSelectedVisible = pSEQPrefs->getPrefBool("KeepSelectedVisible", preferenceName(), true);
+	
+	// get the immediate update setting
+	m_immediateUpdate = pSEQPrefs->getPrefBool("ImmediateUpdate", preferenceName(), false);
+	
+	// get framerate 
+	int fpm = pSEQPrefs->getPrefInt("FPM", preferenceName(), 10);
+	m_delay = 60000L / fpm;
+	
+	Q3BoxLayout* vLayout = new Q3VBoxLayout(this);
+	Q3HBoxLayout* hLayout= new Q3HBoxLayout(vLayout);
+	
+	// create the spawn list combo box
+	m_categoryCombo = new QComboBox(false, this, "spawnlistcombo");
+	m_categoryCombo->setDuplicatesEnabled(false);
+	hLayout->addWidget(m_categoryCombo, 0, AlignLeft);
+	connect(m_categoryCombo, SIGNAL(activated(int)),
+			this, SLOT(categorySelected(int)));
+	
+	// Create the Spawn Counter
+	m_totalSpawns = new QLineEdit(this);
+	m_totalSpawns->setReadOnly(TRUE);
+	m_totalSpawns->setAlignment(AlignCenter);
+	m_totalSpawns->setMinimumWidth(5);
+	m_totalSpawns->setMaximumWidth(50);
+	hLayout->addWidget(m_totalSpawns, 0, AlignCenter);  
+	
+	// setup spinbox to control frame rate (FPM)
+	m_fpmSpinBox = new QSpinBox(5, 60, 1, this, "fpmSpinBox");
+	m_fpmSpinBox->setValue(fpm);
+	m_fpmSpinBox->setSuffix("FPM");
+	hLayout->addWidget(m_fpmSpinBox, 0, AlignRight);
+	connect(m_fpmSpinBox, SIGNAL(valueChanged(int)),
+			this, SLOT(setFPM(int)));
+	
+	// enable/disable the spin box
+	m_fpmSpinBox->setEnabled(!m_immediateUpdate);
+	
+	// create the spawn listview
+	m_spawnList = new SEQListView(preferenceName(), 
+								  this, "spawnlistview");
+	vLayout->addWidget(m_spawnList);
+	
+	m_spawnList->addColumn ("Name");
+	m_spawnList->addColumn ("Lvl", "Level");
+	m_spawnList->addColumn ("Hp", "HP");
+	m_spawnList->addColumn ("MaxHP");
+	if(showeq_params->retarded_coords) 
+	{
+		m_spawnList->addColumn ("N/S", "Coord1");
+		m_spawnList->addColumn ("E/W", "Coord2");
+	} 
+	else 
+	{
+		m_spawnList->addColumn ("X", "Coord1");
+		m_spawnList->addColumn ("Y", "Coord2");
+	}
+	m_spawnList->addColumn ("Z", "Coord3");
+	m_spawnList->addColumn ("ID");
+	m_spawnList->addColumn ("Dist");
+	m_spawnList->addColumn ("Race");
+	m_spawnList->addColumn ("Class");
+	m_spawnList->addColumn ("Info");
+	m_spawnList->addColumn ("SpawnTime");
+	m_spawnList->addColumn("Deity");
+	m_spawnList->addColumn("Body Type", "BodyType");
+	m_spawnList->addColumn("Guild Tag", "GuildTag");
+	
+	// restore the columns settings from preferences
+	m_spawnList->restoreColumns();
+	
+	// setup timer for refreshing the spawn list
+	m_timer = new QTimer(this, "spawnlist2timer");
+	
+	// connect a QListView signal to ourselves
+	connect(m_spawnList, SIGNAL(selectionChanged(Q3ListViewItem*)),	this, SLOT(selChanged(Q3ListViewItem*)));
+	connect (m_spawnList, SIGNAL(mouseButtonPressed(int, Q3ListViewItem*, const QPoint&, int)), this, SLOT(mousePressEvent(int, Q3ListViewItem*, const QPoint&, int)));
+	connect (m_spawnList, SIGNAL(doubleClicked(Q3ListViewItem*)), this, SLOT(mouseDoubleClickEvent(Q3ListViewItem*)));
+	
+	// connect SpawnList slots to SpawnShell signals
+	connect(m_spawnShell, SIGNAL(addItem(const Item *)), this, SLOT(addItem(const Item *)));
+	connect(m_spawnShell, SIGNAL(delItem(const Item *)), this, SLOT(delItem(const Item *)));
+	connect(m_spawnShell, SIGNAL(killSpawn(const Item *, const Item*, uint16_t)), this, SLOT(killSpawn(const Item *)));
+	connect(m_spawnShell, SIGNAL(selectSpawn(const Item *)), this, SLOT(selectSpawn(const Item *)));
+	connect(m_spawnShell, SIGNAL(clearItems()), this, SLOT(clear()));
+	
+	if (m_immediateUpdate)
+		connect(m_spawnShell, SIGNAL(changeItem(const Item *, uint32_t)), this, SLOT(changeItem(const Item *, uint32_t)));
+	
+	// connect SpawnList slots to Player signals
+	connect(m_player, SIGNAL(posChanged(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)), 
+			this, SLOT(setPlayer(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)));
+	connect(m_player, SIGNAL(levelChanged(uint8_t)), this, SLOT(playerLevelChanged(uint8_t)));
+	
+	// connect SpawnList slots to CategoryMgr signals
+	connect(m_categoryMgr, SIGNAL(addCategory(const Category*)), this, SLOT(addCategory(const Category*)));
+	connect(m_categoryMgr, SIGNAL(delCategory(const Category*)), this, SLOT(delCategory(const Category*)));
+	connect(m_categoryMgr, SIGNAL(clearedCategories()), this, SLOT(clearedCategories()));
+	connect(m_categoryMgr, SIGNAL(loadedCategories()), this, SLOT(loadedCategories()));
+	
+	// connect SpawnList slots to QTimer signals
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(refresh()));
+	
+	// populate the categories list which will in turn populate the spawn list
+	loadedCategories();
+	
+	// enable/disable the spin box
+	m_fpmSpinBox->setEnabled(!m_immediateUpdate);
+	
+	if (!m_immediateUpdate)
+		m_timer->start(m_delay);
 }  
 
 SpawnListWindow2::~SpawnListWindow2()
@@ -211,7 +191,7 @@ QString SpawnListWindow2::filterString(const Item* item)
    return text;
 }
 
-Q3PopupMenu* SpawnListWindow2::menu()
+QMenu* SpawnListWindow2::menu()
 {
   if (m_menu != NULL)
   {

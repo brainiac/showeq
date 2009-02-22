@@ -255,13 +255,14 @@ void CombatWindow::initUI()
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::initUI: starting...");
 #endif
-	Q3VBoxLayout* layout = new Q3VBoxLayout(boxLayout());
+	// TODO: Fix layout
+	Q3VBoxLayout* pLayout = new Q3VBoxLayout(layout());
 
 	m_menu_bar = new QMenuBar(this);
-	layout->addWidget(m_menu_bar);
+	pLayout->addWidget(m_menu_bar);
 
 	m_tab = new QTabWidget(this);
-	layout->addWidget(m_tab);
+	pLayout->addWidget(m_tab);
 
 	m_widget_offense = initOffenseWidget();
 	m_tab->addTab(m_widget_offense, "&Offense");

@@ -164,7 +164,7 @@ public:
 	void updateSelectedSpawnStatus(const Item* item);
 	
 	void savePrefs(void);
-	void saveDockAreaPrefs(Q3DockArea* a, Qt::ToolBarDock edge);
+	void saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge);
 	
 	void addCategory(void);
 	void reloadCategories(void);
@@ -334,7 +334,7 @@ protected:
 	void createOPCodeMonitorLog(const QString&);
 	void insertWindowMenu(SEQWindow* window);
 	void removeWindowMenu(SEQWindow* window);
-	void setDockEnabled(Q3DockWindow* dw, bool enable);
+	void setDockEnabled(SEQWindow* dw, bool enable);
 	
 public:
 	Player* m_player;

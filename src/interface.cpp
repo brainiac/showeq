@@ -2310,7 +2310,7 @@ void EQInterface::toggle_view_SpawnListCol( int id )
 	}
 }
 
-void EQInterface::toggle_view_DockedWin( int id )
+void EQInterface::toggle_view_DockedWin(int id)
 {
 	SEQWindow* widget = 0;
 	int winnum;
@@ -2325,7 +2325,7 @@ void EQInterface::toggle_view_DockedWin( int id )
 	// flip the menu item state
 	m_dockedWinMenu->setItemChecked(id, !checked);
 	
-	switch(winnum)
+	switch (winnum)
 	{
 		case 0: // Spawn List
 			// note the new setting
@@ -2557,7 +2557,7 @@ void EQInterface::toggle_view_DockableWin( int id )
 	
 	// attempt to undock the window
 	if (widget)
-		setDockEnabled(widget, dockable);
+		widget->setDockEnabled(dockable);
 }
 
 void EQInterface::set_main_WindowCaption( int id )
@@ -2910,21 +2910,15 @@ void EQInterface::set_main_statusbar_Font(int id)
 	newFont.setPointSize(8);
 	
 	// get new status font
-	newFont = QFontDialog::getFont(&ok, 
-								   pSEQPrefs->getPrefFont("StatusFont",
-														  "Interface",
-														  newFont),
-								   this, name);
+	newFont = QFontDialog::getFont(&ok, pSEQPrefs->getPrefFont("StatusFont", "Interface", newFont), this, name);
 	
 	// if the user clicked ok and selected a valid font, set it
 	if (ok)
 	{
 		// set the preference for future sessions
-		pSEQPrefs->setPrefFont("StatusFont", "Interface", 
-							   newFont);
+		pSEQPrefs->setPrefFont("StatusFont", "Interface", newFont);
 		
-		// make sure to reset the status font since the previous call may have 
-		// changed it
+		// make sure to reset the status font since the previous call may have changed it
 		restoreStatusFont();
 	}
 }
@@ -2978,9 +2972,9 @@ void EQInterface::savePrefs(void)
 	}
 }
 
-void EQInterface::saveDockAreaPrefs(Q3DockArea* a, Qt::ToolBarDock edge)
+void EQInterface::saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge)
 {
-#ifndef QT3_SUPPORT
+#if 0
 	QList<Q3DockWindow*> l = a->dockWindowList();
 	for (Q3DockWindow *dw = l.first(); dw; dw = l.next())
 	{
@@ -2994,7 +2988,6 @@ void EQInterface::saveDockAreaPrefs(Q3DockArea* a, Qt::ToolBarDock edge)
 void EQInterface::setCaption(const QString& text)
 {
 	QMainWindow::setCaption(text);
-	
 	pSEQPrefs->setPrefString("Caption", "Interface", caption());
 }
 
@@ -5333,9 +5326,10 @@ void EQInterface::showMap(int i)
 		
 		
 		// TODO: Fix Docking of Window
-		//setDockEnabled(m_map[i], pSEQPrefs->getPrefBool(QString("Dockable") + mapPrefName, "Interface", true));
-		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_map[i]->preferenceName(), Left);
+		setDockEnabled(m_map[i], pSEQPrefs->getPrefBool(QString("Dockable") + mapPrefName, "Interface", true));
+		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_map[i]->preferenceName(), Left);
 		//addDockWindow(m_map[i], mapName, edge, true);
+		addDockWidget(edge, m_map[i]);
 		
 		if (!m_isMapDocked[i])
 			m_map[i]->undock();
@@ -5386,11 +5380,11 @@ void EQInterface::showMessageWindow(int i)
 											   prefName, caption,
 											   0, name);
 		
-		
 		// TODO: Fix Docking of window
-		//setDockEnabled(m_messageWindow[i], pSEQPrefs->getPrefBool(QString("Dockable") + prefName, "Interface", false));
-		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_messageWindow[i]->preferenceName(), Left);
+		setDockEnabled(m_messageWindow[i], pSEQPrefs->getPrefBool(QString("Dockable") + prefName, "Interface", false));
+		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_messageWindow[i]->preferenceName(), Left);
 		//addDockWindow(m_messageWindow[i], edge, false);
+		addDockWidget(edge, m_messageWindow[i]);
 		
 		if (!m_isMessageWindowDocked[i])
 			m_messageWindow[i]->undock();
@@ -5415,14 +5409,15 @@ void EQInterface::showMessageWindow(int i)
 void EQInterface::showSpawnList()
 {
 	// if it doesn't exist, create it.
-	if (m_spawnList == 0)
+	if (m_spawnList == NULL)
 	{
 		m_spawnList = new SpawnListWindow (m_player, m_spawnShell, m_categoryMgr, 0, "spawnlist");
 		
 		// TODO: Fix Docking of Window
-		//setDockEnabled(m_spawnList, pSEQPrefs->getPrefBool("DockableSpawnList", "Interface", true));		
-		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_spawnList->preferenceName(), Left);
+		setDockEnabled(m_spawnList, pSEQPrefs->getPrefBool("DockableSpawnList", "Interface", true));		
+		//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnList->preferenceName(), Left);
 		//addDockWindow(m_spawnList, edge, false);
+		addDockWidget(Qt::RightDockWidgetArea, m_spawnList);
 		
 		if (m_isSpawnListDocked)
 			m_spawnList->undock();
@@ -5454,14 +5449,15 @@ void EQInterface::showSpawnList()
 void EQInterface::showSpawnList2()
 {
 	// if it doesn't exist, create it.
-	if (m_spawnList2 == 0)
+	if (m_spawnList2 == NULL)
 	{
 		m_spawnList2 = new SpawnListWindow2(m_player, m_spawnShell, m_categoryMgr, 0, "spawnlist");
 		
 		// TODO: Fix Docking of Window
-		//setDockEnabled(m_spawnList2, pSEQPrefs->getPrefBool("DockableSpawnList2", "Interface", true));
-		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_spawnList2->preferenceName(), Left);
+		setDockEnabled(m_spawnList2, pSEQPrefs->getPrefBool("DockableSpawnList2", "Interface", true));
+		//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnList2->preferenceName(), Left);
 		//addDockWindow(m_spawnList2, edge, false);
+		addDockWidget(Qt::RightDockWidgetArea, m_spawnList2);
 		
 		if (!m_isSpawnList2Docked)
 			m_spawnList2->undock();
@@ -5498,9 +5494,10 @@ void EQInterface::showSpawnPointList(void)
 		m_spawnPointList = new SpawnPointWindow(m_spawnMonitor, 0, "spawnlist");
 		
 		// TODO: Fix docking of windows
-		//setDockEnabled(m_spawnPointList, pSEQPrefs->getPrefBool("DockableSpawnPointList", "Interface", true));
-		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_spawnPointList->preferenceName(), Left);
+		setDockEnabled(m_spawnPointList, pSEQPrefs->getPrefBool("DockableSpawnPointList", "Interface", true));
+		//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnPointList->preferenceName(), Left);
 		//addDockWindow(m_spawnPointList, edge, false);
+		addDockWidget(Qt::RightDockWidgetArea, m_spawnPointList);
 		
 		if (!m_isSpawnPointListDocked)
 			m_spawnPointList->undock();
@@ -5533,9 +5530,10 @@ void EQInterface::showStatList(void)
 		m_statList = new StatListWindow(m_player, 0, "stats");
 		
 		// TODO: Fix docking of windows
-		//setDockEnabled(m_statList, pSEQPrefs->getPrefBool("DockablePlayerStats", "Interface", true));
-		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_statList->preferenceName(), Left);
+		setDockEnabled(m_statList, pSEQPrefs->getPrefBool("DockablePlayerStats", "Interface", true));
+		//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_statList->preferenceName(), Left);
 		//addDockWindow(m_statList, edge, false);
+		addDockWidget(Qt::RightDockWidgetArea, m_statList);
 		
 		if (!m_isStatListDocked)
 			m_statList->undock();
@@ -5568,9 +5566,10 @@ void EQInterface::showSkillList(void)
 		m_skillList = new SkillListWindow(m_player, 0, "skills");
 		
 		// TODO: Fix docking of window
-		//setDockEnabled(m_skillList, pSEQPrefs->getPrefBool("DockablePlayerSkills", "Interface", true));
+		setDockEnabled(m_skillList, pSEQPrefs->getPrefBool("DockablePlayerSkills", "Interface", true));
 		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_skillList->preferenceName(), Left);
 		//addDockWindow(m_skillList, edge, false);
+		addDockWidget(Qt::LeftDockWidgetArea, m_skillList);
 		
 		if (!m_isSkillListDocked)
 			m_skillList->undock();
@@ -5603,9 +5602,10 @@ void EQInterface::showSpellList(void)
 		m_spellList = new SpellListWindow(m_spellShell, this, "spelllist");
 		
 		// TODO: Fix docking of windows
-		//setDockEnabled(m_spellList, pSEQPrefs->getPrefBool("DockableSpellList", "Interface", true));
+		setDockEnabled(m_spellList, pSEQPrefs->getPrefBool("DockableSpellList", "Interface", true));
 		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_spellList->preferenceName(), Left);
 		//addDockWindow(m_spellList, edge, false);
+		addDockWidget(Qt::LeftDockWidgetArea, m_spellList);
 		
 		if (!m_isSpellListDocked)
 			m_spellList->undock();
@@ -5644,9 +5644,10 @@ void EQInterface::showCompass(void)
 		m_compass = new CompassFrame(m_player, 0, "compass");
 		
 		// TODO: Fix docking of windows
-		//setDockEnabled(m_compass, pSEQPrefs->getPrefBool("DockableCompass", "Interface", true));
+		setDockEnabled(m_compass, pSEQPrefs->getPrefBool("DockableCompass", "Interface", true));
 		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_compass->preferenceName(), Left);
 		//addDockWindow(m_compass, edge, false);
+		addDockWidget(Qt::TopDockWidgetArea, m_compass);
 		
 		if (!m_isCompassDocked)
 			m_compass->undock();
@@ -5677,9 +5678,10 @@ void EQInterface::showNetDiag()
 		m_netDiag = new NetDiag(m_packet, 0, "NetDiag");
 		
 		// TODO: Fix docking of windows
-		//setDockEnabled(m_netDiag, pSEQPrefs->getPrefBool("DockableNetDiag", "Interface", true));
+		setDockEnabled(m_netDiag, pSEQPrefs->getPrefBool("DockableNetDiag", "Interface", true));
 		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_netDiag->preferenceName(), Bottom);
 		//addDockWindow(m_netDiag, edge, true);
+		addDockWidget(Qt::BottomDockWidgetArea, m_netDiag);
 		
 		m_netDiag->undock();
 		
@@ -5707,9 +5709,10 @@ void EQInterface::showGuildList(void)
 		m_guildListWindow = new GuildListWindow(m_player, m_guildShell, 0, "GuildList");
 		
 		// TODO: Fix docking of window
-		//setDockEnabled(m_guildListWindow, pSEQPrefs->getPrefBool("DockableGuildListWindow", "Interface", true));
+		setDockEnabled(m_guildListWindow, pSEQPrefs->getPrefBool("DockableGuildListWindow", "Interface", true));
 		//Dock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_guildListWindow->preferenceName(), Bottom);
 		//addDockWindow(m_guildListWindow, edge, true);
+		addDockWidget(Qt::RightDockWidgetArea, m_guildListWindow);
 		
 		m_guildListWindow->undock();
 		
@@ -5815,19 +5818,11 @@ void EQInterface::createZoneLog(void)
 	if (m_zoneLog)
 		return;
 	
-	QString logFile = pSEQPrefs->getPrefString("ZoneLogFilename",
-											   "PacketLogging",
-											   "zone.log");
-	
+	QString logFile = pSEQPrefs->getPrefString("ZoneLogFilename", "PacketLogging", "zone.log");	
 	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
 	
-	m_zoneLog = new PacketStreamLog(*m_packet, 
-									logFileInfo.absFilePath(),
-									this, "ZoneLog");
-	
-	m_zoneLog->setRaw(pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging",
-											 false));
-	
+	m_zoneLog = new PacketStreamLog(*m_packet, logFileInfo.absFilePath(), this, "ZoneLog");
+	m_zoneLog->setRaw(pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging", false));
 	m_zoneLog->setDir(0);
 	
 	connect(m_packet, SIGNAL(rawZonePacket(const uint8_t*, size_t, uint8_t, uint16_t)),
@@ -5841,19 +5836,11 @@ void EQInterface::createBazaarLog(void)
 	if (m_bazaarLog)
 		return;
 	
-	QString logFile = pSEQPrefs->getPrefString("BazaarLogFilename",
-											   "PacketLogging",
-											   "bazaar.log");
-	
+	QString logFile = pSEQPrefs->getPrefString("BazaarLogFilename", "PacketLogging", "bazaar.log");
 	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
 	
-	m_bazaarLog = new BazaarLog(*m_packet,
-								logFileInfo.absFilePath(),
-								this,
-								*m_spawnShell,
-								"BazaarLog");
-	m_packet->connect2("OP_BazaarSearch", SP_Zone, DIR_Server,
-					   "bazaarSearchResponseStruct", SZC_Modulus,
+	m_bazaarLog = new BazaarLog(*m_packet, logFileInfo.absFilePath(), this, *m_spawnShell, "BazaarLog");
+	m_packet->connect2("OP_BazaarSearch", SP_Zone, DIR_Server, "bazaarSearchResponseStruct", SZC_Modulus,
 					   m_bazaarLog, SLOT(bazaarSearch(const uint8_t*, size_t, uint8_t)));
 }
 
@@ -5863,21 +5850,12 @@ void EQInterface::createUnknownZoneLog(void)
 		return;
 	
 	QString section = "PacketLogging";
-	
-	QString logFile = pSEQPrefs->getPrefString("UnknownZoneLogFilename",
-											   section,
-											   "unknownzone.log");
-	
+	QString logFile = pSEQPrefs->getPrefString("UnknownZoneLogFilename", section, "unknownzone.log");
 	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
-	
 	logFile = logFileInfo.absFilePath();
 	
-	m_unknownZoneLog = new UnknownPacketLog(*m_packet, 
-											logFile,
-											this, "UnknownLog");
-	
-	m_unknownZoneLog->setView(pSEQPrefs->getPrefBool("ViewUnknown", section, 
-													 false));
+	m_unknownZoneLog = new UnknownPacketLog(*m_packet, logFile, this, "UnknownLog");
+	m_unknownZoneLog->setView(pSEQPrefs->getPrefBool("ViewUnknown", section, false));
 	
 	connect(m_packet, SIGNAL(decodedZonePacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)),
 			m_unknownZoneLog, SLOT(packet(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
@@ -5891,19 +5869,11 @@ void EQInterface::createOPCodeMonitorLog(const QString& opCodeList)
 		return;
 	
 	QString section = "OpCodeMonitoring";
-	
-	QString logFile = pSEQPrefs->getPrefString("LogFilename", 
-											   section, 
-											   "opcodemonitor.log");
-	
+	QString logFile = pSEQPrefs->getPrefString("LogFilename", section, "opcodemonitor.log");
 	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
-	
 	logFile = logFileInfo.absFilePath();
 	
-	m_opcodeMonitorLog = new OPCodeMonitorPacketLog(*m_packet, 
-													logFile,
-													this, "OpCodeMonitorLog");
-	
+	m_opcodeMonitorLog = new OPCodeMonitorPacketLog(*m_packet, logFile, this, "OpCodeMonitorLog");
 	m_opcodeMonitorLog->init(opCodeList);
 	m_opcodeMonitorLog->setLog(pSEQPrefs->getPrefBool("Log", section, false));
 	m_opcodeMonitorLog->setView(pSEQPrefs->getPrefBool("View", section, false));
@@ -5941,9 +5911,10 @@ void EQInterface::removeWindowMenu(SEQWindow* window)
 	}
 }
 
-void EQInterface::setDockEnabled(Q3DockWindow* dw, bool enable)
+void EQInterface::setDockEnabled(SEQWindow* dw, bool enable)
 {
 	// TODO: Fix docking windows
+	dw->setDockEnabled(enable);
 	//QMainWindow::setDockEnabled(dw, DockTop, enable);
 	//QMainWindow::setDockEnabled(dw, DockBottom, enable);
 	//QMainWindow::setDockEnabled(dw, DockLeft, enable);
@@ -5958,11 +5929,13 @@ void EQInterface::setupExperienceWindow()
 	m_expWindow = new ExperienceWindow(m_dataLocationMgr, m_player, m_groupMgr, m_zoneMgr);
 	
 	// TODO: Fix docking of windows
-	//setDockEnabled(m_expWindow, pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
+	//m_expWindow->setDockEnabled(pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
+	setDockEnabled(m_expWindow, pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
 	//Qt::ToolBarDock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_expWindow->preferenceName(), Qt::DockUnmanaged);
 	//addDockWindow(m_expWindow, edge, false);
+	addDockWidget(Qt::TopDockWidgetArea, m_expWindow);
 	
-	m_expWindow->undock();
+	//m_expWindow->undock();
 	m_expWindow->restoreSize();
 	
 	// move window to new position
@@ -5984,9 +5957,11 @@ void EQInterface::setupCombatWindow()
 	m_combatWindow = new CombatWindow(m_player);
 	
 	// TODO: Fix docking of windows
-	//setDockEnabled(m_combatWindow, pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
+	m_combatWindow->setDockEnabled(pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
 	//Qt::ToolBarDock edge = (Qt::ToolBarDock)pSEQPrefs->getPrefInt("Dock", m_combatWindow->preferenceName(), Qt::DockUnmanaged);
 	//addDockWindow(m_combatWindow, edge, false);
+	addDockWidget(Qt::TopDockWidgetArea, m_combatWindow);
+	
 	m_combatWindow->undock();
 	m_combatWindow->restoreSize();
 	

@@ -27,7 +27,7 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 {
   //  setResizeEnabled(false);
   // get preferences
-  Q3GridLayout* tmpGrid = new Q3GridLayout(boxLayout(), 26, 9);
+  Q3GridLayout* tmpGrid = new Q3GridLayout(layout(), 26, 9);
   tmpGrid->addColSpacing(3, 5);
   tmpGrid->addColSpacing(6, 5);
   tmpGrid->addRowSpacing(1, 5);

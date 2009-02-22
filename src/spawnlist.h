@@ -75,7 +75,6 @@ public:
 	SpawnListItem* Find(Q3ListViewItemIterator& it, const Item* item, bool first = false);
 	
 	const Category* getCategory(SpawnListItem *);
-	
 	SpawnListMenu* menu();
 	
 signals:
@@ -84,10 +83,10 @@ signals:
 	void spawnSelected(const Item* item);
 	void keepUpdated(bool on);
 	
-	public slots: 
+public slots: 
 	void setPlayer(int16_t x, int16_t y, int16_t z, 
-				   int16_t deltaX, int16_t deltaY, int16_t deltaZ, 
-				   int32_t degrees); 
+				   int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees); 
+	
 	void selectNext(void);
 	void selectPrev(void);
 	// SpawnShell signals
@@ -105,7 +104,7 @@ signals:
 	void rebuildSpawnList();
 	void playerLevelChanged(uint8_t);
 	
-	private slots:
+private slots:
 	void selChanged(Q3ListViewItem*);
 	
 	void mousePressEvent (int button, Q3ListViewItem *litem, const QPoint &point, int col);
@@ -118,6 +117,7 @@ private:
 	QString filterString(const Item *item, int flags = 0);
 	
 	void selectAndOpen(SpawnListItem *);
+	
 	CategoryMgr* m_categoryMgr;
 	Player *m_player;
 	SpawnShell* m_spawnShell;
