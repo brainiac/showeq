@@ -4435,38 +4435,39 @@ MapFrame::MapFrame(FilterMgr* filterMgr,
 	
 	QLabel* tmpLabel;
 	
-	// setup the vertical box
-	// TODO: Fix box layout
-	
-	m_vertical = new Q3VBoxLayout(this);
-	
-	// setup the top control window
-	m_topControlBox = new Q3HBox(this);
-	m_topControlBox->setSpacing(1);
-	m_topControlBox->setMargin(0);
-	m_vertical->addWidget(m_topControlBox);
-	
-	tmpPrefString = "ShowTopControlBox";
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-		m_topControlBox->hide();
-	
 	// setup runtime filter
 	m_filterMgr->registerRuntimeFilter(m_mapPreferenceName, m_runtimeFilterFlag, m_runtimeFilterFlagMask);
 	
+	// setup the vertical box
+	// TODO: Fix box layout
+	
+	m_vertical = new QVBoxLayout();
+	
+	// setup the top control window in a horizontal box
+	m_topControlBox = new QWidget();
+	QHBoxLayout* topControlBoxLayout = new QHBoxLayout();
+	topControlBoxLayout->setSpacing(1);
+	topControlBoxLayout->setMargin(0);
+	if (!pSEQPrefs->getPrefBool("ShowTopControlBox", prefString, 1))
+		m_topControlBox->hide();
+	m_topControlBox->setLayout(topControlBoxLayout);
+	m_vertical->addWidget(m_topControlBox);
+	
 	// Create map
-	m_map = new Map(mapMgr, player, spawnshell, zoneMgr, spawnMonitor,
-					m_mapPreferenceName, m_runtimeFilterFlagMask, this, mapName);
+	m_map = new Map(mapMgr, player, spawnshell, zoneMgr, spawnMonitor, m_mapPreferenceName, m_runtimeFilterFlagMask, this, mapName);
 	m_vertical->addWidget(m_map);
 	
 	// setup bottom control window
-	m_bottomControlBox = new Q3HBox(this);
-	m_bottomControlBox->setSpacing(1);
-	m_bottomControlBox->setMargin(0);
+	m_bottomControlBox = new QWidget();	
+	QHBoxLayout* bottomControlBoxLayout = new QHBoxLayout();
+	bottomControlBoxLayout->setSpacing(1);
+	bottomControlBoxLayout->setMargin(0);
+	if (!pSEQPrefs->getPrefBool("ShowBottomControlBox", prefString, 1))
+		m_bottomControlBox->hide();	
+	m_bottomControlBox->setLayout(bottomControlBoxLayout);
 	m_vertical->addWidget(m_bottomControlBox);
 	
-	tmpPrefString = "ShowBottomControlBox";	
-	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
-		m_bottomControlBox->hide();
+
 	
 	
 	// setup Zoom control
@@ -4566,14 +4567,10 @@ MapFrame::MapFrame(FilterMgr* filterMgr,
 	tmpPrefString = "ShowPanControls";
 	if (!pSEQPrefs->getPrefBool(tmpPrefString, prefString, 1))
 		m_panBox->hide();
-	connect(m_panX, SIGNAL(valueChanged(int)),
-			m_map, SLOT(setPanOffsetX(int)));
-	connect(m_panY, SIGNAL(valueChanged(int)),
-			m_map, SLOT(setPanOffsetY(int)));
-	connect(m_map, SIGNAL(panXChanged(int)),
-			m_panX, SLOT(setValue(int)));
-	connect(m_map, SIGNAL(panYChanged(int)),
-			m_panY, SLOT(setValue(int)));
+	connect(m_panX, SIGNAL(valueChanged(int)), m_map, SLOT(setPanOffsetX(int)));
+	connect(m_panY, SIGNAL(valueChanged(int)), m_map, SLOT(setPanOffsetY(int)));
+	connect(m_map, SIGNAL(panXChanged(int)), m_panX, SLOT(setValue(int)));
+	connect(m_map, SIGNAL(panYChanged(int)), m_panY, SLOT(setValue(int)));
 	
 	m_depthControlBox = new Q3HBox(m_bottomControlBox);
 	tmpLabel = new QLabel(m_depthControlBox);
