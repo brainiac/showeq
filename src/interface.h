@@ -164,7 +164,7 @@ public:
 	void updateSelectedSpawnStatus(const Item* item);
 	
 	void savePrefs(void);
-	void saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge);
+	//void saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge);
 	
 	void addCategory(void);
 	void reloadCategories(void);

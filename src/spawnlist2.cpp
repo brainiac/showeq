@@ -82,6 +82,7 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 	hLayout->addWidget(m_totalSpawns, 0, AlignCenter);  
 	hLayout->addWidget(m_fpmSpinBox, 0, AlignRight);
 	hLayout->setContentsMargins(0, 0, 0, 0);
+	hLayout->setSpacing(0);
 	QWidget* hBox = new QWidget();
 	hBox->setLayout(hLayout);	
 	
@@ -92,6 +93,7 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 	vLayout->addWidget(hBox);
 	vLayout->addWidget(m_spawnList);
 	vLayout->setContentsMargins(0, 0, 0, 0);
+	vLayout->setSpacing(0);
 
 	QWidget* pWidget = new QWidget();
 	pWidget->setLayout(vLayout);
