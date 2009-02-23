@@ -15,7 +15,7 @@
 #include "packetcommon.h"
 #include "packetinfo.h"
 
-#include <qtimer>
+#include <QTimer>
 
 #if defined (__GLIBC__) && (__GLIBC__ < 2)
 #error "Need glibc 2.1.3 or better"

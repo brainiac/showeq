@@ -28,7 +28,7 @@
 #include <qlist.h>
 #include <qdatetime.h>
 #include <qdatastream.h>   
-#include <q3ptrlist>
+#include <q3ptrlist.h>
 
 #include "everquest.h"
 #include "point.h"

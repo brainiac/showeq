@@ -14,7 +14,7 @@
 #include <qmetaobject.h>
 #include <q3strlist.h>
 #include <qfile.h>
-#include <qtxml/qxml.h>
+#include <QtXml/qxml.h>
 //Added by qt3to4:
 #include <Q3TextStream>
 #include <Q3CString>

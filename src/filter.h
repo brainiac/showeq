@@ -19,7 +19,7 @@
 #include <qstring.h>
 #include <q3ptrlist.h>
 #include <qregexp.h>
-#include <qtxml/qxml.h>
+#include <QtXml/qxml.h>
 #include <q3textstream.h>
 
 #include <map>

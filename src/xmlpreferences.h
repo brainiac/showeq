@@ -34,7 +34,7 @@
 #include <QString>
 #include <QVariant>
 #include <QHash>
-#include <QtXml/QDom.h>
+#include <QtXml/qdom.h>
 
 // XMLPreferences is a generic class that implements a persistant config
 // file in the XML format specified in seqpref.dtd.

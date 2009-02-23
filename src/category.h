@@ -33,8 +33,8 @@
 #include <q3hbox.h>
 #include <q3vbox.h>
 #include <qpushbutton.h>
-#include <q3button>
-#include <q3ptrlist>
+#include <Q3Button>
+#include <Q3PtrList>
 
 //----------------------------------------------------------------------
 // forward declarations

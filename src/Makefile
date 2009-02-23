@@ -30,19 +30,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/local/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/local/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/brainiac/Development/ShowEQ-5.13.1.0
+CMAKE_SOURCE_DIR = /home/brainiac/Desktop/ShowEQ
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/brainiac/Development/ShowEQ-5.13.1.0
+CMAKE_BINARY_DIR = /home/brainiac/Desktop/ShowEQ
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -50,7 +50,7 @@ CMAKE_BINARY_DIR = /Users/brainiac/Development/ShowEQ-5.13.1.0
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0/src && /opt/local/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd /home/brainiac/Desktop/ShowEQ/src && /usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -60,7 +60,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0/src && /opt/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	cd /home/brainiac/Desktop/ShowEQ/src && /usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,14 +69,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(CMAKE_COMMAND) -E cmake_progress_start /Users/brainiac/Development/ShowEQ-5.13.1.0/CMakeFiles /Users/brainiac/Development/ShowEQ-5.13.1.0/src/CMakeFiles/progress.make
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/brainiac/Development/ShowEQ-5.13.1.0/CMakeFiles 0
+	cd /home/brainiac/Desktop/ShowEQ && $(CMAKE_COMMAND) -E cmake_progress_start /home/brainiac/Desktop/ShowEQ/CMakeFiles /home/brainiac/Desktop/ShowEQ/src/CMakeFiles/progress.make
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/brainiac/Desktop/ShowEQ/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -85,22 +85,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/brainiac/Desktop/ShowEQ && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/showeq.dir/rule:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/showeq.dir/rule
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/showeq.dir/rule
 .PHONY : src/CMakeFiles/showeq.dir/rule
 
 # Convenience name for target.
@@ -109,967 +109,967 @@ showeq: src/CMakeFiles/showeq.dir/rule
 
 # fast build rule for target.
 showeq/fast:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/build
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/build
 .PHONY : showeq/fast
 
 # target to build an object file
 bazaarlog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/bazaarlog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/bazaarlog.o
 .PHONY : bazaarlog.o
 
 # target to preprocess a source file
 bazaarlog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/bazaarlog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/bazaarlog.i
 .PHONY : bazaarlog.i
 
 # target to generate assembly for a file
 bazaarlog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/bazaarlog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/bazaarlog.s
 .PHONY : bazaarlog.s
 
 # target to build an object file
 category.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/category.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/category.o
 .PHONY : category.o
 
 # target to preprocess a source file
 category.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/category.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/category.i
 .PHONY : category.i
 
 # target to generate assembly for a file
 category.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/category.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/category.s
 .PHONY : category.s
 
 # target to build an object file
 combatlog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/combatlog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/combatlog.o
 .PHONY : combatlog.o
 
 # target to preprocess a source file
 combatlog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/combatlog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/combatlog.i
 .PHONY : combatlog.i
 
 # target to generate assembly for a file
 combatlog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/combatlog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/combatlog.s
 .PHONY : combatlog.s
 
 # target to build an object file
 compass.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compass.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compass.o
 .PHONY : compass.o
 
 # target to preprocess a source file
 compass.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compass.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compass.i
 .PHONY : compass.i
 
 # target to generate assembly for a file
 compass.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compass.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compass.s
 .PHONY : compass.s
 
 # target to build an object file
 compassframe.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compassframe.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compassframe.o
 .PHONY : compassframe.o
 
 # target to preprocess a source file
 compassframe.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compassframe.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compassframe.i
 .PHONY : compassframe.i
 
 # target to generate assembly for a file
 compassframe.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compassframe.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/compassframe.s
 .PHONY : compassframe.s
 
 # target to build an object file
 datalocationmgr.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datalocationmgr.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datalocationmgr.o
 .PHONY : datalocationmgr.o
 
 # target to preprocess a source file
 datalocationmgr.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datalocationmgr.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datalocationmgr.i
 .PHONY : datalocationmgr.i
 
 # target to generate assembly for a file
 datalocationmgr.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datalocationmgr.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datalocationmgr.s
 .PHONY : datalocationmgr.s
 
 # target to build an object file
 datetimemgr.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datetimemgr.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datetimemgr.o
 .PHONY : datetimemgr.o
 
 # target to preprocess a source file
 datetimemgr.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datetimemgr.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datetimemgr.i
 .PHONY : datetimemgr.i
 
 # target to generate assembly for a file
 datetimemgr.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datetimemgr.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/datetimemgr.s
 .PHONY : datetimemgr.s
 
 # target to build an object file
 diagnosticmessages.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/diagnosticmessages.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/diagnosticmessages.o
 .PHONY : diagnosticmessages.o
 
 # target to preprocess a source file
 diagnosticmessages.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/diagnosticmessages.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/diagnosticmessages.i
 .PHONY : diagnosticmessages.i
 
 # target to generate assembly for a file
 diagnosticmessages.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/diagnosticmessages.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/diagnosticmessages.s
 .PHONY : diagnosticmessages.s
 
 # target to build an object file
 editor.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/editor.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/editor.o
 .PHONY : editor.o
 
 # target to preprocess a source file
 editor.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/editor.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/editor.i
 .PHONY : editor.i
 
 # target to generate assembly for a file
 editor.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/editor.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/editor.s
 .PHONY : editor.s
 
 # target to build an object file
 eqstr.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/eqstr.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/eqstr.o
 .PHONY : eqstr.o
 
 # target to preprocess a source file
 eqstr.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/eqstr.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/eqstr.i
 .PHONY : eqstr.i
 
 # target to generate assembly for a file
 eqstr.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/eqstr.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/eqstr.s
 .PHONY : eqstr.s
 
 # target to build an object file
 experiencelog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/experiencelog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/experiencelog.o
 .PHONY : experiencelog.o
 
 # target to preprocess a source file
 experiencelog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/experiencelog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/experiencelog.i
 .PHONY : experiencelog.i
 
 # target to generate assembly for a file
 experiencelog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/experiencelog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/experiencelog.s
 .PHONY : experiencelog.s
 
 # target to build an object file
 filter.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filter.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filter.o
 .PHONY : filter.o
 
 # target to preprocess a source file
 filter.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filter.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filter.i
 .PHONY : filter.i
 
 # target to generate assembly for a file
 filter.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filter.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filter.s
 .PHONY : filter.s
 
 # target to build an object file
 filteredspawnlog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filteredspawnlog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filteredspawnlog.o
 .PHONY : filteredspawnlog.o
 
 # target to preprocess a source file
 filteredspawnlog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filteredspawnlog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filteredspawnlog.i
 .PHONY : filteredspawnlog.i
 
 # target to generate assembly for a file
 filteredspawnlog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filteredspawnlog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filteredspawnlog.s
 .PHONY : filteredspawnlog.s
 
 # target to build an object file
 filtermgr.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filtermgr.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filtermgr.o
 .PHONY : filtermgr.o
 
 # target to preprocess a source file
 filtermgr.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filtermgr.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filtermgr.i
 .PHONY : filtermgr.i
 
 # target to generate assembly for a file
 filtermgr.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filtermgr.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filtermgr.s
 .PHONY : filtermgr.s
 
 # target to build an object file
 filternotifications.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filternotifications.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filternotifications.o
 .PHONY : filternotifications.o
 
 # target to preprocess a source file
 filternotifications.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filternotifications.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filternotifications.i
 .PHONY : filternotifications.i
 
 # target to generate assembly for a file
 filternotifications.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filternotifications.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/filternotifications.s
 .PHONY : filternotifications.s
 
 # target to build an object file
 group.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/group.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/group.o
 .PHONY : group.o
 
 # target to preprocess a source file
 group.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/group.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/group.i
 .PHONY : group.i
 
 # target to generate assembly for a file
 group.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/group.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/group.s
 .PHONY : group.s
 
 # target to build an object file
 guild.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guild.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guild.o
 .PHONY : guild.o
 
 # target to preprocess a source file
 guild.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guild.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guild.i
 .PHONY : guild.i
 
 # target to generate assembly for a file
 guild.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guild.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guild.s
 .PHONY : guild.s
 
 # target to build an object file
 guildlist.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildlist.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildlist.o
 .PHONY : guildlist.o
 
 # target to preprocess a source file
 guildlist.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildlist.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildlist.i
 .PHONY : guildlist.i
 
 # target to generate assembly for a file
 guildlist.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildlist.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildlist.s
 .PHONY : guildlist.s
 
 # target to build an object file
 guildshell.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildshell.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildshell.o
 .PHONY : guildshell.o
 
 # target to preprocess a source file
 guildshell.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildshell.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildshell.i
 .PHONY : guildshell.i
 
 # target to generate assembly for a file
 guildshell.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildshell.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/guildshell.s
 .PHONY : guildshell.s
 
 # target to build an object file
 interface.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/interface.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/interface.o
 .PHONY : interface.o
 
 # target to preprocess a source file
 interface.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/interface.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/interface.i
 .PHONY : interface.i
 
 # target to generate assembly for a file
 interface.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/interface.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/interface.s
 .PHONY : interface.s
 
 # target to build an object file
 logger.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/logger.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/logger.o
 .PHONY : logger.o
 
 # target to preprocess a source file
 logger.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/logger.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/logger.i
 .PHONY : logger.i
 
 # target to generate assembly for a file
 logger.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/logger.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/logger.s
 .PHONY : logger.s
 
 # target to build an object file
 main.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/main.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/main.o
 .PHONY : main.o
 
 # target to preprocess a source file
 main.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/main.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/main.i
 .PHONY : main.i
 
 # target to generate assembly for a file
 main.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/main.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/main.s
 .PHONY : main.s
 
 # target to build an object file
 map.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/map.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/map.o
 .PHONY : map.o
 
 # target to preprocess a source file
 map.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/map.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/map.i
 .PHONY : map.i
 
 # target to generate assembly for a file
 map.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/map.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/map.s
 .PHONY : map.s
 
 # target to build an object file
 mapcore.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapcore.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapcore.o
 .PHONY : mapcore.o
 
 # target to preprocess a source file
 mapcore.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapcore.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapcore.i
 .PHONY : mapcore.i
 
 # target to generate assembly for a file
 mapcore.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapcore.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapcore.s
 .PHONY : mapcore.s
 
 # target to build an object file
 mapicon.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicon.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicon.o
 .PHONY : mapicon.o
 
 # target to preprocess a source file
 mapicon.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicon.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicon.i
 .PHONY : mapicon.i
 
 # target to generate assembly for a file
 mapicon.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicon.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicon.s
 .PHONY : mapicon.s
 
 # target to build an object file
 mapicondialog.moc.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.moc.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.moc.o
 .PHONY : mapicondialog.moc.o
 
 # target to preprocess a source file
 mapicondialog.moc.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.moc.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.moc.i
 .PHONY : mapicondialog.moc.i
 
 # target to generate assembly for a file
 mapicondialog.moc.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.moc.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.moc.s
 .PHONY : mapicondialog.moc.s
 
 # target to build an object file
 mapicondialog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.o
 .PHONY : mapicondialog.o
 
 # target to preprocess a source file
 mapicondialog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.i
 .PHONY : mapicondialog.i
 
 # target to generate assembly for a file
 mapicondialog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/mapicondialog.s
 .PHONY : mapicondialog.s
 
 # target to build an object file
 message.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/message.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/message.o
 .PHONY : message.o
 
 # target to preprocess a source file
 message.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/message.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/message.i
 .PHONY : message.i
 
 # target to generate assembly for a file
 message.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/message.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/message.s
 .PHONY : message.s
 
 # target to build an object file
 messagefilter.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilter.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilter.o
 .PHONY : messagefilter.o
 
 # target to preprocess a source file
 messagefilter.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilter.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilter.i
 .PHONY : messagefilter.i
 
 # target to generate assembly for a file
 messagefilter.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilter.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilter.s
 .PHONY : messagefilter.s
 
 # target to build an object file
 messagefilterdialog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilterdialog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilterdialog.o
 .PHONY : messagefilterdialog.o
 
 # target to preprocess a source file
 messagefilterdialog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilterdialog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilterdialog.i
 .PHONY : messagefilterdialog.i
 
 # target to generate assembly for a file
 messagefilterdialog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilterdialog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagefilterdialog.s
 .PHONY : messagefilterdialog.s
 
 # target to build an object file
 messages.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messages.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messages.o
 .PHONY : messages.o
 
 # target to preprocess a source file
 messages.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messages.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messages.i
 .PHONY : messages.i
 
 # target to generate assembly for a file
 messages.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messages.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messages.s
 .PHONY : messages.s
 
 # target to build an object file
 messageshell.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messageshell.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messageshell.o
 .PHONY : messageshell.o
 
 # target to preprocess a source file
 messageshell.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messageshell.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messageshell.i
 .PHONY : messageshell.i
 
 # target to generate assembly for a file
 messageshell.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messageshell.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messageshell.s
 .PHONY : messageshell.s
 
 # target to build an object file
 messagewindow.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagewindow.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagewindow.o
 .PHONY : messagewindow.o
 
 # target to preprocess a source file
 messagewindow.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagewindow.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagewindow.i
 .PHONY : messagewindow.i
 
 # target to generate assembly for a file
 messagewindow.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagewindow.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/messagewindow.s
 .PHONY : messagewindow.s
 
 # target to build an object file
 netdiag.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netdiag.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netdiag.o
 .PHONY : netdiag.o
 
 # target to preprocess a source file
 netdiag.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netdiag.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netdiag.i
 .PHONY : netdiag.i
 
 # target to generate assembly for a file
 netdiag.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netdiag.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netdiag.s
 .PHONY : netdiag.s
 
 # target to build an object file
 netstream.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netstream.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netstream.o
 .PHONY : netstream.o
 
 # target to preprocess a source file
 netstream.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netstream.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netstream.i
 .PHONY : netstream.i
 
 # target to generate assembly for a file
 netstream.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netstream.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/netstream.s
 .PHONY : netstream.s
 
 # target to build an object file
 packet.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packet.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packet.o
 .PHONY : packet.o
 
 # target to preprocess a source file
 packet.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packet.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packet.i
 .PHONY : packet.i
 
 # target to generate assembly for a file
 packet.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packet.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packet.s
 .PHONY : packet.s
 
 # target to build an object file
 packetcapture.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetcapture.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetcapture.o
 .PHONY : packetcapture.o
 
 # target to preprocess a source file
 packetcapture.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetcapture.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetcapture.i
 .PHONY : packetcapture.i
 
 # target to generate assembly for a file
 packetcapture.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetcapture.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetcapture.s
 .PHONY : packetcapture.s
 
 # target to build an object file
 packetformat.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetformat.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetformat.o
 .PHONY : packetformat.o
 
 # target to preprocess a source file
 packetformat.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetformat.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetformat.i
 .PHONY : packetformat.i
 
 # target to generate assembly for a file
 packetformat.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetformat.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetformat.s
 .PHONY : packetformat.s
 
 # target to build an object file
 packetfragment.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetfragment.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetfragment.o
 .PHONY : packetfragment.o
 
 # target to preprocess a source file
 packetfragment.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetfragment.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetfragment.i
 .PHONY : packetfragment.i
 
 # target to generate assembly for a file
 packetfragment.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetfragment.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetfragment.s
 .PHONY : packetfragment.s
 
 # target to build an object file
 packetinfo.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetinfo.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetinfo.o
 .PHONY : packetinfo.o
 
 # target to preprocess a source file
 packetinfo.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetinfo.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetinfo.i
 .PHONY : packetinfo.i
 
 # target to generate assembly for a file
 packetinfo.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetinfo.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetinfo.s
 .PHONY : packetinfo.s
 
 # target to build an object file
 packetlog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetlog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetlog.o
 .PHONY : packetlog.o
 
 # target to preprocess a source file
 packetlog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetlog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetlog.i
 .PHONY : packetlog.i
 
 # target to generate assembly for a file
 packetlog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetlog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetlog.s
 .PHONY : packetlog.s
 
 # target to build an object file
 packetstream.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetstream.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetstream.o
 .PHONY : packetstream.o
 
 # target to preprocess a source file
 packetstream.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetstream.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetstream.i
 .PHONY : packetstream.i
 
 # target to generate assembly for a file
 packetstream.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetstream.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/packetstream.s
 .PHONY : packetstream.s
 
 # target to build an object file
 player.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/player.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/player.o
 .PHONY : player.o
 
 # target to preprocess a source file
 player.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/player.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/player.i
 .PHONY : player.i
 
 # target to generate assembly for a file
 player.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/player.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/player.s
 .PHONY : player.s
 
 # target to build an object file
 seqlistview.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqlistview.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqlistview.o
 .PHONY : seqlistview.o
 
 # target to preprocess a source file
 seqlistview.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqlistview.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqlistview.i
 .PHONY : seqlistview.i
 
 # target to generate assembly for a file
 seqlistview.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqlistview.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqlistview.s
 .PHONY : seqlistview.s
 
 # target to build an object file
 seqwindow.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqwindow.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqwindow.o
 .PHONY : seqwindow.o
 
 # target to preprocess a source file
 seqwindow.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqwindow.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqwindow.i
 .PHONY : seqwindow.i
 
 # target to generate assembly for a file
 seqwindow.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqwindow.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/seqwindow.s
 .PHONY : seqwindow.s
 
 # target to build an object file
 skilllist.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/skilllist.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/skilllist.o
 .PHONY : skilllist.o
 
 # target to preprocess a source file
 skilllist.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/skilllist.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/skilllist.i
 .PHONY : skilllist.i
 
 # target to generate assembly for a file
 skilllist.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/skilllist.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/skilllist.s
 .PHONY : skilllist.s
 
 # target to build an object file
 spawn.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawn.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawn.o
 .PHONY : spawn.o
 
 # target to preprocess a source file
 spawn.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawn.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawn.i
 .PHONY : spawn.i
 
 # target to generate assembly for a file
 spawn.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawn.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawn.s
 .PHONY : spawn.s
 
 # target to build an object file
 spawnlist.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist.o
 .PHONY : spawnlist.o
 
 # target to preprocess a source file
 spawnlist.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist.i
 .PHONY : spawnlist.i
 
 # target to generate assembly for a file
 spawnlist.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist.s
 .PHONY : spawnlist.s
 
 # target to build an object file
 spawnlist2.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist2.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist2.o
 .PHONY : spawnlist2.o
 
 # target to preprocess a source file
 spawnlist2.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist2.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist2.i
 .PHONY : spawnlist2.i
 
 # target to generate assembly for a file
 spawnlist2.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist2.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlist2.s
 .PHONY : spawnlist2.s
 
 # target to build an object file
 spawnlistcommon.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlistcommon.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlistcommon.o
 .PHONY : spawnlistcommon.o
 
 # target to preprocess a source file
 spawnlistcommon.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlistcommon.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlistcommon.i
 .PHONY : spawnlistcommon.i
 
 # target to generate assembly for a file
 spawnlistcommon.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlistcommon.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlistcommon.s
 .PHONY : spawnlistcommon.s
 
 # target to build an object file
 spawnlog.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlog.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlog.o
 .PHONY : spawnlog.o
 
 # target to preprocess a source file
 spawnlog.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlog.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlog.i
 .PHONY : spawnlog.i
 
 # target to generate assembly for a file
 spawnlog.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlog.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnlog.s
 .PHONY : spawnlog.s
 
 # target to build an object file
 spawnmonitor.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnmonitor.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnmonitor.o
 .PHONY : spawnmonitor.o
 
 # target to preprocess a source file
 spawnmonitor.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnmonitor.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnmonitor.i
 .PHONY : spawnmonitor.i
 
 # target to generate assembly for a file
 spawnmonitor.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnmonitor.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnmonitor.s
 .PHONY : spawnmonitor.s
 
 # target to build an object file
 spawnpointlist.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnpointlist.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnpointlist.o
 .PHONY : spawnpointlist.o
 
 # target to preprocess a source file
 spawnpointlist.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnpointlist.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnpointlist.i
 .PHONY : spawnpointlist.i
 
 # target to generate assembly for a file
 spawnpointlist.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnpointlist.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnpointlist.s
 .PHONY : spawnpointlist.s
 
 # target to build an object file
 spawnshell.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnshell.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnshell.o
 .PHONY : spawnshell.o
 
 # target to preprocess a source file
 spawnshell.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnshell.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnshell.i
 .PHONY : spawnshell.i
 
 # target to generate assembly for a file
 spawnshell.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnshell.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spawnshell.s
 .PHONY : spawnshell.s
 
 # target to build an object file
 spelllist.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spelllist.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spelllist.o
 .PHONY : spelllist.o
 
 # target to preprocess a source file
 spelllist.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spelllist.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spelllist.i
 .PHONY : spelllist.i
 
 # target to generate assembly for a file
 spelllist.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spelllist.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spelllist.s
 .PHONY : spelllist.s
 
 # target to build an object file
 spells.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spells.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spells.o
 .PHONY : spells.o
 
 # target to preprocess a source file
 spells.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spells.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spells.i
 .PHONY : spells.i
 
 # target to generate assembly for a file
 spells.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spells.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spells.s
 .PHONY : spells.s
 
 # target to build an object file
 spellshell.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spellshell.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spellshell.o
 .PHONY : spellshell.o
 
 # target to preprocess a source file
 spellshell.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spellshell.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spellshell.i
 .PHONY : spellshell.i
 
 # target to generate assembly for a file
 spellshell.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spellshell.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/spellshell.s
 .PHONY : spellshell.s
 
 # target to build an object file
 statlist.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/statlist.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/statlist.o
 .PHONY : statlist.o
 
 # target to preprocess a source file
 statlist.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/statlist.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/statlist.i
 .PHONY : statlist.i
 
 # target to generate assembly for a file
 statlist.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/statlist.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/statlist.s
 .PHONY : statlist.s
 
 # target to build an object file
 terminal.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/terminal.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/terminal.o
 .PHONY : terminal.o
 
 # target to preprocess a source file
 terminal.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/terminal.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/terminal.i
 .PHONY : terminal.i
 
 # target to generate assembly for a file
 terminal.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/terminal.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/terminal.s
 .PHONY : terminal.s
 
 # target to build an object file
 util.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/util.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/util.o
 .PHONY : util.o
 
 # target to preprocess a source file
 util.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/util.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/util.i
 .PHONY : util.i
 
 # target to generate assembly for a file
 util.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/util.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/util.s
 .PHONY : util.s
 
 # target to build an object file
 vpacket.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/vpacket.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/vpacket.o
 .PHONY : vpacket.o
 
 # target to preprocess a source file
 vpacket.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/vpacket.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/vpacket.i
 .PHONY : vpacket.i
 
 # target to generate assembly for a file
 vpacket.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/vpacket.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/vpacket.s
 .PHONY : vpacket.s
 
 # target to build an object file
 xmlconv.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlconv.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlconv.o
 .PHONY : xmlconv.o
 
 # target to preprocess a source file
 xmlconv.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlconv.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlconv.i
 .PHONY : xmlconv.i
 
 # target to generate assembly for a file
 xmlconv.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlconv.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlconv.s
 .PHONY : xmlconv.s
 
 # target to build an object file
 xmlpreferences.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlpreferences.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlpreferences.o
 .PHONY : xmlpreferences.o
 
 # target to preprocess a source file
 xmlpreferences.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlpreferences.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlpreferences.i
 .PHONY : xmlpreferences.i
 
 # target to generate assembly for a file
 xmlpreferences.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlpreferences.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/xmlpreferences.s
 .PHONY : xmlpreferences.s
 
 # target to build an object file
 zonemgr.o:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/zonemgr.o
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/zonemgr.o
 .PHONY : zonemgr.o
 
 # target to preprocess a source file
 zonemgr.i:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/zonemgr.i
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/zonemgr.i
 .PHONY : zonemgr.i
 
 # target to generate assembly for a file
 zonemgr.s:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/zonemgr.s
+	cd /home/brainiac/Desktop/ShowEQ && $(MAKE) -f src/CMakeFiles/showeq.dir/build.make src/CMakeFiles/showeq.dir/zonemgr.s
 .PHONY : zonemgr.s
 
 # Help Target
@@ -1284,6 +1284,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/brainiac/Development/ShowEQ-5.13.1.0 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/brainiac/Desktop/ShowEQ && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

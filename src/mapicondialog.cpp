@@ -1,9 +1,9 @@
-#include "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.h"
+#include "/home/brainiac/Desktop/ShowEQ/src/mapicondialog.h"
 
 #include <qvariant.h>
 #include <qcolordialog.h>
 #include <qpainter.h>
-#include "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/mapicondialog.ui.h"
+#include "/home/brainiac/Desktop/ShowEQ/src/mapicondialog.ui.h"
 /*
  *  Constructs a MapIconDialog as a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'.
