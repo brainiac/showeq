@@ -1247,58 +1247,53 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	Q3PopupMenu* statusBarMenu = new Q3PopupMenu;
 	statusBarMenu->setCheckable(true);
 	pInterfaceMenu->insertItem("&Status Bar", statusBarMenu);
-	statusBarMenu->insertItem("Show/Hide", 
-							  this, SLOT(toggle_view_statusbar()));
-	x = statusBarMenu->insertItem( "Status");
+	statusBarMenu->insertItem("Show/Hide", this, SLOT(toggle_view_statusbar()));
+	
+	x = statusBarMenu->insertItem("Status");
 	statusBarMenu->setItemParameter(x, 1);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowStatus",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "Zone");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowStatus", "Interface_StatusBar", false));
+
+	x = statusBarMenu->insertItem("Zone");
 	statusBarMenu->setItemParameter(x, 2);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowZone",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "Spawns");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowZone", "Interface_StatusBar", false));
+
+	x = statusBarMenu->insertItem("Spawns");
 	statusBarMenu->setItemParameter(x, 3);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowSpawns",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "Experience");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowSpawns", "Interface_StatusBar", false));
+
+	x = statusBarMenu->insertItem("Experience");
 	statusBarMenu->setItemParameter(x, 4);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowExp",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "AA Experience");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowExp", "Interface_StatusBar", false));
+
+	x = statusBarMenu->insertItem("AA Experience");
 	statusBarMenu->setItemParameter(x, 5);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowExpAA",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "Packet Counter");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowExpAA", "Interface_StatusBar", false));
+	
+	x = statusBarMenu->insertItem("Packet Counter");
 	statusBarMenu->setItemParameter(x, 6);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowPacketCounter",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "EQ Time");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowPacketCounter", "Interface_StatusBar", false));
+	
+	x = statusBarMenu->insertItem("EQ Time");
 	statusBarMenu->setItemParameter(x, 7);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowEQTime",
-															"Interface_StatusBar", false));
-	x = statusBarMenu->insertItem( "Run Speed");
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowEQTime", "Interface_StatusBar", false));
+	x = statusBarMenu->insertItem("Run Speed");
 	statusBarMenu->setItemParameter(x, 8);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowSpeed",
-															"Interface_StatusBar", false));
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowSpeed", "Interface_StatusBar", false));
+	
 	// ZEM code
-	x = statusBarMenu->insertItem( "ZEM");
+	x = statusBarMenu->insertItem("ZEM");
 	statusBarMenu->setItemParameter(x, 9);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowZEM",
-															"Interface_StatusBar", false));
+	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowZEM", "Interface_StatusBar", false));
     
-	connect (statusBarMenu, SIGNAL(activated(int)), 
-			 this, SLOT(toggle_main_statusbar_Window(int)));
+	connect(statusBarMenu, SIGNAL(activated(int)), this, SLOT(toggle_main_statusbar_Window(int)));
 	
 	m_terminalMenu = new Q3PopupMenu;
 	pInterfaceMenu->insertItem("&Terminal", m_terminalMenu);
 	
 	m_terminalTypeFilterMenu = new Q3PopupMenu;
 	m_terminalMenu->insertItem("MessageTypeFilter", m_terminalTypeFilterMenu);
-	m_terminalTypeFilterMenu->insertItem("&Enable All", 
-										 this, SLOT(enableAllTypeFilters()), 0, 64);
-	m_terminalTypeFilterMenu->insertItem("&Disable All", 
-										 this, SLOT(disableAllTypeFilters()), 0, 65);
+	m_terminalTypeFilterMenu->insertItem("&Enable All", this, SLOT(enableAllTypeFilters()), 0, 64);
+	m_terminalTypeFilterMenu->insertItem("&Disable All", this, SLOT(disableAllTypeFilters()), 0, 65);
 	
 	m_terminalTypeFilterMenu->insertSeparator(-1);
 	
@@ -1317,26 +1312,19 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 		}
 	}
 	
-	connect(m_terminalTypeFilterMenu, SIGNAL(activated(int)),
-			this, SLOT(toggleTypeFilter(int)));
+	connect(m_terminalTypeFilterMenu, SIGNAL(activated(int)), this, SLOT(toggleTypeFilter(int)));
 	
 	m_terminalShowUserFilterMenu = new Q3PopupMenu;
+	m_terminalShowUserFilterMenu->insertItem("&Enable All", this, SLOT(enableAllShowUserFilters()), 0, 66);
+	m_terminalShowUserFilterMenu->insertItem("&Disable All", this, SLOT(disableAllShowUserFilters()), 0, 67);
+	m_terminalShowUserFilterMenu->insertSeparator(-1);
 	m_terminalMenu->insertItem("User Message Filter - &Show", m_terminalShowUserFilterMenu);
 	
-	m_terminalShowUserFilterMenu->insertItem("&Enable All", 
-											 this, SLOT(enableAllShowUserFilters()), 0, 66);
-	m_terminalShowUserFilterMenu->insertItem("&Disable All", 
-											 this, SLOT(disableAllShowUserFilters()), 0, 67);
-	m_terminalShowUserFilterMenu->insertSeparator(-1);
-	
 	m_terminalHideUserFilterMenu = new Q3PopupMenu;
-	m_terminalMenu->insertItem("User Message Filter - &Hide", m_terminalHideUserFilterMenu);
-	
-	m_terminalHideUserFilterMenu->insertItem("&Enable All", 
-											 this, SLOT(enableAllHideUserFilters()), 0, 66);
-	m_terminalHideUserFilterMenu->insertItem("&Disable All", 
-											 this, SLOT(disableAllHideUserFilters()), 0, 67);
+	m_terminalHideUserFilterMenu->insertItem("&Enable All", this, SLOT(enableAllHideUserFilters()), 0, 66);
+	m_terminalHideUserFilterMenu->insertItem("&Disable All", this, SLOT(disableAllHideUserFilters()), 0, 67);
 	m_terminalHideUserFilterMenu->insertSeparator(-1);
+	m_terminalMenu->insertItem("User Message Filter - &Hide", m_terminalHideUserFilterMenu);
 	
 	uint32_t enabledShowUserFilters = m_terminal->enabledShowUserFilters();
 	uint32_t enabledHideUserFilters = m_terminal->enabledHideUserFilters();
@@ -1354,32 +1342,27 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 		}
 	}
 	
-	connect(m_terminalShowUserFilterMenu, SIGNAL(activated(int)),
-			this, SLOT(toggleShowUserFilter(int)));
-	connect(m_terminalHideUserFilterMenu, SIGNAL(activated(int)),
-			this, SLOT(toggleHideUserFilter(int)));
-	m_terminalMenu->insertItem("Edit User &Message Filters...", 
-							   this, SLOT(showMessageFilterDialog()));
+	connect(m_terminalShowUserFilterMenu, SIGNAL(activated(int)), this, SLOT(toggleShowUserFilter(int)));
+	connect(m_terminalHideUserFilterMenu, SIGNAL(activated(int)), this, SLOT(toggleHideUserFilter(int)));
 	
+	m_terminalMenu->insertItem("Edit User &Message Filters...", this, SLOT(showMessageFilterDialog()));
 	m_terminalMenu->insertSeparator(-1);
 	
 	x = m_terminalMenu->insertItem("&Display Type", this, SLOT(toggleDisplayType(int)));
 	m_terminalMenu->setItemChecked(x, m_terminal->displayType());
-	x = m_terminalMenu->insertItem("Display T&ime/Date", this,
-								   SLOT(toggleDisplayTime(int)));
+	
+	x = m_terminalMenu->insertItem("Display T&ime/Date", this, SLOT(toggleDisplayTime(int)));
 	m_terminalMenu->setItemChecked(x, m_terminal->displayDateTime());
-	x = m_terminalMenu->insertItem("Display &EQ Date/Time", this,
-								   SLOT(toggleEQDisplayTime(int)));
+	
+	x = m_terminalMenu->insertItem("Display &EQ Date/Time", this, SLOT(toggleEQDisplayTime(int)));
 	m_terminalMenu->setItemChecked(x, m_terminal->displayEQDateTime());
-	x = m_terminalMenu->insertItem("&Use Color", this,
-								   SLOT(toggleUseColor(int)));
+	
+	x = m_terminalMenu->insertItem("&Use Color", this, SLOT(toggleUseColor(int)));
 	m_terminalMenu->setItemChecked(x, m_terminal->useColor());
 	
 	
-	pInterfaceMenu->insertItem( "Formatted Messages File...", 
-							   this, SLOT(select_main_FormatFile(int)));
-	pInterfaceMenu->insertItem( "Spells File...", 
-							   this, SLOT(select_main_SpellsFile(int)));
+	pInterfaceMenu->insertItem( "Formatted Messages File...", this, SLOT(select_main_FormatFile(int)));
+	pInterfaceMenu->insertItem( "Spells File...", this, SLOT(select_main_SpellsFile(int)));
 	
 
 	
@@ -3686,8 +3669,7 @@ EQInterface::toggle_view_SpawnList(void)
 	pSEQPrefs->setPrefBool("ShowSpawnList", "Interface", !wasVisible);
 }
 
-void
-EQInterface::toggle_view_SpawnList2(void)
+void EQInterface::toggle_view_SpawnList2(void)
 {
 	bool wasVisible = ((m_spawnList2 != 0) && m_spawnList2->isVisible());
 	

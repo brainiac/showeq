@@ -64,8 +64,8 @@ void SEQWindow::setDockEnabled(bool enabled)
 
 void SEQWindow::removeDockingFeatures()
 {
-	setFeatures(QDockWidget::NoDockWidgetFeatures);
-	setTitleBarWidget(new QWidget());
+//	setFeatures(QDockWidget::NoDockWidgetFeatures);
+//	setTitleBarWidget(new QWidget());
 }
 
 void SEQWindow::setCaption(const QString& text)

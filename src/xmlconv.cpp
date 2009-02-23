@@ -453,7 +453,7 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 		case QVariant::StringList:
 		{
 			e.setTagName("stringlist");
-			uint j;
+			int32_t j;
 			
 			QDomNode n;
 			QDomNodeList stringNodeList = e.elementsByTagName("string");
