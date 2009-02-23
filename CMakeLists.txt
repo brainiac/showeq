@@ -18,7 +18,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON)
 
 project(showeq)
-set(VERSION "5.13.1.0")
+set(VERSION "6.0.1.0")
 set(PKGDATADIR ${DATA_INSTALL_DIR})
 
 message(STATUS "Version: ${VERSION}")
