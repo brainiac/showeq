@@ -154,35 +154,25 @@ GuildListWindow::GuildListWindow(Player* player, GuildShell* guildShell, QWidget
 	
 	m_showAlts = pSEQPrefs->getPrefBool("ShowAlts", preferenceName(), true);
 	
-	QVBoxLayout* vLayout = new QVBoxLayout();
-	QHBoxLayout* hLayout= new QHBoxLayout(vLayout);
-	
-	// Guild Name
+	// TODO: Fixme Guild Name
 	m_guildName = new QLabel("Guild", this);
-	m_guildName->setAlignment(AlignLeft|AlignVCenter|SingleLine);
-	// TODO: Fixme
+	m_guildName->setAlignment(AlignLeft | AlignVCenter | SingleLine);
 	//m_guildName->setFrameShape(LineEditPanel);
 	//m_guildName->setFrameShadow(Sunken);
 	m_guildName->setMinimumWidth(50);
 	m_guildName->setMaximumWidth(300);
-	hLayout->addWidget(m_guildName, 1, AlignLeft);
 	guildChanged();
 	
-	// Guild Totals
+	// TODO: Fixme Guild Totals
 	m_guildTotals = new QLabel("", this);
-	m_guildTotals->setAlignment(AlignRight|AlignVCenter|SingleLine);
-	// TODO: Fixme
+	m_guildTotals->setAlignment(AlignRight | AlignVCenter | SingleLine);
 	//m_guildTotals->setFrameShape(LineEditPanel);
 	//m_guildTotals->setFrameShadow(Sunken);
 	m_guildTotals->setMinimumWidth(30);
 	m_guildTotals->setMaximumWidth(120);
-	hLayout->addWidget(m_guildTotals, 0, AlignRight);
-	
+
 	// create the spawn listview
 	m_guildList = new SEQListView(preferenceName(), this, "guildlistview");
-	vLayout->addWidget(m_guildList);
-	
-	// setup the columns
 	m_guildList->addColumn("Name");
 	m_guildList->addColumn("Level");
 	m_guildList->addColumn("Class");
@@ -192,9 +182,27 @@ GuildListWindow::GuildListWindow(Player* player, GuildShell* guildShell, QWidget
 	m_guildList->addColumn("Last On", "LastOn");
 	m_guildList->addColumn("Zone");
 	m_guildList->addColumn("Public Note", "PublicNote");
-	
 	// restore the columns settings from preferences
 	m_guildList->restoreColumns();
+		
+	QHBoxLayout* hLayout = new QHBoxLayout();
+	hLayout->setSpacing(1);
+	hLayout->setMargin(0);
+	hLayout->addWidget(m_guildName, 1, AlignLeft);
+	hLayout->addWidget(m_guildTotals, 0, AlignRight);
+	
+	QWidget* hLayoutBox = new QWidget();
+	hLayoutBox->setLayout(hLayout);
+	
+	QVBoxLayout* vLayout = new QVBoxLayout();
+	vLayout->setSpacing(1);
+	vLayout->setMargin(0);	
+	vLayout->addWidget(hLayoutBox);
+	vLayout->addWidget(m_guildList);
+	
+	QWidget* vLayoutBox = new QWidget();
+	vLayoutBox->setLayout(vLayout);
+	setWidget(vLayoutBox);
 	
 	connect(m_guildShell, SIGNAL(cleared()), this, SLOT(cleared()));
 	connect(m_guildShell, SIGNAL(loaded()), this, SLOT(loaded()));
@@ -395,8 +403,7 @@ void GuildListWindow::toggle_showAlts(int id)
 	// toggle immediate update value
 	m_showAlts = !m_showAlts;
 	m_menu->setItemChecked(id, m_showAlts);
-	pSEQPrefs->setPrefBool("ShowAlts", preferenceName(), 
-						   m_showAlts);
+	pSEQPrefs->setPrefBool("ShowAlts", preferenceName(), m_showAlts);
 	
 	// re-populate the window
 	populate();
@@ -407,13 +414,12 @@ void GuildListWindow::toggle_keepSorted(int id)
 	// toggle immediate update value
 	m_keepSorted = !m_keepSorted;
 	m_menu->setItemChecked(id, m_keepSorted);
-	pSEQPrefs->setPrefBool("KeepSorted", preferenceName(), 
-						   m_keepSorted);
+	pSEQPrefs->setPrefBool("KeepSorted", preferenceName(), m_keepSorted);
 	if (m_keepSorted)
 		m_guildList->sort();
 }
 
-void GuildListWindow::toggle_guildListCol( int id )
+void GuildListWindow::toggle_guildListCol(int id)
 {
 	int colnum;
 	
@@ -430,8 +436,7 @@ void GuildListWindow::set_font(int id)
 	QFont newFont;
 	bool ok = false;
 	// get a new font
-	newFont = QFontDialog::getFont(&ok, font(),
-								   this, caption() + " Font");
+	newFont = QFontDialog::getFont(&ok, font(), this, caption() + " Font");
     
     
     // if the user entered a font and clicked ok, set the windows font
@@ -446,8 +451,7 @@ void GuildListWindow::set_caption(int id)
 	QString captionText = 
     QInputDialog::getText("ShowEQ Guild List Window Caption",
 						  "Enter caption for the Guild List Window:",
-						  QLineEdit::Normal, caption(),
-						  &ok, this);
+						  QLineEdit::Normal, caption(), &ok, this);
 	
 	// if the user entered a caption and clicked ok, set the windows caption
 	if (ok)

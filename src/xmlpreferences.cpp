@@ -16,6 +16,7 @@
 
 #include "xmlpreferences.h"
 #include "xmlconv.h"
+#include "diagnosticmessages.h"
 
 #include <QDir>
 #include <QFile>
@@ -333,8 +334,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 				QDomElement e = propertyList.item(j).toElement();
 				if (!e.hasAttribute("name"))
 				{
-					qWarning("property in section '%s' without name! Ignoring!",
-							 (const char*)sectionName);
+					qWarning("property in section '%s' without name! Ignoring!", (const char*)sectionName);
 					continue;
 				}
 
@@ -496,7 +496,6 @@ void XMLPreferences::setPref(const QString& inName, const QString& inSection, co
 void XMLPreferences::setPref(PrefSectionDict& dict, const QString& inName, const QString& inSection, const QVariant& inValue)
 {
 	PreferenceDict* sectionDict;
-	QVariant preference;
 	
 	if (dict.contains(inSection))
 	{
@@ -507,20 +506,16 @@ void XMLPreferences::setPref(PrefSectionDict& dict, const QString& inName, const
 		sectionDict = new PreferenceDict();
 		dict[inSection] = sectionDict;
 	}
-	
 	sectionDict->insert(inName, inValue);
 }
 
 QString XMLPreferences::getPrefComment(const QString& inName, const QString& inSection)
 {
-	QString comment;
-	
 	if (m_commentSections.contains(inSection))
 	{
 		CommentDict* commentSectionDict = m_commentSections[inSection];
 		return commentSectionDict->value(inName);
 	}
-			
 	return QString("");
 }
 

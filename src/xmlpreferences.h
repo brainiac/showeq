@@ -129,7 +129,7 @@ public:
 	void setPrefSizePolicy(const QString& inName, const QString& inSection, const QSizePolicy& inValue, Persistence pers = User);
 	void setPrefCursor(const QString& inName, const QString& inSection, const QCursor& inValue, Persistence pers = User);
 	void setPrefStringList(const QString& inName, const QString& inSection, const QStringList& inValue, Persistence pers = User);
-	void setPrefVariant(const QString& inName, const QString& inSection, const QVariant& inValue, Persistence pers);
+	void setPrefVariant(const QString& inName, const QString& inSection, const QVariant& inValue, Persistence pers = User);
   
 public slots:
 	void save();		// Saves all modified values to the appropriate file

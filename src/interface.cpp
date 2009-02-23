@@ -143,6 +143,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	pFiller->setWindowFlags(Qt::Widget);
 	setCentralWidget(pFiller);
 
+	m_stateVersion = 1;	
 	
 	// disable the dock menu
 	//setDockMenuEnabled(false);
@@ -1112,11 +1113,11 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	// Character -> Class
 	m_charClassMenu = new Q3PopupMenu;
 	m_charMenu->insertItem("Choose &Class", m_charClassMenu);
-	for( int i = 0; i < PLAYER_CLASSES; i++)
+	for (int i = 0; i < PLAYER_CLASSES; i++)
 	{
 		char_ClassID[i] = m_charClassMenu->insertItem(player_classes[i]);
 		m_charClassMenu->setItemParameter(char_ClassID[i],i+1);
-		if(i+1 == m_player->defaultClass())
+		if (i + 1 == m_player->defaultClass())
 			m_charMenu->setItemChecked(char_ClassID[i], true);
 	}
 	connect (m_charClassMenu, SIGNAL(activated(int)), this, SLOT(SetDefaultCharacterClass(int)));
@@ -1136,10 +1137,10 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 		else if(i == 14)
 			m_charRaceMenu->setItemParameter(char_RaceID[i],330);
 		
-		if(m_charRaceMenu->itemParameter(char_RaceID[i]) == m_player->defaultRace())
+		if (m_charRaceMenu->itemParameter(char_RaceID[i]) == m_player->defaultRace())
 			m_charRaceMenu->setItemChecked(char_RaceID[i], true);
 	}
-	connect (m_charRaceMenu, SIGNAL(activated(int)), this, SLOT(SetDefaultCharacterRace(int)));
+	connect(m_charRaceMenu, SIGNAL(activated(int)), this, SLOT(SetDefaultCharacterRace(int)));
 	
 	// Filters Menu
 	Q3PopupMenu* filterMenu = new Q3PopupMenu;
@@ -1476,28 +1477,18 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
         m_windowCaptionMenu->setItemParameter(x, i + mapCaptionBase);
 	}
 	
-	connect (windowFontMenu, SIGNAL(activated(int)), 
-			 this, SLOT(set_main_WindowFont(int)));
+	connect (windowFontMenu, SIGNAL(activated(int)), this, SLOT(set_main_WindowFont(int)));
 	
 	
-	x = m_windowMenu->insertItem("Save Window Sizes && Positions", 
-								 this, SLOT(toggle_main_SavePosition(int)),
-								 0, -1, 2);
-	m_windowMenu->setItemChecked (x, pSEQPrefs->getPrefBool("SavePosition", 
-															"Interface",
-															true));
-	x = m_windowMenu->insertItem("Restore Window Positions", 
-								 this, SLOT(toggle_main_UseWindowPos(int)),
-								 0, -1, 3);
-	m_windowMenu->setItemChecked (x, pSEQPrefs->getPrefBool("UseWindowPos", 
-															"Interface",
-															true));
-	
+	x = m_windowMenu->insertItem("Save Window Sizes && Positions", this, SLOT(toggle_main_SavePosition(int)), 0, -1, 2);
+	m_windowMenu->setItemChecked(x, pSEQPrefs->getPrefBool("SavePosition", "Interface", true));
+	x = m_windowMenu->insertItem("Restore Window Positions", this, SLOT(toggle_main_UseWindowPos(int)), 0, -1, 3);
+	m_windowMenu->setItemChecked(x, pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true));	
 	m_windowMenu->insertSeparator(4);
 	
 	////////////////////////////////////////////////////////////////
 	// Debug menu
-	Q3PopupMenu* pDebugMenu = new Q3PopupMenu;
+	QMenu* pDebugMenu = new QMenu;
 	menuBar()->insertItem("&Debug", pDebugMenu);
 	pDebugMenu->insertItem("List I&nterface", this, SLOT(listInterfaceInfo()));
 	pDebugMenu->insertItem("List S&pawns", this, SLOT(listSpawns()), ALT+CTRL+Key_P);
@@ -1822,48 +1813,35 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	m_packet->connect2("OP_TargetMouse", SP_Zone, DIR_Client|DIR_Server, "clientTargetStruct", SZC_Match,
 					   this, SLOT(clientTarget(const uint8_t*)));
 #if 0 // ZBTEMP
-	connect(m_packet, SIGNAL(attack2Hand1(const uint8_t*, size_t, uint8_t)), 
-			this, SLOT(attack2Hand1(const uint8_t*)));
+	connect(m_packet, SIGNAL(attack2Hand1(const uint8_t*, size_t, uint8_t)), this, SLOT(attack2Hand1(const uint8_t*)));
 #endif
 	m_packet->connect2("OP_Action2", SP_Zone, DIR_Client|DIR_Server, "action2Struct", SZC_Match,
 					   this, SLOT(action2Message(const uint8_t*)));
 	m_packet->connect2("OP_Death", SP_Zone, DIR_Server, "newCorpseStruct", SZC_Match,
 					   this, SLOT(combatKillSpawn(const uint8_t*)));
 #if 0 // ZBTEMP
-	connect(m_packet, SIGNAL(interruptSpellCast(const uint8_t*, size_t, uint8_t)),
-			this, SLOT(interruptSpellCast(const uint8_t*)));
-	connect(m_packet, SIGNAL(moneyUpdate(const uint8_t*, size_t, uint8_t)),
-			this, SLOT(moneyUpdate(const uint8_t*)));
-	connect(m_packet, SIGNAL(moneyThing(const uint8_t*, size_t, uint8_t)),
-			this, SLOT(moneyThing(const uint8_t*)));
+	connect(m_packet, SIGNAL(interruptSpellCast(const uint8_t*, size_t, uint8_t)), this, SLOT(interruptSpellCast(const uint8_t*)));
+	connect(m_packet, SIGNAL(moneyUpdate(const uint8_t*, size_t, uint8_t)), this, SLOT(moneyUpdate(const uint8_t*)));
+	connect(m_packet, SIGNAL(moneyThing(const uint8_t*, size_t, uint8_t)), this, SLOT(moneyThing(const uint8_t*)));
 #endif // ZBTEMP
 	
 	connect(m_packet, SIGNAL(toggle_session_tracking()),
 			this, SLOT(toggle_net_session_tracking()));
 	
 	// connect EQInterface slots to ZoneMgr signals
-	connect(m_zoneMgr, SIGNAL(zoneBegin(const QString&)),
-			this, SLOT(zoneBegin(const QString&)));
-	connect(m_zoneMgr, SIGNAL(zoneEnd(const QString&, const QString&)),
-			this, SLOT(zoneEnd(const QString&, const QString&)));
-	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)),
-			this, SLOT(zoneChanged(const QString&)));
+	connect(m_zoneMgr, SIGNAL(zoneBegin(const QString&)), this, SLOT(zoneBegin(const QString&)));
+	connect(m_zoneMgr, SIGNAL(zoneEnd(const QString&, const QString&)), this, SLOT(zoneEnd(const QString&, const QString&)));
+	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)), this, SLOT(zoneChanged(const QString&)));
 	
 	// connect the SpellShell slots to EQInterface signals
-	connect(this, SIGNAL(spellMessage(QString&)),
-			m_spellShell, SLOT(spellMessage(QString&)));
+	connect(this, SIGNAL(spellMessage(QString&)), m_spellShell, SLOT(spellMessage(QString&)));
 	
 	// connect EQInterface slots to SpawnShell signals
-	connect(m_spawnShell, SIGNAL(addItem(const Item*)),
-			this, SLOT(addItem(const Item*)));
-	connect(m_spawnShell, SIGNAL(delItem(const Item*)),
-			this, SLOT(delItem(const Item*)));
-	connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)),
-			this, SLOT(killSpawn(const Item*)));
-	connect(m_spawnShell, SIGNAL(changeItem(const Item*, uint32_t)),
-			this, SLOT(changeItem(const Item*)));
-	connect(m_spawnShell, SIGNAL(spawnConsidered(const Item*)),
-			this, SLOT(spawnConsidered(const Item*)));
+	connect(m_spawnShell, SIGNAL(addItem(const Item*)), this, SLOT(addItem(const Item*)));
+	connect(m_spawnShell, SIGNAL(delItem(const Item*)), this, SLOT(delItem(const Item*)));
+	connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), this, SLOT(killSpawn(const Item*)));
+	connect(m_spawnShell, SIGNAL(changeItem(const Item*, uint32_t)), this, SLOT(changeItem(const Item*)));
+	connect(m_spawnShell, SIGNAL(spawnConsidered(const Item*)), this, SLOT(spawnConsidered(const Item*)));
 	
 	// connect the SpawnShell slots to Packet signals
 	m_packet->connect2("OP_GroundSpawn", SP_Zone, DIR_Server, "makeDropStruct", SZC_Match,
@@ -1876,57 +1854,40 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	//    m_packet->connect2("OP_NewSpawn", SP_Zone, DIR_Server,
 	// 		      "spawnStruct", SZC_Match,
 	// 		      m_spawnShell, SLOT(newSpawn(const uint8_t*)));
-	m_packet->connect2("OP_ZoneEntry", SP_Zone, DIR_Server,
-					   "uint8_t", SZC_None,
+	m_packet->connect2("OP_ZoneEntry", SP_Zone, DIR_Server, "uint8_t", SZC_None,
 					   m_spawnShell, SLOT(zoneEntry(const uint8_t*, size_t)));
-	m_packet->connect2("OP_MobUpdate", SP_Zone, DIR_Server|DIR_Client,
-					   "spawnPositionUpdate", SZC_Match,
+	m_packet->connect2("OP_MobUpdate", SP_Zone, DIR_Server|DIR_Client, "spawnPositionUpdate", SZC_Match,
 					   m_spawnShell, SLOT(updateSpawns(const uint8_t*)));
-	m_packet->connect2("OP_WearChange", SP_Zone, DIR_Server|DIR_Client,
-					   "SpawnUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_WearChange", SP_Zone, DIR_Server|DIR_Client, "SpawnUpdateStruct", SZC_Match,
 					   m_spawnShell, SLOT(updateSpawnInfo(const uint8_t*)));
-	m_packet->connect2("OP_HPUpdate", SP_Zone, DIR_Server|DIR_Client,
-					   "hpNpcUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_HPUpdate", SP_Zone, DIR_Server|DIR_Client, "hpNpcUpdateStruct", SZC_Match,
 					   m_spawnShell, SLOT(updateNpcHP(const uint8_t*)));
-	m_packet->connect2("OP_DeleteSpawn", SP_Zone, DIR_Server|DIR_Client,
-					   "deleteSpawnStruct", SZC_Match,
+	m_packet->connect2("OP_DeleteSpawn", SP_Zone, DIR_Server|DIR_Client, "deleteSpawnStruct", SZC_Match,
 					   m_spawnShell, SLOT(deleteSpawn(const uint8_t*)));
-	m_packet->connect2("OP_SpawnRename", SP_Zone, DIR_Server,
-					   "spawnRenameStruct", SZC_Match,
+	m_packet->connect2("OP_SpawnRename", SP_Zone, DIR_Server, "spawnRenameStruct", SZC_Match,
 					   m_spawnShell, SLOT(renameSpawn(const uint8_t*)));
-	m_packet->connect2("OP_Illusion", SP_Zone, DIR_Server|DIR_Client,
-					   "spawnIllusionStruct", SZC_Match,
+	m_packet->connect2("OP_Illusion", SP_Zone, DIR_Server|DIR_Client, "spawnIllusionStruct", SZC_Match,
 					   m_spawnShell, SLOT(illusionSpawn(const uint8_t*)));
-	m_packet->connect2("OP_SpawnAppearance", SP_Zone, DIR_Server|DIR_Client,
-					   "spawnAppearanceStruct", SZC_Match,
+	m_packet->connect2("OP_SpawnAppearance", SP_Zone, DIR_Server|DIR_Client, "spawnAppearanceStruct", SZC_Match,
 					   m_spawnShell, SLOT(updateSpawnAppearance(const uint8_t*)));
-	m_packet->connect2("OP_Death", SP_Zone, DIR_Server,
-					   "newCorpseStruct", SZC_Match,
+	m_packet->connect2("OP_Death", SP_Zone, DIR_Server, "newCorpseStruct", SZC_Match,
 					   m_spawnShell, SLOT(killSpawn(const uint8_t*)));
-	m_packet->connect2("OP_RespawnFromHover", SP_Zone, DIR_Server|DIR_Client,
-					   "uint8_t", SZC_None,
+	m_packet->connect2("OP_RespawnFromHover", SP_Zone, DIR_Server|DIR_Client, "uint8_t", SZC_None,
 					   m_spawnShell, SLOT(respawnFromHover(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_Shroud", SP_Zone, DIR_Server,
-					   "spawnShroudSelf", SZC_None,
+	m_packet->connect2("OP_Shroud", SP_Zone, DIR_Server, "spawnShroudSelf", SZC_None,
 					   m_spawnShell, SLOT(shroudSpawn(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_RemoveSpawn", SP_Zone, DIR_Server|DIR_Client,
-					   "removeSpawnStruct", SZC_None,
+	m_packet->connect2("OP_RemoveSpawn", SP_Zone, DIR_Server|DIR_Client, "removeSpawnStruct", SZC_None,
 					   m_spawnShell, SLOT(removeSpawn(const uint8_t*, size_t, uint8_t)));
 #if 0 // ZBTEMP
-	connect(m_packet, SIGNAL(spawnWearingUpdate(const uint8_t*, size_t, uint8_t)),
-			m_spawnShell, SLOT(spawnWearingUpdate(const uint8_t*)));
+	connect(m_packet, SIGNAL(spawnWearingUpdate(const uint8_t*, size_t, uint8_t)), m_spawnShell, SLOT(spawnWearingUpdate(const uint8_t*)));
 #endif
-	m_packet->connect2("OP_Consider", SP_Zone, DIR_Server|DIR_Client,
-					   "considerStruct", SZC_Match,
+	m_packet->connect2("OP_Consider", SP_Zone, DIR_Server|DIR_Client, "considerStruct", SZC_Match,
 					   m_spawnShell, SLOT(consMessage(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_NpcMoveUpdate", SP_Zone, DIR_Server,
-					   "uint8_t", SZC_None,
+	m_packet->connect2("OP_NpcMoveUpdate", SP_Zone, DIR_Server, "uint8_t", SZC_None,
 					   m_spawnShell, SLOT(npcMoveUpdate(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_ClientUpdate", SP_Zone, DIR_Server,
-					   "playerSpawnPosStruct", SZC_Match,
+	m_packet->connect2("OP_ClientUpdate", SP_Zone, DIR_Server, "playerSpawnPosStruct", SZC_Match,
 					   m_spawnShell, SLOT(playerUpdate(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_CorpseLocResponse", SP_Zone, DIR_Server,
-					   "corpseLocStruct", SZC_Match,
+	m_packet->connect2("OP_CorpseLocResponse", SP_Zone, DIR_Server, "corpseLocStruct", SZC_Match,
 					   m_spawnShell, SLOT(corpseLoc(const uint8_t*)));
 #if 0 // No longer used as of 5-22-2008
 	m_packet->connect2("OP_ZoneSpawns", SP_Zone, DIR_Server,
@@ -1935,146 +1896,101 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 #endif
 	
 	// connect the SpellShell slots to ZoneMgr signals
-	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)),
-			m_spellShell, SLOT(zoneChanged()));
+	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)), m_spellShell, SLOT(zoneChanged()));
 	
 	// connect the SpellShell slots to SpawnShell signals
-	connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)),
-			m_spellShell, SLOT(killSpawn(const Item*)));
+	connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), m_spellShell, SLOT(killSpawn(const Item*)));
 	
 	// connect the SpellShell slots to Player signals
-	connect(m_player, SIGNAL(newPlayer(void)),
-			m_spellShell, SLOT(clear()));
-	connect(m_player, SIGNAL(buffLoad(const spellBuff *)), 
-			m_spellShell, SLOT(buffLoad(const spellBuff *)));
+	connect(m_player, SIGNAL(newPlayer(void)), m_spellShell, SLOT(clear()));
+	connect(m_player, SIGNAL(buffLoad(const spellBuff *)), m_spellShell, SLOT(buffLoad(const spellBuff *)));
 	
 	// connect the SpellShell slots to EQPacket signals
-	m_packet->connect2("OP_CastSpell", SP_Zone, DIR_Server|DIR_Client,
-					   "startCastStruct", SZC_Match,
+	m_packet->connect2("OP_CastSpell", SP_Zone, DIR_Server|DIR_Client, "startCastStruct", SZC_Match,
 					   m_spellShell, SLOT(selfStartSpellCast(const uint8_t*)));
-	m_packet->connect2("OP_Buff", SP_Zone, DIR_Server|DIR_Client,
-					   "buffStruct", SZC_Match,
+	m_packet->connect2("OP_Buff", SP_Zone, DIR_Server|DIR_Client, "buffStruct", SZC_Match,
 					   m_spellShell, SLOT(buff(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_Action", SP_Zone, DIR_Server|DIR_Client,
-					   "actionStruct", SZC_Match,
+	m_packet->connect2("OP_Action", SP_Zone, DIR_Server|DIR_Client, "actionStruct", SZC_Match,
 					   m_spellShell, SLOT(action(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_Action", SP_Zone, DIR_Server|DIR_Client,
-					   "actionAltStruct", SZC_Match,
+	m_packet->connect2("OP_Action", SP_Zone, DIR_Server|DIR_Client, "actionAltStruct", SZC_Match,
 					   m_spellShell, SLOT(action(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_SimpleMessage", SP_Zone, DIR_Server,
-					   "simpleMessageStruct", SZC_Match,
-					   m_spellShell,
-					   SLOT(simpleMessage(const uint8_t*, size_t, uint8_t)));
+	m_packet->connect2("OP_SimpleMessage", SP_Zone, DIR_Server, "simpleMessageStruct", SZC_Match,
+					   m_spellShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t)));
 	
 	
 	// connect Player slots to EQPacket signals
-	connect(m_zoneMgr, SIGNAL(playerProfile(const charProfileStruct*)),
-			m_player, SLOT(player(const charProfileStruct*)));
-	m_packet->connect2("OP_SkillUpdate", SP_Zone, DIR_Server,
-					   "skillIncStruct", SZC_Match,
+	connect(m_zoneMgr, SIGNAL(playerProfile(const charProfileStruct*)), m_player, SLOT(player(const charProfileStruct*)));
+	m_packet->connect2("OP_SkillUpdate", SP_Zone, DIR_Server, "skillIncStruct", SZC_Match,
 					   m_player, SLOT(increaseSkill(const uint8_t*)));
-	m_packet->connect2("OP_ManaChange", SP_Zone, DIR_Server,
-					   "manaDecrementStruct", SZC_Match,
+	m_packet->connect2("OP_ManaChange", SP_Zone, DIR_Server, "manaDecrementStruct", SZC_Match,
 					   m_player, SLOT(manaChange(const uint8_t*)));
-	m_packet->connect2("OP_ClientUpdate", SP_Zone, DIR_Server|DIR_Client,
-					   "playerSelfPosStruct", SZC_Match,
+	m_packet->connect2("OP_ClientUpdate", SP_Zone, DIR_Server|DIR_Client, "playerSelfPosStruct", SZC_Match,
 					   m_player, SLOT(playerUpdateSelf(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_ExpUpdate", SP_Zone, DIR_Server,
-					   "expUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_ExpUpdate", SP_Zone, DIR_Server, "expUpdateStruct", SZC_Match,
 					   m_player, SLOT(updateExp(const uint8_t*)));
-	m_packet->connect2("OP_AAExpUpdate", SP_Zone, DIR_Server,
-					   "altExpUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_AAExpUpdate", SP_Zone, DIR_Server, "altExpUpdateStruct", SZC_Match,
 					   m_player, SLOT(updateAltExp(const uint8_t*)));
-	m_packet->connect2("OP_LevelUpdate", SP_Zone, DIR_Server,
-					   "levelUpUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_LevelUpdate", SP_Zone, DIR_Server, "levelUpUpdateStruct", SZC_Match,
 					   m_player, SLOT(updateLevel(const uint8_t*)));
-	m_packet->connect2("OP_HPUpdate", SP_Zone, DIR_Server|DIR_Client,
-					   "hpNpcUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_HPUpdate", SP_Zone, DIR_Server|DIR_Client, "hpNpcUpdateStruct", SZC_Match,
 					   m_player, SLOT(updateNpcHP(const uint8_t*)));
-	m_packet->connect2("OP_WearChange", SP_Zone, DIR_Server|DIR_Client,
-					   "SpawnUpdateStruct", SZC_Match,
+	m_packet->connect2("OP_WearChange", SP_Zone, DIR_Server|DIR_Client, "SpawnUpdateStruct", SZC_Match,
 					   m_player, SLOT(updateSpawnInfo(const uint8_t*)));
-	m_packet->connect2("OP_Stamina", SP_Zone, DIR_Server,
-					   "staminaStruct", SZC_Match,
+	m_packet->connect2("OP_Stamina", SP_Zone, DIR_Server, "staminaStruct", SZC_Match,
 					   m_player, SLOT(updateStamina(const uint8_t*)));
-	m_packet->connect2("OP_Consider", SP_Zone, DIR_Server|DIR_Client,
-					   "considerStruct", SZC_Match,
+	m_packet->connect2("OP_Consider", SP_Zone, DIR_Server|DIR_Client, "considerStruct", SZC_Match,
 					   m_player, SLOT(consMessage(const uint8_t*, size_t, uint8_t)));
-	m_packet->connect2("OP_SwapSpell", SP_Zone, DIR_Server,
-					   "tradeSpellBookSlotsStruct", SZC_Match,
+	m_packet->connect2("OP_SwapSpell", SP_Zone, DIR_Server, "tradeSpellBookSlotsStruct", SZC_Match,
 					   m_player, SLOT(tradeSpellBookSlots(const uint8_t*, size_t, uint8_t)));
 	
 	// interface statusbar slots
-	connect (this, SIGNAL(newZoneName(const QString&)),
-			 m_stsbarZone, SLOT(setText(const QString&)));
-	connect (m_packet, SIGNAL(stsMessage(const QString &, int)),
-			 this, SLOT(stsMessage(const QString &, int)));
-	connect (m_spawnShell, SIGNAL(numSpawns(int)),
-			 this, SLOT(numSpawns(int)));
-	connect (m_packet, SIGNAL(numPacket(int, int)),
-			 this, SLOT(numPacket(int, int)));
-	connect (m_packet, SIGNAL(resetPacket(int, int)),
-			 this, SLOT(resetPacket(int, int)));
-	connect (m_player, SIGNAL(newSpeed(double)),
-			 this, SLOT(newSpeed(double)));
-	connect(m_player, SIGNAL(setExp(uint32_t, uint32_t, uint32_t, uint32_t, 
-									uint32_t)),
-			this, SLOT(setExp(uint32_t, uint32_t, uint32_t, 
-							  uint32_t, uint32_t)));
-	connect(m_player, SIGNAL(newExp(uint32_t, uint32_t, uint32_t, uint32_t, 
-									uint32_t, uint32_t)),
-			this, SLOT(newExp(uint32_t, uint32_t, uint32_t,  
-							  uint32_t, uint32_t, uint32_t)));
+	connect (this, SIGNAL(newZoneName(const QString&)), m_stsbarZone, SLOT(setText(const QString&)));
+	connect (m_packet, SIGNAL(stsMessage(const QString &, int)), this, SLOT(stsMessage(const QString &, int)));
+	connect (m_spawnShell, SIGNAL(numSpawns(int)), this, SLOT(numSpawns(int)));
+	connect (m_packet, SIGNAL(numPacket(int, int)), this, SLOT(numPacket(int, int)));
+	connect (m_packet, SIGNAL(resetPacket(int, int)), this, SLOT(resetPacket(int, int)));
+	connect (m_player, SIGNAL(newSpeed(double)), this, SLOT(newSpeed(double)));
+	connect(m_player, SIGNAL(setExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)),
+			this, SLOT(setExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)));
+	connect(m_player, SIGNAL(newExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)),
+			this, SLOT(newExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)));
 	connect(m_player, SIGNAL(setAltExp(uint32_t, uint32_t, uint32_t, uint32_t)),
 			this, SLOT(setAltExp(uint32_t, uint32_t, uint32_t, uint32_t)));
-	connect(m_player, SIGNAL(newAltExp(uint32_t, uint32_t, uint32_t, uint32_t,
-									   uint32_t, uint32_t)),
-			this, SLOT(newAltExp(uint32_t, uint32_t, uint32_t, uint32_t,
-								 uint32_t, uint32_t)));
-	connect(m_player, SIGNAL(levelChanged(uint8_t)),
-			this, SLOT(levelChanged(uint8_t)));
+	connect(m_player, SIGNAL(newAltExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)),
+			this, SLOT(newAltExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)));
+	connect(m_player, SIGNAL(levelChanged(uint8_t)), this, SLOT(levelChanged(uint8_t)));
 	
-	if (m_expWindow != 0)
+	if (m_expWindow != NULL)
 	{
 		// connect ExperienceWindow slots to Player signals
-		connect(m_player, SIGNAL(newPlayer(void)),
-				m_expWindow, SLOT(clear(void)));
+		connect(m_player, SIGNAL(newPlayer(void)), m_expWindow, SLOT(clear(void)));
 		connect(m_player, SIGNAL(expGained(const QString &, int, long, QString )),
 				m_expWindow, SLOT(addExpRecord(const QString &, int, long,QString )));
 		
 		// connect ExperienceWindow slots to EQInterface signals
-		connect(this, SIGNAL(restoreFonts(void)),
-				m_expWindow, SLOT(restoreFont(void)));
-		connect(this, SIGNAL(saveAllPrefs(void)),
-				m_expWindow, SLOT(savePrefs(void)));
+		connect(this, SIGNAL(restoreFonts(void)), m_expWindow, SLOT(restoreFont(void)));
+		connect(this, SIGNAL(saveAllPrefs(void)), m_expWindow, SLOT(savePrefs(void)));
 	}
 	
-	if (m_combatWindow != 0)
+	if (m_combatWindow != NULL)
 	{
 		// connect CombatWindow slots to the signals
-		connect(m_player, SIGNAL(newPlayer(void)),
-				m_combatWindow, SLOT(clear(void)));
+		connect(m_player, SIGNAL(newPlayer(void)), m_combatWindow, SLOT(clear(void)));
 		connect (this, SIGNAL(combatSignal(int, int, int, int, int, QString, QString)),
 				 m_combatWindow, SLOT(addCombatRecord(int, int, int, int, int, QString, QString)));
-		connect (m_spawnShell, SIGNAL(spawnConsidered(const Item*)),
-				 m_combatWindow, SLOT(resetDPS()));
-		connect(this, SIGNAL(restoreFonts(void)),
-				m_combatWindow, SLOT(restoreFont(void)));
-		connect(this, SIGNAL(saveAllPrefs(void)),
-				m_combatWindow, SLOT(savePrefs(void)));
+		connect (m_spawnShell, SIGNAL(spawnConsidered(const Item*)), m_combatWindow, SLOT(resetDPS()));
+		connect(this, SIGNAL(restoreFonts(void)), m_combatWindow, SLOT(restoreFont(void)));
+		connect(this, SIGNAL(saveAllPrefs(void)), m_combatWindow, SLOT(savePrefs(void)));
 	}
 	
 	
 	//
 	// Geometry Configuration
 	//
-	
 	QSize s;
 	QPoint p;
 	
-	
 	// interface components
-	
 	// set mainwindow Geometry
 	section = "Interface";
 	s = pSEQPrefs->getPrefSize("WindowSize", section, size());
@@ -2086,33 +2002,37 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	}
 	show();
 	
-	Q3Accel *accel = new Q3Accel(this);
-	accel->connectItem( accel->insertItem(CTRL+ALT+Key_S), this, SLOT(toggle_view_statusbar()));
-	accel->connectItem( accel->insertItem(CTRL+ALT+Key_T), this, SLOT(toggle_view_menubar()));
+	QAction* toggleStatusBar = new QAction(this);
+	toggleStatusBar->setShortcut(CTRL+ALT+Key_S);
+	connect(toggleStatusBar, SIGNAL(triggered()), this, SLOT(toggle_view_statusbar()));
+	this->addAction(toggleStatusBar);
 	
+	QAction* toggleMenuBar = new QAction(this);
+	toggleMenuBar->setShortcut(CTRL+ALT+Key_T);
+	connect(toggleMenuBar, SIGNAL(triggered()), this, SLOT(toggle_view_menubar()));
+	this->addAction(toggleMenuBar);
+
 	// load in the docking preferences if any have been saved
-	QString dockPrefs = pSEQPrefs->getPrefString("DockingInfo", section, QString());
+	QByteArray dockPrefs = pSEQPrefs->getPrefVariant("DockingInfo", section, QVariant()).toByteArray();
 	if (!dockPrefs.isEmpty())
 	{
-		Q3TextStream ts(&dockPrefs, QIODevice::ReadOnly);
-		// ???
-#ifndef QT3_SUPPORT
-		ts >> *this;
-#endif
+		if (!restoreState(dockPrefs, m_stateVersion))
+		{
+			seqDebug("Unable to restore state version %i", m_stateVersion);
+		}
 	}
 	
 	// Set main window title
 	// TODO: Add % replacement values and a signal to update, for ip address currently
 	// TODO: being monitored.
-	
-	QMainWindow::setCaption(pSEQPrefs->getPrefString("Caption", section, "ShowEQ - Main (ctrl+alt+t to toggle menubar)"));
+	setCaption(pSEQPrefs->getPrefString("Caption", section, "ShowEQ - Main (ctrl+alt+t to toggle menubar)"));
 	
 	// load the format strings for display
 	loadFormatStrings();
 	
 	/* Start the packet capturing */
 	m_packet->start (10);
-}// end constructor
+} // end constructor
 ////////////////////
 
 EQInterface::~EQInterface()
@@ -2205,8 +2125,7 @@ void EQInterface::restoreStatusFont()
 {
 	QFont defFont;
 	defFont.setPointSize(8);
-	QFont statusFont = pSEQPrefs->getPrefFont("StatusFont", "Interface", 
-											  defFont);
+	QFont statusFont = pSEQPrefs->getPrefFont("StatusFont", "Interface", defFont);
 	
 	int statusFixedHeight = statusFont.pointSize() + 6;
 	
@@ -2232,7 +2151,7 @@ void EQInterface::restoreStatusFont()
 	m_stsbarZEM->setFixedHeight(statusFixedHeight);
 }
 
-void EQInterface::toggle_view_StatWin( int id )
+void EQInterface::toggle_view_StatWin(int id)
 {
 	int statnum;
 	
@@ -2252,7 +2171,7 @@ void EQInterface::toggle_view_StatWin( int id )
 	}
 }
 
-void EQInterface::toggle_view_SkillWin( int id )
+void EQInterface::toggle_view_SkillWin(int id)
 {
 	int skillnum;
 	
@@ -2276,7 +2195,7 @@ void EQInterface::toggle_view_SkillWin( int id )
 	}
 }
 
-void EQInterface::toggle_view_SpawnListCol( int id )
+void EQInterface::toggle_view_SpawnListCol(int id)
 {
 	int colnum;
 	
@@ -2426,7 +2345,7 @@ void EQInterface::toggle_view_DockedWin(int id)
 }
 
 
-void EQInterface::toggle_view_DockableWin( int id )
+void EQInterface::toggle_view_DockableWin(int id)
 {
 	SEQWindow* widget = 0;
 	int winnum;
@@ -2548,7 +2467,7 @@ void EQInterface::toggle_view_DockableWin( int id )
 		widget->setDockEnabled(dockable);
 }
 
-void EQInterface::set_main_WindowCaption( int id )
+void EQInterface::set_main_WindowCaption(int id)
 {
 	QWidget* widget = 0;
 	int winnum;
@@ -2643,7 +2562,7 @@ void EQInterface::set_main_WindowCaption( int id )
 }
 
 
-void EQInterface::set_main_WindowFont( int id )
+void EQInterface::set_main_WindowFont(int id)
 {
 	int winnum;
 	
@@ -2911,13 +2830,13 @@ void EQInterface::set_main_statusbar_Font(int id)
 	}
 }
 
-void EQInterface::toggle_main_SavePosition (int id)
+void EQInterface::toggle_main_SavePosition(int id)
 {
     pSEQPrefs->setPrefBool("SavePosition", "Interface", !pSEQPrefs->getPrefBool("SavePosition", "Interface"));
     m_windowMenu->setItemChecked(id, pSEQPrefs->getPrefBool("SavePosition", "Interface"));
 }
 
-void EQInterface::toggle_main_UseWindowPos (int id)
+void EQInterface::toggle_main_UseWindowPos(int id)
 {
     pSEQPrefs->setPrefBool("UseWindowPos", "Interface", !pSEQPrefs->getPrefBool("UseWindowPos", "Interface"));
     m_windowMenu->setItemChecked(id, pSEQPrefs->getPrefBool("UseWindowPos", "Interface"));
@@ -2926,7 +2845,7 @@ void EQInterface::toggle_main_UseWindowPos (int id)
 //
 // save prefs
 //
-void EQInterface::savePrefs(void)
+void EQInterface::savePrefs()
 {
 	seqDebug("==> EQInterface::savePrefs()");
 	
@@ -2940,10 +2859,13 @@ void EQInterface::savePrefs(void)
 		QString dockPrefs;
 		Q3TextStream ts(&dockPrefs, QIODevice::WriteOnly);
 		
-#ifndef QT3_SUPPORT
-		ts << *this;
-#endif
-		pSEQPrefs->setPrefString("DockingInfo", interfaceSection, dockPrefs);
+		// save state info
+		QByteArray info = saveState(m_stateVersion);
+		if (!info.isEmpty())
+		{
+			pSEQPrefs->setPrefVariant("DockingInfo", interfaceSection, QVariant(info));
+		}
+		//pSEQPrefs->setPrefString("DockingInfo", interfaceSection, dockPrefs);
 		
 		// send savePrefs signal out
 		emit saveAllPrefs();

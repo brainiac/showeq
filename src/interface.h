@@ -491,6 +491,8 @@ private:
 	bool m_selectOnTarget;
 	bool m_useUpdateRadius;
 	
+	int m_stateVersion;
+	
 private:
 	// menu items
 	void createFileMenu();

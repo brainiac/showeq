@@ -628,7 +628,7 @@ MessageWindow::~MessageWindow()
   delete [] m_typeStyles;
 }
 
-Q3PopupMenu* MessageWindow::menu()
+QMenu* MessageWindow::menu()
 {
   return m_menu;
 }

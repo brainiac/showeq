@@ -462,7 +462,7 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 			QStringList::Iterator it = stringList.begin();
 			
 			for (j = 0; 
-				 ((j < stringNodeList.length()) && (it != stringList.end()));
+				 ((j < (int32_t)stringNodeList.length()) && (it != stringList.end()));
 				 j++)
 			{
 				// get the current string element
@@ -478,10 +478,10 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 			// more nodes in previous stringlist then current, remove excess nodes
 			if (stringNodeList.count() > stringList.count())
 			{
-				while (j < stringNodeList.count())
+				while (j < (int32_t)stringNodeList.count())
 					e.removeChild(stringNodeList.item(j).toElement());
 			}
-			else if (j <stringList.count())
+			else if (j < (int32_t)stringList.count())
 			{
 				while (it != stringList.end())
 				{
