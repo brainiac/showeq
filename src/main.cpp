@@ -51,7 +51,7 @@
 
 #include "datalocationmgr.h"
 
-static const char *id = "@(#) $Id: main.cpp 718 2009-01-20 17:41:14Z ieatacid $ $Name$";
+static const char *id = "@(#) $Id$ $Name$";
 
 /* **********************************
    defines used for option processing
