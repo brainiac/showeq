@@ -214,6 +214,99 @@
 		6FA0906FA0906FA090000000 /* xmlconv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xmlconv.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlconv.cpp"; sourceTree = "<absolute>"; };
 		6FABE06FABE06FABE0000000 /* xmlpreferences.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xmlpreferences.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/xmlpreferences.cpp"; sourceTree = "<absolute>"; };
 		6FB7206FB7206FB720000000 /* seqwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seqwindow.cpp; path = "/Users/brainiac/Development/ShowEQ-5.13.1.0/src/seqwindow.cpp"; sourceTree = "<absolute>"; };
+		F74FA5440F50F7D100014A6C /* bazaarlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bazaarlog.h; path = src/bazaarlog.h; sourceTree = "<group>"; };
+		F74FA5450F50F7D100014A6C /* category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = category.h; path = src/category.h; sourceTree = "<group>"; };
+		F74FA5460F50F7D100014A6C /* cgiconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cgiconv.h; path = src/cgiconv.h; sourceTree = "<group>"; };
+		F74FA5470F50F7D100014A6C /* classes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classes.h; path = src/classes.h; sourceTree = "<group>"; };
+		F74FA5480F50F7D100014A6C /* combatlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = combatlog.h; path = src/combatlog.h; sourceTree = "<group>"; };
+		F74FA5490F50F7D100014A6C /* compass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compass.h; path = src/compass.h; sourceTree = "<group>"; };
+		F74FA54A0F50F7D100014A6C /* compassframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compassframe.h; path = src/compassframe.h; sourceTree = "<group>"; };
+		F74FA54B0F50F7D100014A6C /* crctab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crctab.h; path = src/crctab.h; sourceTree = "<group>"; };
+		F74FA54C0F50F7D100014A6C /* datalocationmgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = datalocationmgr.h; path = src/datalocationmgr.h; sourceTree = "<group>"; };
+		F74FA54D0F50F7D100014A6C /* datetimemgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = datetimemgr.h; path = src/datetimemgr.h; sourceTree = "<group>"; };
+		F74FA54E0F50F7D100014A6C /* db3conv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db3conv.h; path = src/db3conv.h; sourceTree = "<group>"; };
+		F74FA54F0F50F7D100014A6C /* dbcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbcommon.h; path = src/dbcommon.h; sourceTree = "<group>"; };
+		F74FA5500F50F7D100014A6C /* decode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decode.h; path = src/decode.h; sourceTree = "<group>"; };
+		F74FA5510F50F7D100014A6C /* deity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deity.h; path = src/deity.h; sourceTree = "<group>"; };
+		F74FA5520F50F7D100014A6C /* diagnosticmessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = diagnosticmessages.h; path = src/diagnosticmessages.h; sourceTree = "<group>"; };
+		F74FA5530F50F7D100014A6C /* editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editor.h; path = src/editor.h; sourceTree = "<group>"; };
+		F74FA5540F50F7D100014A6C /* eqstr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eqstr.h; path = src/eqstr.h; sourceTree = "<group>"; };
+		F74FA5550F50F7D100014A6C /* everquest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = everquest.h; path = src/everquest.h; sourceTree = "<group>"; };
+		F74FA5560F50F7D100014A6C /* experiencelog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = experiencelog.h; path = src/experiencelog.h; sourceTree = "<group>"; };
+		F74FA5570F50F7D100014A6C /* filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filter.h; path = src/filter.h; sourceTree = "<group>"; };
+		F74FA5580F50F7D100014A6C /* filteredspawnlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filteredspawnlog.h; path = src/filteredspawnlog.h; sourceTree = "<group>"; };
+		F74FA5590F50F7D100014A6C /* filtermgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filtermgr.h; path = src/filtermgr.h; sourceTree = "<group>"; };
+		F74FA55A0F50F7D100014A6C /* filternotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filternotifications.h; path = src/filternotifications.h; sourceTree = "<group>"; };
+		F74FA55B0F50F7D100014A6C /* fixpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fixpt.h; path = src/fixpt.h; sourceTree = "<group>"; };
+		F74FA55C0F50F7D100014A6C /* gdbmconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gdbmconv.h; path = src/gdbmconv.h; sourceTree = "<group>"; };
+		F74FA55D0F50F7D100014A6C /* group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = group.h; path = src/group.h; sourceTree = "<group>"; };
+		F74FA55E0F50F7D100014A6C /* guild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = guild.h; path = src/guild.h; sourceTree = "<group>"; };
+		F74FA55F0F50F7D100014A6C /* guildlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = guildlist.h; path = src/guildlist.h; sourceTree = "<group>"; };
+		F74FA5600F50F7D100014A6C /* guildshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = guildshell.h; path = src/guildshell.h; sourceTree = "<group>"; };
+		F74FA5610F50F7D100014A6C /* itemdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = itemdb.h; path = src/itemdb.h; sourceTree = "<group>"; };
+		F74FA5620F50F7D100014A6C /* languages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = languages.h; path = src/languages.h; sourceTree = "<group>"; };
+		F74FA5630F50F7D100014A6C /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = logger.h; path = src/logger.h; sourceTree = "<group>"; };
+		F74FA5640F50F7D100014A6C /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/main.h; sourceTree = "<group>"; };
+		F74FA5650F50F7D100014A6C /* map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = map.h; path = src/map.h; sourceTree = "<group>"; };
+		F74FA5660F50F7D100014A6C /* mapcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapcore.h; path = src/mapcore.h; sourceTree = "<group>"; };
+		F74FA5670F50F7D100014A6C /* mapicon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapicon.h; path = src/mapicon.h; sourceTree = "<group>"; };
+		F74FA5680F50F7D100014A6C /* mapicondialog.ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapicondialog.ui.h; path = src/mapicondialog.ui.h; sourceTree = "<group>"; };
+		F74FA5690F50F7D100014A6C /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = message.h; path = src/message.h; sourceTree = "<group>"; };
+		F74FA56A0F50F7D100014A6C /* messagefilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messagefilter.h; path = src/messagefilter.h; sourceTree = "<group>"; };
+		F74FA56B0F50F7D100014A6C /* messagefilterdialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messagefilterdialog.h; path = src/messagefilterdialog.h; sourceTree = "<group>"; };
+		F74FA56C0F50F7D100014A6C /* messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messages.h; path = src/messages.h; sourceTree = "<group>"; };
+		F74FA56D0F50F7D100014A6C /* messageshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageshell.h; path = src/messageshell.h; sourceTree = "<group>"; };
+		F74FA56E0F50F7D100014A6C /* messagewindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messagewindow.h; path = src/messagewindow.h; sourceTree = "<group>"; };
+		F74FA56F0F50F7D100014A6C /* netdiag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netdiag.h; path = src/netdiag.h; sourceTree = "<group>"; };
+		F74FA5700F50F7D100014A6C /* netstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netstream.h; path = src/netstream.h; sourceTree = "<group>"; };
+		F74FA5710F50F7D100014A6C /* opcodetable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opcodetable.h; path = src/opcodetable.h; sourceTree = "<group>"; };
+		F74FA5720F50F7D100014A6C /* packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packet.h; path = src/packet.h; sourceTree = "<group>"; };
+		F74FA5730F50F7D100014A6C /* packetcapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetcapture.h; path = src/packetcapture.h; sourceTree = "<group>"; };
+		F74FA5740F50F7D100014A6C /* packetcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetcommon.h; path = src/packetcommon.h; sourceTree = "<group>"; };
+		F74FA5750F50F7D100014A6C /* packetformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetformat.h; path = src/packetformat.h; sourceTree = "<group>"; };
+		F74FA5760F50F7D100014A6C /* packetfragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetfragment.h; path = src/packetfragment.h; sourceTree = "<group>"; };
+		F74FA5770F50F7D100014A6C /* packetinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetinfo.h; path = src/packetinfo.h; sourceTree = "<group>"; };
+		F74FA5780F50F7D100014A6C /* packetlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetlog.h; path = src/packetlog.h; sourceTree = "<group>"; };
+		F74FA5790F50F7D100014A6C /* packetstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packetstream.h; path = src/packetstream.h; sourceTree = "<group>"; };
+		F74FA57A0F50F7D100014A6C /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = player.h; path = src/player.h; sourceTree = "<group>"; };
+		F74FA57B0F50F7D100014A6C /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point.h; path = src/point.h; sourceTree = "<group>"; };
+		F74FA57C0F50F7D100014A6C /* pointarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pointarray.h; path = src/pointarray.h; sourceTree = "<group>"; };
+		F74FA57D0F50F7D100014A6C /* races.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = races.h; path = src/races.h; sourceTree = "<group>"; };
+		F74FA57E0F50F7D100014A6C /* s_everquest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = s_everquest.h; path = src/s_everquest.h; sourceTree = "<group>"; };
+		F74FA57F0F50F7D100014A6C /* seqlistview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = seqlistview.h; path = src/seqlistview.h; sourceTree = "<group>"; };
+		F74FA5800F50F7D100014A6C /* seqwindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = seqwindow.h; path = src/seqwindow.h; sourceTree = "<group>"; };
+		F74FA5810F50F7D100014A6C /* skilllist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skilllist.h; path = src/skilllist.h; sourceTree = "<group>"; };
+		F74FA5820F50F7D100014A6C /* skills.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skills.h; path = src/skills.h; sourceTree = "<group>"; };
+		F74FA5830F50F7D100014A6C /* spawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawn.h; path = src/spawn.h; sourceTree = "<group>"; };
+		F74FA5840F50F7D100014A6C /* spawnlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlist.h; path = src/spawnlist.h; sourceTree = "<group>"; };
+		F74FA5850F50F7D100014A6C /* spawnlist2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlist2.h; path = src/spawnlist2.h; sourceTree = "<group>"; };
+		F74FA5860F50F7D100014A6C /* spawnlistcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlistcommon.h; path = src/spawnlistcommon.h; sourceTree = "<group>"; };
+		F74FA5870F50F7D100014A6C /* spawnlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnlog.h; path = src/spawnlog.h; sourceTree = "<group>"; };
+		F74FA5880F50F7D100014A6C /* spawnmonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnmonitor.h; path = src/spawnmonitor.h; sourceTree = "<group>"; };
+		F74FA5890F50F7D100014A6C /* spawnpointlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnpointlist.h; path = src/spawnpointlist.h; sourceTree = "<group>"; };
+		F74FA58A0F50F7D100014A6C /* spawnshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spawnshell.h; path = src/spawnshell.h; sourceTree = "<group>"; };
+		F74FA58B0F50F7D100014A6C /* spelllist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spelllist.h; path = src/spelllist.h; sourceTree = "<group>"; };
+		F74FA58C0F50F7D100014A6C /* spells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spells.h; path = src/spells.h; sourceTree = "<group>"; };
+		F74FA58D0F50F7D100014A6C /* spellshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spellshell.h; path = src/spellshell.h; sourceTree = "<group>"; };
+		F74FA58E0F50F7D100014A6C /* staticspells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = staticspells.h; path = src/staticspells.h; sourceTree = "<group>"; };
+		F74FA58F0F50F7D100014A6C /* statlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = statlist.h; path = src/statlist.h; sourceTree = "<group>"; };
+		F74FA5900F50F7D100014A6C /* strnlen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = strnlen.h; path = src/strnlen.h; sourceTree = "<group>"; };
+		F74FA5910F50F7D100014A6C /* terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = terminal.h; path = src/terminal.h; sourceTree = "<group>"; };
+		F74FA5920F50F7D100014A6C /* typenames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = typenames.h; path = src/typenames.h; sourceTree = "<group>"; };
+		F74FA5930F50F7D100014A6C /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
+		F74FA5940F50F7D100014A6C /* vpacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vpacket.h; path = src/vpacket.h; sourceTree = "<group>"; };
+		F74FA5950F50F7D100014A6C /* weapons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons.h; path = src/weapons.h; sourceTree = "<group>"; };
+		F74FA5960F50F7D100014A6C /* weapons1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons1.h; path = src/weapons1.h; sourceTree = "<group>"; };
+		F74FA5970F50F7D100014A6C /* weapons2a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons2a.h; path = src/weapons2a.h; sourceTree = "<group>"; };
+		F74FA5980F50F7D100014A6C /* weapons2b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons2b.h; path = src/weapons2b.h; sourceTree = "<group>"; };
+		F74FA5990F50F7D100014A6C /* weapons2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons2c.h; path = src/weapons2c.h; sourceTree = "<group>"; };
+		F74FA59A0F50F7D100014A6C /* weapons27.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons27.h; path = src/weapons27.h; sourceTree = "<group>"; };
+		F74FA59B0F50F7D100014A6C /* weapons28.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons28.h; path = src/weapons28.h; sourceTree = "<group>"; };
+		F74FA59C0F50F7D100014A6C /* weapons29.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = weapons29.h; path = src/weapons29.h; sourceTree = "<group>"; };
+		F74FA59D0F50F7D100014A6C /* xmlconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xmlconv.h; path = src/xmlconv.h; sourceTree = "<group>"; };
+		F74FA59E0F50F7D100014A6C /* xmlpreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xmlpreferences.h; path = src/xmlpreferences.h; sourceTree = "<group>"; };
+		F74FA59F0F50F7D100014A6C /* zonemgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zonemgr.h; path = src/zonemgr.h; sourceTree = "<group>"; };
+		F74FA5A00F50F7D100014A6C /* zones.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zones.h; path = src/zones.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -380,6 +473,99 @@
 		6DB4A06DB4A06DB4A0000000 /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
+				F74FA5440F50F7D100014A6C /* bazaarlog.h */,
+				F74FA5450F50F7D100014A6C /* category.h */,
+				F74FA5460F50F7D100014A6C /* cgiconv.h */,
+				F74FA5470F50F7D100014A6C /* classes.h */,
+				F74FA5480F50F7D100014A6C /* combatlog.h */,
+				F74FA5490F50F7D100014A6C /* compass.h */,
+				F74FA54A0F50F7D100014A6C /* compassframe.h */,
+				F74FA54B0F50F7D100014A6C /* crctab.h */,
+				F74FA54C0F50F7D100014A6C /* datalocationmgr.h */,
+				F74FA54D0F50F7D100014A6C /* datetimemgr.h */,
+				F74FA54E0F50F7D100014A6C /* db3conv.h */,
+				F74FA54F0F50F7D100014A6C /* dbcommon.h */,
+				F74FA5500F50F7D100014A6C /* decode.h */,
+				F74FA5510F50F7D100014A6C /* deity.h */,
+				F74FA5520F50F7D100014A6C /* diagnosticmessages.h */,
+				F74FA5530F50F7D100014A6C /* editor.h */,
+				F74FA5540F50F7D100014A6C /* eqstr.h */,
+				F74FA5550F50F7D100014A6C /* everquest.h */,
+				F74FA5560F50F7D100014A6C /* experiencelog.h */,
+				F74FA5570F50F7D100014A6C /* filter.h */,
+				F74FA5580F50F7D100014A6C /* filteredspawnlog.h */,
+				F74FA5590F50F7D100014A6C /* filtermgr.h */,
+				F74FA55A0F50F7D100014A6C /* filternotifications.h */,
+				F74FA55B0F50F7D100014A6C /* fixpt.h */,
+				F74FA55C0F50F7D100014A6C /* gdbmconv.h */,
+				F74FA55D0F50F7D100014A6C /* group.h */,
+				F74FA55E0F50F7D100014A6C /* guild.h */,
+				F74FA55F0F50F7D100014A6C /* guildlist.h */,
+				F74FA5600F50F7D100014A6C /* guildshell.h */,
+				F74FA5610F50F7D100014A6C /* itemdb.h */,
+				F74FA5620F50F7D100014A6C /* languages.h */,
+				F74FA5630F50F7D100014A6C /* logger.h */,
+				F74FA5640F50F7D100014A6C /* main.h */,
+				F74FA5650F50F7D100014A6C /* map.h */,
+				F74FA5660F50F7D100014A6C /* mapcore.h */,
+				F74FA5670F50F7D100014A6C /* mapicon.h */,
+				F74FA5680F50F7D100014A6C /* mapicondialog.ui.h */,
+				F74FA5690F50F7D100014A6C /* message.h */,
+				F74FA56A0F50F7D100014A6C /* messagefilter.h */,
+				F74FA56B0F50F7D100014A6C /* messagefilterdialog.h */,
+				F74FA56C0F50F7D100014A6C /* messages.h */,
+				F74FA56D0F50F7D100014A6C /* messageshell.h */,
+				F74FA56E0F50F7D100014A6C /* messagewindow.h */,
+				F74FA56F0F50F7D100014A6C /* netdiag.h */,
+				F74FA5700F50F7D100014A6C /* netstream.h */,
+				F74FA5710F50F7D100014A6C /* opcodetable.h */,
+				F74FA5720F50F7D100014A6C /* packet.h */,
+				F74FA5730F50F7D100014A6C /* packetcapture.h */,
+				F74FA5740F50F7D100014A6C /* packetcommon.h */,
+				F74FA5750F50F7D100014A6C /* packetformat.h */,
+				F74FA5760F50F7D100014A6C /* packetfragment.h */,
+				F74FA5770F50F7D100014A6C /* packetinfo.h */,
+				F74FA5780F50F7D100014A6C /* packetlog.h */,
+				F74FA5790F50F7D100014A6C /* packetstream.h */,
+				F74FA57A0F50F7D100014A6C /* player.h */,
+				F74FA57B0F50F7D100014A6C /* point.h */,
+				F74FA57C0F50F7D100014A6C /* pointarray.h */,
+				F74FA57D0F50F7D100014A6C /* races.h */,
+				F74FA57E0F50F7D100014A6C /* s_everquest.h */,
+				F74FA57F0F50F7D100014A6C /* seqlistview.h */,
+				F74FA5800F50F7D100014A6C /* seqwindow.h */,
+				F74FA5810F50F7D100014A6C /* skilllist.h */,
+				F74FA5820F50F7D100014A6C /* skills.h */,
+				F74FA5830F50F7D100014A6C /* spawn.h */,
+				F74FA5840F50F7D100014A6C /* spawnlist.h */,
+				F74FA5850F50F7D100014A6C /* spawnlist2.h */,
+				F74FA5860F50F7D100014A6C /* spawnlistcommon.h */,
+				F74FA5870F50F7D100014A6C /* spawnlog.h */,
+				F74FA5880F50F7D100014A6C /* spawnmonitor.h */,
+				F74FA5890F50F7D100014A6C /* spawnpointlist.h */,
+				F74FA58A0F50F7D100014A6C /* spawnshell.h */,
+				F74FA58B0F50F7D100014A6C /* spelllist.h */,
+				F74FA58C0F50F7D100014A6C /* spells.h */,
+				F74FA58D0F50F7D100014A6C /* spellshell.h */,
+				F74FA58E0F50F7D100014A6C /* staticspells.h */,
+				F74FA58F0F50F7D100014A6C /* statlist.h */,
+				F74FA5900F50F7D100014A6C /* strnlen.h */,
+				F74FA5910F50F7D100014A6C /* terminal.h */,
+				F74FA5920F50F7D100014A6C /* typenames.h */,
+				F74FA5930F50F7D100014A6C /* util.h */,
+				F74FA5940F50F7D100014A6C /* vpacket.h */,
+				F74FA5950F50F7D100014A6C /* weapons.h */,
+				F74FA5960F50F7D100014A6C /* weapons1.h */,
+				F74FA5970F50F7D100014A6C /* weapons2a.h */,
+				F74FA5980F50F7D100014A6C /* weapons2b.h */,
+				F74FA5990F50F7D100014A6C /* weapons2c.h */,
+				F74FA59A0F50F7D100014A6C /* weapons27.h */,
+				F74FA59B0F50F7D100014A6C /* weapons28.h */,
+				F74FA59C0F50F7D100014A6C /* weapons29.h */,
+				F74FA59D0F50F7D100014A6C /* xmlconv.h */,
+				F74FA59E0F50F7D100014A6C /* xmlpreferences.h */,
+				F74FA59F0F50F7D100014A6C /* zonemgr.h */,
+				F74FA5A00F50F7D100014A6C /* zones.h */,
 				10332F010332F010332F0000 /* mapicondialog.h */,
 			);
 			name = "Header Files";
@@ -951,9 +1137,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
-				);
+				HEADER_SEARCH_PATHS = "/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support";
 				INSTALL_PATH = "";
 				OTHER_CFLAGS = (
 					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
@@ -981,9 +1165,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
-				);
+				HEADER_SEARCH_PATHS = "/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support";
 				INSTALL_PATH = "";
 				OTHER_CFLAGS = (
 					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
@@ -1011,9 +1193,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
-				);
+				HEADER_SEARCH_PATHS = "/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support";
 				INSTALL_PATH = "";
 				OTHER_CFLAGS = (
 					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
@@ -1041,9 +1221,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "'CMAKE_INTDIR=\"$(CONFIGURATION)\"'";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support",
-				);
+				HEADER_SEARCH_PATHS = "/usr/local/Trolltech/Qt-4.4.3/include/Qt3Support";
 				INSTALL_PATH = "";
 				OTHER_CFLAGS = (
 					"-F/usr/local/Trolltech/Qt-4.4.3/lib",
