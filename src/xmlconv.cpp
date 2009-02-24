@@ -316,6 +316,11 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		v = ba;
 		ok = true;
 	}
+	else if (e.tagName() == "data")
+	{
+		v = getByteArrayFromString(e.attribute("value"));
+		ok = true;
+	}
 	else if (e.tagName() == "list")
 	{
 		qWarning("Unimplemented tag: %s", (const char*)e.tagName());
@@ -508,46 +513,13 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 			
 		case QVariant::ByteArray: // this is only for [u]int64_t
 		{
-			e.setTagName("uint64");
-			QByteArray ba = v.toByteArray();
-			
-			// make sure this only handles [u]int64_t's
-			if (ba.size() != sizeof(uint64_t))
-			{
-				qWarning("Don't know how to persist variant of type: %s (%d) (size=%d)!", v.typeName(), v.type(), ba.size());
-				ok = false;
-				break;
-			}
-			
-			// convert the data back into a uint64_t
-			uint64_t num = *(uint64_t*)ba.data();
-			
-			QChar buff[33];
-			QChar* p = &buff[32];
-			const char* digitSet = "0123456789abcdef";
-			int len = 0;
-			
-			// construct the string
-			do 
-			{
-				*--p = digitSet[((int)(num%16))];
-				num = num >> 4; // divide by 16
-				len++;
-			} while ( num );
-			
-			// store it in a QString
-			QString storage;
-			storage.setUnicode(p, len);
-			
+			e.setTagName("data");
+
 			// set the value
-			e.setAttribute("value", storage);
+			e.setAttribute("value", getStringFromByteArray(v.toByteArray()));
 		}
 			break;
-			
-#if 0
-		case QVariant::List:
-		case QVaraint::Map:
-#endif
+
 		default:
 			qWarning("Don't know how to persist variant of type: %s (%d)!",
 					 v.typeName(), v.type());
@@ -556,6 +528,62 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 	}
 	
 	return ok;
+}
+
+QString DomConvenience::getStringFromByteArray(const QByteArray& ba)
+{
+	const char* digitSet = "0123456789abcdef";
+	QString data = "";
+	
+	for (int i = 0; i < ba.size(); i++)
+	{
+		char c = ba[i]; 
+		
+		data += digitSet[(c >> 4) & 0xf];
+		data += digitSet[c & 0xF];
+	}
+	return data;
+}
+
+QByteArray DomConvenience::getByteArrayFromString(const QString& value)
+{
+	const QChar* ptr = value.unicode();
+	uint32_t len = value.length();
+	
+	if (!ptr)
+	{
+		return QByteArray(0);
+	}
+	
+	QByteArray data(len / 2, '\0');
+	uint8_t dv = 0; uint32_t i = 0;
+	bool even = false;
+	while (len > 0 && ok_in_hex(*ptr))
+	{
+		len = len - 1;
+		if (even)
+			dv = dv << 4;
+		else
+			dv = 0;				
+		
+		if (ptr->isDigit())
+		{
+			dv += ptr->digitValue();
+		}
+		else
+		{
+			if (*ptr >= 'a' && *ptr <= 'f')
+				dv += ptr->toAscii() - 'a' + 10;
+			else if (*ptr >= 'A' && *ptr <= 'F')
+				dv += ptr->toAscii() - 'A' + 10;
+		}
+		
+		if (even)
+			data[i++] = dv;
+		even = !even;
+		ptr++;
+	}
+	return data;
 }
 
 bool DomConvenience::getBoolFromString(const QString& s, bool& ok)

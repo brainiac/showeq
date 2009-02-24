@@ -20,20 +20,23 @@
 
 class DomConvenience
 {
- public:
-  DomConvenience(QDomDocument& doc);
-  bool elementToVariant(const QDomElement& elem, QVariant& var);
-  bool variantToElement(const QVariant& var, QDomElement& elem);
+public:
+	DomConvenience(QDomDocument& doc);
+	bool elementToVariant(const QDomElement& elem, QVariant& var);
+	bool variantToElement(const QVariant& var, QDomElement& elem);
 
- protected:
-  bool getBoolFromString(const QString& s, bool& ok);
-  int getBase(const QDomElement& e);
-  QColor getColor(const QDomElement& e);
-  QString boolString(bool b);
-  void clearAttributes(QDomElement& e);
-
- private:
-  QDomDocument& m_doc;
+	static QByteArray getByteArrayFromString(const QString&);
+	static QString getStringFromByteArray(const QByteArray&);
+	
+protected:
+	bool getBoolFromString(const QString& s, bool& ok);
+	int getBase(const QDomElement& e);
+	QColor getColor(const QDomElement& e);
+	QString boolString(bool b);
+	void clearAttributes(QDomElement& e);
+		
+private:
+	QDomDocument& m_doc;
 };
 
 #endif // XMLCONV_H

@@ -21,7 +21,7 @@
 #include <QDir>
 #include <QFile>
 #include <QTextStream>
-#include <QRegExp>batt
+#include <QRegExp>
 
 const float seqPrefVersion = 1.0;
 const char* seqPrefName = "seqpreferences";
