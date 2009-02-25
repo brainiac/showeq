@@ -126,7 +126,7 @@ FilterItem::FilterItem(const QString& filterPattern, bool caseSensitive)
       // if a hyphen was specified, but no max value after it, it means
       // all values above min
       if (levelString.isEmpty())
-        maxLevel = INT_MAX;
+        maxLevel = 255;
       else
       {
         // get the max level
