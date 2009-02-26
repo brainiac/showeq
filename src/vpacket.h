@@ -56,46 +56,46 @@ struct packet_struct
 
 class VPacket
 {
- public:
-   VPacket(const char *name = 0, int timed = 3, 
-	   bool bRecord = false, int bufsize = DEFBUFSIZE);
-   ~VPacket();
+public:
+	VPacket(const char *name = 0, int timed = 3, 
+			bool bRecord = false, int bufsize = DEFBUFSIZE);
+	~VPacket();
 
-   int Playback(char *buff, int bufsize, time_t* time, long *ver = NULL);
-   int Record(const char *buff, int bufsize, time_t time, long ver = 0);
-   void Flush(void)                     { if (m_bRecord) writeBuffer(); }
-   void setPlaybackSpeed(int speed);
-   void setFlushPacket(bool inset)       { m_bFlushPacket = inset; }
-   void setCompressTime(int ms)         { m_nCompressTime = ms; }
-   int playbackSpeed(void)              { return m_nPlaybackSpeed; }
-   int endOfData(void)                  { return m_bEndofFile; }
-   long FilePos(void)                   { return m_lBytesIO;   }
-   bool isRecording(void)               { return m_bRecord; }
-   const char* getFileName()            { return m_sFile; }
+	int Playback(char *buff, int bufsize, time_t* time, long *ver = NULL);
+	int Record(const char *buff, int bufsize, time_t time, long ver = 0);
+	void Flush()                         { if (m_bRecord) writeBuffer(); }
+	void setPlaybackSpeed(int speed);
+	void setFlushPacket(bool inset)      { m_bFlushPacket = inset; }
+	void setCompressTime(int ms)         { m_nCompressTime = ms; }
+	int playbackSpeed()                  { return m_nPlaybackSpeed; }
+	int endOfData()                      { return m_bEndofFile; }
+	long FilePos()                       { return m_lBytesIO;   }
+	bool isRecording()                   { return m_bRecord; }
+	const char* getFileName()            { return m_sFile; }
 
- private:
-   int   fillBuffer(void);
-   int   writeBuffer(void);
-   int   flush(void);
+private:
+	int   fillBuffer();
+	int   writeBuffer();
+	int   flush();
 
-   char* m_sFile;
-   int   m_fd;
-   char* m_cBuffer;
-   int   m_nBufIndex;           // Current Index into buffer
-   int   m_nBufBytes;           // Bytes avail in buffer
-   int   m_nBufSize;            // Max Size of buffer
-   int   m_nPlaybackSpeed;      // Playback speed (0=ASAP, 1=1x, 2=2x, etc)
-   long  m_lStartTime;
-   long  m_nSequence;
-   bool   m_bEndofFile;
-   long  m_lBytesIO;            // number of bytes transferred since creation
-   int   mTime();
-   int   m_bFlushPacket;
-   int   m_nLastPacketTime;
-   int   m_nFirstPacketTime;
-   int   m_nLastTime;
-   int   m_nCompressTime;
-   bool m_bRecord;
+	char* m_sFile;
+	int   m_fd;
+	char* m_cBuffer;
+	int   m_nBufIndex;           // Current Index into buffer
+	int   m_nBufBytes;           // Bytes avail in buffer
+	int   m_nBufSize;            // Max Size of buffer
+	int   m_nPlaybackSpeed;      // Playback speed (0=ASAP, 1=1x, 2=2x, etc)
+	long  m_lStartTime;
+	long  m_nSequence;
+	bool   m_bEndofFile;
+	long  m_lBytesIO;            // number of bytes transferred since creation
+	int   mTime();
+	int   m_bFlushPacket;
+	int   m_nLastPacketTime;
+	int   m_nFirstPacketTime;
+	int   m_nLastTime;
+	int   m_nCompressTime;
+	bool m_bRecord;
 };
 
 #endif				// VPACKET_H

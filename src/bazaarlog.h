@@ -20,19 +20,18 @@ class SpawnShell;
 // BazaarLog is an SEQLogger subclass that handles bazaar packets
 class BazaarLog : public SEQLogger
 {
-  Q_OBJECT
+	Q_OBJECT
 
- public:
-  BazaarLog(EQPacket &packet, const QString& fname,
-	    QObject* parent, SpawnShell& shell, const char* name = 0);
-  virtual ~BazaarLog();
+public:
+	BazaarLog(EQPacket &packet, const QString& fname,
+			  QObject* parent, SpawnShell& shell, const char* name = 0);
+	virtual ~BazaarLog();
 
- public slots:
-  void bazaarSearch(const uint8_t*, size_t, uint8_t);
+public slots:
+	void bazaarSearch(const uint8_t*, size_t, uint8_t);
 
- protected:
-  EQPacket& m_packet;
-  SpawnShell& m_shell;
+protected:
+	SpawnShell& m_shell;
 };
 
 #endif // _BAZAARLOG_H_

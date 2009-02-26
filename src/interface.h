@@ -493,6 +493,8 @@ private:
 	
 	int m_stateVersion;
 	
+	QWidget* m_filler;
+	
 private:
 	// menu items
 	void createFileMenu();

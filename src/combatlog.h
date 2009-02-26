@@ -59,7 +59,7 @@ public:
 private:
 	int			m_iType;
 	int			m_iSpell;
-	Player*	m_player;
+	Player*		m_player;
 
 	int 		m_iHits;
 	int			m_iMisses;
@@ -95,7 +95,7 @@ public:
 	void	addHit(int iDamage);
 
 private:
-	Player*	m_player;
+	Player*		m_player;
 
 	int 		m_iHits;
 	int			m_iMisses;
@@ -124,11 +124,11 @@ public:
 	int		getDamageGiven() { return m_iDamageGiven; };
 	int		getDamageTaken() { return m_iDamageTaken; };
 
-	QString		getName() { return m_iName; };
-	void		setName(QString iName) { m_iName = iName; };
+	QString	getName() { return m_iName; };
+	void	setName(QString iName) { m_iName = iName; };
 
-	time_t		getTime() { return m_time; };
-	void		setTime(time_t iTime) { m_time = iTime; };
+	time_t	getTime() { return m_time; };
+	void	setTime(time_t iTime) { m_time = iTime; };
 
 	double	getDPS();
 	double	getMobDPS();
@@ -137,7 +137,7 @@ public:
 	
 private:
 	int			m_iID;
-	Player*	m_player;
+	Player*		m_player;
 
 	int			m_iStartTime;
 	int			m_iLastTime;
@@ -146,8 +146,8 @@ private:
 	int			m_iDamageTaken;
 	double		m_dMobDPS;
 
-	QString			m_iName;
-	time_t			m_time;
+	QString		m_iName;
+	time_t		m_time;
 };
 
 ////////////////////////////////////////////
@@ -158,13 +158,10 @@ class CombatWindow : public SEQWindow
 	Q_OBJECT
 
 public:
-
-	CombatWindow(Player* player,
-		     QWidget* parent = 0, const char* name = 0);
+	CombatWindow(Player* player, QWidget* parent = 0, const char* name = 0);
 	~CombatWindow();
 
 public slots:
-
 	virtual void savePrefs(void);
 	void addCombatRecord(int iTargetID, int iSourceID, int iType, int iSpell, int iDamage, QString tName, QString sName);
 	void resetDPS();
@@ -173,7 +170,6 @@ public slots:
 	void clear(void);
 
 private:
-
 	void initUI();
 	QWidget* initOffenseWidget();
 	QWidget* initDefenseWidget();
@@ -188,9 +184,8 @@ private:
 	void updateMob();
 	void updateDPS(int iDamage);
 
-
 private:
-	Player*	m_player;
+	Player*		m_player;
 
 	QWidget* 	m_widget_offense;
 	QWidget* 	m_widget_defense;
@@ -240,8 +235,8 @@ private:
 	int		m_iCurrentDPSTotal;
 	int		m_iDPSStartTime;
 	int		m_iDPSTimeLast;
-	double		m_dDPS;
-	double		m_dDPSLast;
+	double	m_dDPS;
+	double	m_dDPSLast;
 
 };
 

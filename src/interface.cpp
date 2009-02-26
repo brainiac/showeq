@@ -137,12 +137,14 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 {
 	// set central widget to a QMainWindow so we can stack left and right
 	// over the top and bottom...
-	//setCentralWidget(new QWidget(this, "filler"));
-	QMainWindow* pFiller = new QMainWindow(this);
-	pFiller->setCentralWidget(new QLineEdit());
-	pFiller->setWindowFlags(Qt::Widget);
-	setCentralWidget(pFiller);
+	m_filler = new QWidget(this, "filler");
+	setCentralWidget(m_filler);
 
+	setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
+	setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+	setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
+	setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
+	
 	m_stateVersion = 1;	
 	
 	// disable the dock menu
@@ -1426,13 +1428,11 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	
 	// Interface -> Window Font
 	Q3PopupMenu* windowFontMenu = new Q3PopupMenu;
-	m_windowMenu->insertItem( "&Font", windowFontMenu, -1, 1);
+	m_windowMenu->insertItem("&Font", windowFontMenu, -1, 1);
     
-	windowFontMenu->insertItem( "&Application Default...", 
-							   this, SLOT(set_main_Font(int)));
+	windowFontMenu->insertItem("&Application Default...", this, SLOT(set_main_Font(int)));
 	
-	windowFontMenu->insertItem( "Main Window Status Font...", 
-							   this, SLOT(set_main_statusbar_Font(int)));
+	windowFontMenu->insertItem("Main Window Status Font...", this, SLOT(set_main_statusbar_Font(int)));
 	//   x = windowFontMenu->insertItem("&Main Window");
 	//   windowFontMenu->setItemParameter(x, 5);
     
@@ -2865,7 +2865,6 @@ void EQInterface::savePrefs()
 		{
 			pSEQPrefs->setPrefVariant("DockingInfo", interfaceSection, QVariant(info));
 		}
-		//pSEQPrefs->setPrefString("DockingInfo", interfaceSection, dockPrefs);
 		
 		// send savePrefs signal out
 		emit saveAllPrefs();
@@ -4238,17 +4237,15 @@ EQInterface::newSpeed(double speed)
 	m_stsbarSpeed->setText(tempStr);
 }
 
-void 
-EQInterface::resetPacket(int num, int stream)
+void EQInterface::resetPacket(int num, int stream)
 {
-	if(stream != (int)zone2client);
+	//if (stream != (int)zone2client);
 	// if passed 0 reset the average
 	m_packetStartTime = mTime();
 	m_initialcount = num;
 }
 
-void
-EQInterface::numPacket(int num, int stream)
+void EQInterface::numPacket(int num, int stream)
 {
 	
 	if(stream != (int)zone2client)
@@ -4817,12 +4814,8 @@ void EQInterface::init_view_menu()
 	
 	// set the checkmarks for windows that are always created, but not always
 	// visible
-	menuBar()->setItemChecked(m_id_view_ExpWindow, 
-							  (m_expWindow != 0) && 
-							  m_expWindow->isVisible()); 
-	menuBar()->setItemChecked (m_id_view_CombatWindow, 
-							   (m_combatWindow != 0) &&
-							   m_combatWindow->isVisible());
+	menuBar()->setItemChecked(m_id_view_ExpWindow, (m_expWindow != 0) && m_expWindow->isVisible()); 
+	menuBar()->setItemChecked(m_id_view_CombatWindow, (m_combatWindow != 0) && m_combatWindow->isVisible());
 	
 	// set initial view options
 	if (m_spawnList != 0)
