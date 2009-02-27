@@ -7,7 +7,7 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
-#include <qdatetime.h>
+#include <QDateTime>
 #include <ctype.h>
 
 #include "bazaarlog.h"

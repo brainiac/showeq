@@ -12,16 +12,23 @@
  *
  *
  */
-#include <datetimemgr.h>
+#include "datetimemgr.h"
 #include "everquest.h"
 
-#include <qdatetime.h>
-#include <qtimer.h>
+#include "diagnosticmessages.h"
+
+
+#include <QDateTime>
+#include <QTimer>
 
 DateTimeMgr::DateTimeMgr(QObject* parent, const char* name)
   : QObject(parent, name),
 	m_updateFrequency(60 * 1000),
 	m_timer(0)
+{
+}
+
+DateTimeMgr::~DateTimeMgr()
 {
 }
 

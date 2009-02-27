@@ -55,9 +55,9 @@ signals:
 	void cleared();
 
 protected:
-	DateTimeMgr*		m_dateTimeMgr;
+	DateTimeMgr* m_dateTimeMgr;
 	MessageFilters*	m_messageFilters;
-	MessageList		m_messages;
+	MessageList	m_messages;
 
 	static Messages*	s_messages;
 };

@@ -31,6 +31,7 @@ class DateTimeMgr : public QObject
 
 public:
 	DateTimeMgr(QObject* parent = 0, const char* name = 0);
+	~DateTimeMgr();
 	const QDateTime& eqDateTime() const;
 	const QDateTime& updatedDateTime();
 	int updateFrequency();

@@ -11,8 +11,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include <q3mainwindow.h>
-//Added by qt3to4:
+#include <Q3MainWindow>
 #include <QCloseEvent>
 #include <Q3PopupMenu>
 
@@ -20,23 +19,23 @@ class Q3MultiLineEdit;
 class Q3ToolBar;
 class Q3PopupMenu;
 
-class EditorWindow: public Q3MainWindow
+class EditorWindow : public Q3MainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    EditorWindow();
-    EditorWindow( const char *fileName );
-    ~EditorWindow();
-
+	EditorWindow();
+	EditorWindow(const char *fileName);
+	~EditorWindow();
+	
 protected:
-    void closeEvent( QCloseEvent* );
-
+    void closeEvent(QCloseEvent*);
+	
 private slots:
     void load();
-    void load( const char *fileName );
+    void load(const char *fileName);
     void save();
     void saveAs();
-
+	
 private:
     Q3MultiLineEdit *e;
     Q3ToolBar *fileTools;

@@ -54,7 +54,7 @@ PacketCaptureThread::~PacketCaptureThread()
     if (m_pcache_pcap)
     {
         // Turn off pcap
-        pcap_close(m_pcache_pcap);
+        //pcap_close(m_pcache_pcap);
     }
 
     // Drop the packets we have lying around
@@ -255,7 +255,9 @@ void PacketCaptureThread::startOffline(const char* filename, int playbackSpeed)
 void PacketCaptureThread::stop()
 {
     // close the pcap session
-    pcap_close(m_pcache_pcap);
+	
+	// this won't work if the call is blocking... maybe set up a timer 
+    //pcap_close(m_pcache_pcap);
     m_pcache_pcap = NULL;
 }
 

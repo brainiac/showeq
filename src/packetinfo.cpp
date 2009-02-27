@@ -150,12 +150,12 @@ bool EQPacketDispatch::connect(const QObject* receiver, const char* member)
 			 (const char*)member);
 #endif
 	
-	return QObject::connect(this, SIGNAL(signal(const uint8_t*, size_t, uint8_t)), receiver, member);
+	return QObject::connect((QObject*)this, SIGNAL(signal(const uint8_t*, size_t, uint8_t)), receiver, member);
 }
 
 bool EQPacketDispatch::disconnect(const QObject* receiver, const char* member)
 {
-	return QObject::disconnect(this, SIGNAL(signal(const uint8_t*, size_t, uint8_t)), receiver, member);
+	return QObject::disconnect((QObject*)this, SIGNAL(signal(const uint8_t*, size_t, uint8_t)), receiver, member);
 }
 
 //----------------------------------------------------------------------
@@ -423,7 +423,7 @@ void EQPacketOPCodeDB::list(void) const
 	Q3IntDictIterator<EQPacketOPCode> it(m_opcodes);
 	while ((current = it.current()) != NULL)
 	{
-		fprintf(stderr, "\tkey=%04lx opcode=%04x", t.currentKey(), current->opcode());
+		fprintf(stderr, "\tkey=%04lx opcode=%04x", it.currentKey(), current->opcode());
 		if (!current->name().isNull())
 			fprintf(stderr, " name='%s'", current->name().latin1());
 		

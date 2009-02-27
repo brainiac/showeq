@@ -2037,88 +2037,125 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 
 EQInterface::~EQInterface()
 {
+	seqInfo("Destroying m_netDiag...");
 	if (m_netDiag != 0)
 		delete m_netDiag;
 	
+	seqInfo("Destroying m_spawnPointList...");
 	if (m_spawnPointList != 0)
 		delete m_spawnPointList;
 	
+	seqInfo("Destroying m_statList...");
 	if (m_statList != 0)
 		delete m_statList;
 	
+	seqInfo("Destroying m_guildListWindow...");
 	if (m_guildListWindow != 0)
 		delete m_guildListWindow;
 	
+	seqInfo("Destroying m_skillList...");
 	if (m_skillList != 0)
 		delete m_skillList;
 	
+	seqInfo("Destroying m_spellList...");
 	if (m_spellList != 0)
 		delete m_spellList;
 	
+	seqInfo("Destroying m_spawnList2...");
 	if (m_spawnList2 != 0)
 		delete m_spawnList2;
 	
+	seqInfo("Destroying m_spawnList...");
 	if (m_spawnList != 0)
 		delete m_spawnList;
 	
 	for (int i = 0; i < maxNumMaps; i++)
+	{
+		seqInfo("Destroying Map #%i...", i);
 		if (m_map[i] != 0)
 			delete m_map[i];
+	}
 	
 	for (int i = 0; i < maxNumMessageWindows; i++)
+	{
+		seqInfo("Destroying MessageWindow #%i...", i);
 		if (m_messageWindow[i] != 0)
 			delete m_messageWindow[i];
+	}
 	
+	seqInfo("Destroying m_combatWindow...");
 	if (m_combatWindow != 0)
 		delete m_combatWindow;
 	
+	seqInfo("Destroying m_expWindow...");
 	if (m_expWindow != 0)
 		delete m_expWindow;
 	
+	seqInfo("Destroying m_spawnLogger...");
 	if (m_spawnLogger != 0)
 		delete m_spawnLogger;
 	
+	seqInfo("Destroying m_filteredSpawnLog...");
+	if (m_filteredSpawnLog != 0)
+		delete m_filteredSpawnLog;
+	
+	seqInfo("Destroying m_spawnMonitor...");
 	if (m_spawnMonitor != 0)
 		delete m_spawnMonitor;
 	
+	seqInfo("Destroying m_groupMgr...");
 	if (m_groupMgr != 0)
 		delete m_groupMgr;
 	
+	seqInfo("Destroying m_spawnShell...");
 	if (m_spellShell != 0)
 		delete m_spellShell;
-	
+
+	seqInfo("Destroying m_spells...");
 	if (m_spells != 0)
 		delete m_spells;
 	
+	seqInfo("Destroying m_mapMgr...");
 	if (m_mapMgr != 0)
 		delete m_mapMgr;
 	
+	seqInfo("Destroying m_spawnShell...");
 	if (m_spawnShell != 0)
 		delete m_spawnShell;
 	
+	seqInfo("Destroying m_categoryMgr...");
 	if (m_categoryMgr != 0)
 		delete m_categoryMgr;
 	
+	seqInfo("Destroying m_filterMgr...");
 	if (m_filterMgr != 0)
 		delete m_filterMgr;
 	
-	if (m_dateTimeMgr != 0)
-		delete m_dateTimeMgr;
-	
+	seqInfo("Destroying m_eqStrings...");
 	if (m_eqStrings != 0)
 		delete m_eqStrings;
 	
+	seqInfo("Destroying m_player...");
 	if (m_player != 0)
 		delete m_player;
 	
+	seqInfo("Destroying m_guildShell...");	
 	if (m_guildShell != 0)
 		delete m_guildShell;
 	
+	seqInfo("Destroying m_zoneMgr...");
 	if (m_zoneMgr != 0)
 		delete m_zoneMgr;
 	
+	seqInfo("Destroying m_packet...");
 	if (m_packet != 0)
 		delete m_packet;
+	
+	seqInfo("Destrorying m_dateTimeMgr...");
+	if (m_dateTimeMgr != 0)
+		delete m_dateTimeMgr;
+	
+	printf("done...\n"); 
 }
 
 void EQInterface::restoreStatusFont()

@@ -10,7 +10,7 @@
 #ifndef _BAZAARLOG_H_
 #define _BAZAARLOG_H_
 
-#include <qobject.h>
+#include <QObject>
 #include "logger.h"
 
 class EQPacket;
