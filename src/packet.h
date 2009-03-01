@@ -168,11 +168,11 @@ private:
 	EQPacketOPCodeDB* m_zoneOPCodeDB;
 	
 	void connectStream(EQPacketStream* stream);
-	void dispatchPacket   (int size, unsigned char *buffer);
+	void dispatchPacket(int size, unsigned char *buffer);
 	void dispatchPacket(EQUDPIPPacketFormat& packet);
 	protected slots:
 	void resetEQPacket();
-	void dispatchWorldChatData (size_t len, uint8_t* data, uint8_t direction = 0);
+	void dispatchWorldChatData(size_t len, uint8_t* data, uint8_t direction = 0);
 };
 
 inline in_addr_t EQPacket::clientAddr()
