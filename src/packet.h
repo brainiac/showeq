@@ -68,34 +68,34 @@ public:
 			 const char *name);
 	~EQPacket();           
 	void start(int delay = 0);
-	void stop(void);
+	void stop();
 	
 	const QString pcapFilter();
 	int packetCount(int);
 	const QString& ip();
 	const QString& mac();
 	const QString& device();
-	in_addr_t clientAddr(void);
-	in_port_t clientPort(void);
-	in_port_t serverPort(void);
-	uint8_t session_tracking_enabled(void);
-	int playbackPackets(void);
-	int playbackSpeed(void);
+	in_addr_t clientAddr();
+	in_port_t clientPort();
+	in_port_t serverPort();
+	uint8_t session_tracking_enabled();
+	int playbackPackets();
+	int playbackSpeed();
 	size_t currentCacheSize(int);
 	uint32_t currentMaxLength(int);
 	uint16_t serverSeqExp(int);
-	uint16_t arqSeqGiveUp(void);
-	bool session_tracking(void);
-	bool realtime(void);
+	uint16_t arqSeqGiveUp();
+	bool session_tracking();
+	bool realtime();
 	bool connect2(const QString& opcodeName, EQStreamPairs sp,
 				  uint8_t dir, const char* payload,  EQSizeCheckType szt, 
 				  const QObject* receiver, const char* member);
 	
 public slots:
-	void processPackets(void);
-	void processPlaybackPackets(void);
-	void incPlayback(void);
-	void decPlayback(void);
+	void processPackets();
+	void processPlaybackPackets();
+	void incPlayback();
+	void decPlayback();
 	void setPlayback(int);
 	void monitorIPClient(const QString& address);   
 	void monitorMACClient(const QString& address);   
@@ -175,37 +175,37 @@ private:
 	void dispatchWorldChatData (size_t len, uint8_t* data, uint8_t direction = 0);
 };
 
-inline in_addr_t EQPacket::clientAddr(void)
+inline in_addr_t EQPacket::clientAddr()
 {
 	return m_client_addr;
 }
 
-inline in_port_t EQPacket::clientPort(void)
+inline in_port_t EQPacket::clientPort()
 {
 	return m_clientPort;
 }
 
-inline in_port_t EQPacket::serverPort(void)
+inline in_port_t EQPacket::serverPort()
 {
 	return m_serverPort;
 }
 
-inline uint16_t EQPacket::arqSeqGiveUp(void)
+inline uint16_t EQPacket::arqSeqGiveUp()
 {
 	return m_arqSeqGiveUp;
 }
 
-inline bool EQPacket::session_tracking(void)
+inline bool EQPacket::session_tracking()
 {
 	return m_session_tracking;
 }
 
-inline int EQPacket::playbackPackets(void)
+inline int EQPacket::playbackPackets()
 {
 	return m_playbackPackets;
 }
 
-inline bool EQPacket::realtime(void)
+inline bool EQPacket::realtime()
 {
 	return m_realtime;
 }
