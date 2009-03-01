@@ -27,13 +27,13 @@ typedef uint32_t in_addr_t;
 #endif
 
 #include <netinet/in.h>
-	 
+
 //----------------------------------------------------------------------
 // enumerated types
 enum EQStreamPairs
 {
-  SP_World = 0x01,
-  SP_Zone = 0x02
+	SP_World = 0x01,
+	SP_Zone = 0x02
 };
 
 //----------------------------------------------------------------------
@@ -51,8 +51,8 @@ class EQPacketOPCode;
 class EQPacket : public QObject
 {
 	Q_OBJECT 
-public:
 	
+public:
 	EQPacket(const QString& worldopcodesxml,
 			 const QString& zoneopcodesxml,
 			 uint16_t m_arqSeqGiveUp, 
@@ -106,7 +106,7 @@ public slots:
 	void setRealtime(bool val);
 	void dispatchSessionKey(uint32_t sessionId, EQStreamID streamid, uint32_t sessionKey);
 	
-protected slots:
+	protected slots:
 	void closeStream(uint32_t sessionId, EQStreamID streamId);
 	void lockOnClient(in_port_t serverPort, in_port_t clientPort);
 	
@@ -177,52 +177,52 @@ private:
 
 inline in_addr_t EQPacket::clientAddr(void)
 {
-   return m_client_addr;
+	return m_client_addr;
 }
 
 inline in_port_t EQPacket::clientPort(void)
 {
-  return m_clientPort;
+	return m_clientPort;
 }
 
 inline in_port_t EQPacket::serverPort(void)
 {
-  return m_serverPort;
+	return m_serverPort;
 }
 
 inline uint16_t EQPacket::arqSeqGiveUp(void)
 {
-  return m_arqSeqGiveUp;
+	return m_arqSeqGiveUp;
 }
 
 inline bool EQPacket::session_tracking(void)
 {
-  return m_session_tracking;
+	return m_session_tracking;
 }
 
 inline int EQPacket::playbackPackets(void)
 {
-  return m_playbackPackets;
+	return m_playbackPackets;
 }
 
 inline bool EQPacket::realtime(void)
 {
-  return m_realtime;
+	return m_realtime;
 }
 
 inline const QString& EQPacket::ip()
 {
-  return m_ip;
+	return m_ip;
 }
 
 inline const QString& EQPacket::mac()
 {
-  return m_mac;
+	return m_mac;
 }
 
 inline const QString& EQPacket::device()
 {
-  return m_device;
+	return m_device;
 }
 
 #endif // _PACKET_H_

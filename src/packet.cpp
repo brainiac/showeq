@@ -238,12 +238,12 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		// Normal pcap packet handler
-		connect (m_timer, SIGNAL(timeout ()), this, SLOT(processPackets ()));
+		connect(m_timer, SIGNAL(timeout()), this, SLOT(processPackets()));
 	}
 	else
 	{
 		// Special internal playback handler
-		connect (m_timer, SIGNAL(timeout ()), this, SLOT(processPlaybackPackets ()));
+		connect(m_timer, SIGNAL(timeout()), this, SLOT(processPlaybackPackets()));
 	}
 	
 	/* setup VPacket */
@@ -340,9 +340,9 @@ EQPacket::~EQPacket()
 void EQPacket::start(int delay)
 {
 #ifdef DEBUG_PACKET
-	debug ("start()");
+	debug("start()");
 #endif /* DEBUG_PACKET */
-	m_timer->start (delay, false);
+	m_timer->start(delay, false);
 }
 
 /* Stop the timer to process packets */
@@ -381,7 +381,7 @@ void EQPacket::processPackets()
 			m_vPacket->Record((const char *) buffer, size, now, PACKETVERSION);
 		}
 		
-		dispatchPacket(size - sizeof (struct ether_header),  (unsigned char *) buffer + sizeof (struct ether_header) );
+		dispatchPacket(size - sizeof(struct ether_header), (unsigned char *)buffer + sizeof(struct ether_header) );
 	}
 	
 	/* Clear decoding flag */
@@ -423,7 +423,7 @@ void EQPacket::processPlaybackPackets()
 			
 			if (PACKETVERSION == version)
 			{
-				dispatchPacket (size - sizeof(ether_header), (unsigned char *)buffer + sizeof(ether_header));
+				dispatchPacket(size - sizeof(ether_header), (unsigned char *)buffer + sizeof(ether_header));
 			}
 			else
 			{
@@ -443,9 +443,7 @@ void EQPacket::processPlaybackPackets()
 	// check if we've reached the end of the recording
 	if (m_vPacket->endOfData())
 	{
-		seqInfo("End of playback file '%s' reached."
-				"Playback Finished!",
-				m_vPacket->getFileName());
+		seqInfo("End of playback file '%s' reached. Playback Finished!", m_vPacket->getFileName());
 		
 		// stop the timer, nothing more can be done...
 		stop();
@@ -521,7 +519,7 @@ void EQPacket::connectStream(EQPacketStream* stream)
 void EQPacket::dispatchPacket(int size, unsigned char *buffer)
 {
 #ifdef DEBUG_PACKET
-	debug ("EQPacket::dispatchPacket()");
+	debug("EQPacket::dispatchPacket()");
 #endif /* DEBUG_PACKET */
 	
 	// Create an object to parse the packet
@@ -702,7 +700,7 @@ void EQPacket::dispatchWorldChatData(size_t len, uint8_t *data, uint8_t dir)
 
 ///////////////////////////////////////////
 // Returns the current playback speed
-int EQPacket::playbackSpeed(void)
+int EQPacket::playbackSpeed()
 {
 	if (m_vPacket)
 		return m_vPacket->playbackSpeed();
@@ -744,7 +742,7 @@ void EQPacket::setPlayback(int speed)
 
 ///////////////////////////////////////////
 // Increment the packet playback speed
-void EQPacket::incPlayback(void)
+void EQPacket::incPlayback()
 {
 	int x;
 	
@@ -782,7 +780,7 @@ void EQPacket::incPlayback(void)
 
 ///////////////////////////////////////////
 // Decrement the packet playback speed
-void EQPacket::decPlayback(void)
+void EQPacket::decPlayback()
 {
 	int x;
 	
@@ -826,7 +824,7 @@ void EQPacket::monitorIPClient(const QString& ip)
 {
 	m_ip = ip;
 	struct in_addr  ia;
-	inet_aton (m_ip, &ia);
+	inet_aton(m_ip, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
 	
@@ -847,7 +845,7 @@ void EQPacket::monitorMACClient(const QString& mac)
 	m_mac = mac;
 	m_detectingClient = true;
 	struct in_addr  ia;
-	inet_aton (AUTOMATIC_CLIENT_IP, &ia);
+	inet_aton(AUTOMATIC_CLIENT_IP, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
 	
@@ -869,7 +867,7 @@ void EQPacket::monitorNextClient()
 	m_detectingClient = true;
 	m_ip = AUTOMATIC_CLIENT_IP;
 	struct in_addr  ia;
-	inet_aton (m_ip, &ia);
+	inet_aton(m_ip, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
 	
@@ -908,14 +906,14 @@ void EQPacket::monitorDevice(const QString& dev)
 		 to set up a different filter for picking up new sessions */
 		
 		if (m_ip == "auto")
-			inet_aton (AUTOMATIC_CLIENT_IP, &ia);
-		else if (inet_aton (m_ip, &ia) == 0)
+			inet_aton(AUTOMATIC_CLIENT_IP, &ia);
+		else if (inet_aton(m_ip, &ia) == 0)
 		{
 			he = gethostbyname(m_ip);
 			if (!he)
 				seqFatal("Invalid address; %s", (const char*)m_ip);
 			
-			memcpy (&ia, he->h_addr_list[0], he->h_length);
+			memcpy(&ia, he->h_addr_list[0], he->h_length);
 		}
 		m_client_addr = ia.s_addr;
 		m_ip = inet_ntoa(ia);
@@ -1041,7 +1039,7 @@ int EQPacket::packetCount(int stream)
 	return m_streams[stream]->packetCount();
 }
 
-uint8_t EQPacket::session_tracking_enabled(void)
+uint8_t EQPacket::session_tracking_enabled()
 {
 	return m_zone2ClientStream->sessionTracking();
 }
