@@ -54,143 +54,135 @@ typedef std::map<uint16_t, EQProtocolPacket* > EQPacketMap;
 // EQPacketStream
 class EQPacketStream : public QObject
 {
-  Q_OBJECT
+	Q_OBJECT
 
- public:
-  EQPacketStream(EQStreamID streamid, uint8_t dir, uint16_t m_arqSeqGiveUp,
-		 EQPacketOPCodeDB& opcodeDB, 
-		 QObject* parent = 0, const char* name = 0);
-  ~EQPacketStream();
-  void reset();
-  uint8_t sessionTracking();
-  void setSessionTracking(uint8_t);
-  uint16_t arqSeqGiveUp();
-  void setArqSeqGiveUp(uint16_t);
-  int packetCount(void);
-  uint8_t dir();
-  EQStreamID streamID();
-  size_t currentCacheSize();
-  uint16_t arqSeqExp();
-  bool connect2(const QString& opcodeName, 
-		const char* payload,  EQSizeCheckType szt, 
-		const QObject* receiver, const char* member);
-  void receiveSessionKey(uint32_t sessionId, EQStreamID streamid, 
-    uint32_t sessionKey);
-  void close(uint32_t sessionId, EQStreamID streamid, uint8_t sessionTracking);
-  uint16_t calculateCRC(EQProtocolPacket& packet);
-  uint32_t getSessionKey() const { return m_sessionKey; }
-  uint32_t getMaxLength() const { return m_maxLength; }
+public:
+	EQPacketStream(EQStreamID streamid, uint8_t dir, uint16_t m_arqSeqGiveUp,
+				   EQPacketOPCodeDB& opcodeDB, QObject* parent = 0, const char* name = 0);
+	~EQPacketStream();
+	void reset();
+	uint8_t sessionTracking();
+	void setSessionTracking(uint8_t);
+	uint16_t arqSeqGiveUp();
+	void setArqSeqGiveUp(uint16_t);
+	int packetCount(void);
+	uint8_t dir();
+	EQStreamID streamID();
+	size_t currentCacheSize();
+	uint16_t arqSeqExp();
+	bool connect2(const QString& opcodeName, const char* payload,  EQSizeCheckType szt, 
+				  const QObject* receiver, const char* member);
+	void receiveSessionKey(uint32_t sessionId, EQStreamID streamid, uint32_t sessionKey);
+	void close(uint32_t sessionId, EQStreamID streamid, uint8_t sessionTracking);
+	uint16_t calculateCRC(EQProtocolPacket& packet);
+	uint32_t getSessionKey() const { return m_sessionKey; }
+	uint32_t getMaxLength() const { return m_maxLength; }
   
- public slots:
-  void handlePacket(EQUDPIPPacketFormat& pf);
+public slots:
+	void handlePacket(EQUDPIPPacketFormat& pf);
   
- signals:
-  void rawPacket(const uint8_t* data, size_t len, uint8_t dir, 
-		 uint16_t opcode);
-  void decodedPacket(const uint8_t* data, size_t len, uint8_t dir,
-		     uint16_t opcode, const EQPacketOPCode* opcodeEntry);
-  void decodedPacket(const uint8_t* data, size_t len, uint8_t dir,
-		     uint16_t opcode, const EQPacketOPCode* opcodeEntry,
-		     bool unknown);
+signals:
+	void rawPacket(const uint8_t* data, size_t len, uint8_t dir, uint16_t opcode);
+	void decodedPacket(const uint8_t* data, size_t len, uint8_t dir, uint16_t opcode, const EQPacketOPCode* opcodeEntry);
+	void decodedPacket(const uint8_t* data, size_t len, uint8_t dir, uint16_t opcode, const EQPacketOPCode* opcodeEntry, bool unknown);
 
-  // this signals stream closure
-  void closing(uint32_t sessionId, EQStreamID streamId);
+	// this signals stream closure
+	void closing(uint32_t sessionId, EQStreamID streamId);
 
-  // this signals a change in the session tracking state
-  void sessionTrackingChanged(uint8_t);
-  void lockOnClient(in_port_t serverPort, in_port_t clientPort);
+	// this signals a change in the session tracking state
+	void sessionTrackingChanged(uint8_t);
+	void lockOnClient(in_port_t serverPort, in_port_t clientPort);
 
-  // Signal a new session key being received
-  void sessionKey(uint32_t sessionId, EQStreamID streadid, uint32_t sessionKey);
+	// Signal a new session key being received
+	void sessionKey(uint32_t sessionId, EQStreamID streadid, uint32_t sessionKey);
 		    
-  // used for net_stats display
-  void cacheSize(int, int);
-  void seqReceive(int, int);
-  void seqExpect(int, int);
-  void numPacket(int, int);
-  void resetPacket(int, int);
-  void maxLength(int, int);
+	// used for net_stats display
+	void cacheSize(int, int);
+	void seqReceive(int, int);
+	void seqExpect(int, int);
+	void numPacket(int, int);
+	void resetPacket(int, int);
+	void maxLength(int, int);
 
- protected:
-  void resetCache();
-  void setCache(uint16_t serverArqSeq, EQProtocolPacket& packet);
-  void processCache();
-  void processPacket(EQProtocolPacket& packet, bool subpacket);
-  void dispatchPacket(const uint8_t* data, size_t len,
-		      uint16_t opCode, const EQPacketOPCode* opcodeEntry);
+protected:
+	void resetCache();
+	void setCache(uint16_t serverArqSeq, EQProtocolPacket& packet);
+	void processCache();
+	void processPacket(EQProtocolPacket& packet, bool subpacket);
+	void dispatchPacket(const uint8_t* data, size_t len, uint16_t opCode, const EQPacketOPCode* opcodeEntry);
 
 
-  EQPacketOPCodeDB& m_opcodeDB;
-  Q3PtrDict<EQPacketDispatch> m_dispatchers;
-  EQStreamID m_streamid;
-  uint8_t m_dir;
-  int m_packetCount;
-  uint8_t m_session_tracking_enabled;
+	EQPacketOPCodeDB& m_opcodeDB;
+	Q3PtrDict<EQPacketDispatch> m_dispatchers;
+	EQStreamID m_streamid;
+	uint8_t m_dir;
+	int m_packetCount;
+	uint8_t m_session_tracking_enabled;
 
-  // ARQ cache handling
-  EQPacketMap m_cache;
-  size_t m_maxCacheCount;
-  uint16_t m_arqSeqExp;
-  uint16_t m_arqSeqGiveUp;
-  bool m_arqSeqFound;
+	// ARQ cache handling
+	EQPacketMap m_cache;
+	size_t m_maxCacheCount;
+	uint16_t m_arqSeqExp;
+	uint16_t m_arqSeqGiveUp;
+	bool m_arqSeqFound;
   
-  // Fragment handling
-  EQPacketFragmentSequence m_fragment;
+	// Fragment handling
+	EQPacketFragmentSequence m_fragment;
 
-  // Session info
-  uint32_t m_sessionId;
-  uint32_t m_sessionKey;
-  in_port_t m_sessionClientPort;
-  uint32_t m_maxLength;
+	// Session info
+	uint32_t m_sessionId;
+	uint32_t m_sessionKey;
+	in_port_t m_sessionClientPort;
+	uint32_t m_maxLength;
 
-  // encryption
-  int64_t m_decodeKey;
-  bool m_validKey;
+	// encryption
+	int64_t m_decodeKey;
+	bool m_validKey;
 };
 
 inline uint8_t EQPacketStream::sessionTracking()
 {
-  return m_session_tracking_enabled;
+	return m_session_tracking_enabled;
 }
 
 inline void EQPacketStream::setSessionTracking(uint8_t val)
 {
-  m_session_tracking_enabled = val;
+	m_session_tracking_enabled = val;
 }
 
 inline uint16_t EQPacketStream::arqSeqGiveUp()
 {
-  return m_arqSeqGiveUp;
+	return m_arqSeqGiveUp;
 }
 
 inline void EQPacketStream::setArqSeqGiveUp(uint16_t val)
 {
-  m_arqSeqGiveUp = val;
+	m_arqSeqGiveUp = val;
 }
 
 inline int EQPacketStream::packetCount(void)
 {
-  return m_packetCount;
+	return m_packetCount;
 }
 
 inline uint8_t EQPacketStream::dir()
 {
-  return m_dir;
+	return m_dir;
 }
 
 inline EQStreamID EQPacketStream::streamID()
 {
-  return m_streamid;
+	return m_streamid;
 }
 
 inline size_t EQPacketStream::currentCacheSize()
 {
-  return m_cache.size();
+	return m_cache.size();
 }
 
 inline uint16_t EQPacketStream::arqSeqExp()
 {
-  return m_arqSeqExp;
+	return m_arqSeqExp;
 }
 
 #endif //  _PACKETSTREAM_H_

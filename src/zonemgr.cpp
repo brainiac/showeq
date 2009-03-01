@@ -20,7 +20,7 @@
 #include "everquest.h"
 #include "diagnosticmessages.h"
 
-#include <QFiles>
+#include <QFile>
 #include <QDataStream>
 #include <QRegExp>
 

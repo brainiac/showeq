@@ -8,7 +8,7 @@
  *  Portions Copyright 2001-2004,2007 Zaphod (dohpaz@users.sourceforge.net). 
  */
 
-#include <qdatetime.h>
+#include <QDateTime>
 
 #include "packetlog.h"
 #include "packetformat.h"

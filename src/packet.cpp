@@ -285,21 +285,15 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 // Destructor
 EQPacket::~EQPacket()
 {
-	seqDebug("Destroying m_packetCapture...");
 	if (m_packetCapture != NULL)
-	{
-		seqDebug(">\tAttempting to stop m_packetCapture...");
-		
+	{		
 		// stop any packet capture 
 		m_packetCapture->stop();
-		
-		seqDebug(">\tm_packetCapture has stopped...");
 		
 		// delete the object
 		delete m_packetCapture;
 	}
 	
-	seqDebug("Destroying m_vPacket...");
 	// try to close down VPacket cleanly
 	if (m_vPacket != NULL)
 	{
@@ -310,7 +304,6 @@ EQPacket::~EQPacket()
 		delete m_vPacket;
 	}
 	
-	seqDebug("Destroying m_timer...");
 	if (m_timer != NULL)
 	{
 		// make sure the timer is stopped
@@ -320,34 +313,27 @@ EQPacket::~EQPacket()
 		delete m_timer;
 	}
 	
-	seqDebug("Calling resetEQPacket()...");
 	resetEQPacket();
 	
-	seqDebug("Deleting streams...");
 	delete m_client2WorldStream;
 	delete m_world2ClientStream;
 	delete m_client2ZoneStream;
 	delete m_zone2ClientStream;
 	
-	seqDebug("Destroying m_packetTypeDB...");
 	if (m_packetTypeDB)
 	{
 		delete m_packetTypeDB;
 	}
 	
-	seqDebug("Destroying m_zoneOPCodeDB...");
 	if (m_zoneOPCodeDB)
 	{
 		delete m_zoneOPCodeDB;
 	}
 	
-	seqDebug("Destroying m_worldOPCodeDB...");
 	if (m_worldOPCodeDB)
 	{
 		delete m_worldOPCodeDB;
 	}
-	
-	seqDebug("Done destroying EQPacket...");
 }
 
 /* Start the timer to process packets */

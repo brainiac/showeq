@@ -142,8 +142,7 @@ VPacket::~VPacket(void)
 // Record a data buffer with timestamp
 // If our internal buffer is full, make call to flush to file
 //
-int
-VPacket::Record(const char *buff, int packetsize, time_t time, long version)
+int VPacket::Record(const char *buff, int packetsize, time_t time, long version)
 {
 	int size;
 	int bufsize;
