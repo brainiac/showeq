@@ -22,7 +22,7 @@
 
 #include <QString>
 #include <QColor>
-#include <QLisst>
+#include <QList>
 #include <QDialog>
 #include <QLineEdit>
 #include <QComboBox>

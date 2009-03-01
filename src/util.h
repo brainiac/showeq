@@ -49,15 +49,12 @@ QString slot_to_name(int16_t slotnr);
 
 uint32_t calc_exp (int level, uint16_t race, uint8_t class_);
 
-int  mTime(void);
+int mTime();
 int calcMaxMana(int INT, int WIS, int daclass, int level);
 
 QString reformatMoney (unsigned int uiCopper);
 
-void fprintData(FILE* fp,
-		uint32_t len,
-		const uint8_t* data
-		);
+void fprintData(FILE* fp, uint32_t len, const uint8_t* data);
 
 void diagFileWriteFail(QString filename);
 void diagFileReadFail(QString filename);
@@ -71,27 +68,25 @@ uint16_t calcCRC16(uint8_t* p, uint32_t length, uint32_t seed);
 template <class T>
 QString bitstring(T value)
 {
-  QString bitstring;
+	QString bitstring;
 
-  // Start with the high-bit and work backwards
-  for (int i = (sizeof(T) * 8) - 1 ; i >= 0; i--)
-    {
-      // every 8 bits insert a space
-      //      if (((i + 1) % 8) == 0)
-      //	bitstring += " ";
-      
-      // if the value is a 1, insert a 1, otherwise insert a 0
-      if (value & (1 << i))
-	bitstring += "1";
-      else
-	bitstring += "0";
+	// Start with the high-bit and work backwards
+	for (int i = (sizeof(T) * 8) - 1 ; i >= 0; i--)
+	{
+		// every 8 bits insert a space
+		//      if (((i + 1) % 8) == 0)
+		//	bitstring += " ";
+		
+		// if the value is a 1, insert a 1, otherwise insert a 0
+		if (value & (1 << i))
+			bitstring += "1";
+		else
+			bitstring += "0";
 
-      if ((i != 0) && ((i % 8) == 0))
-	bitstring += " ";
-	
-    }
-
-  return bitstring;
+		if ((i != 0) && ((i % 8) == 0))
+			bitstring += " ";
+	}
+	return bitstring;
 }
 
 #endif // EQUTIL_U

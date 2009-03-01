@@ -89,44 +89,43 @@ void SEQListView::setSorting(int column, bool increasing)
 
 void SEQListView::savePrefs()
 {
-  // only save the preferences if visible
-  if (isVisible())
-  {
-    int i;
-    int width;
-    QString columnName;
-    QString show = "Show";
+	// only save the preferences if visible
+	if (isVisible())
+	{
+		int i;
+		int width;
+		QString columnName;
+		QString show = "Show";
 
-    // save the column width's/visibility
-    for (i = 0; i < columns(); i++)
-    {
-      columnName = columnPreferenceName(i);
-      width = columnWidth(i);
-      if (width != 0)
-      {
-	pSEQPrefs->setPrefInt(columnName + "Width", preferenceName(), width);
-	pSEQPrefs->setPrefBool(show + columnName, preferenceName(), true);
-      }
-      else
-	pSEQPrefs->setPrefBool(show + columnName, preferenceName(), false);
-    }
+		// save the column width's/visibility
+		for (i = 0; i < columns(); i++)
+		{
+			columnName = columnPreferenceName(i);
+			width = columnWidth(i);
+			if (width != 0)
+			{
+				pSEQPrefs->setPrefInt(columnName + "Width", preferenceName(), width);
+				pSEQPrefs->setPrefBool(show + columnName, preferenceName(), true);
+			}
+			else
+				pSEQPrefs->setPrefBool(show + columnName, preferenceName(), false);
+		}
     
-    // save the column order
-    QString tempStr, tempStr2;
-    if (header()->count() > 0)
-      tempStr.sprintf("%d", header()->mapToSection(0));
-    for(i=1; i < header()->count(); i++) 
-    {
-      tempStr2.sprintf(":%d", header()->mapToSection(i));
-      tempStr += tempStr2;
-    }
-    pSEQPrefs->setPrefString("ColumnOrder", preferenceName(), tempStr);
+		// save the column order
+		QString tempStr, tempStr2;
+		if (header()->count() > 0)
+			tempStr.sprintf("%d", header()->mapToSection(0));
+		for(i=1; i < header()->count(); i++) 
+		{
+			tempStr2.sprintf(":%d", header()->mapToSection(i));
+			tempStr += tempStr2;
+		}
+		pSEQPrefs->setPrefString("ColumnOrder", preferenceName(), tempStr);
 
-    // save the current sorting state
-    pSEQPrefs->setPrefInt("SortColumn", preferenceName(), m_sortColumn);
-    pSEQPrefs->setPrefBool("SortIncreasing", preferenceName(), 
-			   m_sortIncreasing);
-  }
+		// save the current sorting state
+		pSEQPrefs->setPrefInt("SortColumn", preferenceName(), m_sortColumn);
+		pSEQPrefs->setPrefBool("SortIncreasing", preferenceName(), m_sortIncreasing);
+	}
 }
 
 void SEQListView::restoreColumns()
@@ -185,10 +184,8 @@ void SEQListView::restoreColumns()
   }
 
   // restore sorting state
-  setSorting(pSEQPrefs->getPrefInt("SortColumn", preferenceName(), 
-				   m_sortColumn),
-	     pSEQPrefs->getPrefBool("SortIncreasing", preferenceName(),
-				    m_sortIncreasing));
+  setSorting(pSEQPrefs->getPrefInt("SortColumn", preferenceName(), m_sortColumn),
+			 pSEQPrefs->getPrefBool("SortIncreasing", preferenceName(), m_sortIncreasing));
 }
 
 void SEQListView::setColumnVisible(int column, bool visible)
@@ -202,8 +199,7 @@ void SEQListView::setColumnVisible(int column, bool visible)
   if (visible)
   {
     // get the column width
-    width = pSEQPrefs->getPrefInt(columnName + "Width", preferenceName(), 
-				  columnWidth(column));
+    width = pSEQPrefs->getPrefInt(columnName + "Width", preferenceName(), columnWidth(column));
 
     // if it's zero, use default width of 40
     if (width == 0)

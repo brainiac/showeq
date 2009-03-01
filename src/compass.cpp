@@ -13,6 +13,7 @@
 // dependencies will be migrated out.
 //
 #include "compass.h"
+
 #include <qpainter.h>
 #include <qpixmap.h>
 #include <qfont.h>
