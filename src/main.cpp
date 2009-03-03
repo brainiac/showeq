@@ -91,6 +91,8 @@ static const char *id = "@(#) $Id$ $Name$";
 #define   RESTORE_SPAWNS                8
 #define   RESTORE_ALL                   9
 
+#define   REMOTE_PACKET_OPTION          128
+
 /* Note that ASCII 32 is a space, best to stop at 31 and pick up again
    at 128 or higher
 */
@@ -157,6 +159,8 @@ static struct option option_list[] = {
 	{"restore-zone",                 no_argument,        NULL,  RESTORE_ZONE_STATE},
 	{"restore-spawns",               no_argument,        NULL,  RESTORE_SPAWNS},
 	{"restore-all",                  no_argument,        NULL,  RESTORE_ALL},
+
+	{"remote",                       optional_argument,  NULL,  REMOTE_PACKET_OPTION},
 	{0,                              0,                  0,     0}
 };
 
@@ -508,6 +512,12 @@ int main (int argc, char **argv)
 				showeq_params->restoreSpawns = true;
 				break;
 				
+			case REMOTE_PACKET_OPTION:
+				pSEQPrefs->setPrefBool("Enabled", "RemotePacketServer", true, XMLPreferences::Runtime);
+				if (optarg)
+					pSEQPrefs->setPrefInt("Port", "RemotePacketServer", atoi(optarg), XMLPreferences::Runtime);
+				break;
+				
 			/* Spit out the help */
 			case 'h': /* Fall through */
 			default:
@@ -680,7 +690,8 @@ void displayOptions(const char* progName)
   printf ("\n\t                                    SHM 10, NEC 11, WIZ 12");
   printf ("\n\t                                    MAG 13, ENC 14, BST 15");
   printf ("\n\t                                    BER 16\n");
-  
+  printf ("      --remote[=PORT]                   Listen for remote connection to provide\n");
+  printf ("                                        external source of data. Default port is 8773\n");	
   printf ("                                                                   \n");
   printf ("                                                                   \n");
   printf (" The following four options should be used with extreme care!         \n");
