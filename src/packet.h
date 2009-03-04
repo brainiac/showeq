@@ -46,6 +46,9 @@ class EQPacketTypeDB;
 class EQPacketOPCodeDB;
 class EQPacketOPCode;
 
+// Remote packet capture
+class RemotePacketServer;
+
 //----------------------------------------------------------------------
 // EQPacket
 class EQPacket : public QObject
@@ -64,6 +67,8 @@ public:
 			 bool m_recordPackets,
 			 int m_playbackPackets,
 			 int8_t m_playbackSpeed, 
+			 bool useRemote,
+			 uint32_t remotePort,
 			 QObject *parent,
 			 const char *name);
 	~EQPacket();           
@@ -147,6 +152,10 @@ private:
 	bool m_detectingClient;
 	in_addr_t m_client_addr;
 	
+	bool m_useRemote;
+	uint32_t m_remotePort;
+	RemotePacketServer* m_remoteServer;
+	
 	uint16_t m_arqSeqGiveUp;
 	QString m_device;
 	QString m_ip;
@@ -170,7 +179,8 @@ private:
 	void connectStream(EQPacketStream* stream);
 	void dispatchPacket(int size, unsigned char *buffer);
 	void dispatchPacket(EQUDPIPPacketFormat& packet);
-	protected slots:
+
+protected slots:
 	void resetEQPacket();
 	void dispatchWorldChatData(size_t len, uint8_t* data, uint8_t direction = 0);
 };

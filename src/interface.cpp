@@ -237,6 +237,8 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 							pSEQPrefs->getPrefBool("Record", vpsection, false),
 							pSEQPrefs->getPrefInt("Playback", vpsection, PLAYBACK_OFF),
 							pSEQPrefs->getPrefInt("PlaybackRate", vpsection, false),
+							pSEQPrefs->getPrefBool("Enabled", "RemotePacketServer", false),
+							pSEQPrefs->getPrefUInt("Port", "RemotePacketServer", 8773),
 							this, "packet");
 	
 	ipstr[0] = m_packet->ip();	//Retrieves last IP used in previous session 

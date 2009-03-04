@@ -42,6 +42,7 @@ const char* const AUTOMATIC_CLIENT_IP = "127.0.0.0";
 #define PLAYBACK_OFF 0
 #define PLAYBACK_FORMAT_SEQ 1
 #define PLAYBACK_FORMAT_TCPDUMP 2
+#define PLAYBACK_REMOTE 3
 
 //----------------------------------------------------------------------
 // Enumerated types
