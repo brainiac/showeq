@@ -18,9 +18,7 @@
 #include <sys/types.h>
 #include <stdint.h>
 
-#include <qobject.h>
-#include <qdatetime.h>
-
+#include <QDateTime>
 #include <QTimer>
 
 struct timeOfDayStruct;

@@ -11,9 +11,9 @@
 #ifndef _DATALOCATIONMGR_H_
 #define _DATALOCATIONMGR_H_
 
-#include <qstring.h>
-#include <qdir.h>
-#include <qfileinfo.h>
+#include <QString>
+#include <QDir>
+#include <QFileInfo>
 
 class DataLocationMgr
 {
@@ -22,9 +22,9 @@ public:
 	~DataLocationMgr();
 	bool setupUserDirectory();
 	QFileInfo findExistingFile(const QString& subdir, const QString& filename,
-							   bool caseSensitive = false, bool preferUser = true) const;
+				bool caseSensitive = false, bool preferUser = true) const;
 	QFileInfo findWriteFile(const QString& subdir, const QString& filename,
-							bool caseSensitive = true, bool preferUser = true) const;
+				bool caseSensitive = true, bool preferUser = true) const;
 	
 	QDir pkgDataDir(const QString& subdir) const;
 	QDir userDataDir(const QString& subdir) const;

@@ -15,10 +15,10 @@
 #endif
 #include <netinet/in.h>
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qspinbox.h>
+#include <QWidget>
+#include <QLayout>
+#include <QLabel>
+#include <QSpinBox>
 
 #include "packetcommon.h"
 #include "seqwindow.h"
@@ -31,23 +31,24 @@ class EQPacket;
 // NetDiag window class
 class NetDiag : public SEQWindow
 {
-	Q_OBJECT 
+	Q_OBJECT
+	
 public:
 	NetDiag(EQPacket* packet, QWidget* parent, const char* name);
 	~NetDiag();
 	
 public slots:
-	void numPacket              (int, int);
-	void resetPacket            (int, int);
-	void clientChanged          (in_addr_t);
-	void clientPortLatched      (in_port_t);
-	void serverPortLatched      (in_port_t);
-	void sessionTrackingChanged (uint8_t);
-	void filterChanged          ();
-	void seqReceive             (int, int);
-	void seqExpect              (int, int);
-	void cacheSize              (int, int);
-	void maxLength              (int, int);
+	void numPacket(int, int);
+	void resetPacket(int, int);
+	void clientChanged(in_addr_t);
+	void clientPortLatched(in_port_t);
+	void serverPortLatched(in_port_t);
+	void sessionTrackingChanged(uint8_t);
+	void filterChanged();
+	void seqReceive(int, int);
+	void seqExpect(int, int);
+	void cacheSize(int, int);
+	void maxLength(int, int);
 	
 protected:
 	QString print_addr(in_addr_t);

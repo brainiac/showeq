@@ -21,7 +21,7 @@ extern "C" { // fix for bpf not being c++ happy
 #include <pcap.h>
 }
 
-#include <qstring.h>
+#include <QString>
 
 #include "packetcommon.h"
 
@@ -47,14 +47,16 @@ public:
 	// are -1-9, 1 is 1x, 2 is 2x, etc. -1 is paused. 0 is as fast as
 	// possible (no throttle)
 	void setPlaybackSpeed(int playbackSpeed);
-	int getPlaybackSpeed() { return (m_playbackSpeed == 100 ? 0 : m_playbackSpeed); }
+	int getPlaybackSpeed() 
+	{
+		return (m_playbackSpeed == 100 ? 0 : m_playbackSpeed); 
+	}
 	
-	void start (const char *device, const char *host, bool realtime, uint8_t address_type);
+	void start(const char *device, const char *host, bool realtime, uint8_t address_type);
 	void startOffline(const char* filename, int playbackSpeed);
-	void stop ();
-	uint16_t getPacket (unsigned char *buff); 
-	void setFilter (const char *device, const char *hostname, bool realtime,
-					uint8_t address_type, uint16_t zone_server_port, uint16_t client_port);
+	void stop();
+	uint16_t getPacket(unsigned char *buff); 
+	void setFilter(const char *device, const char *hostname, bool realtime, uint8_t address_type, uint16_t zone_server_port, uint16_t client_port);
 	const QString getFilter();
 	
 private:

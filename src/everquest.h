@@ -69,38 +69,38 @@
 ** Diety List
 */
 #define DEITY_UNKNOWN                   0
-#define DEITY_AGNOSTIC			396
-#define DEITY_BRELL			202
-#define DEITY_CAZIC			203
-#define DEITY_EROL			204
-#define DEITY_BRISTLE			205
-#define DEITY_INNY			206
-#define DEITY_KARANA			207
-#define DEITY_MITH			208
-#define DEITY_PREXUS			209
-#define DEITY_QUELLIOUS			210
-#define DEITY_RALLOS			211
-#define DEITY_SOLUSEK			213
-#define DEITY_TRIBUNAL			214
-#define DEITY_TUNARE			215
-#define DEITY_BERT			201	
-#define DEITY_RODCET			212
-#define DEITY_VEESHAN			216
+#define DEITY_AGNOSTIC                  396
+#define DEITY_BRELL                     202
+#define DEITY_CAZIC                     203
+#define DEITY_EROL                      204
+#define DEITY_BRISTLE                   205
+#define DEITY_INNY                      206
+#define DEITY_KARANA                    207
+#define DEITY_MITH                      208
+#define DEITY_PREXUS                    209
+#define DEITY_QUELLIOUS                 210
+#define DEITY_RALLOS                    211
+#define DEITY_SOLUSEK                   213
+#define DEITY_TRIBUNAL                  214
+#define DEITY_TUNARE                    215
+#define DEITY_BERT                      201	
+#define DEITY_RODCET                    212
+#define DEITY_VEESHAN                   216
 
-//Team numbers for Deity teams
-#define DTEAM_GOOD			1
-#define DTEAM_NEUTRAL			2
-#define DTEAM_EVIL			3
-#define DTEAM_OTHER			5
+// Team numbers for Deity teams
+#define DTEAM_GOOD                      1
+#define DTEAM_NEUTRAL                   2
+#define DTEAM_EVIL                      3
+#define DTEAM_OTHER                     5
 
-//Team numbers for Race teams
-#define RTEAM_HUMAN			1
-#define RTEAM_ELF			2
-#define RTEAM_DARK			3
-#define RTEAM_SHORT			4
-#define RTEAM_OTHER			5
+// Team numbers for Race teams
+#define RTEAM_HUMAN                     1
+#define RTEAM_ELF                       2
+#define RTEAM_DARK                      3
+#define RTEAM_SHORT                     4
+#define RTEAM_OTHER                     5
 
-//Maximum limits of certain types of data
+// Maximum limits of certain types of data
 #define MAX_KNOWN_SKILLS                75
 #define MAX_SPELL_SLOTS                 10
 #define MAX_KNOWN_LANGS                 25
@@ -114,7 +114,7 @@
 #define MAX_TRIBUTES                    5
 #define MAX_DISCIPLINES                 100
 
-//Item Flags
+// Item Flags
 #define ITEM_NORMAL                     0x0000
 #define ITEM_NORMAL1                    0x0031
 #define ITEM_NORMAL2                    0x0036
@@ -136,7 +136,7 @@
 #define ITEM_FIELD_SEPERATOR_COUNT      117
 #define ITEM_CMN_FIELD_SEPERATOR_COUNT  102
 
-//Combat Flags
+// Combat Flags
 #define COMBAT_MISS						0
 #define COMBAT_BLOCK					-1
 #define COMBAT_PARRY					-2
@@ -153,10 +153,10 @@ enum ItemPacketType
 {
   ItemPacketViewLink		= 0x00,
   ItemPacketMerchant		= 0x64,
-  ItemPacketLoot		= 0x66,
-  ItemPacketTrade		= 0x67,
+  ItemPacketLoot			= 0x66,
+  ItemPacketTrade			= 0x67,
   ItemPacketSummonItem		= 0x6a,
-  ItemPacketWorldContainer       = 0x6b
+  ItemPacketWorldContainer	= 0x6b
 };
 
 /*

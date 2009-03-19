@@ -13,16 +13,15 @@
 
 #include <stdint.h>
 
-#include <qobject.h>
-#include <q3ptrdict.h>
-#include <q3ptrlist.h>
-#include <q3asciidict.h>
-#include <q3intdict.h>
-#include <q3cstring.h>
-#include <q3strlist.h>
-#include <qstringlist.h>
-#include <q3dict.h>
-#include <q3textstream.h>
+#include <Q3PtrDict>
+#include <Q3PtrList>
+#include <Q3AsciiDict>
+#include <Q3IntDict>
+#include <Q3CString>
+#include <Q3StrList>
+#include <QStringList>
+#include <Q3dict>
+#include <Q3TextStream>
 
 //----------------------------------------------------------------------
 // forward declarations
@@ -52,7 +51,7 @@ public:
 	
 	size_t size(const char* typeName) const;
 	bool valid(const char* typeName) const;
-	void list(void) const;
+	void list() const;
 	
 protected:
 	void addStruct(const char* typeName, size_t);
@@ -76,8 +75,6 @@ public:
 	
 signals:
 	void signal(const uint8_t*, size_t, uint8_t);
-	
-protected:
 	
 private:
 	// disable copy constructor and operator=
@@ -155,16 +152,16 @@ public:
 	~EQPacketOPCode();
 	
 	void setOPCode(uint16_t opcode);
-	uint16_t opcode(void) const;
+	uint16_t opcode() const;
 	void setImplicitLen(uint16_t len);
-	uint16_t implicitLen(void) const;
+	uint16_t implicitLen() const;
 	void setName(const QString& name);
 	const QString& name() const;
 	void setUpdated(const QString& updated);
-	const QString& updated(void) const;
+	const QString& updated() const;
 	void addComment(const QString& comment);
 	bool removeComment(const QString& comment);
-	void clearComments(void);
+	void clearComments();
 	const QStringList& comments() const;
 	EQPacketPayload* find(const uint8_t* data, size_t size, uint8_t dir) const;
 	
@@ -181,7 +178,7 @@ inline void EQPacketOPCode::setOPCode(uint16_t opcode)
 	m_opcode = opcode;
 }
 
-inline uint16_t EQPacketOPCode::opcode(void) const
+inline uint16_t EQPacketOPCode::opcode() const
 {
 	return m_opcode;
 }
@@ -191,7 +188,7 @@ inline void EQPacketOPCode::setImplicitLen(uint16_t len)
 	m_implicitLen = len;
 }
 
-inline uint16_t EQPacketOPCode::implicitLen(void) const
+inline uint16_t EQPacketOPCode::implicitLen() const
 {
 	return m_implicitLen;
 }
@@ -211,7 +208,7 @@ inline void EQPacketOPCode::setUpdated(const QString& updated)
 	m_updated = updated;
 }
 
-inline const QString& EQPacketOPCode::updated(void) const
+inline const QString& EQPacketOPCode::updated() const
 {
 	return m_updated;
 }
@@ -239,7 +236,7 @@ inline bool EQPacketOPCode::removeComment(const QString& comment)
 	return false;
 }
 
-inline void EQPacketOPCode::clearComments(void)
+inline void EQPacketOPCode::clearComments()
 {
 	// clear the comments
 	m_comments.clear();
@@ -261,8 +258,8 @@ public:
 	
 	bool load(const EQPacketTypeDB& typeDB, const QString& filename);
 	bool save(const QString& filename);
-	void list(void) const;
-	void clear(void);
+	void list() const;
+	void clear();
 	EQPacketOPCode* add(uint16_t opcode, const QString& opcodeName);
 	EQPacketOPCode* edit(uint16_t opcode);
 	EQPacketOPCode* edit(const QString& opcodeName);
@@ -279,7 +276,7 @@ protected:
 	Q3Dict<EQPacketOPCode> m_opcodesByName;
 };
 
-inline void EQPacketOPCodeDB::clear(void)
+inline void EQPacketOPCodeDB::clear()
 {
 	m_opcodesByName.clear();
 	m_opcodes.clear();

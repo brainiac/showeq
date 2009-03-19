@@ -8,32 +8,32 @@
 #ifndef EQINT_H
 #define EQINT_H
 
-#include <qwidget.h>
-#include <qpushbutton.h>
-#include <qlcdnumber.h>
-#include <q3frame.h>
-#include <qlabel.h>
-#include <q3listview.h>
-#include <qlayout.h>
-#include <qmenubar.h>
-#include <q3popupmenu.h>
+#include <QWidget>
+#include <QPushButton>
+#include <QLcdNumber>
+#include <Q3Frame>
+#include <QLabel>
+#include <Q3ListView>
+#include <QLayout>
+#include <QMenuBar>
+#include <Q3PopupMenu>
 
-#include <q3mainwindow.h>
+#include <Q3MainWindow>
 #include <QMainWindow>
 
-#include <q3hbox.h>
-#include <q3vbox.h>
-#include <qsplitter.h>
-#include <q3valuelist.h>
-#include <qtimer.h>
-#include <q3ptrlist.h>
-#include <qmessagebox.h>
-#include <q3tabdialog.h>
-#include <qspinbox.h>
-#include <q3intdict.h>
-#include <q3ptrdict.h>
-//Added by qt3to4:
+#include <Q3HBox>
+#include <Q3VBox>
+#include <QSplitter>
+#include <Q3ValueList>
+#include <QTimer>
+#include <Q3PtrList>
+#include <QMessageBox>
+#include <Q3TabDialog>
+#include <QSpinBox>
+#include <Q3IntDict>
+#include <Q3PtrDict>
 #include <Q3TextStream>
+
 #include "everquest.h"
 #include "spawnlist.h"
 #include "spawnshell.h"
@@ -119,8 +119,7 @@ class EQInterface : public QMainWindow
 	Q_OBJECT
 	
 public:
-	EQInterface(DataLocationMgr* dlm, 
-				QWidget * parent = 0, const char *name = 0);
+	EQInterface(DataLocationMgr* dlm, QWidget * parent = 0, const char *name = 0);
 	~EQInterface();
 	
 	QFont appFont;
@@ -128,17 +127,10 @@ public:
 	public slots:
 	void stsMessage(const QString &, int timeout = 0);
 	void numSpawns(int);
-	void setExp(uint32_t totalExp, uint32_t totalTick,
-				uint32_t minExpLevel, uint32_t maxExpLevel, 
-				uint32_t tickExpLevel);
-	void newExp(uint32_t newExp, uint32_t totalExp, 
-				uint32_t totalTick,
-				uint32_t minExpLevel, uint32_t maxExpLevel, 
-				uint32_t tickExpLevel);
-	void setAltExp(uint32_t totalExp,
-				   uint32_t maxExp, uint32_t tickExp, uint32_t aapoints);
-	void newAltExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick, 
-				   uint32_t maxExp, uint32_t tickExp, uint32_t aapoints);
+	void setExp(uint32_t totalExp, uint32_t totalTick, uint32_t minExpLevel, uint32_t maxExpLevel, uint32_t tickExpLevel);
+	void newExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick, uint32_t minExpLevel, uint32_t maxExpLevel, uint32_t tickExpLevel);
+	void setAltExp(uint32_t totalExp, uint32_t maxExp, uint32_t tickExp, uint32_t aapoints);
+	void newAltExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick, uint32_t maxExp, uint32_t tickExp, uint32_t aapoints);
 	void levelChanged(uint8_t level);
 	void newSpeed(double);
 	void numPacket(int, int);
@@ -163,16 +155,16 @@ public:
 	
 	void updateSelectedSpawnStatus(const Item* item);
 	
-	void savePrefs(void);
+	void savePrefs();
 	//void saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge);
 	
-	void addCategory(void);
-	void reloadCategories(void);
+	void addCategory();
+	void reloadCategories();
 	void rebuildSpawnList();
-	void selectNext(void);
-	void selectPrev(void);
-	void saveSelectedSpawnPath(void);
-	void saveSpawnPaths(void);
+	void selectNext();
+	void selectPrev();
+	void saveSelectedSpawnPath();
+	void saveSpawnPaths();
 	void saveSpawnPath(Q3TextStream& out, const Item* item);
 	void toggle_log_AllPackets();
 	void toggle_log_WorldData();
@@ -180,40 +172,40 @@ public:
 	void toggle_opt_BazaarData();
 	void toggle_log_UnknownData();
 	void toggle_log_RawData();
-	void listSpawns(void);
-	void listDrops(void);
-	void listMapInfo(void);
-	void listInterfaceInfo(void);
-	void listGroup(void);
-	void listGuild(void);
-	void dumpSpawns(void);
-	void dumpDrops(void);
-	void dumpMapInfo(void);
-	void dumpGuildInfo(void);
-	void dumpSpellBook(void);
-	void dumpGroup(void);
-	void dumpGuild(void);
-	void launch_editor_filters(void);
-	void launch_editor_zoneFilters(void);
+	void listSpawns();
+	void listDrops();
+	void listMapInfo();
+	void listInterfaceInfo();
+	void listGroup();
+	void listGuild();
+	void dumpSpawns();
+	void dumpDrops();
+	void dumpMapInfo();
+	void dumpGuildInfo();
+	void dumpSpellBook();
+	void dumpGroup();
+	void dumpGuild();
+	void launch_editor_filters();
+	void launch_editor_zoneFilters();
 	void toggleAutoDetectPlayerSettings(int id);
 	void SetDefaultCharacterClass(int id);
 	void SetDefaultCharacterRace(int id);
 	void SetDefaultCharacterLevel (int id);
 	void toggle_view_StatWin(int id);
 	void toggle_view_SkillWin(int id);
-	void toggle_view_SpawnListCol( int id );
-	void toggle_view_DockedWin( int id );
-	void toggle_view_DockableWin( int id );
+	void toggle_view_SpawnListCol(int id);
+	void toggle_view_DockedWin(int id);
+	void toggle_view_DockableWin(int id);
 	void toggle_log_Filter_ZoneData_Client();
 	void toggle_log_Filter_ZoneData_Server();
 	
 	void selectTheme(int id);
-	void toggle_opcode_monitoring (int id);
-	void set_opcode_monitored_list (void);
+	void toggle_opcode_monitoring(int id);
+	void set_opcode_monitored_list();
 	void toggle_opcode_view(int id);
 	void toggle_opcode_log(int id);
 	void select_opcode_file(void);
-	void toggle_net_session_tracking(void);
+	void toggle_net_session_tracking();
 	void toggle_net_real_time_thread(int id);
 	void set_net_monitor_next_client();
 	void set_net_client_IP_address();
@@ -222,13 +214,13 @@ public:
 	void set_net_arq_giveup(int giveup);
 	virtual void setCaption(const QString&);
 	void restoreStatusFont();
-	void showMessageFilterDialog(void);
+	void showMessageFilterDialog();
 	
 signals:
 	void guildList2text(QString);
 	void loadFileMap();
 	void selectSpawn(const Item* item);
-	void saveAllPrefs(void);
+	void saveAllPrefs();
 	void newZoneName (const QString &); 
 	void spellMessage(QString&);
 	void restoreFonts();
@@ -236,10 +228,9 @@ signals:
 	// Decoder signals
 	void theKey(uint64_t);
 	void backfillPlayer(charProfileStruct *);
-	
 	void combatSignal(int, int, int, int, int, QString, QString);
 	
-	private slots:
+private slots:
 	void toggle_opt_Fast();
 	void toggle_view_UnknownData();
 	void toggle_view_ChannelMsgs(int id);
@@ -315,22 +306,22 @@ protected:
 	void loadFormatStrings();
 	void showMap(int mapNum);
 	void showMessageWindow(int winNum);
-	void showSpawnList(void);
-	void showSpawnList2(void);
-	void showSpawnPointList(void);
-	void showStatList(void);
-	void showSkillList(void);
-	void showSpellList(void);
-	void showCompass(void);
-	void showNetDiag(void);
-	void showGuildList(void);
-	void createFilteredSpawnLog(void);
-	void createSpawnLog(void);
-	void createGlobalLog(void);
-	void createWorldLog(void);
-	void createZoneLog(void);
-	void createBazaarLog(void);
-	void createUnknownZoneLog(void);
+	void showSpawnList();
+	void showSpawnList2();
+	void showSpawnPointList();
+	void showStatList();
+	void showSkillList();
+	void showSpellList();
+	void showCompass();
+	void showNetDiag();
+	void showGuildList();
+	void createFilteredSpawnLog();
+	void createSpawnLog();
+	void createGlobalLog();
+	void createWorldLog();
+	void createZoneLog();
+	void createBazaarLog();
+	void createUnknownZoneLog();
 	void createOPCodeMonitorLog(const QString&);
 	void insertWindowMenu(SEQWindow* window);
 	void removeWindowMenu(SEQWindow* window);
@@ -338,7 +329,7 @@ protected:
 	
 public:
 	Player* m_player;
-	MapMgr* mapMgr(void) { return m_mapMgr; }
+	MapMgr* mapMgr() { return m_mapMgr; }
 	
 private:
 	DataLocationMgr* m_dataLocationMgr;
@@ -428,49 +419,49 @@ private:
 	
 	int char_ClassID[PLAYER_CLASSES];
 	int char_RaceID[PLAYER_RACES];
-	int  m_id_log_AllPackets;
-	int  m_id_log_WorldData;
-	int  m_id_log_ZoneData;
-	int  m_id_log_UnknownData;
-	int  m_id_log_RawData;
-	int  m_id_log_Items;
-	int  m_id_log_ItemPackets;
-	int  m_id_opt_BazaarData;
-	int  m_id_opt_OptionsDlg;
-	int  m_id_opt_Fast;
-	int  m_id_opt_ResetMana;
-	int  m_id_view_UnknownData;
-	int  m_id_view_ExpWindow;
-	int  m_id_view_CombatWindow;
-	int  m_id_view_SpawnList;
-	int  m_id_view_SpawnList2;
-	int  m_id_view_SpawnPointList;
-	int  m_id_view_PlayerStats;
-	int  m_id_view_PlayerSkills;
-	int  m_id_view_Compass;
-	int  m_id_view_Map[maxNumMaps];
-	int  m_id_view_MessageWindow[maxNumMessageWindows];
-	int  m_id_view_NetDiag;
-	int  m_id_view_GuildListWindow;
-	int  m_id_view_SpellList;
-	int  m_id_view_PlayerStats_Options;
-	int  m_id_view_PlayerStats_Stats[LIST_MAXLIST];
-	int  m_id_view_PlayerSkills_Options;
-	int  m_id_view_PlayerSkills_Languages;
-	int  m_id_view_SpawnList_Options;
-	int  m_id_view_SpawnList_Cols[tSpawnColMaxCols];
-	int  m_id_opt_ConSelect;
-	int  m_id_opt_TarSelect;
-	int  m_id_opt_KeepSelectedVisible;
-	int  m_id_opt_LogSpawns;
-	int  m_id_opt_PvPTeams;
-	int  m_id_opt_PvPDeity;
-	int  m_id_net_sessiontrack;
-	int  m_packetStartTime;
-	int  m_initialcount;
-	int  m_id_opt_useUpdateRadius;
-	int  m_id_log_Filter_ZoneData_Client;
-	int  m_id_log_Filter_ZoneData_Server;
+	int m_id_log_AllPackets;
+	int m_id_log_WorldData;
+	int m_id_log_ZoneData;
+	int m_id_log_UnknownData;
+	int m_id_log_RawData;
+	int m_id_log_Items;
+	int m_id_log_ItemPackets;
+	int m_id_opt_BazaarData;
+	int m_id_opt_OptionsDlg;
+	int m_id_opt_Fast;
+	int m_id_opt_ResetMana;
+	int m_id_view_UnknownData;
+	int m_id_view_ExpWindow;
+	int m_id_view_CombatWindow;
+	int m_id_view_SpawnList;
+	int m_id_view_SpawnList2;
+	int m_id_view_SpawnPointList;
+	int m_id_view_PlayerStats;
+	int m_id_view_PlayerSkills;
+	int m_id_view_Compass;
+	int m_id_view_Map[maxNumMaps];
+	int m_id_view_MessageWindow[maxNumMessageWindows];
+	int m_id_view_NetDiag;
+	int m_id_view_GuildListWindow;
+	int m_id_view_SpellList;
+	int m_id_view_PlayerStats_Options;
+	int m_id_view_PlayerStats_Stats[LIST_MAXLIST];
+	int m_id_view_PlayerSkills_Options;
+	int m_id_view_PlayerSkills_Languages;
+	int m_id_view_SpawnList_Options;
+	int m_id_view_SpawnList_Cols[tSpawnColMaxCols];
+	int m_id_opt_ConSelect;
+	int m_id_opt_TarSelect;
+	int m_id_opt_KeepSelectedVisible;
+	int m_id_opt_LogSpawns;
+	int m_id_opt_PvPTeams;
+	int m_id_opt_PvPDeity;
+	int m_id_net_sessiontrack;
+	int m_packetStartTime;
+	int m_initialcount;
+	int m_id_opt_useUpdateRadius;
+	int m_id_log_Filter_ZoneData_Client;
+	int m_id_log_Filter_ZoneData_Server;
 	
 	MenuIDList IDList_StyleMenu;
 	

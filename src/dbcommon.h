@@ -29,24 +29,24 @@
 
 class Datum
 {
- public:
-  // default constructor
-  Datum()
-  {
-    data = NULL;
-    size = 0;
-  }
-
-  // convenience constructor
-  Datum(void* data_, uint32_t size_)
-  {
-    data = data_;
-    size = size_;
-  }
-
-  // public data members
-  void* data;
-  uint32_t size;
+public:
+	// default constructor
+	Datum()
+	{
+		data = NULL;
+		size = 0;
+	}
+	
+	// convenience constructor
+	Datum(void* data_, uint32_t size_)
+	{
+		data = data_;
+		size = size_;
+	}
+	
+	// public data members
+	void* data;
+	uint32_t size;
 };
 
 #endif // DBCOMMON_H

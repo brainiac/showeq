@@ -12,10 +12,9 @@
 
 #include <stdint.h>
 
-#include <q3textedit.h>
-#include <qregexp.h>
-#include <qdialog.h>
-
+#include <Q3TextEdit>
+#include <QRegexp>
+#include <QDialog>
 #include <QLabel>
 #include <QMouseEvent>
 #include <QMenu>
@@ -40,6 +39,7 @@ class QLabel;
 class MessageBrowser : public Q3TextEdit
 {
 	Q_OBJECT
+	
 public:
 	MessageBrowser(QWidget* parent = 0, const char* name = 0);
 
@@ -59,6 +59,7 @@ protected:
 class MessageFindDialog : public QDialog
 {
 	Q_OBJECT
+	
 public:
 	MessageFindDialog(MessageBrowser*, const QString& caption, QWidget* parent = 0, const char* name = 0);
 

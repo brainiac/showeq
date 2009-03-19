@@ -15,8 +15,8 @@
 #ifndef _GUILD_H_
 #define _GUILD_H_
 
-#include <qobject.h>
-#include <qstring.h>
+#include <QObject>
+#include <QString>
 #include <vector>
 
 #include "everquest.h"
@@ -25,29 +25,25 @@
 // GuildMgr
 class GuildMgr : public QObject
 {
-  Q_OBJECT
+	Q_OBJECT
+	
+public:
+	GuildMgr(QString, QObject* parent = 0, const char* name = 0);
+	~GuildMgr();
+	
+	QString guildIdToName(uint16_t);
+	
+public slots:
+	void worldGuildList(const uint8_t*, size_t);
+	void readGuildList();
+	void guildList2text(QString);
+	void listGuildInfo();
+	
+private:	
+	void writeGuildList(const worldGuildListStruct*, size_t);
 
- public:
-
-  GuildMgr(QString, QObject* parent = 0, const char* name = 0);
-
-  ~GuildMgr();
-
-  QString guildIdToName(uint16_t);
-
- public slots:
-  void worldGuildList(const uint8_t*, size_t);
-  void readGuildList();
-  void guildList2text(QString);
-  void listGuildInfo();
-
- private:
-  std::vector<QString> m_guildMap;
- 
-  void writeGuildList(const worldGuildListStruct*, size_t);
-
-  QString guildsFileName;
-
+	std::vector<QString> m_guildMap;
+	QString guildsFileName;
 };
 
 #endif // _GUILD_H_

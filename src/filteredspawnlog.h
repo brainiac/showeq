@@ -11,7 +11,7 @@
 #ifndef _FILTEREDSPAWNLOG_H_
 #define _FILTEREDSPAWNLOG_H_
 
-#include <qobject.h>
+#include <QObject>
 #include "logger.h"
 
 //----------------------------------------------------------------------
@@ -23,28 +23,28 @@ class Item;
 
 //----------------------------------------------------------------------
 // FilteredSpawnLog
-class FilteredSpawnLog: public SEQLogger 
+class FilteredSpawnLog : public SEQLogger 
 {
    Q_OBJECT
 
 public:
-   FilteredSpawnLog(DateTimeMgr* dateTimeMgr, FilterMgr* filterMgr,
-		    const QString& filename);
-   ~FilteredSpawnLog();
-   uint32_t filters() { return m_logFilters; }
-
+	FilteredSpawnLog(DateTimeMgr* dateTimeMgr, FilterMgr* filterMgr, const QString& filename);
+	~FilteredSpawnLog();
+	
+	uint32_t filters() { return m_logFilters; }
+	
 public slots:
-   void setFilters(uint32_t flags);
-
-   void addItem(const Item* item);
-   void delItem(const Item* item);
-   void killSpawn(const Item* item);
-
- protected:
-   void logSpawn(const Item* item, const char* action, uint32_t flag);
-   DateTimeMgr* m_dateTimeMgr;
-   FilterMgr* m_filterMgr;
-   uint32_t m_logFilters;
+	void setFilters(uint32_t flags);
+	void addItem(const Item* item);
+	void delItem(const Item* item);
+	void killSpawn(const Item* item);
+	
+protected:
+	void logSpawn(const Item* item, const char* action, uint32_t flag);
+	
+	DateTimeMgr* m_dateTimeMgr;
+	FilterMgr* m_filterMgr;
+	uint32_t m_logFilters;
 };
 
 #endif // _FILTEREDSPAWNLOG_H_

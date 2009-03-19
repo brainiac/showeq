@@ -156,12 +156,12 @@ public:
 	~CombatWindow();
 
 public slots:
-	virtual void savePrefs(void);
+	virtual void savePrefs();
 	void addCombatRecord(int iTargetID, int iSourceID, int iType, int iSpell, int iDamage, QString tName, QString sName);
 	void resetDPS();
 	void clearMob();
 	void clearOffense();
-	void clear(void);
+	void clear();
 
 private:
 	void initUI();

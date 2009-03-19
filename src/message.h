@@ -63,19 +63,21 @@ enum MessageType
 class MessageEntry
 {
 public:
-	MessageEntry(MessageType type, 
-		const QDateTime& dateTime,
-		const QDateTime& eqDateTime,
-		const QString& text,
-		uint32_t color = ME_InvalidColor,
-		uint32_t filterFlags = 0)
-	: m_type(type), m_dateTime(dateTime), m_eqDateTime(eqDateTime),
-		m_text(text), m_color(color), m_filterFlags(filterFlags)
+	MessageEntry(MessageType type, const QDateTime& dateTime, const QDateTime& eqDateTime,
+		const QString& text, uint32_t color = ME_InvalidColor, uint32_t filterFlags = 0)
+	  : m_type(type),
+	    m_dateTime(dateTime), 
+		m_eqDateTime(eqDateTime),
+		m_text(text), 
+		m_color(color), 
+		m_filterFlags(filterFlags)
 	{
 	}
 	
 	MessageEntry() 
-	: m_type(MT_Debug), m_color(0x000000FF), m_filterFlags(0)
+	  : m_type(MT_Debug),
+		m_color(0x000000FF), 
+		m_filterFlags(0)
 	{
 	}
 

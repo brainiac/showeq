@@ -15,45 +15,41 @@
 #ifndef SEQLISTVIEW_H
 #define SEQLISTVIEW_H
 
-#include <q3listview.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <Q3Listview>
+#include <QString>
+#include <QStringList>
 
 class SEQListView : public Q3ListView
 {
-   Q_OBJECT
-
- public:
-  SEQListView(const QString prefName, 
-	      QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0);
-  ~SEQListView();
-
-  const QString& preferenceName() const { return m_preferenceName; }
-  const QString& columnPreferenceName(int column) const;
-
-  QSizePolicy sizePolicy() const;
-
-  virtual int addColumn(const QString& label,
-			int width = -1);
-  virtual int addColumn(const QString& label, 
-			const QString& preference, 
-			int width = -1);
-  virtual void removeColumn(int column);
-  bool columnVisible(int column) { return (columnWidth(column) != 0); }
-  virtual void setSorting(int column, bool increasing = true);
-  int sortColumn() const { return m_sortColumn; }
-  bool sortIncreasing() const { return m_sortIncreasing; }
-
- public slots:
-   virtual void restoreColumns(void);
-   virtual void savePrefs(void);
-   void setColumnVisible(int column, bool visible);
-
- private:
-   QString m_preferenceName;
-   QStringList m_columns;
-   int m_sortColumn;
-   bool m_sortIncreasing;
+	Q_OBJECT
+	
+public:
+	SEQListView(const QString prefName, QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0);
+	~SEQListView();
+	
+	const QString& preferenceName() const { return m_preferenceName; }
+	const QString& columnPreferenceName(int column) const;
+	
+	QSizePolicy sizePolicy() const;
+	
+	virtual int addColumn(const QString& label, int width = -1);
+	virtual int addColumn(const QString& label, const QString& preference, int width = -1);
+	virtual void removeColumn(int column);
+	bool columnVisible(int column) { return (columnWidth(column) != 0); }
+	virtual void setSorting(int column, bool increasing = true);
+	int sortColumn() const { return m_sortColumn; }
+	bool sortIncreasing() const { return m_sortIncreasing; }
+	
+public slots:
+	virtual void restoreColumns();
+	virtual void savePrefs();
+	void setColumnVisible(int column, bool visible);
+	
+private:
+	QString m_preferenceName;
+	QStringList m_columns;
+	int m_sortColumn;
+	bool m_sortIncreasing;
 };
 
 #endif // SEQLISTVIEW_H

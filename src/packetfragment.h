@@ -21,38 +21,39 @@ class EQProtocolPacket;
 // EQPacketFragmentSequence
 class EQPacketFragmentSequence
 {
- public:
-  EQPacketFragmentSequence();
-  EQPacketFragmentSequence(EQStreamID streamid);
-  ~EQPacketFragmentSequence();
-  void reset();
-  void addFragment(EQProtocolPacket& packet);
-  bool isComplete();
-
-  uint8_t* data();
-  size_t size();
-
- protected:
-  EQStreamID m_streamid;
-  uint8_t *m_data;
-  uint32_t m_totalLength;
-  size_t m_dataSize;
-  uint32_t m_dataAllocSize;
+public:
+	EQPacketFragmentSequence();
+	EQPacketFragmentSequence(EQStreamID streamid);
+	~EQPacketFragmentSequence();
+	
+	void reset();
+	void addFragment(EQProtocolPacket& packet);
+	bool isComplete();
+	
+	uint8_t* data();
+	size_t size();
+	
+protected:
+	EQStreamID m_streamid;
+	uint8_t *m_data;
+	uint32_t m_totalLength;
+	size_t m_dataSize;
+	uint32_t m_dataAllocSize;
 };
 
 inline bool EQPacketFragmentSequence::isComplete()
 {
-  return m_dataSize != 0 && m_totalLength == m_dataSize;
+	return m_dataSize != 0 && m_totalLength == m_dataSize;
 }
 
 inline uint8_t* EQPacketFragmentSequence::data()
 {
-  return m_data;
+	return m_data;
 }
 
 inline size_t EQPacketFragmentSequence::size()
 {
-  return m_dataSize;
+	return m_dataSize;
 }
 
 #endif // _PACKETFRAGMENT_H_

@@ -20,10 +20,9 @@
 #include "seqwindow.h"
 #include "seqlistview.h" 
 
-#include <q3listview.h>
-#include <q3ptrdict.h>
-#include <qstring.h>
-
+#include <Q3ListView>
+#include <Q3PtrDict>
+#include <QString>
 #include <QLabel>
 #include <QMenu>
 
@@ -58,18 +57,15 @@ class GuildListItem : public Q3ListViewItem
 public:
 	GuildListItem(Q3ListView* parent, const GuildMember* member, const GuildShell* guildShell);
 	virtual ~GuildListItem();
-
+	
 	virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
-
 	virtual int compare(Q3ListViewItem *i, int col, bool ascending) const;
-
 	void update(const GuildShell* guildShell);
 
 	const GuildMember* guildMember() { return m_member; }
 	void setGuildMember(const GuildMember* member);
-
 	virtual int rtti() const;
-
+	
 protected:
 	const GuildMember* m_member;
 };
@@ -86,7 +82,7 @@ public:
 	
 	virtual QMenu* menu();
 	
-	public slots: 
+public slots: 
 	void cleared();
 	void loaded();
 	void updated(const GuildMember* gm);

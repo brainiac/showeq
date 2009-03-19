@@ -13,26 +13,25 @@
 
 #include <stdint.h>
 
-#include <q3intdict.h>
-#include <qstring.h>
+#include <Q3IntDict>
+#include <QString>
 
 //----------------------------------------------------------------------
 // EQStr
 class EQStr
 {
- public:
-  EQStr(int size = 8009);
-  ~EQStr();
-
-  bool load(const QString& eqstrFile);
-  QString find(uint32_t formatid) const;
-  QString message(uint32_t formatid) const;
-  QString formatMessage(uint32_t formatid, 
-			const char* arguments, size_t argslen) const;
-
- protected:
-   Q3IntDict<QString> m_messageStrings;
-   bool m_loaded;
+public:
+	EQStr(int size = 8009);
+	~EQStr();
+	
+	bool load(const QString& eqstrFile);
+	QString find(uint32_t formatid) const;
+	QString message(uint32_t formatid) const;
+	QString formatMessage(uint32_t formatid, const char* arguments, size_t argslen) const;
+	
+protected:
+	Q3IntDict<QString> m_messageStrings;
+	bool m_loaded;
 };
 
 #endif // _EQSTR_H_

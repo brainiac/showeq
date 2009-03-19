@@ -46,7 +46,7 @@ public slots:
 	virtual void restoreSize();
 	virtual void restorePosition();
 	virtual void restoreFont();
-	virtual void savePrefs(void);
+	virtual void savePrefs();
 	
 	virtual void mousePressEvent(QMouseEvent* e);
 	

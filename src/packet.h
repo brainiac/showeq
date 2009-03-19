@@ -11,11 +11,10 @@
 #ifndef _PACKET_H_
 #define _PACKET_H_
 
-#include <qobject.h>
+#include <QTimer>
+
 #include "packetcommon.h"
 #include "packetinfo.h"
-
-#include <QTimer>
 
 #if defined (__GLIBC__) && (__GLIBC__ < 2)
 #error "Need glibc 2.1.3 or better"
@@ -128,8 +127,8 @@ signals:
 	void clientPortLatched(in_port_t);
 	void serverPortLatched(in_port_t);
 	void sessionTrackingChanged(uint8_t);
-	void toggle_session_tracking(void);
-	void filterChanged(void);
+	void toggle_session_tracking();
+	void filterChanged();
 	void stsMessage(const QString &, int = 0);
 	
 	// new logging

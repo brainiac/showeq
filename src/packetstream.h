@@ -11,7 +11,7 @@
 #ifndef _PACKETSTREAM_H_
 #define _PACKETSTREAM_H_
 
-#include <qobject.h>
+#include <QObject>
 #include <map>
 
 #include "packetcommon.h"
@@ -60,12 +60,13 @@ public:
 	EQPacketStream(EQStreamID streamid, uint8_t dir, uint16_t m_arqSeqGiveUp,
 				   EQPacketOPCodeDB& opcodeDB, QObject* parent = 0, const char* name = 0);
 	~EQPacketStream();
+	
 	void reset();
 	uint8_t sessionTracking();
 	void setSessionTracking(uint8_t);
 	uint16_t arqSeqGiveUp();
 	void setArqSeqGiveUp(uint16_t);
-	int packetCount(void);
+	int packetCount();
 	uint8_t dir();
 	EQStreamID streamID();
 	size_t currentCacheSize();

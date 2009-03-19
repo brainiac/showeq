@@ -71,12 +71,13 @@ private:
 class CategoryDlg : public QDialog
 {
 	Q_OBJECT
+	
 public:
 	CategoryDlg(QWidget *parent, QString name);
 	virtual ~CategoryDlg();
 		
 public slots:
-	void select_color(void);
+	void select_color();
 		
 public:
 	QLineEdit* m_Name;
@@ -94,6 +95,7 @@ typedef Q3PtrListIterator<const Category> CategoryListConstIterator;
 class CategoryMgr : public QObject
 {
 	Q_OBJECT
+	
 public:
 	enum { tMaxNumCategories = 32 };
 		
@@ -101,7 +103,7 @@ public:
 	virtual ~CategoryMgr();
 		
 	const CategoryList findCategories(const QString& filterString, int level) const;
-	const CategoryList& getCategories(void) const { return m_categories; }
+	const CategoryList& getCategories() const { return m_categories; }
 	uint count() { return m_categories.count(); }
 		
 	const Category* addCategory(const QString& name, const QString& filter, const QString& filterout, 
@@ -109,17 +111,17 @@ public:
 	void remCategory(const Category* cat);
 		
 public slots:
-	void clearCategories(void);
+	void clearCategories();
 	void addCategory(QWidget* parent = 0);
 	void editCategories(const Category* cat, QWidget* parent = 0);
-	void reloadCategories(void);
-	void savePrefs(void);
+	void reloadCategories();
+	void savePrefs();
 		
 signals:
 	void addCategory(const Category* cat);
 	void delCategory(const Category* cat);
-	void clearedCategories(void);
-	void loadedCategories(void);
+	void clearedCategories();
+	void loadedCategories();
 		
 private:
 	CategoryList m_categories;

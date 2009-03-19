@@ -16,32 +16,31 @@
 #define UINT32_MAX UINT_MAX
 #endif
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qsize.h>
-#include <qmap.h>
-#include <qdialog.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qtooltip.h>
-#include <qregexp.h>
-#include <q3intdict.h>
-#include <q3textstream.h>
-#include <qdatetime.h>
-#include <qpen.h>
-#include <qbrush.h>
+#include <QWidget>
+#include <QPixmap>
+#include <QSize>
+#include <QMap>
+#include <QDialog>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QLabel>
+#include <QToolTip>
+#include <QRegExp>
+#include <Q3IntDict>
+#include <Q3TextStream>
+#include <QDateTime>
+#include <QPen>
+#include <QBrush>
 
 // includes required for MapMenu
-#include <q3popupmenu.h>
+#include <Q3PopupMenu>
 
 // includes required for MapFrame
-#include <qlayout.h>
-#include <q3vbox.h>
-#include <q3hbox.h>
-#include <qspinbox.h>
-#include <qlist.h>
-//Added by qt3to4:
+#include <QLayout>
+#include <Q3VBox>
+#include <Q3HBox>
+#include <QSpinBox>
+#include <QList>
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <QEvent>
@@ -104,13 +103,15 @@ const int maxFrameTimes = 40;
 class CLineDlg : public QDialog
 {
 	Q_OBJECT
+	
 public:
 	CLineDlg(QWidget* parent, QString name, MapMgr* mapMgr);
 	
 	QComboBox *m_LineColor;
 	QLineEdit *m_LineName;
-	Q3Frame    *m_ColorPreview;
-	public slots:
+	Q3Frame *m_ColorPreview;
+
+public slots:
 	void changeColor(const QString &);
 };
 
@@ -119,13 +120,13 @@ public:
 class MapLabel: public QLabel
 {
 public:
-	MapLabel( Map* map );
+	MapLabel(Map* map);
 	void popup(const QPoint& pos);
 		
 protected:
 	virtual void mousePressEvent(QMouseEvent*);
-		
-	Map*	m_Map;
+	
+	Map* m_Map;
 };
 
 //----------------------------------------------------------------------
@@ -147,10 +148,10 @@ public:
 	const QString& curLineColor() { return m_curLineColor; }
 	const QString& curLineName() { return m_curLineName; }
 	
-	uint8_t getZEM(void) { return m_mapData.zoneZEM(); }
+	uint8_t getZEM() { return m_mapData.zoneZEM(); }
 	void setZEM(uint8_t newZEM) { m_mapData.setZoneZEM(newZEM); }
 	
-	public slots:
+public slots:
 	// Zone Handling
 	void zoneBegin(const QString& shortZoneName);
 	void zoneChanged(const QString& shortZoneName);
@@ -158,25 +159,24 @@ public:
 	void loadZoneMap(const QString& shortZoneName);
 	
 	// Map Handling
-	void loadMap(void);
-	void importMap(void);
-	void loadFileMap(const QString& fileName, 
-					 bool import = false, bool force = false);
-	void saveMap(void);
-	void saveSOEMap(void);
+	void loadMap();
+	void importMap();
+	void loadFileMap(const QString& fileName, bool import = false, bool force = false);
+	void saveMap();
+	void saveSOEMap();
 	
 	// Spawn Handling
 	void addItem(const Item* item);
 	void delItem(const Item* item);
 	void killSpawn(const Item* item);
 	void changeItem(const Item* item, uint32_t changeType);
-	void clearItems(void);
+	void clearItems();
 	
 	// Map Editing
 	void addLocation(QWidget* parent, const MapPoint& point);
 	void startLine(const MapPoint& point);
 	void addLinePoint(const MapPoint& point);
-	void delLinePoint(void);
+	void delLinePoint();
 	
 	// Map Editing control
 	void setLineName(const QString &);
@@ -186,15 +186,15 @@ public:
 	void scaleUpZ(int16_t);
 	
 	// Preference handling
-	void savePrefs(void);
+	void savePrefs();
 	
 	// dump debug info
 	void dumpInfo(Q3TextStream& out);
 	
 signals:
-	void mapLoaded(void);
-	void mapUnloaded(void);
-	void mapUpdated(void);
+	void mapLoaded();
+	void mapUnloaded();
+	void mapUpdated();
 	
 private:
 	const DataLocationMgr* m_dataLocMgr;
@@ -220,9 +220,9 @@ public:
 	MapMenu(Map* map, QWidget* parent = 0, const char* name = 0);
 	virtual ~MapMenu();
 	
-	protected slots:
-	void init_Menu(void);
-	void init_fovMenu(void);
+protected slots:
+	void init_Menu();
+	void init_fovMenu();
 	
 	void select_follow(int itemId);
 	void select_mapLine(int itemId);
@@ -359,33 +359,29 @@ protected:
 
 //----------------------------------------------------------------------
 // Map
-class Map :public QWidget
+class Map : public QWidget
 {
 	Q_OBJECT
 		
 public:
-	Map (MapMgr* m_mapMgr,
-		 Player* player, 
-		 SpawnShell* spawnshell, 
-		 ZoneMgr* zoneMgr,
-		 SpawnMonitor* spawnMonitor,
-		 const QString& preferenceName, uint32_t runtimeFilterFlagMask,
+	Map(MapMgr* m_mapMgr, Player* player, SpawnShell* spawnshell, ZoneMgr* zoneMgr,
+		 SpawnMonitor* spawnMonitor, const QString& preferenceName, uint32_t runtimeFilterFlagMask,
 		 QWidget * parent = 0, const char *name = "map");
-	virtual ~Map(void);
+	virtual ~Map();
 	
-	QSize sizeHint() const; // preferred size
-	QSize minimumSizeHint() const; // minimum size
-	QSizePolicy sizePolicy() const; // size policy
-	QRect getRect()         { return rect(); }
+	QSize sizeHint() const;
+	QSize minimumSizeHint() const;
+	QSizePolicy sizePolicy() const; 
+	QRect getRect() { return rect(); }
+	
 	MapMgr* mapMgr() const { return m_mapMgr; }
 	MapIcons* mapIcons() const { return m_mapIcons; }
 	
-	unsigned char getZEM (void);
-	void          setZEM (unsigned char newZEM);
+	unsigned char getZEM ();
+	void setZEM (unsigned char newZEM);
 	
 	// old methods
 	MapOptimizationMethod getMapOptimization() { return m_param.mapOptimizationMethod(); }
-	
 	MapMenu* menu();
 	
 	// get methods
@@ -443,37 +439,37 @@ public:
 	bool showGridTicks() const { return m_param.showGridTicks(); }
 	bool cacheAlwaysRepaint() const { return m_mapCache.alwaysRepaint(); }
 	
-	public slots:   
-	void savePrefs(void);
-	void saveMapImage(void);
+public slots:   
+	void savePrefs();
+	void saveMapImage();
 	
 	void selectSpawn(const Item* item);
 	
 	// SpawnShell handling
 	void delItem(const Item* item);
 	void changeItem(const Item* item, uint32_t changeType);
-	void clearItems(void);
+	void clearItems();
 	
 	// MapMgr handling
-	void mapLoaded(void);
-	void mapUnloaded(void);
-	void mapUpdated(void);
+	void mapLoaded();
+	void mapUnloaded();
+	void mapUpdated();
 	
 	// map editing
 	void addLocation();
 	void startLine();
 	void addLinePoint();
-	void delLinePoint(void);
+	void delLinePoint();
 	void addPathPoint();
-	void showLineDlg(void);
+	void showLineDlg();
 	void scaleDownZ(int);
 	void scaleUpZ(int);
 	
 	// assorted
 	void zoomIn();
 	void zoomOut();
-	void increaseGridResolution	(void);
-	void decreaseGridResolution	(void);
+	void increaseGridResolution();
+	void decreaseGridResolution();
 	void panRight();
 	void panLeft();
 	void panDown();
@@ -485,9 +481,9 @@ public:
 	void viewTarget();
 	void viewLock();
 	
-	void reAdjustAndRefreshMap(void);
-	void reAdjust (void);
-	void refreshMap(void);
+	void reAdjustAndRefreshMap();
+	void reAdjust();
+	void refreshMap();
 	
 	// set methods
 	void setFollowMode(FollowMode mode);
@@ -558,36 +554,28 @@ signals:
 	void floorRoomChanged(int floorRoom);
 	
 protected:
-	const Item* closestSpawnToPoint(const QPoint& pt,
-									uint32_t& closestDistance) const;
-	const SpawnPoint* closestSpawnPointToPoint(const QPoint& pt,
-											   uint32_t& closestDistance) const;
-	void paintEvent (QPaintEvent *);
-	void mousePressEvent (QMouseEvent *);
-	void mouseMoveEvent( QMouseEvent* );
-	void mouseReleaseEvent( QMouseEvent *);
-	void mouseDoubleClickEvent( QMouseEvent *);
-	void resizeEvent (QResizeEvent *);
+	const Item* closestSpawnToPoint(const QPoint& pt, uint32_t& closestDistance) const;
+	const SpawnPoint* closestSpawnPointToPoint(const QPoint& pt, uint32_t& closestDistance) const;
+	void paintEvent(QPaintEvent *);
+	void mousePressEvent(QMouseEvent *);
+	void mouseMoveEvent(QMouseEvent*);
+	void mouseReleaseEvent(QMouseEvent *);
+	void mouseDoubleClickEvent(QMouseEvent *);
+	void resizeEvent(QResizeEvent *);
 	
-	void paintMap (QPainter *);
+	void paintMap(QPainter *);
 	void paintPlayerBackground(MapParameters& param, QPainter& p);
 	void paintPlayerView(MapParameters& param, QPainter& p);
 	void paintPlayer(MapParameters& param, QPainter& p);
 	void paintDrops(MapParameters& param, QPainter& p);
 	void paintDoors(MapParameters& param, QPainter& p);
-	void paintSelectedSpawnSpecials(MapParameters& param, QPainter& p,
-									const QTime& drawTime);
-	void paintSelectedSpawnPointSpecials(MapParameters& param, QPainter& p,
-										 const QTime& drawTime);
+	void paintSelectedSpawnSpecials(MapParameters& param, QPainter& p, const QTime& drawTime);
+	void paintSelectedSpawnPointSpecials(MapParameters& param, QPainter& p, const QTime& drawTime);
 	const QColor raceTeamHighlightColor(const Spawn* spawn) const;
 	const QColor deityTeamHighlightColor(const Spawn* spawn) const;
-	void paintSpawns(MapParameters& param, QPainter& p, 
-					 const QTime& drawTime);
+	void paintSpawns(MapParameters& param, QPainter& p, const QTime& drawTime);
 	void paintSpawnPoints(MapParameters& param, QPainter& p);
-	void paintDebugInfo(MapParameters& param, 
-						QPainter& tmp, 
-						float fps, 
-						int drawTime);
+	void paintDebugInfo(MapParameters& param, QPainter& tmp, float fps, int drawTime);
 	QRect mapRect () const;
 	
 private:   
@@ -667,9 +655,8 @@ private:
 class MapFilterLineEdit : public QLineEdit
 {
 public:
-	MapFilterLineEdit(QWidget* parent = 0, const char* name = 0)
-	  : QLineEdit(parent, name) {}
-	~MapFilterLineEdit() {} ;
+	MapFilterLineEdit(QWidget* parent = 0, const char* name = 0) : QLineEdit(parent, name) {}
+	~MapFilterLineEdit() {}
 		
 protected:
 	virtual void leaveEvent(QEvent* ev) { emit returnPressed(); }
@@ -693,20 +680,19 @@ public:
 	Map* map() { return m_map; }
 	const QString& mapPreferenceName() { return m_mapPreferenceName; }
 	
-	public slots:
+public slots:
 	void regexpok(int ok);
 	void setregexp(const QString&);
 	void filterConfirmed();
 	void mouseLocation(int16_t x, int16_t y);
-	void setPlayer(int16_t x, int16_t y, int16_t z, 
-				   int16_t Dx, int16_t Dy, int16_t Dz, int32_t degrees);
-	virtual void savePrefs(void);
+	void setPlayer(int16_t x, int16_t y, int16_t z, int16_t Dx, int16_t Dy, int16_t Dz, int32_t degrees);
+	virtual void savePrefs();
 	
 	// dump debug info
 	void dumpInfo(Q3TextStream& out);
 	
-	protected slots:
-	void init_Menu(void);
+protected slots:
+	void init_Menu();
 	
 	void toggle_top_controls(int id);
 	void toggle_bottom_controls(int id);

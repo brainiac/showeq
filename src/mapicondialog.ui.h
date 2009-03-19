@@ -1,5 +1,3 @@
-//Added by qt3to4:
-#include <QPixmap>
 /*
  * mapicondialog.ui.h
  *
@@ -10,15 +8,16 @@
  * 
  */
 
-/****************************************************************************
-** ui.h extension file, included from the uic-generated form implementation.
-**
-** If you wish to add, delete or rename functions or slots use
-** Qt Designer which will update this file, preserving your code. Create an
-** init() function in place of a constructor, and a destroy() function in
-** place of a destructor.
-*****************************************************************************/
+#include <QPixmap>
 
+/****************************************************************************
+ ** ui.h extension file, included from the uic-generated form implementation.
+ **
+ ** If you wish to add, delete or rename functions or slots use
+ ** Qt Designer which will update this file, preserving your code. Create an
+ ** init() function in place of a constructor, and a destroy() function in
+ ** place of a destructor.
+ *****************************************************************************/
 
 void MapIconDialog::apply()
 {
@@ -54,7 +53,7 @@ void MapIconDialog::apply()
     brush = m_currentMapIcon.highlightBrush();
     brush.setStyle(Qt::BrushStyle(m_highlightBrushStyle->currentItem()));
     m_currentMapIcon.setHighlightBrush(brush);
- 
+	
     // get line settings
     m_currentMapIcon.setShowLine0(m_showLine0->isChecked());
     pen = m_currentMapIcon.line0Pen();
@@ -80,15 +79,15 @@ void MapIconDialog::apply()
     pen.setStyle(Qt::PenStyle(m_walkPathPenStyle->currentItem()));
     pen.setWidth(m_walkPathPenWidth->value());
     m_currentMapIcon.setWalkPathPen(pen);
-
+	
     // make sure the map icons object has been set
     if (m_mapIcons)
     {
-	// set the current map icon types settings
-	m_mapIcons->setIcon(m_currentMapIconType, m_currentMapIcon);
-	
-	// retrieve the current map icon types settings (just to be sure)
-	m_currentMapIcon = m_mapIcons->icon(m_currentMapIconType);
+		// set the current map icon types settings
+		m_mapIcons->setIcon(m_currentMapIconType, m_currentMapIcon);
+		
+		// retrieve the current map icon types settings (just to be sure)
+		m_currentMapIcon = m_mapIcons->icon(m_currentMapIconType);
     }
     
     // re-setup the display 
@@ -107,104 +106,107 @@ void MapIconDialog::revert()
 
 void MapIconDialog::init()
 {
-  
+	
     QString temp;
     // setup the map icons combo box
     for (int i = tIconTypeDrop; i <= tIconTypeMax; i++)
-      m_mapIconCombo->insertItem(MapIcons::iconTypeName((MapIconType)i), i-1);
-    
+	{
+		m_mapIconCombo->insertItem(MapIcons::iconTypeName((MapIconType)i), i-1);
+    }
+	
     int sizeWH = m_mapIconCombo->height() - 8;
     int size = sizeWH >> 1;
     QPoint point(size, size);
+	
     // setup the image styles
     QPixmap pix(QSize(sizeWH+1, sizeWH+1));
     QPen pen(Qt::black, 0, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin);
     for (int i = tIconStyleNone; i <= tIconStyleMax; i++)
     {
-	pix.fill(Qt::white);
-	QPainter p(&pix);
-	p.setPen(pen);
-	p.setBrush(QBrush(Qt::gray));
-	MapIcon::paintIconImage(MapIconStyle(i), p, point, size, sizeWH);
-	p.end();
-      
-	temp = MapIcon::iconStyleName((MapIconStyle)i);
-	m_imageImage->insertItem(pix, temp, i);
-	m_highlightImage->insertItem(pix, temp, i);
+		pix.fill(Qt::white);
+		QPainter p(&pix);
+		p.setPen(pen);
+		p.setBrush(QBrush(Qt::gray));
+		MapIcon::paintIconImage(MapIconStyle(i), p, point, size, sizeWH);
+		p.end();
+		
+		temp = MapIcon::iconStyleName((MapIconStyle)i);
+		m_imageImage->insertItem(pix, temp, i);
+		m_highlightImage->insertItem(pix, temp, i);
     }
-        
+	
     // setup the image sizes
     for (int i = tIconSizeNone; i <= tIconSizeMax; i++)
     {
-	temp = MapIcon::iconSizeName((MapIconSize)i);
-	m_imageSize->insertItem(temp, i);
-	m_highlightSize->insertItem(temp, i);
+		temp = MapIcon::iconSizeName((MapIconSize)i);
+		m_imageSize->insertItem(temp, i);
+		m_highlightSize->insertItem(temp, i);
     }
-        
+	
     const QString penStyleNames[] =
     {
-	"None",
-	"Solid",
-	"Dash",
-	"Dot",
-	"Dash Dot",
-	"Dash Dot Dot"
+		"None",
+		"Solid",
+		"Dash",
+		"Dot",
+		"Dash Dot",
+		"Dash Dot Dot"
     };
     
     // setup pen style names
     pen = QPen(Qt::black, 0, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin);
     for (int i = Qt::NoPen; i <= Qt::DashDotDotLine; i++)
     {
-	pix.fill(Qt::white);
-	QPainter p(&pix);
-	pen.setStyle(Qt::PenStyle(i));
-	p.setPen(pen);
-	p.setBrush(QBrush(Qt::gray));
-	p.drawLine(point.x() - size, point.y() - size,
-		   point.x() + size, point.y() + size);
-	p.end();
-
-	m_imagePenStyle->insertItem(pix, penStyleNames[i], i);
-	m_highlightPenStyle->insertItem(pix, penStyleNames[i], i);
-	m_line0PenStyle->insertItem(pix, penStyleNames[i], i);
-	m_line1PenStyle->insertItem(pix, penStyleNames[i], i);
-	m_line2PenStyle->insertItem(pix, penStyleNames[i], i);
-	m_walkPathPenStyle->insertItem(pix, penStyleNames[i], i);
+		pix.fill(Qt::white);
+		QPainter p(&pix);
+		pen.setStyle(Qt::PenStyle(i));
+		p.setPen(pen);
+		p.setBrush(QBrush(Qt::gray));
+		p.drawLine(point.x() - size, point.y() - size,
+				   point.x() + size, point.y() + size);
+		p.end();
+		
+		m_imagePenStyle->insertItem(pix, penStyleNames[i], i);
+		m_highlightPenStyle->insertItem(pix, penStyleNames[i], i);
+		m_line0PenStyle->insertItem(pix, penStyleNames[i], i);
+		m_line1PenStyle->insertItem(pix, penStyleNames[i], i);
+		m_line2PenStyle->insertItem(pix, penStyleNames[i], i);
+		m_walkPathPenStyle->insertItem(pix, penStyleNames[i], i);
     }
     
     const QString brushStyleNames[] = 
     {	
-	"None",
-	"Solid",
-	"94% Fill",
-	"88% Fill",
-	"63% Fill",
-	"50% Fill",
-	"37% Fill",
-	"12% Fill",
-	"6 % Fill",
-	"Horizontal Lines",
-	"Vertical Lines",
-	"Crossing Lines",
-	"Diagonal Lines /",
-	"Diagonal Lines \\",
-	"Diagonal Cross Lines",
+		"None",
+		"Solid",
+		"94% Fill",
+		"88% Fill",
+		"63% Fill",
+		"50% Fill",
+		"37% Fill",
+		"12% Fill",
+		"6 % Fill",
+		"Horizontal Lines",
+		"Vertical Lines",
+		"Crossing Lines",
+		"Diagonal Lines /",
+		"Diagonal Lines \\",
+		"Diagonal Cross Lines",
     };
- 
+	
     // setup brush style names
     pen = QPen(Qt::black, 0, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin);
     pen.setWidth(0);
     for (int i = Qt::NoBrush; i <= Qt::DiagCrossPattern; i++)
     {
-	pix.fill(Qt::white);
-	QPainter p(&pix);
-	p.setPen(pen);
-	p.setBrush(QBrush(Qt::BrushStyle(i)));
-	p.drawRect(point.x() - size, point.y() - size, sizeWH, sizeWH);
-	p.end();
-
-	m_imageBrushStyle->insertItem(pix, brushStyleNames[i], i);
-	m_highlightBrushStyle->insertItem(pix, brushStyleNames[i], i);
+		pix.fill(Qt::white);
+		QPainter p(&pix);
+		p.setPen(pen);
+		p.setBrush(QBrush(Qt::BrushStyle(i)));
+		p.drawRect(point.x() - size, point.y() - size, sizeWH, sizeWH);
+		p.end();
+		
+		m_imageBrushStyle->insertItem(pix, brushStyleNames[i], i);
+		m_highlightBrushStyle->insertItem(pix, brushStyleNames[i], i);
     }
     
     // setup the display 
@@ -213,7 +215,7 @@ void MapIconDialog::init()
 
 void MapIconDialog::destroy()
 {
-
+	
 }
 
 void MapIconDialog::setMapIcons(MapIcons* mapIcons)
@@ -234,7 +236,7 @@ void MapIconDialog::mapIconCombo_activated( int id)
 {
     // validate state and input
     if (!m_mapIcons || (id >= tIconTypeMax))
-	return;
+		return;
     
     // set the current map icon
     m_currentMapIconType = MapIconType(id + 1);
@@ -248,112 +250,112 @@ void MapIconDialog::mapIconCombo_activated( int id)
 void MapIconDialog::imagePenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.imagePen().color(),
-			                  this, caption() + " Image Outline");
+										  this, caption() + " Image Outline");
     
     if (color.isValid())
     {
-	QPen pen = m_currentMapIcon.imagePen();
-	pen.setColor(color);
-	m_currentMapIcon.setImagePen(pen);
-	m_imagePenColorSample->setPaletteBackgroundColor(color);
+		QPen pen = m_currentMapIcon.imagePen();
+		pen.setColor(color);
+		m_currentMapIcon.setImagePen(pen);
+		m_imagePenColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::imageBrushColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.imageBrush().color(),
-			                  this, caption() + " Image Fill");
+										  this, caption() + " Image Fill");
     
     if (color.isValid())
     {
-	QBrush brush = m_currentMapIcon.imageBrush();
-	brush.setColor(color);
-	m_currentMapIcon.setImageBrush(brush );
-	m_imageBrushColorSample->setPaletteBackgroundColor(color);
+		QBrush brush = m_currentMapIcon.imageBrush();
+		brush.setColor(color);
+		m_currentMapIcon.setImageBrush(brush );
+		m_imageBrushColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::highlightPenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.highlightPen().color(),
-			                  this, caption() + " Highlight Outline");
+										  this, caption() + " Highlight Outline");
     
     if (color.isValid())
     {
-	QPen pen = m_currentMapIcon.highlightPen();
-	pen.setColor(color);
-	m_currentMapIcon.setHighlightPen(pen);
-	m_highlightPenColorSample->setPaletteBackgroundColor(color);
+		QPen pen = m_currentMapIcon.highlightPen();
+		pen.setColor(color);
+		m_currentMapIcon.setHighlightPen(pen);
+		m_highlightPenColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::highlightBrushColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.highlightBrush().color(),
-			                  this, caption() + " Highlight Fill");
+										  this, caption() + " Highlight Fill");
     
     if (color.isValid())
     {
-	QBrush brush = m_currentMapIcon.highlightBrush();
-	brush.setColor(color);
-	m_currentMapIcon.setHighlightBrush(brush );
-	m_highlightBrushColorSample->setPaletteBackgroundColor(color);
+		QBrush brush = m_currentMapIcon.highlightBrush();
+		brush.setColor(color);
+		m_currentMapIcon.setHighlightBrush(brush );
+		m_highlightBrushColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::line0PenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.line0Pen().color(),
-			                  this, caption() + " Line 0");
+										  this, caption() + " Line 0");
     
     if (color.isValid())
     {
-	QPen pen = m_currentMapIcon.line0Pen();
-	pen.setColor(color);
-	m_currentMapIcon.setLine0Pen(pen);
-	m_line0PenColorSample->setPaletteBackgroundColor(color);
+		QPen pen = m_currentMapIcon.line0Pen();
+		pen.setColor(color);
+		m_currentMapIcon.setLine0Pen(pen);
+		m_line0PenColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::line1PenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.line1Pen().color(),
-			                  this, caption() + " Line 1");
+										  this, caption() + " Line 1");
     
     if (color.isValid())
     {
-	QPen pen = m_currentMapIcon.line1Pen();
-	pen.setColor(color);
-	m_currentMapIcon.setLine1Pen(pen);
-	m_line1PenColorSample->setPaletteBackgroundColor(color);
+		QPen pen = m_currentMapIcon.line1Pen();
+		pen.setColor(color);
+		m_currentMapIcon.setLine1Pen(pen);
+		m_line1PenColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::line2PenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.line2Pen().color(),
-			                  this, caption() + " Line 2");
+										  this, caption() + " Line 2");
     
     if (color.isValid())
     {
-	QPen pen = m_currentMapIcon.line2Pen();
-	pen.setColor(color);
-	m_currentMapIcon.setLine2Pen(pen);
-	m_line2PenColorSample->setPaletteBackgroundColor(color);
+		QPen pen = m_currentMapIcon.line2Pen();
+		pen.setColor(color);
+		m_currentMapIcon.setLine2Pen(pen);
+		m_line2PenColorSample->setPaletteBackgroundColor(color);
     }
 }
 
 void MapIconDialog::walkPathPenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.walkPathPen().color(),
-			                  this, caption() + " Walk Path Line");
+										  this, caption() + " Walk Path Line");
     
     if (color.isValid())
     {
-	QPen pen = m_currentMapIcon.walkPathPen();
-	pen.setColor(color);
-	m_currentMapIcon.setWalkPathPen(pen);
-	m_walkPathPenColorSample->setPaletteBackgroundColor(color);
+		QPen pen = m_currentMapIcon.walkPathPen();
+		pen.setColor(color);
+		m_currentMapIcon.setWalkPathPen(pen);
+		m_walkPathPenColorSample->setPaletteBackgroundColor(color);
     }
 }
 
