@@ -6,26 +6,25 @@
  */
 
 #ifndef COMBATLOG_H
-# define COMBATLOG_H
+#define COMBATLOG_H
 
-# include <qobject.h>
-# include <qwidget.h>
-# include <qtabwidget.h>
-# include <qlist.h>
-# include <q3listview.h>
-# include <qcombobox.h>
-# include <qlabel.h>
-# include <qlayout.h>
-# include <qmenubar.h>
-//Added by qt3to4:
+#include <QObject>
+#include <QWidget>
+#include <QTabWidget>
+#include <QList>
+#include <Q3ListView>
+#include <QComboBox>
+#include <QLabel>
+#include <QLayout>
+#include <QMenuBar>
 #include <Q3PopupMenu>
 #include <Q3VBoxLayout>
 
-# include <sys/time.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <stdio.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 #include "seqwindow.h"
 #include "seqlistview.h"
@@ -42,31 +41,29 @@ class Player;
 class CombatOffenseRecord
 {
 public:
-
 	CombatOffenseRecord(int iType, Player* p, int iSpell);
-
-	int		getType() { return m_iType; };
-	int		getSpell() { return m_iSpell; };
-	int		getHits() { return m_iHits; };
-	int		getMisses() { return m_iMisses; };
-	int		getMinDamage() { return m_iMinDamage; };
-	int		getMaxDamage() { return m_iMaxDamage; };
-	int		getTotalDamage() { return m_iTotalDamage; };
-
-	void	addMiss(int iMissReason) { m_iMisses++; };
-	void	addHit(int iDamage);
-
+	
+	int	getType() { return m_iType; };
+	int	getSpell() { return m_iSpell; };
+	int	getHits() { return m_iHits; };
+	int	getMisses() { return m_iMisses; };
+	int	getMinDamage() { return m_iMinDamage; };
+	int	getMaxDamage() { return m_iMaxDamage; };
+	int	getTotalDamage() { return m_iTotalDamage; };
+	
+	void addMiss(int iMissReason) { m_iMisses++; };
+	void addHit(int iDamage);
+	
 private:
-	int			m_iType;
-	int			m_iSpell;
-	Player*		m_player;
-
-	int 		m_iHits;
-	int			m_iMisses;
-	int			m_iMinDamage;
-	int			m_iMaxDamage;
-	int			m_iTotalDamage;
-
+	int m_iType;
+	int m_iSpell;
+	Player* m_player;
+	
+	int m_iHits;
+	int m_iMisses;
+	int m_iMinDamage;
+	int m_iMaxDamage;
+	int m_iTotalDamage;
 };
 
 
@@ -79,34 +76,34 @@ public:
 
 	CombatDefenseRecord(Player* p);
 
-	int		getHits() { return m_iHits; };
-	int		getMisses() { return m_iMisses; };
-	int		getBlocks() { return m_iBlocks; };
-	int		getParries() { return m_iParries; };
-	int		getRipostes() { return m_iRipostes; };
-	int		getDodges() { return m_iDodges; };
-	int		getMinDamage() { return m_iMinDamage; };
-	int		getMaxDamage() { return m_iMaxDamage; };
-	int		getTotalDamage() { return m_iTotalDamage; };
-	int		getTotalAttacks() { return m_iTotalAttacks; };
+	int getHits() { return m_iHits; };
+	int getMisses() { return m_iMisses; };
+	int getBlocks() { return m_iBlocks; };
+	int getParries() { return m_iParries; };
+	int getRipostes() { return m_iRipostes; };
+	int getDodges() { return m_iDodges; };
+	int getMinDamage() { return m_iMinDamage; };
+	int getMaxDamage() { return m_iMaxDamage; };
+	int getTotalDamage() { return m_iTotalDamage; };
+	int getTotalAttacks() { return m_iTotalAttacks; };
 
-	void    clear(void);
-	void	addMiss(int iMissReason);
-	void	addHit(int iDamage);
+	void clear();
+	void addMiss(int iMissReason);
+	void addHit(int iDamage);
 
 private:
-	Player*		m_player;
+	Player* m_player;
 
-	int 		m_iHits;
-	int			m_iMisses;
-	int			m_iBlocks;
-	int			m_iParries;
-	int			m_iRipostes;
-	int			m_iDodges;
-	int			m_iMinDamage;
-	int			m_iMaxDamage;
-	int			m_iTotalDamage;
-	int			m_iTotalAttacks;
+	int m_iHits;
+	int m_iMisses;
+	int m_iBlocks;
+	int m_iParries;
+	int m_iRipostes;
+	int m_iDodges;
+	int m_iMinDamage;
+	int m_iMaxDamage;
+	int m_iTotalDamage;
+	int m_iTotalAttacks;
 };
 
 
@@ -116,38 +113,35 @@ private:
 class CombatMobRecord
 {
 public:
-
 	CombatMobRecord(int iID, int iStartTime, Player* p);
 
-	int		getID() { return m_iID; };
-	int		getDuration() { return (m_iLastTime - m_iStartTime); };
-	int		getDamageGiven() { return m_iDamageGiven; };
-	int		getDamageTaken() { return m_iDamageTaken; };
+	int getID() { return m_iID; };
+	int getDuration() { return (m_iLastTime - m_iStartTime); };
+	int getDamageGiven() { return m_iDamageGiven; };
+	int getDamageTaken() { return m_iDamageTaken; };
 
 	QString	getName() { return m_iName; };
-	void	setName(QString iName) { m_iName = iName; };
+	void setName(QString iName) { m_iName = iName; };
 
-	time_t	getTime() { return m_time; };
-	void	setTime(time_t iTime) { m_time = iTime; };
+	time_t getTime() { return m_time; };
+	void setTime(time_t iTime) { m_time = iTime; };
 
-	double	getDPS();
-	double	getMobDPS();
+	double getDPS();
+	double getMobDPS();
 
-	void	addHit(int iTarget, int iSource, int iDamage);
+	void addHit(int iTarget, int iSource, int iDamage);
 	
 private:
-	int			m_iID;
-	Player*		m_player;
-
-	int			m_iStartTime;
-	int			m_iLastTime;
-	int			m_iDamageGiven;
-	double		m_dDPS;
-	int			m_iDamageTaken;
-	double		m_dMobDPS;
-
-	QString		m_iName;
-	time_t		m_time;
+	int m_iID;
+	Player* m_player;
+	int m_iStartTime;
+	int m_iLastTime;
+	int m_iDamageGiven;
+	double m_dDPS;
+	int m_iDamageTaken;
+	double m_dMobDPS;
+	QString m_iName;
+	time_t m_time;
 };
 
 ////////////////////////////////////////////
@@ -237,7 +231,6 @@ private:
 	int		m_iDPSTimeLast;
 	double	m_dDPS;
 	double	m_dDPSLast;
-
 };
 
 #endif // COMBATLOG_H

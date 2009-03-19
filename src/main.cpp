@@ -51,7 +51,7 @@
 
 #include "datalocationmgr.h"
 
-static const char *id = "@(#) $Id$ $Name$";
+static const char *id = "@(#) $Id$";
 
 /* **********************************
    defines used for option processing
@@ -195,7 +195,7 @@ int main (int argc, char **argv)
 	if (!configFileDefInfo.exists())
 	{
 		fprintf(stderr, "Fatal: Couldn't find seqdef.xml!\n"
-				"\tDid you remember to do 'make install'\n");
+				        "\tDid you remember to do 'make install'?\n");
 		exit(-1);
 	}
 	

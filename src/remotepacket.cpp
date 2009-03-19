@@ -23,7 +23,7 @@
 // uint32			- Message Id
 // << DATA >>
 
-//#define PACKET_INFO_DIAG
+#define PACKET_INFO_DIAG
 
 enum MessageId
 {

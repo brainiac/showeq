@@ -490,6 +490,9 @@ bool Filters::load(const QString& filename)
   // load filters
   m_file = filename;
 
+  if (m_file.isEmpty())
+	  return false;
+
   // create XML content handler
   LoadXmlContentHandler handler(*this, m_types);
 

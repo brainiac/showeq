@@ -23,7 +23,7 @@ SEQWindow::SEQWindow(const QString prefName, const QString caption,
   : QDockWidget(name, parent, f),
 	m_preferenceName(prefName)
 {
-	seqDebug("Creating SEQWindow named %s with caption %s", name, (const char*)caption);
+	//seqDebug("Creating SEQWindow named %s with caption %s", name, (const char*)caption);
 	setName(name);
 	
 	// set the windows caption
