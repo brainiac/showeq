@@ -20,7 +20,7 @@
 #include <math.h>
 
 #include <QDateTime>
-#include <Qstring>
+#include <QString>
 #include <QStringList>
 #include <QFile>
 #include <Q3PtrQueue>

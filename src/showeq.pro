@@ -3,8 +3,8 @@ TARGET = showeq
 MOC_DIR = tmp
 OBJECTS_DIR = tmp
 UI_DIR = tmp
-CONFIG += qt thread stl warn_on debug
-DEFINES += PKGDATADIR=\"/usr/local/share/showeq\" 
+CONFIG += qt thread stl warn_off debug
+DEFINES += PKGDATADIR="\"/usr/local/share/showeq\"" 
 DEFINES += QMAKEBUILD
 LIBS += -lpcap
 
