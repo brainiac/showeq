@@ -223,7 +223,7 @@ uint8_t Spell::level(uint8_t class_) const
 
 Spells::Spells(const QString& spellsFileName)
   : m_maxSpell(0), 
-m_spells(NULL)
+	m_spells(NULL)
 {
 	loadSpells(spellsFileName);
 }
@@ -266,8 +266,7 @@ void Spells::loadSpells(const QString& spellsFileName)
 			text = QString::fromUcs2((uint16_t*)textData.data());
 		
 		// split the file into at the line termination
-		QStringList lines = QStringList::split(lineTerm,
-											   text, false);
+		QStringList lines = QStringList::split(lineTerm, text, false);
 		
 		Spell* newSpell;
 		

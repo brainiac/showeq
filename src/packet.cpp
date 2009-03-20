@@ -406,7 +406,7 @@ void EQPacket::processPackets()
 			}
 			
 			/* take the raw packet and dispatch it to the proper stream */
-			dispatchPacket(size - sizeof(struct ether_header), (unsigned char *)buffer + sizeof(struct ether_header) );
+			dispatchPacket(size - sizeof(struct ether_header), (unsigned char *)buffer + sizeof(struct ether_header));
 		}
 	
 	}
@@ -964,9 +964,9 @@ void EQPacket::monitorDevice(const QString& dev)
 	
 	// restart packet capture
 	if (m_mac.length() == 17)
-		m_packetCapture->start(m_device, m_mac, m_realtime, MAC_ADDRESS_TYPE );
+		m_packetCapture->start(m_device, m_mac, m_realtime, MAC_ADDRESS_TYPE);
 	else
-		m_packetCapture->start(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE );
+		m_packetCapture->start(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE);
 	emit filterChanged();
 }
 

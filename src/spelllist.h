@@ -39,8 +39,7 @@ class SpellListItem : public Q3ListViewItem
 public:
 	SpellListItem(Q3ListViewItem *parent);
 	SpellListItem(Q3ListView *parent = NULL);
-	virtual void paintCell(QPainter *p, const QColorGroup &cg,
-						   int column, int width, int alignment);
+	virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
 	const QColor textColor();
 	void setTextColor(const QColor &color);
 	void update();
@@ -59,6 +58,7 @@ private:
 class SpellList : public SEQListView 
 {
 	Q_OBJECT
+
 public:
 	SpellList(SpellShell* sshell, QWidget *parent = 0, const char *name = 0);
 	Q3PopupMenu* menu();
@@ -89,8 +89,8 @@ public slots:
 	void rightButtonClicked(Q3ListViewItem *, const QPoint&, int);
 	void activated(int);
 	
-	protected slots:  
-	void init_menu(void);
+protected slots:  
+	void init_menu();
 	
 private:
 	void selectAndOpen(SpellListItem *);
@@ -116,8 +116,8 @@ public:
 	
 	SpellList* spellList() { return m_spellList; }
 	
-	public slots:
-	virtual void savePrefs(void);
+public slots:
+	virtual void savePrefs();
 	
 protected:
 	SpellList* m_spellList;

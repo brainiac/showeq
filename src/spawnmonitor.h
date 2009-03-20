@@ -40,8 +40,10 @@
 //	are rumored to be very rare, yet static, spawns in EQ
 
 #include <time.h>
-#include <qobject.h>
-#include <q3asciidict.h>
+
+#include <QObject>
+#include <Q3AsciiDict>
+
 #include "spawn.h"
 #include "zonemgr.h"
 #include "spawnshell.h"
@@ -52,91 +54,96 @@ class DataLocationMgr;
 class SpawnPoint: public EQPoint
 {
 public:
-  SpawnPoint(uint16_t spawnID, const EQPoint& loc, 
-	     const QString& name = "", time_t diffTime = 0, 
-	     uint32_t count = 1);
+	SpawnPoint(uint16_t spawnID, const EQPoint& loc, const QString& name = "", time_t diffTime = 0, uint32_t count = 1);
+	virtual ~SpawnPoint();
 
-  virtual ~SpawnPoint();
-  
-  long secsLeft() const { return m_diffTime - ( time( 0 ) - m_deathTime ); }
-  
-  static QString key( int x, int y, int z );
-  static QString key( const EQPoint& l ) { return key( l.x(), l.y(), l.z() ); }
-  QString key() const { return key( x(), y(), z() ); }
+	long secsLeft() const 
+	{ 
+		return m_diffTime - (time(0) - m_deathTime);
+	}
 
-  // getters
-  unsigned char age() const;
-  QString name() const { return m_name; }
-  QString last() const { return m_last; }
-  uint16_t lastID() const { return m_lastID; }
-  int32_t count() const { return m_count; }
-  Spawn* getSpawn() const;
-  time_t spawnTime() const { return m_spawnTime; }
-  time_t deathTime() const { return m_deathTime; } 
-  time_t diffTime() const { return m_diffTime; }
+	static QString key(int x, int y, int z);
+	static QString key(const EQPoint& l)
+	{
+		return key(l.x(), l.y(), l.z()); 
+	}
+	QString key() const 
+	{ 
+		return key(x(), y(), z()); 
+	}
 
-  // setters
-  void setName(const QString& newName) { m_name = newName; }
-  void setLast(const QString& last) { m_last = last; }
-  void setLastID(uint16_t lastID) { m_lastID = lastID; }
+	// getters
+	unsigned char age() const;
+	QString name() const { return m_name; }
+	QString last() const { return m_last; }
+	uint16_t lastID() const { return m_lastID; }
+	int32_t count() const { return m_count; }
+	Spawn* getSpawn() const;
+	time_t spawnTime() const { return m_spawnTime; }
+	time_t deathTime() const { return m_deathTime; } 
+	time_t diffTime() const { return m_diffTime; }
 
-  // utility methods
-  void update(const Spawn* spawn);
-  void restart(void);
+	// setters
+	void setName(const QString& newName) { m_name = newName; }
+	void setLast(const QString& last) { m_last = last; }
+	void setLastID(uint16_t lastID) { m_lastID = lastID; }
 
- protected:
-  time_t m_spawnTime;
-  time_t m_deathTime;
-  time_t m_diffTime;
-  uint32_t m_count;
-  QString m_name;
-  QString m_last;
-  uint16_t m_lastID;
+	// utility methods
+	void update(const Spawn* spawn);
+	void restart();
+
+protected:
+	time_t m_spawnTime;
+	time_t m_deathTime;
+	time_t m_diffTime;
+	uint32_t m_count;
+	QString m_name;
+	QString m_last;
+	uint16_t m_lastID;
 };
 
 class SpawnMonitor: public QObject
 {
-Q_OBJECT
+	Q_OBJECT
+
 public:
-  SpawnMonitor(const DataLocationMgr* dataLocMgr, 
-			     ZoneMgr* zoneMgr, SpawnShell* spawnShell, 
-			     QObject* parent = 0, 
-			     const char* name = "spawnmonitor" );
-  virtual ~SpawnMonitor();
- 
-  const Q3AsciiDict<SpawnPoint>& spawnPoints() { return m_points; }
-  const Q3AsciiDict<SpawnPoint>& spawns() { return m_spawns; }
-  const SpawnPoint* selected() { return m_selected; }
+	SpawnMonitor(const DataLocationMgr* dataLocMgr, ZoneMgr* zoneMgr, SpawnShell* spawnShell, 
+		QObject* parent = 0, const char* name = "spawnmonitor");
+	virtual ~SpawnMonitor();
+
+	const Q3AsciiDict<SpawnPoint>& spawnPoints() { return m_points; }
+	const Q3AsciiDict<SpawnPoint>& spawns() { return m_spawns; }
+	const SpawnPoint* selected() { return m_selected; }
 
 public slots:
-  void setName(const SpawnPoint* sp, const QString& name);
-  void setModified( SpawnPoint* changedSp );
-  void setSelected(const SpawnPoint* sp);
-  void clear(void);
-  void deleteSpawnPoint(const SpawnPoint* sp);
-  void newSpawn(const Item* item );
-  void killSpawn(const Item* item );
-  void zoneChanged( const QString& newZoneName );
-  void zoneEnd( const QString& newZoneName );
-  void saveSpawnPoints();
-  void loadSpawnPoints();
+	void setName(const SpawnPoint* sp, const QString& name);
+	void setModified(SpawnPoint* changedSp);
+	void setSelected(const SpawnPoint* sp);
+	void clear();
+	void deleteSpawnPoint(const SpawnPoint* sp);
+	void newSpawn(const Item* item);
+	void killSpawn(const Item* item);
+	void zoneChanged(const QString& newZoneName);
+	void zoneEnd(const QString& newZoneName);
+	void saveSpawnPoints();
+	void loadSpawnPoints();
 
 signals:
-  void newSpawnPoint( const SpawnPoint* spawnPoint );
-  void clearSpawnPoints();
-  void selectionChanged(const SpawnPoint* selected);
+	void newSpawnPoint(const SpawnPoint* spawnPoint);
+	void clearSpawnPoints();
+	void selectionChanged(const SpawnPoint* selected);
 
 protected:
-  void restartSpawnPoint( SpawnPoint* spawnPoint );
-  void checkSpawnPoint(const Spawn* spawn );
- 
-  const DataLocationMgr* m_dataLocMgr;
-  SpawnShell* m_spawnShell;
-  QString m_zoneName;
-  Q3AsciiDict<SpawnPoint> m_spawns;
-  Q3AsciiDict<SpawnPoint> m_points;
-  const SpawnPoint* m_selected;
-  bool m_modified;
+	void restartSpawnPoint(SpawnPoint* spawnPoint);
+	void checkSpawnPoint(const Spawn* spawn);
+
+	const DataLocationMgr* m_dataLocMgr;
+	SpawnShell* m_spawnShell;
+	QString m_zoneName;
+	Q3AsciiDict<SpawnPoint> m_spawns;
+	Q3AsciiDict<SpawnPoint> m_points;
+	const SpawnPoint* m_selected;
+	bool m_modified;
 };
 
 #endif

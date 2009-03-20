@@ -8,8 +8,7 @@
 #ifndef SPAWNLIST2_H
 #define SPAWNLIST2_H
 
-#include <q3ptrdict.h>
-
+#include <Q3PtrDict>
 #include <Q3PopupMenu>
 
 #include "seqwindow.h"
@@ -51,30 +50,28 @@ signals:
 	void spawnSelected(const Item* item);
 	void keepUpdated(bool on);
 	
-	public slots: 
+public slots: 
 	// SpawnShell signals
 	void addItem(const Item *);
 	void delItem(const Item *);
 	void changeItem(const Item *, uint32_t changeType);
 	void killSpawn(const Item *);
 	void selectSpawn(const Item *);
-	void clear(void);
+	void clear();
 	
 	// CategoryMgr signals
 	void addCategory(const Category* cat);
 	void delCategory(const Category* cat);
-	void clearedCategories(void);
-	void loadedCategories(void);
+	void clearedCategories();
+	void loadedCategories();
 	
 	// Player signals
 	void playerLevelChanged(uint8_t);
-	void setPlayer(int16_t x, int16_t y, int16_t z, 
-				   int16_t deltaX, int16_t deltaY, int16_t deltaZ, 
-				   int32_t degrees); 
+	void setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees); 
 	
-	void rebuildSpawnList(void);
-	void refresh(void);
-	virtual void savePrefs(void);
+	void rebuildSpawnList();
+	void refresh();
+	virtual void savePrefs();
 	private slots:
 	// category combo box signals
 	void categorySelected(int index);
@@ -95,9 +92,9 @@ signals:
 	
 private:
 	void setSelectedQuiet(Q3ListViewItem* item, bool selected);
-	void populateSpawns(void);
+	void populateSpawns();
 	void populateCategory(const Category* cat);
-	void updateCount(void);
+	void updateCount();
 	
 	// data sources
 	Player *m_player;

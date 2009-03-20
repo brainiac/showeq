@@ -161,7 +161,7 @@ inline void EQPacketStream::setArqSeqGiveUp(uint16_t val)
 	m_arqSeqGiveUp = val;
 }
 
-inline int EQPacketStream::packetCount(void)
+inline int EQPacketStream::packetCount()
 {
 	return m_packetCount;
 }

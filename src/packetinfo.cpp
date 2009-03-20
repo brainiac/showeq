@@ -10,10 +10,10 @@
 
 #include <stdio.h>
 
-#include <qobject.h>
-#include <qmetaobject.h>
-#include <q3strlist.h>
-#include <qfile.h>
+#include <QObject>
+#include <QMetaObject>
+#include <Q3StrList>
+#include <QFile>
 #include <QtXml/qxml.h>
 #include <Q3TextStream>
 #include <Q3CString>
@@ -41,7 +41,7 @@ public:
 	
 	// QXmlContentHandler overrides
 	bool startDocument();
-	bool startElement(const QString&, const QString&, const QString&, const QXmlAttributes& );
+	bool startElement(const QString&, const QString&, const QString&, const QXmlAttributes&);
 	bool characters(const QString& ch);
 	bool endElement(const QString&, const QString&, const QString&);
 	bool endDocument();
@@ -107,7 +107,7 @@ bool EQPacketTypeDB::valid(const char* typeName) const
 	return (size != 0);
 }
 
-void EQPacketTypeDB::list(void) const
+void EQPacketTypeDB::list() const
 {
 	seqInfo("EQPacketTypeDB contains %d types (in %d buckets)",
 			m_typeSizeDict.count(), m_typeSizeDict.size());
@@ -409,7 +409,7 @@ EQPacketOPCode* EQPacketOPCodeDB::add(uint16_t opcode, const QString& name)
 	return newOPCode;
 }
 
-void EQPacketOPCodeDB::list(void) const
+void EQPacketOPCodeDB::list() const
 {
 	m_opcodes.statistics();
 	

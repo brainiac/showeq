@@ -15,20 +15,17 @@
 
 #include <stdio.h>
 
-#include <qstring.h>
-#include <qregexp.h>
-#include <qapplication.h>
+#include <QString>
+#include <QRegExp>
+#include <QApplication>
 
 FilterNotifications::FilterNotifications(QObject* parent, const char* name)
-  : QObject(parent, name),
-    m_useSystemBeep(false),
-    m_useCommands(false)
+ : QObject(parent, name),
+	m_useSystemBeep(false),
+	m_useCommands(false)
 {
-  m_useSystemBeep = 
-    pSEQPrefs->getPrefBool("SystemBeep", "Filters", m_useSystemBeep);
-  m_useCommands = 
-    pSEQPrefs->getPrefBool("EnableCommands", "Filters", 
-			   m_useCommands);
+	m_useSystemBeep = pSEQPrefs->getPrefBool("SystemBeep", "Filters", m_useSystemBeep);
+	m_useCommands = pSEQPrefs->getPrefBool("EnableCommands", "Filters", m_useCommands);
 }
 
 FilterNotifications::~FilterNotifications()
@@ -37,96 +34,90 @@ FilterNotifications::~FilterNotifications()
 
 void FilterNotifications::setUseSystemBeep(bool val)
 {
-  m_useSystemBeep = val;
-
-  pSEQPrefs->setPrefBool("SystemBeep", "Filters", m_useSystemBeep);
+	m_useSystemBeep = val;
+	pSEQPrefs->setPrefBool("SystemBeep", "Filters", m_useSystemBeep);
 }
 
 void FilterNotifications::setUseCommands(bool val)
 {
-  m_useCommands = val;
-
-  pSEQPrefs->setPrefBool("EnableCommands", "Filters", m_useCommands);
+	m_useCommands = val;
+	pSEQPrefs->setPrefBool("EnableCommands", "Filters", m_useCommands);
 }
 
 void FilterNotifications::addItem(const Item* item)
 {
-  uint32_t filterFlags = item->filterFlags();
+	uint32_t filterFlags = item->filterFlags();
 
-  // first handle alert
-  if (filterFlags & FILTER_FLAG_ALERT)
-    handleAlert(item, "SpawnAudioCommand", "Spawned");
+	// first handle alert
+	if (filterFlags & FILTER_FLAG_ALERT)
+		handleAlert(item, "SpawnAudioCommand", "Spawned");
 
-  // then the rest of the filters
-  if (filterFlags & FILTER_FLAG_LOCATE)
-    handleAlert(item, "LocateSpawnAudioCommand", "Locate Spawned");
-  if (filterFlags & FILTER_FLAG_CAUTION)
-    handleAlert(item, "CautionSpawnAudioCommand", "Caution Spawned");
-  if (filterFlags & FILTER_FLAG_HUNT)
-    handleAlert(item, "HuntSpawnAudioCommand", "Hunt Spawned");
-  if (filterFlags & FILTER_FLAG_DANGER)
-    handleAlert(item, "DangerSpawnAudioCommand", "Danger Spawned");
+	// then the rest of the filters
+	if (filterFlags & FILTER_FLAG_LOCATE)
+		handleAlert(item, "LocateSpawnAudioCommand", "Locate Spawned");
+	if (filterFlags & FILTER_FLAG_CAUTION)
+		handleAlert(item, "CautionSpawnAudioCommand", "Caution Spawned");
+	if (filterFlags & FILTER_FLAG_HUNT)
+		handleAlert(item, "HuntSpawnAudioCommand", "Hunt Spawned");
+	if (filterFlags & FILTER_FLAG_DANGER)
+		handleAlert(item, "DangerSpawnAudioCommand", "Danger Spawned");
 }
 
 void FilterNotifications::delItem(const Item* item)
 {
-  // first handle alert
-  if (item->filterFlags() & FILTER_FLAG_ALERT)
-    handleAlert(item, "DeSpawnAudioCommand", "Despawned");
+	// first handle alert
+	if (item->filterFlags() & FILTER_FLAG_ALERT)
+		handleAlert(item, "DeSpawnAudioCommand", "Despawned");
 }
 
 void FilterNotifications::killSpawn(const Item* item)
 {
-  // first handle alert
-  if (item->filterFlags() & FILTER_FLAG_ALERT)
-    handleAlert(item, "DeathAudioCommand", "Died");
+	// first handle alert
+	if (item->filterFlags() & FILTER_FLAG_ALERT)
+		handleAlert(item, "DeathAudioCommand", "Died");
 }
 
 void FilterNotifications::changeItem(const Item* item, uint32_t changeType)
 {
-  // if all has changed, it is effectively if not literally a new item
-  if (changeType == tSpawnChangedALL)
-    addItem(item);
+	// if all has changed, it is effectively if not literally a new item
+	if (changeType == tSpawnChangedALL)
+		addItem(item);
 }
 
-void FilterNotifications::handleAlert(const Item* item, 
-				      const QString& commandPref, 
-				      const QString& cue)
+void FilterNotifications::handleAlert(const Item* item, const QString& commandPref, const QString& cue)
 {
-  if (m_useSystemBeep)
-    beep();
+	if (m_useSystemBeep)
+		beep();
 
-  if (m_useCommands)
-    executeCommand(item, pSEQPrefs->getPrefString(commandPref, "Filters"), cue);
+	if (m_useCommands)
+		executeCommand(item, pSEQPrefs->getPrefString(commandPref, "Filters"), cue);
 }
 
-void FilterNotifications::beep(void)
+void FilterNotifications::beep()
 {
-  QApplication::beep();
+	QApplication::beep();
 }
 
-void FilterNotifications::executeCommand(const Item* item, 
-					 const QString& rawCommand,
-					 const QString& audioCue)
+void FilterNotifications::executeCommand(const Item* item, const QString& rawCommand, const QString& audioCue)
 {
-  if (rawCommand.isEmpty())
-    return;
+	if (rawCommand.isEmpty())
+		return;
 
-  // time to cook the command line
-  QString command = rawCommand;
+	// time to cook the command line
+	QString command = rawCommand;
 
-  QRegExp nameExp("%n");
-  QRegExp cueExp("%c");
-  
-  // get the name, and replace all occurrances of %n with the name
-  QString name = item->transformedName();
-  command.replace(nameExp, name);
-  
-  // now, replace all occurrances of %c with the audio cue
-  command.replace(cueExp, audioCue);
-  
-  // fire off the command
-  system ((const char*)command);
+	QRegExp nameExp("%n");
+	QRegExp cueExp("%c");
+
+	// get the name, and replace all occurrances of %n with the name
+	QString name = item->transformedName();
+	command.replace(nameExp, name);
+
+	// now, replace all occurrances of %c with the audio cue
+	command.replace(cueExp, audioCue);
+
+	// fire off the command
+	system ((const char*)command);
 }
 
 #ifndef QMAKEBUILD

@@ -18,6 +18,6 @@
 #define FLAG_COMBINED     0x2000 // Combined packet
 #define FLAG_CRYPTO       0x4000 // Encrypted packet
 #define FLAG_IMPLICIT     0x8000 // Packet with implicit length
-#define FLAG_DECODE       ( FLAG_COMP | FLAG_COMBINED | FLAG_IMPLICIT | FLAG_CRYPTO )
+#define FLAG_DECODE       (FLAG_COMP | FLAG_COMBINED | FLAG_IMPLICIT | FLAG_CRYPTO)
 
 #endif	// EQDECODE_H

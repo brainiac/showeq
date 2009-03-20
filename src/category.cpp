@@ -91,19 +91,18 @@ CategoryDlg::CategoryDlg(QWidget *parent, QString name)
 	
 	QLabel *colorLabel = new QLabel ("Color", this);
 	colorLabel->setFont(labelFont);
-	colorLabel->setAlignment(AlignRight|AlignVCenter);
+	colorLabel->setAlignment(AlignRight | AlignVCenter);
 	row1Layout->addWidget(colorLabel, 0, AlignLeft);
 	
 	m_Color = (Q3Button*)new QPushButton(this, "color");
 	m_Color->setText("...");
 	m_Color->setFont(labelFont);
-	connect(m_Color, SIGNAL(clicked()),
-			this, SLOT(select_color()));
+	connect(m_Color, SIGNAL(clicked()), this, SLOT(select_color()));
 	row1Layout->addWidget(m_Color);
 	
 	QLabel *nameLabel = new QLabel ("Name", this);
 	nameLabel->setFont(labelFont);
-	nameLabel->setAlignment(AlignLeft|AlignVCenter);
+	nameLabel->setAlignment(AlignLeft | AlignVCenter);
 	row4Layout->addWidget(nameLabel);
 	
 	m_Name = new QLineEdit(this, "Name");
@@ -112,7 +111,7 @@ CategoryDlg::CategoryDlg(QWidget *parent, QString name)
 	
 	QLabel *filterLabel = new QLabel ("Filter", this);
 	filterLabel->setFont(labelFont);
-	filterLabel->setAlignment(AlignLeft|AlignVCenter);
+	filterLabel->setAlignment(AlignLeft | AlignVCenter);
 	row3Layout->addWidget(filterLabel);
 	
 	m_Filter  = new QLineEdit(this, "Filter");
@@ -121,7 +120,7 @@ CategoryDlg::CategoryDlg(QWidget *parent, QString name)
 	
 	QLabel *filteroutLabel = new QLabel ("FilterOut", this);
 	filteroutLabel->setFont(labelFont);
-	filteroutLabel->setAlignment(AlignLeft|AlignVCenter);
+	filteroutLabel->setAlignment(AlignLeft | AlignVCenter);
 	row2Layout->addWidget(filteroutLabel);
 	
 	m_FilterOut  = new QLineEdit(this, "FilterOut");
@@ -143,7 +142,7 @@ CategoryDlg::~CategoryDlg()
 {
 }
 
-void CategoryDlg::select_color(void)
+void CategoryDlg::select_color()
 {
 	QColor newColor = QColorDialog::getColor(m_Color->backgroundColor(), this, "Category Color");
 	
@@ -154,7 +153,7 @@ void CategoryDlg::select_color(void)
 // ------------------------------------------------------
 // CategoryMgr
 CategoryMgr::CategoryMgr(QObject* parent, const char* name)
-: QObject(parent, name)
+  : QObject(parent, name)
 {
 	m_categories.setAutoDelete(false);
 	reloadCategories();
@@ -228,7 +227,7 @@ void CategoryMgr::remCategory(const Category* cat)
 	}
 }
 
-void CategoryMgr::clearCategories(void)
+void CategoryMgr::clearCategories()
 {
 	//seqDebug("clearCategories()");
 	emit clearedCategories();
@@ -289,7 +288,7 @@ void CategoryMgr::editCategories(const Category* cat, QWidget* parent)
 	delete dlg;
 }
 
-void CategoryMgr::reloadCategories(void)
+void CategoryMgr::reloadCategories()
 {
 	clearCategories();
 	m_changed = false;
@@ -329,7 +328,7 @@ void CategoryMgr::reloadCategories(void)
 	seqInfo("Categories Reloaded");
 }
 
-void CategoryMgr::savePrefs(void)
+void CategoryMgr::savePrefs()
 {
 	if (!m_changed)
 		return;

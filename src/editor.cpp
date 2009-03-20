@@ -180,7 +180,7 @@ void EditorWindow::save()
 	
 	setCaption(filename);
 	
-	statusBar()->message(QString( "Saved %1" ).arg(filename), 2000);
+	statusBar()->message(QString("Saved %1").arg(filename), 2000);
 }
 
 void EditorWindow::saveAs()
@@ -203,7 +203,7 @@ void EditorWindow::closeEvent(QCloseEvent* ce)
 	
 	switch (QMessageBox::information(this, "ShowEQ Editor",
 		"The document has been changed since the last save.",
-		"Save Now", "Cancel", "Lose Changes", 0, 1 ) ) 
+		"Save Now", "Cancel", "Lose Changes", 0, 1)) 
 	{
 		case 0:
 			save();

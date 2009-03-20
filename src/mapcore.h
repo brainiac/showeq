@@ -537,7 +537,7 @@ public:
 	void setLocationColor(const QString& color);
 	void startLine(const QString& name, const QString& color, const MapPoint& point);
 	void addLinePoint(const MapPoint& point);
-	void delLinePoint(void);
+	void delLinePoint();
 	void setLineName(const QString& name);
 	void setLineColor(const QString& color);
 	void setFileName(const QString& name) { m_fileName = name; }

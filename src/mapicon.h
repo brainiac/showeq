@@ -268,7 +268,7 @@ public:
 	void save();
 	
 	// get accessors
-	const QString& preferenceName(void) const { return m_preferenceName; }
+	const QString& preferenceName() const { return m_preferenceName; }
 	int drawSize() const { return m_drawSize; }
 	bool showNPCWalkPaths() const { return m_showNPCWalkPaths; }
 	bool showSpawnNames() const { return m_showSpawnNames; }

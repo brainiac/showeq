@@ -14,14 +14,12 @@
 #include "diagnosticmessages.h"
 #include "main.h"
 
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qtimer.h>
-#include <qlayout.h>
-
+#include <QComboBox>
+#include <QSpinBox>
+#include <QTimer>
+#include <QLayout>
 #include <QMenu>
 #include <QLabel>
-
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
@@ -268,11 +266,11 @@ void SpawnListWindow2::changeItem(const Item* item, uint32_t changeItem)
 	litem = find(item);
 	
 	// if nothing significant changed, just update it
-	if (!(changeItem & (tSpawnChangedName | 
-						tSpawnChangedLevel | 
-						tSpawnChangedNPC | 
-						tSpawnChangedFilter | 
-						tSpawnChangedRuntimeFilter)))
+	if (!(changeItem & (tSpawnChangedName 
+					  | tSpawnChangedLevel 
+					  | tSpawnChangedNPC 
+					  | tSpawnChangedFilter 
+					  | tSpawnChangedRuntimeFilter)))
 	{
 		if (litem != NULL)
 			litem->update(m_player, changeItem);
@@ -294,8 +292,7 @@ void SpawnListWindow2::changeItem(const Item* item, uint32_t changeItem)
     
 	// if this is a filtered spawn and the current category isn't a filtered 
 	// filter category, then don't add it
-	if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
-		!m_currentCategory->isFilteredFilter())
+	if ((item->filterFlags() & FILTER_FLAG_FILTERED) && !m_currentCategory->isFilteredFilter())
 	{
 		// delete the item (if it already existed)
 		if (litem != NULL)
@@ -391,7 +388,7 @@ void SpawnListWindow2::selectSpawn(const Item *item)
 	}  
 }
 
-void SpawnListWindow2::clear(void)
+void SpawnListWindow2::clear()
 {
 	// clear out the spawn list item dictionary
 	m_spawnListItemDict.clear();
@@ -431,7 +428,7 @@ void SpawnListWindow2::delCategory(const Category* cat)
 	}
 }
 
-void SpawnListWindow2::clearedCategories(void)
+void SpawnListWindow2::clearedCategories()
 {
 	// clear the category combo box
 	m_categoryCombo->clear();
@@ -440,7 +437,7 @@ void SpawnListWindow2::clearedCategories(void)
 	clear();
 }
 
-void SpawnListWindow2::loadedCategories(void)
+void SpawnListWindow2::loadedCategories()
 {
 	// stop widget updates
 	setUpdatesEnabled(false);
@@ -494,9 +491,7 @@ void SpawnListWindow2::playerLevelChanged(uint8_t)
 	}
 }
 
-void SpawnListWindow2::setPlayer(int16_t x, int16_t y, int16_t z, 
-								 int16_t deltaX, int16_t deltaY, int16_t deltaZ, 
-								 int32_t degrees)
+void SpawnListWindow2::setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees)
 {
 	Q3ListViewItemIterator it(m_spawnList);
 	SpawnListItem* litem;
@@ -540,7 +535,7 @@ void SpawnListWindow2::setPlayer(int16_t x, int16_t y, int16_t z,
 	}
 }
 
-void SpawnListWindow2::rebuildSpawnList(void)
+void SpawnListWindow2::rebuildSpawnList()
 {
 	// clear the spawn list contents
 	clear();
@@ -549,15 +544,13 @@ void SpawnListWindow2::rebuildSpawnList(void)
 	populateSpawns();
 }
 
-void SpawnListWindow2::refresh(void)
+void SpawnListWindow2::refresh()
 {
 #if 0 // ZBTEMP
 	QTime test;
 	test.start();
-	seqDebug("SpawnListWindow2::refresh(void) Category=%08x '%s' %d:%d:%d",
-			 m_currentCategory, 
-			 (m_currentCategory != NULL) ? 
-			 (const char*) m_currentCategory->name() : "NONE",
+	seqDebug("SpawnListWindow2::refresh() Category=%08x '%s' %d:%d:%d",
+			 m_currentCategory, (m_currentCategory != NULL) ? (const char*) m_currentCategory->name() : "NONE",
 			 test.hour(), test.minute(), test.second());
 	test.start();
 #endif
@@ -595,8 +588,7 @@ void SpawnListWindow2::refresh(void)
 			litem = find(item);
 			
 			// skip filtered spawns
-			if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
-				!m_currentCategory->isFilteredFilter())
+			if ((item->filterFlags() & FILTER_FLAG_FILTERED) && !m_currentCategory->isFilteredFilter())
 			{
 				// delete the item (if it already existed)
 				if (litem != NULL)
@@ -688,11 +680,10 @@ void SpawnListWindow2::refresh(void)
 		m_timer->start(m_delay, true);
 }
 
-void SpawnListWindow2::savePrefs(void)
+void SpawnListWindow2::savePrefs()
 {
 	// save the current category
-	pSEQPrefs->setPrefInt("CurrentCategory", preferenceName(), 
-						  m_categoryCombo->currentItem());
+	pSEQPrefs->setPrefInt("CurrentCategory", preferenceName(), m_categoryCombo->currentItem());
 	
 	// save the underlying SEQWindows prefs
 	SEQWindow::savePrefs();
@@ -735,8 +726,7 @@ void SpawnListWindow2::selChanged(Q3ListViewItem* litem)
 		emit spawnSelected(m_selectedItem);
 }
 
-void SpawnListWindow2::mousePressEvent(int button, Q3ListViewItem* litem,
-									   const QPoint &point, int col)
+void SpawnListWindow2::mousePressEvent(int button, Q3ListViewItem* litem, const QPoint &point, int col)
 {
 	// Left Mouse Button Events
 	if (button  == LeftButton && litem != NULL)
@@ -850,10 +840,10 @@ void SpawnListWindow2::setSelectedQuiet(Q3ListViewItem* item, bool selected)
 	m_spawnList->repaintItem(item);
 }
 
-void SpawnListWindow2::populateSpawns(void)
+void SpawnListWindow2::populateSpawns()
 {
 #if 0 // ZBTEMP
-	seqDebug("SpawnListWindow2::populateSpawns(void) Category=%08x '%s'",
+	seqDebug("SpawnListWindow2::populateSpawns() Category=%08x '%s'",
 			 m_currentCategory, 
 			 (m_currentCategory != NULL) ? 
 			 (const char*) m_currentCategory->name() : "NONE");

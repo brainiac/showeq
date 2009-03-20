@@ -14,17 +14,14 @@
 #include "zonemgr.h"
 #include "main.h"
 
-#include <qfont.h>
-#include <qpainter.h>
-#include <qfontdialog.h>
-#include <qinputdialog.h>
-
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qlayout.h>
-
+#include <QFont>
+#include <QPainter>
+#include <QFontDialog>
+#include <QInputDialog>
+#include <QLineEdit>
+#include <QLabel>
+#include <QLayout>
 #include <QMenu>
-
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
@@ -43,7 +40,7 @@ GuildListItem::~GuildListItem()
 {
 }
 
-void GuildListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment )
+void GuildListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
 	QFont font = this->listView()->font();
 	
@@ -137,7 +134,7 @@ int GuildListItem::rtti() const
 //----------------------------------------------------------------------
 // GuildListWindow
 GuildListWindow::GuildListWindow(Player* player, GuildShell* guildShell, QWidget* parent, const char* name)
-: SEQWindow("GuildList", "ShowEQ - Guild Member List", parent, name),
+  : SEQWindow("GuildList", "ShowEQ - Guild Member List", parent, name),
 	m_player(player),
 	m_guildShell(guildShell), 
 	m_guildListItemDict(709),
@@ -255,8 +252,7 @@ QMenu* GuildListWindow::menu()
 	m_id_guildList_Cols[tGuildListColPublicNote] = guildListColMenu->insertItem("&Public Note");
 	guildListColMenu->setItemParameter(m_id_guildList_Cols[tGuildListColPublicNote], tGuildListColPublicNote);
 	
-	connect (guildListColMenu, SIGNAL(activated(int)), 
-			 this, SLOT(toggle_guildListCol(int)));
+	connect(guildListColMenu, SIGNAL(activated(int)), this, SLOT(toggle_guildListCol(int)));
 	
 	m_menu->insertSeparator(-1);
 	int x = m_menu->insertItem("Show Offline", this, SLOT(toggle_showOffline(int)));
@@ -378,12 +374,11 @@ void GuildListWindow::guildChanged()
 	m_guildName->setText(guild.arg(m_player->guildTag()));
 }
 
-void GuildListWindow::init_Menu(void)
+void GuildListWindow::init_Menu()
 {
 	// make sure the menu bar settings are correct
 	for (int i = 0; i < tGuildListColMaxCols; i++)
-		m_menu->setItemChecked(m_id_guildList_Cols[i], 
-							   m_guildList->columnVisible(i));
+		m_menu->setItemChecked(m_id_guildList_Cols[i], m_guildList->columnVisible(i));
 }
 
 void GuildListWindow::toggle_showOffline(int id)
@@ -391,8 +386,7 @@ void GuildListWindow::toggle_showOffline(int id)
 	// toggle immediate update value
 	m_showOffline = !m_showOffline;
 	m_menu->setItemChecked(id, m_showOffline);
-	pSEQPrefs->setPrefBool("ShowOffline", preferenceName(), 
-						   m_showOffline);
+	pSEQPrefs->setPrefBool("ShowOffline", preferenceName(), m_showOffline);
 	
 	// re-populate the window
 	populate();
@@ -458,7 +452,7 @@ void GuildListWindow::set_caption(int id)
 		setCaption(captionText);
 }
 
-void GuildListWindow::clear(void)
+void GuildListWindow::clear()
 {
 	// clear count
 	m_membersOn = 0;
@@ -472,7 +466,7 @@ void GuildListWindow::clear(void)
 	updateCount();
 }
 
-void GuildListWindow::populate(void)
+void GuildListWindow::populate()
 {
 	GuildMember* member;
 	GuildListItem* memberItem;
@@ -529,7 +523,7 @@ void GuildListWindow::populate(void)
 	repaint();
 }
 
-void GuildListWindow::updateCount(void)
+void GuildListWindow::updateCount()
 {
 	QString text(" %1 on/%2 total ");
 	m_guildTotals->setText(text.arg(m_membersOn).arg(m_guildShell->members().count()));

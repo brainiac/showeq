@@ -24,12 +24,11 @@
 
 #include <string.h>
 
-#include <qfontdialog.h>
-#include <qinputdialog.h>
-#include <qmessagebox.h>
-#include <qfont.h>
-#include <qpainter.h>
-//Added by qt3to4:
+#include <QFontDialog>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QFont>
+#include <QPainter>
 #include <Q3PopupMenu>
 
 SpawnListItem::SpawnListItem(Q3ListViewItem *parent) : Q3ListViewItem(parent)
@@ -317,16 +316,9 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 		// Id
 		buff.sprintf("%5d", item()->id());
 		setText(tSpawnColID, buff);
-		
-		// Race
 		setText(tSpawnColRace, item()->raceString());
-		
-		// Class
 		setText(tSpawnColClass, item()->classString());
-		
-		// Spawntime
-		setText(tSpawnColSpawnTime, m_item->spawnTimeStr());
-		
+		setText(tSpawnColSpawnTime, m_item->spawnTimeStr());		
 		// CJD TODO - Deity, PVP teams
 	}
 	
@@ -435,10 +427,7 @@ void SpawnListItem::pickTextColor(const Item* item, Player* player, QColor def)
 
 
 
-SpawnListMenu::SpawnListMenu(SEQListView* spawnlist,
-							 SEQWindow* spawnlistWindow,
-							 FilterMgr* filterMgr,
-							 CategoryMgr* categoryMgr,
+SpawnListMenu::SpawnListMenu(SEQListView* spawnlist, SEQWindow* spawnlistWindow, FilterMgr* filterMgr, CategoryMgr* categoryMgr,
 							 QWidget* parent, const char* name)
   : m_spawnlist(spawnlist),
 	m_spawnlistWindow(spawnlistWindow),
@@ -572,7 +561,7 @@ SpawnListMenu::~SpawnListMenu()
 {
 }
 
-void SpawnListMenu::init_Menu(void)
+void SpawnListMenu::init_Menu()
 {
 	// make sure the menu bar settings are correct
 	for (int i = 0; i < tSpawnColMaxCols; i++)
@@ -645,8 +634,7 @@ void SpawnListMenu::add_filter(int id)
 	
 	// get the user edited filter string, based on the items filterString
 	bool ok = false;
-	filterString = QInputDialog::getText(filterName + " Filter", "Enter the filter string:",
-						  QLineEdit::Normal, filterString, &ok, m_spawnlist);
+	filterString = QInputDialog::getText(filterName + " Filter", "Enter the filter string:", QLineEdit::Normal, filterString, &ok, m_spawnlist);
 	
 	// if the user clicked ok, add the filter
 	if (ok)
@@ -664,8 +652,7 @@ void SpawnListMenu::add_zoneFilter(int id)
 	
 	// get the user edited filter string, based on the items filterString
 	bool ok = false;
-	filterString = QInputDialog::getText(filterName + " Filter", "Enter the filter string:",
-						  QLineEdit::Normal, filterString, &ok, m_spawnlist);
+	filterString = QInputDialog::getText(filterName + " Filter", "Enter the filter string:", QLineEdit::Normal, filterString, &ok, m_spawnlist);
 	
 	
 	// if the user clicked ok, add the filter

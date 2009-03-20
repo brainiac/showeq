@@ -287,7 +287,7 @@ void ExperienceWindow::savePrefs()
 }
 
 void ExperienceWindow::addExpRecord(const QString &mob_name, int mob_level,
-									long xp_gained, QString zone_name ) 
+									long xp_gained, QString zone_name) 
 {	
 	ExperienceRecord *xp = new ExperienceRecord(mob_name, mob_level, xp_gained,
 			time(0), zone_name, m_player->classVal(), m_player->level(), 
@@ -461,7 +461,7 @@ void ExperienceWindow::updateAverage()
 	
 	QString s_mob_avg_exp;
 	if (mob_count)
-		s_mob_avg_exp = Commanate( (uint32_t)(total_exp/mob_count) );
+		s_mob_avg_exp = Commanate((uint32_t)(total_exp/mob_count));
 	else
 		s_mob_avg_exp = "0";
 	
@@ -484,7 +484,7 @@ void ExperienceWindow::updateAverage()
 	/* This now checks if the exp value is sensible, and if not
 	 it is displayed as "unknown". cpphack */
 	if (exp_remaining > 0)
-		s_exp_remaining = Commanate( exp_remaining );
+		s_exp_remaining = Commanate(exp_remaining);
 	else
 		s_exp_remaining = "unknown";
 	
@@ -526,7 +526,7 @@ void ExperienceWindow::updateAverage()
 void ExperienceWindow::resizeEvent(QResizeEvent *e)
 {
 	//int mh = m_menu_bar->height() + 4;
-	//m_layout->setGeometry( 0, mh, e->size().width(),  e->size().height()-mh );
+	//m_layout->setGeometry(0, mh, e->size().width(),  e->size().height()-mh);
 }
 
 void ExperienceWindow::viewAll() 

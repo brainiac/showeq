@@ -80,7 +80,7 @@ public:
 	bool addFilter(const QString& filterPattern);
 	bool addFilter(const QString& filterPattern, uint8_t minLevel, uint8_t maxLevel);
 	void remFilter(const QString& filterPattern); 
-	void listFilters(void);
+	void listFilters();
 	void setCaseSensitive(bool caseSensitive);
 	
 private:
@@ -143,7 +143,7 @@ protected:
 	uint8_t m_maxType;
 };
 
-inline uint8_t FilterTypes::maxType(void) const
+inline uint8_t FilterTypes::maxType() const
 {
 	return m_maxType;
 }

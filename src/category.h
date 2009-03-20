@@ -106,8 +106,7 @@ public:
 	const CategoryList& getCategories() const { return m_categories; }
 	uint count() { return m_categories.count(); }
 		
-	const Category* addCategory(const QString& name, const QString& filter, const QString& filterout, 
-								QColor color = Qt::black);
+	const Category* addCategory(const QString& name, const QString& filter, const QString& filterout, QColor color = Qt::black);
 	void remCategory(const Category* cat);
 		
 public slots:

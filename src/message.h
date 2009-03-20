@@ -13,9 +13,9 @@
 
 #include <stdint.h>
 
-#include <qstring.h>
-#include <qdatetime.h>
-#include <q3valuevector.h>
+#include <QString>
+#include <QDateTime>
+#include <Q3ValueVector>
 
 //----------------------------------------------------------------------
 // constants

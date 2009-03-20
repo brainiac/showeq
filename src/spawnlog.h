@@ -40,14 +40,12 @@ public slots:
     void logDeleteSpawn(const Item *spawn);
 
 protected:
-    void logSpawnInfo(const char *type, const char *name, int id, int level, 
-                      int x, int y, int z, 
-                      const char *killer, int kid, int guildid);
-    void logSpawnInfo(const char *type, const char *name, int id, int level, 
-                      int x, int y, int z, 
-		      const QDateTime& eqDate, const QTime& time, 
-                      const char *killer, int kid, int guildid);
-    int version;
+	void logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z, 
+		const char *killer, int kid, int guildid);
+	void logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z, 
+		const QDateTime& eqDate, const QTime& time, const char *killer, int kid, int guildid);
+
+	int version;
     QString zoneShortName;
     DateTimeMgr* m_dateTimeMgr;
 };

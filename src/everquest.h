@@ -151,12 +151,12 @@
 */
 enum ItemPacketType
 {
-  ItemPacketViewLink		= 0x00,
-  ItemPacketMerchant		= 0x64,
-  ItemPacketLoot			= 0x66,
-  ItemPacketTrade			= 0x67,
-  ItemPacketSummonItem		= 0x6a,
-  ItemPacketWorldContainer	= 0x6b
+	ItemPacketViewLink			= 0x00,
+	ItemPacketMerchant			= 0x64,
+	ItemPacketLoot				= 0x66,
+	ItemPacketTrade				= 0x67,
+	ItemPacketSummonItem		= 0x6a,
+	ItemPacketWorldContainer	= 0x6b
 };
 
 /*
@@ -164,9 +164,9 @@ enum ItemPacketType
 */
 enum ItemType
 {
-  ItemTypeCommon		= 0,
-  ItemTypeContainer	= 1,
-  ItemTypeBook		= 2
+	ItemTypeCommon		= 0,
+	ItemTypeContainer		= 1,
+	ItemTypeBook			= 2
 };
 
 /*
@@ -174,84 +174,84 @@ enum ItemType
 */
 enum ChatColor
 {
-  CC_Default               = 0,
-  CC_DarkGrey              = 1,
-  CC_DarkGreen             = 2,
-  CC_DarkBlue              = 3,
-  CC_Purple                = 5,
-  CC_LightGrey             = 6,
-  CC_User_Say              = 256,
-  CC_User_Tell             = 257,
-  CC_User_Group            = 258,
-  CC_User_Guild            = 259,
-  CC_User_OOC              = 260,
-  CC_User_Auction          = 261,
-  CC_User_Shout            = 262,
-  CC_User_Emote            = 263,
-  CC_User_Spells           = 264,
-  CC_User_YouHitOther      = 265,
-  CC_User_OtherHitYou      = 266,
-  CC_User_YouMissOther     = 267,
-  CC_User_OtherMissYou     = 268,
-  CC_User_Duels            = 269,
-  CC_User_Skills           = 270,
-  CC_User_Disciplines      = 271,
-  CC_User_Default          = 273,
-  CC_User_MerchantOffer    = 275,
-  CC_User_MerchantExchange = 276,
-  CC_User_YourDeath        = 277,
-  CC_User_OtherDeath       = 278,
-  CC_User_OtherHitOther    = 279,
-  CC_User_OtherMissOther   = 280,
-  CC_User_Who              = 281,
-  CC_User_Yell             = 282,
-  CC_User_NonMelee         = 283,
-  CC_User_SpellWornOff     = 284,
-  CC_User_MoneySplit       = 285,
-  CC_User_Loot             = 286,
-  CC_User_Random           = 287,
-  CC_User_OtherSpells      = 288,
-  CC_User_SpellFailure     = 289,
-  CC_User_ChatChannel      = 290,
-  CC_User_Chat1            = 291,
-  CC_User_Chat2            = 292,
-  CC_User_Chat3            = 293,
-  CC_User_Chat4            = 294,
-  CC_User_Chat5            = 295,
-  CC_User_Chat6            = 296,
-  CC_User_Chat7            = 297,
-  CC_User_Chat8            = 298,
-  CC_User_Chat9            = 299,
-  CC_User_Chat10           = 300,
-  CC_User_MeleeCrit        = 301,
-  CC_User_SpellCrit        = 302,
-  CC_User_TooFarAway       = 303,
-  CC_User_NPCRampage       = 304,
-  CC_User_NPCFurry         = 305,
-  CC_User_NPCEnrage        = 306,
-  CC_User_EchoSay          = 307,
-  CC_User_EchoTell         = 308,
-  CC_User_EchoGroup        = 309,
-  CC_User_EchoGuild        = 310,
-  CC_User_EchoOOC          = 311,
-  CC_User_EchoAuction      = 312,
-  CC_User_EchoShout        = 313,
-  CC_User_EchoEmote        = 314,
-  CC_User_EchoChat1        = 315,
-  CC_User_EchoChat2        = 316,
-  CC_User_EchoChat3        = 317,
-  CC_User_EchoChat4        = 318,
-  CC_User_EchoChat5        = 319,
-  CC_User_EchoChat6        = 320,
-  CC_User_EchoChat7        = 321,
-  CC_User_EchoChat8        = 322,
-  CC_User_EchoChat9        = 323,
-  CC_User_EchoChat10       = 324,
-  CC_User_UnusedAtThisTime = 325,
-  CC_User_ItemTags         = 326,
-  CC_User_RaidSay          = 327,
-  CC_User_MyPet            = 328,
-  CC_User_DamageShield     = 329,
+	CC_Default               = 0,
+	CC_DarkGrey              = 1,
+	CC_DarkGreen             = 2,
+	CC_DarkBlue              = 3,
+	CC_Purple                = 5,
+	CC_LightGrey             = 6,
+	CC_User_Say              = 256,
+	CC_User_Tell             = 257,
+	CC_User_Group            = 258,
+	CC_User_Guild            = 259,
+	CC_User_OOC              = 260,
+	CC_User_Auction          = 261,
+	CC_User_Shout            = 262,
+	CC_User_Emote            = 263,
+	CC_User_Spells           = 264,
+	CC_User_YouHitOther      = 265,
+	CC_User_OtherHitYou      = 266,
+	CC_User_YouMissOther     = 267,
+	CC_User_OtherMissYou     = 268,
+	CC_User_Duels            = 269,
+	CC_User_Skills           = 270,
+	CC_User_Disciplines      = 271,
+	CC_User_Default          = 273,
+	CC_User_MerchantOffer    = 275,
+	CC_User_MerchantExchange = 276,
+	CC_User_YourDeath        = 277,
+	CC_User_OtherDeath       = 278,
+	CC_User_OtherHitOther    = 279,
+	CC_User_OtherMissOther   = 280,
+	CC_User_Who              = 281,
+	CC_User_Yell             = 282,
+	CC_User_NonMelee         = 283,
+	CC_User_SpellWornOff     = 284,
+	CC_User_MoneySplit       = 285,
+	CC_User_Loot             = 286,
+	CC_User_Random           = 287,
+	CC_User_OtherSpells      = 288,
+	CC_User_SpellFailure     = 289,
+	CC_User_ChatChannel      = 290,
+	CC_User_Chat1            = 291,
+	CC_User_Chat2            = 292,
+	CC_User_Chat3            = 293,
+	CC_User_Chat4            = 294,
+	CC_User_Chat5            = 295,
+	CC_User_Chat6            = 296,
+	CC_User_Chat7            = 297,
+	CC_User_Chat8            = 298,
+	CC_User_Chat9            = 299,
+	CC_User_Chat10           = 300,
+	CC_User_MeleeCrit        = 301,
+	CC_User_SpellCrit        = 302,
+	CC_User_TooFarAway       = 303,
+	CC_User_NPCRampage       = 304,
+	CC_User_NPCFurry         = 305,
+	CC_User_NPCEnrage        = 306,
+	CC_User_EchoSay          = 307,
+	CC_User_EchoTell         = 308,
+	CC_User_EchoGroup        = 309,
+	CC_User_EchoGuild        = 310,
+	CC_User_EchoOOC          = 311,
+	CC_User_EchoAuction      = 312,
+	CC_User_EchoShout        = 313,
+	CC_User_EchoEmote        = 314,
+	CC_User_EchoChat1        = 315,
+	CC_User_EchoChat2        = 316,
+	CC_User_EchoChat3        = 317,
+	CC_User_EchoChat4        = 318,
+	CC_User_EchoChat5        = 319,
+	CC_User_EchoChat6        = 320,
+	CC_User_EchoChat7        = 321,
+	CC_User_EchoChat8        = 322,
+	CC_User_EchoChat9        = 323,
+	CC_User_EchoChat10       = 324,
+	CC_User_UnusedAtThisTime = 325,
+	CC_User_ItemTags         = 326,
+	CC_User_RaidSay          = 327,
+	CC_User_MyPet            = 328,
+	CC_User_DamageShield     = 329,
 };
 
 /*
@@ -272,67 +272,67 @@ enum GroupUpdateAction
  */
 enum LeadershipAAIndex
 {
-  groupMarkNPC = 0,
-  groupNPCHealth,
-  groupDelegateMainAssist,
-  groupDelegateMarkNPC,
-  groupUnknown4,
-  groupUnknown5,
-  groupInspectBuffs,
-  groupUnknown7,
-  groupSpellAwareness,
-  groupOffenseEnhancement,
-  groupManaEnhancement,
-  groupHealthEnhancement,
-  groupHealthRegeneration,
-  groupFindPathToPC,
-  groupHealthOfTargetsTarget,
-  groupUnknown15,
-  raidMarkNPC,  //0x10
-  raidNPCHealth,
-  raidDelegateMainAssist,
-  raidDelegateMarkNPC,
-  raidUnknown4,
-  raidUnknown5,
-  raidUnknown6,
-  raidSpellAwareness,
-  raidOffenseEnhancement,
-  raidManaEnhancement,
-  raidHealthEnhancement,
-  raidHealthRegeneration,
-  raidFindPathToPC,
-  raidHealthOfTargetsTarget,
-  raidUnknown14,
-  raidUnknown15,
-  MAX_LEAD_AA //=32
+	groupMarkNPC = 0,
+	groupNPCHealth,
+	groupDelegateMainAssist,
+	groupDelegateMarkNPC,
+	groupUnknown4,
+	groupUnknown5,
+	groupInspectBuffs,
+	groupUnknown7,
+	groupSpellAwareness,
+	groupOffenseEnhancement,
+	groupManaEnhancement,
+	groupHealthEnhancement,
+	groupHealthRegeneration,
+	groupFindPathToPC,
+	groupHealthOfTargetsTarget,
+	groupUnknown15,
+	raidMarkNPC,  //0x10
+	raidNPCHealth,
+	raidDelegateMainAssist,
+	raidDelegateMarkNPC,
+	raidUnknown4,
+	raidUnknown5,
+	raidUnknown6,
+	raidSpellAwareness,
+	raidOffenseEnhancement,
+	raidManaEnhancement,
+	raidHealthEnhancement,
+	raidHealthRegeneration,
+	raidFindPathToPC,
+	raidHealthOfTargetsTarget,
+	raidUnknown14,
+	raidUnknown15,
+	MAX_LEAD_AA //=32
 };
 
 /**
- * Recast timer types. Used as an off set to charProfileStruct timers.
- */
+* Recast timer types. Used as an off set to charProfileStruct timers.
+*/
 enum RecastTypes
 {
-  RecastTimer0 = 0,
-  RecastTimer1,
-  WeaponHealClickTimer, // 2
-  MuramiteBaneNukeClickTimer, // 3
-  RecastTimer4,
-  DispellClickTimer, // 5 (also click heal orbs?)
-  EpicTimer, // 6
-  OoWBPClickTimer, // 7
-  VishQuestClassItemTimer, // 8
-  HealPotionTimer, // 9
-  RecastTimer10,
-  RecastTimer11,
-  RecastTimer12,
-  RecastTimer13,
-  RecastTimer14,
-  RecastTimer15,
-  RecastTimer16,
-  RecastTimer17,
-  RecastTimer18,
-  ModRodTimer, // 19
-  MAX_RECAST_TYPES // 20
+	RecastTimer0 = 0,
+	RecastTimer1,
+	WeaponHealClickTimer, // 2
+	MuramiteBaneNukeClickTimer, // 3
+	RecastTimer4,
+	DispellClickTimer, // 5 (also click heal orbs?)
+	EpicTimer, // 6
+	OoWBPClickTimer, // 7
+	VishQuestClassItemTimer, // 8
+	HealPotionTimer, // 9
+	RecastTimer10,
+	RecastTimer11,
+	RecastTimer12,
+	RecastTimer13,
+	RecastTimer14,
+	RecastTimer15,
+	RecastTimer16,
+	RecastTimer17,
+	RecastTimer18,
+	ModRodTimer, // 19
+	MAX_RECAST_TYPES // 20
 };
 
 
@@ -350,17 +350,17 @@ enum RecastTypes
 // OpCode stuff (all kinda silly, but until we stop including the OpCode everywhere)...
 struct opCodeStruct
 {
-    int16_t opCode;
+	int16_t opCode;
 
-  // kinda silly -- this is required for us to be able to stuff them in a QValueList
-  bool operator== ( const opCodeStruct t ) const
-  {
-    return ( opCode == t.opCode);
-  }
-  bool operator== ( uint16_t opCode2 ) const
-  {
-    return ( opCode == opCode2 );
-  }
+	// kinda silly -- this is required for us to be able to stuff them in a QValueList
+	bool operator==(const opCodeStruct t) const
+	{
+		return (opCode == t.opCode);
+	}
+	bool operator==(uint16_t opCode2) const
+	{
+		return (opCode == opCode2);
+	}
 };
 
 /**
@@ -619,7 +619,7 @@ struct dzSwitchInfo
 /*0004*/ uint32_t show;          // Show compass line
 /*0008*/ uint16_t zoneID;
 /*0010*/ uint16_t instanceID;
-/*0012*/ uint32_t type;          // if(type != 1 && type > 2 && type <= 5) { color = green; } else { color = pink; }
+/*0012*/ uint32_t type;          // if (type != 1 && type > 2 && type <= 5) { color = green; } else { color = pink; }
 /*0016*/ uint32_t unknown0016;
 /*0020*/ float    y;
 /*0024*/ float    x;
@@ -1217,8 +1217,8 @@ struct spawnStruct
            /*0000*/ EquipStruct equipment[9];
          };
 
-/*0000*/ char title[0];  // only read if(hasTitleOrSuffix & 4)
-/*0000*/ char suffix[0]; // only read if(hasTitleOrSuffix & 8)
+/*0000*/ char title[0];  // only read if (hasTitleOrSuffix & 4)
+/*0000*/ char suffix[0]; // only read if (hasTitleOrSuffix & 8)
 /*0000*/ char unknown20[32];
 };
 #endif

@@ -62,7 +62,7 @@ _T fixPtMul(_T a, _T b, qType q)
 template <class _T> inline
 _T fixPtDiv(_T a, _T b, qType q) 
 { 
-	return (( 1 << q) / b); 
+	return ((1 << q) / b); 
 }
 
 // Basic operations performed on two numbers where a is of fixed point format q

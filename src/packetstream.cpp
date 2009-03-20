@@ -105,10 +105,8 @@ bool EQPacketStream::connect2(const QString& opcodeName, const char* payloadType
 	const EQPacketOPCode* opcode = m_opcodeDB.find(opcodeName);
 	if (!opcode)
 	{
-		seqDebug("connect2: Unknown opcode '%s' with payload type '%s'",
-			 (const char*)opcodeName, payloadType);
-		seqDebug("\tfor receiver '%s' of type '%s' to member '%s'",
-			 receiver->name(), receiver->className(), member);
+		seqDebug("connect2: Unknown opcode '%s' with payload type '%s'", (const char*)opcodeName, payloadType);
+		seqDebug("\tfor receiver '%s' of type '%s' to member '%s'", receiver->name(), receiver->className(), member);
 		return false;
 	}
 	
@@ -130,13 +128,9 @@ bool EQPacketStream::connect2(const QString& opcodeName, const char* payloadType
 	// if no payload found, create one and issue a warning
 	if (!payload)
 	{
-		seqDebug("connect2: Warning! opcode '%s' has no matching payload.",
-			(const char*)opcodeName);
-		seqDebug("\tdir '%d' payload '%s' szt '%d'",
-			m_dir, payloadType, szt);
-		seqDebug("\tfor receiver '%s' of type '%s' to member '%s'",
-			receiver->name(), receiver->className(), member);
-		
+		seqDebug("connect2: Warning! opcode '%s' has no matching payload.", (const char*)opcodeName);
+		seqDebug("\tdir '%d' payload '%s' szt '%d'", m_dir, payloadType, szt);
+		seqDebug("\tfor receiver '%s' of type '%s' to member '%s'",	receiver->name(), receiver->className(), member);	
 		return false;
 	}
 	
@@ -278,7 +272,7 @@ void EQPacketStream::processCache()
 		
 		// keep trying to find a new serverArqSeqExp if we haven't found a good
 		// one yet...
-		while(it == m_cache.end())
+		while (it == m_cache.end())
 		{
 			seqWarn("SEQ: Giving up on finding arq %04x in stream %s cache, skipping!",
 					m_arqSeqExp, EQStreamStr[m_streamid]);
@@ -1167,8 +1161,7 @@ void EQPacketStream::processPacket(EQProtocolPacket& packet, bool isSubpacket)
 
 /////////////////////////////////////////////////
 // Process a session key change
-void EQPacketStream::receiveSessionKey(uint32_t sessionId, 
-									   EQStreamID streamid, uint32_t sessionKey)
+void EQPacketStream::receiveSessionKey(uint32_t sessionId, EQStreamID streamid, uint32_t sessionKey)
 {
 	if (streamid != m_streamid && m_sessionId == sessionId)
 	{
@@ -1185,8 +1178,7 @@ void EQPacketStream::receiveSessionKey(uint32_t sessionId,
 
 ///////////////////////////////////////////////////////////////
 // Process a session disconnect if it is for us
-void EQPacketStream::close(uint32_t sessionId, EQStreamID streamId,
-						   uint8_t sessionTracking)
+void EQPacketStream::close(uint32_t sessionId, EQStreamID streamId, uint8_t sessionTracking)
 {
 	if (sessionId == m_sessionId)
 	{

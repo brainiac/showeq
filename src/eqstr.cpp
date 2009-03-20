@@ -14,11 +14,10 @@
 
 #include <stdio.h>
 
-#include <qregexp.h>
-#include <qfile.h>
-#include <qstringlist.h>
-#include <q3valuevector.h>
-//Added by qt3to4:
+#include <QRegExp>
+#include <QFile>
+#include <QStringList>
+#include <Q3ValueVector>
 #include <Q3CString>
 
 EQStr::EQStr(int size)
@@ -138,7 +137,7 @@ QString EQStr::formatMessage(uint32_t formatid,
 	
 	if (formatStringRes == NULL)
 	{
-		tempStr.sprintf( "Unknown: %04x: ",
+		tempStr.sprintf("Unknown: %04x: ",
 						formatid);
 		tempStr += QString::fromUtf8(arguments);
 		

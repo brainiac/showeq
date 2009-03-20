@@ -15,7 +15,7 @@
 
 #include <stdint.h>
 
-#include <qobject.h>
+#include <QObject>
 
 //----------------------------------------------------------------------
 // forward declarations

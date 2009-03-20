@@ -31,11 +31,7 @@
 #include <QDateTime>
 #include <QPen>
 #include <QBrush>
-
-// includes required for MapMenu
 #include <Q3PopupMenu>
-
-// includes required for MapFrame
 #include <QLayout>
 #include <Q3VBox>
 #include <Q3HBox>

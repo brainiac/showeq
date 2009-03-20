@@ -103,11 +103,8 @@ public slots:
 	void newSpawn(const spawnStruct& s);
 	void playerUpdate(const uint8_t*pupdate, size_t, uint8_t);
 	void npcMoveUpdate(const uint8_t*npcupdate, size_t, uint8_t);
-	void updateSpawn(uint16_t id, 
-					 int16_t x, int16_t y, int16_t z,
-					 int16_t xVel, int16_t yVel, int16_t zVel,
-					 int8_t heading, int8_t deltaHeading,
-					 uint8_t animation);
+	void updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,int16_t xVel, int16_t yVel, int16_t zVel,
+					 int8_t heading, int8_t deltaHeading, uint8_t animation);
 	void updateSpawns(const uint8_t* updates);
 	void updateSpawnInfo(const uint8_t* spawnupdate);
 	void renameSpawn(const uint8_t* renameupdate);
@@ -126,8 +123,8 @@ public slots:
 	void playerChangedID(uint16_t playerID);
 	void refilterSpawns();
 	void refilterSpawnsRuntime();
-	void saveSpawns(void);
-	void restoreSpawns(void);
+	void saveSpawns();
+	void restoreSpawns();
 	
 protected:
 	void refilterSpawns(spawnItemType type);

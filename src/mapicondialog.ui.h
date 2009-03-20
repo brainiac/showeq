@@ -232,7 +232,7 @@ void MapIconDialog::setMapIcons(MapIcons* mapIcons)
     setupMapIconDisplay();
 }
 
-void MapIconDialog::mapIconCombo_activated( int id)
+void MapIconDialog::mapIconCombo_activated(int id)
 {
     // validate state and input
     if (!m_mapIcons || (id >= tIconTypeMax))
@@ -270,7 +270,7 @@ void MapIconDialog::imageBrushColor_clicked()
     {
 		QBrush brush = m_currentMapIcon.imageBrush();
 		brush.setColor(color);
-		m_currentMapIcon.setImageBrush(brush );
+		m_currentMapIcon.setImageBrush(brush);
 		m_imageBrushColorSample->setPaletteBackgroundColor(color);
     }
 }
@@ -298,7 +298,7 @@ void MapIconDialog::highlightBrushColor_clicked()
     {
 		QBrush brush = m_currentMapIcon.highlightBrush();
 		brush.setColor(color);
-		m_currentMapIcon.setHighlightBrush(brush );
+		m_currentMapIcon.setHighlightBrush(brush);
 		m_highlightBrushColorSample->setPaletteBackgroundColor(color);
     }
 }

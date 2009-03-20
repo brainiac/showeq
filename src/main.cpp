@@ -168,7 +168,7 @@ static struct option option_list[] = {
 struct ShowEQParams* showeq_params;
 XMLPreferences*      pSEQPrefs = NULL; 
 
-void displayVersion(void);
+void displayVersion();
 void displayOptions(const char* progName);
 
 int main (int argc, char **argv)
@@ -558,7 +558,7 @@ int main (int argc, char **argv)
 	return ret;
 }
 
-void displayVersion(void)
+void displayVersion()
 {
 	printf("ShowEQ %s, released under the GPL.\n", VERSION);
 	printf("  SINS 0.5, released under the GPL.\n");

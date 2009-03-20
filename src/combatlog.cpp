@@ -69,7 +69,7 @@ CombatDefenseRecord::CombatDefenseRecord(Player* p)
 	clear();
 }
 
-void CombatDefenseRecord::clear(void)
+void CombatDefenseRecord::clear()
 {
 	m_iHits = 0;
 	m_iMisses = 0;
@@ -302,7 +302,6 @@ QWidget* CombatWindow::initOffenseWidget()
 	m_listview_offense->setColumnAlignment(7, Qt::AlignRight);
 
 	m_listview_offense->restoreColumns();
-
 	m_listview_offense->setMinimumSize(m_listview_offense->sizeHint().width(), 200);
 
 	Q3GroupBox *summaryGBox = new Q3VGroupBox("Summary", pWidget);

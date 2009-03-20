@@ -67,7 +67,7 @@ public:
 	SpawnListItem(Q3ListView *parent);
 
 	virtual ~SpawnListItem();
-	virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment );
+	virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
 
 	const QColor textColor()  { return m_textColor; }
 	void setTextColor(const QColor &color) { m_textColor = color; }
@@ -95,18 +95,15 @@ class SpawnListMenu : public Q3PopupMenu
 	Q_OBJECT
 
 public:
-	SpawnListMenu(SEQListView* spawnlist,
-				  SEQWindow* spawnlistWindow,
-				  FilterMgr* filterMgr,
-				  CategoryMgr* categoryMgr,
-				  QWidget* parent = 0, const char* name = 0);
+	SpawnListMenu(SEQListView* spawnlist, SEQWindow* spawnlistWindow, FilterMgr* filterMgr,
+				  CategoryMgr* categoryMgr, QWidget* parent = 0, const char* name = 0);
 	virtual ~SpawnListMenu();
 	void setCurrentCategory(const Category* cat);
 	void setCurrentItem(const Item* item);
 
 protected slots:
 	void init_Menu();
-	void toggle_spawnListCol( int id );
+	void toggle_spawnListCol(int id);
 	void add_filter(int id);
 	void add_zoneFilter(int id);
 	void add_category(int id);

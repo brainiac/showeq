@@ -44,10 +44,13 @@ QString SpellItem::castTimeStr() const
 	
 	// using system_spawntime for now...
 	if (showeq_params->systime_spawntime)
+	{
 		text = QString("%1").arg(castTime());
-	else {
+	}
+	else 
+	{
 		/* Friendlier format courtesy of Daisy */
-		struct tm *CreationLocalTime = localtime( &(m_castTime.tv_sec) );
+		struct tm *CreationLocalTime = localtime(&(m_castTime.tv_sec));
 		/* tzname should be set by localtime() but this doesn't seem to
          work.  cpphack */
 		char buff[256];
@@ -437,7 +440,7 @@ void SpellShell::spellMessage(QString &str)
 	}
 }
 
-void SpellShell::zoneChanged(void)
+void SpellShell::zoneChanged()
 {
 	m_lastPlayerSpell = 0;
 	SpellItem* spell;

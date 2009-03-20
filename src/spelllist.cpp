@@ -127,10 +127,8 @@ SpellList::SpellList(SpellShell* sshell, QWidget *parent, const char *name)
 	
 	restoreColumns();
 	
-	connect(this, SIGNAL(doubleClicked(Q3ListViewItem*)),
-			this, SLOT(mouseDoubleClicked(Q3ListViewItem*)));
-	connect(this, SIGNAL(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)),
-			this, SLOT(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)));
+	connect(this, SIGNAL(doubleClicked(Q3ListViewItem*)), this, SLOT(mouseDoubleClicked(Q3ListViewItem*)));
+	connect(this, SIGNAL(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)), this, SLOT(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)));
 }
 
 Q3PopupMenu* SpellList::menu()
@@ -157,7 +155,7 @@ Q3PopupMenu* SpellList::menu()
 	return m_menu;
 }
 
-void SpellList::init_menu(void)
+void SpellList::init_menu()
 { 
 	m_menu->setItemChecked(mid_spellName, columnWidth(SPELLCOL_SPELLNAME) != 0);
 	m_menu->setItemChecked(mid_spellId, columnWidth(SPELLCOL_SPELLID) != 0);
@@ -171,7 +169,8 @@ void SpellList::init_menu(void)
 
 void SpellList::selectSpell(const SpellItem *item)
 {
-	if (item) {
+	if (item)
+	{
 		SpellListItem *i = Find(item);
 		selectAndOpen(i);
 	}
@@ -183,7 +182,8 @@ SpellListItem* SpellList::InsertSpell(const SpellItem *item)
 		return NULL;
 	
 	Q3ValueList<SpellListItem *>::Iterator it;
-	for(it = m_spellList.begin(); it != m_spellList.end(); it++) {
+	for (it = m_spellList.begin(); it != m_spellList.end(); it++) 
+	{
 		if ((*it)->item() == item)
 			break;
 	}
@@ -193,10 +193,13 @@ SpellListItem* SpellList::InsertSpell(const SpellItem *item)
 		int tid = (*it)->text(SPELLCOL_TARGETID).toInt();
 		if ((sid == (*it)->item()->spellId()) &&
 			(cid == (*it)->item()->casterId()) &&
-			(tid == (*it)->item()->targetId())) {
+			(tid == (*it)->item()->targetId()))
+		{
 			(*it)->update();
 			return (*it);
-		} else {
+		} 
+		else
+		{
 			DeleteItem((*it)->item());
 		}
 	}
@@ -215,9 +218,11 @@ SpellListItem* SpellList::InsertSpell(const SpellItem *item)
 
 void SpellList::DeleteItem(const SpellItem *item)
 {
-	if (item) {
+	if (item)
+	{
 		SpellListItem *i = Find(item);
-		if (i) {
+		if (i) 
+		{
 			m_spellList.remove(i);
 			delete i;
 		}
@@ -243,9 +248,11 @@ QColor SpellList::pickSpellColor(const SpellItem *item, QColor def) const
 
 SpellListItem* SpellList::Find(const SpellItem *item)
 {
-	if (item) {
+	if (item) 
+	{
 		Q3ValueList<SpellListItem*>::Iterator it;
-		for(it = m_spellList.begin(); it != m_spellList.end(); ++it) {
+		for (it = m_spellList.begin(); it != m_spellList.end(); ++it)
+		{
 			if ((*it)->item() == item)
 				return (*it);
 		}
@@ -267,7 +274,8 @@ void SpellList::delSpell(const SpellItem *item)
 
 void SpellList::changeSpell(const SpellItem *item)
 {
-	if (item) {
+	if (item)
+	{
 		SpellListItem *i = Find(item);
 		if (!i)
 			return;
@@ -277,8 +285,11 @@ void SpellList::changeSpell(const SpellItem *item)
 		if ((sid == item->spellId()) &&
 			(cid == item->casterId()) &&
 			(tid == item->targetId()))
+		{
 			i->update();
-		else {
+		}
+		else 
+		{
 			DeleteItem(item);
 			addSpell(item);
 		}
@@ -295,7 +306,8 @@ void SpellList::clear()
 void SpellList::selectAndOpen(SpellListItem *item)
 {
 	Q3ListViewItem *i = item;
-	while(i) {
+	while (i)
+	{
 		item->setOpen(true);
 		item = (SpellListItem *)item->parent();
 	}
@@ -317,11 +329,12 @@ void SpellList::mouseDoubleClicked(Q3ListViewItem *item)
 	SpellListItem *i = (SpellListItem *)item;
 	const SpellItem *j = i->item(); 
 	if (j)
+	{
 		m_spellShell->deleteSpell(j);
+	}
 }
 
-void SpellList::rightButtonClicked(Q3ListViewItem *item, const QPoint& pos,
-								   int col)
+void SpellList::rightButtonClicked(Q3ListViewItem *item, const QPoint& pos, int col)
 {
 	Q3PopupMenu* slMenu = menu();
 	
@@ -334,32 +347,47 @@ void SpellList::activated(int mid)
 	int col = 0;
 	int id = 0;
 	
-	if (mid == mid_spellName) {
+	if (mid == mid_spellName) 
+	{
 		id = mid_spellName;
 		col = SPELLCOL_SPELLNAME;
-	} else if (mid == mid_spellId) {
+	} 
+	else if (mid == mid_spellId) 
+	{
 		id = mid_spellId;
 		col = SPELLCOL_SPELLID;
-	} else if (mid == mid_casterId) {
+	} 
+	else if (mid == mid_casterId) 
+	{
 		id = mid_casterId;
 		col = SPELLCOL_CASTERID;
-	} else if (mid == mid_casterName) {
+	} 
+	else if (mid == mid_casterName)
+	{
 		id = mid_casterName;
 		col = SPELLCOL_CASTERNAME;
-	} else if (mid == mid_targetId) {
+	}
+	else if (mid == mid_targetId)
+	{
 		id = mid_targetId;
 		col = SPELLCOL_TARGETID;
-	} else if (mid == mid_targetName) {
+	}
+	else if (mid == mid_targetName)
+	{
 		id = mid_targetName;
 		col = SPELLCOL_TARGETNAME;
-	} else if (mid == mid_casttime) {
+	}
+	else if (mid == mid_casttime)
+	{
 		id = mid_casttime;
 		col = SPELLCOL_CASTTIME;
-	} else if (mid == mid_duration) {
+	} 
+	else if (mid == mid_duration) 
+	{
 		id = mid_duration;
 		col = SPELLCOL_DURATION;
 	}
-	
+
 	if (id) 
 	{
 		setColumnVisible(col, !columnVisible(col));
@@ -387,7 +415,7 @@ Q3PopupMenu* SpellListWindow::menu()
 	return m_spellList->menu();
 }
 
-void SpellListWindow::savePrefs(void)
+void SpellListWindow::savePrefs()
 {
 	// save SEQWindow prefs
 	SEQWindow::savePrefs();

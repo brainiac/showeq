@@ -13,6 +13,16 @@
  * Date   - 7/31/2001
  */
 
+#ifdef __FreeBSD__
+#include <sys/types.h>
+#endif
+#include <limits.h>
+#include <math.h>
+
+#include <QFile>
+#include <QDataStream>
+#include <Q3TextStream>
+
 #include "spawnshell.h"
 #include "filtermgr.h"
 #include "zonemgr.h"
@@ -22,16 +32,6 @@
 #include "packetcommon.h"
 #include "diagnosticmessages.h"
 #include "netstream.h"
-
-#include <QFile>
-#include <QDataStream>
-#include <Q3TextStream>
-
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#endif
-#include <limits.h>
-#include <math.h>
 
 //----------------------------------------------------------------------
 // useful macro definitions
@@ -117,8 +117,8 @@ SpawnShell::SpawnShell(FilterMgr& filterMgr, ZoneMgr* zoneMgr, Player* player, G
 	connect(&m_filterMgr, SIGNAL(runtimeFiltersChanged(uint8_t)), this, SLOT(refilterSpawnsRuntime()));
 	
 	// connect SpawnShell slots to ZoneMgr signals
-	connect(m_zoneMgr, SIGNAL(zoneBegin(const QString&)), this, SLOT(clear(void)));
-	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)),this, SLOT(clear(void)));
+	connect(m_zoneMgr, SIGNAL(zoneBegin(const QString&)), this, SLOT(clear()));
+	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)),this, SLOT(clear()));
 	
 	// connect Player signals to SpawnShell signals
 	connect(m_player, SIGNAL(changeItem(const Item*, uint32_t)), this, SIGNAL(changeItem(const Item*, uint32_t)));
@@ -134,7 +134,7 @@ SpawnShell::SpawnShell(FilterMgr& filterMgr, ZoneMgr* zoneMgr, Player* player, G
 	m_timer = new QTimer(this);
 	
 	// connect the timer
-	connect(m_timer, SIGNAL(timeout()),	this, SLOT(saveSpawns(void)));
+	connect(m_timer, SIGNAL(timeout()),	this, SLOT(saveSpawns()));
 	
 	// start the timer (changed to oneshot to help prevent a backlog on slower
 	// machines)
@@ -497,7 +497,7 @@ int32_t SpawnShell::fillSpawnStruct(spawnStruct *spawn, const uint8_t *data, siz
 	// skip unknown3, unknown4
 	netStream.skipBytes(8);
 	
-	if(spawn->otherData & 1)
+	if (spawn->otherData & 1)
 	{
 		// it's a chest or untargetable
 		do
@@ -1101,7 +1101,7 @@ void SpawnShell::shroudSpawn(const uint8_t* data, size_t len, uint8_t dir)
 	uint16_t spawnStructSize=netStream.readUInt16NC();
 	spawnStructSize-=6;
 	
-	if(spawnID!=m_player->id())
+	if (spawnID!=m_player->id())
 	{
 		// Shrouding other player
 		spawnShroudOther *shroud = new spawnShroudOther;
@@ -1529,7 +1529,7 @@ void SpawnShell::refilterSpawnsRuntime(spawnItemType type)
 	}
 }
 
-void SpawnShell::saveSpawns(void)
+void SpawnShell::saveSpawns()
 {
 	QFile keyFile(showeq_params->saveRestoreBaseFilename + "Spawns.dat");
 	if (keyFile.open(QIODevice::WriteOnly))
@@ -1575,7 +1575,7 @@ void SpawnShell::saveSpawns(void)
 		m_timer->start(showeq_params->saveSpawnsFrequency, true);
 }
 
-void SpawnShell::restoreSpawns(void)
+void SpawnShell::restoreSpawns()
 {
 	QString fileName = showeq_params->saveRestoreBaseFilename + "Spawns.dat";
 	QFile keyFile(fileName);
@@ -1639,13 +1639,11 @@ void SpawnShell::restoreSpawns(void)
 		
 		emit numSpawns(m_spawns.count());
 		
-		seqInfo("Restored SPAWNS: count=%d!",
-				m_spawns.count());
+		seqInfo("Restored SPAWNS: count=%d!", m_spawns.count());
 	}
 	else
 	{
-		seqWarn("Failure loading %s: Unable to open!",
-				(const char*)fileName);
+		seqWarn("Failure loading %s: Unable to open!", (const char*)fileName);
 	}
 }
 

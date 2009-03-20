@@ -55,7 +55,7 @@ public:
 	QRect boundingRect() const;
 	
 	void point(uint32_t i, _T* x, _T* y, _T* z) const;
-	const Point3D<_T>& point( uint32_t i) const;
+	const Point3D<_T>& point(uint32_t i) const;
 	void setPoint(uint32_t i, _T x, _T y, _T z);
 	void setPoint(uint32_t i, const Point3D<_T>& p);
 	bool setPoints(uint32_t nPoints, const _T* points);

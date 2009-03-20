@@ -16,43 +16,43 @@
 
 int seqDebug(const char* format, ...)
 {
-  va_list ap;
-  va_start(ap, format);
-  int ret = vfprintf(stderr, format, ap);
-  fputs("\n", stderr);
-  va_end(ap);
-  return ret;
+	va_list ap;
+	va_start(ap, format);
+	int ret = vfprintf(stderr, format, ap);
+	fputs("\n", stderr);
+	va_end(ap);
+	return ret;
 }
 
 int seqInfo(const char* format, ...)
 {
-  va_list ap;
-  va_start(ap, format);
-  int ret = vfprintf(stderr, format, ap);
-  fputs("\n", stderr);
-  va_end(ap);
-  return ret;
+	va_list ap;
+	va_start(ap, format);
+	int ret = vfprintf(stderr, format, ap);
+	fputs("\n", stderr);
+	va_end(ap);
+	return ret;
 }
 
 int seqWarn(const char* format, ...)
 {
-  va_list ap;
-  va_start(ap, format);
-  int ret = vfprintf(stderr, format, ap);
-  fputs("\n", stderr);
-  va_end(ap);
-  return ret;
+	va_list ap;
+	va_start(ap, format);
+	int ret = vfprintf(stderr, format, ap);
+	fputs("\n", stderr);
+	va_end(ap);
+	return ret;
 }
 
 void seqFatal(const char* format, ...)
 {
-  int ret;
-  va_list ap;
-  va_start(ap, format);
-  ret = vfprintf(stderr, format, ap);
-  fputs("\n", stderr);
-  va_end(ap);
-  exit (-1);
+	int ret;
+	va_list ap;
+	va_start(ap, format);
+	ret = vfprintf(stderr, format, ap);
+	fputs("\n", stderr);
+	va_end(ap);
+	exit (-1);
 }
 
 

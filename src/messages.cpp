@@ -54,7 +54,7 @@ void Messages::addMessage(MessageType type, const QString& text, uint32_t color)
 	emit newMessage(message);
 }
 
-void Messages::clear(void)
+void Messages::clear()
 {
 	// clear the messages
 	m_messages.clear();

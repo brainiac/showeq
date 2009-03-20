@@ -98,7 +98,7 @@ void SEQWindow::restoreFont()
 	{
 		// use the font specified in the preferences
 		QFont font = pSEQPrefs->getPrefFont("Font", preferenceName());
-		setFont( font);
+		setFont(font);
 	}
 }
 
@@ -143,7 +143,7 @@ void SEQWindow::restorePosition()
 	}
 }
 
-void SEQWindow::savePrefs(void)
+void SEQWindow::savePrefs()
 {
 	if (pSEQPrefs->getPrefBool("SavePosition", "Interface", true))
 	{

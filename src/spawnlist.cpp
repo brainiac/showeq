@@ -35,7 +35,7 @@
 #endif
 #include <math.h>
 #include <regex.h>
-//Added by qt3to4:
+
 #include <Q3PopupMenu>
 
 // ------------------------------------------------------
@@ -80,60 +80,41 @@ SpawnList::SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* catego
 	restoreColumns();
 	
 	// connect a QListView signal to ourselves
-	connect(this, SIGNAL(selectionChanged(Q3ListViewItem*)),
-			this, SLOT(selChanged(Q3ListViewItem*)));
-	
-	connect (this, SIGNAL(mouseButtonPressed(int, Q3ListViewItem*, const QPoint&, int)),
-			 this, SLOT(mousePressEvent(int, Q3ListViewItem*, const QPoint&, int)));
-	
-	connect (this, SIGNAL(doubleClicked(Q3ListViewItem*)),
-			 this, SLOT(mouseDoubleClickEvent(Q3ListViewItem*)));
+	connect(this, SIGNAL(selectionChanged(Q3ListViewItem*)), this, SLOT(selChanged(Q3ListViewItem*)));
+	connect(this, SIGNAL(mouseButtonPressed(int, Q3ListViewItem*, const QPoint&, int)),
+			this, SLOT(mousePressEvent(int, Q3ListViewItem*, const QPoint&, int)));
+	connect(this, SIGNAL(doubleClicked(Q3ListViewItem*)), this, SLOT(mouseDoubleClickEvent(Q3ListViewItem*)));
 	
 	// connect SpawnList slots to SpawnShell signals
-	connect(m_spawnShell, SIGNAL(addItem(const Item *)),
-			this, SLOT(addItem(const Item *)));
-	connect(m_spawnShell, SIGNAL(delItem(const Item *)),
-			this, SLOT(delItem(const Item *)));
-	connect(m_spawnShell, SIGNAL(changeItem(const Item *, uint32_t)),
-			this, SLOT(changeItem(const Item *, uint32_t)));
-	connect(m_spawnShell, SIGNAL(killSpawn(const Item *, const Item*, uint16_t)),
-			this, SLOT(killSpawn(const Item *)));
-	connect(m_spawnShell, SIGNAL(selectSpawn(const Item *)),
-			this, SLOT(selectSpawn(const Item *)));
-	connect(m_spawnShell, SIGNAL(clearItems()),
-			this, SLOT(clear()));
+	connect(m_spawnShell, SIGNAL(addItem(const Item *)), this, SLOT(addItem(const Item *)));
+	connect(m_spawnShell, SIGNAL(delItem(const Item *)), this, SLOT(delItem(const Item *)));
+	connect(m_spawnShell, SIGNAL(changeItem(const Item *, uint32_t)), this, SLOT(changeItem(const Item *, uint32_t)));
+	connect(m_spawnShell, SIGNAL(killSpawn(const Item *, const Item*, uint16_t)), this, SLOT(killSpawn(const Item *)));
+	connect(m_spawnShell, SIGNAL(selectSpawn(const Item *)), this, SLOT(selectSpawn(const Item *)));
+	connect(m_spawnShell, SIGNAL(clearItems()), this, SLOT(clear()));
 	
 	// connect SpawnList slots to Player signals
-	connect(m_player, SIGNAL(posChanged(int16_t,int16_t,int16_t,
-										int16_t,int16_t,int16_t,int32_t)), 
-			this, SLOT(setPlayer(int16_t,int16_t,int16_t,
-								 int16_t,int16_t,int16_t,int32_t)));
-	connect(m_player, SIGNAL(levelChanged(uint8_t)),
-			this, SLOT(playerLevelChanged(uint8_t)));
+	connect(m_player, SIGNAL(posChanged(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, int32_t)), 
+			this, SLOT(setPlayer(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, int32_t)));
+	connect(m_player, SIGNAL(levelChanged(uint8_t)), this, SLOT(playerLevelChanged(uint8_t)));
 	
 	// connect SpawnList slots to CategoryMgr signals
-	connect(m_categoryMgr, SIGNAL(addCategory(const Category*)),
-			this, SLOT(addCategory(const Category*)));
-	connect(m_categoryMgr, SIGNAL(delCategory(const Category*)),
-			this, SLOT(delCategory(const Category*)));
-	connect(m_categoryMgr, SIGNAL(clearedCategories()),
-			this, SLOT(clearedCategories()));
-	connect(m_categoryMgr, SIGNAL(loadedCategories()),
-			this, SLOT(loadedCategories()));
+	connect(m_categoryMgr, SIGNAL(addCategory(const Category*)), this, SLOT(addCategory(const Category*)));
+	connect(m_categoryMgr, SIGNAL(delCategory(const Category*)), this, SLOT(delCategory(const Category*)));
+	connect(m_categoryMgr, SIGNAL(clearedCategories()), this, SLOT(clearedCategories()));
+	connect(m_categoryMgr, SIGNAL(loadedCategories()), this, SLOT(loadedCategories()));
 	
 	// populate the initial spawn list
 	rebuildSpawnList();
 }
 
-void SpawnList::setPlayer(int16_t x, int16_t y, int16_t z, 
-						  int16_t deltaX, int16_t deltaY, int16_t deltaZ, 
-						  int32_t degrees)
+void SpawnList::setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees)
 {
-	//   seqDebug("SpawnList::setPlayer()");
+	// seqDebug("SpawnList::setPlayer()");
 	char buff[200];  
 	
 	SpawnListItem *i = (SpawnListItem*)firstChild();
-	//   if (i) seqDebug("============= firstChild, name=%s type=%s", i->item()->name().data(), i->type());
+	// if (i) seqDebug("============= firstChild, name=%s type=%s", i->item()->name().data(), i->type());
 	
 	// is this a fast machine?
 	if (!showeq_params->fast_machine)
@@ -174,11 +155,10 @@ void SpawnList::changeItem(const Item* item, uint32_t changeItem)
 	while (i) 
 	{
 		// reinsert only if level, NPC or filterFlags changes
-		if (!(changeItem & (tSpawnChangedLevel |
-							tSpawnChangedNPC | 
-							tSpawnChangedFilter | 
-							tSpawnChangedRuntimeFilter)))
+		if (!(changeItem & (tSpawnChangedLevel | tSpawnChangedNPC | tSpawnChangedFilter | tSpawnChangedRuntimeFilter)))
+		{
 			i->update(m_player, changeItem);
+		}
 		else 
 		{
 			bool select = false;
@@ -241,9 +221,7 @@ void SpawnList::killSpawn(const Item* item)
 		addItem(item);
 }
 
-SpawnListItem* SpawnList::Find(Q3ListViewItemIterator& it, 
-							   const Item* item, 
-							   bool first)
+SpawnListItem* SpawnList::Find(Q3ListViewItemIterator& it, const Item* item, bool first)
 {
 	if (first) 
 		it = Q3ListViewItemIterator(this); // reset iterator to the beginning
@@ -252,7 +230,7 @@ SpawnListItem* SpawnList::Find(Q3ListViewItemIterator& it,
 	
 	SpawnListItem *i;
 	// while there are still items, increment forward
-	while(it.current())
+	while (it.current())
 	{
 		// get the current item
 		i = (SpawnListItem*)it.current();
@@ -302,9 +280,7 @@ void SpawnList::addItem(const Item* item)
 		int l = j->text(tSpawnColLevel).toInt();
 		
 		// reinsert only if name, level, NPC, or filterFlags changes
-		if ((l == level) &&
-			(j->m_npc == item->NPC()) &&
-			(j->text(tSpawnColName) == item->name()))
+		if ((l == level) && (j->m_npc == item->NPC()) && (j->text(tSpawnColName) == item->name()))
 		{
 			// it matches, just update all of it's instances
 			
@@ -368,11 +344,10 @@ void SpawnList::addItem(const Item* item)
 		SpawnListItem* catlitem;
 		
 		// iterate over all the categories
-		for(cat = cit.toFirst(); cat != NULL; cat = ++cit)
+		for (cat = cit.toFirst(); cat != NULL; cat = ++cit)
 		{ 
 			// skip filtered spawns, if this isn't a filtered filter category
-			if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
-				!cat->isFilteredFilter())
+			if ((item->filterFlags() & FILTER_FLAG_FILTERED) && !cat->isFilteredFilter())
 			{
 				continue;
 			}
@@ -451,7 +426,7 @@ void SpawnList::delItem(const Item* item)
 			// delete children
 			Q3ListViewItem* child = j->firstChild();
 			Q3ListViewItem* next;
-			while(child) 
+			while (child) 
 			{
 				// get the next child
 				next = (SpawnListItem *) child->nextSibling();
@@ -614,7 +589,7 @@ void SpawnList::setSelectedQuiet(Q3ListViewItem* item, bool selected)
 }
 
 // Select next item of the same type and id as currently selected item
-void SpawnList::selectNext(void)
+void SpawnList::selectNext()
 {
 	//   seqDebug("SpawnList::selectNext()");
 	SpawnListItem *i;
@@ -651,7 +626,7 @@ void SpawnList::selectNext(void)
 } // end selectNext
 
 
-void SpawnList::selectPrev(void)
+void SpawnList::selectPrev()
 {
 	//   seqDebug("SpawnList::SelectPrev()");
 	SpawnListItem *i, *last, *cur;
@@ -702,7 +677,7 @@ void SpawnList::selectPrev(void)
 	}
 } // end SelectPrev
 
-void SpawnList::clear(void)
+void SpawnList::clear()
 {
 	//seqDebug("SpawnList::clear()");
 	Q3ListView::clear();
@@ -782,7 +757,7 @@ void SpawnList::delCategory(const Category* cat)
 	}
 }
 
-void SpawnList::clearedCategories(void)
+void SpawnList::clearedCategories()
 {
 	// clear out the list of category list items
 	m_categoryListItems.clear();
@@ -791,7 +766,7 @@ void SpawnList::clearedCategories(void)
 	Q3ListView::clear();
 }
 
-void SpawnList::loadedCategories(void)
+void SpawnList::loadedCategories()
 {
 	// stop widget updates
 	setUpdatesEnabled(false);
@@ -930,7 +905,7 @@ void SpawnList::populateCategory(const Category* cat)
 	repaint();
 }
 
-void SpawnList::populateSpawns(void)
+void SpawnList::populateSpawns()
 {
 	// types of items to populate category with
 	spawnItemType types[] = { tSpawn, tDrop, tDoors, tPlayer };
@@ -966,7 +941,7 @@ void SpawnList::populateSpawns(void)
 				filterStr = filterString(item, flags);
 				
 				// iterate over all the categories
-				for(cat = cit.toFirst(); cat != NULL; cat = ++cit)
+				for (cat = cit.toFirst(); cat != NULL; cat = ++cit)
 				{ 
 					// skip filtered spawns
 					if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
@@ -999,7 +974,7 @@ void SpawnList::populateSpawns(void)
 		
 		// done adding items, now iterate over all the categories and 
 		// update the counts
-		for(cat = cit.toFirst(); cat != NULL; cat = ++cit)
+		for (cat = cit.toFirst(); cat != NULL; cat = ++cit)
 		{
 			catlitem =  m_categoryListItems.find((void*)cat);
 			catlitem->updateTitle(cat->name());
@@ -1045,11 +1020,10 @@ void SpawnList::selChanged(Q3ListViewItem* litem)
 		emit spawnSelected(item);
 }
 
-void SpawnList::mousePressEvent(int button, Q3ListViewItem* litem,
-								const QPoint &point, int col)
+void SpawnList::mousePressEvent(int button, Q3ListViewItem* litem, const QPoint &point, int col)
 {
 	// Left Mouse Button Events
-	if (button  == Qt::LeftButton && litem != NULL)
+	if (button == Qt::LeftButton && litem != NULL)
 	{
 		setSelected(litem, TRUE);
 	}
@@ -1135,14 +1109,12 @@ SpawnListMenu* SpawnList::menu()
 	if (m_menu != NULL)
 		return m_menu;
 	
-	m_menu = new SpawnListMenu(this, (SEQWindow*)parent(), m_spawnShell->filterMgr(),
-							   m_categoryMgr, this, "spawnlist menu");
+	m_menu = new SpawnListMenu(this, (SEQWindow*)parent(), m_spawnShell->filterMgr(), m_categoryMgr, this, "spawnlist menu");
 	
 	return m_menu;
 }
 
-SpawnListWindow::SpawnListWindow(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr,
-								 QWidget* parent, const char* name)
+SpawnListWindow::SpawnListWindow(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr, QWidget* parent, const char* name)
   : SEQWindow("SpawnList", "ShowEQ - Spawns", parent, name)
 {
 	m_spawnList = new SpawnList(player, spawnShell, categoryMgr, this, name);
@@ -1167,7 +1139,7 @@ QMenu* SpawnListWindow::menu()
 	return spawnMenu;
 }
 
-void SpawnListWindow::savePrefs(void)
+void SpawnListWindow::savePrefs()
 {
 	// save SEQWindow prefs
 	SEQWindow::savePrefs();

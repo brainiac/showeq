@@ -619,8 +619,8 @@ public slots:
     virtual void revert();
     virtual void init();
     virtual void destroy();
-    virtual void setMapIcons( MapIcons * mapIcons );
-    virtual void mapIconCombo_activated( int id );
+    virtual void setMapIcons(MapIcons * mapIcons);
+    virtual void mapIconCombo_activated(int id);
     virtual void imagePenColor_clicked();
     virtual void imageBrushColor_clicked();
     virtual void highlightPenColor_clicked();
