@@ -15,7 +15,7 @@
 #ifndef XMLCONV_H
 #define XMLCONV_H
 
-#include <qvariant.h>
+#include <QVariant>
 #include <QtXml/qdom.h>
 
 class DomConvenience

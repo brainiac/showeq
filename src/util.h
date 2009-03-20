@@ -15,7 +15,7 @@
 #include <stdint.h>
 #endif
 #include <stdio.h>
-#include <qstring.h>
+#include <QString>
 
 #include "everquest.h"
 #include "main.h"

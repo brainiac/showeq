@@ -15,8 +15,8 @@
 
 #include <stdint.h>
 
-#include <qobject.h>
-#include <qregexp.h>
+#include <QObject>
+#include <QRegExp>
 
 //----------------------------------------------------------------------
 // forward declarations
