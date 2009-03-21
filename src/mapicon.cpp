@@ -987,7 +987,7 @@ void MapIcons::paintSpawnPointIcon(MapParameters& param, QPainter& p, const MapI
 		else
 			p.setBrush(mapIcon.imageBrush());
 
-		mapIcon.paintIconImage(mapIcon.imageStyle(), p, point, m_mapIconSizes[mapIcon.imageSize()], *m_mapIconSizesWH[mapIcon.imageSize()]);
+		mapIcon.paintIconImage(mapIcon.imageStyle(), p, point, *m_mapIconSizes[mapIcon.imageSize()], *m_mapIconSizesWH[mapIcon.imageSize()]);
 	}
 
 	// Draw the highlight

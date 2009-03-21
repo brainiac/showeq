@@ -20,7 +20,7 @@
 #include <Q3CString>
 #include <Q3StrList>
 #include <QStringList>
-#include <Q3dict>
+#include <Q3Dict>
 #include <Q3TextStream>
 
 //----------------------------------------------------------------------

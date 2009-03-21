@@ -15,7 +15,7 @@
 #ifndef SEQLISTVIEW_H
 #define SEQLISTVIEW_H
 
-#include <Q3Listview>
+#include <Q3ListView>
 #include <QString>
 #include <QStringList>
 

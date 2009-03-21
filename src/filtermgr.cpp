@@ -19,9 +19,9 @@
 
 #include <errno.h>
 
-#include <QRegexp>
+#include <QRegExp>
 #include <QString>
-#include <QFileOnfo>
+#include <QFileInfo>
 
 //
 // ZBTEMP: predefined filters and filter mask will be migrated out

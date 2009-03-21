@@ -10,7 +10,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <QLcdNumber>
+#include <QLCDNumber>
 #include <Q3Frame>
 #include <QLabel>
 #include <Q3ListView>

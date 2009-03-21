@@ -161,7 +161,7 @@ MessageFilterDialog::MessageFilterDialog(MessageFilters* filters, const QString&
 	{
 		typeName = MessageEntry::messageTypeString((MessageType)i);
 		if (!typeName.isEmpty())
-			()new MessageFilterListBoxText(m_messageTypes, typeName, i);
+			new MessageFilterListBoxText(m_messageTypes, typeName, i);
 	}
 
 	// fill in existing messages
@@ -170,7 +170,7 @@ MessageFilterDialog::MessageFilterDialog(MessageFilters* filters, const QString&
 	{
 		filter = m_filters->filter(i);
 		if (filter)
-			()new MessageFilterListBoxText(m_existingFilters, filter->name(), i);
+			new MessageFilterListBoxText(m_existingFilters, filter->name(), i);
 	}
 }
 

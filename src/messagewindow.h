@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 #include <Q3TextEdit>
-#include <QRegexp>
+#include <QRegExp>
 #include <QDialog>
 #include <QLabel>
 #include <QMouseEvent>

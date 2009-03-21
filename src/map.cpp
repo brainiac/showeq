@@ -44,7 +44,7 @@
 #include <QEvent>
 #include <QPushButton>
 #include <QLayout>
-#include <Q3Toolbar>
+#include <Q3ToolBar>
 #include <Q3Accel>
 #include <QColorDialog>
 #include <QFontDialog>
@@ -893,7 +893,7 @@ MapMenu::MapMenu(Map* map, QWidget* parent, const char* name)
 	// m_id_zoomDefault = subMenu->insertItem(m_zoomDefaultSpinBox);
 	m_id_zoomDefaultMenu = insertItem("Default Zoom", subMenu);
 
-	m_id_cacheAlwaysRepaint = insertItem("Always Repaint Map Cache",thi s, SLOT(toggle_cacheAlwaysRepaint()));
+	m_id_cacheAlwaysRepaint = insertItem("Always Repaint Map Cache", this, SLOT(toggle_cacheAlwaysRepaint()));
 	m_id_cacheChanges = insertItem("Cache Changes", this, SLOT(toggle_cacheChanges()));
 
 
@@ -1663,7 +1663,7 @@ void Map::mousePressEvent(QMouseEvent* me)
 
 			// repaint if necessary
 			if (!m_cacheChanges)
-				refreshMap());
+				refreshMap();
 		}
 	}
 }
@@ -3109,8 +3109,8 @@ void Map::paintPlayerView(MapParameters& param, QPainter& p)
 
 		p.setPen(yellow); // color
 		p.drawLine(m_param.playerXOffset(), m_param.playerYOffset(),
-			m_param.playerXOffset() + in(sin(angle) * m_scaledFOVDistance),
-			m_param.playerYOffset() + int (cos(angle) * m_scaledFOVDistance));
+			m_param.playerXOffset() + int(sin(angle) * m_scaledFOVDistance),
+			m_param.playerYOffset() + int(cos(angle) * m_scaledFOVDistance));
 
 		p.setPen(red); // color
 		for (int n = 2; n--;)
@@ -3791,7 +3791,7 @@ void Map::paintEvent (QPaintEvent * e)
 	p.end ();
 }
 
-void Map::mouseMoveEventQMouseEvent* event)
+void Map::mouseMoveEvent(QMouseEvent* event)
 {
 	// We're moving the map around, only try to move if we are in zoom mode
 	// Also, since the mouse is more sensitive, pan a little slower.
@@ -3884,7 +3884,7 @@ void Map::mouseMoveEventQMouseEvent* event)
 			(const char*)remaining,
 			sp->count());
 
-		m_mapTip->setText(strin);
+		m_mapTip->setText(string);
 		QPoint popPoint = mapToGlobal(event->pos());
 		m_mapTip->popup(QPoint(popPoint.x() + 15, popPoint.y() + 15));
 	}

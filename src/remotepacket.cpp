@@ -244,9 +244,7 @@ void RemotePacketServer::dispatchPacket(uint32_t type, const uint8_t* data, uint
 
 
 void RemotePacketServer::handlePacket(uint32_t type, const uint8_t* data, uint32_t length)
-{
-	()length;
-	
+{	
 	// I suppose we should start first by selectively handling the individual
 	// packet types. type represents an internal packet protocol type, not an
 	// EQ Packet protocol type.
