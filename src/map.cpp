@@ -240,6 +240,7 @@ void MapLabel::mousePressEvent(QMouseEvent*)
 MapMgr::MapMgr(const DataLocationMgr* dataLocMgr, SpawnShell* spawnShell, Player* player, ZoneMgr* zoneMgr,
 			   QWidget* dialogParent, QObject* parent, const char* name)
   : QObject(parent, name),
+	m_dataLocMgr(dataLocMgr),
 	m_spawnShell(spawnShell),
 	m_player(player),
 	m_dialogParent(dialogParent)
@@ -252,10 +253,10 @@ MapMgr::MapMgr(const DataLocationMgr* dataLocMgr, SpawnShell* spawnShell, Player
 	m_curLocationColor = pSEQPrefs->getPrefString("DefaultLocationColor", "MapMgr", "white");
 
 	// supply the MapMgr slots with signals from SpawnShell
-	connect (m_spawnShell, SIGNAL(addItem(const Item*)), this, SLOT(addItem(const Item*)));
-	connect (m_spawnShell, SIGNAL(delItem(const Item*)), this, SLOT(delItem(const Item*)));
-	connect (m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), this, SLOT(killSpawn(const Item*)));
-	connect (m_spawnShell, SIGNAL(changeItem(const Item*, uint32_t)), this, SLOT(changeItem(const Item*, uint32_t)));
+	connect(m_spawnShell, SIGNAL(addItem(const Item*)), this, SLOT(addItem(const Item*)));
+	connect(m_spawnShell, SIGNAL(delItem(const Item*)), this, SLOT(delItem(const Item*)));
+	connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), this, SLOT(killSpawn(const Item*)));
+	connect(m_spawnShell, SIGNAL(changeItem(const Item*, uint32_t)), this, SLOT(changeItem(const Item*, uint32_t)));
 	connect(m_spawnShell, SIGNAL(clearItems()), this, SLOT(clearItems()));
 
 	// supply the MapMgr slots with signals from ZoneMgr
