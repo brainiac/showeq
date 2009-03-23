@@ -16,11 +16,12 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+#include <QTextStream>
+#include <QList>
 #include <QString>
-#include <Q3PtrList>
 #include <QRegExp>
 #include <QtXml/qxml.h>
-#include <Q3TextStream>
+
 
 #include <map>
 
@@ -33,8 +34,8 @@ class FilterTypes;
 
 //--------------------------------------------------
 // typedefs
-typedef Q3PtrList<FilterItem> FilterList;
-typedef Q3PtrListIterator<FilterItem> FilterListIterator;
+typedef QList<FilterItem*> FilterList;
+typedef QListIterator<FilterItem*> FilterListIterator;
 typedef std::map<uint32_t, QString> FilterTypeMap;
 typedef std::map<uint32_t, Filter*> FilterMap;
 
@@ -44,18 +45,36 @@ class FilterItem
 {
 public:
 	FilterItem(const QString& filterPattern, bool caseSensitive);
-	FilterItem(const QString& filterPattern, bool caseSensitive, 
-			   uint8_t minLevel, uint8_t maxLevel);
+	FilterItem(const QString& filterPattern, bool caseSensitive, uint8_t minLevel, uint8_t maxLevel);
 	~FilterItem();
 	
-	bool save(QString& indent, Q3TextStream& out);
+	bool save(QString& indent, QTextStream& out);
 	bool isFiltered(const QString& filterString, uint8_t level) const;
 	
-	QString name() const { return m_regexp.pattern(); }
-	QString filterPattern() const { return m_regexp.pattern(); }
-	uint8_t minLevel() const { return m_minLevel; }
-	uint8_t maxLevel() const { return m_maxLevel; }
-	bool valid() { return m_regexp.isValid(); }
+	QString name() const
+	{
+		return m_regexp.pattern(); 
+	}
+
+	QString filterPattern() const 
+	{
+		return m_regexp.pattern(); 
+	}
+	
+	uint8_t minLevel() const 
+	{
+		return m_minLevel; 
+	}
+	
+	uint8_t maxLevel() const 
+	{
+		return m_maxLevel; 
+	}
+	
+	bool valid() 
+	{ 
+		return m_regexp.isValid(); 
+	}
 	
 protected:
 	void init(const QString& filterPattern, bool caseSensitive, uint8_t minLevel, uint8_t maxLevel);
@@ -75,7 +94,7 @@ public:
 	Filter(bool caseSensitive = 0);
 	~Filter();
 	
-	bool save(QString& indent, Q3TextStream& out);
+	bool save(QString& indent, QTextStream& out);
 	bool isFiltered(const QString& filterString, uint8_t level);
 	bool addFilter(const QString& filterPattern);
 	bool addFilter(const QString& filterPattern, uint8_t minLevel, uint8_t maxLevel);
@@ -86,7 +105,7 @@ public:
 private:
 	FilterItem* findFilter(const QString& filterPattern);
 	
-	FilterList m_filterItems;
+	QList<FilterItem*> m_filterItems;
 	bool m_caseSensitive;
 };
 
@@ -114,6 +133,7 @@ public:
 protected:
 	QString m_file;
 	FilterMap m_filters;
+	
 	const FilterTypes& m_types;
 	bool m_caseSensitive;
 };
@@ -128,49 +148,45 @@ public:
 	
 	bool registerType(const QString& name, uint8_t& type, uint32_t& mask);
 	void unregisterType(uint8_t type);
-	uint8_t maxType() const;
-	uint32_t mask(uint8_t type) const;
+	
+	uint8_t maxType() const
+	{
+		return m_maxType;
+	}
+	
+	uint32_t mask(uint8_t type) const
+	{
+		return (t << type);
+	}
+	
 	uint32_t mask(const QString& name) const;
 	uint8_t type(const QString& name) const;
-	QString name(uint8_t type) const;
-	QString name(uint32_t mask) const;
+	
+	QString name(uint8_t type) const
+	{
+		return name(mask(type));
+	}
+	
+	QString name(uint32_t mask) const
+	{
+		FilterTypeMap::const_iterator it = m_filters.find(mask);
+		if (it != m_filters.end())
+			return it->second;
+		return QString("Unknown:") + QString::number(mask);
+	}
+	
 	QString names(uint32_t mask) const;
-	bool validMask(uint32_t mask) const;
+	
+	bool validMask(uint32_t mask) const
+	{
+		return m_allocated & mask != 0;
+	}
 	
 protected:
-	uint32_t m_allocated;
 	FilterTypeMap m_filters;
+	
+	uint32_t m_allocated;	
 	uint8_t m_maxType;
 };
-
-inline uint8_t FilterTypes::maxType() const
-{
-	return m_maxType;
-}
-
-inline uint32_t FilterTypes::mask(uint8_t type) const
-{
-	return (1 << type);
-}
-
-inline QString FilterTypes::name(uint8_t type) const
-{
-	return name(mask(type));
-}
-
-inline QString FilterTypes::name(uint32_t mask) const
-{
-	FilterTypeMap::const_iterator it = m_filters.find(mask);
-	
-	if (it != m_filters.end())
-		return it->second;
-	
-	return QString("Unknown:") + QString::number(mask);
-}
-
-inline bool FilterTypes::validMask(uint32_t mask) const 
-{
-	return ((m_allocated & mask) != 0);
-}
 
 #endif // FILTER_H
