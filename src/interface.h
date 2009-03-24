@@ -8,31 +8,30 @@
 #ifndef EQINT_H
 #define EQINT_H
 
-#include <QWidget>
-#include <QPushButton>
-#include <QLCDNumber>
-#include <Q3Frame>
-#include <QLabel>
-#include <Q3ListView>
-#include <QLayout>
-#include <QMenuBar>
-#include <Q3PopupMenu>
-
+// Deprecated headers
 #include <Q3MainWindow>
-#include <QMainWindow>
-
+#include <Q3Frame>
+#include <Q3ListView>
+#include <Q3PopupMenu>
 #include <Q3HBox>
 #include <Q3VBox>
-#include <QSplitter>
 #include <Q3ValueList>
-#include <QTimer>
 #include <Q3PtrList>
-#include <QMessageBox>
 #include <Q3TabDialog>
-#include <QSpinBox>
 #include <Q3IntDict>
 #include <Q3PtrDict>
 #include <Q3TextStream>
+
+#include <QPushButton>
+#include <QLCDNumber>
+#include <QLabel>
+#include <QLayout>
+#include <QMenuBar>
+#include <QMainWindow>
+#include <QSplitter>
+#include <QTimer>
+#include <QMessageBox>
+#include <QSpinBox>
 
 #include "everquest.h"
 #include "spawnlist.h"
@@ -92,15 +91,15 @@ typedef Q3ValueList<int> MenuIDList;
 //--------------------------------------------------
 // constants
 // maximum number of maps
-const int maxNumMaps = 5; 
+const int maxNumMaps = 5;
 
 // This is the base number where the map dock options appear in the
 // Docked menu
-const int mapDockBase = 11; 
+const int mapDockBase = 11;
 
 // This is the base number where the map caption options appear in the
 // Window caption menu
-const int mapCaptionBase = 11; 
+const int mapCaptionBase = 11;
 
 // maximum number of message windows
 const int maxNumMessageWindows = 10;
@@ -109,22 +108,23 @@ const int maxNumMessageWindows = 10;
 // in the Docked menu
 const int messageWindowDockBase = 16;
 
+// Number of strings, pass as a size to EQStr
+const int maxNumEQStr = 8009;
+
 //--------------------------------------------------
 // EQInterface
-/*!
-  \brief QMainWindow from Hell!  Also known as ShowEQ's main window.
-*/
+// QMainWindow from Hell!  Also known as ShowEQ's main window.
 class EQInterface : public QMainWindow
 {
 	Q_OBJECT
-	
+
 public:
 	EQInterface(DataLocationMgr* dlm, QWidget * parent = 0, const char *name = 0);
 	~EQInterface();
-	
+
 	QFont appFont;
-	
-	public slots:
+
+public slots:
 	void stsMessage(const QString &, int timeout = 0);
 	void numSpawns(int);
 	void setExp(uint32_t totalExp, uint32_t totalTick, uint32_t minExpLevel, uint32_t maxExpLevel, uint32_t tickExpLevel);
@@ -141,23 +141,23 @@ public:
 	void updatedDateTime(const QDateTime&);
 	void syncDateTime(const QDateTime&);
 	void clientTarget(const uint8_t* cts);
-	
+
 	void zoneBegin(const QString& shortZoneName);
 	void zoneEnd(const QString& shortZoneName, const QString& longZoneName);
 	void zoneChanged(const QString& shortZoneName);
-	
+
 	void spawnSelected(const Item* item);
 	void spawnConsidered(const Item* item);
 	void addItem(const Item* item);
 	void delItem(const Item* item);
 	void killSpawn(const Item* item);
 	void changeItem(const Item* item);
-	
+
 	void updateSelectedSpawnStatus(const Item* item);
-	
+
 	void savePrefs();
 	//void saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge);
-	
+
 	void addCategory();
 	void reloadCategories();
 	void rebuildSpawnList();
@@ -198,7 +198,7 @@ public:
 	void toggle_view_DockableWin(int id);
 	void toggle_log_Filter_ZoneData_Client();
 	void toggle_log_Filter_ZoneData_Server();
-	
+
 	void selectTheme(int id);
 	void toggle_opcode_monitoring(int id);
 	void set_opcode_monitored_list();
@@ -215,21 +215,21 @@ public:
 	virtual void setCaption(const QString&);
 	void restoreStatusFont();
 	void showMessageFilterDialog();
-	
+
 signals:
 	void guildList2text(QString);
 	void loadFileMap();
 	void selectSpawn(const Item* item);
 	void saveAllPrefs();
-	void newZoneName (const QString &); 
+	void newZoneName (const QString &);
 	void spellMessage(QString&);
 	void restoreFonts();
-	
+
 	// Decoder signals
 	void theKey(uint64_t);
 	void backfillPlayer(charProfileStruct *);
 	void combatSignal(int, int, int, int, int, QString, QString);
-	
+
 private slots:
 	void toggle_opt_Fast();
 	void toggle_view_UnknownData();
@@ -285,7 +285,7 @@ private slots:
 	void opt_clearChannelMsgs(int id);
 	void init_view_menu();
 	void toggle_opt_UseUpdateRadius();
-	
+
 	void toggleTypeFilter(int);
 	void disableAllTypeFilters();
 	void enableAllTypeFilters();
@@ -299,7 +299,7 @@ private slots:
 	void toggleDisplayTime(int);
 	void toggleEQDisplayTime(int);
 	void toggleUseColor(int);
-	
+
 protected:
 	bool getMonitorOpCodeList(const QString& title, QString& opcodeList);
 	int setTheme(int id);
@@ -326,19 +326,14 @@ protected:
 	void insertWindowMenu(SEQWindow* window);
 	void removeWindowMenu(SEQWindow* window);
 	void setDockEnabled(SEQWindow* dw, bool enable);
-	
+
 public:
 	Player* m_player;
 	MapMgr* mapMgr() { return m_mapMgr; }
-	
+
 private:
 	DataLocationMgr* m_dataLocationMgr;
 	MapMgr* m_mapMgr;
-	SpawnListWindow* m_spawnList;
-	SpawnListWindow2* m_spawnList2;
-	SpellListWindow* m_spellList;
-	SkillListWindow* m_skillList;
-	StatListWindow* m_statList;
 	SpawnPointWindow* m_spawnPointList;
 	EQPacket* m_packet;
 	ZoneMgr* m_zoneMgr;
@@ -349,7 +344,7 @@ private:
 	SpellShell* m_spellShell;
 	GroupMgr* m_groupMgr;
 	SpawnMonitor* m_spawnMonitor;
-	GuildMgr* m_guildmgr; 
+	GuildMgr* m_guildmgr;
 	GuildShell* m_guildShell;
 	DateTimeMgr* m_dateTimeMgr;
 	EQStr* m_eqStrings;
@@ -360,37 +355,44 @@ private:
 	FilteredSpawnLog* m_filteredSpawnLog;
 	FilterNotifications* m_filterNotifications;
 	SpawnLog *m_spawnLogger;
-	
+
 	PacketLog* m_globalLog;
 	PacketStreamLog* m_worldLog;
 	PacketStreamLog* m_zoneLog;
 	BazaarLog* m_bazaarLog;
 	UnknownPacketLog* m_unknownZoneLog;
 	OPCodeMonitorPacketLog* m_opcodeMonitorLog;
-	
+
 	const Item* m_selectedSpawn;
-	
-	Q3PopupMenu* m_netMenu;
-	Q3PopupMenu* m_decoderMenu;
-	Q3PopupMenu* m_statWinMenu;
-	Q3PopupMenu* m_skillWinMenu;
-	Q3PopupMenu* m_spawnListMenu;
-	Q3PopupMenu* m_dockedWinMenu;
-	Q3PopupMenu* m_dockableWinMenu;
-	Q3PopupMenu* m_windowCaptionMenu;
-	Q3PopupMenu* m_charMenu;
-	Q3PopupMenu* m_charLevelMenu;
+
+	// Menu Pieces
+	QMenu* m_netMenu;
+	QMenu* m_decoderMenu;
+	QMenu* m_statWinMenu;
+	QMenu* m_skillWinMenu;
+	QMenu* m_spawnListMenu;
+	QMenu* m_dockedWinMenu;
+	QMenu* m_dockableWinMenu;
+	QMenu* m_windowCaptionMenu;
+	QMenu* m_charMenu;
+	QMenu* m_charLevelMenu;
 	QSpinBox* m_levelSpinBox;
-	Q3PopupMenu* m_charClassMenu;
-	Q3PopupMenu* m_charRaceMenu;
-	Q3PopupMenu* m_terminalMenu;
-	Q3PopupMenu* m_terminalTypeFilterMenu;
-	Q3PopupMenu* m_terminalShowUserFilterMenu;
-	Q3PopupMenu* m_terminalHideUserFilterMenu;
-	Q3PopupMenu* m_windowMenu;
+	QMenu* m_charClassMenu;
+	QMenu* m_charRaceMenu;
+	QMenu* m_terminalMenu;
+	QMenu* m_terminalTypeFilterMenu;
+	QMenu* m_terminalShowUserFilterMenu;
+	QMenu* m_terminalHideUserFilterMenu;
+	QMenu* m_windowMenu;
 	Q3PtrDict<int> m_windowsMenus;
-	Q3PopupMenu* m_filterZoneDataMenu;
-	
+	QMenu* m_filterZoneDataMenu;
+
+	// Windows
+	SpawnListWindow* m_spawnList;
+	SpawnListWindow2* m_spawnList2;
+	SpellListWindow* m_spellList;
+	SkillListWindow* m_skillList;
+	StatListWindow* m_statList;
 	CompassFrame* m_compass;
 	MessageWindow* m_messageWindow[maxNumMessageWindows];
 	MapFrame*  m_map[maxNumMaps];
@@ -399,7 +401,7 @@ private:
 	NetDiag* m_netDiag;
 	MessageFilterDialog* m_messageFilterDialog;
 	GuildListWindow* m_guildListWindow;
-	
+
 	QLabel* m_stsbarSpawns;
 	QLabel* m_stsbarStatus;
 	QLabel* m_stsbarZone;
@@ -411,12 +413,12 @@ private:
 	QLabel* m_stsbarSpeed;
 	// ZEM code
 	QLabel* m_stsbarZEM;
-	
+
 	QString ipstr[5];
-	QString macstr[5];   
-	
+	QString macstr[5];
+
 	Q3IntDict<QString> m_formattedMessageStrings;
-	
+
 	int char_ClassID[PLAYER_CLASSES];
 	int char_RaceID[PLAYER_RACES];
 	int m_id_log_AllPackets;
@@ -462,12 +464,12 @@ private:
 	int m_id_opt_useUpdateRadius;
 	int m_id_log_Filter_ZoneData_Client;
 	int m_id_log_Filter_ZoneData_Server;
-	
+
 	MenuIDList IDList_StyleMenu;
-	
+
 	QStringList m_StringList;
 	QDialog *dialogbox;
-	
+
 	bool m_isSkillListDocked;
 	bool m_isStatListDocked;
 	bool m_isMapDocked[maxNumMaps];
@@ -477,19 +479,19 @@ private:
 	bool m_isSpawnPointListDocked;
 	bool m_isSpellListDocked;
 	bool m_isCompassDocked;
-	
+
 	bool m_selectOnConsider;
 	bool m_selectOnTarget;
 	bool m_useUpdateRadius;
-	
+
 	int m_stateVersion;
-	
+
 	QWidget* m_filler;
-	
+
 private:
 	// menu items
 	void createFileMenu();
-	
+
 	void setupExperienceWindow();
 	void setupCombatWindow();
 };
