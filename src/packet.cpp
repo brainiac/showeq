@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2004 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2004,2007 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2004,2007 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 /* Implementation of Packet class */
@@ -40,11 +40,11 @@
 
 // The following defines are used to diagnose packet handling behavior
 // this define is used to diagnose packet processing (in dispatchPacket mostly)
-//#define PACKET_PROCESS_DIAG 3 
+//#define PACKET_PROCESS_DIAG 3
 // verbosity level 0-n
 
 // this define is used to diagnose cache handling (in dispatchPacket mostly)
-//#define PACKET_CACHE_DIAG 3 
+//#define PACKET_CACHE_DIAG 3
 // verbosity level (0-n)
 
 // diagnose opcode DB issues
@@ -81,7 +81,7 @@ const in_port_t ChatServerPort = 5998;
 // Constructor
 EQPacket::EQPacket(const QString& worldopcodesxml,
 		const QString& zoneopcodesxml,
-		uint16_t arqSeqGiveUp, 
+		uint16_t arqSeqGiveUp,
 		QString device,
 		QString ip,
 		QString mac_address,
@@ -89,7 +89,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		bool sessionTrackingFlag,
 		bool recordPackets,
 		int playbackPackets,
-		int8_t playbackSpeed, 
+		int8_t playbackSpeed,
 		bool useRemote,
 		uint32_t portNum,
 		QObject * parent, const char *name)
@@ -97,7 +97,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 	m_packetCapture(NULL),
 	m_vPacket(NULL),
 	m_timer(NULL),
-	m_busy_decoding(false),	
+	m_busy_decoding(false),
 	m_useRemote(useRemote),
 	m_remotePort(portNum),
 	m_arqSeqGiveUp(arqSeqGiveUp),
@@ -109,16 +109,18 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 	m_recordPackets(recordPackets),
 	m_playbackPackets(playbackPackets),
 	m_playbackSpeed(playbackSpeed)
-{	
+{
 	if (m_useRemote)
+	{
 		m_playbackPackets = PLAYBACK_REMOTE;
-	
+	}
+
 	// create the packet type db
 	m_packetTypeDB = new EQPacketTypeDB();
 #ifdef PACKET_OPCODEDB_DIAG
 	m_packetTypeDB->list();
 #endif
-	
+
 	// create the world opcode db (with hash size of 29)
 	m_worldOPCodeDB = new EQPacketOPCodeDB(29);
 	// load the world opcode db
@@ -127,7 +129,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 #ifdef PACKET_OPCODEDB_DIAG
 	m_worldOPCodeDB->list();
 #endif
-	
+
 	// create the zone opcode db (with hash size of 211)
 	m_zoneOPCodeDB = new EQPacketOPCodeDB(211);
 	// load the zone opcode db
@@ -136,47 +138,47 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 #ifdef PACKET_OPCODEDB_DIAG
 	m_zoneOPCodeDB->list();
 #endif
-	
+
 	// ** Setup the data streams **
-	
+
 	// Setup client -> world stream
 	m_client2WorldStream = new EQPacketStream(client2world, DIR_Client, m_arqSeqGiveUp, *m_worldOPCodeDB, this, "client2world");
 	connectStream(m_client2WorldStream);
-	
+
 	// Setup world -> client stream
 	m_world2ClientStream = new EQPacketStream(world2client, DIR_Server, m_arqSeqGiveUp, *m_worldOPCodeDB, this, "world2client");
 	connectStream(m_world2ClientStream);
-	
+
 	// Setup client -> zone stream
 	m_client2ZoneStream = new EQPacketStream(client2zone, DIR_Client, m_arqSeqGiveUp, *m_zoneOPCodeDB, this, "client2zone");
 	connectStream(m_client2ZoneStream);
-	
+
 	// Setup zone -> client stream
 	m_zone2ClientStream = new EQPacketStream(zone2client, DIR_Server, m_arqSeqGiveUp, *m_zoneOPCodeDB, this, "zone2client");
 	connectStream(m_zone2ClientStream);
-	
+
 	// Initialize convenient streams array
 	m_streams[client2world] = m_client2WorldStream;
 	m_streams[world2client] = m_world2ClientStream;
 	m_streams[client2zone] = m_client2ZoneStream;
 	m_streams[zone2client] = m_zone2ClientStream;
-	
+
 	// no client/server ports yet
 	m_clientPort = 0;
 	m_serverPort = 0;
-	
+
 	struct hostent *he;
 	struct in_addr  ia;
 	if (m_ip.isEmpty() && m_mac.isEmpty())
 		seqFatal("No address specified");
-	
+
 	/* remote capture doesn't use the ip based packet capture system.
 	 * so don't bother setting it up. */
 	if (!m_ip.isEmpty() && m_playbackPackets != PLAYBACK_REMOTE)
 	{
-		/* Substitute "special" IP which is interpreted 
+		/* Substitute "special" IP which is interpreted
 		 to set up a different filter for picking up new sessions */
-		
+
 		if (m_ip == "auto")
 			inet_aton (AUTOMATIC_CLIENT_IP, &ia);
 		else if (inet_aton (m_ip, &ia) == 0)
@@ -184,12 +186,12 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			he = gethostbyname(m_ip);
 			if (!he)
 				seqFatal("Invalid address; %s", (const char*)m_ip);
-			
+
 			memcpy (&ia, he->h_addr_list[0], he->h_length);
 		}
 		m_client_addr = ia.s_addr;
 		m_ip = inet_ntoa(ia);
-		
+
 		if (m_ip ==  AUTOMATIC_CLIENT_IP)
 		{
 			m_detectingClient = true;
@@ -201,7 +203,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			seqInfo("Listening for client: %s", (const char*)m_ip);
 		}
 	}
-	
+
 	m_remoteServer = NULL;
 	if (m_playbackPackets == PLAYBACK_REMOTE)
 	{
@@ -213,36 +215,37 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 	{
 		// create the pcap object and initialize, either with MAC or IP
 		m_packetCapture = new PacketCaptureThread();
+
 		if (m_mac.length() == 17)
 			m_packetCapture->start(m_device, m_mac, m_realtime, MAC_ADDRESS_TYPE);
 		else
 			m_packetCapture->start(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE);
-		
+
 		emit filterChanged();
 	}
 	else if (m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		// Create the pcap object and initialize with the file input given
 		m_packetCapture = new PacketCaptureThread();
-		
+
 		const char* filename = pSEQPrefs->getPrefString("Filename", "VPacket");
-		
+
 		m_packetCapture->startOffline(filename, m_playbackSpeed);
 		seqInfo("Playing back packets from '%s' at speed '%d'", filename, m_playbackSpeed);
 	}
-	
+
 	// Flag session tracking properly on streams
 	session_tracking(sessionTrackingFlag);
-	
+
 	// if running setuid root, then give up root access, since the PacketCapture
 	// is the only thing that needed it.
 	if ((geteuid() == 0) && (getuid() != geteuid()))
-		setuid(getuid()); 
-	
+		setuid(getuid());
+
 	/* Create timer object */
 	m_timer = new QTimer(this);
-	
-	if (m_playbackPackets == PLAYBACK_OFF || 
+
+	if (m_playbackPackets == PLAYBACK_OFF ||
 		m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP ||
 		m_playbackPackets == PLAYBACK_REMOTE)
 	{
@@ -254,23 +257,23 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		// Special internal playback handler
 		connect(m_timer, SIGNAL(timeout()), this, SLOT(processPlaybackPackets()));
 	}
-	
+
 	/* setup VPacket */
 	m_vPacket = NULL;
-	
+
 	QString section = "VPacket";
 	// First param to VPacket is the filename
 	// Second param is playback speed:  0 = fast as poss, 1 = 1X, 2 = 2X etc
 	if (pSEQPrefs->isPreference("Filename", section))
 	{
 		const char *filename = pSEQPrefs->getPrefString("Filename", section);
-		
+
 		if (m_recordPackets)
 		{
 			m_vPacket = new VPacket(filename, 1, true);
 			// Must appear befire next call to getPrefString, which uses a static string
 			seqInfo("Recording packets to '%s' for future playback", filename);
-			
+
 			if (!pSEQPrefs->getPrefString("FlushPackets", section).isEmpty())
 				m_vPacket->setFlushPacket(true);
 		}
@@ -279,7 +282,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			m_vPacket = new VPacket(filename, 1, false);
 			m_vPacket->setCompressTime(pSEQPrefs->getPrefInt("CompressTime", section, 0));
 			m_vPacket->setPlaybackSpeed(m_playbackSpeed);
-			
+
 			seqInfo("Playing back packets from '%s' at speed '%d'", filename, m_playbackSpeed);
 		}
 	}
@@ -295,59 +298,59 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 EQPacket::~EQPacket()
 {
 	if (m_packetCapture != NULL)
-	{		
-		// stop any packet capture 
+	{
+		// stop any packet capture
 		m_packetCapture->stop();
-		
+
 		// delete the object
 		delete m_packetCapture;
 	}
-	
+
 	if (m_remoteServer != NULL)
 	{
 		// stop the packet capture server
 		m_remoteServer->stop();
-		
+
 		// delete the object
 		delete m_remoteServer;
 	}
-	
+
 	// try to close down VPacket cleanly
 	if (m_vPacket != NULL)
 	{
 		// make sure any data is flushed to the file
 		m_vPacket->Flush();
-		
+
 		// delete VPacket
 		delete m_vPacket;
 	}
-	
+
 	if (m_timer != NULL)
 	{
 		// make sure the timer is stopped
 		m_timer->stop();
-		
+
 		// delete the timer
 		delete m_timer;
 	}
-	
+
 	resetEQPacket();
-	
+
 	delete m_client2WorldStream;
 	delete m_world2ClientStream;
 	delete m_client2ZoneStream;
 	delete m_zone2ClientStream;
-	
+
 	if (m_packetTypeDB)
 	{
 		delete m_packetTypeDB;
 	}
-	
+
 	if (m_zoneOPCodeDB)
 	{
 		delete m_zoneOPCodeDB;
 	}
-	
+
 	if (m_worldOPCodeDB)
 	{
 		delete m_worldOPCodeDB;
@@ -378,7 +381,7 @@ void EQPacket::processPackets()
 	/* Make sure we are not called while already busy */
 	if (m_busy_decoding)
 		return;
-	
+
 	if (m_playbackPackets == PLAYBACK_REMOTE)
 	{
 		m_remoteServer->processPackets();
@@ -387,28 +390,28 @@ void EQPacket::processPackets()
 	{
 		/* Set flag that we are busy decoding */
 		m_busy_decoding = true;
-		
-		unsigned char buffer[BUFSIZ]; 
+
+		unsigned char buffer[BUFSIZ];
 		short size;
-		
+
 		/* fetch them from pcap */
 		while ((size = m_packetCapture->getPacket(buffer)))
 		{
 			/* Now.. we know the rest is an IP udp packet concerning the
 			 * host in question, because pcap takes care of that.
 			 */
-			
+
 			/* Now we assume its an everquest packet */
 			if (m_recordPackets)
 			{
 				time_t now = time(NULL);
 				m_vPacket->Record((const char *) buffer, size, now, PACKETVERSION);
 			}
-			
+
 			/* take the raw packet and dispatch it to the proper stream */
 			dispatchPacket(size - sizeof(struct ether_header), (unsigned char *)buffer + sizeof(struct ether_header));
 		}
-	
+
 	}
 	/* Clear decoding flag */
 	m_busy_decoding = false;
@@ -424,29 +427,29 @@ void EQPacket::processPlaybackPackets()
 	/* Make sure we are not called while already busy */
 	if (m_busy_decoding)
 		return;
-	
+
 	/* Set flag that we are busy decoding */
 	m_busy_decoding = true;
-	
+
 	unsigned char  buffer[8192];
 	int            size;
-	
+
 	/* in packet playback mode fetch packets from VPacket class */
 	time_t now;
 	int timein = mTime();
 	int i = 0;
-    
+
 	long version = PACKETVERSION;
-	
+
 	// decode packets from the playback buffer
 	do
 	{
 		size = m_vPacket->Playback((char *)buffer, sizeof(buffer), &now, &version);
-		
+
 		if (size)
 		{
 			i++;
-			
+
 			if (PACKETVERSION == version)
 			{
 				dispatchPacket(size - sizeof(ether_header), (unsigned char *)buffer + sizeof(ether_header));
@@ -456,7 +459,7 @@ void EQPacket::processPlaybackPackets()
 				seqWarn("Error:  The version of the packet stream has " \
 						"changed since '%s' was recorded - disabling playback",
 						m_vPacket->getFileName());
-				
+
 				// stop the timer, nothing more can be done...
 				stop();
 				break;
@@ -465,16 +468,16 @@ void EQPacket::processPlaybackPackets()
 		else
 			break;
 	} while (mTime() - timein < 100);
-	
+
 	// check if we've reached the end of the recording
 	if (m_vPacket->endOfData())
 	{
 		seqInfo("End of playback file '%s' reached. Playback Finished!", m_vPacket->getFileName());
-		
+
 		// stop the timer, nothing more can be done...
 		stop();
 	}
-	
+
 	/* Clear decoding flag */
 	m_busy_decoding = false;
 }
@@ -491,23 +494,23 @@ void EQPacket::connectStream(EQPacketStream* stream)
 			// Zone server stream
 			connect(stream, SIGNAL(rawPacket(const uint8_t*, size_t, uint8_t, uint16_t)),
 					this,	SIGNAL(rawZonePacket(const uint8_t*, size_t, uint8_t, uint16_t)));
-			
+
 			connect(stream,	SIGNAL(decodedPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)),
 					this,	SIGNAL(decodedZonePacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)));
-			
+
 			connect(stream,	SIGNAL(decodedPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)),
 					this,	SIGNAL(decodedZonePacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
 			break;
-			
+
 		case world2client:
 		case client2world:
 			// World server stream
 			connect(stream,	SIGNAL(rawPacket(const uint8_t*, size_t, uint8_t, uint16_t)),
 					this,	SIGNAL(rawWorldPacket(const uint8_t*, size_t, uint8_t, uint16_t)));
-			
+
 			connect(stream,	SIGNAL(decodedPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)),
 					this,	SIGNAL(decodedWorldPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)));
-			
+
 			connect(stream,	SIGNAL(decodedPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)),
 					this,	SIGNAL(decodedWorldPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
 			break
@@ -515,7 +518,7 @@ void EQPacket::connectStream(EQPacketStream* stream)
 		default:
 			return;
 	}
-	
+
 	// Debugging
 	connect(stream,	SIGNAL(cacheSize(int, int)),
 			this,	SIGNAL(cacheSize(int, int)));
@@ -525,7 +528,7 @@ void EQPacket::connectStream(EQPacketStream* stream)
 			this,	SIGNAL(seqExpect(int, int)));
 	connect(stream,	SIGNAL(numPacket(int, int)),
 			this,	SIGNAL(numPacket(int, int)));
-	
+
 	// Session handling
 	connect(stream,	SIGNAL(sessionTrackingChanged(uint8_t)),
 			this,	SIGNAL(sessionTrackingChanged(uint8_t)));
@@ -540,19 +543,19 @@ void EQPacket::connectStream(EQPacketStream* stream)
 }
 
 ////////////////////////////////////////////////////
-// This function decides the fate of the Everquest packet 
+// This function decides the fate of the Everquest packet
 // and dispatches it to the correct packet stream for handling function
 void EQPacket::dispatchPacket(int size, unsigned char *buffer)
 {
 #ifdef DEBUG_PACKET
 	debug("EQPacket::dispatchPacket()");
 #endif /* DEBUG_PACKET */
-	
+
 	// Create an object to parse the packet
 	EQUDPIPPacketFormat packet(buffer, size, false);
-	
+
 	dispatchPacket(packet);
-	
+
 	// signal a new packet. This has to be at the end so that the session is
 	// filled in if possible, so that it can report on crc errors properly
 	emit newPacket(packet);
@@ -577,7 +580,7 @@ void EQPacket::dispatchPacket(EQUDPIPPacketFormat& packet)
 		emit clientChanged(m_client_addr);
 		seqInfo("Client Detected: %s", (const char*)m_ip);
 	}
-	
+
 	// Dispatch based on known streams
 	if ((packet.getDestPort() == ChatServerPort) ||	(packet.getSourcePort() == ChatServerPort))
 	{
@@ -638,21 +641,21 @@ void EQPacket::closeStream(uint32_t sessionId, EQStreamID streamId)
 		m_packetCapture->setFilter(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE, 0, 0);
 		emit filterChanged();
 	}
-	
+
 	// Pass the close onto the streams
 	m_client2WorldStream->close(sessionId, streamId, m_session_tracking);
 	m_world2ClientStream->close(sessionId, streamId, m_session_tracking);
 	m_client2ZoneStream->close(sessionId, streamId, m_session_tracking);
 	m_zone2ClientStream->close(sessionId, streamId, m_session_tracking);
-	
+
 	// If we just closed the zone server session, unlatch the client port
 	if (streamId == zone2client || streamId == client2zone)
 	{
 		m_clientPort = 0;
 		m_serverPort = 0;
-		
+
 		emit clientPortLatched(m_clientPort);
-		
+
 		seqInfo("EQPacket: SessionDisconnect detected, awaiting next zone session,  pcap filter: EQ Client %s",
 				(const char*)m_ip);
 	}
@@ -664,8 +667,8 @@ void EQPacket::lockOnClient(in_port_t serverPort, in_port_t clientPort)
 {
 	m_serverPort = serverPort;
 	m_clientPort = clientPort;
-	
-	if (m_playbackPackets == PLAYBACK_OFF || 
+
+	if (m_playbackPackets == PLAYBACK_OFF ||
 		m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		if (m_mac.length() == 17)
@@ -679,7 +682,7 @@ void EQPacket::lockOnClient(in_port_t serverPort, in_port_t clientPort)
 			emit filterChanged();
 		}
 	}
-	
+
 	// Wanted this message even if we're running on playback...
 	if (m_mac.length() == 17)
 	{
@@ -691,7 +694,7 @@ void EQPacket::lockOnClient(in_port_t serverPort, in_port_t clientPort)
 		seqInfo("EQPacket: SessionRequest detected, pcap filter: EQ Client %s, Client port %d. Server port %d",
 				(const char*)m_ip, m_clientPort, m_serverPort);
 	}
-	
+
 	emit clientPortLatched(m_clientPort);
 }
 
@@ -704,7 +707,7 @@ void EQPacket::dispatchSessionKey(uint32_t sessionId, EQStreamID streamid, uint3
 }
 
 ///////////////////////////////////////////
-//EQPacket::dispatchWorldChatData  
+//EQPacket::dispatchWorldChatData
 // note this dispatch gets just the payload
 void EQPacket::dispatchWorldChatData(size_t len, uint8_t *data, uint8_t dir)
 {
@@ -713,9 +716,9 @@ void EQPacket::dispatchWorldChatData(size_t len, uint8_t *data, uint8_t dir)
 #endif /* DEBUG_PACKET */
 	if (len < 10)
 		return;
-	
+
 	uint16_t opCode = eqntohuint16(data);
-	
+
 	switch (opCode)
 	{
 		default:
@@ -746,23 +749,23 @@ void EQPacket::setPlayback(int speed)
 	{
 		m_packetCapture->setPlaybackSpeed(speed);
 	}
-    
+
 	QString string("");
-    
+
 	if (speed == 0)
 		string.sprintf("Playback speed set Fast as possible");
 	else if (speed < 0)
 		string.sprintf("Playback paused (']' to resume)");
 	else
 		string.sprintf("Playback speed set to %d", speed);
-	
+
 	emit stsMessage(string, 5000);
-	
+
 	emit resetPacket(m_client2WorldStream->packetCount(), client2world);
 	emit resetPacket(m_world2ClientStream->packetCount(), world2client);
 	emit resetPacket(m_client2ZoneStream->packetCount(), client2zone);
 	emit resetPacket(m_zone2ClientStream->packetCount(), zone2client);
-	
+
 	emit playbackSpeedChanged(speed);
 }
 
@@ -771,7 +774,7 @@ void EQPacket::setPlayback(int speed)
 void EQPacket::incPlayback()
 {
 	int x;
-	
+
 	if (m_vPacket)
 	{
 		x = m_vPacket->playbackSpeed();
@@ -780,27 +783,27 @@ void EQPacket::incPlayback()
 	{
 		x = m_packetCapture->getPlaybackSpeed();
 	}
-    
+
 	switch(x)
 	{
 			// if we were paused go to 1X not full speed
 		case -1:
 			x = 1;
 			break;
-			
+
 			// can't go faster than full speed
 		case 0:
 			return;
-			
+
 		case 9:
 			x = 0;
 			break;
-			
+
 		default:
 			x += 1;
 			break;
 	}
-    
+
 	setPlayback(x);
 }
 
@@ -809,7 +812,7 @@ void EQPacket::incPlayback()
 void EQPacket::decPlayback()
 {
 	int x;
-	
+
 	if (m_vPacket)
 	{
 		x = m_vPacket->playbackSpeed();
@@ -818,29 +821,29 @@ void EQPacket::decPlayback()
 	{
 		x = m_packetCapture->getPlaybackSpeed();
 	}
-	
+
 	switch(x)
 	{
 			// paused
 		case -1:
 			return;
 			break;
-			
+
 			// slower than 1 is paused
 		case 1:
 			x = -1;
 			break;
-			
+
 			// if we were full speed goto 9
 		case 0:
 			x = 9;
 			break;
-			
+
 		default:
 			x -= 1;
 			break;
 	}
-    
+
 	setPlayback(x);
 }
 
@@ -853,9 +856,9 @@ void EQPacket::monitorIPClient(const QString& ip)
 	inet_aton(m_ip, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
-	
+
 	resetEQPacket();
-	
+
 	seqInfo("Listening for IP client: %s", (const char*)m_ip);
 	if (m_playbackPackets == PLAYBACK_OFF || m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
@@ -874,11 +877,11 @@ void EQPacket::monitorMACClient(const QString& mac)
 	inet_aton(AUTOMATIC_CLIENT_IP, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
-	
+
 	resetEQPacket();
-	
+
 	seqInfo("Listening for MAC client: %s", (const char*)m_mac);
-	
+
 	if (m_playbackPackets == PLAYBACK_OFF || m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		m_packetCapture->setFilter(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE, 0, 0);
@@ -895,13 +898,13 @@ void EQPacket::monitorNextClient()
 	struct in_addr  ia;
 	inet_aton(m_ip, &ia);
 	m_client_addr = ia.s_addr;
-	
+
 	emit clientChanged(m_client_addr);
-	
+
 	resetEQPacket();
-	
+
 	seqInfo("Listening for next client seen. (you must zone for this to work!)");
-	
+
 	if (m_playbackPackets == PLAYBACK_OFF || m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		m_packetCapture->setFilter(m_device, NULL, m_realtime, DEFAULT_ADDRESS_TYPE, 0, 0);
@@ -915,25 +918,25 @@ void EQPacket::monitorDevice(const QString& dev)
 {
 	// set the device to use
 	m_device = dev;
-	
+
 	// make sure we aren't playing back packets
 	if (m_playbackPackets != PLAYBACK_OFF)
 		return;
 	if (m_useRemote)
 		return;
-	
+
 	// stop the current packet capture
 	m_packetCapture->stop();
-	
+
 	// setup for capture on new device
 	if (!m_ip.isEmpty())
 	{
 		struct hostent *he;
 		struct in_addr  ia;
-		
-		/* Substitute "special" IP which is interpreted 
+
+		/* Substitute "special" IP which is interpreted
 		 to set up a different filter for picking up new sessions */
-		
+
 		if (m_ip == "auto")
 			inet_aton(AUTOMATIC_CLIENT_IP, &ia);
 		else if (inet_aton(m_ip, &ia) == 0)
@@ -941,12 +944,12 @@ void EQPacket::monitorDevice(const QString& dev)
 			he = gethostbyname(m_ip);
 			if (!he)
 				seqFatal("Invalid address; %s", (const char*)m_ip);
-			
+
 			memcpy(&ia, he->h_addr_list[0], he->h_length);
 		}
 		m_client_addr = ia.s_addr;
 		m_ip = inet_ntoa(ia);
-		
+
 		if (m_ip ==  AUTOMATIC_CLIENT_IP)
 		{
 			m_detectingClient = true;
@@ -959,9 +962,9 @@ void EQPacket::monitorDevice(const QString& dev)
 					(const char*)m_ip);
 		}
 	}
-	
+
 	resetEQPacket();
-	
+
 	// restart packet capture
 	if (m_mac.length() == 17)
 		m_packetCapture->start(m_device, m_mac, m_realtime, MAC_ADDRESS_TYPE);
@@ -979,24 +982,24 @@ void EQPacket::session_tracking(bool enable)
 	m_world2ClientStream->setSessionTracking(m_session_tracking);
 	m_client2ZoneStream->setSessionTracking(m_session_tracking);
 	m_zone2ClientStream->setSessionTracking(m_session_tracking);
-	
-	emit sessionTrackingChanged(m_session_tracking);	
+
+	emit sessionTrackingChanged(m_session_tracking);
 }
 
 ///////////////////////////////////////////
 // Set the current ArqSeqGiveUp
 void EQPacket::setArqSeqGiveUp(uint16_t giveUp)
-{	
+{
 	// a sanity check, if the user set it to below 32, they're prolly nuts
 	if (giveUp >= 32)
 		m_arqSeqGiveUp = giveUp;
-	
+
 	// a sanity check, if the user set it to below 32, they're prolly nuts
 	if (m_arqSeqGiveUp >= 32)
 		giveUp = m_arqSeqGiveUp;
 	else
 		giveUp = 32;
-	
+
 	m_client2WorldStream->setArqSeqGiveUp(giveUp);
 	m_world2ClientStream->setArqSeqGiveUp(giveUp);
 	m_client2ZoneStream->setArqSeqGiveUp(giveUp);
@@ -1009,16 +1012,16 @@ void EQPacket::setRealtime(bool val)
 }
 
 bool EQPacket::connect2(const QString& opcodeName, EQStreamPairs sp,
-						uint8_t dir, const char* payload,  EQSizeCheckType szt, 
+						uint8_t dir, const char* payload,  EQSizeCheckType szt,
 						const QObject* receiver, const char* member)
 {
 	bool res = false;
-	
+
 	if (m_playbackPackets == PLAYBACK_REMOTE)
 	{
 		return m_remoteServer->connect2(opcodeName, payload, sp, dir, szt, receiver, member);
 	}
-	
+
 	if (sp & SP_World)
 	{
 		if (dir & DIR_Client)
@@ -1045,7 +1048,7 @@ void EQPacket::resetEQPacket()
 	{
 		m_remoteServer->reset();
 	}
-	
+
 	m_client2WorldStream->reset();
 	m_client2WorldStream->setSessionTracking(m_session_tracking);
 	m_world2ClientStream->reset();
@@ -1054,10 +1057,10 @@ void EQPacket::resetEQPacket()
 	m_client2ZoneStream->setSessionTracking(m_session_tracking);
 	m_zone2ClientStream->reset();
 	m_zone2ClientStream->setSessionTracking(m_session_tracking);
-	
+
 	m_clientPort = 0;
 	m_serverPort = 0;
-	
+
 	emit clientPortLatched(m_clientPort);
 }
 
@@ -1070,7 +1073,7 @@ const QString EQPacket::pcapFilter()
 		return QString("Remote");
 	if (m_playbackPackets != PLAYBACK_OFF)
 		return QString("Playback");
-	
+
 	return m_packetCapture->getFilter();
 }
 
