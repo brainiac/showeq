@@ -76,7 +76,7 @@ FilterItem::FilterItem(const QString& filterPattern, bool caseSensitive)
 		// the level string is everything else
 		QString levelString = workString.mid(breakPoint + 1);
 
-#ifdef DEBUG_FILTER 
+#ifdef DEBUG_FILTER
 		seqDebug("regexString=%s", (const char*)regexString);
 		seqDebug("breakPoint=%d mid()=%s",
 			breakPoint, (const char*)levelString);
@@ -139,7 +139,7 @@ FilterItem::FilterItem(const QString& filterPattern, bool caseSensitive)
 			}
 		}
 
-		// if no max level specified, or some dope set it below min, make it 
+		// if no max level specified, or some dope set it below min, make it
 		// equal the min
 		if (maxLevel < minLevel)
 			maxLevel = minLevel;
@@ -154,7 +154,7 @@ void FilterItem::init(const QString& regexString, bool caseSensitive, uint8_t mi
 	m_maxLevel = maxLevel;
 
 #ifdef DEBUG_FILTER
-	seqDebug("regexString=%s minLevel=%d maxLevel=%d", 
+	seqDebug("regexString=%s minLevel=%d maxLevel=%d",
 		(const char*)regexString, minLevel, maxLevel);
 #endif
 
@@ -173,7 +173,7 @@ void FilterItem::init(const QString& regexString, bool caseSensitive, uint8_t mi
 	if (!m_regexp.isValid())
 	{
 		seqWarn("Filter Error: '%s' - %s",
-			(const char*)m_regexp.pattern(), 
+			(const char*)m_regexp.pattern(),
 			(const char*)m_regexp.errorString());
 	}
 }
@@ -185,7 +185,7 @@ FilterItem::FilterItem(const QString& filterPattern, bool caseSensitive, uint8_t
 	if (!m_regexp.isValid())
 	{
 		seqWarn("Filter Error: '%s' - %s",
-			(const char*)m_regexp.pattern(), 
+			(const char*)m_regexp.pattern(),
 			(const char*)m_regexp.errorString());
 	}
 }
@@ -236,7 +236,7 @@ bool FilterItem::isFiltered(const QString& filterString, uint8_t level) const
 					return true;
 			}
 		}
-		else 
+		else
 			return true; // filter matched
 	}
 
@@ -266,35 +266,33 @@ void Filter::setCaseSensitive(bool caseSensitive)
 
 bool Filter::isFiltered(const QString& filterString, uint8_t level)
 {
-	FilterItem *re;
 #ifdef DEBUG_FILTER
 	//seqDebug("isFiltered(%s)", string);
 #endif /* DEBUG_FILTER */
 
 	// iterate over the filters checking for a match
 	FilterListIterator it(m_filterItems);
-	for (re = it.toFirst(); re != NULL; re = ++it)
+	while (it.hasNext())
 	{
+		FilterItem *re = it.next();
 		if (re->isFiltered(filterString, level))
 			return true;
 	}
-
 	return false;
 }
 
 bool Filter::save(QString& indent, QTextStream& out)
 {
-	FilterItem *re;
-
 	// increase indent
 	indent += "    ";
 
 	// construct an iterator over the filter items
 	FilterListIterator it(m_filterItems);
-
-	// iterate over the filter items, saving them as we go along.
-	for (re = it.toFirst(); re != NULL; re = ++it)
+	while (it.hasNext())
+	{
+		FilterItem *re = it.next();
 		re->save(indent, out);
+	}
 
 	// decrease indent
 	indent.remove(0, 4);
@@ -304,18 +302,14 @@ bool Filter::save(QString& indent, QTextStream& out)
 
 void Filter::remFilter(const QString& filterPattern)
 {
-	FilterItem *re;
-
 	// Find a match in the list and the one previous to it
-	//while (re)
 	FilterListIterator it(m_filterItems);
-	for (re = it.toFirst(); re != NULL; re = ++it)
+	while (it.hasNext())
 	{
-		if (re->name() == filterPattern) // if match
+		FilterItem *re = it.next();
+		if (re->name() == filterPattern)
 		{
-			// remove the filter
 			m_filterItems.remove(re);
-
 #ifdef DEBUG_FILTER
 			seqDebug("Removed '%s' from List", (const char*)filterPattern);
 #endif
@@ -326,13 +320,11 @@ void Filter::remFilter(const QString& filterPattern)
 
 bool Filter::addFilter(const QString& filterPattern)
 {
-	FilterItem* re;
-
 	// no duplicates allowed
 	if (findFilter(filterPattern))
 		return false;
 
-	re = new FilterItem(filterPattern, m_caseSensitive);
+	FilterItem* re = new FilterItem(filterPattern, m_caseSensitive);
 
 	// append it to the end of the list
 	m_filterItems.append(re);
@@ -341,7 +333,7 @@ bool Filter::addFilter(const QString& filterPattern)
 	seqDebug("Added Filter '%s'", (const char*)filterPattern);
 #endif
 
-	return re->valid(); 
+	return re->valid();
 }
 
 bool Filter::addFilter(const QString& filterPattern, uint8_t minLevel, uint8_t maxLevel)
@@ -362,35 +354,34 @@ bool Filter::addFilter(const QString& filterPattern, uint8_t minLevel, uint8_t m
 		(const char*)filterPattern, minLevel, maxLevel);
 #endif
 
-	return re->valid(); 
+	return re->valid();
 }
 
 FilterItem *Filter::findFilter(const QString& filterPattern)
 {
-	FilterItem* re;
-
 	FilterListIterator it(m_filterItems);
-	for (re = it.toFirst(); re != NULL; re = ++it)
-		if (re->name() ==  filterPattern)
+	while (it.hasNext())
+	{
+		FilterItem* re = it.next();
+		if (re->name() == filterPattern)
 			return re;
+	}
 
 	return NULL;
 }
 
 void Filter::listFilters()
 {
-	FilterItem *re;
-
 #ifdef DEBUG_FILTER
 	//  seqDebug("Filter::listFilters");
 #endif
 
 	FilterListIterator it(m_filterItems);
-	for (re = it.toFirst(); re != NULL; re = ++it)
+	while (it.hasNext())
 	{
+		FilterItem* re = it.next();
 		if (re->minLevel() || re->maxLevel())
-			seqInfo("\t'%s' (%d, %d)", 
-			(const char*)re->name().utf8(), re->minLevel(), re->maxLevel());
+			seqInfo("\t'%s' (%d, %d)", (const char*)re->name().utf8(), re->minLevel(), re->maxLevel());
 		else
 			seqInfo("\t'%s'", (const char*)re->name().utf8());
 	}
@@ -454,7 +445,7 @@ bool Filters::clearType(uint8_t type)
 
 bool Filters::load(const QString& filename)
 {
-	// clear existing 
+	// clear existing
 	clear();
 
 	// load filters
@@ -545,7 +536,7 @@ void Filters::list() const
 	for (it = m_filters.begin(); it != m_filters.end(); it++)
 	{
 		// print the header
-		seqInfo("Filter Type '%s':", 
+		seqInfo("Filter Type '%s':",
 			(const char*)m_types.name(it->first));
 
 		// list off the actual filters
@@ -581,7 +572,7 @@ uint32_t Filters::filterMask(const QString& filterString, uint8_t level) const
 	return mask;
 }
 
-bool Filters::addFilter(uint8_t type, const QString& filterPattern, 
+bool Filters::addFilter(uint8_t type, const QString& filterPattern,
 						uint8_t minLevel, uint8_t maxLevel)
 {
 	uint32_t mask = (1 << type);
@@ -639,7 +630,7 @@ void Filters::remFilter(uint8_t type, const QString& filterPattern)
 ///////////////////////////////////
 //  FilterTypes
 FilterTypes::FilterTypes()
-  : m_allocated(0), 
+  : m_allocated(0),
 	m_maxType(0)
 {
 }
