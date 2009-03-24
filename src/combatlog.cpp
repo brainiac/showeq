@@ -13,15 +13,19 @@
 #include "diagnosticmessages.h"
 
 #include <Q3Grid>
-#include <QTimer>
 #include <Q3HBox>
 #include <Q3VGroupBox>
-#include <QMessageBox>
-#include <QLayout>
-#include <QLabel>
 #include <Q3GridLayout>
 #include <Q3PopupMenu>
 #include <Q3VBoxLayout>
+
+#include <QVBoxLayout>
+
+#include <QPushButton>
+#include <QMessageBox>
+#include <QLayout>
+#include <QLabel>
+#include <QTimer>
 
 #include <stdio.h>
 #include <time.h>
@@ -32,7 +36,7 @@
 ////////////////////////////////////////////
 //  CombatOffenseRecord implementation
 ////////////////////////////////////////////
-CombatOffenseRecord::CombatOffenseRecord(int iType, Player* p, int iSpell) 
+CombatOffenseRecord::CombatOffenseRecord(int iType, Player* p, int iSpell)
   : m_iType(iType),
 	m_iSpell(iSpell),
 	m_player(p),
@@ -48,13 +52,13 @@ void CombatOffenseRecord::addHit(int iDamage)
 {
 	if (iDamage <= 0)
 		return;
-	
+
 	m_iHits++;
 	m_iTotalDamage += iDamage;
-	
+
 	if (iDamage > 0 && iDamage < m_iMinDamage)
 		m_iMinDamage = iDamage;
-	
+
 	if (iDamage > m_iMaxDamage)
 		m_iMaxDamage = iDamage;
 }
@@ -63,7 +67,7 @@ void CombatOffenseRecord::addHit(int iDamage)
 ////////////////////////////////////////////
 //  CombatDefenseRecord implementation
 ////////////////////////////////////////////
-CombatDefenseRecord::CombatDefenseRecord(Player* p) 
+CombatDefenseRecord::CombatDefenseRecord(Player* p)
   : m_player(p)
 {
 	clear();
@@ -77,7 +81,7 @@ void CombatDefenseRecord::clear()
 	m_iParries = 0;
 	m_iRipostes = 0;
 	m_iDodges = 0;
-	m_iMinDamage = 65536;
+	m_iMinDamage = -1;
 	m_iMaxDamage = 0;
 	m_iTotalDamage = 0;
 	m_iTotalAttacks = 0;
@@ -87,14 +91,14 @@ void CombatDefenseRecord::addHit(int iDamage)
 {
 	if (iDamage <= 0)
 		return;
-	
+
 	m_iTotalAttacks++;
 	m_iHits++;
 	m_iTotalDamage += iDamage;
-	
-	if (iDamage > 0 && iDamage < m_iMinDamage)
+
+	if (iDamage > 0 && (iDamage < m_iMinDamage || m_iMinDamage == -1))
 		m_iMinDamage = iDamage;
-	
+
 	if (iDamage > m_iMaxDamage)
 		m_iMaxDamage = iDamage;
 }
@@ -102,7 +106,7 @@ void CombatDefenseRecord::addHit(int iDamage)
 void CombatDefenseRecord::addMiss(int iMissReason)
 {
 	m_iTotalAttacks++;
-	
+
 	switch (iMissReason)
 	{
 		case COMBAT_MISS:
@@ -112,15 +116,15 @@ void CombatDefenseRecord::addMiss(int iMissReason)
 		case COMBAT_BLOCK:
 			m_iBlocks++;
 			break;
-			
+
 		case COMBAT_PARRY:
 			m_iParries++;
 			break;
-			
+
 		case COMBAT_RIPOSTE:
 			m_iRipostes++;
 			break;
-			
+
 		case COMBAT_DODGE:
 			m_iDodges++;
 			break;
@@ -137,7 +141,7 @@ void CombatDefenseRecord::addMiss(int iMissReason)
 ////////////////////////////////////////////
 //	CombatMobRecord implementation
 ////////////////////////////////////////////
-CombatMobRecord::CombatMobRecord(int iID, int iStartTime, Player* p) 
+CombatMobRecord::CombatMobRecord(int iID, int iStartTime, Player* p)
   : m_iID(iID),
 	m_player(p),
 	m_iStartTime(iStartTime),
@@ -152,36 +156,36 @@ CombatMobRecord::CombatMobRecord(int iID, int iStartTime, Player* p)
 double CombatMobRecord::getDPS()
 {
 	int iTimeElapsed = (m_iLastTime - m_iStartTime) / 1000;
-	
+
 	if (iTimeElapsed > 0)
 	{
 		m_dDPS = (double)m_iDamageGiven / (double)iTimeElapsed;
 	}
-	
+
 	return m_dDPS;
 }
 
 double CombatMobRecord::getMobDPS()
 {
 	int iTimeElapsed = (m_iLastTime - m_iStartTime) / 1000;
-	
+
 	if (iTimeElapsed > 0)
 	{
 		m_dMobDPS = (double)m_iDamageTaken / (double)iTimeElapsed;
 	}
-	
+
 	return m_dMobDPS;
 }
 
 void CombatMobRecord::addHit(int iTarget, int iSource, int iDamage)
 {
 	int iPlayerID = m_player->id();
-	
+
 	if (iSource == iPlayerID && iTarget == m_iID)
 	{
 		//	update m_iLastTime
 		m_iLastTime = mTime();
-		
+
 		if (iDamage > 0)
 		{
 			m_iDamageGiven += iDamage;
@@ -191,7 +195,7 @@ void CombatMobRecord::addHit(int iTarget, int iSource, int iDamage)
 	{
 		//	update m_iLastTime
 		m_iLastTime = mTime();
-		
+
 		if (iDamage > 0)
 		{
 			m_iDamageTaken += iDamage;
@@ -221,10 +225,11 @@ CombatWindow::CombatWindow(Player* player, QWidget* parent, const char* name)
 	m_dDPS(0.0),
 	m_dDPSLast(0.0)
 {
+
 	/* Hopefully this is only called once to set up the window,
      so this is a good place to initialize some things which
      otherwise won't be. */
-	
+
 	m_combat_offense_list.setAutoDelete(true);
 	m_combat_defense_record = new CombatDefenseRecord(player);
 	m_combat_mob_list.setAutoDelete(true);
@@ -237,38 +242,41 @@ void CombatWindow::initUI()
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::initUI: starting...");
 #endif
-	// TODO: Fix layout
-	Q3VBoxLayout* pLayout = new Q3VBoxLayout();
-	
-	m_menu_bar = new QMenuBar(this);
-	pLayout->addWidget(m_menu_bar);
-	
-	m_tab = new QTabWidget(this);
-	pLayout->addWidget(m_tab);
-	
-	m_widget_offense = initOffenseWidget();
-	m_tab->addTab(m_widget_offense, "&Offense");
-	
-	m_widget_defense = initDefenseWidget();
-	m_tab->addTab(m_widget_defense, "&Defense");
-	
-	m_widget_mob = initMobWidget();
-	m_tab->addTab(m_widget_mob, "&Mobs");
-	
-	m_clear_menu = new Q3PopupMenu(this);
-	m_clear_menu->insertItem("Clear Offense Stats", this, SLOT(clearOffense()));
-	m_clear_menu->insertItem("Clear Mob Stats", this, SLOT(clearMob()));
-	
-	m_menu_bar->insertItem("&Clear", m_clear_menu);
-	
+
+	m_tab = new QTabWidget();
+
+	m_offenseTab = initOffenseWidget();
+	m_tab->addTab(m_offenseTab, "&Offense");
+
+	m_defenseTab = initDefenseWidget();
+	m_tab->addTab(m_defenseTab, "&Defense");
+
+	m_mobTab = initMobWidget();
+	m_tab->addTab(m_mobTab, "&Mobs");
+
+	//m_menuBar = new QMenuBar(this);
+	//m_clearMenu = new Q3PopupMenu(this);
+	//m_clearMenu->insertItem("Clear Offense Stats", this, SLOT(clearOffense()));
+	//m_clearMenu->insertItem("Clear Mob Stats", this, SLOT(clearMob()));
+	//m_menuBar->insertItem("&Clear", m_clearMenu);
+
+	//QPushButton* m_clearButton = new QPushButton("Clear");
+	//connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearOffense()));
+	//connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearMob()));
+
+	//QVBoxLayout* mainLayout = new QVBoxLayout();
+	//mainLayout->addWidget(m_tab);
+	//mainLayout->addWidget(m_clearButton);
+
 	updateOffense();
 	updateDefense();
 	updateMob();
-	
-	QWidget* pWidget = new QWidget();
-	pWidget->setLayout(pLayout);
-	setWidget(pWidget);
-	
+
+	//QWidget* layoutWidget = new QWidget();
+	//layoutWidget->setLayout(mainLayout);
+	//setWidget(layoutWidget);
+	setWidget(m_tab);
+
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::initUI: finished...");
 #endif
@@ -276,200 +284,248 @@ void CombatWindow::initUI()
 
 QWidget* CombatWindow::initOffenseWidget()
 {
-	QWidget *pWidget = new QWidget(m_tab);
+	// Create the list view widget
+	m_offenseListView = new SEQListView(preferenceName());
+	m_offenseListView->addColumn("Type");
+	m_offenseListView->setColumnAlignment(0, Qt::AlignRight);
+	m_offenseListView->addColumn("Hit");
+	m_offenseListView->setColumnAlignment(1, Qt::AlignRight);
+	m_offenseListView->addColumn("Miss");
+	m_offenseListView->setColumnAlignment(2, Qt::AlignRight);
+	m_offenseListView->addColumn("Ratio");
+	m_offenseListView->setColumnAlignment(3, Qt::AlignRight);
+	m_offenseListView->addColumn("Avg");
+	m_offenseListView->setColumnAlignment(4, Qt::AlignRight);
+	m_offenseListView->addColumn("Min");
+	m_offenseListView->setColumnAlignment(5, Qt::AlignRight);
+	m_offenseListView->addColumn("Max");
+	m_offenseListView->setColumnAlignment(6, Qt::AlignRight);
+	m_offenseListView->addColumn("Total");
+	m_offenseListView->setColumnAlignment(7, Qt::AlignRight);
+	m_offenseListView->restoreColumns();
+	m_offenseListView->setMinimumSize(m_offenseListView->sizeHint().width(), 200);
 
-	m_layout_offense = new Q3VBoxLayout(pWidget);
+	// lay out the widgets in a grid
+	QGridLayout *summaryGrid = new QGridLayout();
 
-	Q3GroupBox *listGBox = new Q3VGroupBox(pWidget);
-	m_layout_offense->addWidget(listGBox);
+	// Total damage
+	summaryGrid->addWidget(new QLabel("Total Damage:"), 0, 0);
+	m_offenseTotalDamage = new QLabel();
+	summaryGrid->addWidget(m_offenseTotalDamage, 0, 1);
 
-	m_listview_offense = new SEQListView(preferenceName(), listGBox);
-	m_listview_offense->addColumn("Type");
-	m_listview_offense->setColumnAlignment(0, Qt::AlignRight);
-	m_listview_offense->addColumn("Hit");
-	m_listview_offense->setColumnAlignment(1, Qt::AlignRight);
-	m_listview_offense->addColumn("Miss");
-	m_listview_offense->setColumnAlignment(2, Qt::AlignRight);
-	m_listview_offense->addColumn("Ratio");
-	m_listview_offense->setColumnAlignment(3, Qt::AlignRight);
-	m_listview_offense->addColumn("Avg");
-	m_listview_offense->setColumnAlignment(4, Qt::AlignRight);
-	m_listview_offense->addColumn("Min");
-	m_listview_offense->setColumnAlignment(5, Qt::AlignRight);
-	m_listview_offense->addColumn("Max");
-	m_listview_offense->setColumnAlignment(6, Qt::AlignRight);
-	m_listview_offense->addColumn("Total");
-	m_listview_offense->setColumnAlignment(7, Qt::AlignRight);
+	// Average melee
+	summaryGrid->addWidget(new QLabel("Avg Melee:"), 0, 2);
+	m_offenseAvgMelee = new QLabel();
+	summaryGrid->addWidget(m_offenseAvgMelee, 0, 3);
 
-	m_listview_offense->restoreColumns();
-	m_listview_offense->setMinimumSize(m_listview_offense->sizeHint().width(), 200);
+	// % from special
+	summaryGrid->addWidget(new QLabel("% from Special:"), 1, 0);
+	m_offensePercentSpecial = new QLabel();
+	summaryGrid->addWidget(m_offensePercentSpecial, 1, 1);
 
-	Q3GroupBox *summaryGBox = new Q3VGroupBox("Summary", pWidget);
-	m_layout_offense->addWidget(summaryGBox);
+	// Avg Special
+	summaryGrid->addWidget(new QLabel("Avg Special:"), 1, 2);
+	m_offenseAvgSpecial = new QLabel();
+	summaryGrid->addWidget(m_offenseAvgSpecial, 1, 3);
 
-	Q3Grid *summaryGrid = new Q3Grid(4, summaryGBox);
+	// % from non melee
+	summaryGrid->addWidget(new QLabel("% from NonMelee:"), 2, 0);
+	m_offensePercentNonMelee = new QLabel();
+	summaryGrid->addWidget(m_offensePercentNonMelee, 2, 1);
 
-	new QLabel("Total Damage:", summaryGrid);
-	m_label_offense_totaldamage = new QLabel(summaryGrid);
+	// Avg non melee
+	summaryGrid->addWidget(new QLabel("Avg NonMelee:"), 2, 2);
+	m_offenseAvgNonMelee = new QLabel();
+	summaryGrid->addWidget(m_offenseAvgNonMelee, 2, 3);
 
-	new QLabel("Avg Melee:", summaryGrid);
-	m_label_offense_avgmelee = new QLabel(summaryGrid);
+	summaryGrid->setColStretch(1, 1);
+	summaryGrid->setColStretch(3, 1);
+	summaryGrid->setSpacing(5);
 
-	new QLabel("% from Special:", summaryGrid);
-	m_label_offense_percentspecial = new QLabel(summaryGrid);
+	QGroupBox* summaryWidget = new QGroupBox("Summary");
+	summaryWidget->setLayout(summaryGrid);
 
-	new QLabel("Avg Special:", summaryGrid);
-	m_label_offense_avgspecial = new QLabel(summaryGrid);
+	m_offenseLayout = new QVBoxLayout();
+	m_offenseLayout->addWidget(m_offenseListView);
+	m_offenseLayout->addWidget(summaryWidget);
 
-	new QLabel("% from NonMelee:", summaryGrid);
-	m_label_offense_percentnonmelee = new QLabel(summaryGrid);
+	QWidget* layoutWidget = new QWidget();
+	layoutWidget->setLayout(m_offenseLayout);
 
-	new QLabel("Avg NonMelee:", summaryGrid);
-	m_label_offense_avgnonmelee = new QLabel(summaryGrid);
-
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(1, 1);
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(3, 1);
-	summaryGrid->layout()->setSpacing(5);
-
-	return pWidget;
+	return layoutWidget;
 }
 
 QWidget* CombatWindow::initDefenseWidget()
 {
-	QWidget *pWidget = new QWidget(m_tab);
-	m_layout_defense = new Q3VBoxLayout(pWidget);
+	QGridLayout* avoidanceLayout = new QGridLayout();
 
-	Q3GroupBox *avoidanceGBox = new Q3VGroupBox("Avoidance", pWidget);
-	m_layout_defense->addWidget(avoidanceGBox);
+	// Misses
+	avoidanceLayout->addWidget(new QLabel("Misses:"), 0, 0);
+	m_defenseAvoidMisses = new QLabel();
+	avoidanceLayout->addWidget(m_defenseAvoidMisses, 0, 1);
 
-	Q3Grid *avoidanceGrid = new Q3Grid(6, avoidanceGBox);
+	// Blocks
+	avoidanceLayout->addWidget(new QLabel("Blocks:"), 0, 2);
+	m_defenseAvoidBlock = new QLabel();
+	avoidanceLayout->addWidget(m_defenseAvoidBlock, 0, 3);
 
-	new QLabel("Misses:", avoidanceGrid);
-	m_label_defense_avoid_misses = new QLabel(avoidanceGrid);
+	// Parries
+	avoidanceLayout->addWidget(new QLabel("Parries:"), 0, 4);
+	m_defenseAvoidParry = new QLabel();
+	avoidanceLayout->addWidget(m_defenseAvoidParry, 0, 5);
 
-	new QLabel("Blocks:", avoidanceGrid);
-	m_label_defense_avoid_block = new QLabel(avoidanceGrid);
+	// Ripostes
+	avoidanceLayout->addWidget(new QLabel("Ripostes:"), 1, 0);
+	m_defenseAvoidRiposte = new QLabel();
+	avoidanceLayout->addWidget(m_defenseAvoidRiposte, 1, 1);
 
-	new QLabel("Parries:", avoidanceGrid);
-	m_label_defense_avoid_parry = new QLabel(avoidanceGrid);
+	// Dodges
+	avoidanceLayout->addWidget(new QLabel("Dodges"), 1, 2);
+	m_defenseAvoidDodge = new QLabel();
+	avoidanceLayout->addWidget(m_defenseAvoidDodge, 1, 3);
 
-	new QLabel("Ripostes:", avoidanceGrid);
-	m_label_defense_avoid_riposte = new QLabel(avoidanceGrid);
+	// Total
+	avoidanceLayout->addWidget(new QLabel("Total:"), 1, 4);
+	m_defenseAvoidTotal = new QLabel();
+	avoidanceLayout->addWidget(m_defenseAvoidTotal, 1, 5);
 
-	new QLabel("Dodges", avoidanceGrid);
-	m_label_defense_avoid_dodge = new QLabel(avoidanceGrid);
+	avoidanceLayout->setColStretch(1, 1);
+	avoidanceLayout->setColStretch(3, 1);
+	avoidanceLayout->setColStretch(5, 1);
+	avoidanceLayout->setSpacing(5);
 
-	new QLabel("Total:", avoidanceGrid);
-	m_label_defense_avoid_total = new QLabel(avoidanceGrid);
+	QGroupBox* avoidanceBox = new QGroupBox("Avoidance");
+	avoidanceBox->setLayout(avoidanceLayout);
 
-	((Q3GridLayout *)avoidanceGrid->layout())->setColStretch(1, 1);
-	((Q3GridLayout *)avoidanceGrid->layout())->setColStretch(3, 1);
-	((Q3GridLayout *)avoidanceGrid->layout())->setColStretch(5, 1);
-	avoidanceGrid->layout()->setSpacing(5);
 
-	Q3GroupBox *mitigationGBox = new Q3VGroupBox("Mitigation", pWidget);
-	m_layout_defense->addWidget(mitigationGBox);
+	QGridLayout* mitigationLayout = new QGridLayout();
 
-	Q3Grid *mitigationGrid = new Q3Grid(6, mitigationGBox);
+	// Avg Hit
+	mitigationLayout->addWidget(new QLabel("Avg. Hit:"), 0, 0);
+	m_defenseMitigateAvgHit = new QLabel();
+	mitigationLayout->addWidget(m_defenseMitigateAvgHit, 0, 1);
 
-	new QLabel("Avg. Hit:", mitigationGrid);
-	m_label_defense_mitigate_avghit = new QLabel(mitigationGrid);
+	// Min Hit:
+	mitigationLayout->addWidget(new QLabel("Min Hit:"), 0, 2);
+	m_defenseMitigateMinHit = new QLabel();
+	mitigationLayout->addWidget(m_defenseMitigateMinHit, 0, 3);
 
-	new QLabel("Min:", mitigationGrid);
-	m_label_defense_mitigate_minhit = new QLabel(mitigationGrid);
+	// Max Hit:
+	mitigationLayout->addWidget(new QLabel("Max Hit:"), 0, 4);
+	m_defenseMitigateMaxHit = new QLabel();
+	mitigationLayout->addWidget(m_defenseMitigateMaxHit, 0, 5);
 
-	new QLabel("Max:", mitigationGrid);
-	m_label_defense_mitigate_maxhit = new QLabel(mitigationGrid);
+	mitigationLayout->setColStretch(1, 1);
+	mitigationLayout->setColStretch(3, 1);
+	mitigationLayout->setColStretch(5, 1);
+	mitigationLayout->setSpacing(5);
 
-	((Q3GridLayout *)mitigationGrid->layout())->setColStretch(1, 1);
-	((Q3GridLayout *)mitigationGrid->layout())->setColStretch(3, 1);
-	((Q3GridLayout *)mitigationGrid->layout())->setColStretch(5, 1);
-	mitigationGrid->layout()->setSpacing(5);
+	QGroupBox* mitigationBox = new QGroupBox("Mitigation");
+	mitigationBox->setLayout(mitigationLayout);
 
-	Q3GroupBox *summaryGBox = new Q3VGroupBox("Summary", pWidget);
-	m_layout_defense->addWidget(summaryGBox);
+	QGridLayout* summaryLayout = new QGridLayout();
 
-	Q3Grid *summaryGrid = new Q3Grid(6, summaryGBox);
+	// Mob Attacks
+	summaryLayout->addWidget(new QLabel("Mob Attacks:"), 0, 0);
+	m_defenseMobAttacks = new QLabel();
+	summaryLayout->addWidget(m_defenseMobAttacks, 0, 1);
 
-	new QLabel("Mob Attacks:", summaryGrid);
-	m_label_defense_summary_mobattacks = new QLabel(summaryGrid);
+	// Percent Avoided
+	summaryLayout->addWidget(new QLabel("% Avoided:"), 0, 2);
+	m_defensePercentAvoided = new QLabel();
+	summaryLayout->addWidget(m_defensePercentAvoided, 0, 3);
 
-	new QLabel("% Avoided:", summaryGrid);
-	m_label_defense_summary_percentavoided = new QLabel(summaryGrid);
+	// Total damage
+	summaryLayout->addWidget(new QLabel("Total Damage:"), 0, 4);
+	m_defenseTotalDamage = new QLabel();
+	summaryLayout->addWidget(m_defenseTotalDamage, 0, 5);
 
-	new QLabel("Total Damage:", summaryGrid);
-	m_label_defense_summary_totaldamage = new QLabel(summaryGrid);
+	summaryLayout->setColStretch(1, 1);
+	summaryLayout->setColStretch(3, 1);
+	summaryLayout->setColStretch(5, 1);
+	summaryLayout->setSpacing(5);
 
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(1, 1);
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(3, 1);
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(5, 1);
-	summaryGrid->layout()->setSpacing(5);
+	QGroupBox* summaryBox = new QGroupBox("Summary");
+	summaryBox->setLayout(summaryLayout);
 
-	return pWidget;
+	m_defenseLayout = new QVBoxLayout();
+	m_defenseLayout->addWidget(avoidanceBox);
+	m_defenseLayout->addWidget(mitigationBox);
+	m_defenseLayout->addWidget(summaryBox);
+
+	QWidget* layoutWidget = new QWidget();
+	layoutWidget->setLayout(m_defenseLayout);
+	return layoutWidget;
 }
 
 QWidget* CombatWindow::initMobWidget()
 {
-	QWidget *pWidget = new QWidget(m_tab);
+	m_mobListView = new SEQListView(preferenceName());
+	m_mobListView->addColumn("Time");
+	m_mobListView->setColumnAlignment(0, Qt::AlignRight);
+	m_mobListView->addColumn("Name");
+	m_mobListView->setColumnAlignment(1, Qt::AlignRight);
+	m_mobListView->addColumn("ID");
+	m_mobListView->setColumnAlignment(2, Qt::AlignRight);
+	m_mobListView->addColumn("Duration");
+	m_mobListView->setColumnAlignment(3, Qt::AlignRight);
+	m_mobListView->addColumn("Damage Given");
+	m_mobListView->setColumnAlignment(4, Qt::AlignRight);
+	m_mobListView->addColumn("DPS");
+	m_mobListView->setColumnAlignment(5, Qt::AlignRight);
+	m_mobListView->addColumn("Damage Taken");
+	m_mobListView->setColumnAlignment(6, Qt::AlignRight);
+	m_mobListView->addColumn("MOB DPS");
+	m_mobListView->setColumnAlignment(7, Qt::AlignRight);
+	m_mobListView->restoreColumns();
+	m_mobListView->setMinimumSize(m_mobListView->sizeHint().width(), 200);
 
-	m_layout_mob = new Q3VBoxLayout(pWidget);
+	QGridLayout* summaryLayout = new QGridLayout();
 
-	Q3GroupBox *listGBox = new Q3VGroupBox(pWidget);
-	m_layout_mob->addWidget(listGBox);
+	// Total mobs
+	summaryLayout->addWidget(new QLabel("Total Mobs"), 0, 0);
+	m_mobTotalMobs = new QLabel();
+	summaryLayout->addWidget(m_mobTotalMobs, 0, 1);
 
-	m_listview_mob = new SEQListView(preferenceName(), listGBox);
-	m_listview_mob->addColumn("Time");
-	m_listview_mob->setColumnAlignment(0, Qt::AlignRight);
-	m_listview_mob->addColumn("Name");
-	m_listview_mob->setColumnAlignment(1, Qt::AlignRight);
-	m_listview_mob->addColumn("ID");
-	m_listview_mob->setColumnAlignment(2, Qt::AlignRight);
-	m_listview_mob->addColumn("Duration");
-	m_listview_mob->setColumnAlignment(3, Qt::AlignRight);
-	m_listview_mob->addColumn("Damage Given");
-	m_listview_mob->setColumnAlignment(4, Qt::AlignRight);
-	m_listview_mob->addColumn("DPS");
-	m_listview_mob->setColumnAlignment(5, Qt::AlignRight);
-	m_listview_mob->addColumn("Damage Taken");
-	m_listview_mob->setColumnAlignment(6, Qt::AlignRight);
-	m_listview_mob->addColumn("MOB DPS");
-	m_listview_mob->setColumnAlignment(7, Qt::AlignRight);
+	// Avg dps
+	summaryLayout->addWidget(new QLabel("Avg DPS:"), 0, 2);
+	m_mobAvgDps = new QLabel();
+	summaryLayout->addWidget(m_mobAvgDps, 0, 3);
 
-	m_listview_mob->restoreColumns();
-	m_listview_mob->setMinimumSize(m_listview_mob->sizeHint().width(), 200);
+	// current dps
+	summaryLayout->addWidget(new QLabel("Current DPS:"), 1, 0);
+	m_mobCurrentDps = new QLabel();
+	summaryLayout->addWidget(m_mobCurrentDps, 1, 1);
 
-	Q3GroupBox *summaryGBox = new Q3VGroupBox("Summary", pWidget);
-	m_layout_mob->addWidget(summaryGBox);
+	// last dps
+	summaryLayout->addWidget(new QLabel("Last DPS:"), 1, 2);
+	m_mobLastDps = new QLabel();
+	summaryLayout->addWidget(m_mobLastDps, 1, 3);
 
-	Q3Grid *summaryGrid = new Q3Grid(4, summaryGBox);
+	summaryLayout->setColStretch(1, 1);
+	summaryLayout->setColStretch(3, 1);
+	summaryLayout->setSpacing(5);
 
-	new QLabel("Total Mobs", summaryGrid);
-	m_label_mob_totalmobs = new QLabel(summaryGrid);
+	QGroupBox* summaryBox = new QGroupBox("Summary");
+	summaryBox->setLayout(summaryLayout);
 
-	new QLabel("Avg DPS:", summaryGrid);
-	m_label_mob_avgdps = new QLabel(summaryGrid);
+	m_mobLayout = new QVBoxLayout();
+	m_mobLayout->addWidget(m_mobListView);
+	m_mobLayout->addWidget(summaryBox);
 
-	new QLabel("Current DPS:", summaryGrid);
-	m_label_mob_currentdps = new QLabel(summaryGrid);
-
-	new QLabel("Last DPS:", summaryGrid);
-	m_label_mob_lastdps = new QLabel(summaryGrid);
-
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(1, 1);
-	((Q3GridLayout *)summaryGrid->layout())->setColStretch(3, 1);
-	summaryGrid->layout()->setSpacing(5);
-
-	return pWidget;
+	QWidget* layoutWidget = new QWidget();
+	layoutWidget->setLayout(m_mobLayout);
+	return layoutWidget;
 }
 
 void CombatWindow::savePrefs()
 {
 	// save the SEQWindow's prefs
 	SEQWindow::savePrefs();
-	
+
 	// save the SEQListViews' prefs
-	m_listview_mob->savePrefs();
-	m_listview_offense->savePrefs();
+	m_mobListView->savePrefs();
+	m_offenseListView->savePrefs();
 }
 
 void CombatWindow::updateOffense()
@@ -477,14 +533,14 @@ void CombatWindow::updateOffense()
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::updateOffense starting...");
 #endif
-	
+
 	QString s_totaldamage;
 	QString s_percentspecial;
 	QString s_percentnonmelee;
 	QString s_avgmelee;
 	QString s_avgspecial;
 	QString s_avgnonmelee;
-	
+
 	int iTotalDamage = 0;
 	int iTotalHits = 0;
 	double dPercentSpecial = 0.0;
@@ -492,20 +548,19 @@ void CombatWindow::updateOffense()
 	double dAvgMelee = 0.0;
 	double dAvgSpecial = 0.0;
 	double dAvgNonmelee = 0.0;
-	
+
 	int iMeleeDamage = 0;
 	int iMeleeHits = 0;
 	int iSpecialDamage = 0;
 	int iSpecialHits = 0;
 	int iNonmeleeDamage = 0;
 	int iNonmeleeHits = 0;
-	
-	
+
 	//	empty the list so we can repopulate
-	m_listview_offense->clear();
-	
+	m_offenseListView->clear();
+
 	CombatOffenseRecord *pRecord;
-	
+
 	for (pRecord = m_combat_offense_list.first(); pRecord != 0; pRecord = m_combat_offense_list.next())
 	{
 		int iType = pRecord->getType();
@@ -515,10 +570,19 @@ void CombatWindow::updateOffense()
 		int iMinDamage = pRecord->getMinDamage();
 		int iMaxDamage = pRecord->getMaxDamage();
 		int iDamage = pRecord->getTotalDamage();
-		
-		double dAvgDamage = (double)iDamage / (double)iHits;
-		double dRatio = (double)iHits / (double)iMisses;
-		
+
+		double dAvgDamage, dRatio;
+
+		if (iHits != 0)
+			dAvgDamage = (double)iDamage / (double)iHits;
+		else
+			dAvgDamage = 0.0;
+
+		if (iMisses != 0)
+			dRatio = (double)iHits / (double)iMisses;
+		else
+			dRatio = 0.0;
+
 		QString s_type;
 		// Belith -- Damage shields are strange!
 		switch (iType)
@@ -555,7 +619,7 @@ void CombatWindow::updateOffense()
 				s_type.sprintf("Damage Shield: (%d)", iType);
 				break;
 		}
-		
+
 		QString s_hits;
 		s_hits.setNum(iHits);
 		QString s_misses;
@@ -570,11 +634,11 @@ void CombatWindow::updateOffense()
 		s_maxdamage.setNum(iMaxDamage);
 		QString s_damage;
 		s_damage.setNum(iDamage);
-		
-		Q3ListViewItem *pItem = new Q3ListViewItem(m_listview_offense,
+
+		Q3ListViewItem *pItem = new Q3ListViewItem(m_offenseListView,
 				s_type, s_hits, s_misses, s_ratio, s_avgdamage, s_mindamage,
 				s_maxdamage, s_damage);
-		m_listview_offense->insertItem(pItem);
+		m_offenseListView->insertItem(pItem);
 
 		switch (iType)
 		{
@@ -612,12 +676,31 @@ void CombatWindow::updateOffense()
 	iTotalDamage = iMeleeDamage + iSpecialDamage + iNonmeleeDamage;
 	iTotalHits = iMeleeHits + iSpecialHits + iNonmeleeHits;
 
-	dPercentSpecial = ((double)iSpecialDamage / (double)iTotalDamage) * 100.0;
-	dPercentNonmelee = ((double)iNonmeleeDamage / (double)iTotalDamage) * 100.0;
+	if (iTotalDamage != 0)
+	{
+		dPercentSpecial = ((double)iSpecialDamage / (double)iTotalDamage) * 100.0;
+		dPercentNonmelee = ((double)iNonmeleeDamage / (double)iTotalDamage) * 100.0;
+	}
+	else
+	{
+		dPercentSpecial = 0.0;
+		dPercentNonmelee = 0.0;
+	}
 
-	dAvgMelee = (double)iMeleeDamage / (double)iMeleeHits;
-	dAvgSpecial = (double)iSpecialDamage / (double)iSpecialHits;
-	dAvgNonmelee = (double)iNonmeleeDamage / (double)iNonmeleeHits;
+	if (iMeleeHits != 0)
+		dAvgMelee = (double)iMeleeDamage / (double)iMeleeHits;
+	else
+		dAvgMelee = 0.0;
+
+	if (iSpecialHits != 0)
+		dAvgSpecial = (double)iSpecialDamage / (double)iSpecialHits;
+	else
+		dAvgSpecial = 0.0;
+
+	if (iNonmeleeHits != 0)
+		dAvgNonmelee = (double)iNonmeleeDamage / (double)iNonmeleeHits;
+	else
+		dAvgNonmelee = 0.0;
 
 	s_totaldamage.setNum(iTotalDamage);
 	s_percentspecial.setNum(dPercentSpecial);
@@ -626,12 +709,12 @@ void CombatWindow::updateOffense()
 	s_avgspecial.setNum(dAvgSpecial);
 	s_avgnonmelee.setNum(dAvgNonmelee);
 
-	m_label_offense_totaldamage->setText(s_totaldamage);
-	m_label_offense_percentspecial->setText(s_percentspecial);
-	m_label_offense_percentnonmelee->setText(s_percentnonmelee);
-	m_label_offense_avgmelee->setText(s_avgmelee);
-	m_label_offense_avgspecial->setText(s_avgspecial);
-	m_label_offense_avgnonmelee->setText(s_avgnonmelee);
+	m_offenseTotalDamage->setText(s_totaldamage);
+	m_offensePercentSpecial->setText(s_percentspecial);
+	m_offensePercentNonMelee->setText(s_percentnonmelee);
+	m_offenseAvgMelee->setText(s_avgmelee);
+	m_offenseAvgSpecial->setText(s_avgspecial);
+	m_offenseAvgNonMelee->setText(s_avgnonmelee);
 
 
 #ifdef DEBUGCOMBAT
@@ -648,42 +731,50 @@ void CombatWindow::updateDefense()
 	int iRipostes = m_combat_defense_record->getRipostes();
 	int iDodges = m_combat_defense_record->getDodges();
 	int iTotalAvoid = iMisses+iBlocks+iParries+iRipostes+iDodges;
-	
-	double dAvgHit = (double)m_combat_defense_record->getTotalDamage() / (double)m_combat_defense_record->getHits();
+
+	double dAvgHit, dAvoided;
+	int hits = m_combat_defense_record->getHits();
+	if (hits != 0)
+		dAvgHit = (double)m_combat_defense_record->getTotalDamage() / (double)hits;
+	else
+		dAvgHit = 0.0;
+
 	int iMinHit = m_combat_defense_record->getMinDamage();
 	int iMaxHit = m_combat_defense_record->getMaxDamage();
-	
+
 	int iMobAttacks = m_combat_defense_record->getTotalAttacks();
-	double dAvoided = ((double)iTotalAvoid / (double)iMobAttacks) * 100.0;
+	if (iMobAttacks != 0)
+		dAvoided = ((double)iTotalAvoid / (double)iMobAttacks) * 100.0;
+	else
+		dAvoided = 0.0;
 	int iTotalDamage = m_combat_defense_record->getTotalDamage();
-	
-	
-	m_label_defense_avoid_misses->setText(QString::number(iMisses));
-	m_label_defense_avoid_block->setText(QString::number(iBlocks));
-	m_label_defense_avoid_parry->setText(QString::number(iParries));
-	m_label_defense_avoid_riposte->setText(QString::number(iRipostes));
-	m_label_defense_avoid_dodge->setText(QString::number(iDodges));
-	m_label_defense_avoid_total->setText(QString::number(iTotalAvoid));
-	m_label_defense_mitigate_avghit->setText(QString::number(dAvgHit));
-	m_label_defense_mitigate_minhit->setText(QString::number(iMinHit));
-	m_label_defense_mitigate_maxhit->setText(QString::number(iMaxHit));
-	m_label_defense_summary_mobattacks->setText(QString::number(iMobAttacks));
-	m_label_defense_summary_percentavoided->setText(QString::number(dAvoided));
-	m_label_defense_summary_totaldamage->setText(QString::number(iTotalDamage));
+
+	m_defenseAvoidMisses->setText(QString::number(iMisses));
+	m_defenseAvoidBlock->setText(QString::number(iBlocks));
+	m_defenseAvoidParry->setText(QString::number(iParries));
+	m_defenseAvoidRiposte->setText(QString::number(iRipostes));
+	m_defenseAvoidDodge->setText(QString::number(iDodges));
+	m_defenseAvoidTotal->setText(QString::number(iTotalAvoid));
+	m_defenseMitigateAvgHit->setText(QString::number(dAvgHit));
+	m_defenseMitigateMinHit->setText(QString::number(iMinHit));
+	m_defenseMitigateMaxHit->setText(QString::number(iMaxHit));
+	m_defenseMobAttacks->setText(QString::number(iMobAttacks));
+	m_defensePercentAvoided->setText(QString::number(dAvoided));
+	m_defenseTotalDamage->setText(QString::number(iTotalDamage));
 }
 
 void CombatWindow::updateMob()
 {
-	
+
 	int iTotalMobs = 0;
 	double dAvgDPS = 0.0;
 	double dDPSSum = 0.0;
-	
+
 	//	empty the list so we can repopulate
-	m_listview_mob->clear();
-	
+	m_mobListView->clear();
+
 	CombatMobRecord *pRecord;
-	
+
 	for (pRecord = m_combat_mob_list.first(); pRecord != 0; pRecord = m_combat_mob_list.next())
 	{
 		int iID = pRecord->getID();
@@ -692,7 +783,7 @@ void CombatWindow::updateMob()
 		double dDPS = pRecord->getDPS();
 		int iDamageTaken = pRecord->getDamageTaken();
 		double dMobDPS = pRecord->getMobDPS();
-		
+
 		char s_time[64];
 		time_t timev = pRecord->getTime();
 		strftime(s_time, 64, "%m/%d %H:%M:%S", localtime(&timev));
@@ -703,26 +794,26 @@ void CombatWindow::updateMob()
 		QString s_dps = QString::number(dDPS);
 		QString s_iDamageTaken = QString::number(iDamageTaken);
 		QString s_mobdps = QString::number(dMobDPS);
-		
-		
-		Q3ListViewItem *pItem = new Q3ListViewItem(m_listview_mob,
+
+
+		Q3ListViewItem *pItem = new Q3ListViewItem(m_mobListView,
 				s_time, s_name, s_id, s_duration, s_damagegiven,
 				s_dps, s_iDamageTaken, s_mobdps);
-		m_listview_mob->insertItem(pItem);
-		
+		m_mobListView->insertItem(pItem);
+
 		iTotalMobs++;
 		dDPSSum += dDPS;
 	}
-	
+
 	if (iTotalMobs)
 		dAvgDPS = dDPSSum / (double)iTotalMobs;
 	else
 		dAvgDPS = 0;
-	
-	m_label_mob_totalmobs->setText(QString::number(iTotalMobs));
-	m_label_mob_avgdps->setText(QString::number(dAvgDPS));
-	m_label_mob_currentdps->setText(QString::number(m_dDPS));
-	m_label_mob_lastdps->setText(QString::number(m_dDPSLast));
+
+	m_mobTotalMobs->setText(QString::number(iTotalMobs));
+	m_mobAvgDps->setText(QString::number(dAvgDPS));
+	m_mobCurrentDps->setText(QString::number(m_dDPS));
+	m_mobLastDps->setText(QString::number(m_dDPSLast));
 }
 
 void CombatWindow::addCombatRecord(int iTargetID, int iSourceID, int iType, int iSpell, int iDamage, QString tName, QString sName)
@@ -732,12 +823,12 @@ void CombatWindow::addCombatRecord(int iTargetID, int iSourceID, int iType, int 
 	seqDebug("target=%d, source=%d, type=%d, spell=%d, damage=%d",
 			 iTargetID, iSourceID, iType, iSpell, iDamage);
 #endif
-	
+
 	int iPlayerID = m_player->id();
-	
+
 	//	The one case we won't handle (for now) is where the Target
 	//	and Source are the same.
-	
+
 	if (iTargetID == iPlayerID && iSourceID != iPlayerID)
 	{
 		addDefenseRecord(iDamage);
@@ -757,7 +848,7 @@ void CombatWindow::addCombatRecord(int iTargetID, int iSourceID, int iType, int 
 		if (iDamage > 0)
 			updateDPS(iDamage);
 	}
-	
+
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::addCombatRecord finished...");
 #endif
@@ -768,9 +859,9 @@ void CombatWindow::addOffenseRecord(int iType, int iDamage, int iSpell)
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::addOffenseRecord starting...");
 #endif
-	
+
 	bool bFoundRecord = false;
-	
+
 	CombatOffenseRecord *pRecord;
 	for (pRecord = m_combat_offense_list.first(); pRecord != 0; pRecord = m_combat_offense_list.next())
 	{
@@ -780,14 +871,14 @@ void CombatWindow::addOffenseRecord(int iType, int iDamage, int iSpell)
 			bFoundRecord = true;
 			break;
 		}
-		
+
 		if (pRecord->getType() == iType && pRecord->getType() == 231 && pRecord->getSpell() == iSpell)
 		{
 			bFoundRecord = true;
 			break;
 		}
 	}
-	
+
 	if (!bFoundRecord)
 	{
 		// Belith -- Again lets skip buffs, etc
@@ -796,7 +887,7 @@ void CombatWindow::addOffenseRecord(int iType, int iDamage, int iSpell)
 			m_combat_offense_list.append(pRecord);
 		}
 	}
-	
+
 	if (iDamage > 0)
 	{
 		pRecord->addHit(iDamage);
@@ -805,7 +896,7 @@ void CombatWindow::addOffenseRecord(int iType, int iDamage, int iSpell)
 	{
 		pRecord->addMiss(iDamage);
 	}
-	
+
 #ifdef DEBUGCOMBAT
 	seqDebug("CombatWindow::addOffenseRecord finished...");
 #endif
@@ -878,7 +969,7 @@ void CombatWindow::addMobRecord(int iTargetID, int iSourceID, int iDamage, QStri
 void CombatWindow::updateDPS(int iDamage)
 {
 	int iTimeNow = mTime();
-	
+
 	//	reset if it's been 10 seconds without an update
 	if (iTimeNow > (m_iDPSTimeLast + 10000))
 	{
@@ -888,19 +979,19 @@ void CombatWindow::updateDPS(int iDamage)
 		m_iDPSStartTime = iTimeNow;
 		m_iCurrentDPSTotal = 0;
 	}
-	
+
 	m_iDPSTimeLast = mTime();
 	m_iCurrentDPSTotal += iDamage;
-	
+
 	int iTimeElapsed = (iTimeNow - m_iDPSStartTime) / 1000;
-	
+
 	if (iTimeElapsed > 0)
 	{
 		m_dDPS = (double)m_iCurrentDPSTotal / (double)iTimeElapsed;
 	}
-	
-	m_label_mob_currentdps->setText(QString::number(m_dDPS));
-	m_label_mob_lastdps->setText(QString::number(m_dDPSLast));
+
+	m_mobCurrentDps->setText(QString::number(m_dDPS));
+	m_mobLastDps->setText(QString::number(m_dDPSLast));
 }
 
 void CombatWindow::resetDPS()
@@ -922,7 +1013,7 @@ void CombatWindow::clearMob()
 			m_combat_mob_list.clear();
 			updateMob();
 			break;
-			
+
 		default:
 			break;
 	}
@@ -939,7 +1030,7 @@ void CombatWindow::clearOffense()
 			m_combat_offense_list.clear();
 			updateOffense();
 			break;
-			
+
 		default:
 			break;
 	}

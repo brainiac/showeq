@@ -16,9 +16,6 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QLayout>
-#include <QMenuBar>
-#include <Q3PopupMenu>
-#include <Q3VBoxLayout>
 
 #include <sys/time.h>
 #include <sys/types.h>
@@ -42,7 +39,7 @@ class CombatOffenseRecord
 {
 public:
 	CombatOffenseRecord(int iType, Player* p, int iSpell);
-	
+
 	int	getType() { return m_iType; };
 	int	getSpell() { return m_iSpell; };
 	int	getHits() { return m_iHits; };
@@ -50,15 +47,15 @@ public:
 	int	getMinDamage() { return m_iMinDamage; };
 	int	getMaxDamage() { return m_iMaxDamage; };
 	int	getTotalDamage() { return m_iTotalDamage; };
-	
+
 	void addMiss(int iMissReason) { m_iMisses++; };
 	void addHit(int iDamage);
-	
+
 private:
 	int m_iType;
 	int m_iSpell;
 	Player* m_player;
-	
+
 	int m_iHits;
 	int m_iMisses;
 	int m_iMinDamage;
@@ -82,7 +79,7 @@ public:
 	int getParries() { return m_iParries; };
 	int getRipostes() { return m_iRipostes; };
 	int getDodges() { return m_iDodges; };
-	int getMinDamage() { return m_iMinDamage; };
+	int getMinDamage() { return m_iMinDamage == -1 ? 0 : m_iMinDamage; };
 	int getMaxDamage() { return m_iMaxDamage; };
 	int getTotalDamage() { return m_iTotalDamage; };
 	int getTotalAttacks() { return m_iTotalAttacks; };
@@ -130,7 +127,7 @@ public:
 	double getMobDPS();
 
 	void addHit(int iTarget, int iSource, int iDamage);
-	
+
 private:
 	int m_iID;
 	Player* m_player;
@@ -179,58 +176,58 @@ private:
 	void updateDPS(int iDamage);
 
 private:
+
 	Player*		m_player;
-
-	QWidget* 	m_widget_offense;
-	QWidget* 	m_widget_defense;
-	QWidget*	m_widget_mob;
-
 	QTabWidget*     m_tab;
-	Q3VBoxLayout*	m_layout_offense;
-	Q3VBoxLayout*	m_layout_defense;
-	Q3VBoxLayout*	m_layout_mob;
 
-	SEQListView* 	m_listview_offense;
-	SEQListView* 	m_listview_mob;
+	// Offense tab
+	QWidget* m_offenseTab;
+	QVBoxLayout* m_offenseLayout;
+	SEQListView* m_offenseListView;
+	QLabel* m_offenseTotalDamage;
+	QLabel* m_offensePercentSpecial;
+	QLabel* m_offensePercentNonMelee;
+	QLabel* m_offenseAvgMelee;
+	QLabel* m_offenseAvgSpecial;
+	QLabel* m_offenseAvgNonMelee;
 
-	QLabel* 	m_label_offense_totaldamage;
-	QLabel*		m_label_offense_percentspecial;
-	QLabel*		m_label_offense_percentnonmelee;
-	QLabel*		m_label_offense_avgmelee;
-	QLabel*		m_label_offense_avgspecial;
-	QLabel*		m_label_offense_avgnonmelee;
+	// Defense tab
+	QWidget* m_defenseTab;
+	QVBoxLayout* m_defenseLayout;
+	QLabel* m_defenseAvoidMisses;
+	QLabel* m_defenseAvoidBlock;
+	QLabel* m_defenseAvoidParry;
+	QLabel* m_defenseAvoidRiposte;
+	QLabel* m_defenseAvoidDodge;
+	QLabel* m_defenseAvoidTotal;
+	QLabel* m_defenseMitigateAvgHit;
+	QLabel* m_defenseMitigateMinHit;
+	QLabel* m_defenseMitigateMaxHit;
+	QLabel* m_defenseMobAttacks;
+	QLabel* m_defensePercentAvoided;
+	QLabel* m_defenseTotalDamage;
 
-	QLabel*		m_label_defense_avoid_misses;
-	QLabel*		m_label_defense_avoid_block;
-	QLabel*		m_label_defense_avoid_parry;
-	QLabel*		m_label_defense_avoid_riposte;
-	QLabel*		m_label_defense_avoid_dodge;
-	QLabel*		m_label_defense_avoid_total;
-	QLabel*		m_label_defense_mitigate_avghit;
-	QLabel*		m_label_defense_mitigate_minhit;
-	QLabel*		m_label_defense_mitigate_maxhit;
-	QLabel*		m_label_defense_summary_mobattacks;
-	QLabel*		m_label_defense_summary_percentavoided;
-	//QLabel*		m_label_defense_summary_ratio;
-	QLabel*		m_label_defense_summary_totaldamage;
-
-	QLabel*		m_label_mob_totalmobs;
-	QLabel*		m_label_mob_avgdps;
-	QLabel*		m_label_mob_currentdps;
-	QLabel*		m_label_mob_lastdps;
+	// Mob tab
+	QWidget* m_mobTab;
+	QVBoxLayout* m_mobLayout;
+	SEQListView* m_mobListView;
+	QLabel* m_mobTotalMobs;
+	QLabel* m_mobAvgDps;
+	QLabel* m_mobCurrentDps;
+	QLabel* m_mobLastDps;
 
 	Q3PtrList<CombatOffenseRecord> m_combat_offense_list;
 	CombatDefenseRecord *m_combat_defense_record;
 	Q3PtrList<CombatMobRecord> m_combat_mob_list;
 
-	QMenuBar	*m_menu_bar;
-	Q3PopupMenu	*m_clear_menu;
+	//QMenuBar *m_menuBar;
+	//Q3PopupMenu *m_clearMenu;
 
-	int		m_iCurrentDPSTotal;
-	int		m_iDPSStartTime;
-	int		m_iDPSTimeLast;
-	double	m_dDPS;
-	double	m_dDPSLast;
+	int m_iCurrentDPSTotal;
+	int m_iDPSStartTime;
+	int m_iDPSTimeLast;
+	double m_dDPS;
+	double m_dDPSLast;
 };
 
 #endif // COMBATLOG_H
