@@ -40,7 +40,7 @@ SpawnListItem::SpawnListItem(Q3ListViewItem *parent) : Q3ListViewItem(parent)
 
 SpawnListItem::SpawnListItem(Q3ListView *parent) : Q3ListViewItem(parent)
 {
-	m_textColor = Qt::black; 
+	m_textColor = Qt::black;
 	m_item = NULL;
 	m_npc = 0;
 }
@@ -51,7 +51,7 @@ SpawnListItem::~SpawnListItem()
 
 //----------------------------------------------------------------------
 //
-// paintCell 
+// paintCell
 //
 // overridden from base class in order to change color and style attributes
 //
@@ -60,17 +60,17 @@ void SpawnListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, in
 	QColorGroup newCg(cg);
 
 	newCg.setColor(QColorGroup::Text, m_textColor);
-	
+
 	QFont font = this->listView()->font();
-	
+
 	uint32_t filterFlags = 0;
-	
+
 	if (m_item != NULL)
 		filterFlags = m_item->filterFlags();
-	
+
 	if (!(filterFlags & (FILTER_FLAG_FILTERED |
 						 FILTER_FLAG_ALERT |
-						 FILTER_FLAG_LOCATE | 
+						 FILTER_FLAG_LOCATE |
 						 FILTER_FLAG_CAUTION |
 						 FILTER_FLAG_DANGER)))
 	{
@@ -78,31 +78,31 @@ void SpawnListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, in
 		font.setItalic(false);
 		font.setUnderline(false);
 	}
-	else 
+	else
 	{
 		// color filtered spawns grey
 		if (filterFlags & FILTER_FLAG_FILTERED)
 			newCg.setColor(QColorGroup::Text, Qt::gray);
-		
+
 		if (filterFlags & FILTER_FLAG_ALERT)
 			font.setBold(true);
 		else
 			font.setBold(false);
-		
+
 		if (filterFlags & FILTER_FLAG_LOCATE)
 			font.setItalic(true);
 		else
 			font.setItalic(false);
-		
-		if ((filterFlags & FILTER_FLAG_CAUTION) || 
+
+		if ((filterFlags & FILTER_FLAG_CAUTION) ||
 			(filterFlags & FILTER_FLAG_DANGER))
 			font.setUnderline(true);
 		else
 			font.setUnderline(false);
 	}
-	
+
 	p->setFont(font);
-	
+
 	Q3ListViewItem::paintCell(p, newCg, column, width, alignment);
 }
 
@@ -115,33 +115,33 @@ int SpawnListItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 {
 	if (col == 0) // Name
 		return key(col, ascending).compare(i->key(col, ascending));
-	
+
 	if (m_item == NULL)
 		return -1;
-	
+
 	SpawnListItem *other = (SpawnListItem *)i;
-	
+
 	if (m_item->type() == tUnknown && other->m_item->type() == tUnknown)
 		return 0;
 	else if (m_item->type() == tUnknown)
 		return -1;
 	else if (other->m_item->type() == tUnknown)
 		return 1;
-	
-	
+
+
 	const Spawn* spawn = NULL;
 	const Spawn* other_spawn = NULL;
 	const Item* item = NULL;
 	const Item* other_item = NULL;
-	
-	
+
+
 	if ((m_item->type() == tSpawn) || (m_item->type() == tPlayer))
 		spawn = (const Spawn*)m_item;
-	
+
 	if ((other->m_item->type() == tSpawn) || (other->m_item->type() == tPlayer))
 		other_spawn = (const Spawn*)other->m_item;
-	
-	// Spawn v Spawn specific compares  
+
+	// Spawn v Spawn specific compares
 	if ((spawn != NULL) && (other_spawn != NULL))
 	{
 		switch (col)
@@ -171,10 +171,10 @@ int SpawnListItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 	{
 		return -1;
 	}
-	
+
 	item = (const Item*)m_item;
 	other_item = (const Item*)other->m_item;
-	
+
 	// Generic Item compares
 	switch (col)
 	{
@@ -206,9 +206,9 @@ int SpawnListItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 		default:
 			// use default method for columns with simple text
 			return key(col, ascending).compare(i->key(col, ascending));
-			
+
 	};
-	
+
 }
 
 void SpawnListItem::update(Player* player, uint32_t changeType)
@@ -216,10 +216,10 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 	//   seqDebug("SpawnListItem::update()\n");
 	QString buff;
 	const Spawn* spawn = NULL;
-	
+
 	if ((item()->type() == tSpawn) || (item()->type() == tPlayer))
 		spawn = (const Spawn*)item();
-	
+
 	if (changeType & tSpawnChangedName)
 	{
 		// Name
@@ -227,8 +227,8 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 			buff = item()->transformedName();
 		else
 			buff = item()->name();
-		
-		if (spawn != NULL) 
+
+		if (spawn != NULL)
 		{
 			if (!spawn->lastName().isEmpty())
 			{
@@ -237,10 +237,10 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 			if (spawn->gm())
 				buff += " *GM* ";
 		}
-		
+
 		setText(tSpawnColName, buff);
 	}
-	
+
 	// only spawns contain level info
 	if (spawn != NULL)
 	{
@@ -250,24 +250,24 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 			buff.sprintf("%2d", spawn->level());
 			setText(tSpawnColLevel, buff);
 		}
-		
+
 		if (changeType & tSpawnChangedHP)
 		{
 			// Hitpoints
 			buff.sprintf("%5d", spawn->HP());
 			setText(tSpawnColHP, buff);
-			
+
 			// Maximum Hitpoints
 			buff.sprintf("%5d", spawn->maxHP());
 			setText(tSpawnColMaxHP, buff);
 		}
-		
+
 		if (changeType == tSpawnChangedALL)
 		{
 			setText(tSpawnColDeity, spawn->deityName());
 			setText(tSpawnColBodyType, spawn->typeString());
 			if (spawn->guildID() < MAX_GUILDS)
-			{  
+			{
 				if (!spawn->guildTag().isEmpty())
 					setText(tSpawnColGuildID, spawn->guildTag());
 				else
@@ -282,21 +282,21 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 		setText(tSpawnColHP, buff);
 		setText(tSpawnColMaxHP, buff);
 	}
-	
+
 	if (changeType & tSpawnChangedPosition)
 	{
 		// X position
 		buff.sprintf("%5d", showeq_params->retarded_coords ? (int)item()->y() : (int)item()->x());
 		setText(tSpawnColXPos, buff);
-		
+
 		// Y position
 		buff.sprintf("%5d", showeq_params->retarded_coords ? (int)item()->x() : (int)item()->y());
 		setText(tSpawnColYPos, buff);
-		
+
 		// Z position
 		buff.sprintf("%5d", item()->z());
 		setText(tSpawnColZPos, buff);
-		
+
 		// Distance
 		if (!showeq_params->fast_machine)
 		{
@@ -310,7 +310,7 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 		}
 		setText(tSpawnColDist, buff);
 	}
-	
+
 	if (changeType == tSpawnChangedALL)
 	{
 		// Id
@@ -318,16 +318,16 @@ void SpawnListItem::update(Player* player, uint32_t changeType)
 		setText(tSpawnColID, buff);
 		setText(tSpawnColRace, item()->raceString());
 		setText(tSpawnColClass, item()->classString());
-		setText(tSpawnColSpawnTime, m_item->spawnTimeStr());		
+		setText(tSpawnColSpawnTime, m_item->spawnTimeStr());
 		// CJD TODO - Deity, PVP teams
 	}
-	
+
 	if (changeType & tSpawnChangedWearing)
 	{
 		// Info
 		setText(tSpawnColInfo, item()->info());
 	}
-	
+
 	m_npc = item()->NPC();
 }
 
@@ -349,7 +349,7 @@ void SpawnListItem::setShellItem(const Item *item)
 //----------------------------------------------------------------------
 //
 // pickTextColor
-// 
+//
 // insert color schemes here
 //
 void SpawnListItem::pickTextColor(const Item* item, Player* player, QColor def)
@@ -359,17 +359,17 @@ void SpawnListItem::pickTextColor(const Item* item, Player* player, QColor def)
 		m_textColor = def;
 		return;
 	}
-	
+
 	const Spawn* spawn = NULL;
 	if ((item->type() == tSpawn) || (item->type() == tPlayer))
 		spawn = (const Spawn*)item;
-	
+
 	if (spawn == NULL)
 	{
 		m_textColor = def;
 		return;
 	}
-	
+
 	switch (spawn->typeflag())
 	{
 		case 65:
@@ -381,11 +381,11 @@ void SpawnListItem::pickTextColor(const Item* item, Player* player, QColor def)
 			m_textColor = Qt::darkMagenta;
 			return;
 	}
-	
+
 	// color by pvp team
 	if (showeq_params->pvp) // if pvp
 	{
-		switch (spawn->raceTeam()) 
+		switch (spawn->raceTeam())
 		{
 			case RTEAM_HUMAN:
 				m_textColor = Qt::blue;
@@ -400,10 +400,10 @@ void SpawnListItem::pickTextColor(const Item* item, Player* player, QColor def)
 				m_textColor = Qt::magenta;
 				return;
 		}
-	} 
+	}
 	else if (showeq_params->deitypvp) // if deitypvp
 	{
-		switch (spawn->deityTeam()) 
+		switch (spawn->deityTeam())
 		{
 			case DTEAM_GOOD:
 				m_textColor = Qt::blue;
@@ -416,7 +416,7 @@ void SpawnListItem::pickTextColor(const Item* item, Player* player, QColor def)
 				return;
 		}
 	}
-	
+
 	// color by consider difficulty
 	m_textColor = player->pickConColor(spawn->level());
 	if (m_textColor == Qt::white)
@@ -438,114 +438,114 @@ SpawnListMenu::SpawnListMenu(SEQListView* spawnlist, SEQWindow* spawnlistWindow,
 	Q3PopupMenu* spawnListColMenu = new Q3PopupMenu;
 	insertItem("Show &Column", spawnListColMenu);
 	spawnListColMenu->setCheckable(true);
-	
+
 	m_id_spawnList_Cols[tSpawnColName] = spawnListColMenu->insertItem("&Name");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColName], tSpawnColName);
-	
+
 	m_id_spawnList_Cols[tSpawnColLevel] = spawnListColMenu->insertItem("&Level");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColLevel], tSpawnColLevel);
-	
+
 	m_id_spawnList_Cols[tSpawnColHP] = spawnListColMenu->insertItem("&HP");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColHP], tSpawnColHP);
-	
+
 	m_id_spawnList_Cols[tSpawnColMaxHP] = spawnListColMenu->insertItem("&Max HP");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColMaxHP], tSpawnColMaxHP);
-	
+
 	m_id_spawnList_Cols[tSpawnColXPos] = spawnListColMenu->insertItem("Coord &1");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColXPos], tSpawnColXPos);
-	
+
 	m_id_spawnList_Cols[tSpawnColYPos] = spawnListColMenu->insertItem("Coord &2");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColYPos], tSpawnColYPos);
-	
+
 	m_id_spawnList_Cols[tSpawnColZPos] = spawnListColMenu->insertItem("Coord &3");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColZPos], tSpawnColZPos);
-	
+
 	m_id_spawnList_Cols[tSpawnColID] = spawnListColMenu->insertItem("I&D");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColID], tSpawnColID);
-	
+
 	m_id_spawnList_Cols[tSpawnColDist] = spawnListColMenu->insertItem("&Dist");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColDist], tSpawnColDist);
-	
+
 	m_id_spawnList_Cols[tSpawnColRace] = spawnListColMenu->insertItem("&Race");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColRace], tSpawnColRace);
-	
+
 	m_id_spawnList_Cols[tSpawnColClass] = spawnListColMenu->insertItem("&Class");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColClass], tSpawnColClass);
-	
+
 	m_id_spawnList_Cols[tSpawnColInfo] = spawnListColMenu->insertItem("&Info");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColInfo], tSpawnColInfo);
-	
+
 	m_id_spawnList_Cols[tSpawnColSpawnTime] = spawnListColMenu->insertItem("Spawn &Time");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColSpawnTime], tSpawnColSpawnTime);
-	
+
 	m_id_spawnList_Cols[tSpawnColDeity] = spawnListColMenu->insertItem("&Deity");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColDeity], tSpawnColDeity);
-	
+
 	m_id_spawnList_Cols[tSpawnColBodyType] = spawnListColMenu->insertItem("&Body Type");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColBodyType], tSpawnColBodyType);
-	
+
 	m_id_spawnList_Cols[tSpawnColGuildID] = spawnListColMenu->insertItem("Guild Tag");
 	spawnListColMenu->setItemParameter(m_id_spawnList_Cols[tSpawnColGuildID], tSpawnColGuildID);
-	
+
 	connect (spawnListColMenu, SIGNAL(activated(int)), this, SLOT(toggle_spawnListCol(int)));
-	
+
 	int x;
 	Q3PopupMenu* filterMenu = new Q3PopupMenu;
 	m_id_filterMenu = insertItem("Add &Filter", filterMenu);
 	setItemEnabled(m_id_filterMenu, false);
-	
+
 	x = filterMenu->insertItem("&Hunt...");
 	filterMenu->setItemParameter(x, HUNT_FILTER);
-	
+
 	x = filterMenu->insertItem("&Caution...");
 	filterMenu->setItemParameter(x, CAUTION_FILTER);
-	
+
 	x = filterMenu->insertItem("&Danger...");
 	filterMenu->setItemParameter(x, DANGER_FILTER);
-	
+
 	x = filterMenu->insertItem("&Locate...");
 	filterMenu->setItemParameter(x, LOCATE_FILTER);
-	
+
 	x = filterMenu->insertItem("&Alert...");
 	filterMenu->setItemParameter(x, ALERT_FILTER);
-	
+
 	x = filterMenu->insertItem("&Filtered...");
 	filterMenu->setItemParameter(x, FILTERED_FILTER);
-	
+
 	x = filterMenu->insertItem("&Tracer...");
 	filterMenu->setItemParameter(x, TRACER_FILTER);
-	
+
 	connect (filterMenu, SIGNAL(activated(int)), this, SLOT(add_filter(int)));
-	
+
 	Q3PopupMenu* zoneFilterMenu = new Q3PopupMenu;
 	m_id_zoneFilterMenu = insertItem("Add &Zone Filter", zoneFilterMenu);
 	setItemEnabled(m_id_zoneFilterMenu, false);
-	
+
 	x = zoneFilterMenu->insertItem("&Hunt...");
 	zoneFilterMenu->setItemParameter(x, HUNT_FILTER);
-	
+
 	x = zoneFilterMenu->insertItem("&Caution...");
 	zoneFilterMenu->setItemParameter(x, CAUTION_FILTER);
-	
+
 	x = zoneFilterMenu->insertItem("&Danger...");
 	zoneFilterMenu->setItemParameter(x, DANGER_FILTER);
-	
+
 	x = zoneFilterMenu->insertItem("&Locate...");
 	zoneFilterMenu->setItemParameter(x, LOCATE_FILTER);
-	
+
 	x = zoneFilterMenu->insertItem("&Alert...");
 	zoneFilterMenu->setItemParameter(x, ALERT_FILTER);
-	
+
 	x = zoneFilterMenu->insertItem("&Filtered...");
 	zoneFilterMenu->setItemParameter(x, FILTERED_FILTER);
-	
+
 	x = zoneFilterMenu->insertItem("&Tracer...");
 	zoneFilterMenu->setItemParameter(x, TRACER_FILTER);
-	
+
 	connect (zoneFilterMenu, SIGNAL(activated(int)), this, SLOT(add_zoneFilter(int)));
-	
+
 	insertSeparator(-1);
-	
+
 	x = insertItem("&Add Category...", this, SLOT(add_category(int)));
 	m_id_edit_category = insertItem("&Edit Category...", this, SLOT(edit_category(int)));
 	m_id_delete_category = insertItem("&Delete Category...", this, SLOT(delete_category(int)));
@@ -553,7 +553,7 @@ SpawnListMenu::SpawnListMenu(SEQListView* spawnlist, SEQWindow* spawnlistWindow,
 	insertSeparator(-1);
 	insertItem("&Font...", this, SLOT(set_font(int)));
 	insertItem("&Caption...", this, SLOT(set_caption(int)));
-	
+
 	connect(this, SIGNAL(aboutToShow()), this, SLOT(init_Menu()));
 }
 
@@ -572,7 +572,7 @@ void SpawnListMenu::setCurrentCategory(const Category* cat)
 {
 	// set the current category
 	m_currentCategory = cat;
-	
+
 	// update the menu item names
 	if (cat != NULL)
 	{
@@ -594,11 +594,11 @@ void SpawnListMenu::setCurrentItem(const Item* item)
 {
 	// set the current item
 	m_currentItem = item;
-	
+
 	// enable/disable item depending on if there is one
 	setItemEnabled(m_id_filterMenu, (item != NULL));
 	setItemEnabled(m_id_zoneFilterMenu, (item != NULL));
-	
+
 	if (item != NULL)
 	{
 		changeItem(m_id_filterMenu, "Add '" + item->name() + "' &Filter");
@@ -614,9 +614,9 @@ void SpawnListMenu::setCurrentItem(const Item* item)
 void SpawnListMenu::toggle_spawnListCol(int id)
 {
 	int colnum;
-	
+
 	colnum = itemParameter(id);
-	
+
 	if (isItemChecked(id))
 		m_spawnlist->setColumnVisible(colnum, false);
 	else
@@ -627,15 +627,15 @@ void SpawnListMenu::add_filter(int id)
 {
 	if (m_currentItem == NULL)
 		return;
-	
+
 	int filter = itemParameter(id);
 	QString filterName = m_filterMgr->filterName(filter);
 	QString filterString = m_currentItem->filterString();
-	
+
 	// get the user edited filter string, based on the items filterString
 	bool ok = false;
 	filterString = QInputDialog::getText(filterName + " Filter", "Enter the filter string:", QLineEdit::Normal, filterString, &ok, m_spawnlist);
-	
+
 	// if the user clicked ok, add the filter
 	if (ok)
 		m_filterMgr->addFilter(filter, filterString);
@@ -645,16 +645,16 @@ void SpawnListMenu::add_zoneFilter(int id)
 {
 	if (m_currentItem == NULL)
 		return;
-	
+
 	int filter = itemParameter(id);
 	QString filterName = m_filterMgr->filterName(filter);
 	QString filterString = m_currentItem->filterString();
-	
+
 	// get the user edited filter string, based on the items filterString
 	bool ok = false;
 	filterString = QInputDialog::getText(filterName + " Filter", "Enter the filter string:", QLineEdit::Normal, filterString, &ok, m_spawnlist);
-	
-	
+
+
 	// if the user clicked ok, add the filter
 	if (ok)
 		m_filterMgr->addZoneFilter(filter, filterString);
@@ -676,10 +676,10 @@ void SpawnListMenu::delete_category(int id)
 {
 	// confirm that the user wants to delete the category
 	QMessageBox mb("Are you sure?", "Are you sure you wish to delete category "
-				   + m_currentCategory->name() + "?", QMessageBox::NoIcon, QMessageBox::Yes, 
+				   + m_currentCategory->name() + "?", QMessageBox::NoIcon, QMessageBox::Yes,
 				   QMessageBox::No | QMessageBox::Default | QMessageBox::Escape,
 				   QMessageBox::NoButton, m_spawnlist);
-	
+
 	// if user chose yes, then delete the category
 	if (mb.exec() == QMessageBox::Yes)
 		m_categoryMgr->remCategory(m_currentCategory);
@@ -698,7 +698,7 @@ void SpawnListMenu::set_font(int id)
 	bool ok = false;
 	// get a new font
 	newFont = QFontDialog::getFont(&ok, m_spawnlistWindow->font(), this, "ShowEQ Spawn List Font");
-    
+
     // if the user entered a font and clicked ok, set the windows font
     if (ok)
 		m_spawnlistWindow->setWindowFont(newFont);
@@ -707,11 +707,11 @@ void SpawnListMenu::set_font(int id)
 void SpawnListMenu::set_caption(int id)
 {
 	bool ok = false;
-	
-	QString caption = 
+
+	QString caption =
     QInputDialog::getText("ShowEQ Spawn List Window Caption", "Enter caption for the Spawn List Window:",
 						  QLineEdit::Normal, m_spawnlistWindow->caption(), &ok, this);
-	
+
 	// if the user entered a caption and clicked ok, set the windows caption
 	if (ok)
 		m_spawnlistWindow->setCaption(caption);
@@ -720,4 +720,3 @@ void SpawnListMenu::set_caption(int id)
 #ifndef QMAKEBUILD
 #include "spawnlistcommon.moc"
 #endif
-

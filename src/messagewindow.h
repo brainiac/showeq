@@ -39,7 +39,7 @@ class QLabel;
 class MessageBrowser : public Q3TextEdit
 {
 	Q_OBJECT
-	
+
 public:
 	MessageBrowser(QWidget* parent = 0, const char* name = 0);
 
@@ -59,7 +59,7 @@ protected:
 class MessageFindDialog : public QDialog
 {
 	Q_OBJECT
-	
+
 public:
 	MessageFindDialog(MessageBrowser*, const QString& caption, QWidget* parent = 0, const char* name = 0);
 
@@ -89,7 +89,7 @@ public:
 	MessageTypeStyle();
 	MessageTypeStyle(const MessageTypeStyle& style);
 	~MessageTypeStyle();
-  
+
 	MessageTypeStyle& operator=(const MessageTypeStyle& style);
 
 	const QColor& color() const { return m_color; }
@@ -100,7 +100,7 @@ public:
 	void setFont(const QFont& font) { m_font = font; }
 	bool useDefaultFont() const { return m_useDefaultFont; }
 	void setUseDefaultFont(bool val) { m_useDefaultFont = val; }
-  
+
 	void load(const QString& preferenceName, const QString& typeName);
 	void save(const QString& preferenceName, const QString& typeName) const;
 
@@ -147,14 +147,14 @@ protected:
 class MessageWindow : public SEQWindow
 {
 	Q_OBJECT
-	
+
 public:
 	MessageWindow(Messages* messages, MessageFilters* filters, const QString& prefName = "MessageWindow",
 				  const QString& caption = "Message Window", QWidget* parent = 0, const char* name = 0);
 	~MessageWindow();
 
 	virtual QMenu* menu();
-  
+
 public slots:
 	void newMessage(const MessageEntry& message);
 	void refreshMessages();
@@ -190,7 +190,7 @@ protected slots:
 protected:
 	void addMessage(const MessageEntry& message);
 	void addColorMessage(const MessageEntry& message);
-  
+
 	Messages* m_messages;
 	MessageFilters* m_messageFilters;
 	MessageBrowser* m_messageWindow;
@@ -219,4 +219,3 @@ protected:
 };
 
 #endif // _MESSAGEWINDOW_H_
-

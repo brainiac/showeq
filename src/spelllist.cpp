@@ -34,19 +34,19 @@ SpellListItem::SpellListItem(Q3ListView *parent) : Q3ListViewItem(parent)
 
 
 //Added in by Worried to make color change by time remaining work
-// paintCell 
+// paintCell
 //
 // overridden from base class in order to change color and style attributes
 //
 void SpellListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
 	QColorGroup newCg(cg);
-	
+
 	newCg.setColor(QColorGroup::Text, m_textColor);
-	
+
 	QFont font = this->listView()->font();
 	p->setFont(font);
-	
+
 	Q3ListViewItem::paintCell(p, newCg, column, width, alignment);
 }
 
@@ -64,7 +64,7 @@ void SpellListItem::update()
 {
 	//color change by Worried
 	//change spell colors according to time remaining
-	
+
 	if (m_item->duration() > 120)
 		this->setTextColor(Qt::black);
 	else if (m_item->duration() <= 120 and m_item->duration() > 60)
@@ -75,7 +75,7 @@ void SpellListItem::update()
 		this->setTextColor(Qt::magenta);
 	else if (m_item->duration() <= 12)
 		this->setTextColor(Qt::red);
-	
+
 	setText(SPELLCOL_SPELLID, QString("%1").arg(m_item->spellId()));
 	setText(SPELLCOL_SPELLNAME, m_item->spellName());
 	setText(SPELLCOL_CASTERID, QString("%1").arg(m_item->casterId()));
@@ -124,9 +124,9 @@ SpellList::SpellList(SpellShell* sshell, QWidget *parent, const char *name)
 	addColumn("Casted", "CastTime");
 	addColumn("Remain", "RemainTime");
 	setSorting(SPELLCOL_DURATION);
-	
+
 	restoreColumns();
-	
+
 	connect(this, SIGNAL(doubleClicked(Q3ListViewItem*)), this, SLOT(mouseDoubleClicked(Q3ListViewItem*)));
 	connect(this, SIGNAL(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)), this, SLOT(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)));
 }
@@ -136,10 +136,10 @@ Q3PopupMenu* SpellList::menu()
 	// if the menu already exists, return it
 	if (m_menu)
 		return m_menu;
-	
+
 	m_menu = new Q3PopupMenu(this);
 	m_menu->setCheckable(true);
-	
+
 	mid_spellName = m_menu->insertItem("Spell Name");
 	mid_spellId = m_menu->insertItem("Spell ID");
 	mid_casterId = m_menu->insertItem("Caster ID");
@@ -148,15 +148,15 @@ Q3PopupMenu* SpellList::menu()
 	mid_targetName = m_menu->insertItem("Target Name");
 	mid_casttime = m_menu->insertItem("Cast Time");
 	mid_duration = m_menu->insertItem("Remaining Time");
-	
+
 	connect(m_menu, SIGNAL(activated(int)), this, SLOT(activated(int)));
 	connect(m_menu, SIGNAL(aboutToShow()), this, SLOT(init_menu()));
-	
+
 	return m_menu;
 }
 
 void SpellList::init_menu()
-{ 
+{
 	m_menu->setItemChecked(mid_spellName, columnWidth(SPELLCOL_SPELLNAME) != 0);
 	m_menu->setItemChecked(mid_spellId, columnWidth(SPELLCOL_SPELLID) != 0);
 	m_menu->setItemChecked(mid_casterId, columnWidth(SPELLCOL_CASTERID) != 0);
@@ -180,9 +180,9 @@ SpellListItem* SpellList::InsertSpell(const SpellItem *item)
 {
 	if (!item)
 		return NULL;
-	
+
 	Q3ValueList<SpellListItem *>::Iterator it;
-	for (it = m_spellList.begin(); it != m_spellList.end(); it++) 
+	for (it = m_spellList.begin(); it != m_spellList.end(); it++)
 	{
 		if ((*it)->item() == item)
 			break;
@@ -197,22 +197,22 @@ SpellListItem* SpellList::InsertSpell(const SpellItem *item)
 		{
 			(*it)->update();
 			return (*it);
-		} 
+		}
 		else
 		{
 			DeleteItem((*it)->item());
 		}
 	}
-	
+
 	// now insert
 	// CJD TODO - checks for putting in appropriate category
 	SpellListItem *j = new SpellListItem(this);
 	m_spellList.append(j);
 	j->setSpellItem(item);
-	
+
 	//j->setTextColor(pickColorSpawn(item));
 	j->update();
-	
+
 	return j;
 }
 
@@ -221,7 +221,7 @@ void SpellList::DeleteItem(const SpellItem *item)
 	if (item)
 	{
 		SpellListItem *i = Find(item);
-		if (i) 
+		if (i)
 		{
 			m_spellList.remove(i);
 			delete i;
@@ -248,7 +248,7 @@ QColor SpellList::pickSpellColor(const SpellItem *item, QColor def) const
 
 SpellListItem* SpellList::Find(const SpellItem *item)
 {
-	if (item) 
+	if (item)
 	{
 		Q3ValueList<SpellListItem*>::Iterator it;
 		for (it = m_spellList.begin(); it != m_spellList.end(); ++it)
@@ -288,7 +288,7 @@ void SpellList::changeSpell(const SpellItem *item)
 		{
 			i->update();
 		}
-		else 
+		else
 		{
 			DeleteItem(item);
 			addSpell(item);
@@ -321,13 +321,13 @@ void SpellList::selectAndOpen(SpellListItem *item)
 //void interruptSpellCast(struct interruptCastStruct *);
 //void spellMessage(QString&);
 
-void SpellList::mouseDoubleClicked(Q3ListViewItem *item) 
+void SpellList::mouseDoubleClicked(Q3ListViewItem *item)
 {
 	if (!item)
 		return;
-	
+
 	SpellListItem *i = (SpellListItem *)item;
-	const SpellItem *j = i->item(); 
+	const SpellItem *j = i->item();
 	if (j)
 	{
 		m_spellShell->deleteSpell(j);
@@ -337,7 +337,7 @@ void SpellList::mouseDoubleClicked(Q3ListViewItem *item)
 void SpellList::rightButtonClicked(Q3ListViewItem *item, const QPoint& pos, int col)
 {
 	Q3PopupMenu* slMenu = menu();
-	
+
 	if (slMenu)
 		slMenu->popup(pos);
 }
@@ -346,22 +346,22 @@ void SpellList::activated(int mid)
 {
 	int col = 0;
 	int id = 0;
-	
-	if (mid == mid_spellName) 
+
+	if (mid == mid_spellName)
 	{
 		id = mid_spellName;
 		col = SPELLCOL_SPELLNAME;
-	} 
-	else if (mid == mid_spellId) 
+	}
+	else if (mid == mid_spellId)
 	{
 		id = mid_spellId;
 		col = SPELLCOL_SPELLID;
-	} 
-	else if (mid == mid_casterId) 
+	}
+	else if (mid == mid_casterId)
 	{
 		id = mid_casterId;
 		col = SPELLCOL_CASTERID;
-	} 
+	}
 	else if (mid == mid_casterName)
 	{
 		id = mid_casterName;
@@ -381,14 +381,14 @@ void SpellList::activated(int mid)
 	{
 		id = mid_casttime;
 		col = SPELLCOL_CASTTIME;
-	} 
-	else if (mid == mid_duration) 
+	}
+	else if (mid == mid_duration)
 	{
 		id = mid_duration;
 		col = SPELLCOL_DURATION;
 	}
 
-	if (id) 
+	if (id)
 	{
 		setColumnVisible(col, !columnVisible(col));
 		m_menu->setItemChecked(id, columnVisible(col));
@@ -400,7 +400,7 @@ SpellListWindow::SpellListWindow(SpellShell* sshell, QWidget* parent, const char
 {
 	//QVBoxLayout* layout = new QVBoxLayout(this);
 	//layout->setAutoAdd(true);
-	
+
 	m_spellList = new SpellList(sshell, this, name);
 	setWidget(m_spellList);
 }
@@ -419,7 +419,7 @@ void SpellListWindow::savePrefs()
 {
 	// save SEQWindow prefs
 	SEQWindow::savePrefs();
-	
+
 	// make the listview save it's prefs
 	m_spellList->savePrefs();
 }

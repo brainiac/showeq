@@ -1,13 +1,13 @@
 /*
  * spawnmonitor.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Borrowed from:  SINS Distributed under GPL
- * Portions Copyright 2001,2007 Zaphod (dohpaz@users.sourceforge.net). 
+ * Portions Copyright 2001,2007 Zaphod (dohpaz@users.sourceforge.net).
  *
- * For use under the terms of the GNU General Public License, 
+ * For use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -94,7 +94,7 @@ void SpawnPoint::update(const Spawn* spawn)
 	m_count++;
 }
 
-SpawnMonitor::SpawnMonitor(const DataLocationMgr* dataLocMgr, ZoneMgr* zoneMgr, SpawnShell* spawnShell, 
+SpawnMonitor::SpawnMonitor(const DataLocationMgr* dataLocMgr, ZoneMgr* zoneMgr, SpawnShell* spawnShell,
 						   QObject* parent, const char* name)
   : QObject(parent, name),
 	m_dataLocMgr(dataLocMgr),

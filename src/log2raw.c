@@ -26,7 +26,7 @@
    bytes: gets set to the number of bytes read
    rawdata: will contain the data read from the file
 */
-int ReadLog(FILE* inputfile, size_t* bytes, char* rawdata) 
+int ReadLog(FILE* inputfile, size_t* bytes, char* rawdata)
 {
 	char line[MAX_LINE_LEN + 1];
 	char* hexdata;

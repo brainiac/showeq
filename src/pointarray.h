@@ -11,7 +11,7 @@
 
 //
 // NOTE: Trying to keep this file ShowEQ/Everquest independent to allow it
-// to be reused for other Show{} style projects. 
+// to be reused for other Show{} style projects.
 //
 
 #ifndef __POINTARRAY_H_
@@ -39,21 +39,21 @@ public:
 	Point3DArray(const Point3DArray<_T>& array) : Q3MemArray<Point3D<_T> > (array) {}
 	Point3DArray(uint32_t nPoints, const _T* points);
 	~Point3DArray() {};
-	
+
 	Point3DArray<_T>& operator=(const Point3DArray<_T>& array)
-    { 
-		return (Point3DArray<_T>&)assign(array); 
+    {
+		return (Point3DArray<_T>&)assign(array);
 	}
-	
+
 	// returning address of a temporary is bad.
 	Point3DArray<_T> copy() const
-    { 
-		Point3DArray<_T> tmp; 
+    {
+		Point3DArray<_T> tmp;
 		return *((Point3DArray<_T>*)&tmp.duplicate(*this));
 	}
-	
+
 	QRect boundingRect() const;
-	
+
 	void point(uint32_t i, _T* x, _T* y, _T* z) const;
 	const Point3D<_T>& point(uint32_t i) const;
 	void setPoint(uint32_t i, _T x, _T y, _T z);
@@ -65,7 +65,7 @@ public:
 	Q3PointArray getQPointArray();
 };
 
-template <class _T> inline 
+template <class _T> inline
 Point3DArray<_T>::Point3DArray(uint32_t nPoints, const _T* points)
 {
 	setPoints(nPoints, points);
@@ -78,13 +78,13 @@ QRect Point3DArray<_T>::boundingRect() const
 	{
 		return QRect(0, 0, 0, 0);
 	}
-	
+
 	Point3D<_T>* d = Q3MemArray<Point3D<_T> >::data();
 	_T minX, maxX, minY, maxY;
-	
+
 	minX = maxX = d->x();
 	minY = maxY = d->y();
-	
+
 	uint32_t i;
 	for (++d, i = 1; i < Q3MemArray<Point3D<_T> >::size(); i++, d++)
 	{
@@ -97,7 +97,7 @@ QRect Point3DArray<_T>::boundingRect() const
 		else if (d->y() > maxY)
 			maxY = d->y();
 	}
-	
+
 	return QRect(QPoint(minX, minY), QPoint(maxX, maxY));
 }
 
@@ -110,7 +110,7 @@ void Point3DArray<_T>::point(uint32_t index, _T* x, _T* y, _T* z) const
 	*z = p. z();
 }
 
-template <class _T> inline 
+template <class _T> inline
 const Point3D<_T>& Point3DArray<_T>::point(uint32_t index) const
 {
 	return Q3MemArray<Point3D<_T> >::at(index);
@@ -122,7 +122,7 @@ void Point3DArray<_T>::setPoint(uint32_t index, _T x, _T y, _T z)
 	Q3MemArray<Point3D<_T> >::at(index) = Point3D<_T>(x, y, z);
 }
 
-template <class _T> inline 
+template <class _T> inline
 void Point3DArray<_T>::setPoint(uint32_t index, const Point3D<_T>& p)
 {
 	Q3MemArray<Point3D<_T> >::at(index) = p;
@@ -133,7 +133,7 @@ bool Point3DArray<_T>::setPoints(uint32_t nPoints, const _T* points)
 {
 	if (!Q3MemArray<Point3D<_T> >::resize(nPoints))
 		return false;
-	
+
 	for (uint32_t i = 0; nPoints; nPoints--, i++, points += 3)
 	{
 		setPoint(i, *points, *(points + 1), *(points + 2));
@@ -146,12 +146,12 @@ bool Point3DArray<_T>::setPoints(uint32_t nPoints, _T firstx, _T firsty, _T firs
 {
 	if (!Q3MemArray<Point3D<_T> >::resize(nPoints))
 		return false;
-	
+
 	setPoint(0, firstx, firsty, firstz);
-	
+
 	va_list ap;
 	va_start(ap, firstz);
-	
+
 	_T x, y, z;
 	uint32_t i;
 	for (i = 1, --nPoints; nPoints; nPoints--, i++)
@@ -159,12 +159,12 @@ bool Point3DArray<_T>::setPoints(uint32_t nPoints, _T firstx, _T firsty, _T firs
 		x = va_arg(ap, _T);
 		y = va_arg(ap, _T);
 		z = va_arg(ap, _T);
-		
+
 		setPoint(i, x, y, z);
 	}
-	
+
 	va_end(ap);
-	
+
 	return true;
 }
 
@@ -176,17 +176,17 @@ bool Point3DArray<_T>::putPoints(uint32_t index, uint32_t nPoints, const _T* poi
 		if (!Q3MemArray<Point3D<_T> >::resize(index + nPoints))
 			return false;
 	}
-	
+
 	for (uint32_t i = index; nPoints; nPoints--, i++, points += 3)
 	{
 		setPoint(i, *points, *(points + 1), *(points + 2));
 	}
-	
+
 	return true;
 }
 
 template <class _T> inline
-bool Point3DArray<_T>::putPoints(uint32_t index, uint32_t nPoints, 
+bool Point3DArray<_T>::putPoints(uint32_t index, uint32_t nPoints,
 								 _T firstx, _T firsty, _T firstz, ...)
 {
 	if ((index + nPoints) > Q3MemArray<Point3D<_T> >::size())
@@ -194,12 +194,12 @@ bool Point3DArray<_T>::putPoints(uint32_t index, uint32_t nPoints,
 		if (!Q3MemArray<Point3D<_T> >::resize(index + nPoints))
 			return false;
 	}
-	
+
 	setPoint(0, firstx, firsty, firstz);
-	
+
 	va_list ap;
 	va_start(ap, firstz);
-	
+
 	_T x, y, z;
 	uint32_t i;
 	for (i = index + 1, --nPoints; nPoints; nPoints--, i++)
@@ -207,12 +207,12 @@ bool Point3DArray<_T>::putPoints(uint32_t index, uint32_t nPoints,
 		x = va_arg(ap, _T);
 		y = va_arg(ap, _T);
 		z = va_arg(ap, _T);
-		
+
 		setPoint(i, x, y, z);
 	}
-	
+
 	va_end(ap);
-	
+
 	return true;
 }
 
@@ -221,11 +221,11 @@ Q3PointArray Point3DArray<_T>::getQPointArray()
 {
 	// create a temporary QPointArray of the same size as this array
 	Q3PointArray tmp(Q3MemArray<Point3D<_T> >::size());
-	
+
 	// copy each Point3D<_T> as a QPoint into the temporary QPointArray
 	for (uint32_t i = 0; i < Q3MemArray<Point3D<_T> >::size(); i++)
 		tmp.setPoint(i, point(i).qpoint());
-	
+
 	// return the temporary QPointArray
 	return tmp;
 }

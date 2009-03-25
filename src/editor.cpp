@@ -88,33 +88,33 @@ EditorWindow::EditorWindow(const char *fileName)
   : Q3MainWindow(0, "ShowEQ - Editor", Qt::WDestructiveClose)
 {
 	int id;
-	
+
 	QPixmap openIcon, saveIcon;
-	
+
 	fileTools = new Q3ToolBar(this, "file operations");
 	fileTools->setLabel(tr("File Operations"));
-	
+
 	openIcon = QPixmap(fileopen);
 	new QToolButton(openIcon, "Open File", QString::null, this, SLOT(load()), fileTools, "open file");
-    
+
 	saveIcon = QPixmap(filesave);
 	new QToolButton(saveIcon, "Save File", QString::null, this, SLOT(save()), fileTools, "save file");
-	
+
 	Q3PopupMenu* file = new Q3PopupMenu(this);
 	menuBar()->insertItem("&File", file);
-	
+
 	id = file->insertItem(openIcon, "&Open", this, SLOT(load()), CTRL + Key_O);
 	id = file->insertItem(saveIcon, "&Save", this, SLOT(save()), CTRL + Key_S);
-	
+
 	file->insertSeparator();
 	file->insertItem("&Close Editor", this, SLOT(close()), CTRL + Key_W);
-	
+
 	e = new Q3MultiLineEdit(this, "editor");
 	e->setFocus();
 	setCentralWidget(e);
-	
+
 	statusBar()->message("Ready", 2000);
-	
+
 	resize(600, 450);
 	filename = (QString)fileName;
 	load(fileName);
@@ -171,15 +171,15 @@ void EditorWindow::save()
 		statusBar()->message(QString("Could not write to %1").arg(filename), 2000);
 		return;
 	}
-	
+
 	Q3TextStream t(&f);
 	t << text;
 	f.close();
-	
+
 	e->setEdited(FALSE);
-	
+
 	setCaption(filename);
-	
+
 	statusBar()->message(QString("Saved %1").arg(filename), 2000);
 }
 
@@ -200,21 +200,21 @@ void EditorWindow::closeEvent(QCloseEvent* ce)
 		ce->accept();
 		return;
 	}
-	
+
 	switch (QMessageBox::information(this, "ShowEQ Editor",
 		"The document has been changed since the last save.",
-		"Save Now", "Cancel", "Lose Changes", 0, 1)) 
+		"Save Now", "Cancel", "Lose Changes", 0, 1))
 	{
 		case 0:
 			save();
 			ce->accept();
 			break;
-			
+
 		case 1:
 		default: // just for sanity
 			ce->ignore();
 			break;
-			
+
 		case 2:
 			ce->accept();
 			break;
@@ -223,4 +223,4 @@ void EditorWindow::closeEvent(QCloseEvent* ce)
 
 #ifndef QMAKEBUILD
 #include "editor.moc"
-#endif 
+#endif

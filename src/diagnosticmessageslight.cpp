@@ -1,6 +1,6 @@
 /*
  * diagnosticmessageslight.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -54,5 +54,3 @@ void seqFatal(const char* format, ...)
 	va_end(ap);
 	exit (-1);
 }
-
-

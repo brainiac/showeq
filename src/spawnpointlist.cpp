@@ -1,13 +1,13 @@
 /*
  * spawnpointlist.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Borrowed from:  SINS Distributed under GPL
- * Portions Copyright 2001,2007 Zaphod (dohpaz@users.sourceforge.net). 
+ * Portions Copyright 2001,2007 Zaphod (dohpaz@users.sourceforge.net).
  *
- * For use under the terms of the GNU General Public License, 
+ * For use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -282,7 +282,7 @@ void SpawnPointList::deleteItem(const SpawnPointListItem* item)
 	if (def.isEmpty())
 		def = sp->last();
 
-	def.sprintf("%d/%d/%d '%s'", 
+	def.sprintf("%d/%d/%d '%s'",
 		sp->x(), sp->y(), sp->z(), (const char*)def);
 
 	// confirm that the user wants to delete the category
@@ -379,7 +379,7 @@ SpawnPointListMenu::SpawnPointListMenu(SpawnPointList* spawnPointList, QWidget* 
 {
 	m_id_rename = insertItem("&Rename Spawn Point...", this, SLOT(rename_item(int)));
 	m_id_delete = insertItem("&Delete Spawn Point...", this, SLOT(delete_item(int)));
-	
+
 	insertItem("&Clear Spawn Points...", m_spawnPointList, SLOT(clearItems()));
 
 	Q3PopupMenu* listColMenu = new Q3PopupMenu;
@@ -534,4 +534,3 @@ void SpawnPointWindow::savePrefs()
 #ifndef QMAKEBUILD
 #include "spawnpointlist.moc"
 #endif
-

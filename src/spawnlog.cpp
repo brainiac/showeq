@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2001-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2003,2007 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2003,2007 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #include "spawn.h"
@@ -38,7 +38,7 @@ inline void SpawnLog::logSpawnInfo(const char *type, const char *name, int id, i
 	logSpawnInfo(type, name, id, level, x, y, z, eqDate, time, killedBy, kid, guildid);
 }
 
-void SpawnLog::logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z, 
+void SpawnLog::logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z,
 							const QDateTime& eqDate, const QTime& time, const char *killedBy, int kid, int guildid)
 {
 	if (!open())
@@ -74,7 +74,7 @@ void SpawnLog::logZoneSpawns(const uint8_t* data, size_t len)
 void SpawnLog::logNewSpawn(const uint8_t* data)
 {
 	const spawnStruct& spawn = *(const spawnStruct*)data;
-	logSpawnInfo("+",spawn.name,spawn.spawnId,spawn.level, (spawn.x >> 3), (spawn.y >> 3), (spawn.z >> 3), 
+	logSpawnInfo("+",spawn.name,spawn.spawnId,spawn.level, (spawn.x >> 3), (spawn.y >> 3), (spawn.z >> 3),
 		"", 0, spawn.guildID);
 }
 
@@ -86,7 +86,7 @@ void SpawnLog::logKilledSpawn(const Item *item, const Item* kitem, uint16_t kid)
 	const Spawn* spawn = (const Spawn*)item;
 	const Spawn* killer = (const Spawn*)kitem;
 
-	logSpawnInfo("x",(const char *) spawn->name(),spawn->id(), spawn->level(), 
+	logSpawnInfo("x",(const char *) spawn->name(),spawn->id(), spawn->level(),
 		spawn->x(), spawn->y(), spawn->z(), killer ? (const char*)killer->name() : "unknown",
 		kid, spawn->guildID());
 }
@@ -116,4 +116,3 @@ void SpawnLog::logNewZone(const QString& zonename)
 #ifndef QMAKEBUILD
 #include "spawnlog.moc"
 #endif
-

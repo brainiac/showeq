@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #ifndef _FILTEREDSPAWNLOG_H_
@@ -23,7 +23,7 @@ class Item;
 
 //----------------------------------------------------------------------
 // FilteredSpawnLog
-class FilteredSpawnLog : public SEQLogger 
+class FilteredSpawnLog : public SEQLogger
 {
 	Q_OBJECT
 
@@ -48,4 +48,3 @@ protected:
 };
 
 #endif // _FILTEREDSPAWNLOG_H_
-

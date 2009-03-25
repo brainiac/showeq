@@ -37,7 +37,7 @@
 
 using namespace Qt;
 
-//---------------------------------------------------------------------- 
+//----------------------------------------------------------------------
 // MessageBrowser
 MessageBrowser::MessageBrowser(QWidget* parent, const char* name)
 : Q3TextEdit(parent, name)
@@ -149,7 +149,7 @@ void MessageFindDialog::find()
 {
 	// perform a find in the message window, starting at the current position
 	// using the settings from the checkboxes.
-	m_messageWindow->find(m_findText->text(), m_matchCase->isChecked(), m_wholeWords->isChecked(), 
+	m_messageWindow->find(m_findText->text(), m_matchCase->isChecked(), m_wholeWords->isChecked(),
 		!m_findBackwards->isChecked(), 0, 0);
 }
 
@@ -278,7 +278,7 @@ MessageTypeStyleDialog::MessageTypeStyleDialog(MessageTypeStyle& style, const QC
 
 	if (m_style.bgColor().isValid())
 		m_example->setPaletteBackgroundColor(m_style.bgColor());
-	else 
+	else
 		m_example->setPaletteBackgroundColor(m_defaultBGColor);
 
 	if (m_style.useDefaultFont())
@@ -435,8 +435,8 @@ MessageWindow::MessageWindow(Messages* messages, MessageFilters* filters, const 
 	// set it to read only
 	m_messageWindow->setReadOnly(true);
 
-	// set the word wrap 
-	m_messageWindow->setWordWrap(m_wrapText ? 
+	// set the word wrap
+	m_messageWindow->setWordWrap(m_wrapText ?
 		Q3TextEdit::WidgetWidth : Q3TextEdit::NoWrap);
 
 	// set the wrap policy to break at space
@@ -448,7 +448,7 @@ MessageWindow::MessageWindow(Messages* messages, MessageFilters* filters, const 
 
 	// connect to the message filters signals
 	connect(m_messageFilters, SIGNAL(removed(uint32_t, uint8_t)), this, SLOT(removedFilter(uint32_t, uint8_t)));
-	connect(m_messageFilters, SIGNAL(added(uint32_t, uint8_t,  const MessageFilter&)), 
+	connect(m_messageFilters, SIGNAL(added(uint32_t, uint8_t,  const MessageFilter&)),
 		this, SLOT(addedFilter(uint32_t, uint8_t, const MessageFilter&)));
 
 	// connect up our own signals
@@ -469,7 +469,7 @@ MessageWindow::MessageWindow(Messages* messages, MessageFilters* filters, const 
 	m_typeFilterMenu->insertSeparator(-1);
 
 	QString typeName;
-	// iterate over the message types, filling in various menus and getting 
+	// iterate over the message types, filling in various menus and getting
 	// font color preferences
 	for (int i = MT_Guild; i <= MT_Max; i++)
 	{
@@ -523,7 +523,7 @@ MessageWindow::MessageWindow(Messages* messages, MessageFilters* filters, const 
 	m_menu->insertItem("&Find...", this, SLOT(findDialog()), CTRL+Key_F);
 	m_menu->insertSeparator(-1);
 	m_id_lockText = m_menu->insertItem("&Lock Text", this, SLOT(toggleLockedText()), CTRL+Key_L);
-	
+
 	int x = m_menu->insertItem("Refresh Messages...", this, SLOT(refreshMessages()), CTRL+Key_R);
 	m_menu->insertItem("Save Message Text...", this, SLOT(saveText()), CTRL+Key_S);
 	m_menu->insertSeparator(-1);
@@ -690,11 +690,11 @@ void MessageWindow::refreshMessages()
 	if (m_useTypeStyles)
 		for (i = 0, it = messages.begin(); it != messages.end(); ++it, ++i)
 			addColorMessage(*it); // append the message with color
-	else 
+	else
 		for (i = 0, it = messages.begin(); it != messages.end(); ++it, ++i)
 			addMessage(*it); // append the message plain
 
-	// turn updates back on 
+	// turn updates back on
 	m_messageWindow->setUpdatesEnabled(true);
 	setUpdatesEnabled(true);
 
@@ -740,7 +740,7 @@ void MessageWindow::saveText()
 		return;
 
 	QFile file(fileName); // Write the text to a file
-	if (file.open(QIODevice::WriteOnly)) 
+	if (file.open(QIODevice::WriteOnly))
 	{
 		Q3TextStream stream(&file);
 
@@ -871,7 +871,7 @@ void MessageWindow::toggleHideUserFilter(int id)
 	pSEQPrefs->setPrefUInt("EnabledHideUserFilters", preferenceName(), m_enabledHideUserFilters);
 
 	// (un)check the appropriate menu item
-	m_hideUserFilterMenu->setItemChecked(id, 
+	m_hideUserFilterMenu->setItemChecked(id,
 		((m_enabledHideUserFilters & (1 << id)) != 0));
 }
 
@@ -1094,4 +1094,3 @@ void MessageWindow::addedFilter(uint32_t mask, uint8_t filterid, const MessageFi
 #ifndef QMAKEBUILD
 #include "messagewindow.moc"
 #endif
-

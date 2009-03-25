@@ -15,7 +15,7 @@
 
 class EQPacket;
 class SpawnShell;
- 
+
 //----------------------------------------------------------------------
 // BazaarLog is an SEQLogger subclass that handles bazaar packets
 class BazaarLog : public SEQLogger

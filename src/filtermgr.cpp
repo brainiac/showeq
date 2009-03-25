@@ -308,4 +308,3 @@ void FilterMgr::runtimeFilterCommit(uint8_t type)
 #ifndef QMAKEBUILD
 #include "filtermgr.moc"
 #endif
-

@@ -1,6 +1,6 @@
 /*
  * messagefilter.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -15,7 +15,7 @@
 //----------------------------------------------------------------------
 // MessageFilter
 MessageFilter::MessageFilter(const QString& name, uint64_t matchTypes, const QRegExp& regexp)
-  : m_name(name), 
+  : m_name(name),
 	m_types(matchTypes),
 	m_regexp(regexp)
 {
@@ -23,7 +23,7 @@ MessageFilter::MessageFilter(const QString& name, uint64_t matchTypes, const QRe
 
 MessageFilter::MessageFilter(uint64_t matchTypes, const QRegExp& regexp)
   : m_name(regexp.pattern()),
-	m_types(matchTypes), 
+	m_types(matchTypes),
 	m_regexp(regexp)
 {
 }
@@ -104,7 +104,7 @@ uint8_t MessageFilters::addFilter(const MessageFilter& filter)
 			QString number = QString::number(i);
 
 			pSEQPrefs->setPrefString(number + "Name", section, filter.name());
-			pSEQPrefs->setPrefString(number + "Pattern", section, 
+			pSEQPrefs->setPrefString(number + "Pattern", section,
 				filter.regexp().pattern());
 			pSEQPrefs->setPrefUInt64(number + "Types", section, filter.types());
 
@@ -192,4 +192,3 @@ uint32_t MessageFilters::filterMessage(uint64_t messageTypeMask, const QString& 
 #ifndef QMAKEBUILD
 #include "messagefilter.moc"
 #endif
-

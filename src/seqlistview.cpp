@@ -1,13 +1,13 @@
 /*
  * seqlistview.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001,2007 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -106,7 +106,7 @@ void SEQListView::savePrefs()
 			else
 				pSEQPrefs->setPrefBool(show + columnName, preferenceName(), false);
 		}
-    
+
 		// save the column order
 		QString tempStr, tempStr2;
 		if (header()->count() > 0)
@@ -114,7 +114,7 @@ void SEQListView::savePrefs()
 			tempStr.sprintf("%d", header()->mapToSection(0));
 		}
 
-		for (i = 1; i < header()->count(); i++) 
+		for (i = 1; i < header()->count(); i++)
 		{
 			tempStr2.sprintf(":%d", header()->mapToSection(i));
 			tempStr += tempStr2;
@@ -161,18 +161,18 @@ void SEQListView::restoreColumns()
 
 	// restore the column order
 	QString tStr = pSEQPrefs->getPrefString("ColumnOrder", preferenceName(), "N/A");
-	if (tStr != "N/A") 
+	if (tStr != "N/A")
 	{
 		int i = 0;
-		while (!tStr.isEmpty()) 
+		while (!tStr.isEmpty())
 		{
 			int toIndex;
-			if (tStr.find(':') != -1) 
+			if (tStr.find(':') != -1)
 			{
 				toIndex = tStr.left(tStr.find(':')).toInt();
 				tStr = tStr.right(tStr.length() - tStr.find(':') - 1);
-			} 
-			else 
+			}
+			else
 			{
 				toIndex = tStr.toInt();
 				tStr = "";
@@ -182,7 +182,7 @@ void SEQListView::restoreColumns()
 	}
 
 	// restore sorting state
-	setSorting(pSEQPrefs->getPrefInt("SortColumn", preferenceName(), m_sortColumn), 
+	setSorting(pSEQPrefs->getPrefInt("SortColumn", preferenceName(), m_sortColumn),
 		pSEQPrefs->getPrefBool("SortIncreasing", preferenceName(), m_sortIncreasing));
 }
 
@@ -220,4 +220,3 @@ void SEQListView::setColumnVisible(int column, bool visible)
 #ifndef QMAKEBUILD
 #include "seqlistview.moc"
 #endif
-

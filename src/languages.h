@@ -22,7 +22,7 @@
 	"Froglok",       // 13
 	"Goblin",        // 14
 	"Gnoll",         // 15
-	"Combine Tongue",// 16 
+	"Combine Tongue",// 16
 	"Elder Teir'Dal",// 17
 	"Lizardman",     // 18
 	"Orcish",        // 19
@@ -32,4 +32,3 @@
 	"Dark Speech",   // 23
 	"Van Shir",      // 24
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
-

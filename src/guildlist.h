@@ -4,7 +4,7 @@
  *  ShowEQ Distributed under GPL
  *  http://www.sourceforge.net/projects/seq
  *
- *  Copyright 2004 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Copyright 2004 Zaphod (dohpaz@users.sourceforge.net).
  *
  */
 
@@ -18,7 +18,7 @@
 #endif
 
 #include "seqwindow.h"
-#include "seqlistview.h" 
+#include "seqlistview.h"
 
 #include <Q3ListView>
 #include <Q3PtrDict>
@@ -57,7 +57,7 @@ class GuildListItem : public Q3ListViewItem
 public:
 	GuildListItem(Q3ListView* parent, const GuildMember* member, const GuildShell* guildShell);
 	virtual ~GuildListItem();
-	
+
 	virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
 	virtual int compare(Q3ListViewItem *i, int col, bool ascending) const;
 	void update(const GuildShell* guildShell);
@@ -65,7 +65,7 @@ public:
 	const GuildMember* guildMember() { return m_member; }
 	void setGuildMember(const GuildMember* member);
 	virtual int rtti() const;
-	
+
 protected:
 	const GuildMember* m_member;
 };
@@ -75,19 +75,19 @@ protected:
 class GuildListWindow : public SEQWindow
 {
 	Q_OBJECT
-    
+
 public:
 	GuildListWindow(Player* player, GuildShell* guildShell, QWidget* parent = 0, const char* name = 0);
 	~GuildListWindow();
-	
+
 	virtual QMenu* menu();
-	
-public slots: 
+
+public slots:
 	void cleared();
 	void loaded();
 	void updated(const GuildMember* gm);
 	void guildChanged();
-	
+
 protected slots:
 	void init_Menu();
 	void toggle_showOffline(int);
@@ -96,22 +96,22 @@ protected slots:
 	void toggle_guildListCol(int);
 	void set_font(int);
 	void set_caption(int);
-	
+
 protected:
 	void clear();
 	void populate();
 	void updateCount();
-	
+
 	Player* m_player;
 	GuildShell* m_guildShell;
-	
+
 	QLabel* m_guildName;
 	QLabel* m_guildTotals;
 	SEQListView* m_guildList;
 	Q3PtrDict<GuildListItem> m_guildListItemDict;
 	QMenu* m_menu;
 	int m_id_guildList_Cols[tGuildListColMaxCols];
-	
+
 	uint32_t m_membersOn;
 	bool m_showOffline;
 	bool m_showAlts;
@@ -119,4 +119,3 @@ protected:
 };
 
 #endif // _GUILDLIST_H_
-

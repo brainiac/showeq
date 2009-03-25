@@ -3,9 +3,9 @@
  *
  *  ShowEQ Distributed under GPL
  *  http://seq.sourceforge.net/
- * 
- * Portions Copyright 2003-2007 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Portions Copyright 2003-2007 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 #include "filternotifications.h"
@@ -123,8 +123,3 @@ void FilterNotifications::executeCommand(const Item* item, const QString& rawCom
 #ifndef QMAKEBUILD
 #include "filternotifications.moc"
 #endif
-
-
-
-
-

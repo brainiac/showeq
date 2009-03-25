@@ -10,8 +10,8 @@
  * Date   - 3/16/00
  */
 
-/* 
- * SpawnListItem 
+/*
+ * SpawnListItem
  *
  * SpawnListItem is a class intended to store information about an EverQuest
  * Spawn.  It inherits from QListViewItem but overrides functionality to allow
@@ -20,7 +20,7 @@
  * currently it just provides a widget and maintains a QColor for the text
  * display of that widget
  */
- 
+
 #ifndef SPAWNLIST_H
 #define SPAWNLIST_H
 
@@ -67,22 +67,22 @@ class SpawnList : public SEQListView
 public:
 	SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr,
 			  QWidget *parent = 0, const char * name = 0);
-	
+
 	SpawnListItem* Selected();
 	SpawnListItem* Find(Q3ListViewItemIterator& it, const Item* item, bool first = false);
-	
+
 	const Category* getCategory(SpawnListItem *);
 	SpawnListMenu* menu();
-	
+
 signals:
 	void listUpdated();   // flags in spawns have changed
 	void listChanged();   // categories have changed
 	void spawnSelected(const Item* item);
 	void keepUpdated(bool on);
-	
-public slots: 
-	void setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees); 
-	
+
+public slots:
+	void setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees);
+
 	void selectNext();
 	void selectPrev();
 	// SpawnShell signals
@@ -96,32 +96,32 @@ public slots:
 	void delCategory(const Category* cat);
 	void clearedCategories();
 	void loadedCategories();
-	
+
 	void rebuildSpawnList();
 	void playerLevelChanged(uint8_t);
-	
+
 private slots:
 	void selChanged(Q3ListViewItem*);
-	
+
 	void mousePressEvent(int button, Q3ListViewItem *litem, const QPoint &point, int col);
 	void mouseDoubleClickEvent(Q3ListViewItem *litem);
-	
+
 private:
 	void setSelectedQuiet(Q3ListViewItem* item, bool selected);
 	void populateSpawns();
 	void populateCategory(const Category* cat);
 	QString filterString(const Item *item, int flags = 0);
-	
+
 	void selectAndOpen(SpawnListItem *);
-	
+
 	CategoryMgr* m_categoryMgr;
 	Player *m_player;
 	SpawnShell* m_spawnShell;
-	
+
 	// category pointer used as keys to look up the associated SpawnListItem
 	Q3PtrDict<SpawnListItem> m_categoryListItems;
-	
-	SpawnListMenu* m_menu;	
+
+	SpawnListMenu* m_menu;
 };
 
 class SpawnListWindow : public SEQWindow
@@ -144,4 +144,3 @@ protected:
 };
 
 #endif // SPAWNLIST_H
-

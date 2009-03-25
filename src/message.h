@@ -1,6 +1,6 @@
 /*
  * message.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -25,7 +25,7 @@ const uint32_t ME_InvalidColor = 0x000000FF;
 // enumerated types
 enum MessageType
 {
-	MT_Guild = 0, 
+	MT_Guild = 0,
 	MT_Group = 2,
 	MT_Shout = 3,
 	MT_Auction = 4,
@@ -66,17 +66,17 @@ public:
 	MessageEntry(MessageType type, const QDateTime& dateTime, const QDateTime& eqDateTime,
 		const QString& text, uint32_t color = ME_InvalidColor, uint32_t filterFlags = 0)
 	  : m_type(type),
-	    m_dateTime(dateTime), 
+	    m_dateTime(dateTime),
 		m_eqDateTime(eqDateTime),
-		m_text(text), 
-		m_color(color), 
+		m_text(text),
+		m_color(color),
 		m_filterFlags(filterFlags)
 	{
 	}
-	
-	MessageEntry() 
+
+	MessageEntry()
 	  : m_type(MT_Debug),
-		m_color(0x000000FF), 
+		m_color(0x000000FF),
 		m_filterFlags(0)
 	{
 	}
@@ -93,7 +93,7 @@ public:
 	static const QString& messageTypeString(MessageType type)
 	{
 		static QString dummy;
-		
+
 		if (type <= MT_Max)
 			return s_messageTypeStrings[type];
 		return dummy;

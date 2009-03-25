@@ -3,9 +3,9 @@
  *
  *  ShowEQ Distributed under GPL
  *  http://seq.sourceforge.net/
- * 
- * Portions Copyright 2003-2007 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Portions Copyright 2003-2007 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 #include "mapicon.h"
@@ -25,7 +25,7 @@ using namespace Qt;
 
 //----------------------------------------------------------------------
 // constants
-static const QString iconSizeNames[] = 
+static const QString iconSizeNames[] =
 {
 	"None",
 	"Tiny",
@@ -36,7 +36,7 @@ static const QString iconSizeNames[] =
 	"XX Large",
 };
 
-static const QString iconStyleNames[] = 
+static const QString iconStyleNames[] =
 {
 	"None",
 	"Circle",
@@ -51,7 +51,7 @@ static const QString iconStyleNames[] =
 	"Diamond",
 };
 
-static const QString iconTypePrefBaseNames[] = 
+static const QString iconTypePrefBaseNames[] =
 {
 	"Unknown",
 	"Drop",
@@ -92,7 +92,7 @@ static const QString iconTypePrefBaseNames[] =
 	"InstanceLocation",
 };
 
-static const QString iconTypeNames[] = 
+static const QString iconTypeNames[] =
 {
 	"Unknown",
 	"Drop",
@@ -135,7 +135,7 @@ static const QString iconTypeNames[] =
 
 //----------------------------------------------------------------------
 // MapIcon
-MapIcon::IconImageFunction MapIcon::s_iconImageFunctions[] = 
+MapIcon::IconImageFunction MapIcon::s_iconImageFunctions[] =
 {
 	&MapIcon::paintNone,
 	&MapIcon::paintCircle,
@@ -362,7 +362,7 @@ void MapIcon::save(const QString& prefBase, const QString& section)
 	pSEQPrefs->setPrefBool(prefBase + "ShowName", section, m_showName);
 }
 
-void MapIcon::setImage(const QBrush& brush, const QPen& pen, MapIconStyle style, MapIconSize size, bool use, 
+void MapIcon::setImage(const QBrush& brush, const QPen& pen, MapIconStyle style, MapIconSize size, bool use,
 					   bool useSpawnColorPen, bool useSpawnColorBrush, bool flash)
 {
 	// set all the image characteristics
@@ -376,7 +376,7 @@ void MapIcon::setImage(const QBrush& brush, const QPen& pen, MapIconStyle style,
 	m_imageFlash = flash;
 }
 
-void MapIcon::setHighlight(const QBrush& brush, const QPen& pen, MapIconStyle style, MapIconSize size, bool use, 
+void MapIcon::setHighlight(const QBrush& brush, const QPen& pen, MapIconStyle style, MapIconSize size, bool use,
 						   bool useSpawnColorPen, bool useSpawnColorBrush, bool flash)
 {
 	// set all the highlight characteristics
@@ -422,7 +422,7 @@ const QString& MapIcon::iconSizeName(MapIconSize size)
 
 const QString& MapIcon::iconStyleName(MapIconStyle style)
 {
-	if ((style > tIconStyleNone) && (style <= tIconStyleMax)) 
+	if ((style > tIconStyleNone) && (style <= tIconStyleMax))
 		return iconStyleNames[style];
 
 	return iconStyleNames[tIconStyleNone];
@@ -609,7 +609,7 @@ void MapIcons::load()
 	int val = pSEQPrefs->getPrefInt("DrawSize", preferenceName(), 3);
 
 	// calculate the icon sizes
-	m_drawSize = val; 
+	m_drawSize = val;
 	m_drawSizeWH = val << 1; // 2 x size
 	m_marker1Size = val + 1;
 	m_marker1SizeWH = m_marker1Size << 1; // 2 x size
@@ -619,7 +619,7 @@ void MapIcons::load()
 	m_marker3SizeWH = m_marker2Size << 1; // 2 x size
 	if (val > 1)
 		m_marker0Size = val - 1;
-	else 
+	else
 		m_marker0Size = val;
 	m_marker0SizeWH = m_marker0Size << 1; // 2 x size
 	if (val > 2)
@@ -660,7 +660,7 @@ void MapIcons::setDrawSize(int val)
 		return;
 
 	// store and calculate the new sizes
-	m_drawSize = val; 
+	m_drawSize = val;
 	m_drawSizeWH = val << 1; // 2 x size
 	m_marker1Size = val + 1;
 	m_marker1SizeWH = m_marker1Size << 1; // 2 x size
@@ -670,7 +670,7 @@ void MapIcons::setDrawSize(int val)
 	m_marker3SizeWH = m_marker2Size << 1; // 2 x size
 	if (val > 1)
 		m_marker0Size = val - 1;
-	else 
+	else
 		m_marker0Size = val;
 	m_marker0SizeWH = m_marker0Size << 1; // 2 x size
 	if (val > 2)
@@ -686,13 +686,13 @@ void MapIcons::setDrawSize(int val)
 	emit changed();
 }
 
-void MapIcons::setShowNPCWalkPaths(bool val) 
-{ 
+void MapIcons::setShowNPCWalkPaths(bool val)
+{
 	// set the value
-	m_showNPCWalkPaths = val; 
+	m_showNPCWalkPaths = val;
 
 	// save the preference
-	pSEQPrefs->setPrefBool("ShowNPCWalkPaths", preferenceName(), 
+	pSEQPrefs->setPrefBool("ShowNPCWalkPaths", preferenceName(),
 		m_showNPCWalkPaths);
 
 	// signal that the settings have changed
@@ -700,10 +700,10 @@ void MapIcons::setShowNPCWalkPaths(bool val)
 }
 
 
-void MapIcons::setShowSpawnNames(bool val) 
-{ 
+void MapIcons::setShowSpawnNames(bool val)
+{
 	// set the value
-	m_showSpawnNames = val; 
+	m_showSpawnNames = val;
 
 	// save the preference
 	pSEQPrefs->setPrefBool("ShowSpawnNames", preferenceName(), m_showSpawnNames);
@@ -712,14 +712,14 @@ void MapIcons::setShowSpawnNames(bool val)
 	emit changed();
 }
 
-void MapIcons::setFOVDistance(int val) 
-{ 
+void MapIcons::setFOVDistance(int val)
+{
 	// validate the input
 	if ((val < 1) || (val > 1200))
 		return;
 
 	// set the value
-	m_fovDistance = val; 
+	m_fovDistance = val;
 
 	// save the preference
 	pSEQPrefs->setPrefInt("FOVDistance", preferenceName(), m_fovDistance);
@@ -739,7 +739,7 @@ void MapIcons::setIcon(int iconType, const MapIcon& icon)
 }
 
 
-void MapIcons::paintIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const Point3D<int16_t>& item, 
+void MapIcons::paintIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const Point3D<int16_t>& item,
 						 const QString& itemName, const QPoint& point)
 {
 	// Draw Line
@@ -1065,4 +1065,3 @@ QColor MapIcons::pickSpawnColor(const Spawn* spawn)
 #ifndef QMAKEBUILD
 #include "mapicon.moc"
 #endif
-

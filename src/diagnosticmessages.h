@@ -1,6 +1,6 @@
 /*
  * diagnosticmessages.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *

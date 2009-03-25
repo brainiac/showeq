@@ -4,7 +4,7 @@
  *  ShowEQ Distributed under GPL
  *  http://www.sourceforge.net/projects/seq
  *
- *  Copyright 2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Copyright 2003 Zaphod (dohpaz@users.sourceforge.net).
  *
  */
 
@@ -48,14 +48,14 @@ class EQPacketTypeDB
 public:
 	EQPacketTypeDB();
 	~EQPacketTypeDB();
-	
+
 	size_t size(const char* typeName) const;
 	bool valid(const char* typeName) const;
 	void list() const;
-	
+
 protected:
 	void addStruct(const char* typeName, size_t);
-	
+
 	Q3AsciiDict<size_t> m_typeSizeDict;
 };
 
@@ -64,18 +64,18 @@ protected:
 class EQPacketDispatch : public QObject
 {
 	Q_OBJECT
-	
+
 public:
 	EQPacketDispatch(QObject* parent = 0, const char* name = 0);
 	virtual ~EQPacketDispatch();
-	
+
 	void activate(const uint8_t*, size_t, uint8_t);
 	bool connect(const QObject* receiver, const char* member = 0);
 	bool disconnect(const QObject* receiver, const char* member = 0);
-	
+
 signals:
 	void signal(const uint8_t*, size_t, uint8_t);
-	
+
 private:
 	// disable copy constructor and operator=
 	EQPacketDispatch(const EQPacketDispatch&);
@@ -89,7 +89,7 @@ class EQPacketPayload
 public:
 	EQPacketPayload();
 	~EQPacketPayload();
-	
+
 	const Q3CString& typeName() const;
 	bool setType(const EQPacketTypeDB& db, const char* typeName);
 	size_t typeSize() const;
@@ -97,9 +97,9 @@ public:
 	void setSizeCheckType(EQSizeCheckType sizeCheckType);
 	uint8_t dir() const;
 	void setDir(uint8_t dir);
-	
+
 	bool match(const uint8_t* data, size_t size, uint8_t dir) const;
-	
+
 protected:
 	Q3CString m_typeName;
 	size_t m_typeSize;
@@ -150,7 +150,7 @@ public:
 	EQPacketOPCode(uint16_t, const QString& name);
 	EQPacketOPCode(const EQPacketOPCode& opcode);
 	~EQPacketOPCode();
-	
+
 	void setOPCode(uint16_t opcode);
 	uint16_t opcode() const;
 	void setImplicitLen(uint16_t len);
@@ -164,7 +164,7 @@ public:
 	void clearComments();
 	const QStringList& comments() const;
 	EQPacketPayload* find(const uint8_t* data, size_t size, uint8_t dir) const;
-	
+
 protected:
 	uint16_t m_opcode;
 	uint16_t m_implicitLen;
@@ -223,7 +223,7 @@ inline bool EQPacketOPCode::removeComment(const QString& comment)
 {
 	// find the comment
 	QStringList::iterator it = m_comments.find(comment);
-	
+
 	// was the comment found?
 	if (it != m_comments.end())
 	{
@@ -231,7 +231,7 @@ inline bool EQPacketOPCode::removeComment(const QString& comment)
 		m_comments.remove(it);
 		return true;
 	}
-	
+
 	// comment not found, return failure
 	return false;
 }
@@ -255,7 +255,7 @@ class EQPacketOPCodeDB
 public:
 	EQPacketOPCodeDB(int size);
 	~EQPacketOPCodeDB();
-	
+
 	bool load(const EQPacketTypeDB& typeDB, const QString& filename);
 	bool save(const QString& filename);
 	void list() const;
@@ -270,7 +270,7 @@ public:
 	const EQPacketOPCode* find(uint16_t opcode) const;
 	const EQPacketOPCode* find(const QString& opcodeName) const;
 	const Q3IntDict<EQPacketOPCode> opcodes() const;
-	
+
 protected:
 	Q3IntDict<EQPacketOPCode> m_opcodes;
 	Q3Dict<EQPacketOPCode> m_opcodesByName;

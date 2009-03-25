@@ -3,9 +3,9 @@
  *
  *  ShowEQ Distributed under GPL
  *  http://seq.sourceforge.net/
- * 
- * Copyright 2003-2004 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Copyright 2003-2004 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 #ifndef _EQMAPICON_H_
@@ -13,7 +13,7 @@
 
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS
-#endif 
+#endif
 
 #ifdef __FreeBSD__
 #include <sys/types.h>
@@ -57,7 +57,7 @@ enum MapIconStyle
 {
 	tIconStyleNone = 0,
 	tIconStyleCircle = 1,
-	tIconStyleSquare = 2, 
+	tIconStyleSquare = 2,
 	tIconStylePlus = 3,
 	tIconStyleX = 4,
 	tIconStyleUpTriangle = 5,
@@ -73,12 +73,12 @@ enum MapIconType
 {
 	tIconTypeUnknown = 0,
 	tIconTypeDrop,
-	tIconTypeDoor, 
-	tIconTypeZoneDoor, 
+	tIconTypeDoor,
+	tIconTypeZoneDoor,
 	tIconTypeSpawnNPC,
 	tIconTypeSpawnNPCCorpse,
-	tIconTypeSpawnPlayer, 
-	tIconTypeSpawnPlayerCorpse, 
+	tIconTypeSpawnPlayer,
+	tIconTypeSpawnPlayerCorpse,
 	tIconTypeSpawnUnknown,
 	tIconTypeSpawnConsidered,
 	tIconTypeSpawnPlayerPvPEnabled,
@@ -115,23 +115,23 @@ enum MapIconType
 
 //----------------------------------------------------------------------
 // MapIcon
-class MapIcon 
+class MapIcon
 {
 public:
 	// Constructor
 	MapIcon();
 	~MapIcon();
-	
+
 	// operator(s)
 	MapIcon& operator=(const MapIcon& mapIcon);
-	
-	// 
+
+	//
 	void combine(const MapIcon& mapIcon);
-	
+
 	// persistance
 	void load(const QString& prefBase, const QString& section);
 	void save(const QString& prefBase, const QString& section);
-	
+
 	// convenience methods
 	void setImage(const QBrush& brush, const QPen& pen, MapIconStyle style, MapIconSize size,
 				  bool use, bool useSpawnColorPen, bool useSpawnColorBrush, bool flash);
@@ -140,7 +140,7 @@ public:
 	void setLine0(bool show, const QPen& pen);
 	void setLine1(uint32_t distance, const QPen& pen);
 	void setLine2(uint32_t distance, const QPen& pen);
-	
+
 	// set accessors
 	void setImageBrush(const QBrush& val) { m_imageBrush = val; }
 	void setHighlightBrush(const QBrush& val) { m_highlightBrush = val; }
@@ -167,8 +167,8 @@ public:
 	void setShowLine0(const bool val) { m_showLine0 = val; }
 	void setUseWalkPathPen(const bool val) { m_useWalkPathPen = val; }
 	void setShowWalkPath(const bool val) { m_showWalkPath = val; }
-	void setShowName(const bool val) { m_showName = val; } 
-	
+	void setShowName(const bool val) { m_showName = val; }
+
 	// get accessors
 	const QBrush& imageBrush() const { return m_imageBrush; }
 	const QBrush& highlightBrush() const { return m_highlightBrush; }
@@ -196,13 +196,13 @@ public:
 	bool useWalkPathPen() const { return m_useWalkPathPen; }
 	bool showWalkPath() const { return m_showWalkPath; }
 	bool showName() const { return m_showName; }
-	
+
 	static void paintIconImage(MapIconStyle style, QPainter&p, const QPoint& point, int size, int sizeWH);
-	
+
 	// static convenience methods
 	static const QString& iconSizeName(MapIconSize size);
 	static const QString& iconStyleName(MapIconStyle style);
-	
+
 protected:
 	// static paint methods
 	typedef void (*IconImageFunction)(QPainter&p, const QPoint& point, int size, int sizeWH);
@@ -217,7 +217,7 @@ protected:
 	static void paintLeftTriangle(QPainter&p, const QPoint& point, int size, int sizeWH);
 	static void paintStar(QPainter&p, const QPoint& point, int size, int sizeWH);
 	static void paintDiamond(QPainter&p, const QPoint& point, int size, int sizeWH);
-	
+
 protected:
 	QBrush m_imageBrush;
 	QBrush m_highlightBrush;
@@ -245,7 +245,7 @@ protected:
 	bool m_useWalkPathPen;
 	bool m_showWalkPath;
 	bool m_showName;
-	
+
 private:
 	static IconImageFunction s_iconImageFunctions[tIconStyleMax+1];
 };
@@ -262,22 +262,22 @@ public:
 	// Constructor/destructor
 	MapIcons(Player* player, const QString& preferenceName, QObject* parent = 0, const char* name = 0);
 	~MapIcons();
-	
+
 	// persistance
 	void load();
 	void save();
-	
+
 	// get accessors
 	const QString& preferenceName() const { return m_preferenceName; }
 	int drawSize() const { return m_drawSize; }
 	bool showNPCWalkPaths() const { return m_showNPCWalkPaths; }
 	bool showSpawnNames() const { return m_showSpawnNames; }
 	uint16_t fovDistance() const { return m_fovDistance; }
-	
+
 	const MapIcon& icon(int iconType);
-	
+
 	static const QString& iconTypeName(MapIconType type);
-	
+
 public slots:
 	// set accessors
 	void setDrawSize(int val);
@@ -285,27 +285,27 @@ public slots:
 	void setShowSpawnNames(bool val);
 	void setFOVDistance(int val);
 	void setIcon(int iconType, const MapIcon& icon);
-	
+
 	// dump debug info
 	void dumpInfo(Q3TextStream& out);
-	
+
 	// painting slots
 	void paintIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const Point3D<int16_t>& item, const QString& itemName, const QPoint& point);
 	void paintItemIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const Item* item, const QPoint& point);
 	void paintSpawnIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const Spawn* spawn, const EQPoint& location, const QPoint& point);
 	void paintSpawnPointIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const SpawnPoint* spawnpoint, const QPoint& point);
-	
+
 signals:
 	void changed();
-	
+
 protected slots:
 	void flashTick();
-	
+
 protected:
 	QColor pickSpawnPointColor(const SpawnPoint* sp, const QColor& defColor);
 	QColor pickSpawnColor(const Spawn* spawn);
-	
-	Player* m_player; 
+
+	Player* m_player;
 	QString m_preferenceName;
 	MapIcon m_mapIcons[tIconTypeMax+1];
 	int* m_mapIconSizes[tIconSizeMax+1];
@@ -322,12 +322,12 @@ protected:
 	int m_marker2SizeWH; // 2 * m_marker2SizeWH
 	int m_marker3Size; // m_drawSize + 3
 	int m_marker3SizeWH; // 2 * m_marker3SizeWH
-	
+
 	uint16_t m_fovDistance;
-	
+
 	QTimer* m_flashTimer;
 	bool m_flash;
-	
+
 	bool m_showNPCWalkPaths;
 	bool m_showSpawnNames;
 };
@@ -337,7 +337,7 @@ inline const MapIcon& MapIcons::icon(int iconType)
 	// if a valid map icon was passed in, use it
 	if ((iconType <= tIconTypeMax) && (iconType > tIconTypeUnknown))
 		return m_mapIcons[iconType];
-	
+
 	// otherwise return the unknown icon type
 	return m_mapIcons[tIconTypeUnknown];
 }

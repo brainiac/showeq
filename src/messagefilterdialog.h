@@ -35,24 +35,24 @@ public:
 	MessageFilterDialog(MessageFilters* filters, const QString& caption,
 						QWidget* parent = 0, const char* name = 0);
 	~MessageFilterDialog();
-	
+
 public slots:
 	void newFilter();
 	void addFilter();
 	void updateFilter();
 	void deleteFilter();
-	
+
 protected slots:
 	void anyTextChanged(const QString& newText);
 	void messageTypeSelectionChanged();
 	void existingFilterSelectionChanged(Q3ListBoxItem * item);
 	void removedFilter(uint32_t mask, uint8_t filter);
 	void addedFilter(uint32_t mask, uint8_t filterid, const MessageFilter& filter);
-	
+
 protected:
 	void clearFilter();
 	void checkState();
-	
+
 	MessageFilters* m_filters;
 	Q3ListBox* m_existingFilters;
 	QPushButton* m_new;

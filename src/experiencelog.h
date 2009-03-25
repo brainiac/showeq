@@ -36,18 +36,18 @@ class GroupMgr;
 class Player;
 class DataLocationMgr;
 class ZoneMgr;
-	    
+
 //----------------------------------------------------------------------
 // ExperienceRecord
-class ExperienceRecord 
+class ExperienceRecord
 {
 public:
-	
+
 	ExperienceRecord(const QString &mob_name, int mob_level, long xp_gained,
-					 time_t time, const QString &zone_name, 
-					 uint8_t classVal, uint8_t level, float zem, 
+					 time_t time, const QString &zone_name,
+					 uint8_t classVal, uint8_t level, float zem,
 					 float totalLevels, float groupBonus);
-	
+
 	const QString &getMobName() const;
 	int getMobLevel() const;
 	long getExpGained() const;
@@ -57,7 +57,7 @@ public:
 	long getExpValueg() const; // calculated from spawn level and all + group
 	time_t getTime() const;
 	const QString &getZoneName() const;
-	
+
 private:
 	uint8_t m_class;
 	uint8_t m_level;
@@ -77,13 +77,13 @@ private:
 class ExperienceWindow : public SEQWindow
 {
 	Q_OBJECT
-	
+
 public:
-	ExperienceWindow(const DataLocationMgr* dataLocMgr, 
+	ExperienceWindow(const DataLocationMgr* dataLocMgr,
 					 Player* player, GroupMgr* g, ZoneMgr* zoneMgr,
 					 QWidget* parent = 0, const char* name = 0);
 	~ExperienceWindow();
-	
+
 public slots:
 	virtual void savePrefs();
 	void updateAverage();
@@ -100,22 +100,22 @@ public slots:
 	void viewZEMpercent();
 	void viewZEMcalculated();
 	void clear();
-	
+
 private:
 	void resizeEvent(QResizeEvent *);
 	void calculateZEM(long xp_gained, int mob_level);
 	void logexp(long xp_gained, int mob_level);
-	
+
 	// Need to grab xp totals from here
 	const DataLocationMgr* m_dataLocMgr;
 	QString m_newExpLogFile;
 	Player* m_player;
 	GroupMgr* m_group;
 	ZoneMgr* m_zoneMgr;
-	
+
 	Q3VBoxLayout *m_layout;
 	SEQListView *m_exp_listview;
-	
+
 	QLabel *m_experience_rate_label;
 	QLabel *m_total_received;
 	QLabel *m_mob_count;
@@ -125,14 +125,14 @@ private:
 	QLabel *m_experience_rate;
 	QLabel *m_kills_to_level;
 	QLabel *m_time_to_level;
-	
+
 	Q3PtrList<ExperienceRecord> m_exp_list;
-	
+
 	QMenuBar *m_menu_bar;
 	Q3PopupMenu *m_view_menu;
 	Q3PopupMenu *m_exp_rate_menu;
 	Q3PopupMenu *m_ZEM_menu;
-	
+
 	int m_timeframe;
 	int m_ratio;
 	int m_calcZEM;

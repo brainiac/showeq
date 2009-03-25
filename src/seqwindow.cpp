@@ -1,13 +1,13 @@
 /*
  * seqwindow.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001-2003,2007 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -25,16 +25,16 @@ SEQWindow::SEQWindow(const QString prefName, const QString caption,
 {
 	//seqDebug("Creating SEQWindow named %s with caption %s", name, (const char*)caption);
 	setName(name);
-	
+
 	// set the windows caption
 	setWindowTitle(pSEQPrefs->getPrefString("Caption", preferenceName(), caption));
 
 	// windows default to resizable
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-	
+
 	// windows default to be closable when not docked
 	setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetFloatable);
-	
+
 	// restore the font
 	restoreFont();
 }
@@ -59,7 +59,7 @@ void SEQWindow::undock()
 }
 
 void SEQWindow::setDockEnabled(bool enabled)
-{	
+{
 	if (enabled)
 		setAllowedAreas(Qt::AllDockWidgetAreas);
 	else
@@ -77,7 +77,7 @@ void SEQWindow::setCaption(const QString& text)
 	// set the caption
 	//Q3DockWindow::setCaption(text);
 	setName((const char*)caption());
-	
+
 	// set the preference
 	pSEQPrefs->setPrefString("Caption", preferenceName(), caption());
 }
@@ -86,7 +86,7 @@ void SEQWindow::setWindowFont(const QFont& font)
 {
 	// set the font preference
 	pSEQPrefs->setPrefFont("Font", preferenceName(), font);
-	
+
 	// restore the font to the preference
 	restoreFont();
 }
@@ -115,10 +115,10 @@ void SEQWindow::restoreSize()
 	{
 		// retrieve the saved size information
 		QSize s = pSEQPrefs->getPrefSize("WindowSize", preferenceName(), size());
-		
+
 		resize(s);
 	}
-	
+
 	if (pSEQPrefs->getPrefBool("DockVisible", preferenceName(), !isHidden()))
 		show();
 	else
@@ -137,7 +137,7 @@ void SEQWindow::restorePosition()
 	{
 		// retrieve the saved position information
 		QPoint p = pSEQPrefs->getPrefPoint("WindowPos", preferenceName(), pos());
-		
+
 		// Move window to new position
 		move(p);
 	}

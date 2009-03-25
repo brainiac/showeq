@@ -1,6 +1,6 @@
 /*
  * eqstr.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -23,17 +23,15 @@ class EQStr
 public:
 	EQStr(int size = 8009);
 	~EQStr();
-	
+
 	bool load(const QString& eqstrFile);
 	QString find(uint32_t formatid) const;
 	QString message(uint32_t formatid) const;
 	QString formatMessage(uint32_t formatid, const char* arguments, size_t argslen) const;
-	
+
 protected:
 	Q3IntDict<QString> m_messageStrings;
 	bool m_loaded;
 };
 
 #endif // _EQSTR_H_
-
-

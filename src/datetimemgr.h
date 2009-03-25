@@ -1,13 +1,13 @@
 /*
  * datetimemgr.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2003 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -50,20 +50,20 @@ private:
 	QDateTime m_refDateTime;
 };
 
-inline const QDateTime& DateTimeMgr::eqDateTime() const 
-{ 
-	return m_eqDateTime; 
-}
-
-inline const QDateTime& DateTimeMgr::updatedDateTime() 
+inline const QDateTime& DateTimeMgr::eqDateTime() const
 {
-	update(); 
-	return m_eqDateTime; 
+	return m_eqDateTime;
 }
 
-inline int DateTimeMgr::updateFrequency() 
-{ 
-	return m_updateFrequency / 1000; 
+inline const QDateTime& DateTimeMgr::updatedDateTime()
+{
+	update();
+	return m_eqDateTime;
+}
+
+inline int DateTimeMgr::updateFrequency()
+{
+	return m_updateFrequency / 1000;
 }
 
 #endif // _DATETIMEMGR_H_

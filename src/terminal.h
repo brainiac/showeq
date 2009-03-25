@@ -1,6 +1,6 @@
 /*
  * terminal.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -39,10 +39,10 @@ public:
 	const QString& dateTimeFormat() const { return m_dateTimeFormat; }
 	const QString& eqDateTimeFormat() const { return m_eqDateTimeFormat; }
 	bool displayType() const { return m_displayType; }
-	bool displayDateTime() const { return m_displayDateTime; } 
+	bool displayDateTime() const { return m_displayDateTime; }
 	bool displayEQDateTime() const { return m_displayEQDateTime; }
 	bool useColor() const { return m_useColor; }
-  
+
 public slots:
 	void setEnabledTypes(uint64_t types);
 	void setEnabledShowUserFilters(uint32_t filters);
@@ -56,7 +56,7 @@ public slots:
 
 protected slots:
 	void newMessage(const MessageEntry& message);
-	
+
 private:
 	bool isMessageEnabled(const MessageEntry& type);
 

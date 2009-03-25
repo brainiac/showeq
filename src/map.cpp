@@ -4853,4 +4853,3 @@ void MapFrame::toggle_depthControls(int id)
 #ifndef QMAKEBUILD
 #include "map.moc"
 #endif
-

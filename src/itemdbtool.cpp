@@ -52,7 +52,7 @@ static const char *id="@(#) $Id: itemdbtool.cpp 655 2006-11-04 17:44:08Z cmmalon
 ///////////////////////////////////
 // For long options without any short (single letter) equivalent, we'll
 // assign single char nonprinting character equivalents, as is common
-//   for many GNU utilities. 
+//   for many GNU utilities.
 #define   ITEMDB_LORE_FILENAME_OPTION   10
 #define   ITEMDB_NAME_FILENAME_OPTION   11
 #define   ITEMDB_DATA_FILENAME_OPTION   12
@@ -89,36 +89,36 @@ static struct option option_list[] = {
 // forward delcarations
 void displayUsage();
 void displayVersion(EQItemDB* itemDB);
-void printstat(const QString filename, 
-			   const char* message, 
+void printstat(const QString filename,
+			   const char* message,
 			   bool oknoexist = false);
 bool getConfirmation();
 int upgradeItemDB(EQItemDB* itemDB);
-int importFlatFile(EQItemDB* itemDB, 
-				   const char* filename, 
-				   uint32_t itemNr, 
-				   bool force, 
+int importFlatFile(EQItemDB* itemDB,
+				   const char* filename,
+				   uint32_t itemNr,
+				   bool force,
 				   bool updateRecords);
-int importGDBM(EQItemDB* itemDB, 
-			   const char* filename, 
-			   uint32_t itemNr, 
-			   bool force, 
+int importGDBM(EQItemDB* itemDB,
+			   const char* filename,
+			   uint32_t itemNr,
+			   bool force,
 			   bool updateRecords);
-int exportRawRecord(EQItemDB* itemDB, 
-					const char* filename, 
+int exportRawRecord(EQItemDB* itemDB,
+					const char* filename,
 					uint32_t itemNr);
-int exportRecordCSV(EQItemDB* itemDB, 
-					const char* filename, 
+int exportRecordCSV(EQItemDB* itemDB,
+					const char* filename,
 					uint32_t itemNr,
 					char action);
-int deleteRecord(EQItemDB* itemDB, 
-				 uint32_t itemNr, 
+int deleteRecord(EQItemDB* itemDB,
+				 uint32_t itemNr,
 				 bool force);
 int reorganize(EQItemDB* itemDB);
-int displayRecord(EQItemDB* itemDB, 
+int displayRecord(EQItemDB* itemDB,
 				  uint32_t itemNr);
-int listRecords(EQItemDB* itemDB, 
-				uint32_t itemNr, 
+int listRecords(EQItemDB* itemDB,
+				uint32_t itemNr,
 				QString search);
 
 ///////////////////////////////////
@@ -256,9 +256,9 @@ main (int argc, char *argv[])
 		}
 	}
 
-	// if either the display or delete actions were specified and no 
+	// if either the display or delete actions were specified and no
 	// item was specified display help.
-	if (((action == 'd') || (action == 'D')) && 
+	if (((action == 'd') || (action == 'D')) &&
 		(itemNr == 0))
 		displayHelp = true;
 
@@ -269,7 +269,7 @@ main (int argc, char *argv[])
 	if (displayHelp)
 	{
 		// display the usage information
-		displayUsage(); 
+		displayUsage();
 
 		// return non-zero result
 		result = 1;
@@ -297,13 +297,13 @@ main (int argc, char *argv[])
 				break;
 			}
 		case 'f': // import from a flat file db
-			result = importFlatFile(itemDB, action_arg, itemNr, 
+			result = importFlatFile(itemDB, action_arg, itemNr,
 				forceAction, updateRecords);
 			break;
 		case 'r': // import from a itemrawdata.dbm file
 		case 'o': // import from an old GDBM file
 			// the above two options are really the same
-			result = importGDBM(itemDB, action_arg, itemNr, 
+			result = importGDBM(itemDB, action_arg, itemNr,
 				forceAction, updateRecords);
 			break;
 		case 'e': // export a raw data record
@@ -373,8 +373,8 @@ void printstat(const QString filename, const char* message, bool oknoexist)
 			printf("\t%s directory '%s'\n", message, (const char*)filename);
 		else if (fileInfo.isFile())
 			printf("\t%s file '%s'\n", message, (const char*)filename);
-		else 
-			printf ("\t%s file-like entity '%s'\n", 
+		else
+			printf ("\t%s file-like entity '%s'\n",
 			message, (const char*)filename);
 
 		printf("\t  UID: %d(%s), GID: %d(%s), Permissions: %c%c%c%c%c%c%c%c%c\n",
@@ -393,7 +393,7 @@ void printstat(const QString filename, const char* message, bool oknoexist)
 		printf("\t  Size: %d bytes\n", fileInfo.size());
 	}
 	else if (!oknoexist)
-		printf("\tUnable to stat %s file '%s': %s (%d)\n", 
+		printf("\tUnable to stat %s file '%s': %s (%d)\n",
 		message, (const char*)filename, strerror(errno), errno);
 }
 
@@ -424,10 +424,10 @@ void displayVersion(EQItemDB* itemDB)
 	printf ("\tCVS: %s\n", id);
 #ifdef __GNUC__
 #ifdef __GNUC_PATCHLEVEL__
-	printf ("\t\tUsing GCC version: %d.%d.%d\n", 
+	printf ("\t\tUsing GCC version: %d.%d.%d\n",
 		__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__);
 #else
-	printf ("\t\tUsing GCC version: %d.%d\n", 
+	printf ("\t\tUsing GCC version: %d.%d\n",
 		__GNUC__, __GNUC_MINOR__);
 #endif
 #elif defined(__VERSION__)
@@ -459,7 +459,7 @@ void displayVersion(EQItemDB* itemDB)
 	struct utsname utsbuff;
 	if (uname(&utsbuff) == 0)
 		printf ("\tRunning on %s release %s for processor %s\n",
-		utsbuff.sysname, utsbuff.release, 
+		utsbuff.sysname, utsbuff.release,
 		utsbuff.machine);
 	printf ("\n");
 
@@ -481,7 +481,7 @@ void displayVersion(EQItemDB* itemDB)
 	printstat(fileInfo.dirPath(true), "dirPath(DATA_DB)");
 
 	printstat(filename, "DATA_DB");
-	printstat(itemDB->GetDBFile(EQItemDB::RAW_DATA_DB) + dbExt, 
+	printstat(itemDB->GetDBFile(EQItemDB::RAW_DATA_DB) + dbExt,
 		"RAW_DATA_DB");
 	printf ("\n");
 }
@@ -522,7 +522,7 @@ bool getConfirmation()
 			}
 			else
 			{
-				if ((buff[0] == 'N') || 
+				if ((buff[0] == 'N') ||
 					(buff[0] == 'n'))
 					valid = true;
 				else
@@ -542,9 +542,9 @@ int upgradeItemDB(EQItemDB* itemDB)
 		return 1;
 }
 
-int importFlatFile(EQItemDB* itemDB, 
-				   const char* filename, 
-				   uint32_t itemNr, 
+int importFlatFile(EQItemDB* itemDB,
+				   const char* filename,
+				   uint32_t itemNr,
 				   bool force,
 				   bool update)
 {
@@ -585,11 +585,11 @@ int importFlatFile(EQItemDB* itemDB,
 		// restore file position to the beginning of the file
 		fseek(idb, 0, SEEK_SET);
 
-		// the filesize must be a multiple of sizeof(itemStruct) otherwise 
+		// the filesize must be a multiple of sizeof(itemStruct) otherwise
 		// it's corrupt
 		if ((filesize % sizeof(itemItemStruct)) != 0)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"%s: Error Flat File '%s' is corrupt!\n"
 				"\tThe size of the file (%d) is not a multiple of %d!\n",
 				progname, filename, filesize, sizeof(itemItemStruct));
@@ -653,7 +653,7 @@ int importFlatFile(EQItemDB* itemDB,
 
 				// display a status update
 				if ((count % TOOL_STATUS_UPDATE) == 0)
-					fprintf(stderr, "\tImported %d items from file '%s' so far...\n", 
+					fprintf(stderr, "\tImported %d items from file '%s' so far...\n",
 					count, filename);
 			}
 		}
@@ -674,9 +674,9 @@ int importFlatFile(EQItemDB* itemDB,
 #endif // ZBTEMP
 }
 
-int importGDBM(EQItemDB* itemDB, 
-			   const char* filename, 
-			   uint32_t itemNr, 
+int importGDBM(EQItemDB* itemDB,
+			   const char* filename,
+			   uint32_t itemNr,
 			   bool force,
 			   bool update)
 {
@@ -725,7 +725,7 @@ int importGDBM(EQItemDB* itemDB,
 			}
 			else
 			{
-				fprintf(stderr, 
+				fprintf(stderr,
 					"%s: Item %d from file '%s' has incorrect size %d (not %d)\n",
 					progname, itemNr, filename, data.size, sizeof(itemItemStruct));
 				result = 2;
@@ -779,7 +779,7 @@ int importGDBM(EQItemDB* itemDB,
 				else
 				{
 					// no, print warning
-					fprintf(stderr, 
+					fprintf(stderr,
 						"Warning Item %d from file '%s' has incorrect size %d (not %d): Not Inserted\n",
 						*(uint32_t*)key.data, filename, data.size, sizeof(itemItemStruct));
 					result = 4;
@@ -787,7 +787,7 @@ int importGDBM(EQItemDB* itemDB,
 
 				// display a status update
 				if ((lookedat % TOOL_STATUS_UPDATE) == 0)
-					fprintf(stderr, "\tExamined %d items and Imported %d items from file '%s' so far...\n", 
+					fprintf(stderr, "\tExamined %d items and Imported %d items from file '%s' so far...\n",
 					lookedat, count, filename);
 
 				// release the data
@@ -822,8 +822,8 @@ int importGDBM(EQItemDB* itemDB,
 #endif // ZBTEMP
 }
 
-int exportRawRecord(EQItemDB* itemDB, 
-					const char* filename, 
+int exportRawRecord(EQItemDB* itemDB,
+					const char* filename,
 					uint32_t itemNr)
 {
 	int result = 0;
@@ -923,7 +923,7 @@ int exportRawRecord(EQItemDB* itemDB,
 					// make sure the data is the correct size
 					if (itemsize != sizeof(itemItemStruct))
 					{
-						fprintf(stderr, 
+						fprintf(stderr,
 							"Warning: size (%d) of Raw Data for item %d is not equal sizeof(itemItemStruct) (%d): Record Not Written!\n",
 							itemsize, currentItemNr, sizeof(itemItemStruct));
 						result = 6;
@@ -944,7 +944,7 @@ int exportRawRecord(EQItemDB* itemDB,
 
 					// display a status update
 					if ((count % TOOL_STATUS_UPDATE) == 0)
-						fprintf(stderr, "\tExported %d items to file '%s' so far...\n", 
+						fprintf(stderr, "\tExported %d items to file '%s' so far...\n",
 						count, filename);
 				}
 
@@ -961,7 +961,7 @@ int exportRawRecord(EQItemDB* itemDB,
 }
 
 int
-dumpItemCSV(EQItemDB* itemDB, 
+dumpItemCSV(EQItemDB* itemDB,
 			FILE* fh,
 			uint32_t itemNr)
 {
@@ -1088,7 +1088,7 @@ dumpItemCSV(EQItemDB* itemDB,
 }
 
 int
-dumpItemLabeled(EQItemDB* itemDB, 
+dumpItemLabeled(EQItemDB* itemDB,
 				FILE* fh,
 				uint32_t itemNr)
 {
@@ -1197,7 +1197,7 @@ dumpItemLabeled(EQItemDB* itemDB,
 	return 0;
 }
 
-int exportRecordCSV(EQItemDB* itemDB, 
+int exportRecordCSV(EQItemDB* itemDB,
 					const char* filename,
 					uint32_t itemNr,
 					char action)
@@ -1268,8 +1268,8 @@ int exportRecordCSV(EQItemDB* itemDB,
 	return result;
 }
 
-int deleteRecord(EQItemDB* itemDB, 
-				 uint32_t itemNr, 
+int deleteRecord(EQItemDB* itemDB,
+				 uint32_t itemNr,
 				 bool force)
 {
 	int result = 0;
@@ -1300,7 +1300,7 @@ int reorganize(EQItemDB* itemDB)
 	// just ask the ItemDB to reorganize the enabled databases
 	if (itemDB->ReorganizeDatabase())
 		printf("Databases Reorganized.\n");
-	else 
+	else
 		fprintf(stderr, "%s: Failed to reorganize databases!\n", progname);
 
 	return 0;
@@ -1330,7 +1330,7 @@ int listRecords(EQItemDB* itemDB, uint32_t itemNr, QString search)
 		return -1;
 	}
 
-	bool hasNext = true;  
+	bool hasNext = true;
 	uint32_t currentItemNr;
 	uint32_t nextItemNr;
 	QString nameString;
@@ -1382,7 +1382,7 @@ int listRecords(EQItemDB* itemDB, uint32_t itemNr, QString search)
 
 		// only display a name if we have the item name
 		if (!nameString.isEmpty())
-			printf ("%s ", 
+			printf ("%s ",
 			(const char*)nameString);
 		else
 			printf("%s ",
@@ -1496,7 +1496,7 @@ int listRecords(EQItemDB* itemDB, uint32_t itemNr, QString search)
 				{
 					if (!info.isEmpty())
 						info += ", ";
-					info += "Rdc: " + 
+					info += "Rdc: " +
 						QString::number(entry->GetWeightReduction()) + "%";
 				}
 			}
@@ -1523,7 +1523,7 @@ int listRecords(EQItemDB* itemDB, uint32_t itemNr, QString search)
 	return 0;
 }
 
-int displayRecord(EQItemDB* itemDB, 
+int displayRecord(EQItemDB* itemDB,
 				  uint32_t itemNr)
 {
 	QString nameString;
@@ -1537,7 +1537,7 @@ int displayRecord(EQItemDB* itemDB,
 
 	printf ("Item ID: %d\n", itemNr);
 
-	if (hasEntry) 
+	if (hasEntry)
 	{
 		time_t updated = entry->GetUpdated();
 		printf("Last Updated: %s", ctime(&updated));
@@ -1553,7 +1553,7 @@ int displayRecord(EQItemDB* itemDB,
 	else
 	{
 		printf ("Lore: %s\n", (const char*)loreString);
-	} 
+	}
 
 	if (hasEntry)
 	{
@@ -1634,16 +1634,16 @@ int displayRecord(EQItemDB* itemDB,
 		printf("Color: 0x%8.8x\n",
 			entry->GetColor());
 		if (entry->GetStackable() != -1)
-			printf("Stackable: %s (%d)\n", 
+			printf("Stackable: %s (%d)\n",
 			((entry->GetStackable() == 1) ? "yes" : "no"),
 			entry->GetStackable());
 		if (entry->GetEffectType() != -1)
 			printf("Effect Type: %s (%d)\n",
-			(const char*)entry->GetEffectTypeString(), 
+			(const char*)entry->GetEffectTypeString(),
 			entry->GetEffectType());
 		if (entry->GetSpellId() != ITEM_SPELLID_NOSPELL)
 		{
-			printf ("Spell Effect: %s\n", 
+			printf ("Spell Effect: %s\n",
 				(const char*)spell_name (entry->GetSpellId()));
 			if (entry->GetLevel())
 				printf ("Casting Level: %d\n", entry->GetLevel());
@@ -1719,4 +1719,3 @@ int displayRecord(EQItemDB* itemDB,
 
 	return 0;
 }
-

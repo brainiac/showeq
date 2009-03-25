@@ -1,6 +1,6 @@
 /*
  * diagnosticmessages.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -29,13 +29,13 @@ static int seqMessage(MessageType type, const char* format, va_list ap)
 	char buff[SEQ_BUFFER_LENGTH];
 	int ret = vsnprintf(buff, sizeof(buff), format, ap);
 	Messages* messages = Messages::messages();
-	
+
 	// if the message object exists, use it, otherwise dump to stderr
 	if (messages)
 		messages->addMessage(type, buff);
-	else 
+	else
 		fprintf(stderr, "%s\n", buff);
-	
+
 	return ret;
 }
 

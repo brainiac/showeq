@@ -28,7 +28,7 @@ class QTcpSocket;
 class RemotePacketServer : public QObject
 {
 	Q_OBJECT
-	
+
 public:
 	RemotePacketServer(EQPacketOPCodeDB& zoneOPCodeDB, EQPacketOPCodeDB& worldOPCodeDB,
 					   QObject* parent = NULL, const char *name = NULL);
@@ -42,13 +42,13 @@ public:
 	void start(uint16_t portNum);
 	void stop();
 	void reset();
-	
+
 	uint16_t getPort() { return m_port; }
-	
+
 	// receive a packet of data from a socket for processing
 	void handlePacket(uint32_t type, const uint8_t* data, uint32_t length);
 	void dispatchPacket(uint32_t type, const uint8_t* data, uint32_t length, EQDir dir);
-	
+
 signals:
 	void connected(const QString& peer);
 
@@ -56,7 +56,7 @@ public slots:
 	void processPackets();
 	void newConnection();
 	void clientDisconnected();
-	
+
 protected:
 	typedef QHash<void*, EQPacketDispatch*> Dispatcher;
 
@@ -67,14 +67,14 @@ protected:
 	uint16_t m_port;
 	QTcpSocket* m_socket;
 	QTcpServer* m_server;
-	
+
 	Dispatcher m_sendDispatchers;
 	Dispatcher m_recvDispatchers;
 	EQPacketOPCodeDB& m_zoneOPCodeDB;
 	EQPacketOPCodeDB& m_worldOPCodeDB;
-	
+
 	uint32_t m_nextBufferSize;
 	int32_t m_nextMessageType;
-	
+
 	static uint8_t s_tempBuffer[TEMP_BUFFER_SIZE];
 };

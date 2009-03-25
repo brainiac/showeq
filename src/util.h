@@ -22,7 +22,7 @@
 
 // This define causes the crc table used by EQPacketForamt::calcCRC32 to be
 // generated at runtime
-//#define RUNTIME_CRCTAB 
+//#define RUNTIME_CRCTAB
 
 #ifdef RUNTIME_CRCTAB
 // this causes the generated crctab to be output to /tmp/crctab.h
@@ -62,8 +62,8 @@ void diagFileReadFail(QString filename);
 uint32_t calcCRC32(const uint8_t* p, uint32_t length);
 uint16_t calcCRC16(uint8_t* p, uint32_t length, uint32_t seed);
 
-// Templatized function to generate a string representing the bit pattern 
-// of the passed in value.  
+// Templatized function to generate a string representing the bit pattern
+// of the passed in value.
 // Note: For use with integral data types.
 template <class T>
 QString bitstring(T value)
@@ -76,7 +76,7 @@ QString bitstring(T value)
 		// every 8 bits insert a space
 		//      if (((i + 1) % 8) == 0)
 		//	bitstring += " ";
-		
+
 		// if the value is a 1, insert a 1, otherwise insert a 0
 		if (value & (1 << i))
 			bitstring += "1";

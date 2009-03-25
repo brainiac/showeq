@@ -158,7 +158,7 @@ void GroupMgr::addGroupMember(const uint8_t* data)
 			m_members[i]->m_name = gmem->invitee;
 
 			// if there is a member, increment the member count
-			if (!m_members[i]->m_name.isEmpty()) 
+			if (!m_members[i]->m_name.isEmpty())
 				m_memberCount++;
 
 			// attempt to retrieve the member's spawn
@@ -336,7 +336,7 @@ void GroupMgr::dumpInfo(Q3TextStream& out)
 			<< " " << m_members[i]->m_spawn->classString();
 
 		out << endl;
-	}  
+	}
 }
 
 float GroupMgr::groupBonus()
@@ -355,7 +355,7 @@ float GroupMgr::groupBonus()
 unsigned long GroupMgr::totalLevels()
 {
 	// if the player isn't in a group, just return their level
-	if (m_memberCount == 0) 
+	if (m_memberCount == 0)
 		return m_player->level();
 
 	unsigned long total = 0;
@@ -416,4 +416,3 @@ const Spawn* GroupMgr::memberBySlot(uint16_t slot)
 #ifndef QMAKEBUILD
 #include "group.moc"
 #endif
-

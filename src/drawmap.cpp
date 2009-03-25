@@ -172,7 +172,7 @@ void reAdjust ()
 int lookupColor(const QString colorname)
 {
 	// this must be kept in sync with list in map painting class
-	static const char* colornames[] = 
+	static const char* colornames[] =
 	{
 		"grey",
 		"darkblue",
@@ -187,7 +187,7 @@ int lookupColor(const QString colorname)
 		"green",
 		"cyan",
 		"red",
-		"magenta", 
+		"magenta",
 		"yellow",
 		"gray"
 	};
@@ -265,7 +265,7 @@ void loadFileMap (const char *filename)
 				// L = 0, M = 1
 				lineType[numLines] = tempstr[0] - 'L';
 				// Line name
-				tmpStr = strtok (NULL, ",");	
+				tmpStr = strtok (NULL, ",");
 				if (tmpStr == NULL)
 				{
 					fprintf(stderr, "Error reading line name on line %d in map '%s'\n", fileLines, filename);
@@ -287,7 +287,7 @@ void loadFileMap (const char *filename)
 					fprintf(stderr, "Error reading number of points on line %d in map '%s'\n", fileLines, filename);
 					break;
 				}
-				linePoints[numLines] = atoi (tmpStr);	
+				linePoints[numLines] = atoi (tmpStr);
 				if (linePoints[numLines] > maxPoints)
 					maxPoints = linePoints[numLines];
 
@@ -302,9 +302,9 @@ void loadFileMap (const char *filename)
 					tmpStr = strtok (NULL, ",\n");
 					if (tmpStr == NULL)
 					{
-						fprintf(stderr, 
+						fprintf(stderr,
 							"Line %d in map '%s' has point %d with an X coordinate with no Y!\n",
-							fileLines, filename, numPoints);    
+							fileLines, filename, numPoints);
 						break;
 					}
 					lineY[numLines][numPoints] = atoi (tmpStr);
@@ -314,11 +314,11 @@ void loadFileMap (const char *filename)
 						tmpStr = strtok (NULL, ",\n");
 						if (tmpStr == NULL)
 						{
-							fprintf(stderr, 
+							fprintf(stderr,
 								"Line %d in map '%s' has point %d with an X & Y coordinates with no Z with lineType = M!\n",
 								fileLines, filename, numPoints);
 							// should probably abort, here, but hey, see if it works...
-							lineZ[numLines][numPoints] = globHeight;	     
+							lineZ[numLines][numPoints] = globHeight;
 						}
 						else
 							lineZ[numLines][numPoints] = atoi (tmpStr);
@@ -362,7 +362,7 @@ void loadFileMap (const char *filename)
 				break;
 			case 'P':
 				// Location name
-				locationName[numLocations] = strtok (NULL, ",");	
+				locationName[numLocations] = strtok (NULL, ",");
 				// Location color
 				locationColor[numLocations] = lookupColor(strtok (NULL, ","));
 				locationX[numLocations] = atoi (strtok (NULL, ",\n"));
@@ -479,7 +479,7 @@ void paintMap ()
 	{
 		int sx, sy;
 		gdImageLine (im, sx=0, sy=calcYOffset (gy * 1000), 600, calcYOffset (gy
-			* 1000), gridgray);  
+			* 1000), gridgray);
 		char label[32];
 		sprintf (label, "%d", gy*1000);
 		gdImageString (im, gdFontSmall, sx, sy, (unsigned char *)label, gridgray);
@@ -490,7 +490,7 @@ void paintMap ()
 	{
 		for (int n =0; n<(linePoints[l]-1); n++)
 		{
-			gdImageLine (im, 
+			gdImageLine (im,
 				calcXOffset (lineX[l][n]), calcYOffset (lineY[l][n]),
 				calcXOffset (lineX[l][n+1]), calcYOffset (lineY[l][n+1]),
 				mapcolors[lineColor[l]]);
@@ -501,17 +501,17 @@ void paintMap ()
 	int tmpcolor;
 	for (int n = 0; n < numLocations; n++)
 	{
-		if (!locationColor[n]) 
+		if (!locationColor[n])
 		{
 			tmpcolor = white;
 		}
-		else 
+		else
 		{
 			tmpcolor = mapcolors[locationColor[n]];
 		}
 
-		gdImageString (im, gdFontSmall, 
-			calcXOffset (locationX[n]) - 2, 
+		gdImageString (im, gdFontSmall,
+			calcXOffset (locationX[n]) - 2,
 			calcYOffset (locationY[n]) - 2,
 			(unsigned char*)(const char *)locationName[n], tmpcolor);
 	}
@@ -550,7 +550,7 @@ int main (int argc, char *argv[])
 	// process any CGI data
 	cgiconv.processCGIData();
 
-	/* Check if we were passed a map to read */	
+	/* Check if we were passed a map to read */
 	if (argc == 2)
 	{
 		drawMap = true;
@@ -564,7 +564,7 @@ int main (int argc, char *argv[])
 
 	// if in drawmap mode, then that's all that's done
 	if (drawMap)
-	{	
+	{
 		QRegExp slashExp("/");
 		mapName.replace(slashExp, "_");
 
@@ -591,19 +591,19 @@ int main (int argc, char *argv[])
 			"          td { border: black 1px solid }\n"
 			"          th { border: black 1px solid }\n"
 			"      -->\n"
-			"    </style>\n" 
+			"    </style>\n"
 			"  </HEAD>\n"
 			"  <BODY>\n";
 
 		/* Print HTML header */
 		out << header;
 
-		const char* footer = 
+		const char* footer =
 			"  </BODY>\n"
 			"</HTML>\n";
 
 		// otherwise display an HTML form to allow the user to choose a map
-		QDir  mapDir(DATA_INSTALL_DIR "maps/", "*.map", (QDir::Name | QDir::IgnoreCase), 
+		QDir  mapDir(DATA_INSTALL_DIR "maps/", "*.map", (QDir::Name | QDir::IgnoreCase),
 			(QDir::Files | QDir::Readable));
 
 		if (!mapDir.exists())
@@ -615,11 +615,11 @@ int main (int argc, char *argv[])
 
 		QString userAgent = cgiconv.getHTTPUserAgent();
 
-		out << "<FORM method=\"POST\" action=\"" << cgiconv.getScriptName() 
+		out << "<FORM method=\"POST\" action=\"" << cgiconv.getScriptName()
 			<< "\">\n";
 
 		// beware Netscape 4.x style sheet brain death
-		if ((userAgent.contains("Mozilla/4.") == 1) && 
+		if ((userAgent.contains("Mozilla/4.") == 1) &&
 			(userAgent.contains("MSIE") == 0))
 			out << "<TABLE border=2 cellspacing=0 cellpadding=2>\n";
 		else
@@ -641,7 +641,7 @@ int main (int argc, char *argv[])
 		// pointer to the file info for the current file
 		QFileInfo *fi;
 
-		while ((fi=it.current())) 
+		while ((fi=it.current()))
 		{
 			out << "<OPTION value=\"" << fi->fileName() << "\"";
 			if (mapName == fi->fileName())
@@ -657,7 +657,7 @@ int main (int argc, char *argv[])
 		// Submission button
 		out << "<TD><INPUT type=\"submit\" value=\"Display\"/></TD>\n";
 
-		out << 
+		out <<
 			"</TR>"
 			"</TABLE>"
 			"</FORM>";

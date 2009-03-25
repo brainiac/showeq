@@ -6,9 +6,9 @@
  *
  * Crazy Joe Divola (cjd1@users.sourceforge.net)
  * September 5, 2001
- * 
- * Portions Copyright 2003-2007 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Portions Copyright 2003-2007 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 #include "spellshell.h"
@@ -22,7 +22,7 @@
 
 #include <Q3ValueList>
 
-//#define DIAG_SPELLSHELL 1 
+//#define DIAG_SPELLSHELL 1
 
 SpellItem::SpellItem()
   : m_duration(0),
@@ -41,13 +41,13 @@ void SpellItem::updateCastTime()
 QString SpellItem::castTimeStr() const
 {
 	QString text;
-	
+
 	// using system_spawntime for now...
 	if (showeq_params->systime_spawntime)
 	{
 		text = QString("%1").arg(castTime());
 	}
-	else 
+	else
 	{
 		/* Friendlier format courtesy of Daisy */
 		struct tm *CreationLocalTime = localtime(&(m_castTime.tv_sec));
@@ -69,7 +69,7 @@ QString SpellItem::durationStr() const
 		d = 0;
 	int h = d / 3600;
 	d %= 3600;
-	
+
 	text.sprintf("%02d:%02d:%02d", h, d / 60, d % 60);
 	return text;
 }
@@ -80,11 +80,11 @@ void SpellItem::update(uint16_t spellId, const Spell* spell, int duration,
 {
 	setSpellId(spellId);
 	setDuration(duration);
-	
+
 	if (spell)
 	{
 		setSpellName(spell->name());
-		
+
 		if (spell->targetType() != 0x06)
 			setTargetId(targetId);
 	}
@@ -93,26 +93,26 @@ void SpellItem::update(uint16_t spellId, const Spell* spell, int duration,
 		setSpellName(spell_name(spellId));
 		setTargetId(targetId);
 	}
-	
+
 	setCasterId(casterId);
-	
+
 	if (!casterName.isEmpty())
 		setCasterName(casterName);
 	else
 		setCasterName(QString("N/A"));
-	
+
 	if (!targetName.isEmpty())
 		setTargetName(targetName);
 	else
 		setTargetName(QString("N/A"));
-	
+
 	updateCastTime();
 }
 
 
 SpellShell::SpellShell(Player* player, SpawnShell* spawnshell, Spells* spells)
   : QObject(NULL, "spellshell"),
-	m_player(player), 
+	m_player(player),
 	m_spawnShell(spawnshell),
 	m_spells(spells),
 	m_lastPlayerSpell(0)
@@ -129,41 +129,41 @@ SpellShell::~SpellShell()
 
 SpellItem* SpellShell::findSpell(uint16_t spellId, uint16_t targetId, const QString& targetName)
 {
-	for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin(); it != m_spellList.end(); it++) 
+	for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin(); it != m_spellList.end(); it++)
 	{
 		SpellItem *i = *it;
 		if (i->spellId() == spellId)
 		{
-			if ((i->targetId() == targetId) 
+			if ((i->targetId() == targetId)
 					|| ((i->targetId() == 0) && (i->targetName() == targetName)))
 				return i;
 		}
 	}
-	
+
 	return NULL;
 }
 
 SpellItem* SpellShell::findSpell(int spell_id)
 {
 	for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin(); it != m_spellList.end(); it++)
-	{      
+	{
 		SpellItem *si = *it;
-		
+
 		if (si->spellId() == spell_id)
 			return si;
 	}
-	
+
 	return NULL;
 }
 
 void SpellShell::clear()
 {
 	emit clearSpells();
-	
+
 	m_lastPlayerSpell = 0;
 	for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin(); it != m_spellList.end(); it++)
 		delete(*it);
-	
+
 	m_spellList.clear();
 	m_timer->stop();
 }
@@ -176,14 +176,14 @@ void SpellShell::deleteSpell(const SpellItem* item)
 
 void SpellShell::deleteSpell(SpellItem *item)
 {
-	if (item) 
+	if (item)
 	{
 		if (m_lastPlayerSpell == item)
 			m_lastPlayerSpell = 0;
 		m_spellList.remove(item);
 		if (m_spellList.count() == 0)
 			m_timer->stop();
-		
+
 		emit delSpell(item);
 		delete item;
 	}
@@ -194,13 +194,13 @@ void SpellShell::deleteSpell(SpellItem *item)
 void SpellShell::selfStartSpellCast(const uint8_t* data)
 {
 	const startCastStruct *c = (const startCastStruct *)data;
-	
+
 #ifdef DIAG_SPELLSHELL
-	seqDebug("selfStartSpellCast - id=%d (slot=%d, inv=%d) on spawnid=%d", 
+	seqDebug("selfStartSpellCast - id=%d (slot=%d, inv=%d) on spawnid=%d",
 			 c->spellId, c->slot, c->inventorySlot, c->targetId);
 #endif // DIAG_SPELLSHELL
-	
-	// get the target 
+
+	// get the target
 	const Item* s;
 	QString targetName;
 	int duration = 0;
@@ -208,12 +208,12 @@ void SpellShell::selfStartSpellCast(const uint8_t* data)
 	SpellItem *item;
 	if (spell)
 		duration = spell->calcDuration(m_player->level()) * 6;
-	
+
 	if (!spell || spell->targetType() != 6)
 	{
 		if (c->targetId && ((s = m_spawnShell->findID(tSpawn, c->targetId))))
 			targetName = s->name();
-		
+
 		item = findSpell(c->spellId, c->targetId, targetName);
 	}
 	else
@@ -221,13 +221,13 @@ void SpellShell::selfStartSpellCast(const uint8_t* data)
 		targetName = m_player->name();
 		item = findSpell(c->spellId);
 	}
-	
-	if (item) 
+
+	if (item)
 	{ // exists
 		item->update(c->spellId, spell, duration, m_player->id(), m_player->name(), c->targetId, targetName);
 		emit changeSpell(item);
-	} 
-	else 
+	}
+	else
 	{ // new spell
 		item = new SpellItem();
 		item->update(c->spellId, spell, duration, m_player->id(), m_player->name(), c->targetId, targetName);
@@ -245,16 +245,16 @@ void SpellShell::buffLoad(const spellBuff* c)
 #ifdef DIAG_SPELLSHELL
 	seqDebug("Loading buff - id=%d.",c->spellid);
 #endif // DIAG_SPELLSHELL
-	
+
 	const Spell* spell = m_spells->spell(c->spellid);
 	int duration = c->duration * 6;
 	SpellItem *item = findSpell(c->spellid, m_player->id(), m_player->name());
-	if (item) 
+	if (item)
 	{ // exists
 		item->update(c->spellid, spell, duration, 0, "Buff", m_player->id(), m_player->name());
 		emit changeSpell(item);
-	} 
-	else 
+	}
+	else
 	{ // new spell
 		item = new SpellItem();
 		item->update(c->spellid, spell, duration, 0, "Buff", m_player->id(), m_player->name());
@@ -270,19 +270,19 @@ void SpellShell::buff(const uint8_t* data, size_t, uint8_t dir)
 	// we only care about the server
 	if (dir == DIR_Client)
 		return;
-	
+
 	const buffStruct* b = (const buffStruct*)data;
-	
+
 	// if this is the second server packet then ignore it
 	if (b->spellid == 0xffffffff)
 		return;
-	
+
 #ifdef DIAG_SPELLSHELL
 	seqDebug("Changing buff - id=%d from spawn=%d", b->spellid, b->spawnid);
 #endif // DIAG_SPELLSHELL
-	
+
 	const Spell* spell = m_spells->spell(b->spellid);
-	
+
 	// find the spell item
 	SpellItem* item;
 	const Item* s;
@@ -295,10 +295,10 @@ void SpellShell::buff(const uint8_t* data, size_t, uint8_t dir)
 	}
 	else
 		item = findSpell(b->spellid);
-	
+
 	if (!item)
 		return;
-	
+
 	if (b->changetype == 0x01) // removing buff
 		deleteSpell(item);
 	else if (b->changetype == 0x02)
@@ -312,38 +312,38 @@ void SpellShell::buff(const uint8_t* data, size_t, uint8_t dir)
 void SpellShell::action(const uint8_t* data, size_t, uint8_t)
 {
 	const actionStruct* a = (const actionStruct*)data;
-	
+
 	if (a->type != 0xe7) // only things to do if action is a spell
 		return;
-	
+
 	const Item* s;
 	QString targetName;
-	
-	if (a->target && 
+
+	if (a->target &&
 		((s = m_spawnShell->findID(tSpawn, a->target))))
 		targetName = s->name();
-	
+
 	SpellItem *item = findSpell(a->spell, a->target, targetName);
-	
+
 	if (item || (a->target == m_player->id()))
 	{
 		int duration = 0;
 		const Spell* spell = m_spells->spell(a->spell);
 		if (spell)
 			duration = spell->calcDuration(a->level) * 6;
-		
+
 		QString casterName;
 		if (a->source && ((s = m_spawnShell->findID(tSpawn, a->source))))
 			casterName = s->name();
-		
+
 		if (item)
 		{
 #ifdef DIAG_SPELLSHELL
-			seqDebug("action - found - source=%d (lvl: %d) cast id=%d on target=%d causing %d damage", 
+			seqDebug("action - found - source=%d (lvl: %d) cast id=%d on target=%d causing %d damage",
 					 a->source, a->level, a->spell, a->target, a->damage);
 #endif // DIAG_SPELLSHELL
-			
-			item->update(a->spell, spell, duration, 
+
+			item->update(a->spell, spell, duration,
 						 a->source, casterName, a->target, targetName);
 			emit changeSpell(item);
 		}
@@ -351,10 +351,10 @@ void SpellShell::action(const uint8_t* data, size_t, uint8_t)
 		{
 			// otherwise check for spells cast on us
 #ifdef DIAG_SPELLSHELL
-			seqDebug("action - new - source=%d (lvl: %d) cast id=%d on target=%d causing %d damage", 
+			seqDebug("action - new - source=%d (lvl: %d) cast id=%d on target=%d causing %d damage",
 					 a->source, a->level, a->spell, a->target, a->damage);
 #endif // DIAG_SPELLSHELL
-			
+
 			// only way to get here is if there wasn't an existing spell, so...
 			item = new SpellItem();
 			item->update(a->spell, spell, duration, a->source, casterName, a->target, targetName);
@@ -362,7 +362,7 @@ void SpellShell::action(const uint8_t* data, size_t, uint8_t)
 			if ((m_spellList.count() > 0) && (!m_timer->isActive()))
 				m_timer->start(1000 * pSEQPrefs->getPrefInt("SpellTimer", "SpellList", 6));
 			emit addSpell(item);
-		}    
+		}
 	}
 }
 
@@ -371,7 +371,7 @@ void SpellShell::simpleMessage(const uint8_t* data, size_t, uint8_t)
 	// if no spell cast by the player recently, then nothing to do.
 	if (!m_lastPlayerSpell)
 		return;
-	
+
 	const simpleMessageStruct* smsg = (const simpleMessageStruct*)data;
 	switch (smsg->messageFormat)
 	{
@@ -400,7 +400,7 @@ void SpellShell::simpleMessage(const uint8_t* data, size_t, uint8_t)
 			deleteSpell(m_lastPlayerSpell);
 			m_lastPlayerSpell = 0;
 			break;
-			
+
 		default:
 			break;
 	}
@@ -411,7 +411,7 @@ void SpellShell::spellMessage(QString &str)
 {
 	QString spell = str.right(str.length() - 7); // drop 'Spell: '
 	bool b = false;
-	
+
 	// Your xxx has worn off.
 	// Your target resisted the xxx spell.
 	// Your spell fizzles.
@@ -427,7 +427,7 @@ void SpellShell::spellMessage(QString &str)
 		seqInfo("WORE OFF: '%s'", spell.latin1());
 		b = true;
 	}
-	
+
 	if (b) {
 		// Can't really tell which spell/target, so just delete the last one
 		for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin();
@@ -444,10 +444,10 @@ void SpellShell::zoneChanged()
 {
 	m_lastPlayerSpell = 0;
 	SpellItem* spell;
-	for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin(); it != m_spellList.end(); it++) 
+	for (Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin(); it != m_spellList.end(); it++)
 	{
 		spell = *it;
-		
+
 		// clear all the invalidated spawn ids
 		spell->setTargetId(0);
 		spell->setCasterId(0);
@@ -457,7 +457,7 @@ void SpellShell::zoneChanged()
 void SpellShell::killSpawn(const Item* deceased)
 {
     uint16_t id = deceased->id();
-	
+
     if (id == m_player->id())
     {
         // We're dead. No more buffs for us.
@@ -466,12 +466,12 @@ void SpellShell::killSpawn(const Item* deceased)
     else
     {
         SpellItem* spell;
-		
+
         if (m_lastPlayerSpell && (m_lastPlayerSpell->targetId() == id))
         {
             m_lastPlayerSpell = 0;
         }
-		
+
         Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin();
         while (it != m_spellList.end())
         {
@@ -487,33 +487,33 @@ void SpellShell::killSpawn(const Item* deceased)
                 ++it;
             }
         }
-		
+
         if (m_spellList.count() == 0)
         {
             m_timer->stop();
         }
     }
-	
+
 }
 
 void SpellShell::timeout()
 {
 	SpellItem* spell;
-	
+
 	Q3ValueList<SpellItem*>::Iterator it = m_spellList.begin();
-	while (it != m_spellList.end()) 
+	while (it != m_spellList.end())
 	{
 		spell = *it;
-		
+
 		int d = spell->duration() -
 		pSEQPrefs->getPrefInt("SpellTimer", "SpellList", 6);
-		if (d > -6) 
+		if (d > -6)
 		{
 			spell->setDuration(d);
 			emit changeSpell(spell);
 			it++;
-		} 
-		else 
+		}
+		else
 		{
 			seqInfo("SpellItem '%s' finished.", (*it)->spellName().latin1());
 			if (m_lastPlayerSpell == spell)
@@ -523,7 +523,7 @@ void SpellShell::timeout()
 			delete spell;
 		}
 	}
-	
+
 	if (m_spellList.count() == 0)
 		m_timer->stop();
 }
@@ -531,4 +531,3 @@ void SpellShell::timeout()
 #ifndef QMAKEBUILD
 #include "spellshell.moc"
 #endif
-

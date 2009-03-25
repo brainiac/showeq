@@ -64,17 +64,17 @@ class DataLocationMgr;
 class FilterMgr : public QObject
 {
 	Q_OBJECT
-	
+
 public:
-	FilterMgr(const DataLocationMgr* dataLocMgr, 
+	FilterMgr(const DataLocationMgr* dataLocMgr,
 			  const QString filterFile, bool spawnfilter_case);
 	~FilterMgr();
-	
+
 	const QString& filterFile() { return m_filterFile; }
 	const QString& zoneFilterFile() { return m_zoneFilterFile; }
 	bool caseSensitive() { return m_caseSensitive; }
 	void setCaseSensitive(bool caseSensitive);
-	
+
 	uint32_t filterMask(const QString& filterString, uint8_t level) const;
 	QString filterString(uint32_t mask) const;
 	QString filterName(uint8_t filter) const;
@@ -82,7 +82,7 @@ public:
 	void remFilter(uint8_t filter, const QString& filterString);
 	bool addZoneFilter(uint8_t filter, const QString& filterString);
 	void remZoneFilter(uint8_t filter, const QString& filterString);
-	
+
 	bool registerRuntimeFilter(const QString& name, uint8_t& flag, uint32_t& flagMask);
 	void unregisterRuntimeFilter(uint8_t flag);
 	uint32_t runtimeFilterMask(const QString& filterString, uint8_t level) const;
@@ -90,7 +90,7 @@ public:
 	bool runtimeFilterAddFilter(uint8_t flag, const QString& filter);
 	void runtimeFilterRemFilter(uint8_t flag, const QString& filter);
 	void runtimeFilterCommit(uint8_t flag);
-	
+
 public slots:
 	void loadFilters();
 	void loadFilters(const QString& filterFile);
@@ -100,11 +100,11 @@ public slots:
 	void loadZoneFilters();
 	void listZoneFilters();
 	void saveZoneFilters();
-	
+
 signals:
 	void filtersChanged();
 	void runtimeFiltersChanged(uint8_t flag);
-	
+
 private:
 	const DataLocationMgr* m_dataLocMgr;
 	FilterTypes* m_types;
@@ -112,10 +112,10 @@ private:
 	Filters* m_filters;
 	QString m_zoneFilterFile;
 	Filters* m_zoneFilters;
-	
+
 	FilterTypes* m_runtimeTypes;
 	Filters* m_runtimeFilters;
-	
+
 	bool m_caseSensitive;
 };
 

@@ -45,14 +45,14 @@ int main(int argc, char *argv[])
 		"          span.unknown { color: red }\n"
 		"          b.warning { color: red }\n"
 		"      -->\n"
-		"    </style>\n" 
+		"    </style>\n"
 		"  </HEAD>\n"
 		"  <BODY>\n";
 
 	/* Print HTML header */
 	out << header;
 
-	const char* footer = 
+	const char* footer =
 		"  </BODY>\n"
 		"</HTML>\n";
 
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 	}
 	else if (argc > 2)
 	{
-		out << "<H1>Error: " << argv[0] << " called with " << argc 
+		out << "<H1>Error: " << argv[0] << " called with " << argc
 			<< " arguments!</H1>\n";
 		out << "Format: " << argv[0] << "?<ItemID>\n";
 		out << footer;
@@ -110,12 +110,12 @@ int main(int argc, char *argv[])
 
 	// beware Netscape4 style sheet brain death
 	bool isNetscape4 = false;
-	if ((userAgent.contains("Mozilla/4.") == 1) && 
+	if ((userAgent.contains("Mozilla/4.") == 1) &&
 		(userAgent.contains("MSIE") == 0))
 		isNetscape4 = true;
 
 	// display form to allow user to select an item or display the binary data
-	out << "    <FORM method=\"POST\" action=\"" << cgiconv.getScriptName() 
+	out << "    <FORM method=\"POST\" action=\"" << cgiconv.getScriptName()
 		<< "\">\n";
 
 	if (isNetscape4)
@@ -128,11 +128,11 @@ int main(int argc, char *argv[])
 		"<TD><INPUT type=\"reset\" value=\"Reset\"/></TD></TR>\n"
 		"        <TR>\n";
 
-	out << "          <TD><INPUT type=\"text\" name=\"item\" value=\"" 
-		<< itemNumber 
+	out << "          <TD><INPUT type=\"text\" name=\"item\" value=\""
+		<< itemNumber
 		<< "\" size=\"5\"/></TD>\n";
 
-	out << 
+	out <<
 		"          <TD>"
 		"<INPUT type=\"checkbox\" name=\"displayBinary\" value=\"y\"";
 
@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 		out << " checked";
 	out << "/>Display</TD>\n";
 
-	out << 
+	out <<
 		"          <TD>";
 
 	if (displayIcon)
@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
 
 
 	// Submission button
-	out << 
+	out <<
 		"          <TD>"
 		"<INPUT type=\"submit\" value=\"Search\"/></TD>\n";
 
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
 		nameString = entry->GetName();
 
 		if (displayIcon)
-			out << "<P><IMG src=\"" << ICON_DIR << entry->GetIconNr() 
+			out << "<P><IMG src=\"" << ICON_DIR << entry->GetIconNr()
 			<< ".png\" alt=\"Icon: " << entry->GetIconNr() << "\"/></P>";
 
 		if (!nameString.isEmpty())
@@ -204,7 +204,7 @@ int main(int argc, char *argv[])
 		else
 		{
 			out << "<H2>Lore: " << loreString << "</H2>\n";
-		} 
+		}
 
 		out << "<P>\n";
 		time_t updated = entry->GetUpdated();
@@ -237,7 +237,7 @@ int main(int argc, char *argv[])
 		out << "<BR>\n";
 		out << "<B>Size:</B> " << size_name(entry->GetSize()) << "<BR>\n";
 		out << "<B>Slots:</B> " << print_slot(entry->GetSlots()) << "<BR>\n";
-		out << "<B>Base Price:</B> " << reformatMoney(entry->GetCost()) 
+		out << "<B>Base Price:</B> " << reformatMoney(entry->GetCost())
 			<< "<BR>\n";
 		if (entry->GetSTR())
 			out << "<B>Str:</B> " << (int)entry->GetSTR() << "<BR>\n";
@@ -305,15 +305,15 @@ int main(int argc, char *argv[])
 			out << "<B>Material:</B> 0 (None)<BR>\n";
 
 		if (entry->GetStackable() != -1)
-			out << "<B>Stackable:</B> " 
+			out << "<B>Stackable:</B> "
 			<< ((entry->GetStackable() == 1) ? "yes" : "no?") << "<BR>\n";
 
 		if (entry->GetEffectType() != -1)
-			out << "<B>Effect Type:</B> " 
+			out << "<B>Effect Type:</B> "
 			<< entry->GetEffectTypeString() << "<BR>\n";
 		if (entry->GetSpellId() != ITEM_SPELLID_NOSPELL)
 		{
-			out << "<B>Spell Effect:</B> " << spell_name (entry->GetSpellId()) 
+			out << "<B>Spell Effect:</B> " << spell_name (entry->GetSpellId())
 				<< "<BR>\n";
 			if (entry->GetLevel())
 				out << "<B>Casting Level:</B> " << (int)entry->GetLevel() << "<BR>\n";
@@ -327,7 +327,7 @@ int main(int argc, char *argv[])
 					out << (int)entry->GetCharges() << "<BR>\n";
 			}
 			if (entry->GetCastTime())
-				out << "<B>Casting Time:</B> " << (int)entry->GetCastTime() 
+				out << "<B>Casting Time:</B> " << (int)entry->GetCastTime()
 				<< "<BR>\n";
 		}
 		out << "<B>Class:</B> " << print_classes (entry->GetClasses()) << "<BR>\n";
@@ -338,7 +338,7 @@ int main(int argc, char *argv[])
 		if (entry->IsContainer())
 		{
 			if (entry->GetNumSlots())
-				out << "<B>Container Slots:</B> " << (int)entry->GetNumSlots() 
+				out << "<B>Container Slots:</B> " << (int)entry->GetNumSlots()
 				<< "<BR>\n";
 			if (entry->GetSizeCapacity())
 				out << "<B>Size Capacity:</B> " << size_name(entry->GetSizeCapacity())
@@ -360,7 +360,7 @@ int main(int argc, char *argv[])
 
 		if ((size > 0) && (rawData != NULL))
 		{
-			out << "<P><B>Raw data: (" << size << " octets) last updated: " 
+			out << "<P><B>Raw data: (" << size << " octets) last updated: "
 				<< ctime(&updated) << "</B></P>\n";
 			out << "</P>";
 			out << "<PRE>\n";
@@ -377,7 +377,7 @@ int main(int argc, char *argv[])
 	// close the document with the footer
 	out << footer;
 
-	// delete DB entry 
+	// delete DB entry
 	delete entry;
 
 	// shutdown the ItemDB instance

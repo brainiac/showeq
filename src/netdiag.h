@@ -32,11 +32,11 @@ class EQPacket;
 class NetDiag : public SEQWindow
 {
 	Q_OBJECT
-	
+
 public:
 	NetDiag(EQPacket* packet, QWidget* parent, const char* name);
 	~NetDiag();
-	
+
 public slots:
 	void numPacket(int, int);
 	void resetPacket(int, int);
@@ -49,10 +49,10 @@ public slots:
 	void seqExpect(int, int);
 	void cacheSize(int, int);
 	void maxLength(int, int);
-	
+
 protected:
 	QString print_addr(in_addr_t);
-	
+
 private:
 	EQPacket* m_packet;
 	QSpinBox* m_playbackSpeed;
@@ -68,7 +68,7 @@ private:
 	QLabel* m_cache[MAXSTREAMS];
 	QLabel* m_maxLength[MAXSTREAMS];
 	QLabel* m_filterLabel;
-	
+
 	int  m_packetStartTime[MAXSTREAMS];
 	int  m_initialcount[MAXSTREAMS];
 };

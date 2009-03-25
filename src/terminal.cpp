@@ -1,6 +1,6 @@
 /*
  * terminal.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -17,7 +17,7 @@
 // ISO/ANSI/ECMA graphics codes, refer to ECMA-048 Section 8.3.117 SGR
 //   available here http://www.ecma.ch/ecma1/STAND/ECMA-048.HTM
 const char* defaultStyle = "\e[0m";
-const char* typeStyles[] = 
+const char* typeStyles[] =
 {
 	"\e[1;32m",   // 0 - Guild
     NULL,         // 1
@@ -33,7 +33,7 @@ const char* typeStyles[] =
     "\e[5;31m",   // 11 - GM Say
     NULL,         // 12
     NULL,         // 13
-    "\e[5;31m",   // 14 - GM Tell 
+    "\e[5;31m",   // 14 - GM Tell
     "\e[1;36m",   // 15 - Raid
     NULL,         // 16 - Debug
     NULL,         // 17 - Info
@@ -71,7 +71,7 @@ Terminal::Terminal(Messages* messages, QObject* parent, const char* name)
 	m_useColor(true)
 {
 	const QString preferenceName = "Terminal";
-	
+
 	m_enabledTypes = pSEQPrefs->getPrefUInt64("EnabledTypes", preferenceName, m_enabledTypes);
 	m_dateTimeFormat = pSEQPrefs->getPrefString("DateTimeFormat", preferenceName, m_dateTimeFormat);
 	m_eqDateTimeFormat = pSEQPrefs->getPrefString("EQDateTimeFormat", preferenceName, m_eqDateTimeFormat);
@@ -88,16 +88,16 @@ Terminal::~Terminal()
 {
 }
 
-void Terminal::setEnabledTypes(uint64_t types) 
-{ 
-	m_enabledTypes = types; 
+void Terminal::setEnabledTypes(uint64_t types)
+{
+	m_enabledTypes = types;
 	pSEQPrefs->setPrefUInt64("EnabledTypes", "Terminal", m_enabledTypes);
 }
 
 void Terminal::setEnabledShowUserFilters(uint32_t filters)
 {
 	m_enabledShowUserFilters = filters;
-	
+
 	// save the new setting
 	pSEQPrefs->setPrefUInt("EnabledShowUserFilters", "Terminal", m_enabledShowUserFilters);
 }
@@ -105,7 +105,7 @@ void Terminal::setEnabledShowUserFilters(uint32_t filters)
 void Terminal::setEnabledHideUserFilters(uint32_t filters)
 {
 	m_enabledHideUserFilters = filters;
-  
+
 	// save the new setting
 	pSEQPrefs->setPrefUInt("EnabledHideUserFilters", "Terminal", m_enabledHideUserFilters);
 }
@@ -113,7 +113,7 @@ void Terminal::setEnabledHideUserFilters(uint32_t filters)
 void Terminal::setDateTimeForamt(const QString& dateTime)
 {
 	m_dateTimeFormat = dateTime;
-	
+
 	// save the new setting
 	pSEQPrefs->setPrefString("DateTimeFormat", "Terminal", m_dateTimeFormat);
 }
@@ -121,38 +121,38 @@ void Terminal::setDateTimeForamt(const QString& dateTime)
 void Terminal::setEQDateTimeFormat(const QString& dateTime)
 {
 	m_eqDateTimeFormat = dateTime;
-	
+
 	// save the new setting
 	pSEQPrefs->setPrefString("EQDateTimeFormat", "Terminal", m_eqDateTimeFormat);
 }
 
-void Terminal::setDisplayType(bool enable) 
+void Terminal::setDisplayType(bool enable)
 {
-	m_displayType = enable; 
-	
+	m_displayType = enable;
+
 	// save the new setting
 	pSEQPrefs->setPrefBool("DisplayType", "Terminal", m_displayType);
 }
 
-void Terminal::setDisplayDateTime(bool enable) 
+void Terminal::setDisplayDateTime(bool enable)
 {
-	m_displayDateTime = enable; 
-	
+	m_displayDateTime = enable;
+
 	// save the new setting
 	pSEQPrefs->setPrefBool("DisplayDateTime", "Terminal", m_displayDateTime);
 }
 
-void Terminal::setDisplayEQDateTime(bool enable) 
+void Terminal::setDisplayEQDateTime(bool enable)
 {
-	m_displayEQDateTime = enable; 
-	
+	m_displayEQDateTime = enable;
+
 	// save the new setting
 	pSEQPrefs->setPrefBool("DisplayEQDateTime", "Terminal", m_displayEQDateTime);
 }
 
 void Terminal::setUseColor(bool enable)
 {
-	m_useColor = enable; 
+	m_useColor = enable;
 
 	// save the new setting
 	pSEQPrefs->setPrefBool("UseColor", "Terminal", m_useColor);
@@ -178,13 +178,13 @@ void Terminal::newMessage(const MessageEntry& message)
 			fputs(setColor, stdout);
 		}
 	}
- 
+
 	QString text;
 
 	// if displaying the type, add it
 	if (m_displayType)
 		text = MessageEntry::messageTypeString(type) + ": ";
-    
+
 	// if displaying the message date/time append it
 	if (m_displayDateTime)
 		text += message.dateTime().toString(m_dateTimeFormat) + " - ";
@@ -206,7 +206,7 @@ void Terminal::newMessage(const MessageEntry& message)
 
 	if (setColor)
 		fputs(defaultStyle, stdout);
-  
+
 	fputc('\n', stdout);
 }
 
@@ -214,7 +214,7 @@ bool Terminal::isMessageEnabled(const MessageEntry& message)
 {
 	// is this message filtered by flags?
 	MessageType type = message.type();
-	
+
 	return !((((m_enabledTypes & (uint64_t(1) << type)) == 0)
 			 && ((m_enabledShowUserFilters & message.filterFlags()) == 0))
 			 || ((m_enabledHideUserFilters & message.filterFlags()) != 0));
@@ -223,4 +223,3 @@ bool Terminal::isMessageEnabled(const MessageEntry& message)
 #ifndef QMAKEBUILD
 #include "terminal.moc"
 #endif
-

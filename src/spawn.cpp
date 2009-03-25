@@ -35,7 +35,7 @@ const char * Spawn_Corpse_Designator = "'s corpse";
 const int qFormat = 14;
 
 // used to calculate where the mob/player should be while animating
-// 1.3 was figured empiraccly.. feel free to change it..  It seems to 
+// 1.3 was figured empiraccly.. feel free to change it..  It seems to
 // be preety close though.
 const float animationCoefficient = 0.0013;
 
@@ -46,53 +46,53 @@ const EquipStruct SlotEmpty = { 0, 0, 0 };
 
 //----------------------------------------------------------------------
 // Handy utility functions
-// static 
+// static
 QString print_item (uint16_t item)
 {
 	// sparse array of item names, some are NULL
-	static const char*  itemnames[] = 
+	static const char*  itemnames[] =
 	{
 #include "weapons.h"
 	};
 
 	// sparse array of item names (in 0x01 range), some are NULL
-	static const char*  itemnames1[] = 
+	static const char*  itemnames1[] =
 	{
 #include "weapons1.h"
 	};
 
 	// sparse array of item names (in 0x27 range), some are NULL
-	static const char*  itemnames27[] = 
+	static const char*  itemnames27[] =
 	{
 #include "weapons27.h"
 	};
 
 	// sparse array of item names (in 0x28 range), some are NULL
-	static const char*  itemnames28[] = 
+	static const char*  itemnames28[] =
 	{
 #include "weapons28.h"
 	};
 
 	// sparse array of item names (in 0x29 range), some are NULL
-	static const char*  itemnames29[] = 
+	static const char*  itemnames29[] =
 	{
 #include "weapons29.h"
 	};
 
 	// sparse array of item names (in 0x2a range), some are NULL
-	static const char*  itemnames2a[] = 
+	static const char*  itemnames2a[] =
 	{
 #include "weapons2a.h"
 	};
 
 	// sparse array of item names (in 0x2b range), some are NULL
-	static const char*  itemnames2b[] = 
+	static const char*  itemnames2b[] =
 	{
 #include "weapons2b.h"
 	};
 
 	// sparse array of item names (in 0x2c range), some are NULL
-	static const char*  itemnames2c[] = 
+	static const char*  itemnames2c[] =
 	{
 #include "weapons2c.h"
 	};
@@ -203,7 +203,7 @@ QString Item::raceString() const
 
 uint8_t Item::classVal() const
 {
-	return 0; 
+	return 0;
 }
 
 QString Item::classString() const
@@ -296,7 +296,7 @@ Spawn::Spawn(const spawnStruct* s)
 }
 
 Spawn::Spawn(uint16_t id, int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ,
-			 int8_t heading, int8_t deltaHeading, uint8_t animation) 
+			 int8_t heading, int8_t deltaHeading, uint8_t animation)
   : Item(tSpawn, id)
 {
 	// apply the unknown mob values
@@ -460,7 +460,7 @@ void Spawn::backfill(const spawnStruct* s)
 	setRace(s->race);
 	setClassVal(s->class_);
 
-	// don't know how we'd find out if this changed, but it may, currently 
+	// don't know how we'd find out if this changed, but it may, currently
 	setTypeflag(s->bodytype);
 	// no-check
 	setPetOwnerID(s->petOwnerId);
@@ -519,7 +519,7 @@ void Spawn::backfill(const spawnStruct* s)
 	// set guildID
 	if (s->NPC == SPAWN_PLAYER || s->NPC == SPAWN_SELF)
 		setGuildID(s->guildID);
-	else 
+	else
 		setGuildID(0xffff);
 }
 
@@ -545,7 +545,7 @@ void Spawn::setPos(int16_t x, int16_t y, int16_t z, bool walkpathrecord, size_t 
 	{
 		uint32_t count = m_spawnTrackList.count();
 
-		// if this is the self spawn and this is the first spawn point, 
+		// if this is the self spawn and this is the first spawn point,
 		// don't add it to the track list
 		if ((m_NPC == SPAWN_SELF) && (count == 0) && (x == 0) && (y == 0) && (z == 0))
 			return;
@@ -565,9 +565,9 @@ void Spawn::setPos(int16_t x, int16_t y, int16_t z, bool walkpathrecord, size_t 
 
 void Spawn::setDeltas(int16_t deltaX, int16_t deltaY, int16_t deltaZ)
 {
-	m_deltaX = deltaX; 
-	m_deltaY = deltaY; 
-	m_deltaZ = deltaZ; 
+	m_deltaX = deltaX;
+	m_deltaY = deltaY;
+	m_deltaZ = deltaZ;
 	m_cookedDeltaXFixPt = fixPtMulI(animationCoefficientFixPt, qFormat, m_deltaX);
 	m_cookedDeltaYFixPt = fixPtMulI(animationCoefficientFixPt, qFormat, m_deltaY);
 	m_cookedDeltaZFixPt = fixPtMulI(animationCoefficientFixPt, qFormat, m_deltaZ);
@@ -576,22 +576,22 @@ void Spawn::setDeltas(int16_t deltaX, int16_t deltaY, int16_t deltaZ)
 QString Spawn::lightName() const
 {
 	// a non-sparse array of lightnames
-	static const char*  lightnames[] = 
+	static const char*  lightnames[] =
 	{
-		"",    // 0  - No light 
-		"CDL", // 1  - Candle 
-		"TR",  // 2  - Torch 
-		"TGS", // 3  - Tiny Glowing Skull 
-		"SL",  // 4  - Small Lantern 
-		"SoM", // 5  - Stein of Moggok 
-		"LL",  // 6  - Large Lantern 
-		"FL",  // 7  - Flameless lantern, Halo of Light 
-		"GOS", // 8  - Globe of stars 
+		"",    // 0  - No light
+		"CDL", // 1  - Candle
+		"TR",  // 2  - Torch
+		"TGS", // 3  - Tiny Glowing Skull
+		"SL",  // 4  - Small Lantern
+		"SoM", // 5  - Stein of Moggok
+		"LL",  // 6  - Large Lantern
+		"FL",  // 7  - Flameless lantern, Halo of Light
+		"GOS", // 8  - Globe of stars
 		"LG",  // 9  - Light Globe
-		"LS",  // 10 - Lightstone, Burnt-out lightstone, wispstone 
-		"GLS", // 11 - Greater lightstone 
+		"LS",  // 10 - Lightstone, Burnt-out lightstone, wispstone
+		"GLS", // 11 - Greater lightstone
 		"FBE", // 12 - Fire Beatle Eye, Firefly Globe
-		"CL",  // 13 - Coldlight 
+		"CL",  // 13 - Coldlight
 	};
 
 	// return light name from list if it's within range
@@ -625,7 +625,7 @@ QString Spawn::genderName() const
 QString Spawn::deityName() const
 {
 	// make sure people don't add to list without modifying code to support
-	static const char*  deitynames[(DEITY_VEESHAN - DEITY_BERT) + 1] = 
+	static const char*  deitynames[(DEITY_VEESHAN - DEITY_BERT) + 1] =
 	{
 #include "deity.h"
 	};
@@ -715,8 +715,8 @@ void Spawn::calcRaceTeam()
 		break;
 
 	case 8:  // Dwarf
-	case 11:  // Halfling 
-	case 12:  // Gnome 
+	case 11:  // Halfling
+	case 12:  // Gnome
 		m_raceTeam = RTEAM_SHORT;
 		break;
 	}
@@ -727,14 +727,14 @@ QString Spawn::lastName() const
 	return m_lastName;
 }
 
-uint8_t Spawn::level() const 
-{ 
-	return m_level; 
+uint8_t Spawn::level() const
+{
+	return m_level;
 }
 
-uint16_t Spawn::deity() const 
-{ 
-	return m_deity; 
+uint16_t Spawn::deity() const
+{
+	return m_deity;
 }
 
 QString Spawn::cleanedName() const
@@ -783,7 +783,7 @@ uint16_t Spawn::race() const
 QString Spawn::raceString() const
 {
 	// sparse array of racenames, some are NULL
-	static const char*  racenames[] = 
+	static const char*  racenames[] =
 	{
 #include "races.h"
 	};
@@ -841,7 +841,7 @@ QString Spawn::info() const
 	i = tUnknown1;
 	if (equipment(i).itemId != SlotEmpty.itemId)
 	{
-		temp += QString(locs[i]) + ":" + print_material(equipment(i).itemId) + " "; 
+		temp += QString(locs[i]) + ":" + print_material(equipment(i).itemId) + " ";
 	}
 
 #if 1 // print also as slot U1 (Unknown1) until we're positive
@@ -873,7 +873,7 @@ QString Spawn::filterString() const
 
 	QString buff;
 	buff.sprintf("Name:%s:Level:%d:Race:%s:Class:%s:NPC:%d:X:%d:Y:%d:Z:%d:Light:%s:Deity:%s:RTeam:%d:DTeam:%d:Type:%s:LastName:%s:Guild:%s:",
-		(const char*)name.utf8(), level(), (const char*)raceString(), (const char*)classString(), ((NPC() == 10) ? 0 : NPC()), 
+		(const char*)name.utf8(), level(), (const char*)raceString(), (const char*)classString(), ((NPC() == 10) ? 0 : NPC()),
 		x(), y(), z(), (const char*)lightName(), (const char*)deityName(), raceTeam(), deityTeam(),
 		(const char*)typeString(), (const char*)lastName().utf8(), (const char*)guildTag().utf8());
 
@@ -885,19 +885,19 @@ QString Spawn::filterString() const
 
 QString Spawn::dumpString() const
 {
-	return QString("ID:") + QString::number(id()) 
-		+ ":Name:" + transformedName() 
-		+ ":LastName:" + lastName() 
+	return QString("ID:") + QString::number(id())
+		+ ":Name:" + transformedName()
+		+ ":LastName:" + lastName()
 		+ ":Level:" + QString::number(level())
 		+ ":HP:" + QString::number(HP())
 		+ ":MaxHP:" + QString::number(maxHP())
 		+ ":Race:" + raceString()
-		+ ":Class:" + classString() 
+		+ ":Class:" + classString()
 		+ ":NPC:" + QString::number(NPC())
-		+ ":X:" + QString::number(x()) 
+		+ ":X:" + QString::number(x())
 		+ ":Y:" + QString::number(y())
-		+ ":Z:" + QString::number(z()) 
-		+ ":Deity:" + deityName() 
+		+ ":Z:" + QString::number(z())
+		+ ":Deity:" + deityName()
 		+ ":RTeam:" + QString::number(raceTeam())
 		+ ":DTeam:" + QString::number(deityTeam())
 		+ ":Type:" + typeString()
@@ -916,7 +916,7 @@ bool Spawn::approximatePosition(bool animating, const QTime& curTime, EQPoint& n
 	if (animating)
 	{
 		// get the amount of time since last update
-		int msec = m_lastUpdate.msecsTo(curTime); 
+		int msec = m_lastUpdate.msecsTo(curTime);
 
 		if (msec < 0) // if passed midnight, adjust time accordingly
 			msec += 86400 * 1000;
@@ -1022,15 +1022,15 @@ void Drop::update(const makeDropStruct* d, const QString& name)
 		itemId = buff.toInt();
 
 		buff = "Drop: ";
-		if (itemId > 0) 
+		if (itemId > 0)
 			buff.append(print_item(itemId));
-		else 
+		else
 			buff.append(d->idFile);
 	}
 	else
 		buff = QString("Drop: '") + name + "'";
 
-	// set the name 
+	// set the name
 	setName(buff);
 
 	updateLast();
@@ -1041,7 +1041,7 @@ QString Drop::raceString() const
 	return "Drop";
 }
 
-QString Drop::classString() const 
+QString Drop::classString() const
 {
 	return "Thing";
 }

@@ -17,7 +17,7 @@
 
 
 SkillList::SkillList(Player* player, QWidget* parent, const char* name)
-  : SEQListView("SkillList", parent, name), 
+  : SEQListView("SkillList", parent, name),
 	m_pPlayer(player)
 {
 	int i;
@@ -117,11 +117,11 @@ void SkillList::changeSkill (int skillId, int value)
 }
 
 /* Delete all skills when zoning */
-void SkillList::deleteSkills() 
+void SkillList::deleteSkills()
 {
 	for (int i = 0; i < MAX_KNOWN_SKILLS; i++)
 	{
-		if (m_skillList[i] != NULL) 
+		if (m_skillList[i] != NULL)
 		{
 			delete m_skillList[i];
 			m_skillList[i] = NULL;
@@ -142,7 +142,7 @@ void SkillList::addLanguage (int langId, int value)
 		return;
 	}
 
-	// Check if this is a valid skill 
+	// Check if this is a valid skill
 	if (value == 255)
 		return;
 
@@ -154,7 +154,7 @@ void SkillList::addLanguage (int langId, int value)
 	else
 		str.sprintf ("%3d", value);
 
-	// If the language is not added yet, look up the correct skill namd and 
+	// If the language is not added yet, look up the correct skill namd and
 	// add it to the list
 	if (!m_languageList[langId])
 		m_languageList[langId] = new Q3ListViewItem (this, language_name(langId), str);
@@ -188,11 +188,11 @@ void SkillList::changeLanguage (int langId, int value)
 }
 
 /* Delete all skills when zoning */
-void SkillList::deleteLanguages() 
+void SkillList::deleteLanguages()
 {
 	for (int i=0; i < MAX_KNOWN_LANGS; i++)
 	{
-		if (m_languageList[i] != NULL) 
+		if (m_languageList[i] != NULL)
 		{
 			delete m_languageList[i];
 			m_languageList[i] = NULL;
@@ -200,7 +200,7 @@ void SkillList::deleteLanguages()
 	}
 }
 
-void SkillList::addLanguages() 
+void SkillList::addLanguages()
 {
 	if (!m_showLanguages)
 		return;
@@ -247,4 +247,3 @@ void SkillListWindow::savePrefs()
 #ifndef QMAKEBUILD
 #include "skilllist.moc"
 #endif
-

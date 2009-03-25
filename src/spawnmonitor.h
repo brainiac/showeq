@@ -1,13 +1,13 @@
 /*
  * spawnmonitor.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Borrowed from:  SINS Distributed under GPL
- * Portions Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). 
+ * Portions Copyright 2001 Zaphod (dohpaz@users.sourceforge.net).
  *
- * For use under the terms of the GNU General Public License, 
+ * For use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -57,19 +57,19 @@ public:
 	SpawnPoint(uint16_t spawnID, const EQPoint& loc, const QString& name = "", time_t diffTime = 0, uint32_t count = 1);
 	virtual ~SpawnPoint();
 
-	long secsLeft() const 
-	{ 
+	long secsLeft() const
+	{
 		return m_diffTime - (time(0) - m_deathTime);
 	}
 
 	static QString key(int x, int y, int z);
 	static QString key(const EQPoint& l)
 	{
-		return key(l.x(), l.y(), l.z()); 
+		return key(l.x(), l.y(), l.z());
 	}
-	QString key() const 
-	{ 
-		return key(x(), y(), z()); 
+	QString key() const
+	{
+		return key(x(), y(), z());
 	}
 
 	// getters
@@ -80,7 +80,7 @@ public:
 	int32_t count() const { return m_count; }
 	Spawn* getSpawn() const;
 	time_t spawnTime() const { return m_spawnTime; }
-	time_t deathTime() const { return m_deathTime; } 
+	time_t deathTime() const { return m_deathTime; }
 	time_t diffTime() const { return m_diffTime; }
 
 	// setters
@@ -107,7 +107,7 @@ class SpawnMonitor: public QObject
 	Q_OBJECT
 
 public:
-	SpawnMonitor(const DataLocationMgr* dataLocMgr, ZoneMgr* zoneMgr, SpawnShell* spawnShell, 
+	SpawnMonitor(const DataLocationMgr* dataLocMgr, ZoneMgr* zoneMgr, SpawnShell* spawnShell,
 		QObject* parent = 0, const char* name = "spawnmonitor");
 	virtual ~SpawnMonitor();
 

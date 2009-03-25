@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #ifndef _SPAWNLOG_H_
@@ -24,7 +24,7 @@ class Item;
 
 //----------------------------------------------------------------------
 // SpawnLog
-class SpawnLog: public SEQLogger 
+class SpawnLog: public SEQLogger
 {
    Q_OBJECT
 
@@ -40,9 +40,9 @@ public slots:
     void logDeleteSpawn(const Item *spawn);
 
 protected:
-	void logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z, 
+	void logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z,
 		const char *killer, int kid, int guildid);
-	void logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z, 
+	void logSpawnInfo(const char *type, const char *name, int id, int level, int x, int y, int z,
 		const QDateTime& eqDate, const QTime& time, const char *killer, int kid, int guildid);
 
 	int version;

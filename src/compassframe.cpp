@@ -27,32 +27,32 @@ CompassFrame::CompassFrame(Player* player, QWidget* parent, const char* name)
 	QLabel *labelx = new QLabel(showeq_params->retarded_coords ? "E/W:" : "X:");
 	labelx->setFixedHeight(labelx->sizeHint().height());
 	labelx->setAlignment(AlignLeft | AlignVCenter);
-      
+
 	// Create the xpos label
 	m_x = new QLabel("----");
 	m_x->setFixedHeight(m_x->sizeHint().height());
 	m_x->setAlignment(AlignRight | AlignVCenter);
-		
+
 	// Create the y: label
 	QLabel *labely = new QLabel(showeq_params->retarded_coords ? "N/S:" : "Y:");
 	labely->setFixedHeight(labely->sizeHint().height());
 	labely->setAlignment(AlignLeft | AlignVCenter);
-			
+
 	// Create the ypos label
 	m_y = new QLabel("----");
 	m_y->setFixedHeight(m_y->sizeHint().height());
 	m_y->setAlignment(AlignRight | AlignVCenter);
-		
+
 	// Create the z: label
 	QLabel *labelz = new QLabel("Z:");
 	labelz->setFixedHeight(labelz->sizeHint().height());
 	labelz->setAlignment(AlignLeft | AlignVCenter);
-	
+
 	// Create the zpos label
 	m_z = new QLabel("----");
-	m_z->setFixedHeight(m_z->sizeHint().height());      
+	m_z->setFixedHeight(m_z->sizeHint().height());
 	m_z->setAlignment(AlignRight | AlignVCenter);
-	
+
 	QHBoxLayout* coordsBoxLayout = new QHBoxLayout();
 	coordsBoxLayout->setSpacing(1);
 	coordsBoxLayout->setMargin(0);
@@ -72,25 +72,25 @@ CompassFrame::CompassFrame(Player* player, QWidget* parent, const char* name)
 	}
 	coordsBoxLayout->addWidget(labelz);
 	coordsBoxLayout->addWidget(m_z);
-	
+
 	QWidget* coordsBox = new QWidget();
 	coordsBox->setLayout(coordsBoxLayout);
-	
+
 	QVBoxLayout* pLayout = new QVBoxLayout();
 	pLayout->setMargin(0);
 	pLayout->setSpacing(0);
 	pLayout->setAlignment(AlignVCenter | AlignCenter);
 	pLayout->addWidget(m_compass);
 	pLayout->addWidget(coordsBox);
-	
+
 	QWidget* thisWidget = new QWidget();
 	thisWidget->setLayout(pLayout);
 	setWidget(thisWidget);
-	
+
 	// connect signals
-	connect(player, SIGNAL(posChanged(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, int32_t)), 
+	connect(player, SIGNAL(posChanged(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, int32_t)),
 			this, SLOT(posChanged(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, int32_t)));
-	
+
 	// initialize compass
 	m_compass->setPos(player->x(), player->y(), player->z());
 	m_compass->setHeading(player->headingDegrees());
@@ -115,7 +115,7 @@ void CompassFrame::posChanged(int16_t x, int16_t y, int16_t z,
 	// set compass info
 	m_compass->setPos(x, y, z);
 	m_compass->setHeading(heading);
-	
+
 	// set position labels
 	m_x->setText(QString::number(x));
 	m_y->setText(QString::number(y));

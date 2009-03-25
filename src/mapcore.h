@@ -384,9 +384,7 @@ public:
 	void setName(const QString& name) { m_name = name; }
 	void setColor(const QString& color)
 	{
-		printf("Hi");
 		m_color = color;
-		printf("Hi\n");
 	}
 
 private:

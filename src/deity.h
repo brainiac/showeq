@@ -23,4 +23,3 @@
 	"Tunare",         // DEITY_TUNARE = 215
 	"Veeshan",        // DEITY_VEESHAN = 216
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
-

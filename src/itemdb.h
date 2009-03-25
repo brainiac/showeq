@@ -1,6 +1,6 @@
 /*
  * itemdb.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  */
@@ -35,14 +35,14 @@ class DataLocationMgr;
 #endif
 
 
-// EQItemDB is the singleton object that manages the 
+// EQItemDB is the singleton object that manages the
 // Item databases
 class EQItemDB : public QObject, protected ITEMDBBASE
 {
 	Q_OBJECT
 
 public:
-	typedef enum 
+	typedef enum
 	{
 		DATA_DB = 0, // is the db to store the data in ShowEQ format
 		RAW_DATA_DB = 4 // contains the raw packet stream for an object
@@ -66,7 +66,7 @@ public:
 	// Upgrade existing data to new format
 	bool Upgrade();
 
-	// DB Access methods   
+	// DB Access methods
 	bool AddItem(const char* serializedItem, int level = 0);
 
 	// Delete's an item from the enabled databases
@@ -137,9 +137,9 @@ private:
 // EQItemDBIterator is used to iterate over item numbers  in databases
 //  Note: This class is only safe to access from a single thread
 //        (maintains local state data)
-//  Note: As GDBM is currently used, item numbers are retrieved in 
+//  Note: As GDBM is currently used, item numbers are retrieved in
 //        a hash order
-//  Note: The database is held open for read from the call to 
+//  Note: The database is held open for read from the call to
 //        GetFirstItemNumber() until either Done() is called
 //        or the iterator is deleted.  During this time no
 //        updates can occur to the selected DB.  So keep it brief
@@ -194,7 +194,7 @@ class EQItemDBEntry
 {
 public:
 	// public constructor (uses datatype declared in itemdb.cpp)
-	EQItemDBEntry(uint32_t itemNr, 
+	EQItemDBEntry(uint32_t itemNr,
 		void* entryData);
 
 	// public destructor so anyone can delete an instance
@@ -268,11 +268,7 @@ private:
 	struct EQItemDBEntryData* m_itemEntryData;
 	const char* m_itemName;
 	const char* m_itemLore;
-	uint32_t  m_itemNr; 
+	uint32_t  m_itemNr;
 };
 
 #endif // EQITEMDB_H
-
-
-
-

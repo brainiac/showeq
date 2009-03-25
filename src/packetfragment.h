@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #ifndef _PACKETFRAGMENT_H_
@@ -25,14 +25,14 @@ public:
 	EQPacketFragmentSequence();
 	EQPacketFragmentSequence(EQStreamID streamid);
 	~EQPacketFragmentSequence();
-	
+
 	void reset();
 	void addFragment(EQProtocolPacket& packet);
 	bool isComplete();
-	
+
 	uint8_t* data();
 	size_t size();
-	
+
 protected:
 	EQStreamID m_streamid;
 	uint8_t *m_data;

@@ -3,9 +3,9 @@
  *
  * ShowEQ Distributed under GPL
  * http://sourceforge.net/projects/seq/
- * 
- * Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 /*
@@ -64,21 +64,21 @@ typedef Q3IntDictIterator<Item> ItemConstIterator;
 class SpawnShell : public QObject
 {
 	Q_OBJECT
-	
+
 public:
 	SpawnShell(FilterMgr& filterMgr, ZoneMgr* zoneMgr, Player* player, GuildMgr* guildMgr);
-	
+
 	const Item* findID(spawnItemType type, int idSpawn);
 	const Item* findClosestItem(spawnItemType type, int16_t x, int16_t y, double& minDistance);
 	Spawn* findSpawnByName(const QString& name);
-	
+
 	void dumpSpawns(spawnItemType type, Q3TextStream& out);
 	FilterMgr* filterMgr() { return &m_filterMgr; }
 	const ItemMap& getConstMap(spawnItemType type) const;
 	const ItemMap& spawns() const;
 	const ItemMap& drops() const;
 	const ItemMap& doors() const;
-	
+
 signals:
 	void addItem(const Item* item);
 	void delItem(const Item* item);
@@ -88,10 +88,10 @@ signals:
 	void spawnConsidered(const Item* item);
 	void clearItems();
 	void numSpawns(int);
-	
-public slots: 
+
+public slots:
 	void clear();
-	
+
 	// slots to receive from EQPacket...
 	void newGroundItem(const uint8_t*, size_t, uint8_t);
 	void removeGroundItem(const uint8_t*, size_t, uint8_t);
@@ -119,13 +119,13 @@ public slots:
 	void killSpawn(const uint8_t* deadspawn);
 	void respawnFromHover(const uint8_t* respawn, size_t len, uint8_t dir);
 	void corpseLoc(const uint8_t* corpseLoc);
-	
+
 	void playerChangedID(uint16_t playerID);
 	void refilterSpawns();
 	void refilterSpawnsRuntime();
 	void saveSpawns();
 	void restoreSpawns();
-	
+
 protected:
 	void refilterSpawns(spawnItemType type);
 	void refilterSpawnsRuntime(spawnItemType type);
@@ -133,32 +133,32 @@ protected:
 	bool updateFilterFlags(Item* item);
 	bool updateRuntimeFilterFlags(Item* item);
 	int32_t fillSpawnStruct(spawnStruct *spawn, const uint8_t *data, size_t len, bool checkLen);
-	
+
 	ItemMap& getMap(spawnItemType type);
-	
+
 private:
 	ZoneMgr* m_zoneMgr;
 	Player* m_player;
 	FilterMgr& m_filterMgr;
 	GuildMgr* m_guildMgr;
-	
+
 	// track recently killed spawns
 	uint16_t m_deadSpawnID[MAX_DEAD_SPAWNIDS];
 	uint8_t m_cntDeadSpawnIDs;
 	uint8_t m_posDeadSpawnIDs;
-	
+
 	// maps to keep track of the different types of spawns
 	ItemMap m_spawns;
 	ItemMap m_drops;
 	ItemMap m_doors;
 	ItemMap m_players;
-	
+
 	// timer for saving spawns
 	QTimer* m_timer;
 };
 
 inline const ItemMap& SpawnShell::getConstMap(spawnItemType type) const
-{ 
+{
 	switch (type)
 	{
 		case tSpawn:
@@ -175,7 +175,7 @@ inline const ItemMap& SpawnShell::getConstMap(spawnItemType type) const
 }
 
 inline ItemMap& SpawnShell::getMap(spawnItemType type)
-{ 
+{
 	switch (type)
 	{
 		case tSpawn:
@@ -203,7 +203,7 @@ inline const ItemMap& SpawnShell::drops() const
 
 inline const ItemMap& SpawnShell::doors() const
 {
-	return m_doors; 
+	return m_doors;
 }
 
 //--------------------------------------------------

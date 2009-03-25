@@ -1,13 +1,13 @@
 /*
  * spawnpointlist.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Borrowed from:  SINS Distributed under GPL
- * Portions Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). 
+ * Portions Copyright 2001 Zaphod (dohpaz@users.sourceforge.net).
  *
- * For use under the terms of the GNU General Public License, 
+ * For use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */

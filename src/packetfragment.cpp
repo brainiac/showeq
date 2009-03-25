@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 /* Implementation of EQPacketFragmentSequence class */
@@ -70,7 +70,7 @@ void EQPacketFragmentSequence::reset()
 void EQPacketFragmentSequence::addFragment(EQProtocolPacket& packet)
 {
 #ifdef PACKET_PROCESS_FRAG_DIAG
-	debug ("EQPacketFragmentSequence::addFragment() stream %d seq %04x", 
+	debug ("EQPacketFragmentSequence::addFragment() stream %d seq %04x",
 		m_streamid, packet.arqSeq());
 #endif
 
@@ -94,7 +94,7 @@ void EQPacketFragmentSequence::addFragment(EQProtocolPacket& packet)
 			}
 #ifdef PACKET_PROCESS_FRAG_DIAG
 			seqDebug("EQPacketFragmentSequence::addFragment(): Allocating %d bytes for seq %04x, stream %d, OpCode 0x%04x",
-				m_totalLength, packet.arqSeq(), m_streamid, 
+				m_totalLength, packet.arqSeq(), m_streamid,
 				*(uint16_t*)&packet.payload()[4]);
 #endif
 			m_dataAllocSize = m_totalLength;
@@ -104,7 +104,7 @@ void EQPacketFragmentSequence::addFragment(EQProtocolPacket& packet)
 		// Now put in this fragment. Payload starts after alloc size.
 #ifdef PACKET_PROCESS_FRAG_DIAG
 		seqDebug("EQPacketFragmentSequence::addFragment(): Putting initial %d byte fragment into buffer for seq %04x, stream %d, OpCode 0x%04x",
-			packet.payloadLength()-4, packet.arqSeq(), m_streamid, 
+			packet.payloadLength()-4, packet.arqSeq(), m_streamid,
 			*(uint16_t*)&packet.payload()[4]);
 #endif
 		memcpy(m_data, &packet.payload()[4], packet.payloadLength()-4);
@@ -115,7 +115,7 @@ void EQPacketFragmentSequence::addFragment(EQProtocolPacket& packet)
 		// Add this fragment to the buffer. Payload starts immediately.
 #ifdef PACKET_PROCESS_FRAG_DIAG
 		seqDebug("EQPacketFragmentSequence::addFragment(): Putting %d byte fragment into buffer for seq %04x, stream %d, OpCode 0x%04x",
-			packet.payloadLength(), packet.arqSeq(), m_streamid, 
+			packet.payloadLength(), packet.arqSeq(), m_streamid,
 			*(uint16_t*)(m_data));
 #endif
 

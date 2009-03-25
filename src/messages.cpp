@@ -1,6 +1,6 @@
 /*
  * messages.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -25,11 +25,11 @@ Messages::Messages(DateTimeMgr* dateTimeMgr, MessageFilters* messageFilters,
 {
 	if (!s_messages)
 		s_messages = this;
-	
+
 	// connect signals for message filter changes
-	connect(m_messageFilters, SIGNAL(removed(uint32_t, uint8_t)), 
+	connect(m_messageFilters, SIGNAL(removed(uint32_t, uint8_t)),
 			this, SLOT(removedFilter(uint32_t, uint8_t)));
-	connect(m_messageFilters, SIGNAL(added(uint32_t, uint8_t, const MessageFilter&)), 
+	connect(m_messageFilters, SIGNAL(added(uint32_t, uint8_t, const MessageFilter&)),
 			this, SLOT(addedFilter(uint32_t, uint8_t, const MessageFilter&)));
 }
 
@@ -41,7 +41,7 @@ void Messages::addMessage(MessageType type, const QString& text, uint32_t color)
 {
 	// filter the message
 	uint32_t filterFlags = m_messageFilters->filterMessage(type, text);
-  
+
 	// create a message entry
 	MessageEntry message(type, QDateTime::currentDateTime(),
 						 m_dateTimeMgr->updatedDateTime(),
@@ -86,4 +86,3 @@ void Messages::addedFilter(uint32_t mask, uint8_t filterid, const MessageFilter&
 #ifndef QMAKEBUILD
 #include "messages.moc"
 #endif
-

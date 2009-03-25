@@ -1,13 +1,13 @@
 /*
  * xmlconv.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2002-2003 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -27,14 +27,14 @@ public:
 
 	static QByteArray getByteArrayFromString(const QString&);
 	static QString getStringFromByteArray(const QByteArray&);
-	
+
 protected:
 	bool getBoolFromString(const QString& s, bool& ok);
 	int getBase(const QDomElement& e);
 	QColor getColor(const QDomElement& e);
 	QString boolString(bool b);
 	void clearAttributes(QDomElement& e);
-		
+
 private:
 	QDomDocument& m_doc;
 };

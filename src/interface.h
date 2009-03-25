@@ -497,4 +497,3 @@ private:
 };
 
 #endif // EQINT_H
-

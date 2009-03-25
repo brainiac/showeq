@@ -1,13 +1,13 @@
 /*
  * gdbmconv.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -96,7 +96,7 @@ Db* DB3Convenience::GetDatabase(QString dbName)
 
 	// does the file exist
 	if (fileInfo.exists())
-	{ 
+	{
 		// file exists
 		// is the file readable
 		if (!fileInfo.isReadable())
@@ -146,7 +146,7 @@ Db* DB3Convenience::GetDatabase(QString dbName)
 			if (ret != 0)
 			{
 				// display a human readable error
-				fprintf(stderr, "DB3Convenience: DbEnv::open() failed: %s\n", 
+				fprintf(stderr, "DB3Convenience: DbEnv::open() failed: %s\n",
 					DbEnv::strerror(ret));
 
 				return (Db*)NULL;
@@ -176,7 +176,7 @@ Db* DB3Convenience::GetDatabase(QString dbName)
 		if (ret != 0)
 		{
 			// display a human readable error
-			fprintf(stderr, "DB3Convenience: Db::verify() failed on file '%s': %s\n", 
+			fprintf(stderr, "DB3Convenience: Db::verify() failed on file '%s': %s\n",
 				(const char*)dbName, DbEnv::strerror(ret));
 			if (ret == DB_RUNRECOVERY)
 				fprintf(stderr, "DB3Convenience: Please run db_recover on file '%s'\n",
@@ -203,8 +203,8 @@ Db* DB3Convenience::GetDatabase(QString dbName)
 	if (ret != 0)
 	{
 		// display a human readable error
-		fprintf(stderr, 
-			"DB3Convenience: Db::set_flags(0) failed on file '%s': %s\n", 
+		fprintf(stderr,
+			"DB3Convenience: Db::set_flags(0) failed on file '%s': %s\n",
 			(const char*)dbName, DbEnv::strerror(ret));
 
 		// delete the database handle since it's not usable
@@ -222,7 +222,7 @@ Db* DB3Convenience::GetDatabase(QString dbName)
 	if (ret != 0)
 	{
 		// display a human readable error
-		fprintf(stderr, "DB3Convenience: Db::open() failed on file '%s': %s\n", 
+		fprintf(stderr, "DB3Convenience: Db::open() failed on file '%s': %s\n",
 			(const char*)dbName, DbEnv::strerror(ret));
 
 		// check if it's a file access problem
@@ -238,7 +238,7 @@ Db* DB3Convenience::GetDatabase(QString dbName)
 		return (Db*)NULL;
 	}
 
-	// if successfully retrieved database pointer cache it for future use 
+	// if successfully retrieved database pointer cache it for future use
 	if (retdbp)
 		m_dbDict.insert(dbName, retdbp);
 
@@ -382,7 +382,7 @@ void DB3Convenience::Close(QString dbName)
 
 	// if a database was found, close it.
 	if (db != NULL)
-	{ 
+	{
 		// close the database
 		int ret = db->close(0);
 
@@ -609,7 +609,7 @@ void DB3Iterator::Release(Datum& data)
 
 void DB3Iterator::Done()
 {
-	// close the database cursor 
+	// close the database cursor
 	if (m_dbc != NULL)
 	{
 		m_dbc->close();

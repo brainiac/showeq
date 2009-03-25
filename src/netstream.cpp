@@ -4,7 +4,7 @@
  *  ShowEQ Distributed under GPL
  *  http://www.sourceforge.net/projects/seq
  *
- *  Copyright 2004 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Copyright 2004 Zaphod (dohpaz@users.sourceforge.net).
  *
  */
 
@@ -16,7 +16,7 @@ NetStream::NetStream(const uint8_t* data, size_t length)
 	m_length(length)
 {
 	m_lastPos = &m_data[m_length];
-	
+
 	reset();
 }
 
@@ -33,7 +33,7 @@ void NetStream::reset()
 uint8_t NetStream::readUInt8()
 {
 	uint8_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 1)
 	{
@@ -41,16 +41,16 @@ uint8_t NetStream::readUInt8()
 		val = *m_pos;
 		m_pos++;
 	}
-	else 
+	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
 int8_t NetStream::readInt8()
 {
 	int8_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 1)
 	{
@@ -58,16 +58,16 @@ int8_t NetStream::readInt8()
 		val = *(int8_t*)m_pos;
 		m_pos++;
 	}
-	else 
+	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
 uint16_t NetStream::readUInt16()
 {
 	uint16_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 2)
 	{
@@ -75,16 +75,16 @@ uint16_t NetStream::readUInt16()
 		val = eqntohuint16(m_pos);
 		m_pos += 2;
 	}
-	else 
+	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
 int16_t NetStream::readInt16()
 {
 	int16_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 2)
 	{
@@ -94,14 +94,14 @@ int16_t NetStream::readInt16()
 	}
 	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
 uint32_t NetStream::readUInt32()
 {
 	uint32_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 4)
 	{
@@ -109,16 +109,16 @@ uint32_t NetStream::readUInt32()
 		val = eqntohuint32(m_pos);
 		m_pos += 4;
 	}
-	else 
+	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
 int32_t NetStream::readInt32()
 {
 	uint32_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 4)
 	{
@@ -128,7 +128,7 @@ int32_t NetStream::readInt32()
 	}
 	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
@@ -139,17 +139,17 @@ QString NetStream::readText()
 	{
 		// note the starting positino
 		const uint8_t* startPos = m_pos;
-		
+
 		// search for the end of the NULL terminated string
 		while ((*m_pos != '\0') && (m_pos < m_lastPos))
 			m_pos++;
-		
+
 		size_t len = m_pos - startPos;
-		
+
 		// skip over trailing null
 		if (m_pos < m_lastPos)
 			m_pos++;
-		
+
 		// return the result as a QString
 		return QString::fromUtf8((const char*)startPos, len);
 	}
@@ -160,7 +160,7 @@ QString NetStream::readText()
 uint16_t NetStream::readUInt16NC()
 {
     uint16_t val;
-	
+
 	// make sure there is enough data left
     if ((m_lastPos - m_pos) >= 2)
     {
@@ -168,16 +168,16 @@ uint16_t NetStream::readUInt16NC()
         val = eqtohuint16(m_pos);
         m_pos += 2;
     }
-    else 
+    else
         val = 0; // just return 0 if no data left
-	
+
     return val;
 }
 
 uint32_t NetStream::readUInt32NC()
 {
 	uint32_t val;
-	
+
 	// make sure there is enough data left
 	if ((m_lastPos - m_pos) >= 4)
 	{
@@ -185,9 +185,9 @@ uint32_t NetStream::readUInt32NC()
 		val = eqtohuint32(m_pos);
 		m_pos += 4;
 	}
-	else 
+	else
 		val = 0; // just return 0 if no data left
-	
+
 	return val;
 }
 
@@ -204,7 +204,7 @@ BitStream::BitStream(const uint8_t* data, size_t length)
 {
     // Length in bits.
     m_totalBits = length * 8;
-	
+
     reset();
 }
 
@@ -224,21 +224,21 @@ uint32_t BitStream::readUInt(size_t bitCount)
     {
         return 0;
     }
-	
+
     const uint8_t* currentByte = m_data + (m_currentBit >> 3);
     uint32_t out = 0;
-	
+
     // Partial bytes in the lead and end. Full bytes in the middle.
     size_t leadPartialBitCount = 8 - (m_currentBit % 8);
     size_t middleByteCount;
     size_t tailPartialBitCount;
-	
+
     if (leadPartialBitCount == 8)
     {
         // Lead partial is a byte. So just put it in the middle.
         leadPartialBitCount = 0;
     }
-	
+
     if (leadPartialBitCount > bitCount)
     {
         // All the bits we need are in the lead partial. Note that when
@@ -246,7 +246,7 @@ uint32_t BitStream::readUInt(size_t bitCount)
         // it will be handled by the tailPartialBitCount.
         out = *currentByte & ((1 << leadPartialBitCount) - 1);
         m_currentBit += bitCount;
-		
+
         return out >> (leadPartialBitCount - bitCount);
     }
     else
@@ -254,34 +254,34 @@ uint32_t BitStream::readUInt(size_t bitCount)
         // Spanning multiple bytes. leadPartialBitCount is correct.
         // Calculate middle and tail.
         middleByteCount = (bitCount - leadPartialBitCount) / 8;
-        tailPartialBitCount = 
+        tailPartialBitCount =
 		bitCount - (leadPartialBitCount + middleByteCount*8);
     }
-	
+
     if (leadPartialBitCount > 0)
     {
         // Pull in partial from the lead byte
         out |= *currentByte & ((1 << leadPartialBitCount) - 1);
         currentByte++;
     }
-	
+
     // Middle
     for (size_t i=0; i<middleByteCount; i++)
     {
         out = (out << 8) | *currentByte;
         currentByte++;
     }
-	
+
     // And the end.
     if (tailPartialBitCount > 0)
     {
-        out = (out << tailPartialBitCount) | 
+        out = (out << tailPartialBitCount) |
 		(*currentByte >> (8 - tailPartialBitCount));
     }
-	
+
     // Update the current bit
     m_currentBit += bitCount;
-	
+
     return out;
 }
 
@@ -290,7 +290,6 @@ int32_t BitStream::readInt(size_t bitCount)
     // Sign
     uint32_t sign = readUInt(1);
     uint32_t retval = readUInt(bitCount - 1);
-	
+
     return retval * (sign ? -1 : 1);
 }
-

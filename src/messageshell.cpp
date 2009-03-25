@@ -1,6 +1,6 @@
 /*
  * messageshell.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -26,7 +26,7 @@
 
 //----------------------------------------------------------------------
 // MessageShell
-MessageShell::MessageShell(Messages* messages, EQStr* eqStrings, Spells* spells, ZoneMgr* zoneMgr, 
+MessageShell::MessageShell(Messages* messages, EQStr* eqStrings, Spells* spells, ZoneMgr* zoneMgr,
 		SpawnShell* spawnShell, Player* player, QObject* parent, const char* name)
   : QObject(parent, name),
 	m_messages(messages),
@@ -156,7 +156,7 @@ void MessageShell::formattedMessage(const uint8_t* data, size_t len, uint8_t dir
 
 	size_t messagesLen = len - ((uint8_t*)&fmsg->messages[0] - (uint8_t*)fmsg) - sizeof(fmsg->unknownXXXX);
 
-	m_messages->addMessage(chatColor2MessageType(fmsg->messageColor), 
+	m_messages->addMessage(chatColor2MessageType(fmsg->messageColor),
 		m_eqStrings->formatMessage(fmsg->messageFormat, fmsg->messages, messagesLen));
 }
 
@@ -169,7 +169,7 @@ void MessageShell::simpleMessage(const uint8_t* data, size_t len, uint8_t dir)
 	const simpleMessageStruct* smsg = (const simpleMessageStruct*)data;
 	QString tempStr;
 
-	m_messages->addMessage(chatColor2MessageType(smsg->messageColor), 
+	m_messages->addMessage(chatColor2MessageType(smsg->messageColor),
 		m_eqStrings->message(smsg->messageFormat));
 }
 
@@ -396,7 +396,7 @@ void MessageShell::zoneChanged(const QString& shortZoneName)
 
 
 void MessageShell::worldMOTD(const uint8_t* data)
-{ 
+{
 	const worldMOTDStruct* motd = (const worldMOTDStruct*)data;
 	m_messages->addMessage(MT_Motd, QString::fromUtf8(motd->message));
 }
@@ -448,7 +448,7 @@ void MessageShell::handleSpell(const uint8_t* data, size_t, uint8_t dir)
 
 	default:
 		{
-			tempStr.sprintf("Unknown Spell Event (%s) - '", 
+			tempStr.sprintf("Unknown Spell Event (%s) - '",
 				client  ? "Client --> Server" : "Server --> Client");
 			break;
 		}
@@ -467,7 +467,7 @@ void MessageShell::handleSpell(const uint8_t* data, size_t, uint8_t dir)
 
 		if (mem->param1 != 3)
 			tempStr.sprintf("%s%s', slot %d.", tempStr.ascii(), (const char*)spellName, mem->slotId);
-		else 
+		else
 		{
 			tempStr.sprintf("%s%s'.", tempStr.ascii(), (const char*)spellName);
 		}
@@ -506,7 +506,7 @@ void MessageShell::beginCast(const uint8_t* data)
 	else
 		spellName = spell_name(bcast->spellId);
 
-	tempStr.sprintf("%s%s' - Casting time is %g Second%s", 
+	tempStr.sprintf("%s%s' - Casting time is %g Second%s",
 		tempStr.ascii(), (const char*)spellName, casttime, casttime == 1 ? "" : "s");
 
 	m_messages->addMessage(MT_Spell, tempStr);
@@ -560,7 +560,7 @@ void MessageShell::startCast(const uint8_t* data)
 
 	QString tempStr;
 
-	tempStr.sprintf("You begin casting %s.  Current Target is %s(%d)", 
+	tempStr.sprintf("You begin casting %s.  Current Target is %s(%d)",
 		(const char*)spellName, (const char*)targetName, cast->targetId);
 
 	m_messages->addMessage(MT_Spell, tempStr);
@@ -590,15 +590,15 @@ void MessageShell::groupUpdate(const uint8_t* data, size_t size, uint8_t dir)
 		tempStr.sprintf("Update: The group has been disbanded when %s left.",
 			gmem->membername);
 		break;
-	case GUA_MakeLeader: 
-		tempStr.sprintf("Update: %s is now the leader of the group.", 
+	case GUA_MakeLeader:
+		tempStr.sprintf("Update: %s is now the leader of the group.",
 			gmem->membername);
 		break;
 	case GUA_Started:
 		tempStr.sprintf("Update: %s has formed the group.", gmem->membername);
 		break;
 	default:
-		tempStr.sprintf("Update: Unknown Update action:%d - %s - %s)", 
+		tempStr.sprintf("Update: Unknown Update action:%d - %s - %s)",
 			gmem->action, gmem->yourname, gmem->membername);
 	}
 
@@ -620,15 +620,15 @@ void MessageShell::groupDecline(const uint8_t* data)
 	switch(gmem->reason)
 	{
 	case 1:
-		tempStr.sprintf("Invite: %s declines invite from %s (player is grouped)", 
+		tempStr.sprintf("Invite: %s declines invite from %s (player is grouped)",
 			gmem->membername, gmem->yourname);
 		break;
 	case 3:
-		tempStr.sprintf("Invite: %s declines invite from %s", 
+		tempStr.sprintf("Invite: %s declines invite from %s",
 			gmem->membername, gmem->yourname);
 		break;
 	default:
-		tempStr.sprintf("Invite: %s declines invite from %s (unknown reason: %i)", 
+		tempStr.sprintf("Invite: %s declines invite from %s (unknown reason: %i)",
 			gmem->membername, gmem->yourname, gmem->reason);
 		break;
 	}
@@ -674,15 +674,15 @@ void MessageShell::player(const charProfileStruct* player)
 	message.sprintf("Level: %d", player->profile.level);
 	m_messages->addMessage(MT_Player, message);
 
-	message.sprintf("PlayerMoney: P=%d G=%d S=%d C=%d", player->profile.platinum, player->profile.gold, 
+	message.sprintf("PlayerMoney: P=%d G=%d S=%d C=%d", player->profile.platinum, player->profile.gold,
 		player->profile.silver, player->profile.copper);
 	m_messages->addMessage(MT_Player, message);
 
-	message.sprintf("BankMoney: P=%d G=%d S=%d C=%d", player->platinum_bank, player->gold_bank, 
+	message.sprintf("BankMoney: P=%d G=%d S=%d C=%d", player->platinum_bank, player->gold_bank,
 		player->silver_bank, player->copper_bank);
 	m_messages->addMessage(MT_Player, message);
 
-	message.sprintf("CursorMoney: P=%d G=%d S=%d C=%d", player->profile.platinum_cursor, player->profile.gold_cursor, 
+	message.sprintf("CursorMoney: P=%d G=%d S=%d C=%d", player->profile.platinum_cursor, player->profile.gold_cursor,
 		player->profile.silver_cursor, player->profile.copper_cursor);
 	m_messages->addMessage(MT_Player, message);
 
@@ -695,11 +695,11 @@ void MessageShell::player(const charProfileStruct* player)
 	message = "Exp: " + Commanate(player->exp);
 	m_messages->addMessage(MT_Player, message);
 
-	message = "ExpAA: " + Commanate(player->expAA) + " (aa spent: " + Commanate(player->profile.aa_spent) + 
+	message = "ExpAA: " + Commanate(player->expAA) + " (aa spent: " + Commanate(player->profile.aa_spent) +
 		", aa unspent: " + Commanate(player->profile.aa_unspent) + ")";
 	m_messages->addMessage(MT_Player, message);
 
-#if 0 
+#if 0
 	// Format for the aa values used to 0-1000 for group, 0-2000 for raid,
 	// but now it's different. Just drop it for now. %%%
 	message = "GroupLeadAA: " + Commanate(player->expGroupLeadAA) + " (unspent: " + Commanate(player->groupLeadAAUnspent) + ")";
@@ -763,7 +763,7 @@ void MessageShell::consent(const uint8_t* data, size_t, uint8_t dir)
 {
 	const consentResponseStruct* consent = (const consentResponseStruct*)data;
 
-	m_messages->addMessage(MT_General, 
+	m_messages->addMessage(MT_General,
 		QString("Consent: %1 %4 permission to drag %2's corpse in %3")
 		.arg(QString::fromUtf8(consent->consentee))
 		.arg(QString::fromUtf8(consent->consenter))
@@ -772,7 +772,7 @@ void MessageShell::consent(const uint8_t* data, size_t, uint8_t dir)
 }
 
 
-void MessageShell::consMessage(const uint8_t* data, size_t, uint8_t dir) 
+void MessageShell::consMessage(const uint8_t* data, size_t, uint8_t dir)
 {
 	const considerStruct * con = (const considerStruct*)data;
 	const Item* item;
@@ -785,14 +785,14 @@ void MessageShell::consMessage(const uint8_t* data, size_t, uint8_t dir)
 	QString msg("Your faction standing with ");
 
 	// is it you that you've conned?
-	if (con->playerid == con->targetid) 
+	if (con->playerid == con->targetid)
 	{
 		deity = m_player->deityName();
 
 		// well, this is You
 		msg += m_player->name();
 	}
-	else 
+	else
 	{
 		// find the spawn if it exists
 		item = m_spawnShell->findID(tSpawn, con->targetid);
@@ -811,7 +811,7 @@ void MessageShell::consMessage(const uint8_t* data, size_t, uint8_t dir)
 			msg += "Spawn:" + QString::number(con->targetid, 16);
 	} // else not yourself
 
-	switch (con->level) 
+	switch (con->level)
 	{
 	case 0:
 	case 20:
@@ -840,7 +840,7 @@ void MessageShell::consMessage(const uint8_t* data, size_t, uint8_t dir)
 	if (!deity.isEmpty())
 		msg += QString(" [") + deity + "]";
 
-	msg += QString(" is: ") + print_faction(con->faction) + " (" 
+	msg += QString(" is: ") + print_faction(con->faction) + " ("
 		+ QString::number(con->faction) + ")!";
 
 	m_messages->addMessage(MT_Consider, msg);
@@ -852,12 +852,12 @@ void MessageShell::setExp(uint32_t totalExp, uint32_t totalTick, uint32_t minExp
 {
 	QString tempStr;
 	tempStr.sprintf("Exp: Set: %u total, with %u (%u/330) into level with %u left, where 1/330 = %u",
-		totalExp, (totalExp - minExpLevel), totalTick, 
+		totalExp, (totalExp - minExpLevel), totalTick,
 		(maxExpLevel - totalExp), tickExpLevel);
 	m_messages->addMessage(MT_Player, tempStr);
 }
 
-void MessageShell::newExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick, 
+void MessageShell::newExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick,
 						  uint32_t minExpLevel, uint32_t maxExpLevel, uint32_t tickExpLevel)
 {
 	QString tempStr;
@@ -871,12 +871,12 @@ void MessageShell::newExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick
 		uint32_t needKills = leftExp / newExp;
 
 		tempStr.sprintf("Exp: New: %u, %u (%u/330) into level with %u left [~%u kills]",
-			newExp, (totalExp - minExpLevel), totalTick, 
+			newExp, (totalExp - minExpLevel), totalTick,
 			leftExp, needKills);
 	}
 	else
 		tempStr.sprintf("Exp: New: < %u, %u (%u/330) into level with %u left",
-		tickExpLevel, (totalExp - minExpLevel), totalTick, 
+		tickExpLevel, (totalExp - minExpLevel), totalTick,
 		leftExp);
 
 	m_messages->addMessage(MT_Player, tempStr);
@@ -891,7 +891,7 @@ void MessageShell::setAltExp(uint32_t totalExp, uint32_t maxExp, uint32_t tickEx
 	m_messages->addMessage(MT_Player, tempStr);
 }
 
-void MessageShell::newAltExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick, 
+void MessageShell::newAltExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTick,
 							 uint32_t maxExp, uint32_t tickExp, uint32_t aapoints)
 {
 	QString tempStr;
@@ -959,7 +959,7 @@ void MessageShell::killSpawn(const Item* item)
 	else
 		message = "Died in zone '%1' at %3,%2,%4";
 
-	m_messages->addMessage(MT_Player, 
+	m_messages->addMessage(MT_Player,
 		message.arg(m_zoneMgr->shortZoneName())
 		.arg(item->x()).arg(item->y()).arg(item->z()));
 }
@@ -974,7 +974,7 @@ void MessageShell::filterMessage(const QString& prefix, MessageType type, const 
 
 	// extra info if it is a spawn
 	if (spawn)
-		spawnInfo.sprintf(" LVL %d, HP %d/%d", 
+		spawnInfo.sprintf(" LVL %d, HP %d/%d",
 		spawn->level(), spawn->HP(), spawn->maxHP());
 
 	// use appropriate format depending on coordinate ordering
@@ -992,4 +992,3 @@ void MessageShell::filterMessage(const QString& prefix, MessageType type, const 
 #ifndef QMAKEBUILD
 #include "messageshell.moc"
 #endif
-

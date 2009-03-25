@@ -15,7 +15,7 @@
  *
  * VPacket is a generic class that allows recording and playback of
  * generic data with timestamps.  The data is stored in binary format
- * with headers around it so that it is retrieved in the same manner 
+ * with headers around it so that it is retrieved in the same manner
  * (exact same 'chunks') that it was sent.  This makes a good class for
  * a packet capture
  *
@@ -33,7 +33,7 @@
  * at a later time.  Using without a file is untested, as well as using to
  * Fetch and Record simultaneously.  These features may not be implemented
  */
- 
+
 #ifndef VPACKET_H
 #define VPACKET_H
 
@@ -57,7 +57,7 @@ struct packet_struct
 class VPacket
 {
 public:
-	VPacket(const char *name = 0, int timed = 3, 
+	VPacket(const char *name = 0, int timed = 3,
 			bool bRecord = false, int bufsize = DEFBUFSIZE);
 	~VPacket();
 

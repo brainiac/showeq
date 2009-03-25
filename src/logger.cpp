@@ -43,7 +43,7 @@ bool SEQLogger::open()
 	m_fp = fopen((const char*)m_filename,"a");
 
 	if (!m_fp)
-	{ 
+	{
 		if (!m_errOpen)
 		{
 			fprintf(stderr, "Error opening %s: %s (will keep trying)\n",
@@ -65,7 +65,7 @@ bool SEQLogger::open()
 }
 
 void SEQLogger::flush()
-{ 
+{
 	m_file.flush();
 }
 

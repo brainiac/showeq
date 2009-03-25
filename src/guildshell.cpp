@@ -4,7 +4,7 @@
  *  ShowEQ Distributed under GPL
  *  http://www.sourceforge.net/projects/seq
  *
- *  Copyright 2004-2007 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Copyright 2004-2007 Zaphod (dohpaz@users.sourceforge.net).
  *
  */
 
@@ -276,20 +276,20 @@ void GuildShell::guildMemberList(const uint8_t* data, size_t len)
 			(const char*)member->name(),
 			member->level(),
 			(const char*)classString(member->classVal()),
-			member->guildRank(), 
+			member->guildRank(),
 			(const char*)dt.toString(),
 			(const char*)member->publicNote(),
 			(const char*)m_zoneMgr->zoneNameFromID(member->zoneId()),
 			member->zoneInstance());
-#endif	     
+#endif
 	}
 
 	emit loaded();
 
 #ifdef GUILDSHELL_DIAG
-	seqDebug("Finished processing %d guildmates. %d chars in longest name.", 
+	seqDebug("Finished processing %d guildmates. %d chars in longest name.",
 		m_members.count(), m_maxNameLength);
-#endif // 
+#endif //
 }
 
 void GuildShell::guildMemberUpdate(const uint8_t* data, size_t len)
@@ -316,7 +316,7 @@ void GuildShell::guildMemberUpdate(const uint8_t* data, size_t len)
 		seqDebug("%d in members dict.", m_members.count());
 		GuildMemberDictIterator it(m_members); // See QDictIterator
 		for (; it.current(); ++it)
-			seqDebug("'%s'(%d): '%s'(%d)", 
+			seqDebug("'%s'(%d): '%s'(%d)",
 			(const char*)it.currentKey(), it.currentKey().length(),
 			(const char*)it.current()->name(), it.current()->name().length());
 #endif // GUILDSHELL_DIAG > 1
@@ -327,7 +327,3 @@ void GuildShell::guildMemberUpdate(const uint8_t* data, size_t len)
 #ifndef QMAKEBUILD
 #include "guildshell.moc"
 #endif
-
-
-
-

@@ -4,7 +4,7 @@
  *  ShowEQ Distributed under GPL
  *  http://www.sourceforge.net/projects/seq
  *
- *  Copyright 2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Copyright 2003 Zaphod (dohpaz@users.sourceforge.net).
  *
  */
 
@@ -20,7 +20,7 @@
 
 DataLocationMgr::DataLocationMgr(const QString& homeSubDir)
 {
-	// create package directory object 
+	// create package directory object
 	m_pkgData = PKGDATADIR;
 
 	// create the user directory object
@@ -86,7 +86,7 @@ QFileInfo DataLocationMgr::findFile(const QString& dir1, const QString& dir2, co
 	// create a QDir object on the preferred data directory
 	QDir dir(dir1);
 
-	// if the preferred data directory exists and the cd into its subdir works, 
+	// if the preferred data directory exists and the cd into its subdir works,
 	// then attempt to find the file in the user directory.
 	if (dir.exists() && dir.cd(subdir))
 		fileInfo = findFile(dir, filename, caseSensitive, false);
@@ -97,7 +97,7 @@ QFileInfo DataLocationMgr::findFile(const QString& dir1, const QString& dir2, co
 		// no file found yet, try the secondary data dir
 		dir.setPath(dir2);
 
-		// if the secondary data directory exists and the cd into its subdir 
+		// if the secondary data directory exists and the cd into its subdir
 		// works, then attempt to find the file in the user directory.
 		if (dir.exists() && dir.cd(subdir))
 			fileInfo = findFile(dir, filename, caseSensitive, false);
@@ -143,14 +143,14 @@ QFileInfo DataLocationMgr::findFile(const QDir& dir, const QString& filename,
 		}
 	}
 
-	// if doing a case sensitive match or there were no matches, 
+	// if doing a case sensitive match or there were no matches,
 	// just return the file info object
 	return QFileInfo(dir, filename);
 }
 
 QFileInfo DataLocationMgr::findWriteFile(const QString& dir1, const QString& dir2,
 										 const QString& subdir, const QString& filename,
-										 bool caseSensitive) const 
+										 bool caseSensitive) const
 {
 	// start out with an empty/invalid QFileInfo object
 	QFileInfo fileInfo;
@@ -158,7 +158,7 @@ QFileInfo DataLocationMgr::findWriteFile(const QString& dir1, const QString& dir
 	// create a QDir object on the preferred data directory
 	QDir dir(dir1);
 
-	// if the preferred data directory exists and the cd into its subdir works, 
+	// if the preferred data directory exists and the cd into its subdir works,
 	// then attempt to find the file in it..
 	if (dir.exists() && dir.cd(subdir))
 		fileInfo = findFile(dir, filename, caseSensitive, true);
@@ -176,11 +176,11 @@ QFileInfo DataLocationMgr::findWriteFile(const QString& dir1, const QString& dir
 	if (dirInfo.exists() && dirInfo.isDir() && dirInfo.isWritable())
 		return QFileInfo(dir, filename);
 
-	// no file found, nor able to make one under the preferred directory, 
+	// no file found, nor able to make one under the preferred directory,
 	// so try the secondary data dir
 	dir.setPath(dir2);
 
-	// if the secondary data directory exists and the cd into its subdir 
+	// if the secondary data directory exists and the cd into its subdir
 	// works, then attempt to find the file in it.
 	if (dir.exists() && dir.cd(subdir))
 		fileInfo = findFile(dir, filename, caseSensitive, true);
@@ -197,7 +197,7 @@ QFileInfo DataLocationMgr::findWriteFile(const QString& dir1, const QString& dir
 	if (dirInfo.exists() && dirInfo.isDir() && dirInfo.isWritable())
 		return QFileInfo(dir, filename);
 
-	// ok, last ditch desperation if the fileInfo doesn't exist yet 
+	// ok, last ditch desperation if the fileInfo doesn't exist yet
 	// which means neither directory exist/is writable, so try /tmp, /temp,
 	// or /var/tmp
 	dir = QDir::root();

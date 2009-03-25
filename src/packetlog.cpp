@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2004 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2004,2007 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2004,2007 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #include <QDateTime>
@@ -158,12 +158,12 @@ void PacketLog::logData(const uint8_t* data, size_t len, uint8_t dir, uint16_t o
 
 	if (opcodeEntry)
 	{
-		m_out << "[Name: " << opcodeEntry->name() << "][Updated: " 
+		m_out << "[Name: " << opcodeEntry->name() << "][Updated: "
 			<< opcodeEntry->updated() << "]";
 		const EQPacketPayload* payload = opcodeEntry->find(data, len, dir);
 		if (payload)
 		{
-			m_out << "[Type: " << payload->typeName() << " (" 
+			m_out << "[Type: " << payload->typeName() << " ("
 				<< payload->typeSize() << ")";
 			switch (payload->sizeCheckType())
 			{
@@ -214,15 +214,15 @@ void PacketLog::logData(const EQUDPIPPacketFormat& packet)
 
 	m_out << QDateTime::currentDateTime().toString(m_timeDateFormat)
 		<< " [" << sourceStr << ":" << QString::number(packet.getSourcePort())
-		<< "->" << destStr << ":" << QString::number(packet.getDestPort()) 
+		<< "->" << destStr << ":" << QString::number(packet.getDestPort())
 		<< "] [Size: " << QString::number(packet.getUDPPayloadLength()) << "]"
 		<< endl;
 
 	uint16_t calcedCRC;
 
-	if (! packet.hasCRC() || 
+	if (! packet.hasCRC() ||
 		packet.crc() == (calcedCRC = ::calcCRC16(
-		packet.rawPacket(), packet.rawPacketLength()-2, 
+		packet.rawPacket(), packet.rawPacketLength()-2,
 		packet.getSessionKey())))
 	{
 		m_out << "[OPCode: 0x" << QString::number(packet.getNetOpCode(), 16) << "]";
@@ -246,8 +246,8 @@ void PacketLog::logData(const EQUDPIPPacketFormat& packet)
 	}
 	else
 	{
-		m_out << "[BAD CRC (" << QString::number(calcedCRC, 16) 
-			<< " != " << QString::number(packet.crc(), 16) 
+		m_out << "[BAD CRC (" << QString::number(calcedCRC, 16)
+			<< " != " << QString::number(packet.crc(), 16)
 			<< ")! Sessions crossed or unitialized or non-EQ packet! ]" << endl;
 		m_out << "[SessionKey: " << QString::number(packet.getSessionKey(), 16) <<
 			"]" << endl;
@@ -257,7 +257,7 @@ void PacketLog::logData(const EQUDPIPPacketFormat& packet)
 
 	// make sure there is a len before attempting to output it
 	if (packet.payloadLength())
-		outputData(packet.getUDPPayloadLength(), 
+		outputData(packet.getUDPPayloadLength(),
 		(const uint8_t*)packet.getUDPPayload());
 	else
 		m_out << endl;
@@ -357,7 +357,7 @@ void UnknownPacketLog::packet(const uint8_t* data, size_t len, uint8_t dir, uint
 // OpCodeMonitorPacketLog
 OPCodeMonitorPacketLog::OPCodeMonitorPacketLog(EQPacket& packet, const QString& fname, QObject* parent, const char* name)
   : PacketLog(packet, fname, parent, name),
-	m_log(false), 
+	m_log(false),
 	m_view(false)
 {
 }
@@ -456,7 +456,7 @@ void OPCodeMonitorPacketLog::packet(const uint8_t* data, size_t len, uint8_t dir
 	{
 		if (opcode == MonitoredOpCodeList[ uiIndex ][ 0 ])
 		{
-			if ((MonitoredOpCodeList[uiIndex][1] == dir) || 
+			if ((MonitoredOpCodeList[uiIndex][1] == dir) ||
 				(MonitoredOpCodeList[uiIndex][1] == 3))
 			{
 				if ((!unknown && (MonitoredOpCodeList[uiIndex][2] == 1)) || unknown)
@@ -480,4 +480,3 @@ void OPCodeMonitorPacketLog::packet(const uint8_t* data, size_t len, uint8_t dir
 #ifndef QMAKEBUILD
 #include "packetlog.moc"
 #endif
-

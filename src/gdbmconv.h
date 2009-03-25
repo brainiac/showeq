@@ -1,13 +1,13 @@
 /*
  * gdbmconv.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -77,13 +77,13 @@ public:
 
 	// retrieves the first available key value (in hash order)
 	// Note: Opens the database for read
-	bool GetFirstKey(GDBMConvenience* gdbmc, 
-		QString dbName, 
+	bool GetFirstKey(GDBMConvenience* gdbmc,
+		QString dbName,
 		Datum& key);
 
 	// retrieves the first available key value (in hash order)
 	// Note: Opens the database for read
-	bool GetFirstKey(QString dbName, 
+	bool GetFirstKey(QString dbName,
 		Datum& key);
 
 	// retrieves the next available key (in hash order)
@@ -109,7 +109,3 @@ private:
 };
 
 #endif // GDBMCONV_H
-
-
-
-

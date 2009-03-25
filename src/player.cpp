@@ -99,7 +99,7 @@ Player::~Player()
 
 void Player::clear()
 {
-	m_plusMana = 0; 
+	m_plusMana = 0;
 	m_plusHP = 0;
 	m_maxSTR = 0;
 	m_maxSTA = 0;
@@ -270,7 +270,7 @@ void Player::loadProfile(const playerProfileStruct& player)
 	m_validMana = true;
 
 	seqDebug("Player::backfill(bind): Pos (%f/%f/%f) Heading: %f",
-		player.binds[0].x, player.binds[0].y, player.binds[0].z, 
+		player.binds[0].x, player.binds[0].y, player.binds[0].z,
 		player.binds[0].heading);
 
 	// Exp handling
@@ -589,7 +589,7 @@ void Player::updateExp(const uint8_t* data)
 
 	// if this is just setting the percentage, then do nothing (use info from
 	//   player packet).
-	if (exp->type == 0) 
+	if (exp->type == 0)
 	{
 		// signal the setting of experience
 		emit setExp(m_currentExp, exp->exp, m_minExp, m_maxExp, m_tickExp);
@@ -601,12 +601,12 @@ void Player::updateExp(const uint8_t* data)
 	uint32_t realExp = (m_tickExp * exp->exp) + m_minExp;
 	uint32_t expIncrement;
 
-	// if realExperience is greater then current expereince, calculate the 
+	// if realExperience is greater then current expereince, calculate the
 	// increment, otherwise this was a < 1/330'th kill and/or the calculated
 	// real experience is in that funky rounding place that EQ has...
 	if (realExp > m_currentExp)
 		expIncrement = realExp - m_currentExp;
-	else 
+	else
 		expIncrement = 0;
 
 	m_currentExp = realExp;
@@ -758,7 +758,7 @@ void Player::playerUpdateSelf(const uint8_t* data, size_t, uint8_t dir)
 
 	if ((dir != DIR_Client) && (pupdate->spawnId != id()))
 		return;
-	
+
 	if (dir == DIR_Client)
 	{
 		setPlayerID(pupdate->spawnId);
@@ -771,7 +771,7 @@ void Player::playerUpdateSelf(const uint8_t* data, size_t, uint8_t dir)
 	int16_t pdeltaY = int16_t(pupdate->deltaY);
 	int16_t pdeltaZ = int16_t(pupdate->deltaZ);
 
-#if 0 
+#if 0
 	// Dump position updates for debugging client update changes
 	for (int i=0; i<sizeof(playerSelfPosStruct); i++)
 	{
@@ -801,23 +801,23 @@ void Player::playerUpdateSelf(const uint8_t* data, size_t, uint8_t dir)
 		/*0012*/ float y;                 // y coord (1st loc value)
 		/*0016*/ signed deltaHeading:10;  // change in heading
 		unsigned animation:10;   // animation
-		unsigned padding0016:12; // ***Placeholder 
+		unsigned padding0016:12; // ***Placeholder
 		/*0020*/ float deltaX;            // Change in x
 		/*0024*/ float deltaY;            // Change in y
 		/*0028*/ float z;                 // z coord (3rd loc value)
 		/*0032*/ float deltaZ;            // Change in z
 		/*0036*/ unsigned padding0036:10; // animation
 		unsigned heading:12;     // Directional heading
-		unsigned padding0037:10; // ***Placeholder 
+		unsigned padding0037:10; // ***Placeholder
 		/*0040*/
 	};
 #pragma pack(0)
 	struct pos *p = (struct pos *)data;
 	printf("[%.2x](%f, %f, %f), dx %f dy %f dz %f head %f dhead %f anim %d (%x, %x, %x, %x)\n",
-		p->spawnId, p->x, p->y, p->z, 
-		p->deltaX, p->deltaY, p->deltaZ, 
+		p->spawnId, p->x, p->y, p->z,
+		p->deltaX, p->deltaY, p->deltaZ,
 		float(p->heading), float(p->deltaHeading),
-		p->animation, *(uint16_t*) p->unknown0002, p->padding0016, 
+		p->animation, *(uint16_t*) p->unknown0002, p->padding0016,
 		p->padding0028,
 		*(uint32_t*) p->unknown0004);
 #endif
@@ -854,7 +854,7 @@ void Player::consMessage(const uint8_t* data, size_t, uint8_t dir)
 
 	const considerStruct * con = (const considerStruct*)data;
 
-	if (con->playerid == con->targetid) 
+	if (con->playerid == con->targetid)
 		setPlayerID(con->playerid);
 }
 
@@ -1019,15 +1019,15 @@ void Player::setConColorBase(ColorLevel level, const QColor& color)
 void Player::fillConTable()
 {
 	int grayRange = 0;
-	int greenRange = 0; 
+	int greenRange = 0;
 
-	if (level() < 9) 
-	{ // 1 - 8 
+	if (level() < 9)
+	{ // 1 - 8
 		grayRange = -4;
 		greenRange = -8;
-	} 
-	else if (level() < 13) 
-	{ // 9 - 12 
+	}
+	else if (level() < 13)
+	{ // 9 - 12
 		grayRange = -6;
 		greenRange = -4;
 	}
@@ -1036,12 +1036,12 @@ void Player::fillConTable()
 		grayRange = -7;
 		greenRange = -5;
 	}
-	else if (level() < 21) 
-	{ // 17-20 
+	else if (level() < 21)
+	{ // 17-20
 		grayRange = -8;
 		greenRange = -6;
 	}
-	else if (level() < 25) 
+	else if (level() < 25)
 	{ // 21-24
 		grayRange = -9;
 		greenRange = -7;
@@ -1051,12 +1051,12 @@ void Player::fillConTable()
 		grayRange = -10;
 		greenRange = -8;
 	}
-	else if (level() < 33) 
+	else if (level() < 33)
 	{ // 29-32
 		grayRange = -11;
 		greenRange = -9;
 	}
-	else if (level() < 37) 
+	else if (level() < 37)
 	{ // 33-36
 		grayRange = -13;
 		greenRange = -10;
@@ -1071,17 +1071,17 @@ void Player::fillConTable()
 		grayRange = -16;
 		greenRange = -12;
 	}
-	else if (level() < 49) 
+	else if (level() < 49)
 	{ // 45 - 48
 		grayRange = -17;
 		greenRange = -13;
 	}
-	else if (level() < 53) 
+	else if (level() < 53)
 	{ // 49 - 52
 		grayRange = -18;
 		greenRange = -14;
 	}
-	else if (level() < 57) 
+	else if (level() < 57)
 	{ // 53 - 56
 		grayRange = -20;
 		greenRange = -15;
@@ -1092,7 +1092,7 @@ void Player::fillConTable()
 		greenRange = -16;
 	}
 
-	uint8_t spawnLevel = 1; 
+	uint8_t spawnLevel = 1;
 
 	// Gray spawns. No gradient.
 	for (; spawnLevel <= grayRange + level(); spawnLevel++)
@@ -1106,7 +1106,7 @@ void Player::fillConTable()
 		m_conTable[spawnLevel] = m_conColorBases[tGreenSpawn];
 	}
 
-	// Light blue spawns. Again, no gradient. Light blue is 
+	// Light blue spawns. Again, no gradient. Light blue is
 	// blue, but under 5 levels below, so for levels where there is
 	// no light blue, this is negative.
 	for (; spawnLevel < level() - 5; spawnLevel++)
@@ -1167,13 +1167,13 @@ QString Player::lastName() const
 	return (!m_useAutoDetectedSettings || m_useDefaults ? m_defaultLastName : m_lastName);
 }
 
-uint16_t Player::deity() const 
-{ 
-	return ((!m_useAutoDetectedSettings || m_useDefaults) ? m_defaultDeity : m_deity); 
+uint16_t Player::deity() const
+{
+	return ((!m_useAutoDetectedSettings || m_useDefaults) ? m_defaultDeity : m_deity);
 }
 
-uint8_t Player::level() const 
-{ 
+uint8_t Player::level() const
+{
 	return (!m_useAutoDetectedSettings || m_useDefaults ? m_defaultLevel : m_level);
 }
 
@@ -1326,7 +1326,7 @@ void Player::restorePlayerState()
 		if (zoneShortName != m_zoneMgr->shortZoneName().lower())
 		{
 			seqWarn("\aWARNING: Restoring player state for potentially incorrect zone (%s != %s)!",
-				(const char*)zoneShortName, 
+				(const char*)zoneShortName,
 				(const char*)m_zoneMgr->shortZoneName().lower());
 		}
 
@@ -1390,7 +1390,7 @@ void Player::restorePlayerState()
 			m_validAttributes = true;
 		if (flags & 0x20)
 			m_useDefaults = true;
-		else 
+		else
 			m_useDefaults = false;
 
 		// now fill out the con table
@@ -1409,4 +1409,3 @@ void Player::restorePlayerState()
 #ifndef QMAKEBUILD
 #include "player.moc"
 #endif
-

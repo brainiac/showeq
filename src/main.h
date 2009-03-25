@@ -37,7 +37,7 @@ struct ShowEQParams
 	uint32_t		walkpathlength;
 	bool			systime_spawntime;
 	bool			showRealName;
-  
+
 	bool			saveZoneState;
 	bool			savePlayerState;
 	bool			saveSpawns;
@@ -49,7 +49,7 @@ struct ShowEQParams
 	bool			useUpdateRadius;
 	uint8_t			filterZoneDataLog;
 };
- 
+
 extern struct ShowEQParams *showeq_params;
 
 #endif

@@ -4,8 +4,8 @@
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  */
- 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS 
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
     "Generic",              // 0x00
     "1HSword",              // 0x01
     "2HSword",              // 0x02
@@ -82,7 +82,7 @@
     "Kiln",                 // 0x49
     "PotteryWheel",         // 0x4a
     "WoodenCrook",          // 0x4b
-    "Vah Shir Sword",       // 0x4c 
+    "Vah Shir Sword",       // 0x4c
     NULL,                   // 0x4d - Unknown Weapon
     NULL,                   // 0x4e - Unknown Weapon
     NULL,                   // 0x4f - Unknown Weapon
@@ -263,4 +263,3 @@
     NULL,                   // 0xfe - Unknown Weapon
     NULL,                   // 0xff - Unknown Weapon
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
-

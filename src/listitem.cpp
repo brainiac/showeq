@@ -1,6 +1,6 @@
 /*
  *  listitem.cpp
- *  
+ *
  *  ShowEQ Distributed under GPL
  *  http://seq.sourceforge.net/
  */
@@ -69,8 +69,8 @@ int main(int argc, char *argv[])
 			doNameSearch = true;
 
 		// if any of the other CGI form fields is not empty, perform a search
-		if (!searchType.isEmpty() || !searchSlot.isEmpty() || 
-			!searchSkill.isEmpty() || !searchRace.isEmpty() || 
+		if (!searchType.isEmpty() || !searchSlot.isEmpty() ||
+			!searchSkill.isEmpty() || !searchRace.isEmpty() ||
 			!searchClass.isEmpty() || !searchEffect.isEmpty())
 			doSearch = true;
 
@@ -109,14 +109,14 @@ int main(int argc, char *argv[])
 		"          td { border: black 1px solid }\n"
 		"          th { border: black 1px solid }\n"
 		"      -->\n"
-		"    </style>\n" 
+		"    </style>\n"
 		"  </HEAD>\n"
 		"  <BODY>\n";
 
 	/* Print HTML header */
 	out << header;
 
-	const char* footer = 
+	const char* footer =
 		"  </BODY>\n"
 		"</HTML>\n";
 
@@ -135,12 +135,12 @@ int main(int argc, char *argv[])
 			out << " with name containing '" << searchName << "'";
 
 		if (!searchType.isEmpty())
-		{ 
+		{
 			if (searchType == "B")
 				out << " that are a book";
 			else if (searchType == "C")
 				out << " that are a container";
-		} 
+		}
 
 		if (!searchSlot.isEmpty())
 			out << " that go in '" << searchSlot << "' slot";
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 	}
 
 	// beware Netscape 4.x style sheet brain death
-	if ((userAgent.contains("Mozilla/4.") == 1) && 
+	if ((userAgent.contains("Mozilla/4.") == 1) &&
 		(userAgent.contains("MSIE") == 0))
 		out << "<TABLE border=2 cellspacing=0 cellpadding=2>\n";
 	else
@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
 	out << "<TD align=center><STRONG>Effect</STRONG></TD>";
 	out << "</TR>\n";
 
-	// retrieve a pointer to the item database   
+	// retrieve a pointer to the item database
 	EQItemDB* pItemDB = new EQItemDB;
 
 	// if unsuccessful then can't do any more
@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	bool hasNext = true;  
+	bool hasNext = true;
 	uint32_t currentItemNr;
 	uint32_t nextItemNr;
 	QString nameString;
@@ -251,8 +251,8 @@ int main(int argc, char *argv[])
 		// if there is a search to be performed, do it.
 		if (doNameSearch)
 		{
-			if (!searchName.isEmpty()) 
-			{ 
+			if (!searchName.isEmpty())
+			{
 				if ((loreString.find(searchName, 0, false) == -1) &&
 					(nameString.find(searchName, 0, false) == -1))
 					continue;
@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
 			}
 
 			if (!searchSlot.isEmpty())
-			{	
+			{
 				// There are multiple slots, some with numbers, so search for
 				// the correct slot in the list
 				if ((print_slot(entry->GetSlots()).find(searchSlot)) == -1)
@@ -278,7 +278,7 @@ int main(int argc, char *argv[])
 			}
 
 			if (!searchSkill.isEmpty())
-			{	
+			{
 				// there is only one skill, check for exact match
 				if (print_skill(entry->GetSkill()) != searchSkill)
 					continue;
@@ -287,7 +287,7 @@ int main(int argc, char *argv[])
 			QString tmpval;
 
 			if (!searchRace.isEmpty())
-			{	
+			{
 				// get the list of races
 				tmpval = print_races(entry->GetRaces());
 
@@ -300,14 +300,14 @@ int main(int argc, char *argv[])
 			}
 
 			if (!searchClass.isEmpty())
-			{	
+			{
 				// get the list of races
 				tmpval = print_classes(entry->GetClasses());
 
 				// check to see if the item is for ALL/No classes, or
 				// if it contains the requested class
 				if ((tmpval != "ALL") &&
-					(tmpval != "NONE") && 
+					(tmpval != "NONE") &&
 					(tmpval.find(searchClass) == -1))
 					continue;
 			}
@@ -335,33 +335,33 @@ int main(int argc, char *argv[])
 
 		// only display icon number if we have that data
 		if (displayIcon)
-			out << "<TD><IMG SRC=\"" << ICON_DIR << entry->GetIconNr() 
+			out << "<TD><IMG SRC=\"" << ICON_DIR << entry->GetIconNr()
 			<< ".png\" alt=\"Icon: " << entry->GetIconNr() << "\"/></TD>";
 		else
 			out << "<TD>" << entry->GetIconNr() << "</TD>";
 
 		out << "<TD><A HREF=\"showitem.cgi?item=" << currentItemNr
-			<< ";displayBinary=y" 
+			<< ";displayBinary=y"
 			<< (displayIcon ? ";showIcon=y" : ";hideIcon=y")
 			<< "\">" << currentItemNr << "</A></TD>";
 
 		// only display a name if we have the item name
 		if (!nameString.isEmpty())
-			out << "<TD><A HREF=\"showitem.cgi?item=" << currentItemNr 
+			out << "<TD><A HREF=\"showitem.cgi?item=" << currentItemNr
 			<< (displayIcon ? ";showIcon=y" : ";hideIcon=y")
 			<< "\">" << nameString << "</A></TD>";
 		else
 			out << "<TD>&nbsp</TD>";
 
-		// display the lore string 
-		out << "<TD><A HREF=\"showitem.cgi?item=" << currentItemNr 
+		// display the lore string
+		out << "<TD><A HREF=\"showitem.cgi?item=" << currentItemNr
 			<< (displayIcon ? ";showIcon=y" : ";hideIcon=y")
 			<< "\">" << loreString << "</A></TD>";
 
 		// if we have more data for this item, print it
-		out << "<TD align=right>" << entry->GetWeight() << "</TD>"; 
+		out << "<TD align=right>" << entry->GetWeight() << "</TD>";
 		out << "<TD>" << size_name(entry->GetSize()) << "</TD>";
-		out << "<TD align=right>" << (int)entry->GetCost() << "</TD>"; 
+		out << "<TD align=right>" << (int)entry->GetCost() << "</TD>";
 		if (entry->GetMaterial())
 			out << QString("<TD align=center><FONT COLOR=\"#%1\">%2</FONT>")
 			.arg(entry->GetColor(), 6, 16)
@@ -398,7 +398,7 @@ int main(int argc, char *argv[])
 		out << buff << "</TD>";
 
 		if (entry->GetSlots())
-			out << "<TD align=center>" << print_slot(entry->GetSlots()) 
+			out << "<TD align=center>" << print_slot(entry->GetSlots())
 			<< "</TD>";
 		else
 			out << "<TD>&nbsp</TD>";
@@ -494,8 +494,8 @@ int main(int argc, char *argv[])
 	out << "</HTML>";
 }
 
-void displaySelectOption(Q3TextStream& out, 
-						 const QString& value, 
+void displaySelectOption(Q3TextStream& out,
+						 const QString& value,
 						 const QString& name,
 						 const QString currentChk)
 {
@@ -505,18 +505,18 @@ void displaySelectOption(Q3TextStream& out,
 	out << ">" << name << "</OPTION>\n";
 }
 
-void displayForm(Q3TextStream& out, 
-				 CGI& cgiconv, 
+void displayForm(Q3TextStream& out,
+				 CGI& cgiconv,
 				 bool displayIcon)
 {
 	QString currentChk;
 	QString userAgent = cgiconv.getHTTPUserAgent();
 
-	out << "<FORM method=\"POST\" action=\"" << cgiconv.getScriptName() 
+	out << "<FORM method=\"POST\" action=\"" << cgiconv.getScriptName()
 		<< "\">\n";
 
 	// beware Netscape 4.x style sheet brain death
-	if ((userAgent.contains("Mozilla/4.") == 1) && 
+	if ((userAgent.contains("Mozilla/4.") == 1) &&
 		(userAgent.contains("MSIE") == 0))
 		out << "<TABLE border=2 cellspacing=0 cellpadding=2>\n";
 	else
@@ -530,7 +530,7 @@ void displayForm(Q3TextStream& out,
 	out << "<TR>";
 
 	// name field
-	out << "<TD><INPUT type=\"text\" name=\"name\" value=\"" 
+	out << "<TD><INPUT type=\"text\" name=\"name\" value=\""
 		<< cgiconv.getParamValue("name") << "\"/></TD>\n";
 
 	// Type field
@@ -621,12 +621,12 @@ void displayForm(Q3TextStream& out,
 	out << "</SELECT></TD>\n";
 
 	// Effect field
-	out << "<TD><INPUT type=\"text\" name=\"effect\" value=\"" 
+	out << "<TD><INPUT type=\"text\" name=\"effect\" value=\""
 		<< cgiconv.getParamValue("effect") << "\"/></TD>\n";
 
 	// Should the icon be displayed
 	out << "<TD>";
-	if (displayIcon) 
+	if (displayIcon)
 		out << "<INPUT type=\"checkbox\" name=\"hideIcon\" value=\"y\" unchecked>\n"
 		<< "Hide</TD>\n";
 
@@ -642,4 +642,3 @@ void displayForm(Q3TextStream& out,
 	out << "</TABLE>\n";
 	out << "</FORM>\n";
 }
-

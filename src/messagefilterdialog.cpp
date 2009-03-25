@@ -35,9 +35,9 @@ using namespace Qt;
 class MessageFilterListBoxText : public Q3ListBoxText
 {
 public:
-	MessageFilterListBoxText(Q3ListBox * listbox, const QString & text = QString::null, 
+	MessageFilterListBoxText(Q3ListBox * listbox, const QString & text = QString::null,
 		uint32_t data = 0);
-	MessageFilterListBoxText(Q3ListBox * listbox, Q3ListBoxItem* after, 
+	MessageFilterListBoxText(Q3ListBox * listbox, Q3ListBoxItem* after,
 		const QString & text = QString::null, uint32_t data = 0);
 	virtual ~MessageFilterListBoxText();
 
@@ -48,14 +48,14 @@ protected:
 	uint32_t m_data;
 };
 
-MessageFilterListBoxText::MessageFilterListBoxText(Q3ListBox * listbox, const QString & text, 
+MessageFilterListBoxText::MessageFilterListBoxText(Q3ListBox * listbox, const QString & text,
 												   uint32_t data)
   : Q3ListBoxText(listbox, text),
 	m_data(data)
 {
 }
 
-MessageFilterListBoxText::MessageFilterListBoxText(Q3ListBox* listbox, Q3ListBoxItem* after, 
+MessageFilterListBoxText::MessageFilterListBoxText(Q3ListBox* listbox, Q3ListBoxItem* after,
 												   const QString& text, uint32_t data)
   : Q3ListBoxText(listbox, text, after),
 	m_data(data)
@@ -71,7 +71,7 @@ MessageFilterListBoxText::~MessageFilterListBoxText()
 MessageFilterDialog::MessageFilterDialog(MessageFilters* filters, const QString& caption,
 		QWidget* parent, const char* name)
   : QDialog(parent, name, false, Qt::WType_Dialog),
-	m_filters(filters), 
+	m_filters(filters),
 	m_currentFilterNum(0xFF),
 	m_currentFilter(0)
 {
@@ -83,7 +83,7 @@ MessageFilterDialog::MessageFilterDialog(MessageFilters* filters, const QString&
 
 	// connect to the MessageFilter signals
 	connect(m_filters, SIGNAL(removed(uint32_t, uint8_t)), this, SLOT(removedFilter(uint32_t, uint8_t)));
-	connect(m_filters, SIGNAL(added(uint32_t, uint8_t, const MessageFilter&)), 
+	connect(m_filters, SIGNAL(added(uint32_t, uint8_t, const MessageFilter&)),
 		this, SLOT(addedFilter(uint32_t, uint8_t, const MessageFilter&)));
 
 	// setup the dialog
@@ -100,8 +100,8 @@ MessageFilterDialog::MessageFilterDialog(MessageFilters* filters, const QString&
 	column1Layout->addWidget(m_existingFilters, 10);
 	label->setBuddy(m_existingFilters);
 	m_existingFilters->setSelectionMode(Q3ListBox::Single);
-	connect(m_existingFilters, SIGNAL(selectionChanged(Q3ListBoxItem*)), 
-		this, SLOT(existingFilterSelectionChanged(Q3ListBoxItem*))); 
+	connect(m_existingFilters, SIGNAL(selectionChanged(Q3ListBoxItem*)),
+		this, SLOT(existingFilterSelectionChanged(Q3ListBoxItem*)));
 
 	m_new = new QPushButton("Ne&w", this);
 	column1Layout->addWidget(m_new, 1, AlignCenter);
@@ -206,10 +206,10 @@ void MessageFilterDialog::addFilter()
 			// get the message type of the selected item
 			type = ((MessageFilterListBoxText*)currentLBT)->data();
 
-			// add its flag to the types 
+			// add its flag to the types
 			types |= (uint64_t(1) << type);
 		}
-	} 
+	}
 
 	// create a message filter object
 	MessageFilter newFilter(m_name->text(), types, QRegExp(m_pattern->text()));
@@ -348,7 +348,7 @@ void MessageFilterDialog::addedFilter(uint32_t mask, uint8_t filterid, const Mes
 {
 	if (m_existingFilters->count() == 0)
 	{
-		// add the new message filter 
+		// add the new message filter
 		new MessageFilterListBoxText(m_existingFilters, 0,
 			filter.name(), filterid);
 
@@ -419,7 +419,7 @@ void MessageFilterDialog::checkState()
 			}
 
 			// only enable add if the filter is different from its predecessor
-			if ((m_name->text() != m_currentFilter->name()) || 
+			if ((m_name->text() != m_currentFilter->name()) ||
 				(m_pattern->text() != m_currentFilter->regexp().pattern()) ||
 				(types != m_currentFilter->types()))
 				add = true;

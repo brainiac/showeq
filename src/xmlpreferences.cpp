@@ -1,14 +1,14 @@
 /*
  * xmlconv.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
- * Copyright 2002-2003,2007 Zaphod (dohpaz@users.sourceforge.net). 
+ * Copyright 2002-2003,2007 Zaphod (dohpaz@users.sourceforge.net).
  *     All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -29,7 +29,7 @@ const char* seqPrefSysId = "seqpref.dtd";
 
 XMLPreferences::XMLPreferences(const QString& defaultsFileName, const QString& inFileName)
   : m_defaultsFilename(defaultsFileName),
-    m_filename(inFileName), 
+    m_filename(inFileName),
     m_modified(0)
 {
 	m_templateDoc.sprintf(
@@ -90,7 +90,7 @@ void XMLPreferences::loadPreferences(const QString& filename, PrefSectionDict& d
 {
 	QDomDocument doc(seqPrefName);
 	QFile f(filename);
-	
+
 	if (!f.open(QIODevice::ReadOnly))
 	{
 		qWarning("Unable to open file: %s!", (const char*)filename);
@@ -99,17 +99,17 @@ void XMLPreferences::loadPreferences(const QString& filename, PrefSectionDict& d
 
 	QString errorMsg;
 	int errorLine = 0;
-	int errorColumn = 0;	
+	int errorColumn = 0;
 	if (!doc.setContent(&f, false, &errorMsg, &errorLine, &errorColumn))
 	{
 		qWarning("Error processing file: %s!\n\t %s on line %d in column %d!", (const char*)filename, (const char*)errorMsg, errorLine, errorColumn);
 		f.close();
 		return;
 	}
-	
+
 	DomConvenience conv(doc);
-	
-	// do more processing here	
+
+	// do more processing here
 	QDomNodeList sectionList = doc.elementsByTagName("section");
 	for (uint i = 0; i < sectionList.length(); i++)
 	{
@@ -149,7 +149,7 @@ void XMLPreferences::loadPreferences(const QString& filename, PrefSectionDict& d
 		{
 			// create the new preference dictionary
 			commentSectionDict = new CommentDict();
-			
+
 			// insert the preference dictionary into the section
 			m_commentSections[sectionName] = commentSectionDict;
 		}
@@ -163,10 +163,10 @@ void XMLPreferences::loadPreferences(const QString& filename, PrefSectionDict& d
 				qWarning("property in section '%s' without name! Ignoring!", (const char*)sectionName);
 				continue;
 			}
-		
+
 			QString propertyName = property.attribute("name");
 			bool foundValue = false;
-     
+
 			// iterate over the nodes under the property
 			for (QDomNode n = property.firstChild(); !n.isNull(); n = n.nextSibling())
 			{
@@ -200,7 +200,7 @@ void XMLPreferences::loadPreferences(const QString& filename, PrefSectionDict& d
 
 				// found the value
 				foundValue = true;
-       
+
 				// insert value into the section dictionary
 				sectionDict->insert(propertyName, value);
 				break;
@@ -231,7 +231,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 	QDomDocument doc;
 	QFile f(filename);
 	bool loaded = false;
-	
+
 	if (f.open(QIODevice::ReadOnly))
 	{
 		QString errorMsg;
@@ -241,7 +241,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 			loaded = true;
 		else
 		{
-			qWarning("Error processing file: %s!\n\t %s on line %d in column %d!", 
+			qWarning("Error processing file: %s!\n\t %s on line %d in column %d!",
 					 (const char*)filename, (const char*)errorMsg, errorLine, errorColumn);
 		}
 
@@ -268,7 +268,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 	}
 
 	// do more processing here
-	DomConvenience conv(doc);	
+	DomConvenience conv(doc);
 	QDomElement docElem = doc.documentElement();
 	QDomNodeList sectionList = docElem.elementsByTagName("section");
 
@@ -276,11 +276,11 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 	while (sdit.hasNext())
 	{
 		sdit.next();
-		
+
 		QString sectionName = sdit.key();
 		PreferenceDict* sectionDict = sdit.value();
 		QDomElement section;
-		
+
 		// iterate over all the sections in the document
 		for (uint i = 0; i < sectionList.length(); i++)
 		{
@@ -320,11 +320,11 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 		while (pdit.hasNext())
 		{
 			pdit.next();
-			
+
 			QString propertyName = pdit.key();
 			QVariant propertyValue = pdit.value();
 			QDomElement property;
-			
+
 			// get all the property elements in the section
 			QDomNodeList propertyList = section.elementsByTagName("property");
 
@@ -346,7 +346,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 					break;
 				}
 			}
-			
+
 			// if no property was found, create a new one
 			if (property.isNull())
 			{
@@ -371,7 +371,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 				// don't replace comments
 				if (n.toElement().tagName() == "comment")
 					continue;
-				
+
 				// convert it to an element
 				value = n.toElement();
 				break;
@@ -382,7 +382,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 			{
 				// create the value element, bogus type, will be filled in later
 				value = doc.createElement("bogus");
-	
+
 				// append the new value to the property
 				property.appendChild(value);
 			}
@@ -398,7 +398,7 @@ void XMLPreferences::savePreferences(const QString& filename, PrefSectionDict& d
 	// write the modified DOM to disk
 	if (!f.open(QIODevice::WriteOnly))
 	{
-		qWarning("Unable to open file for writing: %s!", 
+		qWarning("Unable to open file for writing: %s!",
 				 (const char*)filename);
 	}
 
@@ -436,7 +436,7 @@ bool XMLPreferences::getPref(const QString& inName, const QString& inSection, QV
 		if (m_runtimeSections.contains(inSection))
 		{
 			sectionDict = m_runtimeSections[inSection];
-		
+
 			// if so, then see if the preference exists
 			if (sectionDict->contains(inName))
 			{
@@ -452,7 +452,7 @@ bool XMLPreferences::getPref(const QString& inName, const QString& inSection, QV
 		if (m_userSections.contains(inSection))
 		{
 			sectionDict = m_userSections[inSection];
-			
+
 			// if so, then see if the preference exists
 			if (sectionDict->contains(inName))
 			{
@@ -468,7 +468,7 @@ bool XMLPreferences::getPref(const QString& inName, const QString& inSection, QV
 		if (m_defaultsSections.contains(inSection))
 		{
 			sectionDict = m_defaultsSections[inSection];
-			
+
 			// if so, then see if the preference exists
 			if (sectionDict->contains(inName))
 			{
@@ -496,7 +496,7 @@ void XMLPreferences::setPref(const QString& inName, const QString& inSection, co
 void XMLPreferences::setPref(PrefSectionDict& dict, const QString& inName, const QString& inSection, const QVariant& inValue)
 {
 	PreferenceDict* sectionDict;
-	
+
 	if (dict.contains(inSection))
 	{
 		sectionDict = dict[inSection];
@@ -520,34 +520,34 @@ QString XMLPreferences::getPrefComment(const QString& inName, const QString& inS
 }
 
 bool XMLPreferences::isSection(const QString& inSection, Persistence pers)
-{	
+{
 	if (pers & Runtime)
 	{
 		// see if the section exists in the dictionary
 		if (m_runtimeSections.contains(inSection))
 			return true;
 	}
-	
+
 	if (pers & User)
 	{
 		// see if the section exists in user settings.
 		if (m_userSections.contains(inSection))
 			return true;
 	}
-	
+
 	if (pers & Defaults)
 	{
 		if (m_defaultsSections.contains(inSection))
 			return true;
 	}
-	
+
 	return false;
 }
 
 bool XMLPreferences::isPreference(const QString& inName, const QString& inSection, Persistence pers)
 {
 	QVariant dummy;
-	
+
 	// try to retrieve the preference
 	return getPref(inName, inSection, dummy, pers);
 }
@@ -560,7 +560,7 @@ retType XMLPreferences::getPref##Type(const QString& inName, const QString& inSe
 	if (getPref(inName, inSection, value, pers)) \
 		return value.value<retType>(); \
 	return def; \
-} 
+}
 
 // implement common get methods
 getPrefMethod(QString, String, const QString&);
@@ -592,34 +592,34 @@ QKeySequence XMLPreferences::getPrefKey(const QString& inName, const QString& in
 	if (getPref(inName, inSection, preference, pers))
 	{
 		QKeySequence key = def;
-		
+
 		switch (preference.type())
 		{
 			case QVariant::KeySequence:
 				key = preference.value<QKeySequence>();
 				break;
-				
+
 			case QVariant::String:
 				// convert it to a key
 				key = (QKeySequence)preference.toString();
 				break;
-				
+
 			case QVariant::Int:
 			case QVariant::UInt:
 			case QVariant::Double:
 				key = (QKeySequence)preference.toInt();
-				break;	
-				
+				break;
+
 			default:
 				qWarning("XMLPreferences::getPrefKey(%s, %s): preference found,\n"
 						 "\tbut type %s is not convertable to type key!",
 						 (const char*)inName, (const char*)inSection, preference.typeName());
 		}
-		
+
 		// fix the key code and return (deal with Qt brain death)
 		return key & ~Qt::UNICODE_ACCEL;
 	}
-	
+
 	// return the default value
 	return def;
 }
@@ -628,28 +628,28 @@ QKeySequence XMLPreferences::getPrefKey(const QString& inName, const QString& in
 int64_t XMLPreferences::getPrefInt64(const QString& inName, const QString& inSection, int64_t def, Persistence pers)
 {
 	QVariant pref;
-	
+
 	// if preference was retrieved, return it as a string
 	if (getPref(inName, inSection, pref, pers))
 	{
 		int64_t value = def;
-		
+
 		switch (pref.type())
 		{
 			case QVariant::String:
 				// convert it to a int64_t (in base 16)
 				value = strtoll(pref.toString(), 0, 16);
 				break;
-				
+
 			case QVariant::Int:
 			case QVariant::UInt:
 				value = pref.toInt();
 				break;
-				
+
 			case QVariant::Double:
 				value = (int64_t)pref.toDouble();
 				break;
-				
+
 			case QVariant::ByteArray:
 			{
 				QByteArray& ba = pref.asByteArray();
@@ -657,18 +657,18 @@ int64_t XMLPreferences::getPrefInt64(const QString& inName, const QString& inSec
 					value = *(int64_t*)ba.data();
 				break;
 			}
-				
+
 			default:
 				qWarning("XMLPreferences::getPrefInt64(%s, %s, %lld): preference found,\n"
 						 "\tbut type %s is not convertable to type int64_t!",
 						 (const char*)inName, (const char*)inSection, (long long)def,
 						 pref.typeName());
 		}
-		
+
 		// return the key
 		return value;
 	}
-	
+
 	// return the default value
 	return def;
 }
@@ -676,28 +676,28 @@ int64_t XMLPreferences::getPrefInt64(const QString& inName, const QString& inSec
 uint64_t XMLPreferences::getPrefUInt64(const QString& inName, const QString& inSection, uint64_t def, Persistence pers)
 {
 	QVariant pref;
-		
+
 	// if preference was retrieved, return it as a string
 	if (getPref(inName, inSection, pref, pers))
 	{
 		uint64_t value = def;
-		
+
 		switch (pref.type())
 		{
 			case QVariant::String:
 				// convert it to a uint64_t (in base 16)
 				value = strtoull(pref.toString(), 0, 16);
 				break;
-				
+
 			case QVariant::Int:
 			case QVariant::UInt:
 				value = pref.toInt();
 				break;
-				
+
 			case QVariant::Double:
 				value = (uint64_t)pref.toDouble();
 				break;
-				
+
 			case QVariant::ByteArray:
 			{
 				QByteArray& ba = pref.asByteArray();
@@ -705,17 +705,17 @@ uint64_t XMLPreferences::getPrefUInt64(const QString& inName, const QString& inS
 					value = *(uint64_t*)ba.data();
 				break;
 			}
-				
+
 			default:
 				qWarning("XMLPreferences::getPrefUInt64(%s, %s, %llu): preference found,\n"
 						 "\tbut type %s is not convertable to type uint64_t!",
 						 (const char*)inName, (const char*)inSection, (unsigned long long)def, pref.typeName());
 		}
-		
+
 		// return the key
 		return value;
 	}
-	
+
 	// return the default value
 	return def;
 }
@@ -727,7 +727,7 @@ QVariant XMLPreferences::getPrefVariant(const QString& inName, const QString& in
 	QVariant value;
 	if (getPref(inName, inSection, value, pers))
 		return value;
-	
+
 	// return the default value
 	return outDefault;
 }
@@ -737,7 +737,7 @@ QVariant XMLPreferences::getPrefVariant(const QString& inName, const QString& in
 void XMLPreferences::setPref##Type(const QString& inName, const QString& inSection, In inValue, Persistence pers) \
 { \
 	setPref(inName, inSection, QVariant(inValue), pers); \
-} 
+}
 
 // create the methods for the types that can be handled the common way
 setPrefMethod(String, const QString&);

@@ -7,7 +7,7 @@
  *  ShowEQ Distributed under GPL
  *  http://www.sourceforge.net/projects/seq
  */
- 
+
 #ifndef EDITOR_H
 #define EDITOR_H
 
@@ -26,16 +26,16 @@ public:
 	EditorWindow();
 	EditorWindow(const char *fileName);
 	~EditorWindow();
-	
+
 protected:
     void closeEvent(QCloseEvent*);
-	
+
 private slots:
     void load();
     void load(const char *fileName);
     void save();
     void saveAs();
-	
+
 private:
     Q3MultiLineEdit *e;
     Q3ToolBar *fileTools;
@@ -44,4 +44,3 @@ private:
 
 
 #endif
-

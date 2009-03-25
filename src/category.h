@@ -1,6 +1,6 @@
 /*
  * category.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  */
@@ -52,10 +52,10 @@ public:
 	const QString& filter() const { return m_filter; }
 	const QString& filterout() const { return m_filterout; }
 	const QColor& color() const { return m_color; }
-	
+
 	bool isFilteredFilter() const { return m_filteredFilter; };
 	bool isFiltered(const QString& filterString, int level = 0) const;
-	
+
 private:
 	QString m_name;
 	QString m_filter;
@@ -71,14 +71,14 @@ private:
 class CategoryDlg : public QDialog
 {
 	Q_OBJECT
-	
+
 public:
 	CategoryDlg(QWidget *parent, QString name);
 	virtual ~CategoryDlg();
-		
+
 public slots:
 	void select_color();
-		
+
 public:
 	QLineEdit* m_Name;
 	QLineEdit* m_Filter;
@@ -95,33 +95,33 @@ typedef Q3PtrListIterator<const Category> CategoryListConstIterator;
 class CategoryMgr : public QObject
 {
 	Q_OBJECT
-	
+
 public:
 	enum { tMaxNumCategories = 32 };
-		
+
 	CategoryMgr(QObject* parent = 0, const char* name = 0);
 	virtual ~CategoryMgr();
-		
+
 	const CategoryList findCategories(const QString& filterString, int level) const;
 	const CategoryList& getCategories() const { return m_categories; }
 	uint count() { return m_categories.count(); }
-		
+
 	const Category* addCategory(const QString& name, const QString& filter, const QString& filterout, QColor color = Qt::black);
 	void remCategory(const Category* cat);
-		
+
 public slots:
 	void clearCategories();
 	void addCategory(QWidget* parent = 0);
 	void editCategories(const Category* cat, QWidget* parent = 0);
 	void reloadCategories();
 	void savePrefs();
-		
+
 signals:
 	void addCategory(const Category* cat);
 	void delCategory(const Category* cat);
 	void clearedCategories();
 	void loadedCategories();
-		
+
 private:
 	CategoryList m_categories;
 	bool m_changed;

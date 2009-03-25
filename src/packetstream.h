@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #ifndef _PACKETSTREAM_H_
@@ -32,20 +32,20 @@ class EQPacketOPCode;
 
 //----------------------------------------------------------------------
 // map type used for caching packets.
-// The reason an STL Map was chosen is because of it's consitent 
+// The reason an STL Map was chosen is because of it's consitent
 // O(log N) behavior, and the key based ordering it enforces
 // is convenient for processing.  The Qt hash based collections really
 // arent' appropriate for the packet cache for multiple reasons:
 // 1) They're iterators are based on key hash order and not key value
-// ordering, making certain algorithms more difficult and potentially 
-// time consuming. 2) insertions into an STL map can be optimized 
-// with the packet data's behavior using an iterator as a hint for 
+// ordering, making certain algorithms more difficult and potentially
+// time consuming. 2) insertions into an STL map can be optimized
+// with the packet data's behavior using an iterator as a hint for
 // insertion location to typically yield amortized constant time behavior.
-// 3) Another optimization possible with this data set using a map 
-// is that after a matching arq is found in the map,  finding/checking 
-// for the next expected arq in the map only requires moving the iterator 
+// 3) Another optimization possible with this data set using a map
+// is that after a matching arq is found in the map,  finding/checking
+// for the next expected arq in the map only requires moving the iterator
 // forward (using operator++()) once and checking if the next key in the list
-// is the expected arq.  This results in the check for followers to only 
+// is the expected arq.  This results in the check for followers to only
 // taking amortized constant time (as opposed to the O(log N) of map::find()
 // or constant average time of the hash find methods.
 typedef std::map<uint16_t, EQProtocolPacket* > EQPacketMap;
@@ -60,7 +60,7 @@ public:
 	EQPacketStream(EQStreamID streamid, uint8_t dir, uint16_t m_arqSeqGiveUp,
 				   EQPacketOPCodeDB& opcodeDB, QObject* parent = 0, const char* name = 0);
 	~EQPacketStream();
-	
+
 	void reset();
 	uint8_t sessionTracking();
 	void setSessionTracking(uint8_t);
@@ -71,17 +71,17 @@ public:
 	EQStreamID streamID();
 	size_t currentCacheSize();
 	uint16_t arqSeqExp();
-	bool connect2(const QString& opcodeName, const char* payload,  EQSizeCheckType szt, 
+	bool connect2(const QString& opcodeName, const char* payload,  EQSizeCheckType szt,
 				  const QObject* receiver, const char* member);
 	void receiveSessionKey(uint32_t sessionId, EQStreamID streamid, uint32_t sessionKey);
 	void close(uint32_t sessionId, EQStreamID streamid, uint8_t sessionTracking);
 	uint16_t calculateCRC(EQProtocolPacket& packet);
 	uint32_t getSessionKey() const { return m_sessionKey; }
 	uint32_t getMaxLength() const { return m_maxLength; }
-  
+
 public slots:
 	void handlePacket(EQUDPIPPacketFormat& pf);
-  
+
 signals:
 	void rawPacket(const uint8_t* data, size_t len, uint8_t dir, uint16_t opcode);
 	void decodedPacket(const uint8_t* data, size_t len, uint8_t dir, uint16_t opcode, const EQPacketOPCode* opcodeEntry);
@@ -96,7 +96,7 @@ signals:
 
 	// Signal a new session key being received
 	void sessionKey(uint32_t sessionId, EQStreamID streadid, uint32_t sessionKey);
-		    
+
 	// used for net_stats display
 	void cacheSize(int, int);
 	void seqReceive(int, int);
@@ -126,7 +126,7 @@ protected:
 	uint16_t m_arqSeqExp;
 	uint16_t m_arqSeqGiveUp;
 	bool m_arqSeqFound;
-  
+
 	// Fragment handling
 	EQPacketFragmentSequence m_fragment;
 
@@ -187,5 +187,3 @@ inline uint16_t EQPacketStream::arqSeqExp()
 }
 
 #endif //  _PACKETSTREAM_H_
-
-

@@ -3,9 +3,9 @@
  *
  *  ShowEQ Distributed under GPL
  *  http://seq.sourceforge.net/
- * 
- * Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 #include <QPixmap>
@@ -23,7 +23,7 @@ void MapIconDialog::apply()
 {
     QPen pen;
     QBrush brush;
-    
+
     // get image settings
     m_currentMapIcon.setImage(m_useImage->isChecked());
     m_currentMapIcon.setImageStyle(MapIconStyle(m_imageImage->currentItem()));
@@ -38,7 +38,7 @@ void MapIconDialog::apply()
     brush = m_currentMapIcon.imageBrush();
     brush.setStyle(Qt::BrushStyle(m_imageBrushStyle->currentItem()));
     m_currentMapIcon.setImageBrush(brush);
-    
+
     // get highlight settings
     m_currentMapIcon.setHighlight(m_useHighlight->isChecked());
     m_currentMapIcon.setHighlightStyle(MapIconStyle(m_highlightImage->currentItem()));
@@ -53,7 +53,7 @@ void MapIconDialog::apply()
     brush = m_currentMapIcon.highlightBrush();
     brush.setStyle(Qt::BrushStyle(m_highlightBrushStyle->currentItem()));
     m_currentMapIcon.setHighlightBrush(brush);
-	
+
     // get line settings
     m_currentMapIcon.setShowLine0(m_showLine0->isChecked());
     pen = m_currentMapIcon.line0Pen();
@@ -70,7 +70,7 @@ void MapIconDialog::apply()
     pen.setStyle(Qt::PenStyle(m_line2PenStyle->currentItem()));
     pen.setWidth(m_line2PenWidth->value());
     m_currentMapIcon.setLine2Pen(pen);
-    
+
     // get general settings
     m_currentMapIcon.setShowName(m_showName->isChecked());
     m_currentMapIcon.setShowWalkPath(m_showWalkPath->isChecked());
@@ -79,18 +79,18 @@ void MapIconDialog::apply()
     pen.setStyle(Qt::PenStyle(m_walkPathPenStyle->currentItem()));
     pen.setWidth(m_walkPathPenWidth->value());
     m_currentMapIcon.setWalkPathPen(pen);
-	
+
     // make sure the map icons object has been set
     if (m_mapIcons)
     {
 		// set the current map icon types settings
 		m_mapIcons->setIcon(m_currentMapIconType, m_currentMapIcon);
-		
+
 		// retrieve the current map icon types settings (just to be sure)
 		m_currentMapIcon = m_mapIcons->icon(m_currentMapIconType);
     }
-    
-    // re-setup the display 
+
+    // re-setup the display
     setupMapIconDisplay();
 }
 
@@ -98,26 +98,26 @@ void MapIconDialog::revert()
 {
     // revert the map icon data to the last backup
     m_currentMapIcon = m_currentMapIconBackup;
-    
-    // re-setup the display 
+
+    // re-setup the display
     setupMapIconDisplay();
 }
 
 
 void MapIconDialog::init()
 {
-	
+
     QString temp;
     // setup the map icons combo box
     for (int i = tIconTypeDrop; i <= tIconTypeMax; i++)
 	{
 		m_mapIconCombo->insertItem(MapIcons::iconTypeName((MapIconType)i), i-1);
     }
-	
+
     int sizeWH = m_mapIconCombo->height() - 8;
     int size = sizeWH >> 1;
     QPoint point(size, size);
-	
+
     // setup the image styles
     QPixmap pix(QSize(sizeWH+1, sizeWH+1));
     QPen pen(Qt::black, 0, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin);
@@ -129,12 +129,12 @@ void MapIconDialog::init()
 		p.setBrush(QBrush(Qt::gray));
 		MapIcon::paintIconImage(MapIconStyle(i), p, point, size, sizeWH);
 		p.end();
-		
+
 		temp = MapIcon::iconStyleName((MapIconStyle)i);
 		m_imageImage->insertItem(pix, temp, i);
 		m_highlightImage->insertItem(pix, temp, i);
     }
-	
+
     // setup the image sizes
     for (int i = tIconSizeNone; i <= tIconSizeMax; i++)
     {
@@ -142,7 +142,7 @@ void MapIconDialog::init()
 		m_imageSize->insertItem(temp, i);
 		m_highlightSize->insertItem(temp, i);
     }
-	
+
     const QString penStyleNames[] =
     {
 		"None",
@@ -152,7 +152,7 @@ void MapIconDialog::init()
 		"Dash Dot",
 		"Dash Dot Dot"
     };
-    
+
     // setup pen style names
     pen = QPen(Qt::black, 0, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin);
     for (int i = Qt::NoPen; i <= Qt::DashDotDotLine; i++)
@@ -165,7 +165,7 @@ void MapIconDialog::init()
 		p.drawLine(point.x() - size, point.y() - size,
 				   point.x() + size, point.y() + size);
 		p.end();
-		
+
 		m_imagePenStyle->insertItem(pix, penStyleNames[i], i);
 		m_highlightPenStyle->insertItem(pix, penStyleNames[i], i);
 		m_line0PenStyle->insertItem(pix, penStyleNames[i], i);
@@ -173,9 +173,9 @@ void MapIconDialog::init()
 		m_line2PenStyle->insertItem(pix, penStyleNames[i], i);
 		m_walkPathPenStyle->insertItem(pix, penStyleNames[i], i);
     }
-    
-    const QString brushStyleNames[] = 
-    {	
+
+    const QString brushStyleNames[] =
+    {
 		"None",
 		"Solid",
 		"94% Fill",
@@ -192,7 +192,7 @@ void MapIconDialog::init()
 		"Diagonal Lines \\",
 		"Diagonal Cross Lines",
     };
-	
+
     // setup brush style names
     pen = QPen(Qt::black, 0, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin);
     pen.setWidth(0);
@@ -204,30 +204,30 @@ void MapIconDialog::init()
 		p.setBrush(QBrush(Qt::BrushStyle(i)));
 		p.drawRect(point.x() - size, point.y() - size, sizeWH, sizeWH);
 		p.end();
-		
+
 		m_imageBrushStyle->insertItem(pix, brushStyleNames[i], i);
 		m_highlightBrushStyle->insertItem(pix, brushStyleNames[i], i);
     }
-    
-    // setup the display 
+
+    // setup the display
     setupMapIconDisplay();
 }
 
 void MapIconDialog::destroy()
 {
-	
+
 }
 
 void MapIconDialog::setMapIcons(MapIcons* mapIcons)
 {
     // set the map icons member
     m_mapIcons = mapIcons;
-    
+
     // set the current map icon type
     m_currentMapIconType = MapIconType(m_mapIconCombo->currentItem() + 1);
     m_currentMapIcon = m_mapIcons->icon(m_currentMapIconType);
     m_currentMapIconBackup = m_currentMapIcon;
-    
+
     // setup the map icon display
     setupMapIconDisplay();
 }
@@ -237,13 +237,13 @@ void MapIconDialog::mapIconCombo_activated(int id)
     // validate state and input
     if (!m_mapIcons || (id >= tIconTypeMax))
 		return;
-    
+
     // set the current map icon
     m_currentMapIconType = MapIconType(id + 1);
     m_currentMapIcon = m_mapIcons->icon(m_currentMapIconType);
     m_currentMapIconBackup = m_currentMapIcon;
-    
-    // setup the display 
+
+    // setup the display
     setupMapIconDisplay();
 }
 
@@ -251,7 +251,7 @@ void MapIconDialog::imagePenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.imagePen().color(),
 										  this, caption() + " Image Outline");
-    
+
     if (color.isValid())
     {
 		QPen pen = m_currentMapIcon.imagePen();
@@ -265,7 +265,7 @@ void MapIconDialog::imageBrushColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.imageBrush().color(),
 										  this, caption() + " Image Fill");
-    
+
     if (color.isValid())
     {
 		QBrush brush = m_currentMapIcon.imageBrush();
@@ -279,7 +279,7 @@ void MapIconDialog::highlightPenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.highlightPen().color(),
 										  this, caption() + " Highlight Outline");
-    
+
     if (color.isValid())
     {
 		QPen pen = m_currentMapIcon.highlightPen();
@@ -293,7 +293,7 @@ void MapIconDialog::highlightBrushColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.highlightBrush().color(),
 										  this, caption() + " Highlight Fill");
-    
+
     if (color.isValid())
     {
 		QBrush brush = m_currentMapIcon.highlightBrush();
@@ -307,7 +307,7 @@ void MapIconDialog::line0PenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.line0Pen().color(),
 										  this, caption() + " Line 0");
-    
+
     if (color.isValid())
     {
 		QPen pen = m_currentMapIcon.line0Pen();
@@ -321,7 +321,7 @@ void MapIconDialog::line1PenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.line1Pen().color(),
 										  this, caption() + " Line 1");
-    
+
     if (color.isValid())
     {
 		QPen pen = m_currentMapIcon.line1Pen();
@@ -335,7 +335,7 @@ void MapIconDialog::line2PenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.line2Pen().color(),
 										  this, caption() + " Line 2");
-    
+
     if (color.isValid())
     {
 		QPen pen = m_currentMapIcon.line2Pen();
@@ -349,7 +349,7 @@ void MapIconDialog::walkPathPenColor_clicked()
 {
     QColor color = QColorDialog::getColor(m_currentMapIcon.walkPathPen().color(),
 										  this, caption() + " Walk Path Line");
-    
+
     if (color.isValid())
     {
 		QPen pen = m_currentMapIcon.walkPathPen();
@@ -373,7 +373,7 @@ void MapIconDialog::setupMapIconDisplay()
     m_imageUseSpawnColorBrush->setChecked(m_currentMapIcon.imageUseSpawnColorBrush());
     m_imageBrushColorSample->setPaletteBackgroundColor(m_currentMapIcon.imageBrush().color());
     m_imageBrushStyle->setCurrentItem(m_currentMapIcon.imageBrush().style());
-    
+
     // setup highlight fields
     m_useHighlight->setChecked(m_currentMapIcon.highlight());
     m_highlightImage->setCurrentItem(m_currentMapIcon.highlightStyle());
@@ -386,7 +386,7 @@ void MapIconDialog::setupMapIconDisplay()
     m_highlightUseSpawnColorBrush->setChecked(m_currentMapIcon.highlightUseSpawnColorBrush());
     m_highlightBrushColorSample->setPaletteBackgroundColor(m_currentMapIcon.highlightBrush().color());
     m_highlightBrushStyle->setCurrentItem(m_currentMapIcon.highlightBrush().style());
-    
+
     // setup lines
     m_showLine0->setChecked(m_currentMapIcon.showLine0());
     m_line0PenColorSample->setPaletteBackgroundColor(m_currentMapIcon.line0Pen().color());
@@ -400,7 +400,7 @@ void MapIconDialog::setupMapIconDisplay()
     m_line2PenColorSample->setPaletteBackgroundColor(m_currentMapIcon.line2Pen().color());
     m_line2PenStyle->setCurrentItem(m_currentMapIcon.line2Pen().style());
     m_line2PenWidth->setValue(m_currentMapIcon.line2Pen().width());
-    
+
     // setup other
     m_showName->setChecked(m_currentMapIcon.showName());
     m_showWalkPath->setChecked(m_currentMapIcon.showWalkPath());

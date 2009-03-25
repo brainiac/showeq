@@ -21,13 +21,13 @@
 class SkillList : public SEQListView
 {
 	Q_OBJECT
-	
+
 public:
-	SkillList (Player* player, QWidget*  parent = 0, const char* name = 0); 
+	SkillList (Player* player, QWidget*  parent = 0, const char* name = 0);
 	~SkillList();
-	
+
 	bool showLanguages() { return m_showLanguages; }
-	
+
 public slots:
 	void addSkill(int skillId, int value);
 	void changeSkill(int skillId, int value);
@@ -37,17 +37,17 @@ public slots:
 	void deleteLanguages();
 	void addLanguages();
 	void showLanguages(bool show);
-	
+
 private:
 	// the player this skill list is monitoring
 	Player* m_pPlayer;
-	
+
 	// the list view items related to skills
 	Q3ListViewItem* m_skillList[MAX_KNOWN_SKILLS];
-	
+
 	// the list view items related to languages
 	Q3ListViewItem* m_languageList[MAX_KNOWN_LANGS];
-	
+
 	// whether or not to show languages
 	bool m_showLanguages;
 };
@@ -55,16 +55,16 @@ private:
 class SkillListWindow : public SEQWindow
 {
 	Q_OBJECT
-	
+
 public:
 	SkillListWindow(Player* player, QWidget* parent = 0, const char* name = 0);
 	~SkillListWindow();
-	
+
 	SkillList* skillList() { return m_skillList; }
-	
+
 public slots:
 	virtual void savePrefs();
-	
+
 protected:
 	SkillList* m_skillList;
 };

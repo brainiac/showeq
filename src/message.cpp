@@ -1,6 +1,6 @@
 /*
  * message.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -10,7 +10,7 @@
 
 #include "message.h"
 
-QString MessageEntry::s_messageTypeStrings[MT_Max+1] = 
+QString MessageEntry::s_messageTypeStrings[MT_Max+1] =
 {
 	"Guild",
 	"",
@@ -49,4 +49,3 @@ QString MessageEntry::s_messageTypeStrings[MT_Max+1] =
 	"Hunt",
 	"Locate",
 };
-

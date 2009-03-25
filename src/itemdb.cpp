@@ -1,6 +1,6 @@
 /*
  * itemdb.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
@@ -185,10 +185,10 @@ public:
 	// 7=Magical
 	/*042*/ int8_t   m_magic;               // Magic flag, 1(0001)=magic
 	/*043*/ int32_t  m_castTime;
-	/*043*/ union 
+	/*043*/ union
 	{
 		/*044*/ uint8_t  m_level;            // Casting level
-		/*044*/ uint8_t  m_haste;             // Haste % 
+		/*044*/ uint8_t  m_haste;             // Haste %
 	};
 	/*045*/ uint8_t  m_requiredLevel;       // Required Level to use item
 	/*046*/ uint32_t m_bardSkillType;       // Bard Skill Type
@@ -215,7 +215,7 @@ public:
 	/*064*/ uint8_t  m_material;            // Material?
 	/*065*/ int32_t  m_sellRate;            // Item sell rate
 	/*066*/ uint32_t m_unknown067;
-	/*067*/ union 
+	/*067*/ union
 	{
 		/*067*/ uint32_t m_fullfillment;      // Food fulfilment (How long it lasts)
 		/*067*/ int16_t  m_clickyCastTime;    // Cast Time for clicky effects, in milliseconds
@@ -285,10 +285,10 @@ typedef EQItemDBEntryData_4 EQItemDBEntryData_Current;
 
 ////////////////////////////////////////////////////////////////////
 // Life is easier if new versions can inherit from the immediate
-// predecessor version.  Otherwise more work and is necessary in 
-// the EQItemDBEntry class accessor methods and in the 
+// predecessor version.  Otherwise more work and is necessary in
+// the EQItemDBEntry class accessor methods and in the
 // EQItemDBEntryData child classes.  Therefore next one should be:
-//  
+//
 // struct EQItemDBEntryData_5 : public EQItemDBEntryData_4
 //
 
@@ -330,7 +330,7 @@ void EQItemDBEntryData_1::Init()
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 1; 
+	m_entryFormatVersion = 1;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryData_1);
@@ -347,7 +347,7 @@ void EQItemDBEntryData_1::Init(const Datum& data)
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 1; 
+	m_entryFormatVersion = 1;
 
 	// by default copy the entire structure from the data
 	size_t copySize = ((EQItemDBEntryData*)data.data)->m_entrySize;
@@ -400,7 +400,7 @@ void EQItemDBEntryData_2::Init()
 	EQItemDBEntryData_1::Init();
 
 	// Set the structure format version information
-	m_entryFormatVersion = 2; 
+	m_entryFormatVersion = 2;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryData_2);
@@ -418,7 +418,7 @@ void EQItemDBEntryData_2::Init(const Datum& data)
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 2; 
+	m_entryFormatVersion = 2;
 
 	// by default copy the entire structure from the data
 	size_t copySize = ((EQItemDBEntryData*)data.data)->m_entrySize;
@@ -434,18 +434,18 @@ void EQItemDBEntryData_2::Init(const Datum& data)
 	m_entrySize = sizeof(EQItemDBEntryData_2);
 }
 
-const char* EQItemDBEntryData_3::Init(const char* serializedItem, 
+const char* EQItemDBEntryData_3::Init(const char* serializedItem,
 									  ItemType itemType)
 {
 	QString field;
 	field.setLength(64);
-	const char* curPos = serializedItem; 
+	const char* curPos = serializedItem;
 
 	// Start with a clean slate
-	memset((void*)this, '\0', sizeof(*this)); 
+	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 3; 
+	m_entryFormatVersion = 3;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryData_3);
@@ -459,77 +459,77 @@ const char* EQItemDBEntryData_3::Init(const char* serializedItem,
 
 	// now start copying data as appropriate
 	tmpString = getField(field, curPos); // get ID - 009
-	strncpy(&m_idfile[0], tmpString.latin1(), sizeof(m_idfile)); 
+	strncpy(&m_idfile[0], tmpString.latin1(), sizeof(m_idfile));
 	m_itemNr = getField(field, curPos).toULong();  // 010
 	m_weight = uint8_t(getField(field, curPos).toUShort()); // 011
-	m_norent = uint8_t(getField(field, curPos).toUShort());         
-	m_nodrop = uint8_t(getField(field, curPos).toUShort());         
-	m_size = uint8_t(getField(field, curPos).toUShort());           
-	m_equipableSlots = getField(field, curPos).toULong(); 
-	m_cost = getField(field, curPos).toLong();           
-	m_iconNr = getField(field, curPos).toUShort();        
+	m_norent = uint8_t(getField(field, curPos).toUShort());
+	m_nodrop = uint8_t(getField(field, curPos).toUShort());
+	m_size = uint8_t(getField(field, curPos).toUShort());
+	m_equipableSlots = getField(field, curPos).toULong();
+	m_cost = getField(field, curPos).toLong();
+	m_iconNr = getField(field, curPos).toUShort();
 	m_unknown018 = getField(field, curPos).toLong();
 	m_unknown019 = getField(field, curPos).toULong();
 	m_unknown020 = getField(field, curPos).toULong();
-	m_tradeskills = (getField(field, curPos).toUShort() != 0);    
-	m_CR = int8_t(getField(field, curPos).toShort());             
-	m_DR = int8_t(getField(field, curPos).toShort());             
-	m_PR = int8_t(getField(field, curPos).toShort());             
-	m_MR = int8_t(getField(field, curPos).toShort());             
-	m_FR = int8_t(getField(field, curPos).toShort());             
-	m_STR = int8_t(getField(field, curPos).toShort());            
-	m_STA = int8_t(getField(field, curPos).toShort());            
-	m_AGI = int8_t(getField(field, curPos).toShort());            
-	m_DEX = int8_t(getField(field, curPos).toShort());            
-	m_CHA = int8_t(getField(field, curPos).toShort());            
-	m_INT = int8_t(getField(field, curPos).toShort());            
-	m_WIS = int8_t(getField(field, curPos).toShort());            
-	m_HP = int8_t(getField(field, curPos).toShort());             
-	m_MANA = int8_t(getField(field, curPos).toShort());           
-	m_AC = int8_t(getField(field, curPos).toShort());             
+	m_tradeskills = (getField(field, curPos).toUShort() != 0);
+	m_CR = int8_t(getField(field, curPos).toShort());
+	m_DR = int8_t(getField(field, curPos).toShort());
+	m_PR = int8_t(getField(field, curPos).toShort());
+	m_MR = int8_t(getField(field, curPos).toShort());
+	m_FR = int8_t(getField(field, curPos).toShort());
+	m_STR = int8_t(getField(field, curPos).toShort());
+	m_STA = int8_t(getField(field, curPos).toShort());
+	m_AGI = int8_t(getField(field, curPos).toShort());
+	m_DEX = int8_t(getField(field, curPos).toShort());
+	m_CHA = int8_t(getField(field, curPos).toShort());
+	m_INT = int8_t(getField(field, curPos).toShort());
+	m_WIS = int8_t(getField(field, curPos).toShort());
+	m_HP = int8_t(getField(field, curPos).toShort());
+	m_MANA = int8_t(getField(field, curPos).toShort());
+	m_AC = int8_t(getField(field, curPos).toShort());
 	m_deity = getField(field, curPos).toULong();
-	m_skillModId = getField(field, curPos).toUShort();     
+	m_skillModId = getField(field, curPos).toUShort();
 	m_skillModPercent = int8_t(getField(field, curPos).toShort());
-	m_baneDmg = getField(field, curPos).toLong();        
-	m_baneDmgRace = getField(field, curPos).toULong();    
-	m_baneDmgBody = getField(field, curPos).toULong();  
+	m_baneDmg = getField(field, curPos).toLong();
+	m_baneDmgRace = getField(field, curPos).toULong();
+	m_baneDmgBody = getField(field, curPos).toULong();
 
 
-	m_magic = int8_t(getField(field, curPos).toShort());          
+	m_magic = int8_t(getField(field, curPos).toShort());
 	m_castTime = getField(field, curPos).toLong();
 
-	m_level = uint8_t(getField(field, curPos).toUShort());       
-	//m_haste;        
+	m_level = uint8_t(getField(field, curPos).toUShort());
+	//m_haste;
 
-	m_requiredLevel = uint8_t(getField(field, curPos).toUShort());  
-	m_bardSkillType = getField(field, curPos).toULong();  
+	m_requiredLevel = uint8_t(getField(field, curPos).toUShort());
+	m_bardSkillType = getField(field, curPos).toULong();
 	m_bardSkillAmount = getField(field, curPos).toLong();
-	m_light = uint8_t(getField(field, curPos).toUShort());          
-	m_delay = int8_t(getField(field, curPos).toShort());          
+	m_light = uint8_t(getField(field, curPos).toUShort());
+	m_delay = int8_t(getField(field, curPos).toShort());
 	m_recommendedLevel = uint8_t(getField(field, curPos).toUShort());
 	m_recommendedSkill = uint8_t(getField(field, curPos).toUShort());
-	m_elemDmgType = uint8_t(getField(field, curPos).toUShort());    
-	m_elemDmg = uint8_t(getField(field, curPos).toUShort());        
-	m_effectType = int8_t(getField(field, curPos).toShort());       
+	m_elemDmgType = uint8_t(getField(field, curPos).toUShort());
+	m_elemDmg = uint8_t(getField(field, curPos).toUShort());
+	m_effectType = int8_t(getField(field, curPos).toShort());
 
 
 
-	m_range = uint8_t(getField(field, curPos).toUShort());          
-	m_damage = int8_t(getField(field, curPos).toShort());         
-	m_color = getField(field, curPos).toULong();          
-	m_classes = getField(field, curPos).toULong();       
-	m_races = getField(field, curPos).toULong();         
+	m_range = uint8_t(getField(field, curPos).toUShort());
+	m_damage = int8_t(getField(field, curPos).toShort());
+	m_color = getField(field, curPos).toULong();
+	m_classes = getField(field, curPos).toULong();
+	m_races = getField(field, curPos).toULong();
 	m_unknown061 = getField(field, curPos).toULong();
-	m_spellId = getField(field, curPos).toUShort();      
-	m_charges = int8_t(getField(field, curPos).toShort());        
-	m_skill = uint8_t(getField(field, curPos).toUShort());          
-	m_material = uint8_t(getField(field, curPos).toUShort());       
-	m_sellRate = getField(field, curPos).toULong();       
+	m_spellId = getField(field, curPos).toUShort();
+	m_charges = int8_t(getField(field, curPos).toShort());
+	m_skill = uint8_t(getField(field, curPos).toUShort());
+	m_material = uint8_t(getField(field, curPos).toUShort());
+	m_sellRate = getField(field, curPos).toULong();
 	m_unknown067 = getField(field, curPos).toULong();
 
 
-	m_fullfillment = getField(field, curPos).toULong(); 
-	//m_clickyCastTime;     
+	m_fullfillment = getField(field, curPos).toULong();
+	//m_clickyCastTime;
 
 	m_unknown069 = getField(field, curPos).toULong();
 	m_unknown070 = getField(field, curPos).toULong();
@@ -553,7 +553,7 @@ const char* EQItemDBEntryData_3::Init(const char* serializedItem,
 	m_factionAmt3 = getField(field, curPos).toLong();
 	m_factionAmt4 = getField(field, curPos).toLong();
 	tmpString = getField(field, curPos);
-	strncpy(&m_charmFile[0], tmpString.latin1(), sizeof(m_charmFile)); 
+	strncpy(&m_charmFile[0], tmpString.latin1(), sizeof(m_charmFile));
 	m_charmFile[31] = '\0';
 	m_unknown091 = getField(field, curPos).toULong();
 	m_augSlot1Type = uint8_t(getField(field, curPos).toUShort());
@@ -565,13 +565,13 @@ const char* EQItemDBEntryData_3::Init(const char* serializedItem,
 	m_ldonPrice = getField(field, curPos).toULong();
 	m_ldonSold = getField(field, curPos).toULong();
 	m_packType = uint8_t(getField(field, curPos).toUShort());
-	m_numSlots = uint8_t(getField(field, curPos).toUShort()); 
-	m_sizeCapacity = uint8_t(getField(field, curPos).toUShort());   
+	m_numSlots = uint8_t(getField(field, curPos).toUShort());
+	m_sizeCapacity = uint8_t(getField(field, curPos).toUShort());
 	m_weightReduction = uint8_t(getField(field, curPos).toUShort());
 	m_bookType = uint8_t(getField(field, curPos).toUShort());
 	m_unknown105 = getField(field, curPos).toULong();
 	tmpString = getField(field, curPos);
-	strncpy(&m_bookFile[0], tmpString.latin1(), sizeof(m_bookFile)); 
+	strncpy(&m_bookFile[0], tmpString.latin1(), sizeof(m_bookFile));
 	m_charmFile[15] = '\0';
 	m_unknown107 = getField(field, curPos).toULong();
 	m_unknown108 = getField(field, curPos).toULong();
@@ -590,7 +590,7 @@ void EQItemDBEntryData_3::Init()
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 3; 
+	m_entryFormatVersion = 3;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryData_3);
@@ -609,7 +609,7 @@ void EQItemDBEntryData_3::Init(const Datum& data)
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 3; 
+	m_entryFormatVersion = 3;
 
 	// by default copy the entire structure from the data
 	size_t copySize = ((EQItemDBEntryData*)data.data)->m_entrySize;
@@ -625,18 +625,18 @@ void EQItemDBEntryData_3::Init(const Datum& data)
 	m_entrySize = sizeof(EQItemDBEntryData_3);
 }
 
-const char* EQItemDBEntryData_4::Init(const char* serializedItem, 
+const char* EQItemDBEntryData_4::Init(const char* serializedItem,
 									  ItemType itemType)
 {
 	QString field;
 	field.setLength(64);
-	const char* curPos = serializedItem; 
+	const char* curPos = serializedItem;
 
 	// Start with a clean slate
-	memset((void*)this, '\0', sizeof(*this)); 
+	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 4; 
+	m_entryFormatVersion = 4;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryData_4);
@@ -650,77 +650,77 @@ const char* EQItemDBEntryData_4::Init(const char* serializedItem,
 
 	// now start copying data as appropriate
 	tmpString = getField(field, curPos); // get ID - 009
-	strncpy(&m_idfile[0], tmpString.latin1(), sizeof(m_idfile)); 
+	strncpy(&m_idfile[0], tmpString.latin1(), sizeof(m_idfile));
 	m_itemNr = getField(field, curPos).toULong();  // 010
 	m_weight = uint8_t(getField(field, curPos).toUShort()); // 011
-	m_norent = uint8_t(getField(field, curPos).toUShort());         
-	m_nodrop = uint8_t(getField(field, curPos).toUShort());         
-	m_size = uint8_t(getField(field, curPos).toUShort());           
-	m_equipableSlots = getField(field, curPos).toULong(); 
-	m_cost = getField(field, curPos).toLong();           
-	m_iconNr = getField(field, curPos).toUShort();        
+	m_norent = uint8_t(getField(field, curPos).toUShort());
+	m_nodrop = uint8_t(getField(field, curPos).toUShort());
+	m_size = uint8_t(getField(field, curPos).toUShort());
+	m_equipableSlots = getField(field, curPos).toULong();
+	m_cost = getField(field, curPos).toLong();
+	m_iconNr = getField(field, curPos).toUShort();
 	m_unknown018 = getField(field, curPos).toLong();
 	m_unknown019 = getField(field, curPos).toULong();
 	m_unknown020 = getField(field, curPos).toULong();
-	m_tradeskills = (getField(field, curPos).toUShort() != 0);    
-	m_CR = int8_t(getField(field, curPos).toShort());             
-	m_DR = int8_t(getField(field, curPos).toShort());             
-	m_PR = int8_t(getField(field, curPos).toShort());             
-	m_MR = int8_t(getField(field, curPos).toShort());             
-	m_FR = int8_t(getField(field, curPos).toShort());             
-	m_STR = int8_t(getField(field, curPos).toShort());            
-	m_STA = int8_t(getField(field, curPos).toShort());            
-	m_AGI = int8_t(getField(field, curPos).toShort());            
-	m_DEX = int8_t(getField(field, curPos).toShort());            
-	m_CHA = int8_t(getField(field, curPos).toShort());            
-	m_INT = int8_t(getField(field, curPos).toShort());            
-	m_WIS = int8_t(getField(field, curPos).toShort());            
-	m_HP = int8_t(getField(field, curPos).toShort());             
-	m_MANA = int8_t(getField(field, curPos).toShort());           
-	m_AC = int8_t(getField(field, curPos).toShort());             
+	m_tradeskills = (getField(field, curPos).toUShort() != 0);
+	m_CR = int8_t(getField(field, curPos).toShort());
+	m_DR = int8_t(getField(field, curPos).toShort());
+	m_PR = int8_t(getField(field, curPos).toShort());
+	m_MR = int8_t(getField(field, curPos).toShort());
+	m_FR = int8_t(getField(field, curPos).toShort());
+	m_STR = int8_t(getField(field, curPos).toShort());
+	m_STA = int8_t(getField(field, curPos).toShort());
+	m_AGI = int8_t(getField(field, curPos).toShort());
+	m_DEX = int8_t(getField(field, curPos).toShort());
+	m_CHA = int8_t(getField(field, curPos).toShort());
+	m_INT = int8_t(getField(field, curPos).toShort());
+	m_WIS = int8_t(getField(field, curPos).toShort());
+	m_HP = int8_t(getField(field, curPos).toShort());
+	m_MANA = int8_t(getField(field, curPos).toShort());
+	m_AC = int8_t(getField(field, curPos).toShort());
 	m_deity = getField(field, curPos).toULong();
-	m_skillModId = getField(field, curPos).toUShort();     
+	m_skillModId = getField(field, curPos).toUShort();
 	m_skillModPercent = int8_t(getField(field, curPos).toShort());
-	m_baneDmg = getField(field, curPos).toLong();        
-	m_baneDmgRace = getField(field, curPos).toULong();    
-	m_baneDmgBody = getField(field, curPos).toULong();  
+	m_baneDmg = getField(field, curPos).toLong();
+	m_baneDmgRace = getField(field, curPos).toULong();
+	m_baneDmgBody = getField(field, curPos).toULong();
 
 
-	m_magic = int8_t(getField(field, curPos).toShort());          
+	m_magic = int8_t(getField(field, curPos).toShort());
 	m_castTime = getField(field, curPos).toLong();
 
-	m_level = uint8_t(getField(field, curPos).toUShort());       
-	//m_haste;        
+	m_level = uint8_t(getField(field, curPos).toUShort());
+	//m_haste;
 
-	m_requiredLevel = uint8_t(getField(field, curPos).toUShort());  
-	m_bardSkillType = getField(field, curPos).toULong();  
+	m_requiredLevel = uint8_t(getField(field, curPos).toUShort());
+	m_bardSkillType = getField(field, curPos).toULong();
 	m_bardSkillAmount = getField(field, curPos).toLong();
-	m_light = uint8_t(getField(field, curPos).toUShort());          
-	m_delay = int8_t(getField(field, curPos).toShort());          
+	m_light = uint8_t(getField(field, curPos).toUShort());
+	m_delay = int8_t(getField(field, curPos).toShort());
 	m_recommendedLevel = uint8_t(getField(field, curPos).toUShort());
 	m_recommendedSkill = uint8_t(getField(field, curPos).toUShort());
-	m_elemDmgType = uint8_t(getField(field, curPos).toUShort());    
-	m_elemDmg = uint8_t(getField(field, curPos).toUShort());        
-	m_effectType = int8_t(getField(field, curPos).toShort());       
+	m_elemDmgType = uint8_t(getField(field, curPos).toUShort());
+	m_elemDmg = uint8_t(getField(field, curPos).toUShort());
+	m_effectType = int8_t(getField(field, curPos).toShort());
 
 
 
-	m_range = uint8_t(getField(field, curPos).toUShort());          
-	m_damage = int8_t(getField(field, curPos).toShort());         
-	m_color = getField(field, curPos).toULong();          
-	m_classes = getField(field, curPos).toULong();       
-	m_races = getField(field, curPos).toULong();         
+	m_range = uint8_t(getField(field, curPos).toUShort());
+	m_damage = int8_t(getField(field, curPos).toShort());
+	m_color = getField(field, curPos).toULong();
+	m_classes = getField(field, curPos).toULong();
+	m_races = getField(field, curPos).toULong();
 	m_unknown061 = getField(field, curPos).toULong();
-	m_spellId = getField(field, curPos).toUShort();      
-	m_charges = int8_t(getField(field, curPos).toShort());        
-	m_skill = uint8_t(getField(field, curPos).toUShort());          
-	m_material = uint8_t(getField(field, curPos).toUShort());       
-	m_sellRate = getField(field, curPos).toULong();       
+	m_spellId = getField(field, curPos).toUShort();
+	m_charges = int8_t(getField(field, curPos).toShort());
+	m_skill = uint8_t(getField(field, curPos).toUShort());
+	m_material = uint8_t(getField(field, curPos).toUShort());
+	m_sellRate = getField(field, curPos).toULong();
 	m_unknown067 = getField(field, curPos).toULong();
 
 
-	m_fullfillment = getField(field, curPos).toULong(); 
-	//m_clickyCastTime;     
+	m_fullfillment = getField(field, curPos).toULong();
+	//m_clickyCastTime;
 
 	m_unknown069 = getField(field, curPos).toULong();
 	m_unknown070 = getField(field, curPos).toULong();
@@ -744,7 +744,7 @@ const char* EQItemDBEntryData_4::Init(const char* serializedItem,
 	m_factionAmt3 = getField(field, curPos).toLong();
 	m_factionAmt4 = getField(field, curPos).toLong();
 	tmpString = getField(field, curPos);
-	strncpy(&m_charmFile[0], tmpString.latin1(), sizeof(m_charmFile)); 
+	strncpy(&m_charmFile[0], tmpString.latin1(), sizeof(m_charmFile));
 	m_charmFile[31] = '\0';
 	m_unknown091 = getField(field, curPos).toULong();
 	m_augSlot1Type = uint8_t(getField(field, curPos).toUShort());
@@ -756,13 +756,13 @@ const char* EQItemDBEntryData_4::Init(const char* serializedItem,
 	m_ldonPrice = getField(field, curPos).toULong();
 	m_ldonSold = getField(field, curPos).toULong();
 	m_packType = uint8_t(getField(field, curPos).toUShort());
-	m_numSlots = uint8_t(getField(field, curPos).toUShort()); 
-	m_sizeCapacity = uint8_t(getField(field, curPos).toUShort());   
+	m_numSlots = uint8_t(getField(field, curPos).toUShort());
+	m_sizeCapacity = uint8_t(getField(field, curPos).toUShort());
 	m_weightReduction = uint8_t(getField(field, curPos).toUShort());
 	m_bookType = uint8_t(getField(field, curPos).toUShort());
 	m_unknown105 = getField(field, curPos).toULong();
 	tmpString = getField(field, curPos);
-	strncpy(&m_bookFile[0], tmpString.latin1(), sizeof(m_bookFile)); 
+	strncpy(&m_bookFile[0], tmpString.latin1(), sizeof(m_bookFile));
 	m_charmFile[15] = '\0';
 	m_unknown107 = getField(field, curPos).toULong();
 	m_unknown108 = getField(field, curPos).toULong();
@@ -780,7 +780,7 @@ void EQItemDBEntryData_4::Init()
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 4; 
+	m_entryFormatVersion = 4;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryData_4);
@@ -799,7 +799,7 @@ void EQItemDBEntryData_4::Init(const Datum& data)
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 4; 
+	m_entryFormatVersion = 4;
 
 	// by default copy the entire structure from the data
 	size_t copySize = ((EQItemDBEntryData*)data.data)->m_entrySize;
@@ -823,7 +823,7 @@ void EQItemDBEntryRawData_1::Init()
 	memset((void*)this, '\0', sizeof(*this));
 
 	// Set the structure format version information
-	m_entryFormatVersion = 1; 
+	m_entryFormatVersion = 1;
 
 	// note the size of the entry
 	m_entrySize = sizeof(EQItemDBEntryRawData_1);
@@ -920,7 +920,7 @@ static bool checkDestinationFile(const QString pfx, const QString fileName)
 
 	if (!dirInfo.exists())
 	{
-		fprintf(stderr, 
+		fprintf(stderr,
 			"%s: Data Directory '%s' doesn't exist.\n",
 			(const char*)pfx, (const char*)dirInfo.absFilePath());
 
@@ -930,7 +930,7 @@ static bool checkDestinationFile(const QString pfx, const QString fileName)
 
 	if (!dirInfo.isDir())
 	{
-		fprintf(stderr, 
+		fprintf(stderr,
 			"%s: Data Directory '%s' isn't a directory.\n",
 			(const char*)pfx, (const char*)dirInfo.absFilePath());
 
@@ -941,7 +941,7 @@ static bool checkDestinationFile(const QString pfx, const QString fileName)
 	// make sure the directory is writable by us
 	if (!dirInfo.isWritable())
 	{
-		fprintf(stderr, 
+		fprintf(stderr,
 			"%s: Data Directory '%s' isn't writable.\n",
 			(const char*)pfx, (const char*)dirInfo.absFilePath());
 
@@ -952,7 +952,7 @@ static bool checkDestinationFile(const QString pfx, const QString fileName)
 	// if the db file exists, but isn't writable, we can't upgrade
 	if (fileInfo.exists() && !fileInfo.isWritable())
 	{
-		fprintf(stderr, 
+		fprintf(stderr,
 			"%s: Data File '%s' isn't writable.\n",
 			(const char*)pfx, (const char*)fileInfo.absFilePath());
 
@@ -987,19 +987,19 @@ bool EQItemDB::Upgrade()
 
 	// if the old item lore name file doesn't exist, then nothing to do...
 	if (fileInfo.exists())
-	{ 
+	{
 #ifdef USE_DB3
 		destFile = m_ItemDataDB + db3Ext;
-#else 
+#else
 		destFile = m_ItemDataDB + gdbmExt;
-#endif 
+#endif
 
 		// check to make sure the destination for the new format DB is correct
 		goodDest = checkDestinationFile("EQItemDB::Upgrade()", destFile);
 
 		if (!goodDest)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"Destination for upgraded DB '%s' is bad.\n"
 				"\tAborting upgrade!\n", (const char*)destFile);
 			return false;
@@ -1017,14 +1017,14 @@ bool EQItemDB::Upgrade()
 		fileInfo.setFile(oldname);
 		itemNameExists = fileInfo.exists();
 		if (itemNameExists)
-			fprintf(stderr, "\tSource %d: %s\n", 
+			fprintf(stderr, "\tSource %d: %s\n",
 			srcNum++, (const char*)(oldname));
 
 		oldname = m_ItemDataDB + gdbmExt;
 		fileInfo.setFile(oldname);
 		itemDataExists = fileInfo.exists();
 		if (itemDataExists)
-			fprintf(stderr, "\tSource %d: %s\n", 
+			fprintf(stderr, "\tSource %d: %s\n",
 			srcNum++, (const char*)(oldname));
 
 		fprintf(stderr, "\tDestination: %s\n",(const char*)destFile);
@@ -1148,7 +1148,7 @@ bool EQItemDB::Upgrade()
 		ret = rename((const char*)(m_ItemNameDB + gdbmExt), (const char*)newname);
 		if (ret != 0)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"EQItemDB::Upgrade(): Failed to rename '%s' to '%s'\n",
 				(const char*)(m_ItemNameDB + gdbmExt), (const char*)newname);
 		}
@@ -1157,7 +1157,7 @@ bool EQItemDB::Upgrade()
 		ret = rename((const char*)(m_ItemLoreDB + gdbmExt), (const char*)newname);
 		if (ret != 0)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"EQItemDB::Upgrade(): Failed to rename '%s' to '%s'\n",
 				(const char*)(m_ItemLoreDB + gdbmExt), (const char*)newname);
 		}
@@ -1167,7 +1167,7 @@ bool EQItemDB::Upgrade()
 		ret = rename((const char*)(m_ItemDataDB + gdbmExt), (const char*)newname);
 		if (ret != 0)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"EQItemDB::Upgrade(): Failed to rename '%s' to '%s'\n",
 				(const char*)(m_ItemDataDB + gdbmExt), (const char*)newname);
 		}
@@ -1193,7 +1193,7 @@ bool EQItemDB::Upgrade()
 
 		if (!goodDest)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"Destination for upgraded DB '%s' is bad.\n"
 				"\tAborting upgrade!\n", (const char*)destFile);
 			return false;
@@ -1268,7 +1268,7 @@ bool EQItemDB::Upgrade()
 		ret = rename((const char*)oldname, (const char*)newname);
 		if (ret != 0)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"EQItemDB::Upgrade(): Failed to rename '%s' to '%s'\n",
 				(const char*)oldname, (const char*)newname);
 		}
@@ -1292,7 +1292,7 @@ bool EQItemDB::Upgrade()
 
 		if (!goodDest)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"Destination for upgraded DB '%s' is bad.\n"
 				"\tAborting upgrade!\n", (const char*)destFile);
 			return false;
@@ -1367,7 +1367,7 @@ bool EQItemDB::Upgrade()
 		ret = rename((const char*)oldname, (const char*)newname);
 		if (ret != 0)
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"EQItemDB::Upgrade(): Failed to rename '%s' to '%s'\n",
 				(const char*)oldname, (const char*)newname);
 		}
@@ -1386,7 +1386,7 @@ inline QString& getField(QString& field, const char*& curPos)
 	const char* begPos = curPos;
 
 	// find closing seperator for field
-	while (*curPos != '|') 
+	while (*curPos != '|')
 		curPos++;
 
 	// set the return string to be the value found
@@ -1396,7 +1396,7 @@ inline QString& getField(QString& field, const char*& curPos)
 	curPos++;
 
 	// return the field for convenient usage
-	return field; 
+	return field;
 }
 
 inline QString& getLastField(QString& field, const char*& curPos)
@@ -1421,17 +1421,17 @@ inline QString& getLastField(QString& field, const char*& curPos)
 		curPos++;
 
 	// return the field for convenient usage
-	return field; 
+	return field;
 }
 
 bool EQItemDB::AddItem(const char* serializedItem, int level)
 {
-	const char* curPos = serializedItem; 
+	const char* curPos = serializedItem;
 	const char* begPos;
 	const char* endPos;
 	int length = strlen(serializedItem);
 	QString field;
-	int fieldCount = 0; 
+	int fieldCount = 0;
 	// preallocate field to be able to hold a minimum size
 	field.setLength(96);
 
@@ -1494,7 +1494,7 @@ bool EQItemDB::AddItem(const char* serializedItem, int level)
 		strncpy((char*)(databuffer + sizeof(EQItemDBEntryData_Current) + loreSize),
 			name.latin1(), nameSize);
 
-		// finish setting up the data 
+		// finish setting up the data
 		data.data = (void*)databuffer;
 
 		// setup key datum to use for queries and insertions
@@ -1577,14 +1577,14 @@ bool EQItemDB::AddItem(const char* serializedItem, int level)
 
 			if (*curPos != '"')
 			{
-				fprintf(stderr, 
+				fprintf(stderr,
 					"Level: %d: Expected '\"' but found '%c' at pos %d field %d\n",
 					level, *curPos, (curPos - begPos), fieldCount);
 				return false; // unknown state, so return false just to be safe
 			}
 
 			// skip closing quote "
-			curPos++; 
+			curPos++;
 		}
 
 		// increment field count
@@ -1592,14 +1592,14 @@ bool EQItemDB::AddItem(const char* serializedItem, int level)
 
 		if ((*curPos != '|') && (*curPos != '\0'))
 		{
-			fprintf(stderr, 
+			fprintf(stderr,
 				"Level: %d: Expected '|' or '\\0' but found '%c' at pos %d field %d\n",
 				level, *curPos, (curPos - begPos), fieldCount);
 			return false; // unknown state, so return false just to be safe
 		}
 
 		// skip field seperator
-		curPos++; 
+		curPos++;
 	}
 
 	return result;
@@ -1658,7 +1658,7 @@ QString EQItemDB::GetItemName(uint32_t itemNr)
 		size_t entrySize = ((EQItemDBEntryData*)data.data)->m_entrySize;
 
 		// calculate pointer to lore string
-		const char* loreString = ((const char*)data.data) 
+		const char* loreString = ((const char*)data.data)
 			+ entrySize;
 
 		// calculate pointer to name string
@@ -1722,7 +1722,7 @@ bool EQItemDB::GetItemData(uint32_t itemNr, class EQItemDBEntry** itemData)
 		// i no data, set itemData to NULL so they don't accidentally use it
 		if (itemData != NULL)
 			*itemData = (class EQItemDBEntry*)NULL;
-	}  
+	}
 
 	return result;
 }
@@ -1742,14 +1742,14 @@ size_t EQItemDB::GetItemRawData(uint32_t itemNr, char** itemData)
 		size_t copySize = data.size - sizeof(EQItemDBEntryRawData_Current);
 
 		// return a copy of the data
-		if (itemData != NULL) 
+		if (itemData != NULL)
 		{
 			// allocate a memory to store the copy
 			*itemData = new char[copySize];
 
 			// copy the data (yes, it's obvious, but hey...)
-			memcpy((void*)*itemData, 
-				(void*)((const char*)data.data + sizeof(EQItemDBEntryRawData_Current)), 
+			memcpy((void*)*itemData,
+				(void*)((const char*)data.data + sizeof(EQItemDBEntryRawData_Current)),
 				copySize);
 		}
 
@@ -1761,13 +1761,13 @@ size_t EQItemDB::GetItemRawData(uint32_t itemNr, char** itemData)
 	}
 	else // if item is not found set itemData to NULL, just in case
 		if (itemData != NULL)
-			*itemData = (char*)NULL; 
+			*itemData = (char*)NULL;
 
 	return result;
 }
 
 
-size_t EQItemDB::GetItemRawData(uint32_t itemNr, 
+size_t EQItemDB::GetItemRawData(uint32_t itemNr,
 								time_t& updated, char** itemData)
 {
 	Datum key, data;
@@ -1783,14 +1783,14 @@ size_t EQItemDB::GetItemRawData(uint32_t itemNr,
 		size_t copySize = data.size - sizeof(EQItemDBEntryRawData_Current);
 
 		// return a copy of the data
-		if (itemData != NULL) 
+		if (itemData != NULL)
 		{
 			// allocate a memory to store the copy
 			*itemData = new char[copySize];
 
 			// copy the data (yes, it's obvious, but hey...)
-			memcpy((void*)*itemData, 
-				(void*)((const char*)data.data + sizeof(EQItemDBEntryRawData_Current)), 
+			memcpy((void*)*itemData,
+				(void*)((const char*)data.data + sizeof(EQItemDBEntryRawData_Current)),
 				copySize);
 		}
 
@@ -1805,7 +1805,7 @@ size_t EQItemDB::GetItemRawData(uint32_t itemNr,
 	}
 	else // if item is not found set itemData to NULL, just in case
 		if (itemData != NULL)
-			*itemData = (char*)NULL; 
+			*itemData = (char*)NULL;
 
 	return result;
 }
@@ -1855,7 +1855,7 @@ void EQItemDB::logItem(const char* serializedItem, size_t len)
 
 	if (lh == NULL)
 	{
-		fprintf(stderr, "\aUnable to open file: [%s]\n", 
+		fprintf(stderr, "\aUnable to open file: [%s]\n",
 			(const char*)filename);
 		return;
 	}
@@ -1880,7 +1880,7 @@ void EQItemDB::item(const uint8_t* data, size_t size, uint8_t)
 
 		if (lh == NULL)
 		{
-			fprintf(stderr, "\aUnable to open file: [%s]\n", 
+			fprintf(stderr, "\aUnable to open file: [%s]\n",
 				(const char*)filename);
 			return;
 		}
@@ -1912,7 +1912,7 @@ void EQItemDB::item(const uint8_t* data, size_t size, uint8_t)
 			}
 
 
-			fprintf(lh, "[Type:%s] [Fields:%d] %s%s\n\n", 
+			fprintf(lh, "[Type:%s] [Fields:%d] %s%s\n\n",
 				typeStr.latin1(), QString(item->serializedItem).contains('|'),
 				ctime(&now),  item->serializedItem);
 
@@ -1920,7 +1920,7 @@ void EQItemDB::item(const uint8_t* data, size_t size, uint8_t)
 		}
 	}
 
-	AddItem(item->serializedItem); 
+	AddItem(item->serializedItem);
 }
 
 void EQItemDB::playerItem(const uint8_t* data, size_t size, uint8_t)
@@ -1940,11 +1940,11 @@ void EQItemDB::playerItem(const uint8_t* data, size_t size, uint8_t)
 
 		if (!lh)
 		{
-			fprintf(stderr, "\aUnable to open file: [%s]\n", 
+			fprintf(stderr, "\aUnable to open file: [%s]\n",
 				(const char*)filename);
 			return;
 		}
-	} 
+	}
 
 	const char* currentItem = serializedItem;
 	const char* endItems = serializedItem + size;
@@ -1952,7 +1952,7 @@ void EQItemDB::playerItem(const uint8_t* data, size_t size, uint8_t)
 	while (currentItem < endItems)
 	{
 		if (lh)
-			fprintf(lh, "[Type:CharInventory] [Pos:%d] [Fields:%d] %s%s\n\n", 
+			fprintf(lh, "[Type:CharInventory] [Pos:%d] [Fields:%d] %s%s\n\n",
 			i, QString(currentItem).contains('|'),
 			ctimeStr,  currentItem);
 
@@ -1973,7 +1973,7 @@ void EQItemDB::playerShroud(const uint8_t* data, size_t size, uint8_t dir)
 		// like OP_ItemPlayerPacket
 		spawnShroudSelf* shroud = (spawnShroudSelf*) data;
 
-		playerItem(&shroud->items, 
+		playerItem(&shroud->items,
 			size - (sizeof(spawnShroudOther) + sizeof(playerProfileStruct)),
 			dir);
 	}
@@ -1993,21 +1993,21 @@ void EQItemDB::itemInfo(const uint8_t* data, size_t size, uint8_t)
 
 		if (!lh)
 		{
-			fprintf(stderr, "\aUnable to open file: [%s]\n", 
+			fprintf(stderr, "\aUnable to open file: [%s]\n",
 				(const char*)filename);
 			return;
 		}
 		else
 		{
-			fprintf(lh, "[Type:ItemInfo] [Fields:%d] %s%s\n\n", 
+			fprintf(lh, "[Type:ItemInfo] [Fields:%d] %s%s\n\n",
 				QString(item->serializedItem).contains('|'),
 				ctime(&now),  item->serializedItem);
 
 			fclose(lh);
 		}
-	} 
+	}
 
-	AddItem(item->serializedItem); 
+	AddItem(item->serializedItem);
 }
 
 
@@ -2072,7 +2072,7 @@ bool EQItemDBIterator::GetNextItemNumber(uint32_t* itemNr)
 	bool result;
 	Datum nextKey;
 
-	// Retrieve the next key  
+	// Retrieve the next key
 	result = GetNextKey(nextKey);
 
 	// did it succeed
@@ -2159,18 +2159,18 @@ int EQItemDBIterator::GetItemData(char** itemData)
 	found = GetData(data);
 
 	if (found)
-	{ 
+	{
 		size_t copySize = data.size - sizeof(EQItemDBEntryRawData_Current);
 
 		// data was found, did the caller want the data?
-		if (itemData != NULL) 
+		if (itemData != NULL)
 		{
 			// allocate a copy of the data
 			*itemData = new char[data.size];
 
 			// copy the data (yes, it's obvious, but hey...)
-			memcpy((void*)*itemData, 
-				(void*)((const char*)data.data + sizeof(EQItemDBEntryRawData_Current)), 
+			memcpy((void*)*itemData,
+				(void*)((const char*)data.data + sizeof(EQItemDBEntryRawData_Current)),
 				copySize);
 		}
 
@@ -2180,7 +2180,7 @@ int EQItemDBIterator::GetItemData(char** itemData)
 		// release the databases copy of the data
 		Release(data);
 	}
-	else 
+	else
 	{
 		// if the caller requested, and no data, set itemData to NULL for safety
 		if (itemData != NULL)
@@ -2191,7 +2191,7 @@ int EQItemDBIterator::GetItemData(char** itemData)
 }
 
 void EQItemDBIterator::Done()
-{ 
+{
 	// Have the iterator do it's schtick
 #ifdef USE_DB3
 	DB3Iterator::Done();
@@ -2202,7 +2202,7 @@ void EQItemDBIterator::Done()
 
 ////////////////////////////////////////////////////////////////////
 // Implementation of the EQItemDBEntry class
-EQItemDBEntry::EQItemDBEntry(uint32_t itemNr, 
+EQItemDBEntry::EQItemDBEntry(uint32_t itemNr,
 							 void* entryData)
 							 : m_itemEntryData((struct EQItemDBEntryData*)entryData),
 							 m_itemNr(itemNr)
@@ -2212,7 +2212,7 @@ EQItemDBEntry::EQItemDBEntry(uint32_t itemNr,
 	m_itemLore = (((const char*)entryData) +  m_itemEntryData->m_entrySize);
 
 	// and the item name is stored after that
-	m_itemName = (((const char*)entryData) +  m_itemEntryData->m_entrySize 
+	m_itemName = (((const char*)entryData) +  m_itemEntryData->m_entrySize
 		+ strlen(m_itemLore) + 1);
 
 }
@@ -2238,15 +2238,15 @@ uint16_t EQItemDBEntry::GetEntryFormatVersion()
 	return ((EQItemDBEntryData*)m_itemEntryData)->m_entryFormatVersion;
 }
 
-int16_t EQItemDBEntry::GetFlag() 
-{ 
-	return (int16_t)((EQItemDBEntryData_3*)m_itemEntryData)->m_itemType; 
+int16_t EQItemDBEntry::GetFlag()
+{
+	return (int16_t)((EQItemDBEntryData_3*)m_itemEntryData)->m_itemType;
 }
 
 uint8_t EQItemDBEntry::GetLoreFlag()
 {
 	if (((EQItemDBEntryData*)m_itemEntryData)->m_entryFormatVersion == 4)
-		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_loreFlag; 
+		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_loreFlag;
 	else
 		return (m_itemLore[0] == '*');
 }
@@ -2254,7 +2254,7 @@ uint8_t EQItemDBEntry::GetLoreFlag()
 uint8_t EQItemDBEntry::GetPendingLoreFlag()
 {
 	if (((EQItemDBEntryData*)m_itemEntryData)->m_entryFormatVersion == 4)
-		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_pendingLoreFlag; 
+		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_pendingLoreFlag;
 	else
 		return (m_itemLore[0] == '~');
 }
@@ -2262,7 +2262,7 @@ uint8_t EQItemDBEntry::GetPendingLoreFlag()
 uint8_t EQItemDBEntry::GetSummonedFlag()
 {
 	if (((EQItemDBEntryData*)m_itemEntryData)->m_entryFormatVersion == 4)
-		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_summonedFlag; 
+		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_summonedFlag;
 	else
 		return (m_itemLore[0] == '&');
 }
@@ -2270,189 +2270,189 @@ uint8_t EQItemDBEntry::GetSummonedFlag()
 uint8_t EQItemDBEntry::GetArtifactFlag()
 {
 	if (((EQItemDBEntryData*)m_itemEntryData)->m_entryFormatVersion == 4)
-		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_artifactFlag; 
+		return ((EQItemDBEntryData_4*)m_itemEntryData)->m_artifactFlag;
 	else
 		return (m_itemLore[0] == '#');
 }
 
-ItemType EQItemDBEntry::GetItemType() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_itemType; 
+ItemType EQItemDBEntry::GetItemType()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_itemType;
 }
 
-uint8_t EQItemDBEntry::GetWeight() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_weight; 
+uint8_t EQItemDBEntry::GetWeight()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_weight;
 }
 
-int8_t EQItemDBEntry::GetNoRent() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_norent; 
+int8_t EQItemDBEntry::GetNoRent()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_norent;
 }
 
-int8_t EQItemDBEntry::GetNoDrop() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_nodrop; 
+int8_t EQItemDBEntry::GetNoDrop()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_nodrop;
 }
 
-uint8_t EQItemDBEntry::GetSize() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_size; 
+uint8_t EQItemDBEntry::GetSize()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_size;
 }
 
-uint16_t EQItemDBEntry::GetIconNr() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_iconNr; 
+uint16_t EQItemDBEntry::GetIconNr()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_iconNr;
 }
 
-uint32_t EQItemDBEntry::GetSlots() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_equipableSlots; 
+uint32_t EQItemDBEntry::GetSlots()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_equipableSlots;
 }
 
-int32_t  EQItemDBEntry::GetCost() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_cost; 
+int32_t  EQItemDBEntry::GetCost()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_cost;
 }
 
-int8_t   EQItemDBEntry::GetSTR() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_STR; 
+int8_t   EQItemDBEntry::GetSTR()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_STR;
 }
 
-int8_t   EQItemDBEntry::GetSTA() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_STA; 
+int8_t   EQItemDBEntry::GetSTA()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_STA;
 }
 
-int8_t   EQItemDBEntry::GetCHA() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_CHA; 
+int8_t   EQItemDBEntry::GetCHA()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_CHA;
 }
 
-int8_t   EQItemDBEntry::GetDEX() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_DEX; 
+int8_t   EQItemDBEntry::GetDEX()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_DEX;
 }
 
-int8_t   EQItemDBEntry::GetINT() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_INT; 
+int8_t   EQItemDBEntry::GetINT()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_INT;
 }
 
-int8_t   EQItemDBEntry::GetAGI() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_AGI; 
+int8_t   EQItemDBEntry::GetAGI()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_AGI;
 }
 
-int8_t   EQItemDBEntry::GetWIS() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_WIS; 
+int8_t   EQItemDBEntry::GetWIS()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_WIS;
 }
 
-int8_t   EQItemDBEntry::GetMR() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_MR; 
+int8_t   EQItemDBEntry::GetMR()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_MR;
 }
 
-int8_t   EQItemDBEntry::GetFR() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_FR; 
+int8_t   EQItemDBEntry::GetFR()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_FR;
 }
 
-int8_t   EQItemDBEntry::GetCR() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_CR; 
+int8_t   EQItemDBEntry::GetCR()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_CR;
 }
 
-int8_t   EQItemDBEntry::GetDR() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_DR; 
+int8_t   EQItemDBEntry::GetDR()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_DR;
 }
 
-int8_t   EQItemDBEntry::GetPR() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_PR; 
+int8_t   EQItemDBEntry::GetPR()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_PR;
 }
 
-int8_t   EQItemDBEntry::GetHP() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_HP; 
+int8_t   EQItemDBEntry::GetHP()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_HP;
 }
 
-int8_t   EQItemDBEntry::GetMana() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_MANA; 
+int8_t   EQItemDBEntry::GetMana()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_MANA;
 }
 
-int8_t   EQItemDBEntry::GetAC() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_AC; 
+int8_t   EQItemDBEntry::GetAC()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_AC;
 }
 
-uint8_t  EQItemDBEntry::GetLight() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_light; 
+uint8_t  EQItemDBEntry::GetLight()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_light;
 }
 
-uint8_t  EQItemDBEntry::GetDelay() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_delay; 
+uint8_t  EQItemDBEntry::GetDelay()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_delay;
 }
 
-uint8_t  EQItemDBEntry::GetDamage() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_damage; 
+uint8_t  EQItemDBEntry::GetDamage()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_damage;
 }
 
-uint8_t  EQItemDBEntry::GetRange() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_range; 
+uint8_t  EQItemDBEntry::GetRange()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_range;
 }
 
-uint8_t  EQItemDBEntry::GetSkill() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_skill; 
+uint8_t  EQItemDBEntry::GetSkill()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_skill;
 }
 
-int8_t   EQItemDBEntry::GetMagic() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_magic; 
+int8_t   EQItemDBEntry::GetMagic()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_magic;
 }
 
-int8_t   EQItemDBEntry::GetLevel0() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_level; 
+int8_t   EQItemDBEntry::GetLevel0()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_level;
 }
 
-uint8_t  EQItemDBEntry::GetMaterial() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_material; 
+uint8_t  EQItemDBEntry::GetMaterial()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_material;
 }
 
-uint32_t EQItemDBEntry::GetColor() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_color; 
+uint32_t EQItemDBEntry::GetColor()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_color;
 }
 
-uint16_t  EQItemDBEntry::GetClasses() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_classes; 
+uint16_t  EQItemDBEntry::GetClasses()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_classes;
 }
 
-uint16_t  EQItemDBEntry::GetRaces() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_races; 
+uint16_t  EQItemDBEntry::GetRaces()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_races;
 }
 
-uint8_t  EQItemDBEntry::GetLevel() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_level; 
+uint8_t  EQItemDBEntry::GetLevel()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_level;
 }
 
-uint16_t  EQItemDBEntry::GetSpellId() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_spellId; 
+uint16_t  EQItemDBEntry::GetSpellId()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_spellId;
 }
 
 int8_t   EQItemDBEntry::GetCharges()
@@ -2460,9 +2460,9 @@ int8_t   EQItemDBEntry::GetCharges()
 	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_charges;
 }
 
-uint8_t  EQItemDBEntry::GetNumSlots() 
-{ 
-	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_numSlots; 
+uint8_t  EQItemDBEntry::GetNumSlots()
+{
+	return ((EQItemDBEntryData_3*)m_itemEntryData)->m_numSlots;
 }
 
 uint8_t  EQItemDBEntry::GetWeightReduction()
@@ -2491,7 +2491,7 @@ int8_t EQItemDBEntry::GetEffectType()
 
 QString EQItemDBEntry::GetEffectTypeString()
 {
-	static const char* effectNames[] = 
+	static const char* effectNames[] =
 	{
 		"No Effect",
 		"Click anywhere w/o class check",
@@ -2547,4 +2547,3 @@ bool   EQItemDBEntry::IsContainer()
 #ifndef QMAKEBUILD
 #include "itemdb.moc"
 #endif
-

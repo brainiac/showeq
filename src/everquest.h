@@ -51,7 +51,7 @@
 #define LIST_PR                         17
 #define LIST_AC                         18
 #define LIST_ALTEXP                     19
-#define LIST_MAXLIST                    20 
+#define LIST_MAXLIST                    20
 
 /*
 ** MOB Spawn Type
@@ -65,7 +65,7 @@
 #define SPAWN_DOOR                      7
 #define SPAWN_SELF                      10
 
-/* 
+/*
 ** Diety List
 */
 #define DEITY_UNKNOWN                   0
@@ -83,7 +83,7 @@
 #define DEITY_SOLUSEK                   213
 #define DEITY_TRIBUNAL                  214
 #define DEITY_TUNARE                    215
-#define DEITY_BERT                      201	
+#define DEITY_BERT                      201
 #define DEITY_RODCET                    212
 #define DEITY_VEESHAN                   216
 
@@ -109,7 +109,7 @@
 #define MAX_BUFFS                       25
 #define MAX_GUILDS                      1500
 #define MAX_AA                          359
-#define MAX_BANDOLIERS                  20 
+#define MAX_BANDOLIERS                  20
 #define MAX_POTIONS_IN_BELT             5
 #define MAX_TRIBUTES                    5
 #define MAX_DISCIPLINES                 100
@@ -366,7 +366,7 @@ struct opCodeStruct
 /**
  * Session request on a stream. This is sent by the client to initiate
  * a session with the zone or world server.
- * 
+ *
  * Size: 12 Octets
  */
 struct SessionRequestStruct
@@ -404,7 +404,7 @@ struct SessionDisconnectStruct
 /*0000*/ uint8_t unknown[8];
 };
 
-/* 
+/*
  * Used in charProfileStruct
  * Size: 4 bytes
  */
@@ -444,7 +444,7 @@ struct spellBuff
 };
 
 
-/* 
+/*
  * Used in charProfileStruct
  * Size: 8 octets
  */
@@ -457,7 +457,7 @@ struct AA_Array
 
 /**
  * An item inline in the stream, used in Bandolier and Potion Belt.
- * Size: 72 Octets 
+ * Size: 72 Octets
  */
 struct InlineItem
 {
@@ -469,7 +469,7 @@ struct InlineItem
 
 /**
  * Used in charProfileStruct. Contents of a Bandolier.
- * Size: 320 Octets 
+ * Size: 320 Octets
  */
 struct BandolierStruct
 {
@@ -483,7 +483,7 @@ struct BandolierStruct
 
 /**
  * A tribute a player can have loaded.
- * Size: 8 Octets 
+ * Size: 8 Octets
  */
 struct TributeStruct
 {
@@ -594,7 +594,7 @@ struct newZoneStruct
 /*0704*/ char    zonefile[64];             // Zone file name?
 /*0768*/ uint8_t unknown0764[36];          // *** Placeholder (12/05/2006)
 /*0804*/ uint8_t unknown0800[32];          // *** Placeholder (02/13/2007)
-/*0836*/ uint8_t unknown0832[12];          // *** Placeholder 
+/*0836*/ uint8_t unknown0832[12];          // *** Placeholder
 /*0848*/ uint8_t unknown0844[4];           // *** Placeholder (06/29/2005)
 /*0852*/ uint8_t unknown0848[4];           // *** Placeholder (09/13/2005)
 /*0856*/ uint8_t unknown0852[4];           // *** Placeholder (02/21/2006)
@@ -691,7 +691,7 @@ struct playerProfileStruct
 /*04180*/ uint8_t   face;               // Player face
 /*04181*/ uint8_t unknown04181[175];
 /*04356*/ int32_t   sSpellBook[400];    // List of the Spells in spellbook
-/*05956*/ uint8_t   unknown5956[448];   // all 0xff after last spell    
+/*05956*/ uint8_t   unknown5956[448];   // all 0xff after last spell
 /*06404*/ int32_t   sMemSpells[MAX_SPELL_SLOTS]; // List of spells memorized
 /*06444*/ uint8_t unknown06444[28];
 /*06472*/ uint32_t  platinum;           // Platinum Pieces on player
@@ -702,7 +702,7 @@ struct playerProfileStruct
 /*06492*/ uint32_t  gold_cursor;        // Gold Pieces on cursor
 /*06496*/ uint32_t  silver_cursor;      // Silver Pieces on cursor
 /*06500*/ uint32_t  copper_cursor;      // Copper Pieces on cursor
-/*06504*/ uint32_t  skills[MAX_KNOWN_SKILLS]; // List of skills 
+/*06504*/ uint32_t  skills[MAX_KNOWN_SKILLS]; // List of skills
 /*06804*/ uint8_t unknown06804[236];
 /*07040*/ uint32_t  toxicity;           // Potion Toxicity (15=too toxic, each potion adds 3)
 /*07044*/ uint32_t  thirst;             // Drink (ticks till next drink)
@@ -739,7 +739,7 @@ struct charProfileStruct
 /*15280*/ uint32_t  timePlayedMin;      // time character played
 /*15284*/ uint8_t unknown15284[4];
 /*15288*/ uint8_t   pvp;                // 1=pvp, 0=not pvp
-/*15289*/ uint8_t   anon;               // 2=roleplay, 1=anon, 0=not anon     
+/*15289*/ uint8_t   anon;               // 2=roleplay, 1=anon, 0=not anon
 /*15290*/ uint8_t   gm;                 // 0=no, 1=yes (guessing!)
 /*15291*/ int8_t    guildstatus;        // 0=member, 1=officer, 2=guildleader
 /*15292*/ uint8_t unknown15292[8];
@@ -750,7 +750,7 @@ struct charProfileStruct
 /*15348*/ float     y;                  // Players y position
 /*15352*/ float     x;                  // Players x position
 /*15356*/ float     z;                  // Players z position
-/*15360*/ float     heading;            // Players heading   
+/*15360*/ float     heading;            // Players heading
 /*15364*/ uint32_t  standState;         // 0x64 = stand
 /*15368*/ uint32_t  platinum_bank;      // Platinum Pieces in Bank
 /*15372*/ uint32_t  gold_bank;          // Gold Pieces in Bank
@@ -819,7 +819,7 @@ struct playerAAStruct {
 /*    0 */  uint8_t unknown0;
   union {
     uint8_t unnamed[17];
-    struct _named {  
+    struct _named {
 /*    1 */  uint8_t innate_strength;
 /*    2 */  uint8_t innate_stamina;
 /*    3 */  uint8_t innate_agility;
@@ -979,9 +979,9 @@ struct playerAAStruct {
 #endif
 
 /*
-** Generic Spawn Struct 
+** Generic Spawn Struct
 ** Length: Variable.
-** Used in: 
+** Used in:
 **   dbSpawnStruct
 **   petStruct
 **   spawnShroudOther
@@ -1034,7 +1034,7 @@ struct spawnStruct
 /*0000*/ uint32_t guildID;
 /*0000*/ uint32_t guildstatus;   // 0=member, 1=officer, 2=leader, -1=not guilded
 /*0000*/ uint8_t  class_;
-/*0000*/ uint8_t  state;         // stand state 
+/*0000*/ uint8_t  state;         // stand state
 /*0000*/ uint8_t  light;
 /*0000*/ char     lastName[32];
 /*0000*/ uint32_t petOwnerId;
@@ -1152,7 +1152,7 @@ struct spawnStruct
 /*0000*/ uint32_t guildstatus;   // 0=member, 1=officer, 2=leader, -1=not guilded
 /*0000*/ uint8_t  class_;
 /*0000*/ uint8_t  PVP;
-/*0000*/ uint8_t  state;         // stand state 
+/*0000*/ uint8_t  state;         // stand state
 /*0000*/ uint8_t  light;
 /*0000*/ uint8_t  unknown7;
 /*0000*/ uint8_t  unknown8;
@@ -1248,7 +1248,7 @@ struct spawnStruct
 /*0728*/ uint8_t  beard;          // Beard style (not totally, sure but maybe!)
 /*0723*/ uint8_t  max_hp;         // (name prolly wrong)takes on the value 100 for players, 100 or 110 for NPCs and 120 for PC corpses...
 /*122*/ uint8_t pvp; // 0=Not pvp,1=pvp
-union 
+union
 {
 /*0091*/ int8_t equip_chest2;     // Second place in packet for chest texture (usually 0xFF in live packets)
                                   // Not sure why there are 2 of them, but it effects chest texture!
@@ -1270,7 +1270,7 @@ struct ServerZoneEntryStruct : public spawnStruct
 /*
 ** Generic Door Struct
 ** Length: 92 Octets
-** Used in: 
+** Used in:
 **    OP_SpawnDoor
 **
 */
@@ -1288,7 +1288,7 @@ struct doorStruct
 /*0056*/ uint8_t initialState;
 /*0057*/ uint8_t unknown041[3];
 /*0060*/ uint8_t doorId;          // door's id #
-/*0061*/ uint8_t opentype;       
+/*0061*/ uint8_t opentype;
 /*0062*/ uint8_t size;            // size of door
 /*0063*/ uint8_t holdstateforever;
 /*0064*/ uint32_t zonePoint;
@@ -1296,7 +1296,7 @@ struct doorStruct
 /*0080*/ uint8_t unknown0080[8]; // ***Placeholder (12/07/2005)
 /*0088*/ uint8_t unknown0088[4]; // ***Placeholder (2/13/2007)
 /*0092*/
-}; 
+};
 
 /*
 ** Drop Item On Ground
@@ -1351,7 +1351,7 @@ struct zonePointStruct
 struct zonePointsStruct
 {
   /*0000*/ uint32_t        count;
-  /*0004*/ zonePointStruct zonePoints[0]; 
+  /*0004*/ zonePointStruct zonePoints[0];
   /*0xxx*/ uint8_t         unknown0xxx[24];
   /*0yyy*/
 };
@@ -1386,12 +1386,12 @@ struct itemPacketStruct
 };
 
 /*
-** Item Info Request Struct 
+** Item Info Request Struct
 ** OpCode: ItemInfoCode
 */
 struct itemInfoReqStruct
 {
-/*000*/ uint32_t itemNr;                  // ItemNr 
+/*000*/ uint32_t itemNr;                  // ItemNr
 /*005*/ uint32_t requestSeq;              // Request sequence number
 /*008*/ char     name[64];                // Item name
 /*072*/
@@ -1415,7 +1415,7 @@ struct itemInfoStruct
 ** OpCode: MobUpdateCode
 */
 
-struct spawnPositionUpdate 
+struct spawnPositionUpdate
 {
 /*0000*/ int16_t  spawnId;
 /*0002*/ int64_t  y:19, z:19, x:19, u3:7;
@@ -1460,7 +1460,7 @@ struct spawnIllusionStruct
 /**
  * Shroud spawn. For others shrouding, this has their spawnId and
  * spawnStruct.
- * 
+ *
  * Length: variable
  * OpCode: OP_Shroud
  */
@@ -1500,7 +1500,7 @@ struct spawnCampfire
 {
 /*0000*/ spawnStruct spawn;
 /*0532*/ uint8_t     unknown0532[465];
-/*0997*/ 
+/*0997*/
 };
 
 
@@ -1560,7 +1560,7 @@ struct emoteTextStruct
 struct channelMessageStruct
 {
 /*0000*/ char     target[64];             // the target characters name
-/*0064*/ char     sender[64];             // The senders name 
+/*0064*/ char     sender[64];             // The senders name
 /*0128*/ uint32_t language;               // Language
 /*0132*/ uint32_t chanNum;                // Channel
 /*0136*/ int8_t   unknown0136[8];        // ***Placeholder
@@ -1737,7 +1737,7 @@ struct groupDeclineStruct
 };
 
 /*
-** Grouping Invite Answer - Accept 
+** Grouping Invite Answer - Accept
 ** Length 148 Octets
 ** Opcode OP_GroupFollow
 */
@@ -1755,7 +1755,7 @@ struct groupFollowStruct
 /*
 ** Group Disbanding
 ** Length 148 Octets
-** Opcode 
+** Opcode
 */
 
 struct groupDisbandStruct
@@ -1861,7 +1861,7 @@ struct newCorpseStruct
 /*0000*/ uint32_t spawnId;                // Id of spawn that died
 /*0004*/ uint32_t killerId;               // Killer
 /*0008*/ uint32_t corpseid;               // corpses id
-/*0012*/ int32_t  type;                   // corpse type?  
+/*0012*/ int32_t  type;                   // corpse type?
 /*0016*/ uint32_t spellId;                // ID of Spell
 /*0020*/ uint16_t zoneId;                 // Bind zone id
 /*0022*/ uint16_t zoneInstance;           // Bind zone instance
@@ -1907,7 +1907,7 @@ struct moneyOnCorpseStruct
 ** OpCode: staminaCode
 */
 
-struct staminaStruct 
+struct staminaStruct
 {
 /*0000*/ uint32_t food;                     // Hunger, in ticks till next eat
 /*0004*/ uint32_t water;                    // Thirst, in ticks till next eat
@@ -1974,7 +1974,7 @@ struct actionAltStruct
 struct clientTargetStruct
 {
 /*0000*/ uint32_t newTarget;              // Target ID
-/*0004*/ 
+/*0004*/
 };
 
 /*
@@ -1983,13 +1983,13 @@ struct clientTargetStruct
 ** OpCode: StartCastCode
 */
 
-struct startCastStruct 
+struct startCastStruct
 {
 /*0000*/ int32_t  slot;                   // ***Placeholder
 /*0004*/ uint32_t spellId;                // Spell ID
 /*0008*/ int32_t  inventorySlot;          // ***Placeholder
 /*0012*/ uint32_t targetId;               // The current selected target
-/*0016*/ uint8_t  unknown0018[4];         // ***Placeholder 
+/*0016*/ uint8_t  unknown0018[4];         // ***Placeholder
 /*0020*/
 };
 
@@ -2029,7 +2029,7 @@ struct spellFadedStruct
 {
 /*0000*/ uint32_t color;                  // color of the spell fade message
 /*0004*/ char     message[0];             // fade message
-/*0???*/ uint8_t  paddingXXX[3];          // always 0's 
+/*0???*/ uint8_t  paddingXXX[3];          // always 0's
 };
 
 /*
@@ -2192,8 +2192,8 @@ struct hpNpcUpdateStruct
 /*0000*/ int32_t curHP;
 /*0004*/ int32_t maxHP;
 /*0008*/ uint16_t spawnId;
-/*0010*/ 
-}; 
+/*0010*/
+};
 
 /*
 ** Inspecting Information
@@ -2204,7 +2204,7 @@ struct hpNpcUpdateStruct
 struct inspectDataStruct
 {
 /*0000*/ uint8_t  unknown0000[8];         // ***Placeholder
-/*0008*/ char     itemNames[23][64];      // 23 items with names 
+/*0008*/ char     itemNames[23][64];      // 23 items with names
                                           //    64 characters long.
 /*1480*/ int32_t  icons[23];              // Icon Information
 /*1572*/ char     mytext[200];            // Player Defined Text Info
@@ -2241,7 +2241,7 @@ struct badCastStruct
 ** Length: 8 Octets
 ** OpCode: RandomCode
 */
-struct randomReqStruct 
+struct randomReqStruct
 {
 /*0000*/ uint32_t bottom;                 // Low number
 /*0004*/ uint32_t top;                    // High number
@@ -2252,7 +2252,7 @@ struct randomReqStruct
 ** Length: 76 Octets
 ** OpCode: RandomCode
 */
-struct randomStruct 
+struct randomStruct
 {
 /*0000*/ uint32_t bottom;                 // Low number
 /*0004*/ uint32_t top;                    // High number
@@ -2302,14 +2302,14 @@ struct playerSelfPosStruct
 /*0012*/ float y;                 // y coord (1st loc value)
 /*0016*/ signed deltaHeading:10;  // change in heading
          unsigned animation:10;   // animation
-         unsigned padding0016:12; // ***Placeholder 
+         unsigned padding0016:12; // ***Placeholder
 /*0020*/ float deltaX;            // Change in x
 /*0024*/ float deltaY;            // Change in y
 /*0028*/ float z;                 // z coord (3rd loc value)
 /*0032*/ float deltaZ;            // Change in z
-/*0036*/ unsigned padding0036:10; // ***Placeholder 
+/*0036*/ unsigned padding0036:10; // ***Placeholder
          unsigned heading:12;     // Directional heading
-         unsigned padding0037:10; // ***Placeholder 
+         unsigned padding0037:10; // ***Placeholder
 /*0040*/
 };
 
@@ -2393,7 +2393,7 @@ struct moneyUpdateStruct
 struct memorizeSlotStruct
 {
 /*0000*/ uint32_t slot;                     // Memorization slot (0-7)
-/*0004*/ uint32_t spellId;                  // Id of spell 
+/*0004*/ uint32_t spellId;                  // Id of spell
                                             // (offset of spell in spdat.eff)
 /*0008*/ uint32_t action;                   // 1-memming,0-scribing,2-forget
 /*0012*/
@@ -2471,24 +2471,24 @@ struct clientLFGStruct
 /*
 ** buffStruct
 ** Length: 34 Octets
-** 
+**
 */
 
 struct buffStruct
 {
 /*0000*/ uint32_t spawnid;        //spawn id
-/*0004*/ uint8_t  unknown0004[4]; 
+/*0004*/ uint8_t  unknown0004[4];
 /*0008*/ uint32_t spellid;        // spellid
 /*0012*/ uint32_t duration;       // duration
 /*0016*/ uint8_t  unknown0012[8];
 /*0024*/ uint32_t playerId;       // Player id who cast the buff
 /*0028*/ uint32_t spellslot;      // spellslot
 /*0032*/ uint32_t changetype;     // 1=buff fading,2=buff duration
-/*0034*/ 
+/*0034*/
 };
 
 /*
-** Guild Member Update structure 
+** Guild Member Update structure
 ** Length: 76 octets
 **
 */
@@ -2497,7 +2497,7 @@ struct GuildMemberUpdate
 {
 /*000*/ uint32_t guildId;       // guild id
 /*004*/ char     name[64];      // member name
-/*068*/ uint16_t zoneId;        // zone id 
+/*068*/ uint16_t zoneId;        // zone id
 /*070*/ uint16_t zoneInstance;  // zone instance
 /*072*/ uint32_t lastOn;        // time the player was last on.
 /*076*/
@@ -2512,11 +2512,11 @@ struct bazaarTraderRequest
 {
 /*000*/ uint32_t spawnId;       // Spawn id of person turning trader on/off
 /*004*/ uint8_t mode;           // 0=off, 1=on
-/*005*/ uint8_t uknown005[3];   // 
+/*005*/ uint8_t uknown005[3];   //
 /*008*/
 };
 
-struct bazaarSearchQueryStruct 
+struct bazaarSearchQueryStruct
 {
   uint32_t mark;
   uint32_t type;
@@ -2526,7 +2526,7 @@ struct bazaarSearchQueryStruct
   uint32_t unknownXXX2;
 };
 
-struct bazaarSearchResponseStruct 
+struct bazaarSearchResponseStruct
 {
   uint32_t mark;
   uint32_t count;

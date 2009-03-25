@@ -1,13 +1,13 @@
 /*
  * dbcommon.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -36,14 +36,14 @@ public:
 		data = NULL;
 		size = 0;
 	}
-	
+
 	// convenience constructor
 	Datum(void* data_, uint32_t size_)
 	{
 		data = data_;
 		size = size_;
 	}
-	
+
 	// public data members
 	void* data;
 	uint32_t size;

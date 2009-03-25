@@ -34,7 +34,7 @@
 #define SPELLCOL_CASTTIME   6
 #define SPELLCOL_DURATION   7
 
-class SpellListItem : public Q3ListViewItem 
+class SpellListItem : public Q3ListViewItem
 {
 public:
 	SpellListItem(Q3ListViewItem *parent);
@@ -47,7 +47,7 @@ public:
 	const SpellItem* item() const;
 	const QString& category() const;
 	void setCategory(QString& cat);
-	
+
 private:
 	QColor m_textColor;
 	bool m_btextSet;
@@ -55,7 +55,7 @@ private:
 	QString m_category;
 };
 
-class SpellList : public SEQListView 
+class SpellList : public SEQListView
 {
 	Q_OBJECT
 
@@ -72,11 +72,11 @@ public:
 	QColor pickSpellColor(const SpellItem *item, QColor def = Qt::black) const;
 	//QString& getCategory(SpellListItem *);
 	SpellListItem* Find(const SpellItem *);
-	
+
 signals:
 	void listUpdated();   // flags in spawns have changed
 	void listChanged();   // categories have changed
-	
+
 public slots:
 	// SpellShell signals
 	void addSpell(const SpellItem *);
@@ -84,21 +84,21 @@ public slots:
 	void changeSpell(const SpellItem *);
 	void selectSpell(const SpellItem *);
 	void clear();
-	
+
 	void mouseDoubleClicked(Q3ListViewItem *item);
 	void rightButtonClicked(Q3ListViewItem *, const QPoint&, int);
 	void activated(int);
-	
-protected slots:  
+
+protected slots:
 	void init_menu();
-	
+
 private:
 	void selectAndOpen(SpellListItem *);
 	SpellShell* m_spellShell;
 	Q3ValueList<QString> m_categoryList;
 	Q3ValueList<SpellListItem *> m_spellList;
 	Q3PopupMenu *m_menu;
-	
+
 	int mid_spellName, mid_spellId;
 	int mid_casterId, mid_casterName;
 	int mid_targetId, mid_targetName;
@@ -108,17 +108,17 @@ private:
 class SpellListWindow : public SEQWindow
 {
 	Q_OBJECT
-	
+
 public:
 	SpellListWindow(SpellShell* sshell, QWidget* parent = 0, const char* name = 0);
 	~SpellListWindow();
 	virtual Q3PopupMenu* menu();
-	
+
 	SpellList* spellList() { return m_spellList; }
-	
+
 public slots:
 	virtual void savePrefs();
-	
+
 protected:
 	SpellList* m_spellList;
 };

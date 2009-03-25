@@ -1,13 +1,13 @@
 /*
  * xmlconv.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2002-2003 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -42,7 +42,7 @@ DomConvenience::DomConvenience(QDomDocument& doc)
 bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 {
 	bool ok = false;
-	
+
 	if (e.tagName() == "string")
 	{
 		if (e.hasAttribute("value"))
@@ -55,8 +55,8 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	}
 	else if (e.tagName() == "int")
 	{
-		int base = getBase(e); 
-		
+		int base = getBase(e);
+
 		if (e.hasAttribute("value"))
 			v = QVariant(e.attribute("value").toInt(&ok, base));
 		else
@@ -64,8 +64,8 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	}
 	else if (e.tagName() == "uint")
 	{
-		int base = getBase(e); 
-		
+		int base = getBase(e);
+
 		if (e.hasAttribute("value"))
 			v = QVariant(e.attribute("value").toUInt(&ok, base));
 		else
@@ -84,7 +84,7 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		{
 			QString val = e.attribute("value");
 			v = QVariant(getBoolFromString(val, ok), 0);
-			
+
 			if (!ok)
 				qWarning("%s element with bogus value '%s'!", (const char*)e.tagName(), (const char*)val);
 		}
@@ -96,30 +96,30 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		QColor color = getColor(e);
 		ok = color.isValid();
 		v = color;
-		
+
 		if (!ok)
 			qWarning("%s element without valid value!", (const char*)e.tagName());
 	}
 	else if (e.tagName() == "pen")
 	{
 		int base = getBase(e);
-		uint w = 0; 
+		uint w = 0;
 		Qt::PenStyle s = Qt::SolidLine;
 		Qt::PenCapStyle c = Qt::SquareCap;
 		Qt::PenJoinStyle j = Qt::BevelJoin;
 		QColor color = getColor(e);
-		
+
 		if (e.hasAttribute("style"))
 			s = (Qt::PenStyle)e.attribute("style").toInt(0, base);
 		if (e.hasAttribute("cap"))
 			c = (Qt::PenCapStyle)e.attribute("cap").toInt(0, base);
 		if (e.hasAttribute("join"))
 			j = (Qt::PenJoinStyle)e.attribute("join").toInt(0, base);
-		
+
 		ok = color.isValid();
-		
+
 		v = QPen(color, w, s, c, j);
-		
+
 		if (!ok)
 			qWarning("%s element without valid value!", (const char*)e.tagName());
 	}
@@ -130,11 +130,11 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		Qt::BrushStyle s = Qt::SolidPattern;
 		if (e.hasAttribute("style"))
 			s = (Qt::BrushStyle)e.attribute("style").toInt(0, base);
-		
+
 		ok = color.isValid();
-		
+
 		v = QBrush(color, s);
-		
+
 		if (!ok)
 			qWarning("%s element without valid value!", (const char*)e.tagName());
 	}
@@ -142,14 +142,14 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	{
 		int base = getBase(e);
 		bool coordOk;
-		
+
 		int x = 0, y = 0;
 		if (e.hasAttribute("x"))
 			x = e.attribute("x").toInt(&coordOk, base);
-		
+
 		if (e.hasAttribute("y"))
 			y = e.attribute("y").toInt(&coordOk, base);
-		
+
 		v = QVariant(QPoint(x, y));
 		ok = true;
 	}
@@ -157,20 +157,20 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	{
 		int base = getBase(e);
 		bool coordOk;
-		
+
 		int x = 0, y = 0, width = 0, height = 0;
 		if (e.hasAttribute("x"))
 			x = e.attribute("x").toInt(&coordOk, base);
-		
+
 		if (e.hasAttribute("y"))
 			y = e.attribute("y").toInt(&coordOk, base);
-		
+
 		if (e.hasAttribute("width"))
 			width = e.attribute("width").toInt(&coordOk, base);
-		
+
 		if (e.hasAttribute("height"))
 			height = e.attribute("height").toInt(&coordOk, base);
-		
+
 		v = QVariant(QRect(x, y, width, height));
 		ok = true;
 	}
@@ -178,14 +178,14 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	{
 		int base = getBase(e);
 		bool coordOk;
-		
+
 		int width = 0, height = 0;
 		if (e.hasAttribute("width"))
 			width = e.attribute("width").toInt(&coordOk, base);
-		
+
 		if (e.hasAttribute("height"))
 			height = e.attribute("height").toInt(&coordOk, base);
-		
+
 		v = QVariant(QSize(width, height));
 		ok = true;
 	}
@@ -195,7 +195,7 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		if (e.hasAttribute("sequence"))
 		{
 			key = (QKeySequence)e.attribute("sequence");
-			
+
 			// fix the key code (deal with Qt brain death)
 			v = key & ~Qt::UNICODE_ACCEL;
 			ok = true;
@@ -205,7 +205,7 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	{
 		QFont f;
 		bool boolOk;
-		
+
 		if (e.hasAttribute("family"))
 			f.setFamily(e.attribute("family"));
 		if (e.hasAttribute("pointsize"))
@@ -216,14 +216,14 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 			f.setItalic(getBoolFromString(e.attribute("italic"), boolOk));
 		if (e.hasAttribute("strikeout"))
 			f.setStrikeOut(getBoolFromString(e.attribute("strikeout"), boolOk));
-		
+
 		v = QVariant(f);
 		ok = true;
 	}
 	else if (e.tagName() == "sizepolicy")
 	{
 		QSizePolicy sp;
-		
+
 		if (e.hasAttribute("hsizetype"))
 			sp.setHorData((QSizePolicy::SizeType)e.attribute("hsizetype").toInt());
 		if (e.hasAttribute("vsizetype"))
@@ -247,7 +247,7 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		QDomNodeList stringNodeList = e.elementsByTagName("string");
 		QStringList stringList;
 		QDomElement stringElement;
-		
+
 		for (uint i = 0; i < stringNodeList.length(); i++)
 		{
 			stringElement = stringNodeList.item(i).toElement();
@@ -258,46 +258,46 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 						 (const char*)e.tagName());
 				continue;
 			}
-			
+
 			stringList.append(e.attribute("value"));
 		}
-		
+
 		v = stringList;
-		
+
 		ok = true;
 	}
 	else if (e.tagName() == "uint64")
 	{
 		QString value = e.attribute("value");
-		
+
 		// borrowed more or less from Qt 3.2 (since we have to support older)
 		uint64_t val = 0;
 		const QChar* p = value.unicode();
 		int l = value.length();
 		const uint64_t max_mult = UINT64_MAX / 16;
-		
+
 		if (!p)
 		{
 			qWarning("Invalid value for tag: %s", (const char*)e.tagName());
 			return false;
 		}
-		
+
 		while ( l && p->isSpace() )                 // skip leading space
 			l--,p++;
 		if ( !l )
 			return false;
 		if ( *p == '+' )
 			l--,p++;
-		
+
 		if ( !l || !ok_in_hex(*p) )
 			return false;
-		while ( l && ok_in_hex(*p) ) 
+		while ( l && ok_in_hex(*p) )
 		{
 			l--;
 			uint dv;
-			if ( p->isDigit() ) 
+			if ( p->isDigit() )
 				dv = p->digitValue();
-			else 
+			else
 			{
 				if ( *p >= 'a' && *p <= 'f' )
 					dv = p->toAscii() - 'a' + 10;
@@ -309,10 +309,10 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 			val = 16 * val + dv;
 			p++;
 		}
-		
+
 		QByteArray ba;
 		ba.duplicate((const char*)&val, sizeof(uint64_t));
-		
+
 		v = ba;
 		ok = true;
 	}
@@ -333,16 +333,16 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 	{
 		qWarning("Unknown tag: %s", (const char*)e.tagName());
 	}
-	
+
 	return ok;
 }
 
 bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 {
 	bool ok = true;
-	
+
 	clearAttributes(e);
-	
+
 	switch (v.type())
 	{
 		case QVariant::String:
@@ -454,32 +454,32 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 			e.setTagName("cursor");
 			e.setAttribute("shape", v.value<QCursor>().shape());
 			break;
-			
+
 		case QVariant::StringList:
 		{
 			e.setTagName("stringlist");
 			int32_t j;
-			
+
 			QDomNode n;
 			QDomNodeList stringNodeList = e.elementsByTagName("string");
 			QDomElement stringElem;
 			QStringList stringList = v.toStringList();
 			QStringList::Iterator it = stringList.begin();
-			
-			for (j = 0; 
+
+			for (j = 0;
 				 ((j < (int32_t)stringNodeList.length()) && (it != stringList.end()));
 				 j++)
 			{
 				// get the current string element
 				stringElem = stringNodeList.item(j).toElement();
-				
+
 				// set it to the current string
 				variantToElement(QVariant(*it), stringElem);
-				
+
 				// iterate to the next string
 				++it;
 			}
-			
+
 			// more nodes in previous stringlist then current, remove excess nodes
 			if (stringNodeList.count() > stringList.count())
 			{
@@ -492,25 +492,25 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 				{
 					// create a new element
 					stringElem = m_doc.createElement("string");
-					
+
 					// set it to the currentstring
 					variantToElement(QVariant(*it), stringElem);
-					
+
 					// append it to the current element
 					e.appendChild(stringElem);
-					
+
 					// iterate to the next string
 					++it;
 				}
 			}
 		}
 			break;
-			
+
 		case QVariant::KeySequence:
 			e.setTagName("key");
 			e.setAttribute("sequence", (QString)v.value<QKeySequence>().toString());
 			break;
-			
+
 		case QVariant::ByteArray: // this is only for [u]int64_t
 		{
 			e.setTagName("data");
@@ -526,7 +526,7 @@ bool DomConvenience::variantToElement(const QVariant& v, QDomElement& e)
 			ok = false;
 			break;
 	}
-	
+
 	return ok;
 }
 
@@ -534,11 +534,11 @@ QString DomConvenience::getStringFromByteArray(const QByteArray& ba)
 {
 	const char* digitSet = "0123456789abcdef";
 	QString data = "";
-	
+
 	for (int i = 0; i < ba.size(); i++)
 	{
-		char c = ba[i]; 
-		
+		char c = ba[i];
+
 		data += digitSet[(c >> 4) & 0xf];
 		data += digitSet[c & 0xF];
 	}
@@ -549,12 +549,12 @@ QByteArray DomConvenience::getByteArrayFromString(const QString& value)
 {
 	const QChar* ptr = value.unicode();
 	uint32_t len = value.length();
-	
+
 	if (!ptr)
 	{
 		return QByteArray(0);
 	}
-	
+
 	QByteArray data(len / 2, '\0');
 	uint8_t dv = 0; uint32_t i = 0;
 	bool even = false;
@@ -564,8 +564,8 @@ QByteArray DomConvenience::getByteArrayFromString(const QString& value)
 		if (even)
 			dv = dv << 4;
 		else
-			dv = 0;				
-		
+			dv = 0;
+
 		if (ptr->isDigit())
 		{
 			dv += ptr->digitValue();
@@ -577,7 +577,7 @@ QByteArray DomConvenience::getByteArrayFromString(const QString& value)
 			else if (*ptr >= 'A' && *ptr <= 'F')
 				dv += ptr->toAscii() - 'A' + 10;
 		}
-		
+
 		if (even)
 			data[i++] = dv;
 		even = !even;
@@ -596,21 +596,21 @@ bool DomConvenience::getBoolFromString(const QString& s, bool& ok)
 	}
 	else if ((s == "false") || (s == "0"))
 		ok = true;
-	
+
 	return val;
 }
 
 int DomConvenience::getBase(const QDomElement& e)
 {
-	int base = 10; 
+	int base = 10;
 	bool baseOk = false;
-	if (e.hasAttribute("base")) 
+	if (e.hasAttribute("base"))
 	{
 		base  = e.attribute("base").toInt(&baseOk);
 		if (!baseOk)
 			base = 10;
 	}
-	
+
 	return base;
 }
 
@@ -619,18 +619,18 @@ QColor DomConvenience::getColor(const QDomElement& e)
 	QColor color;
 	if (e.hasAttribute("name"))
 		color = QColor(e.attribute("name"));
-	
+
 	// allow specifying of base color by name and then tweaking
-	if (e.hasAttribute("red") || 
+	if (e.hasAttribute("red") ||
 		e.hasAttribute("green") ||
 		e.hasAttribute("blue"))
 	{
 		int base = getBase(e);
 		bool colorOk = false;
-		
+
 		// default to black
 		int r = 0, g = 0, b = 0;
-		
+
 		// if color was specified by name, use it's RGB values as defaults
 		if (color.isValid())
 		{
@@ -638,17 +638,17 @@ QColor DomConvenience::getColor(const QDomElement& e)
 			g = color.green();
 			b = color.blue();
 		}
-		
+
 		if (e.hasAttribute("red"))
 			r = e.attribute("red").toInt(&colorOk, base);
 		if (e.hasAttribute("green"))
 			g = e.attribute("green").toInt(&colorOk, base);
 		if (e.hasAttribute("blue"))
 			b = e.attribute("blue").toInt(&colorOk, base);
-		
+
 		color = QColor(r, g, b);
 	}
-	
+
 	return color;
 }
 
@@ -661,7 +661,7 @@ void DomConvenience::clearAttributes(QDomElement& e)
 {
 	QDomNamedNodeMap attrMap = e.attributes();
 	QDomNode attrNode;
-	
+
 	for (uint i = attrMap.length(); i > 0; --i)
 		e.removeAttributeNode(attrMap.item(i - 1).toAttr());
 }

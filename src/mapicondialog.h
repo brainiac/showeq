@@ -643,4 +643,3 @@ protected slots:
 };
 
 #endif // MAPICONDIALOG_H
-

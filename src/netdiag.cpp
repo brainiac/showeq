@@ -32,10 +32,10 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 	tmpGrid->addRowSpacing(3, 5);
 	tmpGrid->addRowSpacing(6, 5);
 	tmpGrid->addRowSpacing(8, 5);
-	
+
 	int row = 0;
 	int col = 0;
-	
+
 	// create labels to display client & server info
 	tmpGrid->addWidget(new QLabel("Network ", this), row, col++);
 	tmpGrid->addWidget(new QLabel("Client: ", this), row, col++);
@@ -49,7 +49,7 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 	tmpGrid->addWidget(new QLabel("ClientPort: ", this), row, col++);
 	m_clientPortLabel = new QLabel(this);
 	tmpGrid->addWidget(m_clientPortLabel, row, col++);
-	
+
 	// second row of network info
 	row++; col = 1;
 	tmpGrid->addWidget(new QLabel("Device: ", this), row, col++);
@@ -66,11 +66,11 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 	m_sessionLabel = new QLabel(this);
 	tmpGrid->addWidget(m_sessionLabel, row, col++);
 	m_sessionLabel->setNum(m_packet->session_tracking_enabled());
-	
+
 	clientChanged(m_packet->clientAddr());
 	serverPortLatched(m_packet->serverPort());
 	clientPortLatched(m_packet->clientPort());
-	
+
 	// 3rd row of network info
 	row++; col = 0;
 	tmpGrid->addWidget(new QLabel("Pcap Thread: ", this), row, col++);
@@ -83,12 +83,12 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 	m_filterLabel = new QLabel(this);
 	m_filterLabel->setText(m_packet->pcapFilter());
 	tmpGrid->addMultiCellWidget(m_filterLabel, row, row, col, col+5);
-	
+
 	// stream specific statistics
 	row++; row++; col = 0;
-	
+
 	QString eqStreams[] = {"client->world", "world->client", "client->zone", "zone->client"};
-	
+
 	for (int a = 0; a < MAXSTREAMS; a++)
 	{
 		tmpGrid->addWidget(new QLabel(eqStreams[a], this), row, col++);
@@ -97,9 +97,9 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 		m_maxLength[a]->setNum((int)m_packet->currentMaxLength(a));
 		tmpGrid->addWidget(m_maxLength[a], row, col++);
 		col++;
-		
+
 		row++; col = 0;
-		
+
 		// packet throughput
 		tmpGrid->addWidget(new QLabel("Packets ", this), row, col++);
 		tmpGrid->addWidget(new QLabel("Total: ", this), row, col++);
@@ -114,9 +114,9 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 		m_packetAvg[a] = new QLabel(this, "avg");
 		tmpGrid->addWidget(m_packetAvg[a], row, col++);
 		resetPacket(m_packet->packetCount(a), a);
-		
+
 		row++; col = 0;
-		
+
 		// network status
 		tmpGrid->addWidget(new QLabel("Status ", this), row, col++);
 		tmpGrid->addWidget(new QLabel("Cached: ", this), row, col++);
@@ -132,10 +132,10 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 		m_seqCur[a] = new QLabel(this, "seqcur");
 		tmpGrid->addWidget(m_seqCur[a], row, col++);
 		row++; row++; col = 0;
-		seqExpect(m_packet->serverSeqExp(a), a); 
+		seqExpect(m_packet->serverSeqExp(a), a);
 		m_seqCur[a]->setText("????");
 	}
-	
+
 	if (m_packet->playbackPackets())
 	{
 		tmpGrid->addWidget(new QLabel("Playback ", this), row, col++);
@@ -145,22 +145,22 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 		m_playbackSpeed->setSpecialValueText("Pause");
 		m_playbackSpeed->setWrapping(true);
 		tmpGrid->addWidget(m_playbackSpeed, row, col++, Qt::AlignLeft);
-		
+
 		m_playbackSpeed->setValue(m_packet->playbackSpeed());
-		
+
 		QAction* incPlayback = new QAction(this);
 		incPlayback->setShortcut(pSEQPrefs->getPrefKey("IncPlaybackSpeedKey", preferenceName(), "Ctrl+X"));
 		connect(incPlayback, SIGNAL(triggered()), m_packet, SLOT(incPlayback()));
-		
+
 		QAction* decPlayback = new QAction(this);
 		decPlayback->setShortcut(pSEQPrefs->getPrefKey("DecPlaybackSpeedKey", preferenceName(), "Ctrl+Z"));
 		connect(decPlayback, SIGNAL(triggered()), m_packet, SLOT(decPlayback()));
 	}
-	
+
 	QWidget* thisWidget = new QWidget();
 	thisWidget->setLayout(tmpGrid);
 	setWidget(thisWidget);
-	
+
 	// supply the LCD's with signals
 	connect(m_packet, SIGNAL(cacheSize(int, int)), this, SLOT(cacheSize(int, int)));
 	connect(m_packet, SIGNAL(seqExpect (int, int)), this, SLOT(seqExpect(int, int)));
@@ -173,7 +173,7 @@ NetDiag::NetDiag(EQPacket* packet, QWidget* parent, const char* name = NULL)
 	connect(m_packet, SIGNAL(resetPacket(int, int)), this, SLOT(resetPacket(int, int)));
 	connect(m_packet, SIGNAL(filterChanged()), this, SLOT(filterChanged()));
 	connect(m_packet, SIGNAL(maxLength(int, int)), this, SLOT(maxLength(int, int)));
-	
+
 	if (m_playbackSpeed)
 	{
 		connect(m_playbackSpeed, SIGNAL(valueChanged(int)), m_packet, SLOT(setPlayback(int)));
@@ -203,21 +203,21 @@ void NetDiag::clientChanged(in_addr_t addr)
 {
 	QString disp, tmp;
 	disp = print_addr(addr);
-	
+
 	uint8_t sessionState = m_packet->session_tracking_enabled();
 	m_sessionLabel->setNum(sessionState);
-	
+
 	switch (sessionState)
 	{
 		case 2:
 			tmp.sprintf(":%d", m_packet->clientPort());
 			disp += tmp;
 			break;
-			
+
 		case 1:
 			disp += QString(":?");
 			break;
-			
+
 		default:
 			break;
 	}
@@ -228,12 +228,12 @@ void NetDiag::clientPortLatched(in_port_t clientPort)
 {
 	QString disp, tmp;
 	uint32_t addr = m_packet->clientAddr();
-	
+
 	disp = print_addr(addr);
 	tmp.sprintf(":%d", clientPort);
-	
+
 	disp += tmp;
-	
+
 	m_clientLabel->setText(disp);
 }
 
@@ -246,17 +246,17 @@ void NetDiag::sessionTrackingChanged(uint8_t sessionTrackState)
 {
 	QString disp, tmp;
 	disp = print_addr(m_packet->clientAddr());
-	
+
 	m_sessionLabel->setNum(sessionTrackState);
 	switch(sessionTrackState)
 	{
 		case 1:
 			m_clientLabel->setText(disp + ":?");
 			break;
-			
+
 		case 2:
 			break;
-			
+
 		default:
 			m_clientLabel->setText(disp);
 			break;
@@ -273,7 +273,7 @@ void NetDiag::resetPacket(int num, int stream)
 	// if passed 0 reset the average
 	m_packetStartTime[stream] = mTime();
 	m_initialcount[stream] = num;
-	
+
 	m_packetTotal[stream]->setText(QString::number(num));
 	m_packetRecent[stream]->setText("0");
 	m_packetAvg[stream]->setText("0.0");
@@ -284,25 +284,25 @@ void NetDiag::numPacket(int num, int stream)
 	// start the timer of not started
 	if (!m_packetStartTime)
 		m_packetStartTime[stream] = mTime();
-	
+
 	QString tempStr;
-	
+
 	m_packetTotal[stream]->setText(QString::number(num));
-	
+
 	// update five times per sec
 	static int lastupdate = 0;
 	if ((mTime() - lastupdate) < 1000)
 		return;
 	lastupdate = mTime();
-	
+
 	int numdelta = num - m_initialcount[stream];
 	m_packetRecent[stream]->setText(QString::number(num));
 	int delta = mTime() - m_packetStartTime[stream];
 	if (numdelta && delta)
 		tempStr.sprintf("%2.1f", (float)(numdelta<<10) / (float)delta);
-	else   
+	else
 		tempStr.sprintf("0.0");
-	
+
 	m_packetAvg[stream]->setText(tempStr);
 }
 
@@ -322,7 +322,7 @@ QString NetDiag::print_addr(in_addr_t  addr)
 	debug ("print_addr()");
 #endif /* DEBUG_PACKET */
 	QString paddr;
-	
+
 	paddr.sprintf("%d.%d.%d.%d", addr & 0x000000ff, (addr & 0x0000ff00) >> 8,
 				   (addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);
 	return paddr;
@@ -331,4 +331,3 @@ QString NetDiag::print_addr(in_addr_t  addr)
 #ifndef QMAKEBUILD
 #include "netdiag.moc"
 #endif
-

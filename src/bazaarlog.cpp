@@ -27,15 +27,15 @@ BazaarLog::~BazaarLog()
 
 void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 {
-	if (!open()) 
+	if (!open())
 		return;
-	
+
 	if (len == 0 || data == 0 || len < sizeof(bazaarSearchResponseStruct))
     {
 		seqWarn("Short / empty bazaar data passed to BazaarLog::bazaarSearch");
 		return;
     }
-	
+
 	QString tmp;
 	const struct bazaarSearchResponseStruct* r = (const bazaarSearchResponseStruct*) data;
 	const size_t bsize = sizeof(bazaarSearchResponseStruct);
@@ -43,7 +43,7 @@ void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 	for (int i = 0; i * bsize + msize < len && r[i].mark == 7; i++)
     {
 		const struct bazaarSearchResponseStruct& resp = r[i];
-		
+
 		// First copy and remove count from item name
 		char name[256];
 		strncpy(name, resp.item_name, sizeof(resp.item_name));
@@ -58,12 +58,11 @@ void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 		csv.sprintf("1^%d^%d^%d^%s^%s", int(time(NULL)), resp.price, resp.count, merchant_name, name);
 		m_out << csv << endl;
     }
-	
+
 	flush();
 }
 
 #ifndef QMAKEBUILD
 #include "bazaarlog.moc"
 #endif
-
 

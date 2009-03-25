@@ -46,7 +46,7 @@ long int lrintf(float x)
 #endif
 
 
-struct spellInfoStruct 
+struct spellInfoStruct
 {
 	const char* name;
 };
@@ -65,34 +65,34 @@ QString Commanate(uint32_t number)
 	QString      oldstring;
 	QString      newstring;
 	QString      buffer;
-	
+
 	if (number >= 1000L)
 		oldstring = Commanate(number / 1000L);
-	
+
 	threeDigits = number % 1000L;
 	if (oldstring.isEmpty())
 		buffer.sprintf("%u", threeDigits);
 	else
 		buffer.sprintf("%03u", threeDigits);
-	
+
 	if (oldstring.isEmpty())
 		newstring = buffer;
 	else
 		newstring = oldstring + "," + buffer;
-	
+
 	return newstring;
 }
 
 QString classString(uint8_t classVal)
 {
 	// a non-sparse array of class names
-	static const char*  classnames[] = 
+	static const char*  classnames[] =
 	{
 #include "classes.h"
 	};
-	
+
 	// return class name from list if it's within range
-	if ((classVal < (sizeof(classnames) / sizeof (char*))) && 
+	if ((classVal < (sizeof(classnames) / sizeof (char*))) &&
 		(classnames[classVal] != NULL))
 		return classnames[classVal];
 	else
@@ -110,11 +110,11 @@ QString spell_name(uint16_t spellId)
 QString skill_name(uint16_t skillId)
 {
 	// a non-sparse array of skill names
-	static const char*  skillnames[] = 
+	static const char*  skillnames[] =
 	{
 #include "skills.h"
 	};
-	
+
 	// return skill name from list if it's within range
 	if (skillId < (sizeof(skillnames) / sizeof (char*)))
 		return skillnames[skillId];
@@ -125,7 +125,7 @@ QString skill_name(uint16_t skillId)
 QString size_name(uint8_t sizeId)
 {
 	// a non-sparse array of size names
-	static const char*  sizenames[] = 
+	static const char*  sizenames[] =
 	{
 		"Tiny",    // 0  - Tiny Items
 		"Small",   // 1  - Small Items
@@ -133,7 +133,7 @@ QString size_name(uint8_t sizeId)
 		"Large",   // 3  - Large Items
 		"Giant",   // 4  - Giant Items
 	};
-	
+
 	// return light name from list if it's within range
 	if (sizeId < (sizeof(sizenames) / sizeof (char*)))
 		return sizenames[sizeId];
@@ -144,11 +144,11 @@ QString size_name(uint8_t sizeId)
 QString language_name(uint8_t langId)
 {
 	// non-sparse array of language names
-	static const char*  languagenames[] = 
+	static const char*  languagenames[] =
 	{
 #include "languages.h"
 	};
-	
+
 	// return language name from list if it's within range
 	if (langId < (sizeof(languagenames) / sizeof (char*)))
 		return languagenames[langId];
@@ -159,14 +159,14 @@ QString language_name(uint8_t langId)
 QString print_races(uint16_t races)
 {
 	QString race_str;
-	
+
 	if (races == 0x0000)
 		return "NONE";
-	
+
 	// This needs to change when new races are added
 	if (races == 0x3fff)
 		return "ALL";
-	
+
 	if (races & 1)
 		race_str += "HUM ";
 	if (races & 2)
@@ -197,12 +197,12 @@ QString print_races(uint16_t races)
 		race_str += "VAH ";
 	if (races & 16384)
 		race_str += "FRG ";
-	
+
 	if (races >= 32768) // 2^15 aka (1 << 15)
 	{
 		int new_race;
 		for (int i = 15; i < 31; ++i)
-		{ 
+		{
 			new_race = 1 << i;
 			if (races & new_race)
 			{
@@ -212,10 +212,10 @@ QString print_races(uint16_t races)
 			}
 		}
 	}
-	
+
 	if (race_str.isEmpty())
 		race_str = "";
-	
+
 	return race_str;
 }
 
@@ -223,12 +223,12 @@ QString print_classes(uint16_t classes)
 {
 	if (classes == 0x0000)
 		return "NONE";
-	
+
 	if (classes == 0x7fff)
 		return "ALL";
-	
+
 	QString class_str = "";
-	
+
 	if (classes & 1)
 		class_str += "WAR ";
 	if (classes & 2)
@@ -259,12 +259,12 @@ QString print_classes(uint16_t classes)
 		class_str += "ENC ";
 	if (classes & 16384)
 		class_str += "BST ";
-	
+
 	if (classes >= 32768) // 2^15 aka (1 << 15)
 	{
 		int new_class;
 		for (int i = 15; i < 31; ++i)
-		{ 
+		{
 			new_class = 1 << i;
 			if (classes & new_class)
 			{
@@ -274,14 +274,14 @@ QString print_classes(uint16_t classes)
 			}
 		}
 	}
-	
+
 	return class_str;
 }
 
 QString print_material(uint8_t material)
 {
 	// sparse array of material names, some are NULL
-	static const char*  materialnames[] = 
+	static const char*  materialnames[] =
 	{
 		"None",             // 0x00
 		"Leather",          // 0x01
@@ -308,14 +308,14 @@ QString print_material(uint8_t material)
 		"Kael/Guardian",    // 0x16
 		"VeliousMonk",      // 0x17
 	};
-	
+
 	// assume no material name found
 	const char *materialStr = NULL;
-	
+
 	// retrieve pointer to race name
 	if (material < (sizeof(materialnames) / sizeof (char*)))
 		materialStr = materialnames[material];
-	
+
 	// if race name exists, then return it, otherwise return a number string
 	if (materialStr != NULL)
 		return materialStr;
@@ -400,7 +400,7 @@ QString print_skill(uint8_t skill)
 		case 0x2D:  // 0x2D (45)  - Hand to Hand Weapons
 			return "Hand to Hand Weapon";
     }
-	
+
 	QString skill_name;
 	skill_name.sprintf("U0x%2.2x", skill);
 	return skill_name;
@@ -410,9 +410,9 @@ QString print_slot(uint32_t equipableSlots)
 {
 	if (equipableSlots == 0x00000000)
 		return "NONE";
-	
+
 	QString slot_str;
-	
+
 	if (equipableSlots & 0x00000001)
 		slot_str += "SLOT001 ";
 	if (equipableSlots & 0x00000002)
@@ -464,13 +464,13 @@ QString print_slot(uint32_t equipableSlots)
 		tmp.sprintf("U0x%8.8x", (equipableSlots & (~  0x003fffff)));
 		slot_str += tmp;
     }
-	
+
 	return slot_str;
 }
 
 QString print_faction(int32_t faction)
 {
-	static const char* factionnames[] = 
+	static const char* factionnames[] =
 	{
 		"regards you as an ally",          // 1
 		"looks upon you warmly",           // 2
@@ -482,9 +482,9 @@ QString print_faction(int32_t faction)
 		"glowers at you dubiously",        // 8
 		"looks your way apprehensively",   // 9
 	};
-	
+
 	uint32_t lookup = faction - 1;
-	
+
 	// return faction name from list if it's within range
 	if (lookup < (sizeof(factionnames) / sizeof (char*)))
 		return factionnames[lookup];
@@ -501,7 +501,7 @@ QString slot_to_name(int16_t slotnr)
 {
 	QString slotname;
 	int bag, slot;
-	
+
 	if (slotnr <= 30)
 	{
 		static const char* topSlotNames[] =
@@ -538,21 +538,21 @@ QString slot_to_name(int16_t slotnr)
 			"General8",
 			"Cursor",
 		};
-		
+
 		// get slot name
 		slotname = topSlotNames[slotnr];
-		
-	} 
+
+	}
 	else if (slotnr >= 250 && slotnr <= 329)
 	{
 		bag = slotnr / 10 - 24;
 		slot = slotnr % 10 + 1;
 		slotname = QString("General") + QString::number(bag) + QString("->Pos") + QString::number(slot);
-	} 
+	}
 	else if (slotnr >= 2000 && slotnr <= 2015)
 	{
 		slotname = QString("Bank") + QString::number(slotnr - 2000 + 1);
-	} 
+	}
 	else if (slotnr >= 2030 && slotnr <= 2189)
 	{
 		bag = (slotnr - 1) / 10 - 202;
@@ -571,15 +571,15 @@ QString slot_to_name(int16_t slotnr)
 		slotname = QString("WorldTradeSkill") + QString::number(slotnr - 4000 + 1);
 	else
 		slotname = QString("Unknown") + QString::number(slotnr);
-	
+
 	return slotname;
 }
 
 uint32_t calc_exp(int32_t level, uint16_t race, uint8_t class_)
 {
-	
+
 	float exp=level*level*level;
-	
+
 	if (level<30)         exp*=10;
 	else if (level<50)	  exp*=(10.0 + ((level - 29) * 0.2));
 	else if (level<51)	  exp*=14;
@@ -600,7 +600,7 @@ uint32_t calc_exp(int32_t level, uint16_t race, uint8_t class_)
 	else if (level<64)    exp*=36;
 	else if (level<65)    exp*=38;
 	else                  exp*=40;
-	
+
 	// Do the race mod
 	switch (race)
 	{
@@ -619,7 +619,7 @@ uint32_t calc_exp(int32_t level, uint16_t race, uint8_t class_)
 		case 128: exp*=12;   break; // iksar
 		default:  exp*=10;
 	}
-	
+
 	// Do the class mod
 	switch (class_)
 	{
@@ -639,7 +639,7 @@ uint32_t calc_exp(int32_t level, uint16_t race, uint8_t class_)
 		case 14: exp*=11;   break; // enchanter
 		default: exp*=10;
 	}
-	
+
 	return (uint32_t)(exp);
 }
 
@@ -654,14 +654,14 @@ int mTime(void)
 	struct timeval TimeNow;
 	struct timezone Zone;
 	int rt;
-	
+
 	gettimeofday(&TimeNow, &Zone);
-	
+
 	if (basetime == 0)
 		basetime = TimeNow.tv_sec;
-	
+
 	rt = (TimeNow.tv_sec - basetime) * 1000 + TimeNow.tv_usec / 1000L;
-	
+
 	return rt;
 }
 
@@ -674,7 +674,7 @@ int calcMaxMana(int INT, int WIS, int daclass, int level)
 		case 6: // druid
 		case 10: // shaman
             return ((WIS / 5) +2) * level;
-			
+
 		case 8: // bard
 		case 5: // shadowknight
 		case 11: // necromancer
@@ -688,52 +688,52 @@ int calcMaxMana(int INT, int WIS, int daclass, int level)
 		case 7: // monk
 		default:
             return 0;
-	}	
+	}
 }
 
 QString reformatMoney (unsigned int uiCopper)
 {
 	QString qsMoney = "";
 	bool bNeedComma = false;
-	
+
 	// if there is no money, just cut to the chase
 	if (uiCopper == 0)
 		return "0 Copper";
-	
+
 	// should probably get rid of all the needless checks of uiDivisor
 	// when the value is known and/or it's not being used again
 	unsigned int uiDivisor = 1000;
-	
+
 	if (uiDivisor == 1000 && (uiCopper / uiDivisor) > 0)
 	{
 		qsMoney.sprintf("%d Platinum", uiCopper / uiDivisor);
 		bNeedComma = true;
 		uiCopper -= ((uiCopper / uiDivisor) * uiDivisor);
 	}
-	
+
 	uiDivisor /= 10;
-	
+
 	if (uiDivisor == 100 && (uiCopper / uiDivisor) > 0)
 	{
 		qsMoney.sprintf("%s%s%d Gold", qsMoney.ascii(), bNeedComma ? ", " : "", uiCopper / uiDivisor);
 		bNeedComma = true;
 		uiCopper -= ((uiCopper / uiDivisor) * uiDivisor);
 	}
-	
+
 	uiDivisor /= 10;
-	
+
 	if (uiDivisor == 10 && (uiCopper / uiDivisor) > 0)
 	{
 		qsMoney.sprintf("%s%s%d Silver", qsMoney.ascii(), bNeedComma ? ", " : "", uiCopper / uiDivisor);
 		bNeedComma = true;
 		uiCopper -= ((uiCopper / uiDivisor) * uiDivisor);
 	}
-	
+
 	uiDivisor /= 10;
-	
+
 	if (uiDivisor == 1 && uiCopper != 0)
 		qsMoney.sprintf("%s%s%d Copper", qsMoney.ascii(), bNeedComma ? ", " : "", uiCopper);
-	
+
 	return qsMoney;
 }
 
@@ -742,15 +742,15 @@ void fprintData(FILE* fp, uint32_t len, const uint8_t* data)
 {
 	if (fp == NULL)
 		return;
-	
+
 	char hex[128];
 	char asc[128];
 	char tmp[32];
-	
+
 	hex[0] = 0;
 	asc[0] = 0;
 	unsigned int c;
-	
+
 	for (c = 0; c < len; c ++)
     {
 		if ((!(c % 16)) && c)
@@ -759,23 +759,23 @@ void fprintData(FILE* fp, uint32_t len, const uint8_t* data)
 			hex[0] = 0;
 			asc[0] = 0;
 		}
-		
+
 		sprintf(tmp, "%02x ", data[c]);
 		strcat(hex, tmp);
-		
+
 		if ((data[c] >= 32) && (data[c] <= 126))
 			sprintf(tmp, "%c", data[c]);
 		else
 			strcpy(tmp, ".");
-		
+
 		strcat(asc, tmp);
     }
-	
+
 	if (c % 16)
 		c = c - (c % 16);
 	else
 		c -= 16;
-	
+
 	fprintf(fp, "%03d | %-48s | %s \n\n", c, hex, asc);
 }
 
@@ -783,10 +783,10 @@ void diagFileWriteFail(QString filename)
 {
 	// Get information about the file, if there is one
 	QFileInfo fileInfo(filename);
-	
+
 	// Get information about the directory the file should be in
 	QFileInfo dirInfo(fileInfo.dirPath());
-	
+
 	// Check out the directory
 	if (dirInfo.exists())
 	{
@@ -813,7 +813,7 @@ void diagFileWriteFail(QString filename)
 	else // directory doesn't exist
 		seqWarn("\tDirectory '%s' doesn't exist!",
 				(const char*)dirInfo.absFilePath());
-	
+
 	// Check out the file
 	if (fileInfo.exists())
 	{
@@ -821,7 +821,7 @@ void diagFileWriteFail(QString filename)
 		if (!fileInfo.isWritable())
 			seqWarn("\tCan't write to file: %s",
 					(const char*)fileInfo.absFilePath());
-		
+
 		// Is the file really a file (or did someone do something wierd)
 		if (!fileInfo.isFile())
 			seqWarn("\tNot a file:'%s'!",
@@ -833,10 +833,10 @@ void diagFileReadFail(QString filename)
 {
 	// Get information about the file, if there is one
 	QFileInfo fileInfo(filename);
-	
+
 	// Get information about the directory the file should be in
 	QFileInfo dirInfo(fileInfo.dirPath());
-	
+
 	// Check out the directory
 	if (dirInfo.exists())
 	{
@@ -859,8 +859,8 @@ void diagFileReadFail(QString filename)
 	else // directory doesn't exist
 		seqWarn("\tDirectory '%s' doesn't exist!",
 				(const char*)dirInfo.absFilePath());
-	
-	
+
+
 	// Check out the file
 	if (fileInfo.exists())
 	{
@@ -868,7 +868,7 @@ void diagFileReadFail(QString filename)
 		if (!fileInfo.isReadable())
 			seqWarn("\tCan't read to file: %s",
 					(const char*)fileInfo.absFilePath());
-		
+
 		// Is the file really a file (or did someone do something wierd)
 		if (!fileInfo.isFile())
 			seqWarn("\tNot a file:'%s'!",
@@ -886,13 +886,13 @@ uint32_t calcCRC32(const uint8_t* p, uint32_t length)
 	// by default the generated crctab doesn't exist
 	static bool crctabInited = false;
 	static uint32_t crctab[256];
-	
+
 	// make sure the crctab only gets initialized once
 	if (!crctabInited)
 	{
 		uint32_t i, j;
 		uint32_t c;
-		
+
 		// initialize all 256 table entries
 		for (i = 0; i < 256; i++)
 		{
@@ -905,15 +905,15 @@ uint32_t calcCRC32(const uint8_t* p, uint32_t length)
 				else
 					c = c >> 1;
 			}
-			
+
 			// save the result for the current position
 			crctab[i] = c;
 		}
-		
+
 #ifdef GENERATE_CRCTAB_H
 		// open a file to store the table into
 		FILE* fp = fopen("/tmp/crctab.h", "w");
-		
+
 		if (fp != NULL)
 		{
 			// file was successfully opened, generate the header file
@@ -922,10 +922,10 @@ uint32_t calcCRC32(const uint8_t* p, uint32_t length)
 					"  0x0,\n");
 			for (int i = 1; i < 256; i += 5)
 				fprintf(fp, "  0x%08X, 0x%08X, 0x%08X, 0x%08x, 0x%08x,\n",
-						crctab[i], crctab[i + 1], crctab[i + 2], crctab[i + 3], 
+						crctab[i], crctab[i + 1], crctab[i + 2], crctab[i + 3],
 						crctab[i + 4]);
 			fprintf(fp, "};\n");
-			
+
 			// finished generating the header file, close the file
 			fclose(fp);
 		}
@@ -938,11 +938,11 @@ uint32_t calcCRC32(const uint8_t* p, uint32_t length)
 #endif // RUNTIME_CRCTAB
 	// seed the crc
 	uint32_t crc = 0xFFFFFFFF;
-	
+
 	// iterate over the packet, updating the crc as we go...
 	while(length--)
 		crc = crctab[(crc ^ *(p++)) & 0xFF] ^ (crc >> 8);
-	
+
 	// return the crc after performing the step
 	return crc ^ 0xFFFFFFFF;
 }
@@ -953,17 +953,16 @@ uint16_t calcCRC16(uint8_t* p, uint32_t length, uint32_t seed)
 {
 #include "crctab.h"
 	uint32_t crc = 0L ^ 0xffffffff;
-	
+
 	// CRC each byte of the seed
 	crc = crc >> 8 ^ crctab[(seed       ^ crc) & 0xFF];
 	crc = crc >> 8 ^ crctab[(seed >> 8  ^ crc) & 0xFF];
 	crc = crc >> 8 ^ crctab[(seed >> 16 ^ crc) & 0xFF];
 	crc = crc >> 8 ^ crctab[(seed >> 24 ^ crc) & 0xFF];
-	
+
 	// Then crc the buffer
 	while(length--)
 		crc = crc >> 8 ^ crctab[(*(p++) ^ crc) & 0xFF];
-	
-	return crc ^ 0xffffffffL; 
-}
 
+	return crc ^ 0xffffffffL;
+}

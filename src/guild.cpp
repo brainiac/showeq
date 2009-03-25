@@ -83,7 +83,7 @@ void GuildMgr::readGuildList()
 		worldGuildListStruct tmp;
 		if (guildsfile.size() != sizeof(tmp.guilds))
 		{
-			seqWarn("GuildMgr: Guildsfile not loaded, expected size %d got %ld", sizeof(worldGuildListStruct), guildsfile.size()); 
+			seqWarn("GuildMgr: Guildsfile not loaded, expected size %d got %ld", sizeof(worldGuildListStruct), guildsfile.size());
 			return;
 		}
 
@@ -92,8 +92,8 @@ void GuildMgr::readGuildList()
 		while (!guildsfile.atEnd())
 		{
 			guildsfile.readBlock(reinterpret_cast<char*>(&gl), sizeof(gl));
-			// Commented out until verified that this needs to actually be 
-			// removed. -- Ratt 
+			// Commented out until verified that this needs to actually be
+			// removed. -- Ratt
 			// if (strlen(gl.guildName) > 0)
 			m_guildMap.push_back(QString::fromUtf8(gl.guildName));
 		}
@@ -124,7 +124,7 @@ void GuildMgr::guildList2text(QString fn)
 		return;
 	}
 
-	for (unsigned int i =0 ; i < m_guildMap.size(); i++) 
+	for (unsigned int i =0 ; i < m_guildMap.size(); i++)
 	{
 		if (!m_guildMap[i].isEmpty())
 			guildtext << i << "\t" << m_guildMap[i] << endl;
@@ -138,7 +138,7 @@ void GuildMgr::guildList2text(QString fn)
 
 void GuildMgr::listGuildInfo()
 {
-	for (unsigned int i = 0; i < m_guildMap.size(); i++) 
+	for (unsigned int i = 0; i < m_guildMap.size(); i++)
 	{
 		if (!m_guildMap[i].isEmpty())
 			seqInfo("%d\t%s", i, (const char*)m_guildMap[i]);
@@ -148,4 +148,3 @@ void GuildMgr::listGuildInfo()
 #ifndef QMAKEBUILD
 #include "guild.moc"
 #endif
-

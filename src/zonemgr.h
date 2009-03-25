@@ -1,13 +1,13 @@
 /*
  * zonemgr.h
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -73,7 +73,7 @@ signals:
 	void zoneChanged(const QString& shortZoneName);
 	void zoneChanged(const zoneChangeStruct*, size_t, uint8_t);
 	void zoneEnd(const QString& shortZoneName, const QString& longZoneName);
-  
+
 private:
 	QString m_longZoneName;
 	QString m_shortZoneName;

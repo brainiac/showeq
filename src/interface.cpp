@@ -5731,9 +5731,9 @@ void EQInterface::setupCombatWindow()
 	Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_combatWindow->preferenceName(), Qt::NoDockWidgetArea);
 	addDockWidget(edge, m_combatWindow);
 
-	m_combatWindow->undock();
-	m_combatWindow->restoreSize();
+	//m_combatWindow->undock();
 
+	m_combatWindow->restoreSize();
 	// move window to new position
 	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
 		m_combatWindow->restorePosition();
@@ -5748,4 +5748,3 @@ void EQInterface::setupCombatWindow()
 #ifndef QMAKEBUILD
 #include "interface.moc"
 #endif
-

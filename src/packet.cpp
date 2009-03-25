@@ -1109,4 +1109,3 @@ uint16_t EQPacket::serverSeqExp(int stream)
 #ifndef QMAKEBUILD
 #include "packet.moc"
 #endif
-

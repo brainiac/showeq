@@ -1,13 +1,13 @@
 /*
  * xmlconv.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2002-2003 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -45,10 +45,10 @@
 //    revert()           - Reloads values from file into cache (looses mods)
 //
 //  Note:  Both 'Set' members allow a 'persistent' flag to be passed in
-//         which is defaulted to TRUE.  Setting this to FALSE makes that 
-//         preference not get saved upon a save.  Any later Set with a 
-//         TRUE value overrides this.  This is usefull for command line args 
-//         which should override config file prefs but not overwrite them  
+//         which is defaulted to TRUE.  Setting this to FALSE makes that
+//         preference not get saved upon a save.  Any later Set with a
+//         TRUE value overrides this.  This is usefull for command line args
+//         which should override config file prefs but not overwrite them
 
 typedef QHash<QString, QVariant> PreferenceDict;
 typedef QHash<QString, PreferenceDict*> PrefSectionDict;
@@ -78,7 +78,7 @@ public:
 
 	XMLPreferences(const QString& defaultsFileName, const QString& inFileName);
 	~XMLPreferences();
-  
+
 	// retrieves the comment associated with the preference
 	QString getPrefComment(const QString& inName, const QString& inSection);
 
@@ -87,7 +87,7 @@ public:
 
 	// checks if a preference exists
 	bool isPreference(const QString& inName, const QString& inSection, Persistence pers = Any);
-  
+
 	// getPref{} methods retrieve the current value of a preference
 	QString		getPrefString(const QString& inName, const QString& inSection, const QString& outDefault = QString::null, Persistence pers = Any);
 	int			getPrefInt(const QString& inName, const QString& inSection, int def = -1, Persistence pers = Any);
@@ -130,16 +130,16 @@ public:
 	void setPrefCursor(const QString& inName, const QString& inSection, const QCursor& inValue, Persistence pers = User);
 	void setPrefStringList(const QString& inName, const QString& inSection, const QStringList& inValue, Persistence pers = User);
 	void setPrefVariant(const QString& inName, const QString& inSection, const QVariant& inValue, Persistence pers = User);
-  
+
 public slots:
 	void save();		// Saves all modified values to the appropriate file
 	void load();		// Loads values from files into the appropriate caches
 	void revert();		// Reloads values from files into the appropriate caches
- 
+
 protected:
 	// loads a preference dictionary from the specified filename
 	void loadPreferences(const QString& filename, PrefSectionDict& dict);
-  
+
 	// saves a preference dictionary to the specified filename
 	void savePreferences(const QString& filename, PrefSectionDict& dict);
 
@@ -153,10 +153,10 @@ private:
 	QString m_defaultsFilename;
 	QString m_filename;
 	uint8_t m_modified;
- 
+
 	// stores the non-persistant user preferences
 	PrefSectionDict m_runtimeSections;
- 
+
 	// stores the user preferences
 	PrefSectionDict m_userSections;
 

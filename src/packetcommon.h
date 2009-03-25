@@ -5,7 +5,7 @@
  *  http://www.sourceforge.net/projects/seq
  *
  *  Copyright 2000-2003 by the respective ShowEQ Developers
- *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
+ *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
 #ifndef _PACKETCOMMON_H
@@ -44,12 +44,12 @@ const char* const AUTOMATIC_CLIENT_IP = "127.0.0.0";
 
 //----------------------------------------------------------------------
 // Enumerated types
-enum EQStreamID 
+enum EQStreamID
 {
 	unknown_stream = -1,
-	client2world = 0, 
+	client2world = 0,
 	world2client = 1,
-	client2zone = 2, 
+	client2zone = 2,
 	zone2client = 3,
 	MAXSTREAMS = 4,
 };
@@ -148,4 +148,3 @@ inline int32_t eqtohint32(const uint8_t* data)
 #endif
 
 #endif // _PACKETCOMMON_H
-

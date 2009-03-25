@@ -44,10 +44,10 @@ struct doorStruct;
 //----------------------------------------------------------------------
 // enumerated types
 // type of item
-enum spawnItemType 
-{ 
-	tUnknown, 
-	tDoors, 
+enum spawnItemType
+{
+	tUnknown,
+	tDoors,
 	tDrop,
 	tSpawn,
 	tPlayer
@@ -90,7 +90,7 @@ enum changeType
 	tSpawnChangedRuntimeFilter	= 128,
 	tSpawnChangedConsidered		= 256,
 	tSpawnChangedName			= 512,
-	tSpawnChangedALL			= 1023, // sum of all previous change types 
+	tSpawnChangedALL			= 1023, // sum of all previous change types
 };
 
 
@@ -152,12 +152,12 @@ public:
 
 	void setName(const char *name)
 	{
-		m_name = QString::fromUtf8(name); 
+		m_name = QString::fromUtf8(name);
 	}
 
 	void setName(const QString& name)
-	{ 
-		m_name = name; 
+	{
+		m_name = name;
 	}
 
 	void updateLast()
@@ -170,13 +170,13 @@ public:
 	}
 
 	void setFilterFlags(uint32_t filterFlags)
-	{ 
-		m_filterFlags = filterFlags; 
+	{
+		m_filterFlags = filterFlags;
 	}
 
-	void setRuntimeFilterFlags(uint32_t filterFlags) 
-	{ 
-		m_runtimeFilterFlags = filterFlags; 
+	void setRuntimeFilterFlags(uint32_t filterFlags)
+	{
+		m_runtimeFilterFlags = filterFlags;
 	}
 
 protected:
@@ -188,8 +188,8 @@ protected:
 	uint32_t m_runtimeFilterFlags;
 
 	// persisted info below
-	QTime m_lastUpdate; 
-	QTime m_spawnTime; 
+	QTime m_lastUpdate;
+	QTime m_spawnTime;
 	time_t m_lastChanged;
 	uint16_t m_ID;
 	uint8_t m_NPC;
@@ -239,7 +239,7 @@ public:
 	int16_t deityTeam() const { return m_deityTeam; }
 	int16_t raceTeam() const { return m_raceTeam; }
 	bool considered() const { return m_considered; }
-	EquipStruct equipment(uint8_t wearingSlot) const 
+	EquipStruct equipment(uint8_t wearingSlot) const
 	{ return m_equipment[wearingSlot]; }
 	QString equipmentStr(uint8_t wearingSlot) const;
 	uint8_t typeflag() const { return m_typeflag; }
@@ -267,12 +267,12 @@ public:
 	virtual QString dumpString() const;
 
 	// convenience test methods
-	bool isSelf() const 
+	bool isSelf() const
 	{
-		return (m_NPC == SPAWN_SELF); 
+		return (m_NPC == SPAWN_SELF);
 	}
 
-	bool isCorpse() const 
+	bool isCorpse() const
 	{
 		return ((m_NPC == SPAWN_PC_CORPSE) || (m_NPC == SPAWN_NPC_CORPSE));
 	}
@@ -283,34 +283,34 @@ public:
 	}
 
 	bool isOtherPlayer() const
-	{ 
-		return (m_NPC == SPAWN_PLAYER); 
+	{
+		return (m_NPC == SPAWN_PLAYER);
 	}
 
-	bool isNPC() const 
+	bool isNPC() const
 	{
-		return (m_NPC == SPAWN_NPC); 
+		return (m_NPC == SPAWN_NPC);
 	}
 
 	bool isUnknown() const
 	{
-		return (m_NPC == SPAWN_NPC_UNKNOWN); 
+		return (m_NPC == SPAWN_NPC_UNKNOWN);
 	}
 
 	bool isSameRaceTeam(const Spawn* spawn) const
-	{ 
-		return (raceTeam() == spawn->raceTeam()); 
+	{
+		return (raceTeam() == spawn->raceTeam());
 	}
 
 	bool isSameDeityTeam(const Spawn* spawn) const
 	{
-		return (deityTeam() == spawn->deityTeam()); 
+		return (deityTeam() == spawn->deityTeam());
 	}
 
 	// virtual set method overload
 	void setPos(int16_t x, int16_t Pos, int16_t z, bool walkpathrecord = false, size_t walkpathlength = 0);
 
-	// update methods 
+	// update methods
 
 	// updates all of the, irregardless of existing values
 	void update(const spawnStruct* s);
@@ -443,7 +443,7 @@ protected:
 // Item safe casts inlines
 inline const Spawn* spawnType(const Item* item)
 {
-	// if this is an item of spawn type, return the pointer to Spawn, 
+	// if this is an item of spawn type, return the pointer to Spawn,
 	// return otherwise NULL
 	if (item && ((item->type() == tSpawn) || (item->type() == tPlayer)))
 		return (const Spawn*)item;
@@ -499,4 +499,3 @@ inline Drop* dropType(Item* item)
 }
 
 #endif // _SPAWN_H_
-

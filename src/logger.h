@@ -11,7 +11,7 @@
 #include <QFile>
 #include <Q3TextStream>
 
-#ifdef __FreeBSD__ 
+#ifdef __FreeBSD__
 // since they are incapable of following standards
 #include <sys/types.h>
 #else
@@ -22,18 +22,18 @@
 class SEQLogger : public QObject
 {
 	Q_OBJECT
-	
+
 public:
 	SEQLogger(const QString& fname, QObject* parent = 0, const char* name = "SEQLogger");
 	SEQLogger(FILE *fp, QObject* parent = 0, const char* name = "SEQLogger");
-	
+
 	bool open();
 	bool isOpen();
 	int outputf(const char *fmt, ...);
 	int output(const void *data, int length);
 	void flush();
 	void outputData(uint32_t len, const uint8_t* data);
-	
+
 protected:
 	FILE* m_fp;
 	QFile m_file;
@@ -42,7 +42,7 @@ protected:
 	bool m_errOpen;
 };
 
-inline bool SEQLogger::isOpen() 
+inline bool SEQLogger::isOpen()
 {
 	return (m_fp != 0);
 }

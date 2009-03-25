@@ -55,7 +55,7 @@ int main (int argc, char *argv[])
 
 		// note that a search is being done.
 		doSearch = true;
-	} 
+	}
 
 	// open the output data stream
 	Q3TextStream out(stdout, QIODevice::WriteOnly);
@@ -74,14 +74,14 @@ int main (int argc, char *argv[])
 		"          td { border: black 1px solid }\n"
 		"          th { border: black 1px solid }\n"
 		"      -->\n"
-		"    </style>\n" 
+		"    </style>\n"
 		"  </HEAD>\n"
 		"  <BODY>\n";
 
 	/* Print HTML header */
 	out << header;
 
-	const char* footer = 
+	const char* footer =
 		"  </BODY>\n"
 		"</HTML>\n";
 
@@ -90,17 +90,17 @@ int main (int argc, char *argv[])
 	out << "    <!-- Output for UserAgent: " << userAgent << "-->\n";
 
 
-	out << "<FORM method=\"POST\" action=\"" << cgiconv.getScriptName() 
+	out << "<FORM method=\"POST\" action=\"" << cgiconv.getScriptName()
 		<< "\">\n";
 
 	// beware Netscape 4.x style sheet brain death
-	if ((userAgent.contains("Mozilla/4.") == 1) && 
+	if ((userAgent.contains("Mozilla/4.") == 1) &&
 		(userAgent.contains("MSIE") == 0))
 		out << "<TABLE border=2 cellspacing=0 cellpadding=2>\n";
 	else
 		out << "<TABLE cellspacing=0 cellpadding=2>\n";
 
-	out << 
+	out <<
 		"<TR>"
 		"<TH>Name</TH><TH>Zone</TH><TH>Level</TH><TH>Race</TH><TH>Class</TH>\n"
 		"<TD><INPUT type=\"reset\" value=\"Reset\"/></TD>\n"
@@ -109,15 +109,15 @@ int main (int argc, char *argv[])
 	out << "<TR>";
 
 	// name field
-	out << "<TD><INPUT type=\"text\" name=\"name\" value=\"" 
+	out << "<TD><INPUT type=\"text\" name=\"name\" value=\""
 		<< searchName << "\"/></TD>\n";
 
 	// zone field
-	out << "<TD><INPUT type=\"text\" name=\"zone\" value=\"" 
+	out << "<TD><INPUT type=\"text\" name=\"zone\" value=\""
 		<< searchZone << "\"/></TD>\n";
 
 	// level field
-	out << 
+	out <<
 		"<TD><INPUT type=\"text\" name=\"level\" size=\"2\" maxlength=\"2\""
 		" value=\"";
 	if (searchLevel)
@@ -125,7 +125,7 @@ int main (int argc, char *argv[])
 	out << "\"/></TD>\n";
 
 	// race field
-	out << "<TD><INPUT type=\"text\" name=\"race\" value=\"" 
+	out << "<TD><INPUT type=\"text\" name=\"race\" value=\""
 		<< searchRace << "\"/></TD>\n";
 
 	// Class field
@@ -151,7 +151,7 @@ int main (int argc, char *argv[])
 	out << "<TD><INPUT type=\"submit\" value=\"Search\"/></TD>\n";
 
 	// close the form
-	out << 
+	out <<
 		"</TR>\n"
 		"</TABLE>\n"
 		"</FORM>\n";
@@ -159,10 +159,10 @@ int main (int argc, char *argv[])
 	/////////////////////
 	// on with the search
 	sdb = fopen (SPAWNFILE, "r");
-	if (sdb == NULL) 
+	if (sdb == NULL)
 	{
 		// display the error
-		out << "<H1>Unable to open file '" SPAWNFILE "' (errno = " 
+		out << "<H1>Unable to open file '" SPAWNFILE "' (errno = "
 			<< errno << ")</H1>\n";
 
 		// close the document
@@ -175,7 +175,7 @@ int main (int argc, char *argv[])
 
 	// start the result table
 	// beware Netscape 4.x style sheet brain death
-	if ((userAgent.contains("Mozilla/4.") == 1) && 
+	if ((userAgent.contains("Mozilla/4.") == 1) &&
 		(userAgent.contains("MSIE") == 0))
 		out << "<TABLE border=2 cellspacing=0 cellpadding=2>\n";
 	else
@@ -216,7 +216,7 @@ int main (int argc, char *argv[])
 				continue;
 
 			// is it a level search, if so check
-			if ((searchLevel != 0) && 
+			if ((searchLevel != 0) &&
 				(searchLevel != spawn.level()))
 				continue;
 
@@ -236,7 +236,7 @@ int main (int argc, char *argv[])
 
 		// display the spawn's data
 		out << "<TR>\n";
-		out << "<TD><A HREF=\"showspawn.cgi?name=" << spawnName 
+		out << "<TD><A HREF=\"showspawn.cgi?name=" << spawnName
 			<< "\">" << spawnName << "</A></TD>\n";
 		out << "<TD>" << spawn.realName() << "</TD>\n";
 		out << "<TD>" << dbSpawn.zoneName << "</TD>\n";
@@ -257,7 +257,7 @@ int main (int argc, char *argv[])
 	// display the number of matches
 	out << "<P>"  << counter << " matches found</P>\n";
 
-	// close the document 
+	// close the document
 	out << footer;
 
 	// close the spawn database

@@ -1,13 +1,13 @@
 /*
  * gdbmconv.cpp
- * 
+ *
  * ShowEQ Distributed under GPL
  * http://seq.sourceforge.net/
  *
  * Copyright 2001 Zaphod (dohpaz@users.sourceforge.net). All Rights Reserved.
  *
- * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net) 
- * for use under the terms of the GNU General Public License, 
+ * Contributed to ShowEQ by Zaphod (dohpaz@users.sourceforge.net)
+ * for use under the terms of the GNU General Public License,
  * incorporated herein by reference.
  *
  */
@@ -38,9 +38,9 @@ static void displayGDBMError(const char* operation, const char* filename, const 
 //  Note: Funky casts in arguments to gdbm_open effectively removing const
 //  is due to the fact that although gdbm_open doesn't modify the passed
 //  in string, the developers of GDBM didn't make the file name argument a
-//  const char*, but instead have it as a char*.  Don't ask me why.  So 
+//  const char*, but instead have it as a char*.  Don't ask me why.  So
 //  after reading the GDBM source code, and realizing it was benign I've
-//  committed the sin of casting away the const'ness.  
+//  committed the sin of casting away the const'ness.
 //
 bool GDBMConvenience::Insert(QString dbName, Datum& key, Datum& data,
 							 bool update)
@@ -424,4 +424,3 @@ void GDBMIterator::Done()
 		m_key.dsize = 0;
 	}
 }
-
