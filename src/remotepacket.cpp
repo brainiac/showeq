@@ -23,7 +23,7 @@
 // uint32			- Message Id
 // << DATA >>
 
-#define PACKET_INFO_DIAG
+//#define PACKET_INFO_DIAG 0
 
 enum MessageId
 {
@@ -98,17 +98,11 @@ bool RemotePacketServer::connect2(const QString& opcodeName, const char* payload
 		const QObject* receiver, const char* member)
 {
 	const EQPacketOPCode* opcode = NULL;
-	Dispatcher* dispatcher = NULL;
 	
 	if (sp == SP_World)
 		opcode = m_worldOPCodeDB.find(opcodeName);
 	else 
 		opcode = m_zoneOPCodeDB.find(opcodeName);
-	
-	if (dir == DIR_Client)
-		dispatcher = &m_sendDispatchers;
-	else
-		dispatcher = &m_recvDispatchers;
 	
 	if (!opcode)
 	{
@@ -139,6 +133,26 @@ bool RemotePacketServer::connect2(const QString& opcodeName, const char* payload
 		return false;
 	}
 	
+	bool result = true;
+
+	if (dir & DIR_Client)
+	{
+		result = assignDispatcher(&m_sendDispatchers, opcodeName, payload,
+				receiver, member);
+	}
+
+	if (dir & DIR_Server)
+	{
+		result = result && assignDispatcher(&m_recvDispatchers, opcodeName, payload,
+				receiver, member);
+	}
+
+	return result;
+}
+
+bool RemotePacketServer::assignDispatcher(Dispatcher* dispatcher, const QString& opcodeName, EQPacketPayload* payload,
+			const QObject* receiver, const char* member)
+{
 	// attempt to find an existing dispatch
 	EQPacketDispatch* dispatch = dispatcher->value((void*)payload);
 	
@@ -185,7 +199,7 @@ void RemotePacketServer::newConnection()
 
 void RemotePacketServer::dispatchPacket(uint32_t type, const uint8_t* data, uint32_t length, EQDir dir)
 {
-	Dispatcher* dispatcher = dir == DIR_Client ? &m_sendDispatchers : &m_recvDispatchers;
+	Dispatcher* dispatcher = (dir == DIR_Client) ? &m_sendDispatchers : &m_recvDispatchers;
 	const EQPacketOPCode* opcode = NULL;
 	bool unknown = true;
 	
@@ -199,8 +213,9 @@ void RemotePacketServer::dispatchPacket(uint32_t type, const uint8_t* data, uint
 	if (opcode != NULL)
 	{
 #ifdef PACKET_INFO_DIAG
-		seqDebug("dispatchPacket: attempting to dispatch opcode %#04x '%s'",
-				 opcode->opcode(), (const char*)opcode->name());
+		seqDebug("dispatchPacket: attempting to dispatch opcode [%s] %#04x '%s'",
+				dir == DIR_Client ? "send" : "recv",
+				opcode->opcode(), (const char*)opcode->name());
 #endif
 		
 		EQPayloadListIterator pit(*opcode);
@@ -213,7 +228,7 @@ void RemotePacketServer::dispatchPacket(uint32_t type, const uint8_t* data, uint
 				found = true;
 				unknown = false;
 				
-#ifdef PACKET_INFO_DIAG
+#if defined(PACKET_INFO_DIAG) && (PACKET_INFO_DIAG > 2)
 				seqDebug("\tmatched payload, find dispatcher in dict (%d/%d)",
 						 dispatcher->count(), dispatcher->size());
 #endif
@@ -221,10 +236,18 @@ void RemotePacketServer::dispatchPacket(uint32_t type, const uint8_t* data, uint
 				
 				if (dispatch != NULL)
 				{
-#ifdef PACKET_INFO_DIAG
+#if defined(PACKET_INFO_DIAG) && (PACKET_INFO_DIAG > 2)
 					seqDebug("\tactivating signal...");
 #endif
 					dispatch->activate(data, length, dir);
+				}
+				else
+				{
+#if defined(PACKET_INFO_DIAG)
+					seqWarn("dispatchPacket: opcode [%s] %#04x '%s' has no dispatcher!",
+							dir == DIR_Client ? "send" : "recv", opcode->opcode(),
+							(const char*)opcode->name());
+#endif
 				}
 			}
 			++pit;
@@ -233,7 +256,7 @@ void RemotePacketServer::dispatchPacket(uint32_t type, const uint8_t* data, uint
 		// TODO: Fill this in
 #endif
 	}
-#ifdef PACKET_INFO_DIAG
+#if defined(PACKET_INFO_DIAG) && (PACKET_INFO_DIAG > 1)
 	else
 	{
 		seqWarn("DispatchPacket(): buffer size %d opcode %04x not in opcodeDb",
@@ -360,19 +383,4 @@ void RemotePacketServer::reset()
 {
 	// TODO: What should be done to reset?
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -58,11 +58,15 @@ public slots:
 	void clientDisconnected();
 	
 protected:
+	typedef QHash<void*, EQPacketDispatch*> Dispatcher;
+
+	bool assignDispatcher(Dispatcher* dispatcher, const QString& opcodeName, EQPacketPayload* payload,
+			const QObject* receiver, const char* member);
+
+
 	uint16_t m_port;
 	QTcpSocket* m_socket;
 	QTcpServer* m_server;
-	
-	typedef QHash<void*, EQPacketDispatch*> Dispatcher;
 	
 	Dispatcher m_sendDispatchers;
 	Dispatcher m_recvDispatchers;

@@ -733,8 +733,9 @@ int EQPacket::playbackSpeed()
 {
 	if (m_vPacket)
 		return m_vPacket->playbackSpeed();
-	else
+	if (m_packetCapture)
 		return m_packetCapture->getPlaybackSpeed();
+	return 0;
 }
 
 ///////////////////////////////////////////
@@ -745,10 +746,12 @@ void EQPacket::setPlayback(int speed)
 	{
 		m_vPacket->setPlaybackSpeed(speed);
 	}
-	else
+	else if (m_packetCapture)
 	{
 		m_packetCapture->setPlaybackSpeed(speed);
 	}
+	else
+		return;
 
 	QString string("");
 
