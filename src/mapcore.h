@@ -3,9 +3,9 @@
  *
  *  ShowEQ Distributed under GPL
  *  http://seq.sf.net/
- * 
- * Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 // Author: Zaphod (dohpaz@users.sourceforge.net)
@@ -18,8 +18,8 @@
 //
 //
 
-// ZBTEMP: Note: Currently hardcoded to use int16_t type for point data, 
-// should migrate this to a compiler define/typedef based value that 
+// ZBTEMP: Note: Currently hardcoded to use int16_t type for point data,
+// should migrate this to a compiler define/typedef based value that
 // can be defined differently depending on the needs of other projects
 //
 #ifndef _MAPCORE_H
@@ -80,11 +80,11 @@ class MapParameters
 public:
 	// q format used for map fixed point math
 	enum { qFormat = 14 };
-	
+
 public:
 	MapParameters(const MapData& mapData);
 	~MapParameters();
-	
+
 	// get methods
 	const MapPoint& player() const { return m_curPlayer; }
 	const QPoint& playerOffset() const { return m_curPlayerOffset; }
@@ -108,9 +108,9 @@ public:
 	int zoomDefault() const { return m_zoomDefault; }
 	double ratio() const { return m_ratio; }
 	double ratioX() const { return m_ratio; }
-	double ratioY() const { return m_ratio; } 
+	double ratioY() const { return m_ratio; }
 	int ratioIFixPt() const { return m_ratioIFixPt; }
-	
+
 	int gridResolution() const { return m_gridResolution; }
 	const QColor& gridLineColor() const { return m_gridLineColor; }
 	const QColor& gridTickColor() const { return m_gridTickColor; }
@@ -130,19 +130,19 @@ public:
 	bool showLines() const { return m_showLines; }
 	bool showGridLines() const { return m_showGridLines; }
 	bool showGridTicks() const { return m_showGridTicks; }
-	
+
 	// utility methods
 	int calcXOffset (int mapCoordinate) const;
 	int invertXOffset (int worldX) const;
 	int calcYOffset (int mapCoordinate) const;
 	int invertYOffset (int worldY) const;
-	
+
 	int calcXOffsetI(int mapCoordinate) const;
 	int calcYOffsetI(int mapCoordinate) const;
-	
+
 	// set/adjust methods
 	void setPlayer(const MapPoint& pos);
-	
+
 	void setGridResolution(int res);
 	void increaseGridResolution();
 	void decreaseGridResolution();
@@ -160,7 +160,7 @@ public:
 	void setScreenSize(const QSize& size);
 	void setBackgroundColor(const QColor& color) { m_backgroundColor = color; }
 	void setFont(const QFont& font) { m_font = font; }
-	void setMapOptimizationMethod(MapOptimizationMethod method) { m_optimization = method; }  
+	void setMapOptimizationMethod(MapOptimizationMethod method) { m_optimization = method; }
 	void setMapLineStyle(MapLineStyle style) { m_mapLineStyle = style; }
 	void setShowBackgroundImage(bool val) { m_showBackgroundImage = val; }
 	void setShowLocations(bool val) { m_showLocations = val; }
@@ -171,17 +171,17 @@ public:
 	void setGridTickColor(const QColor& color) { m_gridTickColor = color; }
 	void setHeadRoom(int16_t headRoom);
 	void setFloorRoom(int16_t floorRoom);
-	
+
 	void reAdjust(MapPoint* targetPoint);
 	void reAdjust();
-	
+
 	void reset();
-	
+
 private:
 	const MapData* m_mapData;
 	MapPoint m_curPlayer;
 	QPoint m_curPlayerOffset;
-	int16_t m_playerHeadRoom; 
+	int16_t m_playerHeadRoom;
 	int16_t m_playerFloorRoom;
 	QSize m_screenLength;
 	QRect m_screenBounds;
@@ -193,7 +193,7 @@ private:
 	int m_panOffsetY;
 	double m_ratio;
 	int m_ratioIFixPt;
-	
+
 	// configuration parameters
 	int m_gridResolution;
 	QColor m_gridLineColor;
@@ -202,13 +202,13 @@ private:
 	QFont m_font;
 	int16_t m_headRoom;
 	int16_t m_floorRoom;
-	
+
 	MapPoint m_targetPoint;
 	bool m_targetPointSet;
-	
+
 	MapOptimizationMethod m_optimization;
 	MapLineStyle m_mapLineStyle;
-	bool m_showBackgroundImage; 
+	bool m_showBackgroundImage;
 	bool m_showLocations;
 	bool m_showLines;
 	bool m_showGridLines;
@@ -216,39 +216,39 @@ private:
 };
 
 inline int MapParameters::calcXOffset (int mapCoordinate) const
-{ 
-	return screenCenterX() - (int)(mapCoordinate / m_ratio); 
+{
+	return screenCenterX() - (int)(mapCoordinate / m_ratio);
 }
 
 inline int MapParameters::invertXOffset (int worldX) const
 {
-	return (int)rint((screenCenterX() - worldX) * m_ratio); 
+	return (int)rint((screenCenterX() - worldX) * m_ratio);
 }
 
 inline int MapParameters::calcYOffset (int mapCoordinate) const
-{ 
-	return screenCenterY() - (int)(mapCoordinate / m_ratio); 
+{
+	return screenCenterY() - (int)(mapCoordinate / m_ratio);
 }
 
 inline int MapParameters::invertYOffset (int worldY) const
-{ 
-	return (int)rint((screenCenterY() - worldY) * m_ratio); 
+{
+	return (int)rint((screenCenterY() - worldY) * m_ratio);
 }
 
 inline int MapParameters::calcXOffsetI(int mapCoordinate) const
-{ 
+{
 	return screenCenterX() - fixPtMulII(m_ratioIFixPt, qFormat, mapCoordinate);
 }
 
 inline int MapParameters::calcYOffsetI(int mapCoordinate) const
-{ 
+{
 	return screenCenterY() - fixPtMulII(m_ratioIFixPt, qFormat, mapCoordinate);
 }
 
-inline void MapParameters::setGridResolution(int res) 
+inline void MapParameters::setGridResolution(int res)
 {
 	if ((res >= 50) && (res <= 1500))
-		m_gridResolution = res; 
+		m_gridResolution = res;
 }
 
 inline void MapParameters::increaseGridResolution()
@@ -264,7 +264,7 @@ inline void MapParameters::decreaseGridResolution()
 {
 	if (m_gridResolution >= 1500)
 		return;
-	
+
 	m_gridResolution += 100;
 	reAdjust();
 }
@@ -278,7 +278,7 @@ inline bool MapParameters::setZoom(int zoom)
 		reAdjust();
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -289,23 +289,23 @@ inline void MapParameters::setZoomDefault(int zoom)
 		m_zoomDefault = zoom;
 }
 
-inline bool MapParameters::zoomIn() 
-{ 
-	if (m_zoom < 32) 
+inline bool MapParameters::zoomIn()
+{
+	if (m_zoom < 32)
 	{
-		m_zoom *= 2; 
+		m_zoom *= 2;
 		reAdjust();
 		return true;
 	}
 	return false;
 }
 
-inline bool MapParameters::zoomOut() 
-{ 
-	if (m_zoom > 1) 
+inline bool MapParameters::zoomOut()
+{
+	if (m_zoom > 1)
 	{
-		m_zoom /= 2; 
-		if (m_zoom == 1) 
+		m_zoom /= 2;
+		if (m_zoom == 1)
 			clearPan();
 
 		reAdjust();
@@ -314,15 +314,15 @@ inline bool MapParameters::zoomOut()
 	return false;
 }
 
-inline void MapParameters::panX(int xPan) 
-{ 
+inline void MapParameters::panX(int xPan)
+{
 	m_panOffsetX += m_zoomMapLength.width() / xPan;
 	reAdjust();
 }
 
-inline void MapParameters::panY(int yPan) 
-{ 
-	m_panOffsetY += m_zoomMapLength.height() / yPan; 
+inline void MapParameters::panY(int yPan)
+{
+	m_panOffsetY += m_zoomMapLength.height() / yPan;
 	reAdjust();
 }
 
@@ -333,17 +333,17 @@ inline void MapParameters::panXY(int xPan, int yPan)
 	reAdjust();
 }
 
-inline void MapParameters::clearPan() 
-{ 
-	m_panOffsetX = 0; 
-	m_panOffsetY = 0; 
+inline void MapParameters::clearPan()
+{
+	m_panOffsetX = 0;
+	m_panOffsetY = 0;
 	reAdjust();
 }
 
-inline void MapParameters::setPan(int xPan, int yPan) 
-{ 
-	m_panOffsetX = xPan; 
-	m_panOffsetY = yPan; 
+inline void MapParameters::setPan(int xPan, int yPan)
+{
+	m_panOffsetX = xPan;
+	m_panOffsetY = yPan;
 	reAdjust();
 }
 
@@ -359,9 +359,9 @@ inline void MapParameters::setPanY(int yPan)
 	reAdjust();
 }
 
-inline void MapParameters::setScreenSize(const QSize& size) 
-{ 
-	m_screenLength = size; 
+inline void MapParameters::setScreenSize(const QSize& size)
+{
+	m_screenLength = size;
 	reAdjust();
 }
 
@@ -376,14 +376,19 @@ public:
 	MapCommon(const QString& name, const QColor& color)
     : m_name(name), m_color(color) {}
 	virtual ~MapCommon();
-	
+
 	const QString& name() const { return m_name; }
 	const QColor& color() const { return m_color; }
 	QString colorName() const;
-	
+
 	void setName(const QString& name) { m_name = name; }
-	void setColor(const QString& color) { m_color = color; }
-	
+	void setColor(const QString& color)
+	{
+		printf("Hi");
+		m_color = color;
+		printf("Hi\n");
+	}
+
 private:
 	QString m_name;
 	QString m_colorName;
@@ -395,7 +400,7 @@ inline QString MapCommon::colorName() const
 	// if a color name was specified, return it
 	if (!m_colorName.isEmpty())
 		return m_colorName;
-	
+
 	// otherwise return the string form of a QColor
 	return m_color.name();
 }
@@ -409,22 +414,22 @@ public:
 	MapLineL(const QString& name, const QString& color, uint32_t size);
 	MapLineL(const QString& name, const QString& color, uint32_t size, int16_t z);
 	virtual ~MapLineL();
-	
+
 	int16_t z() const { return m_z; }
 	bool heightSet() const { return m_heightSet; }
 	const QRect& boundingRect() const { return m_bounds; }
-	
+
 	void setZPos(uint16_t z)
-    {  
+    {
 		m_z = z;
-		m_heightSet = true; 
+		m_heightSet = true;
 	}
-	
-	void calcBounds() 
+
+	void calcBounds()
 	{
-		m_bounds = Q3PointArray::boundingRect(); 
+		m_bounds = Q3PointArray::boundingRect();
 	}
-	
+
 private:
 	int16_t m_z;
 	bool m_heightSet;
@@ -441,10 +446,10 @@ public:
 	MapLineM(const QString& name, const QColor& color, uint32_t size);
 	MapLineM(const QString& name, const QString& color, const MapPoint& point);
 	virtual ~MapLineM();
-	
+
 	const QRect& boundingRect() const { return m_bounds; }
 	void calcBounds() { m_bounds = MapPointArray::boundingRect(); }
-	
+
 private:
 	QRect m_bounds;
 };
@@ -461,12 +466,12 @@ public:
 	MapLocation(const QString& name, const QString& color, int16_t x, int16_t y, int16_t z);
 	MapLocation(const QString& name, const QColor& color, int16_t x, int16_t y, int16_t z);
 	virtual ~MapLocation();
-	
-	bool heightSet() const 
-	{ 
-		return m_heightSet; 
+
+	bool heightSet() const
+	{
+		return m_heightSet;
 	}
-	
+
 private:
 	bool m_heightSet;
 };
@@ -479,10 +484,10 @@ public:
 	MapAggro();
 	MapAggro(const QString& name, uint16_t range) : m_name(name), m_range(range) {}
 	virtual ~MapAggro();
-	
+
 	const QString& name() { return m_name; }
 	uint16_t range() { return m_range; }
-	
+
 	void setName(const QString& name) { m_name = name; }
 	void setRange(uint16_t range);
 private:
@@ -498,14 +503,14 @@ public:
 	// constructor/destructor
 	MapData();
 	~MapData();
-	
+
 	// map loading/clearing/saving
 	void clear();
 	void loadMap(const QString& fileName, bool import = false);
 	void loadSOEMap(const QString& fileName, bool import = false);
 	void saveMap(const QString& fileName) const;
 	void saveSOEMap(const QString& fileName) const;
-	
+
 	// accessors
 	const QString& fileName() const { return m_fileName; }
 	const QString& zoneShortName() const { return m_zoneShortName; }
@@ -525,12 +530,12 @@ public:
 	bool imageLoaded() const { return m_imageLoaded; }
 	bool mapLoaded() const { return m_mapLoaded; }
 	bool isAggro(const QString& name, uint16_t* range) const;
-	
+
 	// make sure map is big enough, returns true if size modified
 	bool checkPos(int16_t x, int16_t y);
 	void quickCheckPos(int16_t x, int16_t y);
 	void updateBounds();
-	
+
 	// map editing
 	void addLocation(const QString& name, const QString& color, const QPoint& point);
 	void setLocationName(const QString& name);
@@ -546,7 +551,7 @@ public:
 	void setZoneZEM(uint8_t zem) { m_zoneZEM = zem; }
 	void scaleDownZ(int16_t factor);
 	void scaleUpZ(int16_t factor);
-	
+
 	// map painting
 	void paintGrid(MapParameters& param, QPainter& p) const;
 	void paintLines(MapParameters& param, QPainter& p) const;
@@ -554,7 +559,7 @@ public:
 	void paintFadedFloorsLines(MapParameters& param, QPainter& p) const;
 	void paintLocations(MapParameters& param, QPainter& p) const;
 	bool paintMapImage(MapParameters& param, QPainter& p) const;
-	
+
 private:
 	int16_t m_minX;
 	int16_t m_minY;
@@ -580,11 +585,11 @@ private:
 inline bool MapData::checkPos(int16_t x, int16_t y)
 {
 	bool flag = false;
-	
+
 #if defined(MAP_DEBUG)
 	printf("in x: %i, in y: %i, max(%i,%i) Min(%i,%i)\n", x, y, m_maxX, m_maxY, m_minX, m_minY);
 #endif /* MAP_DEBUG */
-	
+
 	if (x > m_maxX)
 	{
 		m_maxX = x;
@@ -605,11 +610,11 @@ inline bool MapData::checkPos(int16_t x, int16_t y)
 		m_minY = y;
 		flag = true;
 	}
-	
+
 	// update the boundary information if bounds changed
 	if (flag)
 		updateBounds();
-	
+
 	return flag;
 }
 
@@ -637,25 +642,25 @@ inline void MapData::updateBounds()
 
 //----------------------------------------------------------------------
 // MapCache
-class MapCache 
+class MapCache
 {
 public:
 	MapCache(const MapData& data);
 	~MapCache();
-	
+
 	const QPixmap& getMapImage(MapParameters& param);
-	
+
 	// get methods
 	bool needRepaint(MapParameters& param);
 	bool alwaysRepaint() const { return m_alwaysRepaint; }
 #ifdef DEBUG
 	uint32_t paintCount() const { return m_paintCount; }
 #endif
-	
+
 	// set methods
 	void setAlwaysRepaint(bool val) { m_alwaysRepaint = val; }
 	void forceRepaint() { m_painted = false; }
-	
+
 private:
 	const MapData& m_mapData;
 	QPixmap m_mapImage;

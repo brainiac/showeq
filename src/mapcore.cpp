@@ -3,9 +3,9 @@
  *
  *  ShowEQ Distributed under GPL
  *  http://seq.sf.net/
- * 
- * Portions Copyright 2001-2007 Zaphod (dohpaz@users.sourceforge.net). 
- * 
+ *
+ * Portions Copyright 2001-2007 Zaphod (dohpaz@users.sourceforge.net).
+ *
  */
 
 // Author: Zaphod (dohpaz@users.sourceforge.net)
@@ -47,7 +47,7 @@ MapParameters::MapParameters(const MapData& mapData)
 	m_panOffsetY = 0;
 	m_ratio = 1.0;
 
-	// calculate fixed point inverse ratio using the defiend qFormat 
+	// calculate fixed point inverse ratio using the defiend qFormat
 	// for calculate speed purposes (* is faster than /)
 	m_ratioIFixPt = fixPtToFixed<int, double>((1.0 / m_ratio), qFormat);
 
@@ -115,10 +115,10 @@ void MapParameters::reAdjust()
 	// if it's a bit small, zoom out
 	if ((pxrat <= 2) || (pyrat <= 2))
 	{
-		if (m_zoom > 1) 
+		if (m_zoom > 1)
 		{
-			m_zoom /= 2; 
-			if (m_zoom == 1) 
+			m_zoom /= 2;
+			if (m_zoom == 1)
 				clearPan();
 
 			// recalculate zoomed map size
@@ -137,13 +137,13 @@ void MapParameters::reAdjust()
 	int xoff = 0;
 	int yoff = 0;
 
-	if (xrat < yrat) 
+	if (xrat < yrat)
 	{
 		m_zoomMapLength.setHeight((int)(m_screenLength.height() / xrat));
 		if (m_zoom <= 1)
 			yoff = (m_zoomMapLength.height() - pyrat) >> 1;
-	} 
-	else if (yrat) 
+	}
+	else if (yrat)
 	{
 		m_zoomMapLength.setWidth((int)(m_screenLength.width() / yrat));
 		if (m_zoom <= 1)
@@ -153,7 +153,7 @@ void MapParameters::reAdjust()
 	// calculate the scaling ratio to use
 	m_ratio = (double)m_zoomMapLength.width() / (double)m_screenLength.width();
 
-	// calculate fixed point inverse ratio using the defined qFormat 
+	// calculate fixed point inverse ratio using the defined qFormat
 	// for calculate speed purposes (* is faster than /)
 	m_ratioIFixPt = fixPtToFixed<int, double>((1.0 / m_ratio), qFormat);
 
@@ -218,24 +218,24 @@ QPixmap::Optimization MapParameters::pixmapOptimizationMethod()
 {
 	switch (m_optimization)
 	{
-	case tMap_MemoryOptim:  
-		return QPixmap::MemoryOptim; 
+	case tMap_MemoryOptim:
+		return QPixmap::MemoryOptim;
 	case tMap_NoOptim:
-		return QPixmap::NoOptim; 
-	case tMap_NormalOptim:  
+		return QPixmap::NoOptim;
+	case tMap_NormalOptim:
 		return QPixmap::NormalOptim;
-	case tMap_BestOptim:  
+	case tMap_BestOptim:
 		return QPixmap::BestOptim;
 	case tMap_DefaultOptim:
-	default: 
+	default:
 		return QPixmap::DefaultOptim;
 	}
 	/* Optimization Methods:
 	DefaultOptim - A pixmap with this optimization mode set always has the default optimization type
 	- default optimization type for qPixMap is NormalOptim
 	NoOptim      - no optimization (currently the same as MemoryOptim).
-	MemoryOptim  - optimize for minimal memory use. 
-	NormalOptim  - optimize for typical usage. Often uses more memory than MemoryOptim, and often faster. 
+	MemoryOptim  - optimize for minimal memory use.
+	NormalOptim  - optimize for typical usage. Often uses more memory than MemoryOptim, and often faster.
 	BestOptim    - optimize for pixmaps that are drawn very often and where performance is critical.
 	Generally uses more memory than NormalOptim and may provide a little better speed
 	*/
@@ -243,8 +243,8 @@ QPixmap::Optimization MapParameters::pixmapOptimizationMethod()
 #endif
 
 void MapParameters::setPlayer(const MapPoint& pos)
-{ 
-	m_curPlayer = pos; 
+{
+	m_curPlayer = pos;
 
 	// re-calculate precomputed player head/floor room
 	m_playerHeadRoom = m_curPlayer.z() + m_headRoom;
@@ -255,16 +255,16 @@ void MapParameters::setPlayer(const MapPoint& pos)
 }
 
 void MapParameters::setHeadRoom(int16_t headRoom)
-{ 
-	m_headRoom = headRoom; 
+{
+	m_headRoom = headRoom;
 
 	// re-calculate precomputed player head/floor room
 	m_playerHeadRoom = m_curPlayer.z() + m_headRoom;
 }
 
-void MapParameters::setFloorRoom(int16_t floorRoom) 
-{ 
-	m_floorRoom = floorRoom; 
+void MapParameters::setFloorRoom(int16_t floorRoom)
+{
+	m_floorRoom = floorRoom;
 
 	// re-calculate precomputed player head/floor room
 	m_playerFloorRoom = m_curPlayer.z() - m_floorRoom;
@@ -284,7 +284,7 @@ MapLineL::MapLineL() : MapCommon(), m_z(0), m_heightSet(false)
 
 MapLineL::MapLineL(const QString& name, const QString& color, uint32_t size)
   : MapCommon(name, color),
-	Q3PointArray(size), 
+	Q3PointArray(size),
 	m_z(0),
 	m_heightSet(false)
 {
@@ -292,7 +292,7 @@ MapLineL::MapLineL(const QString& name, const QString& color, uint32_t size)
 
 MapLineL::MapLineL(const QString& name, const QString& color, uint32_t size, int16_t z)
   : MapCommon(name, color),
-	Q3PointArray(size), 
+	Q3PointArray(size),
 	m_z(z),
 	m_heightSet(true)
 {
@@ -463,7 +463,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 		return;
 	}
 
-	// note the file name 
+	// note the file name
 	m_fileName = filename;
 
 	// allocate memory in a QCString to hold the entire file contents
@@ -548,12 +548,12 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 		bool ok;
 
-		switch (entryType.toAscii()) 
+		switch (entryType.toAscii())
 		{
 		case 'M':
 			{
 #ifdef DEBUGMAPLOAD
-				seqDebug("M record  [%d] [%d fields]: %s", 
+				seqDebug("M record  [%d] [%d fields]: %s",
 					filelines, count, (const char*)*lit);
 #endif
 
@@ -578,12 +578,12 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 				// Line Color
 				color = (*fit++);
-				if (color.isEmpty()) 
+				if (color.isEmpty())
 					color = "#7F7F7F";
 
 				// Number of points
 				specifiedLinePoints = (*fit++).toUInt(&ok);
-				if (!ok) 
+				if (!ok)
 				{
 					seqWarn("Error reading number of points on line %d in map '%s'!", filelines, filename);
 					continue;
@@ -591,7 +591,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 				if ((specifiedLinePoints != linePoints) && (specifiedLinePoints != 0))
 				{
-					seqWarn("M Line %d in map '%s' has %d points as opposed to the %d points it specified!", 
+					seqWarn("M Line %d in map '%s' has %d points as opposed to the %d points it specified!",
 						filelines, filename, linePoints, specifiedLinePoints);
 				}
 
@@ -631,7 +631,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 		case 'L':
 			{
 #ifdef DEBUGMAPLOAD
-				seqDebug("L record  [%d] [%d fields] %s", 
+				seqDebug("L record  [%d] [%d fields] %s",
 					filelines, count, (const char*)*lit);
 #endif
 
@@ -656,12 +656,12 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 				// Line Color
 				color = (*fit++);
-				if (color.isEmpty()) 
+				if (color.isEmpty())
 					color = "#7F7F7F";
 
 				// Number of points
 				specifiedLinePoints = (*fit++).toUInt(&ok);
-				if (!ok) 
+				if (!ok)
 				{
 					seqWarn("Error reading number of points on line %d in map '%s'!", filelines, filename);
 					continue;
@@ -669,11 +669,11 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 				if ((specifiedLinePoints != linePoints) && (specifiedLinePoints != 0))
 				{
-					seqWarn("L Line %d in map '%s' has %d points as opposed to the %d points it specified!", 
+					seqWarn("L Line %d in map '%s' has %d points as opposed to the %d points it specified!",
 						filelines, filename, linePoints, specifiedLinePoints);
 				}
 
-				// create the appropriate style L line depending on if the global 
+				// create the appropriate style L line depending on if the global
 				// height has been set
 				if (globHeightSet)
 					currentLineL = new MapLineL(name, color, linePoints, globHeight);
@@ -682,7 +682,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 				numPoints = 0;
 
-				// keep going until we run out of fields... 
+				// keep going until we run out of fields...
 				while ((fit != fields.end()) && (numPoints < linePoints))
 				{
 					// X coord
@@ -716,7 +716,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 		case 'P':
 			{
 #ifdef DEBUGMAPLOAD
-				seqWarn("P record [%d] [%d fields]: %s", 
+				seqWarn("P record [%d] [%d fields]: %s",
 					filelines, count, (const char*)*lit);
 #endif
 
@@ -740,7 +740,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 					m_locations.append(new MapLocation(name, color, mx, my, mz));
 				}
 
-				// add the appropriate style Location depending on if the global 
+				// add the appropriate style Location depending on if the global
 				// height has been set
 				if (globHeightSet)
 					m_locations.append(new MapLocation(name, color, mx, my, globHeight));
@@ -766,13 +766,13 @@ void MapData::loadMap(const QString& fileName, bool import)
 				}
 
 				name = (*fit++);
-				if (name.isEmpty()) 
+				if (name.isEmpty())
 				{
 					seqWarn("Line %d in map '%s' has an A marker with no Name expression!", filelines, filename);
 					break;
 				}
 				rangeVal = (*fit++).toUShort();
-				if (!rangeVal) 
+				if (!rangeVal)
 				{
 					seqWarn("Line %d in map '%s' has an A marker with no or 0 Range radius!", filelines, filename);
 					break;
@@ -795,7 +795,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 
 			// get global height
 			globHeight = (*fit++).toShort(&ok);
-			if (!ok) 
+			if (!ok)
 			{
 				seqWarn("Line %d in map '%s' has an H marker with invalid Z!", filelines, filename);
 				break;
@@ -817,7 +817,7 @@ void MapData::loadMap(const QString& fileName, bool import)
 				}
 
 				m_zoneZEM = (*fit++).toUShort(&ok);
-				if (!ok) 
+				if (!ok)
 				{
 					seqWarn("Line %d in map '%s' has an Z marker with invalid ZEM!", filelines, filename);
 					break;
@@ -889,7 +889,7 @@ void MapData::loadSOEMap(const QString& fileName, bool import)
 		return;
 	}
 
-	// note the file name 
+	// note the file name
 	m_fileName = filename;
 
 	// allocate memory in a QCString to hold the entire file contents
@@ -953,7 +953,7 @@ void MapData::loadSOEMap(const QString& fileName, bool import)
 		// get the field count
 		count = fields.count();
 
-		switch (entryType.toAscii()) 
+		switch (entryType.toAscii())
 		{
 		case 'L':
 			{
@@ -977,7 +977,7 @@ void MapData::loadSOEMap(const QString& fileName, bool import)
 				g = (*fit++).toUShort();
 				b = (*fit).toUShort();
 
-				if (!currentLineM || 
+				if (!currentLineM ||
 					!currentLineM->point(checkPoint).isEqual(x2, y2, z2) ||
 					(currentLineM->color().red() != r) ||
 					(currentLineM->color().green() != g) ||
@@ -998,7 +998,7 @@ void MapData::loadSOEMap(const QString& fileName, bool import)
 					// add it to the list of M lines
 					m_mLines.append(currentLineM);
 				}
-				else 
+				else
 				{
 					// if necessary, add room for a point
 					if (currentLineM->size() < (numPoints+1))
@@ -1023,7 +1023,7 @@ void MapData::loadSOEMap(const QString& fileName, bool import)
 		case 'P':
 			{
 #ifdef DEBUGMAPLOAD
-				seqDebug("P record [%d] [%d fields]: %s", 
+				seqDebug("P record [%d] [%d fields]: %s",
 					filelines, count, (const char*)*lit);
 #endif
 
@@ -1047,7 +1047,7 @@ void MapData::loadSOEMap(const QString& fileName, bool import)
 				name.replace("_", " ");
 
 				// add it to the list of locations
-				m_locations.append(new MapLocation(name, QColor(r, g, b), 
+				m_locations.append(new MapLocation(name, QColor(r, g, b),
 					x1, y1, z1));
 
 				// adjust map boundaries
@@ -1088,10 +1088,10 @@ void MapData::saveMap(const QString& fileName) const
 	const char* filename;
 	if (!fileName.isEmpty())
 		filename = (const char*)fileName;
-	else 
+	else
 		filename = (const char*)m_fileName;
 
-	if ((fh = fopen(filename, "w")) == NULL) 
+	if ((fh = fopen(filename, "w")) == NULL)
 	{
 		seqWarn("Error saving map '%s'!", filename);
 		return;
@@ -1201,10 +1201,10 @@ void MapData::saveSOEMap(const QString& fileName) const
 	const char* filename;
 	if (!fileName.isEmpty())
 		filename = (const char*)fileName;
-	else 
+	else
 		filename = (const char*)m_fileName;
 
-	if ((fh = fopen(filename, "w")) == NULL) 
+	if ((fh = fopen(filename, "w")) == NULL)
 	{
 		seqWarn("Error saving map '%s'!", filename);
 		return;
@@ -1261,9 +1261,9 @@ void MapData::saveSOEMap(const QString& fileName) const
 			const MapPoint& curMPoint = currentLineM->point(i);
 
 			// write out the line info
-			fprintf (fh, "L %.1f, %.1f, %.1f, %.1f, %.1f, %.1f, %d, %d, %d\n", 
+			fprintf (fh, "L %.1f, %.1f, %.1f, %.1f, %.1f, %.1f, %d, %d, %d\n",
 				-float(curMPoint.x()), -float(curMPoint.y()), float(curMPoint.z()),
-				-float(lastMPoint.x()), -float(lastMPoint.y()), float(lastMPoint.z()), 
+				-float(lastMPoint.x()), -float(lastMPoint.y()), float(lastMPoint.z()),
 				r, g, b);
 
 			lastMPoint = curMPoint;
@@ -1345,7 +1345,7 @@ void MapData::setLocationColor(const QString& color)
 void MapData::startLine(const QString& name, const QString& color, const MapPoint& point)
 {
 	// create the new line, with just the first point
-	m_editLineM = new MapLineM(name, color, point); 
+	m_editLineM = new MapLineM(name, color, point);
 
 	// calculate the XY bounds of the line
 	m_editLineM->calcBounds();
@@ -1555,7 +1555,7 @@ void MapData::paintGrid(MapParameters& param, QPainter& p) const
 			p.drawText(0, offsetPos, QString::number(pos));
 		}
 
-	}  
+	}
 }
 
 void MapData::paintLines(MapParameters& param, QPainter& p) const
@@ -1613,10 +1613,10 @@ void MapData::paintLines(MapParameters& param, QPainter& p) const
 		// see if the starting position is in bounds
 		lastInBounds = inRect(screenBounds, cur2DX, cur2DY);
 
-		QPainterPath path;
-
 		// move to the starting position
-		path.moveTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+		int startX = param.calcXOffsetI(cur2DX);
+		int startY = param.calcYOffsetI(cur2DY);
+		int nextX, nextY;
 
 		// iterate over all the points in the line
 		for (uint32_t i = 1; i < numPoints; i++)
@@ -1629,14 +1629,22 @@ void MapData::paintLines(MapParameters& param, QPainter& p) const
 
 			// draw the line segment if either end is in bounds
 			if (lastInBounds || curInBounds)
-				path.lineTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+			{
+				nextX = param.calcXOffsetI(cur2DX);
+				nextY = param.calcYOffsetI(cur2DY);
+				p.drawLine(startX, startY, nextX, nextY);
+				startX = nextX;
+				startY = nextY;
+			}
 			else
-				path.moveTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+			{
+				startX = param.calcXOffsetI(cur2DX);
+				startY = param.calcYOffsetI(cur2DY);
+			}
 
 			// current becomes the last
 			lastInBounds = curInBounds;
 		}
-		p.drawPath(path);
 	}
 
 	// then paint the M lines
@@ -1665,9 +1673,10 @@ void MapData::paintLines(MapParameters& param, QPainter& p) const
 		// see if the starting position is in bounds
 		lastInBounds = inRect(screenBounds, curX, curY);
 
-		QPainterPath path;
 		// move to the starting position
-		path.moveTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+		int startX = param.calcXOffsetI(curX);
+		int startY = param.calcYOffsetI(curY);
+		int nextX, nextY;
 
 		// iterate over all the points in the line
 		for (uint32_t i = 1; i < numPoints; i++)
@@ -1680,14 +1689,22 @@ void MapData::paintLines(MapParameters& param, QPainter& p) const
 
 			// draw the line segment if either end is in bounds
 			if (lastInBounds || curInBounds)
-				path.lineTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+			{
+				nextX = param.calcXOffsetI(curX);
+				nextY = param.calcYOffsetI(curY);
+				p.drawLine(startX, startY, nextX, nextY);
+				startX = nextX;
+				startY = nextY;
+			}
 			else
-				path.moveTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+			{
+				startX = param.calcXOffsetI(curX);
+				startY = param.calcYOffsetI(curY);
+			}
 
 			// current becomes the last
 			lastInBounds = curInBounds;
 		}
-		p.drawPath(path);
 	}
 }
 
@@ -1753,9 +1770,10 @@ void MapData::paintDepthFilteredLines(MapParameters& param, QPainter& p) const
 		// see if the starting position is in bounds
 		lastInBounds = inRect(screenBounds, cur2DX, cur2DY);
 
-		QPainterPath path;
 		// move to the starting position
-		path.moveTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+		int startX = param.calcXOffsetI(cur2DX);
+		int startY = param.calcYOffsetI(cur2DY);
+		int nextX, nextY;
 
 		// iterate over all the points in the line
 		for (uint32_t i = 1; i < numPoints; i++)
@@ -1768,14 +1786,22 @@ void MapData::paintDepthFilteredLines(MapParameters& param, QPainter& p) const
 
 			// draw the line segment if either end is in bounds
 			if (lastInBounds || curInBounds)
-				path.lineTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+			{
+				nextX = param.calcXOffsetI(cur2DX);
+				nextY = param.calcYOffsetI(cur2DY);
+				p.drawLine(startX, startY, nextX, nextY);
+				startX = nextX;
+				startY = nextY;
+			}
 			else
-				path.moveTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+			{
+				startX = param.calcXOffsetI(cur2DX);
+				startY = param.calcYOffsetI(cur2DY);
+			}
 
 			// current becomes the last
 			lastInBounds = curInBounds;
 		}
-		p.drawPath(path);
 	}
 
 	// then paint the M lines
@@ -1810,9 +1836,10 @@ void MapData::paintDepthFilteredLines(MapParameters& param, QPainter& p) const
 		seqDebug("Line has %i points:", currentLineM->size());
 #endif
 
-		QPainterPath path;
 		// move to the starting position
-		path.moveTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+		int startX = param.calcXOffsetI(cur2DX);
+		int startY = param.calcYOffsetI(cur2DY);
+		int nextX, nextY;
 
 		// iterate over all the points in the line
 		for (uint32_t i = 1; i < numPoints; i++)
@@ -1827,14 +1854,22 @@ void MapData::paintDepthFilteredLines(MapParameters& param, QPainter& p) const
 
 			// draw the line segment if either end is in bounds
 			if (lastInBounds || curInBounds)
-				path.lineTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+			{
+				nextX = param.calcXOffsetI(cur2DX);
+				nextY = param.calcYOffsetI(cur2DY);
+				p.drawLine(startX, startY, nextX, nextY);
+				startX = nextX;
+				startY = nextY;
+			}
 			else
-				path.moveTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+			{
+				startX = param.calcXOffsetI(cur2DX);
+				startY = param.calcYOffsetI(cur2DY);
+			}
 
 			// current becomes the last
 			lastInBounds = curInBounds;
 		}
-		p.drawPath(path);
 	}
 }
 
@@ -1908,7 +1943,7 @@ void MapData::paintFadedFloorsLines(MapParameters& param, QPainter& p) const
 			// calculate color to use for the line (since L type, only do this once)
 			if (currentLineL->z() > playerPos.z())
 				useColor = (int)((cur2DZ * topm) + topb);
-			else 
+			else
 				useColor = (int)((cur2DZ * botm) + botb);
 
 			if (useColor > 255) useColor = 255;
@@ -1924,9 +1959,10 @@ void MapData::paintFadedFloorsLines(MapParameters& param, QPainter& p) const
 		// see if the starting position is in bounds
 		lastInBounds = inRect(screenBounds, cur2DX, cur2DY);
 
-		QPainterPath path;
 		// move to the starting position
-		path.moveTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+		int startX = param.calcXOffsetI(cur2DX);
+		int startY = param.calcYOffsetI(cur2DY);
+		int nextX, nextY;
 
 		// iterate over all the points in the line
 		for (uint32_t i = 1; i < numPoints; i++)
@@ -1940,14 +1976,22 @@ void MapData::paintFadedFloorsLines(MapParameters& param, QPainter& p) const
 
 			// draw the line segment if either end is in bounds
 			if (lastInBounds || curInBounds)
-				path.lineTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+			{
+				nextX = param.calcXOffsetI(cur2DX);
+				nextY = param.calcYOffsetI(cur2DY);
+				p.drawLine(startX, startY, nextX, nextY);
+				startX = nextX;
+				startY = nextY;
+			}
 			else
-				path.moveTo(param.calcXOffsetI(cur2DX), param.calcYOffsetI(cur2DY));
+			{
+				startX = param.calcXOffsetI(cur2DX);
+				startY = param.calcYOffsetI(cur2DY);
+			}
 
 			// current becomes the last
 			lastInBounds = curInBounds;
 		}
-		p.drawPath(path);
 	}
 
 	// then paint the M lines
@@ -1983,17 +2027,18 @@ void MapData::paintFadedFloorsLines(MapParameters& param, QPainter& p) const
 #endif
 
 		// calculate starting color info for the line
-		if (curZ > playerPos.z()) 
+		if (curZ > playerPos.z())
 			oldColor = (int)((curZ * topm) + topb);
-		else 
+		else
 			oldColor = (int)((curZ * botm) + botb);
 
 		if (oldColor > 255) oldColor = 255;
 		if (oldColor < 0) oldColor = 0;
 
-		QPainterPath path;
 		// move to the starting position
-		path.moveTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+		int startX = param.calcXOffsetI(cur2DX);
+		int startY = param.calcYOffsetI(cur2DY);
+		int nextX, nextY;
 
 		// iterate over all the points in the line
 		for (uint i = 1; i < numPoints; i++)
@@ -2003,9 +2048,9 @@ void MapData::paintFadedFloorsLines(MapParameters& param, QPainter& p) const
 			curZ = mData[i].z();
 
 			// calculate the new color
-			if (curZ > playerPos.z()) 
+			if (curZ > playerPos.z())
 				newColor = (int)((curZ * topm) + topb);
-			else 
+			else
 				newColor = (int)((curZ * botm) + botb);
 			if (newColor > 255) newColor = 255;
 			if (newColor < 0) newColor = 0;
@@ -2017,21 +2062,25 @@ void MapData::paintFadedFloorsLines(MapParameters& param, QPainter& p) const
 			useColor = (newColor + oldColor) >> 1;
 
 			// draw the line segment if either end is in bounds
-			if ((lastInBounds || curInBounds) && (useColor != 0))
+			if (lastInBounds || curInBounds && (useColor != 0))
 			{
-#ifndef QT3_SUPPORT
-				path.setPen(QColor(useColor, useColor, useColor));
-#endif
-				path.lineTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+				p.setPen(QColor(useColor, useColor, useColor));
+				nextX = param.calcXOffsetI(cur2DX);
+				nextY = param.calcYOffsetI(cur2DY);
+				p.drawLine(startX, startY, nextX, nextY);
+				startX = nextX;
+				startY = nextY;
 			}
 			else
-				path.moveTo(param.calcXOffsetI(curX), param.calcYOffsetI(curY));
+			{
+				startX = param.calcXOffsetI(cur2DX);
+				startY = param.calcYOffsetI(cur2DY);
+			}
 
 			// current becomes the last/old
 			lastInBounds = curInBounds;
 			oldColor = newColor;
 		}
-		p.drawPath(path);
 	}
 }
 
@@ -2117,7 +2166,7 @@ bool MapCache::needRepaint(MapParameters& param)
 		(m_lastParam.ratio() != param.ratio()) ||
 		(m_lastParam.zoomMapLength() != param.zoomMapLength()) ||
 		(m_lastParam.screenBounds() != param.screenBounds()) ||
-		((param.mapLineStyle() == tMap_FadedFloors) && 
+		((param.mapLineStyle() == tMap_FadedFloors) &&
 		(m_lastParam.player().z() != param.player().z())) ||
 		((param.mapLineStyle() == tMap_DepthFiltered) &&
 		((m_lastParam.playerHeadRoom() != param.playerHeadRoom()) ||
@@ -2126,10 +2175,10 @@ bool MapCache::needRepaint(MapParameters& param)
 		(m_lastParam.showLocations() != param.showLocations()) ||
 		(m_lastParam.showLines() != param.showLines()) ||
 		(m_lastParam.showGridLines() != param.showGridLines()) ||
-		(m_lastParam.showGridTicks() != param.showGridTicks()) || 
+		(m_lastParam.showGridTicks() != param.showGridTicks()) ||
 		(m_lastParam.showBackgroundImage() != param.showBackgroundImage()) ||
-		(m_lastParam.gridTickColor() != param.gridTickColor()) || 
-		(m_lastParam.backgroundColor() != param.backgroundColor()) || 
+		(m_lastParam.gridTickColor() != param.gridTickColor()) ||
+		(m_lastParam.backgroundColor() != param.backgroundColor()) ||
 		(m_lastParam.font() != param.font()))
 	{
 		return true;
@@ -2167,12 +2216,12 @@ const QPixmap& MapCache::getMapImage(MapParameters& param)
 	// load the background image or paint the background
 	if (!m_mapData.imageLoaded() || !param.showBackgroundImage() ||!m_mapData.paintMapImage(param, tmp))
 	{
-		// paint the map backdrop with the users background color for all 
+		// paint the map backdrop with the users background color for all
 		// map line styles except faded floor, which only really works with
 		// a black background
 		if (param.mapLineStyle() != tMap_FadedFloors)
 			tmp.fillRect(m_mapImage.rect(), param.backgroundColor());
-		else 
+		else
 			tmp.fillRect(m_mapImage.rect(), Qt::black);
 	}
 
