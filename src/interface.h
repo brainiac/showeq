@@ -231,11 +231,24 @@ signals:
 	void combatSignal(int, int, int, int, int, QString, QString);
 
 private slots:
+
+	// Window toggle slots
+	void toggleChannelMsgs(QAction*);
+	void toggleMap(QAction*);
+	void toggleExpWindow();
+	void toggleCombatWindow();
+	void toggleSpawnList();
+	void toggleSpawnList2();
+	void toggleSpawnPointList();
+	void toggleSpellList();
+	void togglePlayerStats();
+	void toggleCompass();
+	void togglePlayerSkills();
+	void toggleNetDiag();
+	void toggleGuildList();
+
+
 	void toggle_opt_Fast();
-	void toggle_view_UnknownData();
-	void toggle_view_ChannelMsgs(int id);
-	void toggle_view_ExpWindow();
-	void toggle_view_CombatWindow();
 	void toggle_opt_ConSelect();
 	void toggle_opt_TarSelect();
 	void toggle_opt_KeepSelectedVisible();
@@ -248,16 +261,7 @@ private slots:
 	void toggle_opt_RetardedCoords(int);
 	void toggle_opt_SystimeSpawntime(int);
 	void select_opt_conColorBase(int);
-	void toggle_view_SpawnList();
-	void toggle_view_SpawnList2();
-	void toggle_view_SpawnPointList();
-	void toggle_view_SpellList();
-	void toggle_view_PlayerStats();
-	void toggle_view_Compass();
-	void toggle_view_PlayerSkills();
-	void toggle_view_Map(int id);
-	void toggle_view_NetDiag();
-	void toggle_view_GuildList();
+	void toggle_view_UnknownData();
 	void resetMaxMana();
 	void select_filter_file();
 	void toggle_filter_Case(int id);
@@ -283,7 +287,7 @@ private slots:
 	void set_opt_save_SpawnFrequency(int frequency);
 	void set_opt_save_BaseFilename();
 	void opt_clearChannelMsgs(int id);
-	void init_view_menu();
+	void updateViewMenu();
 	void toggle_opt_UseUpdateRadius();
 
 	void toggleTypeFilter(int);
@@ -432,26 +436,32 @@ private:
 	int m_id_opt_OptionsDlg;
 	int m_id_opt_Fast;
 	int m_id_opt_ResetMana;
-	int m_id_view_UnknownData;
-	int m_id_view_ExpWindow;
-	int m_id_view_CombatWindow;
-	int m_id_view_SpawnList;
-	int m_id_view_SpawnList2;
-	int m_id_view_SpawnPointList;
-	int m_id_view_PlayerStats;
-	int m_id_view_PlayerSkills;
-	int m_id_view_Compass;
-	int m_id_view_Map[maxNumMaps];
-	int m_id_view_MessageWindow[maxNumMessageWindows];
-	int m_id_view_NetDiag;
-	int m_id_view_GuildListWindow;
-	int m_id_view_SpellList;
+
+	// View Menu Actions
+	QAction* m_viewExpWindow;
+	QAction* m_viewCombatWindow;
+	QAction* m_viewSpawnList;
+	QAction* m_viewSpawnList2;
+	QAction* m_viewSpawnPointList;
+	QAction* m_viewSpellList;
+	QAction* m_viewPlayerStats;
+	QAction* m_viewPlayerSkills;
+	QAction* m_viewCompass;
+
+	QAction* m_viewMap[maxNumMaps];
+	QAction* m_viewMessageWindow[maxNumMessageWindows];
+
+	QAction* m_viewNetDiag;
+	QAction* m_viewGuildList;
+
 	int m_id_view_PlayerStats_Options;
 	int m_id_view_PlayerStats_Stats[LIST_MAXLIST];
 	int m_id_view_PlayerSkills_Options;
 	int m_id_view_PlayerSkills_Languages;
 	int m_id_view_SpawnList_Options;
 	int m_id_view_SpawnList_Cols[tSpawnColMaxCols];
+
+	int m_id_view_UnknownData;
 	int m_id_opt_ConSelect;
 	int m_id_opt_TarSelect;
 	int m_id_opt_KeepSelectedVisible;
