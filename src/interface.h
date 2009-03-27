@@ -90,26 +90,15 @@ typedef Q3ValueList<int> MenuIDList;
 
 //--------------------------------------------------
 // constants
-// maximum number of maps
-const int maxNumMaps = 5;
-
-// This is the base number where the map dock options appear in the
-// Docked menu
-const int mapDockBase = 11;
-
-// This is the base number where the map caption options appear in the
-// Window caption menu
-const int mapCaptionBase = 11;
-
-// maximum number of message windows
-const int maxNumMessageWindows = 10;
-
-// This is the base number where the message window dock options appear
-// in the Docked menu
-const int messageWindowDockBase = 16;
 
 // Number of strings, pass as a size to EQStr
 const int maxNumEQStr = 8009;
+
+// maximum number of maps
+const int maxNumMaps = 5;
+
+// maximum number of message windows
+const int maxNumMessageWindows = 10;
 
 //--------------------------------------------------
 // EQInterface
@@ -190,12 +179,15 @@ public slots:
 	void toggleAutoDetectPlayerSettings(int id);
 	void SetDefaultCharacterClass(int id);
 	void SetDefaultCharacterRace(int id);
-	void SetDefaultCharacterLevel (int id);
-	void toggle_view_StatWin(int id);
-	void toggle_view_SkillWin(int id);
-	void toggle_view_SpawnListCol(int id);
-	void toggle_view_DockedWin(int id);
-	void toggle_view_DockableWin(int id);
+	void SetDefaultCharacterLevel(int id);
+
+	void togglePlayerStat(QAction*);
+	void toggle_view_SkillWin(QAction*);
+	void toggleSpawnListCol(QAction*);
+
+	void toggleWindowDocked(QAction*);
+	void toggleWindowDockable(int);
+
 	void toggle_log_Filter_ZoneData_Client();
 	void toggle_log_Filter_ZoneData_Server();
 
@@ -335,6 +327,28 @@ public:
 	Player* m_player;
 	MapMgr* mapMgr() { return m_mapMgr; }
 
+protected:
+
+	enum {
+		menuSpawnList = 0,
+		menuPlayerStats = 1,
+		menuPlayerSkills = 2,
+		menuSpellList = 3,
+		menuCompass = 4,
+		menuSpawnPointList = 5,
+		menuSpawnList2 = 6,
+
+		// This is the base number where the map dock options appear in the Docked menu
+		mapDockBase = 11,
+
+		// This is the base number where the map caption options appear in the Window caption menu
+		mapCaptionBase = 11,
+
+		// This is the base number where the message window dock options appear in the Docked menu
+		messageWindowDockBase = 16,
+	};
+
+
 private:
 	DataLocationMgr* m_dataLocationMgr;
 	MapMgr* m_mapMgr;
@@ -372,8 +386,8 @@ private:
 	// Menu Pieces
 	QMenu* m_netMenu;
 	QMenu* m_decoderMenu;
-	QMenu* m_statWinMenu;
-	QMenu* m_skillWinMenu;
+	QMenu* m_playerStatsMenu;
+	QMenu* m_playerSkillsMenu;
 	QMenu* m_spawnListMenu;
 	QMenu* m_dockedWinMenu;
 	QMenu* m_dockableWinMenu;
@@ -447,19 +461,15 @@ private:
 	QAction* m_viewPlayerStats;
 	QAction* m_viewPlayerSkills;
 	QAction* m_viewCompass;
-
 	QAction* m_viewMap[maxNumMaps];
 	QAction* m_viewMessageWindow[maxNumMessageWindows];
-
 	QAction* m_viewNetDiag;
 	QAction* m_viewGuildList;
 
-	int m_id_view_PlayerStats_Options;
-	int m_id_view_PlayerStats_Stats[LIST_MAXLIST];
-	int m_id_view_PlayerSkills_Options;
-	int m_id_view_PlayerSkills_Languages;
-	int m_id_view_SpawnList_Options;
-	int m_id_view_SpawnList_Cols[tSpawnColMaxCols];
+	QAction* m_playerStatsMenuAction;
+	QAction* m_spawnListMenuAction;
+	QAction* m_playerSkillsMenuAction;
+	QAction* m_playerSkillsLanguages;
 
 	int m_id_view_UnknownData;
 	int m_id_opt_ConSelect;
@@ -501,6 +511,8 @@ private:
 private:
 	// menu items
 	void createFileMenu();
+	void createViewMenu();
+	void createOptionsMenu();
 
 	void setupExperienceWindow();
 	void setupCombatWindow();

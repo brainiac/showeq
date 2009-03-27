@@ -435,623 +435,17 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	if (pSEQPrefs->getPrefBool("ShowGuildList", section, false))
 		showGuildList();
 
-
+	int x;
 
 
 	/***********************************************************************
 	 * Create Main Menu Widgets
 	 **********************************************************************/
+	createFileMenu();
+	createViewMenu();
+	createOptionsMenu();
 
-	QAction* action = NULL;
 
-	// The first call to menuBar() makes it exist
-	//menu->setSeparator(QMenuBar::InWindowsStyle);
-
-	////////////////////////////////////////////////////////////////
-	// File Menu
-	QMenu* pFileMenu = menuBar()->addMenu("&File");
-
-	// Save Preferences
-	action = new QAction("&Save Preferences", this);
-	action->setShortcut(CTRL + Key_S);
-	connect(action, SIGNAL(triggered()), this, SLOT(savePrefs()));
-	pFileMenu->addAction(action);
-
-	// Open Map
-	action = new QAction("Open &Map", this);
-	action->setShortcut(Key_F1);
-	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(loadMap()));
-	pFileMenu->addAction(action);
-
-	// Import Map
-	action = new QAction("&Import Map", this);
-	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(importMap()));
-	pFileMenu->addAction(action);
-
-	// Save Map
-	action = new QAction("Sa&ve Map", this);
-	action->setShortcut(Key_F2);
-	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(saveMap()));
-	pFileMenu->addAction(action);
-
-	// Save SOE Map
-	action = new QAction("Save SOE Map", this);
-	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(saveSOEMap()));
-	pFileMenu->addAction(action);
-
-	// Reload Guilds File
-	action = new QAction("Reload Guilds File", this);
-	connect(action, SIGNAL(triggered()), m_guildmgr, SLOT(readGuildList()));
-	pFileMenu->addAction(action);
-
-	// Add Spawn Category
-	action = new QAction("Add Spawn Category", this);
-	action->setShortcut(ALT + Key_C);
-	connect(action, SIGNAL(triggered()), this, SLOT(addCategory()));
-	pFileMenu->addAction(action);
-
-	// Rebuild Spawn List
-	action = new QAction("Rebuild SpawnList", this);
-	action->setShortcut(ALT + Key_R);
-	connect(action, SIGNAL(triggered()), this, SLOT(rebuildSpawnList()));
-	pFileMenu->addAction(action);
-
-	// Reload Categories
-	action = new QAction("Reload Categories", this);
-	action->setShortcut(CTRL + Key_R);
-	connect(action, SIGNAL(triggered()), this, SLOT(reloadCategories()));
-	pFileMenu->addAction(action);
-
-	// Select Next
-	action = new QAction("Select Next", this);
-	action->setShortcut(CTRL + Key_Right);
-	connect(action, SIGNAL(triggered()), this, SLOT(selectNext()));
-	pFileMenu->addAction(action);
-
-	// Select Prev
-	action = new QAction("Select Prev", this);
-	action->setShortcut(CTRL + Key_Left);
-	connect(action, SIGNAL(triggered()), this, SLOT(selectPrev()));
-	pFileMenu->addAction(action);
-
-	// Save Selected Spawns Path
-	action = new QAction("Save Selected Spawns Path", this);
-	connect(action, SIGNAL(triggered()), this, SLOT(saveSelectedSpawnPath()));
-	pFileMenu->addAction(action);
-
-	// Save NPC Spawn Paths
-	action = new QAction("Save NPC Spawn Paths", this);
-	connect(action, SIGNAL(triggered()), this, SLOT(saveSpawnPaths()));
-	pFileMenu->addAction(action);
-
-	if (m_packet->playbackPackets() != PLAYBACK_OFF && m_packet->playbackPackets() != PLAYBACK_REMOTE)
-	{
-		// Inc Playback Speed
-		action = new QAction("Increase Playback Speed", this);
-		action->setShortcut(CTRL + Key_X);
-		connect(action, SIGNAL(triggered()), m_packet, SLOT(incPlayback()));
-		pFileMenu->addAction(action);
-
-		// Dec Playback Speed
-		action = new QAction("Decrease Playback Speed", this);
-		action->setShortcut(CTRL + Key_Z);
-		connect(action, SIGNAL(triggered()), m_packet, SLOT(decPlayback()));
-		pFileMenu->addAction(action);
-	}
-
-	// Quit
-	action = new QAction("&Quit", this);
-	connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
-	pFileMenu->addAction(action);
-
-
-	////////////////////////////////////////////////////////////////
-	// View menu
-	QMenu* viewMenu = menuBar()->addMenu("&View");
-
-	// Create Experience Window Item
-	m_viewExpWindow = new QAction("Experience Window", this);
-	m_viewExpWindow->setCheckable(true);
-	connect(m_viewExpWindow, SIGNAL(triggered()), this, SLOT(toggleExpWindow()));
-	viewMenu->addAction(m_viewExpWindow);
-
-	// Create Combat Window Item
-	m_viewCombatWindow = new QAction("Combat Window", this);
-	m_viewCombatWindow->setCheckable(true);
-	connect(m_viewCombatWindow, SIGNAL(triggered()), this, SLOT(toggleCombatWindow()));
-	viewMenu->addAction(m_viewCombatWindow);
-
-	viewMenu->addSeparator();
-
-	// Create Spawn List item
-	m_viewSpawnList = new QAction("Spawn List", this);
-	m_viewSpawnList->setCheckable(true);
-	connect(m_viewSpawnList, SIGNAL(triggered()), this, SLOT(toggleSpawnList()));
-	viewMenu->addAction(m_viewSpawnList);
-
-	// Create Spawn List 2 item
-	m_viewSpawnList2 = new QAction("Spawn List 2", this);
-	m_viewSpawnList2->setCheckable(true);
-	connect(m_viewSpawnList2, SIGNAL(triggered()), this, SLOT(toggleSpawnList2()));
-	viewMenu->addAction(m_viewSpawnList2);
-
-	// Create Spell List item
-	m_viewSpellList = new QAction("Spell List", this);
-	m_viewSpellList->setCheckable(true);
-	connect(m_viewSpellList, SIGNAL(triggered()), this, SLOT(toggleSpellList()));
-	viewMenu->addAction(m_viewSpellList);
-
-	// Create Spawn Point List item
-	m_viewSpawnPointList = new QAction("Spawn Point List", this);
-	m_viewSpawnPointList->setCheckable(true);
-	connect(m_viewSpawnPointList, SIGNAL(triggered()), this, SLOT(toggleSpawnPointList()));
-	viewMenu->addAction(m_viewSpawnPointList);
-
-	// Create player stats item
-	m_viewPlayerStats = new QAction("Player Stats", this);
-	m_viewPlayerStats->setCheckable(true);
-	connect(m_viewPlayerStats, SIGNAL(triggered()), this, SLOT(togglePlayerStats()));
-	viewMenu->addAction(m_viewPlayerStats);
-
-	// Create player skills item
-	m_viewPlayerSkills = new QAction("Player Skills", this);
-	m_viewPlayerSkills->setCheckable(true);
-	connect(m_viewPlayerStats, SIGNAL(triggered()), this, SLOT(togglePlayerSkills()));
-	viewMenu->addAction(m_viewPlayerSkills);
-
-	// Create compass item
-	m_viewCompass = new QAction("Compass", this);
-	m_viewCompass->setCheckable(true);
-	connect(m_viewCompass, SIGNAL(triggered()), this, SLOT(toggleCompass()));
-	viewMenu->addAction(m_viewCompass);
-
-	// Create Map submenu and items
-	QMenu* subMenu = new QMenu("Maps", this);
-	QString mapName;
-	for (int i = 0; i < maxNumMaps; i++)
-	{
-		mapName.sprintf("Map %i", i + 1);
-
-		m_viewMap[i] = new QAction(mapName, this);
-		m_viewMap[i]->setCheckable(true);
-		m_viewMap[i]->setData(i);
-		subMenu->addAction(m_viewMap[i]);
-	}
-	connect(subMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleMap(QAction*)));
-	viewMenu->addMenu(subMenu);
-
-	// Create channel messages submenus and items
-	subMenu = new QMenu("Channel Messages", this);
-	QString messageWindowName;
-	for (int i = 0; i < maxNumMessageWindows; i++)
-	{
-        messageWindowName.sprintf("Channel Messages %i", i + 1);
-
-        m_viewMessageWindow[i] = new QAction(messageWindowName, this);
-        m_viewMessageWindow[i]->setCheckable(true);
-        m_viewMessageWindow[i]->setData(i);
-        subMenu->addAction(m_viewMessageWindow[i]);
-	}
-	connect(subMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleChannelMsgs(QAction*)));
-	viewMenu->addMenu(subMenu);
-
-	// Create network diagnostic menu item
-	m_viewNetDiag = new QAction("Network Diagnostics", this);
-	m_viewNetDiag->setCheckable(true);
-	connect(m_viewNetDiag, SIGNAL(triggered()), this, SLOT(toggleNetDiag()));
-	viewMenu->addAction(m_viewNetDiag);
-
-	// Create guild list menu item
-	m_viewGuildList = new QAction("Guild Member List", this);
-	m_viewGuildList->setCheckable(true);
-	connect(m_viewGuildList, SIGNAL(triggered()), this, SLOT(toggleGuildList()));
-	viewMenu->addAction(m_viewGuildList);
-
-	viewMenu->addSeparator();
-
-	// View -> PlayerStats
-	m_statWinMenu = new Q3PopupMenu;
-	m_id_view_PlayerStats_Options = viewMenu->insertItem( "&Player Stats", m_statWinMenu);
-	m_statWinMenu->setCheckable(TRUE);
-
-	m_id_view_PlayerStats_Stats[LIST_HP] = m_statWinMenu->insertItem("Hit Points");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_HP], LIST_HP);
-
-	m_id_view_PlayerStats_Stats[LIST_MANA] = m_statWinMenu->insertItem("Mana");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_MANA], LIST_MANA);
-
-	m_id_view_PlayerStats_Stats[LIST_STAM] = m_statWinMenu->insertItem("Stamina");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_STAM], LIST_STAM);
-
-	m_id_view_PlayerStats_Stats[LIST_EXP] = m_statWinMenu->insertItem("Experience");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_EXP], LIST_EXP);
-
-	m_id_view_PlayerStats_Stats[LIST_ALTEXP] = m_statWinMenu->insertItem("Alt Experience");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_ALTEXP], LIST_ALTEXP);
-
-	m_id_view_PlayerStats_Stats[LIST_FOOD] = m_statWinMenu->insertItem("Food");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_FOOD], LIST_FOOD);
-
-	m_id_view_PlayerStats_Stats[LIST_WATR] = m_statWinMenu->insertItem("Water");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_WATR], LIST_WATR);
-
-	m_statWinMenu->insertSeparator(-1);
-
-	m_id_view_PlayerStats_Stats[LIST_STR] = m_statWinMenu->insertItem("Strength");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_STR], LIST_STR);
-
-	m_id_view_PlayerStats_Stats[LIST_STA] = m_statWinMenu->insertItem("Stamina");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_STA], LIST_STA);
-
-	m_id_view_PlayerStats_Stats[LIST_CHA] = m_statWinMenu->insertItem("Charisma");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_CHA], LIST_CHA);
-
-	m_id_view_PlayerStats_Stats[LIST_DEX] = m_statWinMenu->insertItem("Dexterity");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_DEX], LIST_DEX);
-
-	m_id_view_PlayerStats_Stats[LIST_INT] = m_statWinMenu->insertItem("Intelligence");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_INT], LIST_INT);
-
-	m_id_view_PlayerStats_Stats[LIST_AGI] = m_statWinMenu->insertItem("Agility");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_AGI], LIST_AGI);
-
-	m_id_view_PlayerStats_Stats[LIST_WIS] = m_statWinMenu->insertItem("Wisdom");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_WIS], LIST_WIS);
-
-	m_statWinMenu->insertSeparator(-1);
-
-	m_id_view_PlayerStats_Stats[LIST_MR] = m_statWinMenu->insertItem("Magic Res");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_MR], LIST_MR);
-	m_statWinMenu->setItemEnabled(m_id_view_PlayerStats_Stats[LIST_MR], false);
-
-	m_id_view_PlayerStats_Stats[LIST_FR] = m_statWinMenu->insertItem("Fire Res");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_FR], LIST_FR);
-	m_statWinMenu->setItemEnabled(m_id_view_PlayerStats_Stats[LIST_FR], false);
-
-	m_id_view_PlayerStats_Stats[LIST_CR] = m_statWinMenu->insertItem("Cold Res");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_CR], LIST_CR);
-	m_statWinMenu->setItemEnabled(m_id_view_PlayerStats_Stats[LIST_CR], false);
-
-	m_id_view_PlayerStats_Stats[LIST_DR] = m_statWinMenu->insertItem("Disease Res");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_DR], LIST_DR);
-	m_statWinMenu->setItemEnabled(m_id_view_PlayerStats_Stats[LIST_DR], false);
-
-	m_id_view_PlayerStats_Stats[LIST_PR] = m_statWinMenu->insertItem("Poison Res");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_PR], LIST_PR);
-	m_statWinMenu->setItemEnabled(m_id_view_PlayerStats_Stats[LIST_PR], false);
-
-	m_statWinMenu->insertSeparator(-1);
-
-	m_id_view_PlayerStats_Stats[LIST_AC] = m_statWinMenu->insertItem("Armor Class");
-	m_statWinMenu->setItemParameter(m_id_view_PlayerStats_Stats[LIST_AC], LIST_AC);
-	m_statWinMenu->setItemEnabled(m_id_view_PlayerStats_Stats[LIST_AC], false);
-	connect (m_statWinMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_StatWin(int)));
-
-	// View -> PlayerSkills
-	m_skillWinMenu = new Q3PopupMenu;
-	m_id_view_PlayerSkills_Options = viewMenu->insertItem( "Player &Skills", m_skillWinMenu);
-	viewMenu->setItemEnabled(m_id_view_PlayerSkills_Options, (m_skillList != 0));
-	m_skillWinMenu->setCheckable(TRUE);
-
-	m_id_view_PlayerSkills_Languages = m_skillWinMenu->insertItem("&Langauges");
-	m_skillWinMenu->setItemParameter(m_id_view_PlayerSkills_Languages,0);
-
-	connect (m_skillWinMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_SkillWin(int)));
-
-	// View -> SpawnList
-    m_spawnListMenu = new Q3PopupMenu;
-    m_id_view_SpawnList_Options = viewMenu->insertItem( "Spawn &List", m_spawnListMenu);
-    viewMenu->setItemEnabled(m_id_view_SpawnList_Options, (m_spawnList != 0));
-    m_spawnListMenu->setCheckable(TRUE);
-
-    m_id_view_SpawnList_Cols[tSpawnColName] = m_spawnListMenu->insertItem("&Name");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColName], tSpawnColName);
-
-    m_id_view_SpawnList_Cols[tSpawnColLevel] = m_spawnListMenu->insertItem("&Level");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColLevel], tSpawnColLevel);
-
-    m_id_view_SpawnList_Cols[tSpawnColHP] = m_spawnListMenu->insertItem("&HP");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColHP], tSpawnColHP);
-
-    m_id_view_SpawnList_Cols[tSpawnColGuildID] = m_spawnListMenu->insertItem("Guild Tag");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColGuildID], tSpawnColGuildID);
-
-    m_id_view_SpawnList_Cols[tSpawnColMaxHP] = m_spawnListMenu->insertItem("&Max HP");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColMaxHP], tSpawnColMaxHP);
-
-    m_id_view_SpawnList_Cols[tSpawnColXPos] = m_spawnListMenu->insertItem("Coord &1");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColXPos], tSpawnColXPos);
-
-    m_id_view_SpawnList_Cols[tSpawnColYPos] = m_spawnListMenu->insertItem("Coord &2");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColYPos], tSpawnColYPos);
-
-    m_id_view_SpawnList_Cols[tSpawnColZPos] = m_spawnListMenu->insertItem("Coord &3");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColZPos], tSpawnColZPos);
-
-    m_id_view_SpawnList_Cols[tSpawnColID] = m_spawnListMenu->insertItem("I&D");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColID], tSpawnColID);
-
-    m_id_view_SpawnList_Cols[tSpawnColDist] = m_spawnListMenu->insertItem("&Dist");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColDist], tSpawnColDist);
-
-    m_id_view_SpawnList_Cols[tSpawnColRace] = m_spawnListMenu->insertItem("&Race");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColRace], tSpawnColRace);
-
-    m_id_view_SpawnList_Cols[tSpawnColClass] = m_spawnListMenu->insertItem("&Class");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColClass], tSpawnColClass);
-
-    m_id_view_SpawnList_Cols[tSpawnColInfo] = m_spawnListMenu->insertItem("&Info");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColInfo], tSpawnColInfo);
-
-    m_id_view_SpawnList_Cols[tSpawnColSpawnTime] = m_spawnListMenu->insertItem("Spawn &Time");
-    m_spawnListMenu->setItemParameter(m_id_view_SpawnList_Cols[tSpawnColSpawnTime], tSpawnColSpawnTime);
-
-    connect (m_spawnListMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_SpawnListCol(int)));
-
-	viewMenu->insertSeparator(-1);
-
-	int x;
-	// View -> DockedWin
-	m_dockedWinMenu = new Q3PopupMenu;
-	viewMenu->insertItem( "&Docked", m_dockedWinMenu);
-	m_dockedWinMenu->setCheckable(true);
-
-	x = m_dockedWinMenu->insertItem("Spawn &List");
-	m_dockedWinMenu->setItemParameter(x, 0);
-	m_dockedWinMenu->setItemChecked(x, m_isSpawnListDocked);
-
-	x = m_dockedWinMenu->insertItem("Spawn &List 2");
-	m_dockedWinMenu->setItemParameter(x, 6);
-	m_dockedWinMenu->setItemChecked(x, m_isSpawnListDocked);
-
-	x = m_dockedWinMenu->insertItem("Spawn P&oint List");
-	m_dockedWinMenu->setItemParameter(x, 5);
-	m_dockedWinMenu->setItemChecked(x, m_isSpawnPointListDocked);
-
-	x = m_dockedWinMenu->insertItem("&Player Stats");
-	m_dockedWinMenu->setItemParameter(x, 1);
-	m_dockedWinMenu->setItemChecked(x, m_isStatListDocked);
-
-	x = m_dockedWinMenu->insertItem("Player &Skills");
-	m_dockedWinMenu->setItemParameter(x, 2);
-	m_dockedWinMenu->setItemChecked(x, m_isSkillListDocked);
-
-	x = m_dockedWinMenu->insertItem("Sp&ell List");
-	m_dockedWinMenu->setItemParameter(x, 3);
-	m_dockedWinMenu->setItemChecked(x, m_isSpellListDocked);
-
-	x = m_dockedWinMenu->insertItem("&Compass");
-	m_dockedWinMenu->setItemParameter(x, 4);
-	m_dockedWinMenu->setItemChecked(x, m_isCompassDocked);
-
-	// insert Map docking options
-	// NOTE: Always insert Map docking options at the end of the Docked menu
-	for (int i = 0; i < maxNumMaps; i++)
-	{
-        QString mapName = "Map ";
-        if (i > 0)
-            mapName += QString::number(i + 1);
-        x = m_dockedWinMenu->insertItem(mapName);
-        m_dockedWinMenu->setItemParameter(x, i + mapDockBase);
-        m_dockedWinMenu->setItemChecked(x, m_isMapDocked[i]);
-	}
-
-	connect (m_dockedWinMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_DockedWin(int)));
-
-	// View -> DockableWin
-	m_dockableWinMenu = new Q3PopupMenu;
-	viewMenu->insertItem( "&Dockable", m_dockableWinMenu);
-	m_dockableWinMenu->setCheckable(true);
-
-	x = m_dockableWinMenu->insertItem("Spawn &List");
-	m_dockableWinMenu->setItemParameter(x, 0);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableSpawnList",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("Spawn &List 2");
-	m_dockableWinMenu->setItemParameter(x, 6);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableSpawnList2",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("Spawn P&oint List");
-	m_dockableWinMenu->setItemParameter(x, 5);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableSpawnPointList",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("&Player Stats");
-	m_dockableWinMenu->setItemParameter(x, 1);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockablePlayerStats",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("Player &Skills");
-	m_dockableWinMenu->setItemParameter(x, 2);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockablePlayerSkills",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("Sp&ell List");
-	m_dockableWinMenu->setItemParameter(x, 3);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableSpellList",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("&Compass");
-	m_dockableWinMenu->setItemParameter(x, 4);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableCompass",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("E&xperience Window");
-	m_dockableWinMenu->setItemParameter(x, 7);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableExperienceWindow",
-															 section, false));
-
-	x = m_dockableWinMenu->insertItem("Com&bat Window");
-	m_dockableWinMenu->setItemParameter(x, 8);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableCombatWindow",
-															 section, false));
-
-	x = m_dockableWinMenu->insertItem("&Guild List");
-	m_dockableWinMenu->setItemParameter(x, 9);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableGuildListWindow",
-															 section, true));
-
-	x = m_dockableWinMenu->insertItem("&Net Diag");
-	m_dockableWinMenu->setItemParameter(x, 10);
-	m_dockableWinMenu->setItemChecked(x,
-									  pSEQPrefs->getPrefBool("DockableNetDiag",
-															 section, true));
-
-	// insert Map docking options
-	subMenu = new Q3PopupMenu;
-	for (int i = 0; i < maxNumMaps; i++)
-	{
-        QString mapName = "Map ";
-		QString mapPrefName = "Map";
-        if (i > 0)
-		{
-            mapName += QString::number(i + 1);
-			mapPrefName + QString::number(i + 1);
-		}
-        x = subMenu->insertItem(mapName);
-        subMenu->setItemParameter(x, i + mapDockBase);
-		subMenu->setItemChecked(x, pSEQPrefs->getPrefBool(QString("Dockable")
-														  + mapName,
-														  section, true));
-	}
-	connect (subMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_DockableWin(int)));
-	m_dockableWinMenu->insertItem("Maps", subMenu);
-
-	// insert Message Window docking options
-	subMenu = new Q3PopupMenu;
-	QString messagePrefName = "DockableMessageWindow";
-	for (int i = 0; i < maxNumMessageWindows; i++)
-	{
-        QString messageWindowName = "Channel Messages ";
-		if (i > 0)
-			messageWindowName += QString::number(i + 1);
-        x = subMenu->insertItem(messageWindowName);
-        subMenu->setItemParameter(x, i + messageWindowDockBase);
-		subMenu->setItemChecked(x, pSEQPrefs->getPrefBool(messagePrefName +
-														  QString::number(i),
-														  section, false));
-	}
-	connect (subMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_DockableWin(int)));
-	m_dockableWinMenu->insertItem("Channel Messages", subMenu);
-
-	connect (m_dockableWinMenu, SIGNAL(activated(int)), this, SLOT(toggle_view_DockableWin(int)));
-
-	// view menu checks are set by init_view_menu
-	connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(updateViewMenu()));
-
-
-	////////////////////////////////////////////////////////////////
-	// Options Menu
-	Q3PopupMenu* pOptMenu = new Q3PopupMenu;
-	menuBar()->insertItem("&Options", pOptMenu);
-	pOptMenu->setCheckable(TRUE);
-	m_id_opt_Fast     = pOptMenu->insertItem("Fast Machine?", this, SLOT(toggle_opt_Fast()));
-	m_id_opt_ConSelect = pOptMenu->insertItem("Select on Consider?", this, SLOT(toggle_opt_ConSelect()));
-	m_id_opt_TarSelect = pOptMenu->insertItem("Select on Target?", this, SLOT(toggle_opt_TarSelect()));
-	m_id_opt_KeepSelectedVisible = pOptMenu->insertItem("Keep Selected Visible?"  , this, SLOT(toggle_opt_KeepSelectedVisible()));
-	m_id_opt_LogSpawns = pOptMenu->insertItem("Log Spawns", this, SLOT(toggle_opt_LogSpawns()));
-	m_id_opt_BazaarData    = pOptMenu->insertItem("Bazaar Searches", this, SLOT(toggle_opt_BazaarData()));
-	menuBar()->setItemChecked (m_id_opt_BazaarData, (m_bazaarLog != 0));
-	m_id_opt_ResetMana = pOptMenu->insertItem("Reset Max Mana", this, SLOT(resetMaxMana()));
-	m_id_opt_PvPTeams  = pOptMenu->insertItem("PvP Teams", this, SLOT(toggle_opt_PvPTeams()));
-	m_id_opt_PvPDeity  = pOptMenu->insertItem("PvP Deity", this, SLOT(toggle_opt_PvPDeity()));
-	x = pOptMenu->insertItem("Create Unknown Spawns", this, SLOT(toggle_opt_CreateUnknownSpawns(int)));
-	menuBar()->setItemChecked (x, showeq_params->createUnknownSpawns);
-	x = pOptMenu->insertItem("Use EQ Retarded Coordinates", this, SLOT(toggle_opt_RetardedCoords(int)));
-	menuBar()->setItemChecked (x, showeq_params->retarded_coords);
-	x = pOptMenu->insertItem("Use Unix System Time for Spawn Time", this, SLOT(toggle_opt_SystimeSpawntime(int)));
-	menuBar()->setItemChecked (x, showeq_params->systime_spawntime);
-	x = pOptMenu->insertItem("Record Spawn Walk Paths", this, SLOT(toggle_opt_WalkPathRecord(int)));
-	menuBar()->setItemChecked (x, showeq_params->walkpathrecord);
-
-	{
-		QMenu* subMenu = new QMenu;
-		QSpinBox* spinBox = new QSpinBox(0, 8192, 1, subMenu);
-
-		spinBox->setValue(showeq_params->walkpathlength);
-		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_opt_WalkPathLength(int)));
-
-		QWidgetAction* pSpinBoxAction = new QWidgetAction(subMenu);
-		pSpinBoxAction->setDefaultWidget(spinBox);
-		subMenu->addAction(pSpinBoxAction);
-		pOptMenu->insertItem("Walk Path Length", subMenu);
-	}
-
-	menuBar()->setItemChecked (m_id_opt_Fast, showeq_params->fast_machine);
-	menuBar()->setItemChecked (m_id_opt_ConSelect, m_selectOnConsider);
-	menuBar()->setItemChecked (m_id_opt_TarSelect, m_selectOnTarget);
-	menuBar()->setItemChecked (m_id_opt_KeepSelectedVisible, showeq_params->keep_selected_visible);
-	menuBar()->setItemChecked (m_id_opt_LogSpawns, (m_spawnLogger != 0));
-	menuBar()->setItemChecked (m_id_opt_PvPTeams, showeq_params->pvp);
-	menuBar()->setItemChecked (m_id_opt_PvPDeity, showeq_params->deitypvp);
-
-	// SaveState SubMenu
-	Q3PopupMenu* pSaveStateMenu = new Q3PopupMenu;
-	pOptMenu->insertItem("&Save State", pSaveStateMenu);
-	pSaveStateMenu->setCheckable(true);
-
-	x = pSaveStateMenu->insertItem("&Player", this, SLOT(toggle_opt_save_PlayerState(int)));
-	pSaveStateMenu->setItemChecked(x, showeq_params->savePlayerState);
-
-	x = pSaveStateMenu->insertItem("&Zone", this, SLOT(toggle_opt_save_ZoneState(int)));
-	pSaveStateMenu->setItemChecked(x, showeq_params->saveZoneState);
-
-	x = pSaveStateMenu->insertItem("&Spawns", this, SLOT(toggle_opt_save_Spawns(int)));
-	pSaveStateMenu->setItemChecked(x, showeq_params->saveSpawns);
-
-	pSaveStateMenu->insertItem("Base &Filename...", this, SLOT(set_opt_save_BaseFilename(void)));
-	pSaveStateMenu->insertSeparator(-1);
-
-	{
-		QMenu* subMenu = new QMenu;
-		QSpinBox* spinBox = new QSpinBox(1, 320, 1, subMenu);
-
-		spinBox->setValue(showeq_params->saveSpawnsFrequency / 1000);
-		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_opt_save_SpawnFrequency(int)));
-
-		QWidgetAction* pSpinBoxAction = new QWidgetAction(subMenu);
-		pSpinBoxAction->setDefaultWidget(spinBox);
-		subMenu->addAction(pSpinBoxAction);
-		pSaveStateMenu->insertItem("Spawn Save Frequency (s)", subMenu);
-	}
-
-	pOptMenu->insertItem("Clear Channel Messages", this, SLOT(opt_clearChannelMsgs(int)));
-
-	// Con Color base menu
-	Q3PopupMenu* conColorBaseMenu = new Q3PopupMenu;
-	x = conColorBaseMenu->insertItem("Gray Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tGraySpawn);
-	x = conColorBaseMenu->insertItem("Green Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tGreenSpawn);
-	x = conColorBaseMenu->insertItem("Light Blue Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tCyanSpawn);
-	x = conColorBaseMenu->insertItem("Blue Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tBlueSpawn);
-	x = conColorBaseMenu->insertItem("Even Spawn...");
-	conColorBaseMenu->setItemParameter(x, tEvenSpawn);
-	x = conColorBaseMenu->insertItem("Yellow Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tYellowSpawn);
-	x = conColorBaseMenu->insertItem("Red Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tRedSpawn);
-	x = conColorBaseMenu->insertItem("Unknown Spawn...");
-	conColorBaseMenu->setItemParameter(x, tUnknownSpawn);
-	connect(conColorBaseMenu, SIGNAL(activated(int)),
-			this, SLOT(select_opt_conColorBase(int)));
-	pOptMenu->insertItem("Con &Colors", conColorBaseMenu);
-	m_id_opt_useUpdateRadius = pOptMenu->insertItem("Use EQ's Update Radius", this, SLOT(toggle_opt_UseUpdateRadius()));
-	menuBar()->setItemChecked (m_id_opt_useUpdateRadius, showeq_params->useUpdateRadius);
 
 	// Network Menu
 	m_netMenu = new Q3PopupMenu;
@@ -1108,7 +502,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	section = "Interface";
 
 	// Advanced menu
-	subMenu = new Q3PopupMenu;
+	QMenu* subMenu = new Q3PopupMenu;
 	{
 		QMenu* subSubMenu = new QMenu;
 		QSpinBox* spinBox = new QSpinBox(32, 1024, 8, subSubMenu);
@@ -2063,9 +1457,596 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget * parent, const char *nam
 	loadFormatStrings();
 
 	/* Start the packet capturing */
-	m_packet->start (10);
+	m_packet->start(10);
+
+	// TODO: Some windows are initialized but hidden.
+	// TODO: When closing a window, its state should be saved for the session.
 } // end constructor
 ////////////////////
+
+void EQInterface::createFileMenu()
+{
+	////////////////////////////////////////////////////////////////
+	// File Menu
+	QMenu* pFileMenu = menuBar()->addMenu("&File");
+	QAction* action = NULL;
+
+	// Save Preferences
+	action = new QAction("&Save Preferences", this);
+	action->setShortcut(CTRL + Key_S);
+	connect(action, SIGNAL(triggered()), this, SLOT(savePrefs()));
+	pFileMenu->addAction(action);
+
+	// Open Map
+	action = new QAction("Open &Map", this);
+	action->setShortcut(Key_F1);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(loadMap()));
+	pFileMenu->addAction(action);
+
+	// Import Map
+	action = new QAction("&Import Map", this);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(importMap()));
+	pFileMenu->addAction(action);
+
+	// Save Map
+	action = new QAction("Sa&ve Map", this);
+	action->setShortcut(Key_F2);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(saveMap()));
+	pFileMenu->addAction(action);
+
+	// Save SOE Map
+	action = new QAction("Save SOE Map", this);
+	connect(action, SIGNAL(triggered()), m_mapMgr, SLOT(saveSOEMap()));
+	pFileMenu->addAction(action);
+
+	// Reload Guilds File
+	action = new QAction("Reload Guilds File", this);
+	connect(action, SIGNAL(triggered()), m_guildmgr, SLOT(readGuildList()));
+	pFileMenu->addAction(action);
+
+	// Add Spawn Category
+	action = new QAction("Add Spawn Category", this);
+	action->setShortcut(ALT + Key_C);
+	connect(action, SIGNAL(triggered()), this, SLOT(addCategory()));
+	pFileMenu->addAction(action);
+
+	// Rebuild Spawn List
+	action = new QAction("Rebuild SpawnList", this);
+	action->setShortcut(ALT + Key_R);
+	connect(action, SIGNAL(triggered()), this, SLOT(rebuildSpawnList()));
+	pFileMenu->addAction(action);
+
+	// Reload Categories
+	action = new QAction("Reload Categories", this);
+	action->setShortcut(CTRL + Key_R);
+	connect(action, SIGNAL(triggered()), this, SLOT(reloadCategories()));
+	pFileMenu->addAction(action);
+
+	// Select Next
+	action = new QAction("Select Next", this);
+	action->setShortcut(CTRL + Key_Right);
+	connect(action, SIGNAL(triggered()), this, SLOT(selectNext()));
+	pFileMenu->addAction(action);
+
+	// Select Prev
+	action = new QAction("Select Prev", this);
+	action->setShortcut(CTRL + Key_Left);
+	connect(action, SIGNAL(triggered()), this, SLOT(selectPrev()));
+	pFileMenu->addAction(action);
+
+	// Save Selected Spawns Path
+	action = new QAction("Save Selected Spawns Path", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(saveSelectedSpawnPath()));
+	pFileMenu->addAction(action);
+
+	// Save NPC Spawn Paths
+	action = new QAction("Save NPC Spawn Paths", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(saveSpawnPaths()));
+	pFileMenu->addAction(action);
+
+	if (m_packet->playbackPackets() != PLAYBACK_OFF && m_packet->playbackPackets() != PLAYBACK_REMOTE)
+	{
+		// Inc Playback Speed
+		action = new QAction("Increase Playback Speed", this);
+		action->setShortcut(CTRL + Key_X);
+		connect(action, SIGNAL(triggered()), m_packet, SLOT(incPlayback()));
+		pFileMenu->addAction(action);
+
+		// Dec Playback Speed
+		action = new QAction("Decrease Playback Speed", this);
+		action->setShortcut(CTRL + Key_Z);
+		connect(action, SIGNAL(triggered()), m_packet, SLOT(decPlayback()));
+		pFileMenu->addAction(action);
+	}
+
+	// Quit
+	action = new QAction("&Quit", this);
+	connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
+	pFileMenu->addAction(action);
+}
+
+void EQInterface::createViewMenu()
+{
+	QString section = "Interface";
+
+	////////////////////////////////////////////////////////////////
+	// View menu
+	QMenu* viewMenu = menuBar()->addMenu("&View");
+
+	// Create Experience Window Item
+	m_viewExpWindow = new QAction("Experience Window", this);
+	m_viewExpWindow->setCheckable(true);
+	connect(m_viewExpWindow, SIGNAL(triggered()), this, SLOT(toggleExpWindow()));
+	viewMenu->addAction(m_viewExpWindow);
+
+	// Create Combat Window Item
+	m_viewCombatWindow = new QAction("Combat Window", this);
+	m_viewCombatWindow->setCheckable(true);
+	connect(m_viewCombatWindow, SIGNAL(triggered()), this, SLOT(toggleCombatWindow()));
+	viewMenu->addAction(m_viewCombatWindow);
+
+	viewMenu->addSeparator();
+
+	// Create Spawn List item
+	m_viewSpawnList = new QAction("Spawn List", this);
+	m_viewSpawnList->setCheckable(true);
+	connect(m_viewSpawnList, SIGNAL(triggered()), this, SLOT(toggleSpawnList()));
+	viewMenu->addAction(m_viewSpawnList);
+
+	// Create Spawn List 2 item
+	m_viewSpawnList2 = new QAction("Spawn List 2", this);
+	m_viewSpawnList2->setCheckable(true);
+	connect(m_viewSpawnList2, SIGNAL(triggered()), this, SLOT(toggleSpawnList2()));
+	viewMenu->addAction(m_viewSpawnList2);
+
+	// Create Spell List item
+	m_viewSpellList = new QAction("Spell List", this);
+	m_viewSpellList->setCheckable(true);
+	connect(m_viewSpellList, SIGNAL(triggered()), this, SLOT(toggleSpellList()));
+	viewMenu->addAction(m_viewSpellList);
+
+	// Create Spawn Point List item
+	m_viewSpawnPointList = new QAction("Spawn Point List", this);
+	m_viewSpawnPointList->setCheckable(true);
+	connect(m_viewSpawnPointList, SIGNAL(triggered()), this, SLOT(toggleSpawnPointList()));
+	viewMenu->addAction(m_viewSpawnPointList);
+
+	// Create player stats item
+	m_viewPlayerStats = new QAction("Player Stats", this);
+	m_viewPlayerStats->setCheckable(true);
+	connect(m_viewPlayerStats, SIGNAL(triggered()), this, SLOT(togglePlayerStats()));
+	viewMenu->addAction(m_viewPlayerStats);
+
+	// Create player skills item
+	m_viewPlayerSkills = new QAction("Player Skills", this);
+	m_viewPlayerSkills->setCheckable(true);
+	connect(m_viewPlayerSkills, SIGNAL(triggered()), this, SLOT(togglePlayerSkills()));
+	viewMenu->addAction(m_viewPlayerSkills);
+
+	// Create compass item
+	m_viewCompass = new QAction("Compass", this);
+	m_viewCompass->setCheckable(true);
+	connect(m_viewCompass, SIGNAL(triggered()), this, SLOT(toggleCompass()));
+	viewMenu->addAction(m_viewCompass);
+
+	// Create Map submenu and items
+	QMenu* subMenu = new QMenu("Maps", this);
+	QString mapName;
+	for (int i = 0; i < maxNumMaps; i++)
+	{
+		mapName.sprintf("Map %i", i + 1);
+
+		m_viewMap[i] = new QAction(mapName, this);
+		m_viewMap[i]->setCheckable(true);
+		m_viewMap[i]->setData(i);
+		subMenu->addAction(m_viewMap[i]);
+	}
+	connect(subMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleMap(QAction*)));
+	viewMenu->addMenu(subMenu);
+
+	// Create channel messages submenus and items
+	subMenu = new QMenu("Channel Messages", this);
+	QString messageWindowName;
+	for (int i = 0; i < maxNumMessageWindows; i++)
+	{
+        messageWindowName.sprintf("Channel Messages %i", i + 1);
+
+        m_viewMessageWindow[i] = new QAction(messageWindowName, this);
+        m_viewMessageWindow[i]->setCheckable(true);
+        m_viewMessageWindow[i]->setData(i);
+        subMenu->addAction(m_viewMessageWindow[i]);
+	}
+	connect(subMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleChannelMsgs(QAction*)));
+	viewMenu->addMenu(subMenu);
+
+	// Create network diagnostic menu item
+	m_viewNetDiag = new QAction("Network Diagnostics", this);
+	m_viewNetDiag->setCheckable(true);
+	connect(m_viewNetDiag, SIGNAL(triggered()), this, SLOT(toggleNetDiag()));
+	viewMenu->addAction(m_viewNetDiag);
+
+	// Create guild list menu item
+	m_viewGuildList = new QAction("Guild Member List", this);
+	m_viewGuildList->setCheckable(true);
+	connect(m_viewGuildList, SIGNAL(triggered()), this, SLOT(toggleGuildList()));
+	viewMenu->addAction(m_viewGuildList);
+
+
+	viewMenu->addSeparator();
+
+
+	/*
+	 * Create Menu Entries for Player Stats
+	 */
+	struct {
+		int Val;
+		const char* Str;
+	} statEntries[] = {
+		{ LIST_HP, 		"Hit Points" },
+		{ LIST_MANA, 	"Mana" },
+		{ LIST_STAM, 	"Stamina" },
+		{ LIST_EXP, 	"Experience" },
+		{ LIST_ALTEXP, 	"Alt Experience" },
+		{ LIST_FOOD, 	"Food" },
+		{ LIST_WATR, 	"Water" },
+		{ -1, 			NULL },
+		{ LIST_STR, 	"Strength" },
+		{ LIST_STA, 	"Stamina" },
+		{ LIST_CHA, 	"Charisma" },
+		{ LIST_DEX, 	"Dexterity" },
+		{ LIST_INT, 	"Intelligence" },
+		{ LIST_AGI, 	"Agility" },
+		{ LIST_WIS, 	"Wisdom" },
+		{ -1, 			NULL },
+		{ LIST_MR, 		"Magic Res" },
+		{ LIST_FR, 		"Fire Res" },
+		{ LIST_CR, 		"Cold Res" },
+		{ LIST_DR, 		"Disease Res" },
+		{ LIST_PR,		"Poison Res" },
+		{ -1, 			NULL },
+		{ LIST_AC,		"Armor Class" },
+		{ -2, 			NULL }
+	};
+
+	m_playerStatsMenu = new QMenu("&Player Stats", this);
+	for (int idx = 0; statEntries[idx].Val != -2; idx++)
+	{
+		if (statEntries[idx].Val == -1)
+		{
+			m_playerStatsMenu->addSeparator();
+			continue;
+		}
+		QAction* menuAction = new QAction(statEntries[idx].Str, this);
+		menuAction->setCheckable(true);
+		menuAction->setData(statEntries[idx].Val);
+		m_playerStatsMenu->addAction(menuAction);
+	}
+	connect(m_playerStatsMenu, SIGNAL(triggered(QAction*)), this, SLOT(togglePlayerStat(QAction*)));
+	m_playerStatsMenuAction = viewMenu->addMenu(m_playerStatsMenu);
+
+
+	/*
+	 * Create Menu Entries for Player Skills
+	 */
+	m_playerSkillsMenu = new QMenu("Player &Skills", this);
+	m_playerSkillsMenu->setCheckable(true);
+
+	m_playerSkillsLanguages = new QAction("&Languages", this);
+	m_playerSkillsLanguages->setCheckable(true);
+	m_playerSkillsLanguages->setData((int)0);
+	m_playerSkillsMenu->addAction(m_playerSkillsLanguages);
+	connect(m_playerSkillsMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggle_view_SkillWin(QAction*)));
+	m_playerSkillsMenuAction = viewMenu->addMenu(m_playerSkillsMenu);
+
+
+	/*
+	 * Create Menu Entries for Spawn List columns
+	 */
+    struct {
+    	int Val;
+    	const char* Str;
+    } menuEntries[] = {
+    	{ tSpawnColName, 		"&Name" },
+    	{ tSpawnColLevel, 		"&Level" },
+    	{ tSpawnColHP, 			"&HP" },
+    	{ tSpawnColMaxHP,		"&Max HP" },
+    	{ tSpawnColXPos,		"Coord &1" },
+    	{ tSpawnColYPos,		"Coord &2" },
+    	{ tSpawnColZPos,		"Coord &3" },
+    	{ tSpawnColID,			"I&D", },
+    	{ tSpawnColDist,		"&Distance" },
+    	{ tSpawnColRace,		"&Race" },
+    	{ tSpawnColClass,		"&Class" },
+    	{ tSpawnColDeity,		"Deit&y" },
+    	{ tSpawnColBodyType,	"&BodyType" },
+    	{ tSpawnColGuildID,		"Guild Tag" },
+    	{ tSpawnColInfo,		"&Info" },
+    	{ tSpawnColSpawnTime, 	"Spawn &Time" },
+    	{ -1, NULL }
+    };
+
+    m_spawnListMenu = new QMenu("Spawn &List", this);
+    for (int idx = 0; menuEntries[idx].Val != -1; idx++)
+    {
+    	QAction* menuAction = new QAction(menuEntries[idx].Str, this);
+    	menuAction->setCheckable(true);
+    	menuAction->setData(menuEntries[idx].Val);
+    	m_spawnListMenu->addAction(menuAction);
+    }
+    m_spawnListMenu->setCheckable(true);
+    connect(m_spawnListMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleSpawnListCol(QAction*)));
+    m_spawnListMenuAction = viewMenu->addMenu(m_spawnListMenu);
+    viewMenu->addMenu(m_spawnListMenu);
+
+    // Separator between spawn list columns and docking options
+	viewMenu->insertSeparator(-1);
+
+
+	/*
+	 * Create Menu Entries for Docked Windows
+	 */
+
+	QAction* action = NULL;
+	int x = 0;
+
+	m_dockedWinMenu = new QMenu("&Docked", this);
+
+	action = new QAction("Spawn &List", this);
+	action->setData(menuSpawnList);
+	action->setCheckable(true);
+	action->setChecked(m_isSpawnListDocked);
+	m_dockedWinMenu->addAction(action);
+
+	action = new QAction("Spawn List &2", this);
+	action->setData(menuSpawnList2);
+	action->setCheckable(true);
+	action->setChecked(m_isSpawnList2Docked);
+	m_dockedWinMenu->addAction(action);
+
+	action = new QAction("Spawn P&oint List", this);
+	action->setData(menuSpawnPointList);
+	action->setCheckable(true);
+	action->setChecked(m_isSpawnPointListDocked);
+	m_dockedWinMenu->addAction(action);
+
+	action = new QAction("&Player Stats", this);
+	action->setData(menuPlayerStats);
+	action->setCheckable(true);
+	action->setChecked(m_isStatListDocked);
+	m_dockedWinMenu->addAction(action);
+
+	action = new QAction("Player &Skills", this);
+	action->setData(menuPlayerSkills);
+	action->setCheckable(true);
+	action->setChecked(m_isSkillListDocked);
+	m_dockedWinMenu->addAction(action);
+
+	action = new QAction("Sp&ell List", this);
+	action->setData(menuSpellList);
+	action->setCheckable(true);
+	action->setChecked(m_isSpellListDocked);
+	m_dockedWinMenu->addAction(action);
+
+	action = new QAction("&Compass", this);
+	action->setData(menuCompass);
+	action->setCheckable(true);
+	action->setChecked(m_isCompassDocked);
+	m_dockedWinMenu->addAction(action);
+
+	// insert Map docking options
+	// NOTE: Always insert Map docking options at the end of the Docked menu
+	for (int i = 0; i < maxNumMaps; i++)
+	{
+		QString mapName;
+		mapName.sprintf("Map %i", i + 1);
+
+		action = new QAction(mapName, this);
+		action->setData(i + mapDockBase);
+		action->setCheckable(true);
+		action->setChecked(m_isMapDocked[i]);
+		m_dockedWinMenu->addAction(action);
+	}
+	viewMenu->addMenu(m_dockedWinMenu);
+	connect(m_dockedWinMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleWindowDocked(QAction*)));
+
+
+
+
+	/*
+	 * Create Menu Entries for Docked Windows
+	 */
+	m_dockableWinMenu = new Q3PopupMenu;
+	viewMenu->insertItem( "&Dockable", m_dockableWinMenu);
+	m_dockableWinMenu->setCheckable(true);
+
+	x = m_dockableWinMenu->insertItem("Spawn &List");
+	m_dockableWinMenu->setItemParameter(x, 0);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpawnList", section, true));
+
+	x = m_dockableWinMenu->insertItem("Spawn &List 2");
+	m_dockableWinMenu->setItemParameter(x, 6);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpawnList2", section, true));
+
+	x = m_dockableWinMenu->insertItem("Spawn P&oint List");
+	m_dockableWinMenu->setItemParameter(x, 5);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpawnPointList", section, true));
+
+	x = m_dockableWinMenu->insertItem("&Player Stats");
+	m_dockableWinMenu->setItemParameter(x, 1);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockablePlayerStats", section, true));
+
+	x = m_dockableWinMenu->insertItem("Player &Skills");
+	m_dockableWinMenu->setItemParameter(x, 2);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockablePlayerSkills", section, true));
+
+	x = m_dockableWinMenu->insertItem("Sp&ell List");
+	m_dockableWinMenu->setItemParameter(x, 3);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpellList", section, true));
+
+	x = m_dockableWinMenu->insertItem("&Compass");
+	m_dockableWinMenu->setItemParameter(x, 4);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableCompass", section, true));
+
+	x = m_dockableWinMenu->insertItem("E&xperience Window");
+	m_dockableWinMenu->setItemParameter(x, 7);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
+
+	x = m_dockableWinMenu->insertItem("Com&bat Window");
+	m_dockableWinMenu->setItemParameter(x, 8);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
+
+	x = m_dockableWinMenu->insertItem("&Guild List");
+	m_dockableWinMenu->setItemParameter(x, 9);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableGuildListWindow", section, true));
+
+	x = m_dockableWinMenu->insertItem("&Net Diag");
+	m_dockableWinMenu->setItemParameter(x, 10);
+	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableNetDiag", section, true));
+
+	// insert Map docking options
+	subMenu = new Q3PopupMenu;
+	for (int i = 0; i < maxNumMaps; i++)
+	{
+        QString mapName = "Map ";
+		QString mapPrefName = "Map";
+        if (i > 0)
+		{
+            mapName += QString::number(i + 1);
+			mapPrefName + QString::number(i + 1);
+		}
+        x = subMenu->insertItem(mapName);
+        subMenu->setItemParameter(x, i + mapDockBase);
+		subMenu->setItemChecked(x, pSEQPrefs->getPrefBool(QString("Dockable") + mapName, section, true));
+	}
+	connect (subMenu, SIGNAL(activated(int)), this, SLOT(toggleWindowDockable(int)));
+	m_dockableWinMenu->insertItem("Maps", subMenu);
+
+	// insert Message Window docking options
+	subMenu = new Q3PopupMenu;
+	QString messagePrefName = "DockableMessageWindow";
+	for (int i = 0; i < maxNumMessageWindows; i++)
+	{
+        QString messageWindowName = "Channel Messages ";
+		if (i > 0)
+			messageWindowName += QString::number(i + 1);
+        x = subMenu->insertItem(messageWindowName);
+        subMenu->setItemParameter(x, i + messageWindowDockBase);
+		subMenu->setItemChecked(x, pSEQPrefs->getPrefBool(messagePrefName + QString::number(i), section, false));
+	}
+	connect (subMenu, SIGNAL(activated(int)), this, SLOT(toggleWindowDockable(int)));
+	m_dockableWinMenu->insertItem("Channel Messages", subMenu);
+
+	connect (m_dockableWinMenu, SIGNAL(activated(int)), this, SLOT(toggleWindowDockable(int)));
+
+	// view menu checks are set by init_view_menu
+	connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(updateViewMenu()));
+}
+
+void EQInterface::createOptionsMenu()
+{
+	////////////////////////////////////////////////////////////////
+	// Options Menu
+
+	Q3PopupMenu* pOptMenu = new Q3PopupMenu;
+	menuBar()->insertItem("&Options", pOptMenu);
+	pOptMenu->setCheckable(TRUE);
+	m_id_opt_Fast     = pOptMenu->insertItem("Fast Machine?", this, SLOT(toggle_opt_Fast()));
+	m_id_opt_ConSelect = pOptMenu->insertItem("Select on Consider?", this, SLOT(toggle_opt_ConSelect()));
+	m_id_opt_TarSelect = pOptMenu->insertItem("Select on Target?", this, SLOT(toggle_opt_TarSelect()));
+	m_id_opt_KeepSelectedVisible = pOptMenu->insertItem("Keep Selected Visible?"  , this, SLOT(toggle_opt_KeepSelectedVisible()));
+	m_id_opt_LogSpawns = pOptMenu->insertItem("Log Spawns", this, SLOT(toggle_opt_LogSpawns()));
+	m_id_opt_BazaarData    = pOptMenu->insertItem("Bazaar Searches", this, SLOT(toggle_opt_BazaarData()));
+	menuBar()->setItemChecked (m_id_opt_BazaarData, (m_bazaarLog != 0));
+	m_id_opt_ResetMana = pOptMenu->insertItem("Reset Max Mana", this, SLOT(resetMaxMana()));
+	m_id_opt_PvPTeams  = pOptMenu->insertItem("PvP Teams", this, SLOT(toggle_opt_PvPTeams()));
+	m_id_opt_PvPDeity  = pOptMenu->insertItem("PvP Deity", this, SLOT(toggle_opt_PvPDeity()));
+	int x = pOptMenu->insertItem("Create Unknown Spawns", this, SLOT(toggle_opt_CreateUnknownSpawns(int)));
+	menuBar()->setItemChecked (x, showeq_params->createUnknownSpawns);
+	x = pOptMenu->insertItem("Use EQ Retarded Coordinates", this, SLOT(toggle_opt_RetardedCoords(int)));
+	menuBar()->setItemChecked (x, showeq_params->retarded_coords);
+	x = pOptMenu->insertItem("Use Unix System Time for Spawn Time", this, SLOT(toggle_opt_SystimeSpawntime(int)));
+	menuBar()->setItemChecked (x, showeq_params->systime_spawntime);
+	x = pOptMenu->insertItem("Record Spawn Walk Paths", this, SLOT(toggle_opt_WalkPathRecord(int)));
+	menuBar()->setItemChecked (x, showeq_params->walkpathrecord);
+
+	{
+		QMenu* subMenu = new QMenu;
+		QSpinBox* spinBox = new QSpinBox(0, 8192, 1, subMenu);
+
+		spinBox->setValue(showeq_params->walkpathlength);
+		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_opt_WalkPathLength(int)));
+
+		QWidgetAction* pSpinBoxAction = new QWidgetAction(subMenu);
+		pSpinBoxAction->setDefaultWidget(spinBox);
+		subMenu->addAction(pSpinBoxAction);
+		pOptMenu->insertItem("Walk Path Length", subMenu);
+	}
+
+	menuBar()->setItemChecked (m_id_opt_Fast, showeq_params->fast_machine);
+	menuBar()->setItemChecked (m_id_opt_ConSelect, m_selectOnConsider);
+	menuBar()->setItemChecked (m_id_opt_TarSelect, m_selectOnTarget);
+	menuBar()->setItemChecked (m_id_opt_KeepSelectedVisible, showeq_params->keep_selected_visible);
+	menuBar()->setItemChecked (m_id_opt_LogSpawns, (m_spawnLogger != 0));
+	menuBar()->setItemChecked (m_id_opt_PvPTeams, showeq_params->pvp);
+	menuBar()->setItemChecked (m_id_opt_PvPDeity, showeq_params->deitypvp);
+
+	// SaveState SubMenu
+	Q3PopupMenu* pSaveStateMenu = new Q3PopupMenu;
+	pOptMenu->insertItem("&Save State", pSaveStateMenu);
+	pSaveStateMenu->setCheckable(true);
+
+	x = pSaveStateMenu->insertItem("&Player", this, SLOT(toggle_opt_save_PlayerState(int)));
+	pSaveStateMenu->setItemChecked(x, showeq_params->savePlayerState);
+
+	x = pSaveStateMenu->insertItem("&Zone", this, SLOT(toggle_opt_save_ZoneState(int)));
+	pSaveStateMenu->setItemChecked(x, showeq_params->saveZoneState);
+
+	x = pSaveStateMenu->insertItem("&Spawns", this, SLOT(toggle_opt_save_Spawns(int)));
+	pSaveStateMenu->setItemChecked(x, showeq_params->saveSpawns);
+
+	pSaveStateMenu->insertItem("Base &Filename...", this, SLOT(set_opt_save_BaseFilename(void)));
+	pSaveStateMenu->insertSeparator(-1);
+
+	{
+		QMenu* subMenu = new QMenu;
+		QSpinBox* spinBox = new QSpinBox(1, 320, 1, subMenu);
+
+		spinBox->setValue(showeq_params->saveSpawnsFrequency / 1000);
+		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_opt_save_SpawnFrequency(int)));
+
+		QWidgetAction* pSpinBoxAction = new QWidgetAction(subMenu);
+		pSpinBoxAction->setDefaultWidget(spinBox);
+		subMenu->addAction(pSpinBoxAction);
+		pSaveStateMenu->insertItem("Spawn Save Frequency (s)", subMenu);
+	}
+
+	pOptMenu->insertItem("Clear Channel Messages", this, SLOT(opt_clearChannelMsgs(int)));
+
+	// Con Color base menu
+	Q3PopupMenu* conColorBaseMenu = new Q3PopupMenu;
+	x = conColorBaseMenu->insertItem("Gray Spawn Base...");
+	conColorBaseMenu->setItemParameter(x, tGraySpawn);
+	x = conColorBaseMenu->insertItem("Green Spawn Base...");
+	conColorBaseMenu->setItemParameter(x, tGreenSpawn);
+	x = conColorBaseMenu->insertItem("Light Blue Spawn Base...");
+	conColorBaseMenu->setItemParameter(x, tCyanSpawn);
+	x = conColorBaseMenu->insertItem("Blue Spawn Base...");
+	conColorBaseMenu->setItemParameter(x, tBlueSpawn);
+	x = conColorBaseMenu->insertItem("Even Spawn...");
+	conColorBaseMenu->setItemParameter(x, tEvenSpawn);
+	x = conColorBaseMenu->insertItem("Yellow Spawn Base...");
+	conColorBaseMenu->setItemParameter(x, tYellowSpawn);
+	x = conColorBaseMenu->insertItem("Red Spawn Base...");
+	conColorBaseMenu->setItemParameter(x, tRedSpawn);
+	x = conColorBaseMenu->insertItem("Unknown Spawn...");
+	conColorBaseMenu->setItemParameter(x, tUnknownSpawn);
+	connect(conColorBaseMenu, SIGNAL(activated(int)), this, SLOT(select_opt_conColorBase(int)));
+	pOptMenu->insertItem("Con &Colors", conColorBaseMenu);
+	m_id_opt_useUpdateRadius = pOptMenu->insertItem("Use EQ's Update Radius", this, SLOT(toggle_opt_UseUpdateRadius()));
+	menuBar()->setItemChecked (m_id_opt_useUpdateRadius, showeq_params->useUpdateRadius);
+
+}
+
 
 EQInterface::~EQInterface()
 {
@@ -2190,159 +2171,88 @@ void EQInterface::restoreStatusFont()
 	m_stsbarZEM->setFixedHeight(statusFixedHeight);
 }
 
-void EQInterface::toggle_view_StatWin(int id)
+void EQInterface::togglePlayerStat(QAction* action)
 {
-	int statnum;
-
-	statnum = m_statWinMenu->itemParameter(id);
-
-	if (m_statWinMenu->isItemChecked(id))
+	if (action->data().isValid() && m_statList != NULL)
 	{
-		m_statWinMenu->setItemChecked(id, FALSE);
-		if (m_statList != 0)
-			m_statList->statList()->enableStat(statnum, false);
-	}
-	else
-	{
-		m_statWinMenu->setItemChecked(id, TRUE);
-		if (m_statList != 0)
-			m_statList->statList()->enableStat(statnum, true);
+		m_statList->statList()->enableStat(action->data().toInt(), action->isChecked());
 	}
 }
 
-void EQInterface::toggle_view_SkillWin(int id)
+void EQInterface::toggle_view_SkillWin(QAction* action)
 {
-	int skillnum;
-
-	skillnum = m_skillWinMenu->itemParameter(id);
-
-	if (m_skillWinMenu->isItemChecked(id))
+	if (m_playerSkillsLanguages == action && m_skillList != NULL)
 	{
-		m_skillWinMenu->setItemChecked(id, FALSE);
-
-		if ((id == m_id_view_PlayerSkills_Languages) &&
-			(m_skillList != 0))
-			m_skillList->skillList()->showLanguages(false);
-	}
-	else
-	{
-		m_skillWinMenu->setItemChecked(id, TRUE);
-
-		if ((id == m_id_view_PlayerSkills_Languages) &&
-			(m_skillList != 0))
-			m_skillList->skillList()->showLanguages(true);
+		m_skillList->skillList()->showLanguages(action->isChecked());
 	}
 }
 
-void EQInterface::toggle_view_SpawnListCol(int id)
+void EQInterface::toggleSpawnListCol(QAction* action)
 {
-	int colnum;
+	int colnum = action->data().toInt();
 
-	colnum = m_spawnListMenu->itemParameter(id);
-
-	if (m_spawnListMenu->isItemChecked(id))
+	if (m_spawnList != NULL)
 	{
-		m_spawnListMenu->setItemChecked(id, FALSE);
-
-		if (m_spawnList != 0)
-			m_spawnList->spawnList()->setColumnVisible(colnum, false);
-	}
-	else
-	{
-		m_spawnListMenu->setItemChecked(id, TRUE);
-
-		if (m_spawnList != 0)
-			m_spawnList->spawnList()->setColumnVisible(colnum, true);
+		m_spawnList->spawnList()->setColumnVisible(colnum, action->isChecked());
 	}
 }
 
-void EQInterface::toggle_view_DockedWin(int id)
+void EQInterface::toggleWindowDocked(QAction* action)
 {
-	SEQWindow* widget = 0;
-	int winnum;
+	SEQWindow* widget = NULL;
+	int winnum = -1;
 	QString preference;
 
 	// get the window number parameter
-	winnum = m_dockedWinMenu->itemParameter(id);
+	winnum = action->data().toInt();
 
-	// get the current menu item state
-	bool checked = m_dockedWinMenu->isItemChecked(id);
-
-	// flip the menu item state
-	m_dockedWinMenu->setItemChecked(id, !checked);
+	// get the new action state
+	bool checked = action->isChecked();
 
 	switch (winnum)
 	{
-		case 0: // Spawn List
-			// note the new setting
-			m_isSpawnListDocked = !checked;
-
-			// reparent the Spawn List
+		case menuSpawnList:
+			m_isSpawnListDocked = checked;
 			widget = m_spawnList;
-
-			// preference
 			preference = "DockedSpawnList";
 			break;
-		case 1: // Player Stats
-			// note the new setting
-			m_isStatListDocked = !checked;
 
-			// reparent the Stat List
+		case menuPlayerStats:
+			m_isStatListDocked = checked;
 			widget = m_statList;
-
-			// preference
 			preference = "DockedPlayerStats";
 			break;
-		case 2: // Player Skills
-			// note the new setting
-			m_isSkillListDocked = !checked;
 
-			// reparent the Skill List
+		case menuPlayerSkills:
+			m_isSkillListDocked = checked;
 			widget = m_skillList;
-
-			// preference
 			preference = "DockedPlayerSkills";
 			break;
-		case 3: // Spell List
-			// note the new setting
-			m_isSpellListDocked = !checked;
 
-			// reparent the Skill List
+		case menuSpellList:
+			m_isSpellListDocked = checked;
 			widget = m_spellList;
-
-			// preference
 			preference = "DockedSpellList";
 			break;
-		case 4: // Compass
-			// note the new setting
-			m_isCompassDocked = !checked;
 
-			// reparent the Skill List
+		case menuCompass:
+			m_isCompassDocked = checked;
 			widget = m_compass;
-
-			// preference
 			preference = "DockedCompass";
 			break;
-		case 5: // Spawn Point List
-			// note the new setting
-			m_isSpawnPointListDocked = !checked;
 
-			// reparent the Spawn List
+		case menuSpawnPointList:
+			m_isSpawnPointListDocked = checked;
 			widget = m_spawnPointList;
-
-			// preference
 			preference = "DockedSpawnPointList";
 			break;
-		case 6: // Spawn List 2
-			// note the new setting
+
+		case menuSpawnList2:
 			m_isSpawnList2Docked = !checked;
-
-			// reparent the Spawn List
 			widget = m_spawnList2;
-
-			// preference
 			preference = "DockedSpawnList2";
 			break;
+
 		default:
 			// use default for maps since the number of them can be changed via a
 			// constant (maxNumMaps)
@@ -2350,43 +2260,32 @@ void EQInterface::toggle_view_DockedWin(int id)
 			{
 				int i = winnum - mapDockBase;
 
-				// note the new setting
-				m_isMapDocked[i] = !checked;
-
-				// reparent teh appropriate map
+				m_isMapDocked[i] = checked;
 				widget = m_map[i];
-
-				QString tmpPrefSuffix = "";
-				if (i > 0)
-					tmpPrefSuffix = QString::number(i + 1);
-
-				// preference
-				preference = "DockedMap" + tmpPrefSuffix;
+				preference.sprintf("DockedMap%i", i+1);
 			}
-
 			break;
     };
 
 	// save new setting
-	pSEQPrefs->setPrefBool(preference, "Interface", !checked);
+	pSEQPrefs->setPrefBool(preference, "Interface", checked);
 
 	// attempt to undock the window
 	if (widget)
 	{
 		if (checked)
-			widget->undock();
-		else
 			widget->dock();
+		else
+			widget->undock();
 
 		// make the widget update it's geometry
 		widget->updateGeometry();
 	}
 }
 
-
-void EQInterface::toggle_view_DockableWin(int id)
+void EQInterface::toggleWindowDockable(int id)
 {
-	SEQWindow* widget = 0;
+	SEQWindow* widget = NULL;
 	int winnum;
 	QString preference;
 
@@ -3327,8 +3226,7 @@ void EQInterface::dumpGuild(void)
 	m_guildShell->dumpMembers(out);
 }
 
-void
-EQInterface::launch_editor_filters(void)
+void EQInterface::launch_editor_filters()
 {
 	EditorWindow * ew = new EditorWindow(m_filterMgr->filterFile());
 	ew->setCaption(m_filterMgr->filterFile());
@@ -3378,7 +3276,7 @@ void EQInterface::toggle_opt_UseUpdateRadius(void)
 }
 
 /* Check and uncheck Log menu options & set EQPacket logging flags */
-void EQInterface::toggle_log_AllPackets (void)
+void EQInterface::toggle_log_AllPackets(void)
 {
 	if (m_globalLog)
 	{
@@ -3393,7 +3291,7 @@ void EQInterface::toggle_log_AllPackets (void)
 	pSEQPrefs->setPrefBool("LogAllPackets", "PacketLogging", state);
 }
 
-void EQInterface::toggle_log_WorldData (void)
+void EQInterface::toggle_log_WorldData(void)
 {
 	if (m_worldLog)
 	{
@@ -3408,7 +3306,7 @@ void EQInterface::toggle_log_WorldData (void)
 	pSEQPrefs->setPrefBool("LogWorldPackets", "PacketLogging", state);
 }
 
-void EQInterface::toggle_log_ZoneData (void)
+void EQInterface::toggle_log_ZoneData(void)
 {
 	if (m_zoneLog)
 	{
@@ -3423,7 +3321,7 @@ void EQInterface::toggle_log_ZoneData (void)
 	pSEQPrefs->setPrefBool("LogZonePackets", "PacketLogging", state);
 }
 
-void EQInterface::toggle_log_Filter_ZoneData_Client (void)
+void EQInterface::toggle_log_Filter_ZoneData_Client(void)
 {
 	bool state = true;
 	if(showeq_params->filterZoneDataLog == DIR_Client)
@@ -3578,7 +3476,7 @@ void EQInterface::toggleSpawnList(void)
 		showSpawnList();
 
 		// enable it's options sub-menu
-		menuBar()->setItemEnabled(m_id_view_SpawnList_Options, true);
+		m_spawnListMenuAction->setEnabled(true);
 	}
 	else
 	{
@@ -3589,7 +3487,7 @@ void EQInterface::toggleSpawnList(void)
 		m_spawnList->hide();
 
 		// disable it's options sub-menu
-		menuBar()->setItemEnabled(m_id_view_SpawnList_Options, false);
+		m_spawnListMenuAction->setEnabled(true);
 
 		// remove its window menu
 		removeWindowMenu(m_spawnList);
@@ -3685,7 +3583,7 @@ void EQInterface::toggleSpellList(void)
 	pSEQPrefs->setPrefBool("ShowSpellList", "Interface", !wasVisible);
 }
 
-void EQInterface::togglePlayerStats(void)
+void EQInterface::togglePlayerStats()
 {
 	bool wasVisible = ((m_statList != 0) && m_statList->isVisible());
 
@@ -3694,7 +3592,7 @@ void EQInterface::togglePlayerStats(void)
 		showStatList();
 
 		// enable it's options sub-menu
-		menuBar()->setItemEnabled(m_id_view_PlayerStats_Options, true);
+		m_playerStatsMenuAction->setEnabled(true);
 	}
 	else
 	{
@@ -3705,7 +3603,7 @@ void EQInterface::togglePlayerStats(void)
 		m_statList->hide();
 
 		// disable it's options sub-menu
-		menuBar()->setItemEnabled(m_id_view_PlayerStats_Options, false);
+		m_playerStatsMenuAction->setEnabled(false);
 
 		// remove its window menu
 		removeWindowMenu(m_statList);
@@ -3714,7 +3612,7 @@ void EQInterface::togglePlayerStats(void)
 		delete m_statList;
 
 		// make sure to clear it's variable
-		m_statList = 0;
+		m_statList = NULL;
 	}
 
 	pSEQPrefs->setPrefBool("ShowPlayerStats", "Interface", !wasVisible);
@@ -3727,8 +3625,7 @@ void EQInterface::togglePlayerSkills(void)
 	if (!wasVisible)
 	{
 		showSkillList();
-
-		menuBar()->setItemEnabled(m_id_view_PlayerSkills_Options, true);
+		m_playerSkillsMenuAction->setEnabled(true);
 	}
 	else
 	{
@@ -3739,7 +3636,7 @@ void EQInterface::togglePlayerSkills(void)
 		m_skillList->hide();
 
 		// disable it's options sub-menu
-		menuBar()->setItemEnabled(m_id_view_PlayerSkills_Options, false);
+		m_playerSkillsMenuAction->setEnabled(false);
 
 		// remove its window menu
 		removeWindowMenu(m_skillList);
@@ -4756,46 +4653,73 @@ void EQInterface::updateViewMenu()
 	m_viewPlayerSkills->setChecked((m_skillList != NULL) && m_skillList->isVisible());
 	m_viewPlayerStats->setChecked((m_statList != NULL) && m_statList->isVisible());
 	m_viewSpawnList->setChecked((m_spawnList != NULL) && m_spawnList->isVisible());
-	m_viewSpawnList2->setChecked((m_spawnList2 != NULL) && m_spawnList->isVisible());
+	m_viewSpawnList2->setChecked((m_spawnList2 != NULL) && m_spawnList2->isVisible());
 	m_viewSpawnPointList->setChecked((m_spawnPointList != NULL) && m_spawnPointList->isVisible());
 	m_viewCompass->setChecked((m_compass != NULL) && m_compass->isVisible());
 	m_viewSpellList->setChecked((m_spellList != NULL) && m_spellList->isVisible());
-
-	m_viewNetDiag->setChecked((m_netDiag != 0) && m_netDiag->isVisible());
-	m_viewGuildList->setChecked((m_guildListWindow != 0) && m_guildListWindow->isVisible());
+	m_viewNetDiag->setChecked((m_netDiag != NULL) && m_netDiag->isVisible());
+	m_viewGuildList->setChecked((m_guildListWindow != NULL) && m_guildListWindow->isVisible());
 
 	// loop over the maps
 	for (int i = 0; i < maxNumMaps; i++)
-		m_viewMap[i]->setChecked((m_map[i] != 0) && m_map[i]->isVisible());
+		m_viewMap[i]->setChecked((m_map[i] != NULL) && m_map[i]->isVisible());
 
 	// loop over the message windows
 	for (int i = 0; i < maxNumMessageWindows; i++)
-		m_viewMessageWindow[i]->setChecked((m_messageWindow[i] != 0) && m_messageWindow[i]->isVisible());
+		m_viewMessageWindow[i]->setChecked((m_messageWindow[i] != NULL) && m_messageWindow[i]->isVisible());
 
-	// set initial view options
-	if (m_spawnList != NULL)
+	// set initial view options for the spawn list menu
+	if (m_spawnList != NULL && m_spawnList->isVisible())
 	{
+
 		SEQListView* spawnList = m_spawnList->spawnList();
 
-		// make sure the menu bar settings are correct
-		for (int i = 0; i < tSpawnColMaxCols; i++)
-			m_spawnListMenu->setItemChecked(m_id_view_SpawnList_Cols[i], spawnList->columnVisible(i));
-	}
-
-	if (m_statList != NULL)
-	{
-		StatList* statList = m_statList->statList();
-		// make sure the menu items are checked
-		for (int i = 0; i < LIST_MAXLIST; i++)
+		QListIterator<QAction*> it(m_spawnListMenu->actions());
+		while (it.hasNext())
 		{
-			m_statWinMenu->setItemChecked(m_id_view_PlayerStats_Stats[i], statList->statShown(i));
+			QAction* action = it.next();
+			QVariant val = action->data();
+			if (val.isValid())
+			{
+				action->setChecked(spawnList->columnVisible(val.toInt()));
+			}
 		}
 	}
+	else
+	{
+		m_spawnListMenuAction->setEnabled(false);
+	}
 
-	if (m_skillList != NULL)
+	// set view status for the player stats menu
+	if (m_statList != NULL && m_statList->isVisible())
+	{
+		StatList* statList = m_statList->statList();
+
+		QListIterator<QAction*> it(m_playerStatsMenu->actions());
+		while (it.hasNext())
+		{
+			QAction* action = it.next();
+			QVariant val = action->data();
+			if (val.isValid())
+			{
+				action->setChecked(statList->statShown(val.toInt()));
+			}
+		}
+	}
+	else
+	{
+		m_playerStatsMenuAction->setEnabled(false);
+	}
+
+	// set view status for the skill list menu
+	if (m_skillList != NULL && m_skillList->isVisible())
 	{
 		// make sure the proper menu items are checked
-		menuBar()->setItemChecked(m_id_view_PlayerSkills_Languages, m_skillList->skillList()->showLanguages());
+		m_playerSkillsLanguages->setChecked(m_skillList->skillList()->showLanguages());
+	}
+	else
+	{
+		m_playerSkillsMenuAction->setEnabled(false);
 	}
 }
 
@@ -4810,16 +4734,14 @@ void EQInterface::toggle_opt_save_ZoneState(int id)
 {
 	showeq_params->saveZoneState = !showeq_params->saveZoneState;
 	menuBar()->setItemChecked(id, showeq_params->saveZoneState);
-	pSEQPrefs->setPrefBool("ZoneState", "SaveState",
-						   showeq_params->saveZoneState);
+	pSEQPrefs->setPrefBool("ZoneState", "SaveState", showeq_params->saveZoneState);
 }
 
 void EQInterface::toggle_opt_save_Spawns(int id)
 {
 	showeq_params->saveSpawns = !showeq_params->saveSpawns;
 	menuBar()->setItemChecked(id, showeq_params->saveSpawns);
-	pSEQPrefs->setPrefBool("Spawns", "SaveState",
-						   showeq_params->saveSpawns);
+	pSEQPrefs->setPrefBool("Spawns", "SaveState", showeq_params->saveSpawns);
 
 	if (showeq_params->saveSpawns)
 		m_spawnShell->saveSpawns();
@@ -4828,24 +4750,20 @@ void EQInterface::toggle_opt_save_Spawns(int id)
 void EQInterface::set_opt_save_SpawnFrequency(int frequency)
 {
 	showeq_params->saveSpawnsFrequency = frequency * 1000;
-	pSEQPrefs->setPrefInt("SpawnsFrequency", "SaveState",
-						  showeq_params->saveSpawnsFrequency);
+	pSEQPrefs->setPrefInt("SpawnsFrequency", "SaveState", showeq_params->saveSpawnsFrequency);
 }
 
 void EQInterface::set_opt_save_BaseFilename()
 {
 	QString fileName =
-    Q3FileDialog::getSaveFileName(showeq_params->saveRestoreBaseFilename,
-								  QString::null, this, "SaveBaseFilename",
-								  "Save State Base Filename");
+    Q3FileDialog::getSaveFileName(showeq_params->saveRestoreBaseFilename, QString::null, this, "SaveBaseFilename", "Save State Base Filename");
 	if (!fileName.isEmpty())
 	{
 		// set it to be the new base filename
 		showeq_params->saveRestoreBaseFilename = fileName;
 
 		// set preference to use for next session
-		pSEQPrefs->setPrefString("BaseFilename", "SaveState",
-								 showeq_params->saveRestoreBaseFilename);
+		pSEQPrefs->setPrefString("BaseFilename", "SaveState", showeq_params->saveRestoreBaseFilename);
 	}
 }
 
@@ -4860,9 +4778,7 @@ void EQInterface::showMessageFilterDialog(void)
 {
 	// create the filter dialog, if necessary
 	if (!m_messageFilterDialog)
-		m_messageFilterDialog = new MessageFilterDialog(m_messageFilters,
-														"ShowEQ Message Filters",
-														this, "messagefilterdialog");
+		m_messageFilterDialog = new MessageFilterDialog(m_messageFilters, "ShowEQ Message Filters", this, "messagefilterdialog");
 
 	// show the message filter dialog
 	m_messageFilterDialog->show();
@@ -5358,10 +5274,10 @@ void EQInterface::showSpawnPointList(void)
 	m_spawnPointList->show();
 }
 
-void EQInterface::showStatList(void)
+void EQInterface::showStatList()
 {
 	// if it doesn't exist, create it
-	if (m_statList == 0)
+	if (m_statList == NULL)
 	{
 		m_statList = new StatListWindow(m_player, 0, "stats");
 
@@ -5392,7 +5308,7 @@ void EQInterface::showStatList(void)
 	m_statList->show();
 }
 
-void EQInterface::showSkillList(void)
+void EQInterface::showSkillList()
 {
 	// if it doesn't exist, create it
 	if (m_skillList == 0)
