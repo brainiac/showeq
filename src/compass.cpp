@@ -110,64 +110,68 @@ void Compass::clearTarget()
 void Compass::paintCompass(QPainter *p)
 {
 	QRect cr = compassRect();
-	QPixmap pix (cr.size());
-	QPainter tmp;
-	pix.fill (this, cr.topLeft());
-	int pwd2 = pix.width() >> 1;
-	int pwd4 = pix.width() >> 2;
-	int phd2 = pix.height() >> 1;
-	int phd4 = pix.height() >> 2;
+	cr.addCoords(5, 5, -5, -5);
+	int pwd2 = cr.width() >> 1;
+	int pwd4 = cr.width() >> 2;
+	int phd2 = cr.height() >> 1;
+	int phd4 = cr.height() >> 2;
 
-	tmp.begin (&pix);
+	p->setRenderHint(QPainter::Antialiasing, true);
 
-	tmp.setBrush(QColor(64, 64, 64));
-	tmp.setPen(darkGray);
-	tmp.drawEllipse(0,0,pix.width(), pix.height());
-	tmp.setPen(gray);
-	tmp.drawLine(0,phd2, pix.width(), phd2);
-	tmp.drawLine(pwd2,0, pwd2, pix.height());
-	tmp.drawLine(pwd4, phd4, pix.width()-pwd4, pix.height()-phd4);
-	tmp.drawLine(pix.width()-pwd4, phd4, pwd4, pix.height()-(phd4));
-	tmp.translate(pwd2, phd2);
+	// Draw Compass Background
+	//p->setBrush(QColor(64, 64, 64));
+	//p->setPen(darkGray);
+	//p->drawEllipse(0,0, cr.width(), cr.height());
+	QConicalGradient coneGradient(0, 0, -90.0);
+	coneGradient.setColorAt(0.0, Qt::darkGray);
+	coneGradient.setColorAt(0.2, QColor(150, 150, 200));
+	coneGradient.setColorAt(0.5, Qt::white);
+	coneGradient.setColorAt(1.0, Qt::darkGray);
 
-	tmp.rotate (-m_ang);
-	tmp.setBrush(blue);
-	tmp.setPen(blue);
-	tmp.drawLine(0-pwd4, 0, pwd2, 0);
-	tmp.drawLine(0,0-phd4, 0, phd4);
-	tmp.setBrush(red);
-	tmp.setPen(red);
-	tmp.drawLine(0, 1, pwd2, 1);
-	tmp.drawLine(0, -1, pwd4, -1);
-	tmp.setBrush(blue);
-	tmp.setPen(red);
-	tmp.drawEllipse (0-5, 0-5, 10, 10);
-	tmp.setBrush(red);
-	tmp.setPen(red);
-	tmp.drawEllipse ((pwd2) -2, -2, 4, 4);
+	p->setBrush(coneGradient);
+	p->drawEllipse(0, 0, cr.width(), cr.height());
+
+
+	p->setPen(gray);
+	p->drawLine(0,phd2, cr.width(), phd2);
+	p->drawLine(pwd2,0, pwd2, cr.height());
+	p->drawLine(pwd4, phd4, cr.width() - pwd4, cr.height() - phd4);
+	p->drawLine(cr.width() - pwd4, phd4, pwd4, cr.height() - phd4);
+	p->translate(pwd2, phd2);
+
+	p->rotate(-m_ang);
+	p->setBrush(blue);
+	p->setPen(blue);
+	p->drawLine(0 - pwd4, 0, pwd2, 0);
+	p->drawLine(0,0 - phd4, 0, phd4);
+	p->setBrush(red);
+	p->setPen(red);
+	p->drawLine(0, 1, pwd2, 1);
+	p->drawLine(0, -1, pwd4, -1);
+	p->setBrush(blue);
+	p->setPen(red);
+	p->drawEllipse(0-5, 0-5, 10, 10);
+	p->setBrush(red);
+	p->setPen(red);
+	p->drawEllipse(pwd2 - 2, -2, 4, 4);
 
 	if (m_dSpawnAngle > 0)
 	{
-		tmp.resetXForm();
-		tmp.translate(pwd2, phd2);
-		tmp.rotate(-m_dSpawnAngle);
-		tmp.setPen(green);
-		tmp.setBrush(green);
-		tmp.drawEllipse(pwd2 -2, -2, 4, 4);
+		p->resetXForm();
+		p->translate(pwd2, phd2);
+		p->rotate(-m_dSpawnAngle);
+		p->setPen(green);
+		p->setBrush(green);
+		p->drawEllipse(pwd2 -2, -2, 4, 4);
 	}
-
-	tmp.end();
-	p->drawPixmap(cr.topLeft(), pix);
 }
 
 void Compass::paintEvent(QPaintEvent *e)
 {
 	QRect updateR = e->rect();
-	QPainter p;
-	p.begin(this);
+	QPainter p(this);
 	if (updateR.intersects(compassRect()))
 		paintCompass(&p);
-	p.end();
 }
 
 #ifndef QMAKEBUILD

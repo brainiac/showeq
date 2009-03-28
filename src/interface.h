@@ -155,9 +155,9 @@ public slots:
 	void saveSelectedSpawnPath();
 	void saveSpawnPaths();
 	void saveSpawnPath(Q3TextStream& out, const Item* item);
-	void toggle_log_AllPackets();
-	void toggle_log_WorldData();
-	void toggle_log_ZoneData();
+	void toggleLogAllPackets();
+	void toggleLogWorldData();
+	void toggleLogZoneData();
 	void toggle_opt_BazaarData();
 	void toggle_log_UnknownData();
 	void toggle_log_RawData();
@@ -174,15 +174,15 @@ public slots:
 	void dumpSpellBook();
 	void dumpGroup();
 	void dumpGuild();
-	void launch_editor_filters();
-	void launch_editor_zoneFilters();
+	void launchFilterEditor();
+	void launchZoneFilterEditor();
 	void toggleAutoDetectPlayerSettings(int id);
 	void SetDefaultCharacterClass(int id);
 	void SetDefaultCharacterRace(int id);
 	void SetDefaultCharacterLevel(int id);
 
 	void togglePlayerStat(QAction*);
-	void toggle_view_SkillWin(QAction*);
+	void togglePlayerSkill(QAction*);
 	void toggleSpawnListCol(QAction*);
 
 	void toggleWindowDocked(QAction*);
@@ -192,11 +192,11 @@ public slots:
 	void toggle_log_Filter_ZoneData_Server();
 
 	void selectTheme(int id);
-	void toggle_opcode_monitoring(int id);
+	void toggleOpcodeMonitoring(int id);
 	void set_opcode_monitored_list();
 	void toggle_opcode_view(int id);
 	void toggle_opcode_log(int id);
-	void select_opcode_file(void);
+	void select_opcode_file();
 	void toggle_net_session_tracking();
 	void toggle_net_real_time_thread(int id);
 	void set_net_monitor_next_client();
@@ -238,7 +238,6 @@ private slots:
 	void togglePlayerSkills();
 	void toggleNetDiag();
 	void toggleGuildList();
-
 
 	void toggle_opt_Fast();
 	void toggle_opt_ConSelect();
@@ -323,12 +322,7 @@ protected:
 	void removeWindowMenu(SEQWindow* window);
 	void setDockEnabled(SEQWindow* dw, bool enable);
 
-public:
-	Player* m_player;
-	MapMgr* mapMgr() { return m_mapMgr; }
-
 protected:
-
 	enum {
 		menuSpawnList = 0,
 		menuPlayerStats = 1,
@@ -373,6 +367,7 @@ private:
 	FilteredSpawnLog* m_filteredSpawnLog;
 	FilterNotifications* m_filterNotifications;
 	SpawnLog *m_spawnLogger;
+	Player* m_player;
 
 	PacketLog* m_globalLog;
 	PacketStreamLog* m_worldLog;
@@ -382,6 +377,27 @@ private:
 	OPCodeMonitorPacketLog* m_opcodeMonitorLog;
 
 	const Item* m_selectedSpawn;
+
+	// Windows
+	SpawnListWindow* m_spawnList;
+	SpawnListWindow2* m_spawnList2;
+	SpellListWindow* m_spellList;
+	SkillListWindow* m_skillList;
+	StatListWindow* m_statList;
+	CompassFrame* m_compass;
+	MessageWindow* m_messageWindow[maxNumMessageWindows];
+	MapFrame*  m_map[maxNumMaps];
+	ExperienceWindow* m_expWindow;
+	CombatWindow* m_combatWindow;
+	NetDiag* m_netDiag;
+	MessageFilterDialog* m_messageFilterDialog;
+	GuildListWindow* m_guildListWindow;
+
+	QString m_ipstr[5];
+	QString m_macstr[5];
+
+	Q3IntDict<QString> m_formattedMessageStrings;
+
 
 	// Menu Pieces
 	QMenu* m_netMenu;
@@ -405,52 +421,6 @@ private:
 	Q3PtrDict<int> m_windowsMenus;
 	QMenu* m_filterZoneDataMenu;
 
-	// Windows
-	SpawnListWindow* m_spawnList;
-	SpawnListWindow2* m_spawnList2;
-	SpellListWindow* m_spellList;
-	SkillListWindow* m_skillList;
-	StatListWindow* m_statList;
-	CompassFrame* m_compass;
-	MessageWindow* m_messageWindow[maxNumMessageWindows];
-	MapFrame*  m_map[maxNumMaps];
-	ExperienceWindow* m_expWindow;
-	CombatWindow* m_combatWindow;
-	NetDiag* m_netDiag;
-	MessageFilterDialog* m_messageFilterDialog;
-	GuildListWindow* m_guildListWindow;
-
-	QLabel* m_stsbarSpawns;
-	QLabel* m_stsbarStatus;
-	QLabel* m_stsbarZone;
-	QLabel* m_stsbarID;
-	QLabel* m_stsbarExp;
-	QLabel* m_stsbarExpAA;
-	QLabel* m_stsbarPkt;
-	QLabel* m_stsbarEQTime;
-	QLabel* m_stsbarSpeed;
-	// ZEM code
-	QLabel* m_stsbarZEM;
-
-	QString ipstr[5];
-	QString macstr[5];
-
-	Q3IntDict<QString> m_formattedMessageStrings;
-
-	int char_ClassID[PLAYER_CLASSES];
-	int char_RaceID[PLAYER_RACES];
-	int m_id_log_AllPackets;
-	int m_id_log_WorldData;
-	int m_id_log_ZoneData;
-	int m_id_log_UnknownData;
-	int m_id_log_RawData;
-	int m_id_log_Items;
-	int m_id_log_ItemPackets;
-	int m_id_opt_BazaarData;
-	int m_id_opt_OptionsDlg;
-	int m_id_opt_Fast;
-	int m_id_opt_ResetMana;
-
 	// View Menu Actions
 	QAction* m_viewExpWindow;
 	QAction* m_viewCombatWindow;
@@ -471,6 +441,20 @@ private:
 	QAction* m_playerSkillsMenuAction;
 	QAction* m_playerSkillsLanguages;
 
+	int char_ClassID[PLAYER_CLASSES];
+	int char_RaceID[PLAYER_RACES];
+	int m_id_log_AllPackets;
+	int m_id_log_WorldData;
+	int m_id_log_ZoneData;
+	int m_id_log_UnknownData;
+	int m_id_log_RawData;
+	int m_id_log_Items;
+	int m_id_log_ItemPackets;
+	int m_id_opt_BazaarData;
+	int m_id_opt_OptionsDlg;
+	int m_id_opt_Fast;
+	int m_id_opt_ResetMana;
+
 	int m_id_view_UnknownData;
 	int m_id_opt_ConSelect;
 	int m_id_opt_TarSelect;
@@ -487,6 +471,22 @@ private:
 
 	MenuIDList IDList_StyleMenu;
 
+	// Status bar pieces
+	QLabel* m_stsbarSpawns;
+	QLabel* m_stsbarStatus;
+	QLabel* m_stsbarZone;
+	QLabel* m_stsbarID;
+	QLabel* m_stsbarExp;
+	QLabel* m_stsbarExpAA;
+	QLabel* m_stsbarPkt;
+	QLabel* m_stsbarEQTime;
+	QLabel* m_stsbarSpeed;
+	// ZEM code
+	QLabel* m_stsbarZEM;
+
+
+
+	// ===================================================
 	QStringList m_StringList;
 	QDialog *dialogbox;
 
@@ -509,13 +509,32 @@ private:
 	QWidget* m_filler;
 
 private:
+	// create interface widgets
+	void setupExperienceWindow();
+	void setupCombatWindow();
+	void createInterfaceWidgets();
+
+	// create logs
+	void createLogs();
+
 	// menu items
 	void createFileMenu();
 	void createViewMenu();
 	void createOptionsMenu();
+	void createNetworkMenu();
+	void createCharacterMenu();
+	void createFiltersMenu();
+	void createInterfaceMenu();
+	void createWindowMenu();
+	void createDebugMenu();
 
-	void setupExperienceWindow();
-	void setupCombatWindow();
+	// status bar
+	void createStatusBar();
+
+	// connect packet signals
+	void connectSignals();
+
+	bool m_creating;	// true if we're creating the interface
 };
 
 #endif // EQINT_H

@@ -20,8 +20,8 @@ CompassFrame::CompassFrame(Player* player, QWidget* parent, const char* name)
 {
 	// create compass widget
 	m_compass = new Compass (this, "compass");
-	m_compass->setFixedWidth(120);
-	m_compass->setFixedHeight(120);
+	m_compass->setFixedWidth(125);
+	m_compass->setFixedHeight(125);
 
 	// Create the x: label
 	QLabel *labelx = new QLabel(showeq_params->retarded_coords ? "E/W:" : "X:");
