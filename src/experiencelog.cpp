@@ -144,7 +144,7 @@ ExperienceWindow::~ExperienceWindow()
 ExperienceWindow::ExperienceWindow(const DataLocationMgr* dataLocMgr,
 		Player* player, GroupMgr* groupMgr, ZoneMgr* zoneMgr,
 		QWidget* parent, const char* name)
-  : SEQWindow("Experience", "ShowEQ - Experience", parent, name),
+  : SEQWindow("Experience", "ShowEQ - Experience", parent, name, Qt::Tool | Qt::WindowTitleHint),
 	m_dataLocMgr(dataLocMgr),
 	m_player(player),
 	m_group(groupMgr),
@@ -156,7 +156,7 @@ ExperienceWindow::ExperienceWindow(const DataLocationMgr* dataLocMgr,
 
 	m_ratio = 1;
 	m_timeframe = 0;
-	m_calcZEM=0;
+	m_calcZEM = 0;
 	m_ZEMviewtype = 0;
 
 	m_view_menu = new Q3PopupMenu(this);

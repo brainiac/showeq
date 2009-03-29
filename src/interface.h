@@ -186,7 +186,7 @@ public slots:
 	void toggleSpawnListCol(QAction*);
 
 	void toggleWindowDocked(QAction*);
-	void toggleWindowDockable(int);
+	void toggleWindowDockable(QAction*);
 
 	void toggle_log_Filter_ZoneData_Client();
 	void toggle_log_Filter_ZoneData_Server();
@@ -323,7 +323,9 @@ protected:
 	void setDockEnabled(SEQWindow* dw, bool enable);
 
 protected:
-	enum {
+
+	// window Id enumeration
+	enum WindowId {
 		menuSpawnList = 0,
 		menuPlayerStats = 1,
 		menuPlayerSkills = 2,
@@ -331,17 +333,14 @@ protected:
 		menuCompass = 4,
 		menuSpawnPointList = 5,
 		menuSpawnList2 = 6,
-
-		// This is the base number where the map dock options appear in the Docked menu
+		menuExperienceWindow = 7,
+		menuCombatWindow = 8,
+		menuGuildList = 9,
+		menuNetDiag = 10,
 		mapDockBase = 11,
-
-		// This is the base number where the map caption options appear in the Window caption menu
 		mapCaptionBase = 11,
-
-		// This is the base number where the message window dock options appear in the Docked menu
 		messageWindowDockBase = 16,
 	};
-
 
 private:
 	DataLocationMgr* m_dataLocationMgr;

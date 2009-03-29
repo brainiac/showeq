@@ -36,9 +36,7 @@ public:
 
 	virtual void dock();
 	virtual void undock();
-	//virtual void setDockEnabled(bool);
-	virtual void setDockEnabled(bool enabled);
-	virtual void removeDockingFeatures();
+	virtual void setDockable(bool enabled);
 
 public slots:
 	virtual void setCaption(const QString&);

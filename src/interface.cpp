@@ -416,7 +416,7 @@ void EQInterface::createInterfaceWidgets()
 		// construct the preference name
 		tmpPrefName = QString("ShowMap") + tmpPrefSuffix;
 
-		// and as appropriate, craete the map
+		// and as appropriate, create the map
 		if (pSEQPrefs->getPrefBool(tmpPrefName, "Interface", (i == 0)))
 			showMap(i);
 	}
@@ -846,8 +846,6 @@ void EQInterface::createViewMenu()
 	 */
 
 	QAction* action = NULL;
-	int x = 0;
-
 	m_dockedWinMenu = new QMenu("&Docked", this);
 
 	action = new QAction("Spawn &List", this);
@@ -914,90 +912,113 @@ void EQInterface::createViewMenu()
 	/*
 	 * Create Menu Entries for Docked Windows
 	 */
-	m_dockableWinMenu = new Q3PopupMenu;
-	viewMenu->insertItem( "&Dockable", m_dockableWinMenu);
-	m_dockableWinMenu->setCheckable(true);
+	m_dockableWinMenu = new QMenu("&Dockable", this);
 
-	x = m_dockableWinMenu->insertItem("Spawn &List");
-	m_dockableWinMenu->setItemParameter(x, 0);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpawnList", section, true));
+	action = new QAction("Spawn &List", this);
+	action->setCheckable(true);
+	action->setData(menuSpawnList);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableSpawnList", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("Spawn &List 2");
-	m_dockableWinMenu->setItemParameter(x, 6);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpawnList2", section, true));
+	action = new QAction("Spawn List &2", this);
+	action->setCheckable(true);
+	action->setData(menuSpawnList2);
+	action->setChecked(pSEQPrefs->getPrefBool("DockablSspawnList2", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("Spawn P&oint List");
-	m_dockableWinMenu->setItemParameter(x, 5);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpawnPointList", section, true));
+	action = new QAction("Spawn P&oint List", this);
+	action->setCheckable(true);
+	action->setData(menuSpawnPointList);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableSpawnPointList", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("&Player Stats");
-	m_dockableWinMenu->setItemParameter(x, 1);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockablePlayerStats", section, true));
+	action = new QAction("&Player Stats", this);
+	action->setCheckable(true);
+	action->setData(menuPlayerStats);
+	action->setChecked(pSEQPrefs->getPrefBool("DockablePlayerStats", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("Player &Skills");
-	m_dockableWinMenu->setItemParameter(x, 2);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockablePlayerSkills", section, true));
+	action = new QAction("Player &Skills", this);
+	action->setCheckable(true);
+	action->setData(menuPlayerSkills);
+	action->setChecked(pSEQPrefs->getPrefBool("DockablePlayerSkills", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("Sp&ell List");
-	m_dockableWinMenu->setItemParameter(x, 3);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableSpellList", section, true));
+	action = new QAction("Sp&ell List", this);
+	action->setCheckable(true);
+	action->setData(menuSpellList);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableSpellList", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("&Compass");
-	m_dockableWinMenu->setItemParameter(x, 4);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableCompass", section, true));
+	action = new QAction("&Compass", this);
+	action->setCheckable(true);
+	action->setData(menuCompass);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableCompass", "Interface", true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("E&xperience Window");
-	m_dockableWinMenu->setItemParameter(x, 7);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
+	action = new QAction("E&xperience Window", this);
+	action->setCheckable(true);
+	action->setData(menuExperienceWindow);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("Com&bat Window");
-	m_dockableWinMenu->setItemParameter(x, 8);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
+	action = new QAction("Com&bat Window", this);
+	action->setCheckable(true);
+	action->setData(menuCombatWindow);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("&Guild List");
-	m_dockableWinMenu->setItemParameter(x, 9);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableGuildListWindow", section, true));
+	action = new QAction("&Guild List", this);
+	action->setCheckable(true);
+	action->setData(menuCombatWindow);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableGuildListWindow", section, true));
+	m_dockableWinMenu->addAction(action);
 
-	x = m_dockableWinMenu->insertItem("&Net Diag");
-	m_dockableWinMenu->setItemParameter(x, 10);
-	m_dockableWinMenu->setItemChecked(x, pSEQPrefs->getPrefBool("DockableNetDiag", section, true));
+	action = new QAction("&Net Diagnostics", this);
+	action->setCheckable(true);
+	action->setData(menuNetDiag);
+	action->setChecked(pSEQPrefs->getPrefBool("DockableNetDiag", section, true));
+	m_dockableWinMenu->addAction(action);
 
 	// insert Map docking options
-	subMenu = new Q3PopupMenu;
+	subMenu = new QMenu("M&aps", this);
 	for (int i = 0; i < maxNumMaps; i++)
 	{
-        QString mapName = "Map ";
+        QString mapName = "Map &";
 		QString mapPrefName = "Map";
         if (i > 0)
 		{
             mapName += QString::number(i + 1);
 			mapPrefName + QString::number(i + 1);
 		}
-        x = subMenu->insertItem(mapName);
-        subMenu->setItemParameter(x, i + mapDockBase);
-		subMenu->setItemChecked(x, pSEQPrefs->getPrefBool(QString("Dockable") + mapName, section, true));
+        action = new QAction(mapName, this);
+        action->setCheckable(true);
+        action->setData(i + mapDockBase);
+        action->setChecked(pSEQPrefs->getPrefBool(QString("Dockable") + mapPrefName, section, true));
+        subMenu->addAction(action);
 	}
-	connect (subMenu, SIGNAL(activated(int)), this, SLOT(toggleWindowDockable(int)));
-	m_dockableWinMenu->insertItem("Maps", subMenu);
+	m_dockableWinMenu->addMenu(subMenu);
 
 	// insert Message Window docking options
-	subMenu = new Q3PopupMenu;
+	subMenu = new QMenu("Channel Messages", this);
 	QString messagePrefName = "DockableMessageWindow";
 	for (int i = 0; i < maxNumMessageWindows; i++)
 	{
-        QString messageWindowName = "Channel Messages ";
+        QString messageWindowName = "Channel Messages &";
 		if (i > 0)
 			messageWindowName += QString::number(i + 1);
-        x = subMenu->insertItem(messageWindowName);
-        subMenu->setItemParameter(x, i + messageWindowDockBase);
-		subMenu->setItemChecked(x, pSEQPrefs->getPrefBool(messagePrefName + QString::number(i), section, false));
-	}
-	connect (subMenu, SIGNAL(activated(int)), this, SLOT(toggleWindowDockable(int)));
-	m_dockableWinMenu->insertItem("Channel Messages", subMenu);
 
-	connect (m_dockableWinMenu, SIGNAL(activated(int)), this, SLOT(toggleWindowDockable(int)));
+		action = new QAction(messageWindowName, this);
+		action->setCheckable(true);
+		action->setData(i + messageWindowDockBase);
+		action->setChecked(pSEQPrefs->getPrefBool(messagePrefName + QString::number(i), section, false));
+		subMenu->addAction(action);
+	}
+	m_dockableWinMenu->addMenu(subMenu);
+	connect (m_dockableWinMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleWindowDockable(QAction*)));
 
 	// view menu checks are set by init_view_menu
+	viewMenu->addMenu(m_dockableWinMenu);
 	connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(updateViewMenu()));
 }
 
@@ -2348,100 +2369,84 @@ void EQInterface::toggleWindowDocked(QAction* action)
 	}
 }
 
-void EQInterface::toggleWindowDockable(int id)
+void EQInterface::toggleWindowDockable(QAction* action)
 {
-	SEQWindow* widget = NULL;
-	int winnum;
-	QString preference;
-
 	// get the window number parameter
-	winnum = m_dockableWinMenu->itemParameter(id);
-
-	// get the current menu item state
-	bool dockable = !m_dockableWinMenu->isItemChecked(id);
+	int winnum = action->data().toInt();
+	bool dockable = action->isChecked();
 
 	// flip the menu item state
-	m_dockableWinMenu->setItemChecked(id, dockable);
+	SEQWindow* widget = NULL;
+	QString preference;
 
-	switch(winnum)
+	switch (winnum)
 	{
-		case 0: // Spawn List
+		case menuSpawnList:
 			widget = m_spawnList;
-
-			// preference
 			preference = "DockableSpawnList";
 			break;
-		case 1: // Player Stats
-			widget = m_statList;
 
-			// preference
+		case menuPlayerStats:
+			widget = m_statList;
 			preference = "DockablePlayerStats";
 			break;
-		case 2: // Player Skills
-			widget = m_skillList;
 
-			// preference
+		case menuPlayerSkills:
+			widget = m_skillList;
 			preference = "DockablePlayerSkills";
 			break;
-		case 3: // Spell List
-			widget = m_spellList;
 
-			// preference
+		case menuSpellList:
+			widget = m_spellList;
 			preference = "DockableSpellList";
 			break;
-		case 4: // Compass
-			widget = m_compass;
 
-			// preference
+		case menuCompass:
+			widget = m_compass;
 			preference = "DockableCompass";
 			break;
-		case 5: // Spawn Point List
-			widget = m_spawnPointList;
 
-			// preference
+		case menuSpawnPointList:
+			widget = m_spawnPointList;
 			preference = "DockableSpawnPointList";
 			break;
-		case 6: // Spawn List 2
-			widget = m_spawnList2;
 
-			// preference
+		case menuSpawnList2:
+			widget = m_spawnList2;
 			preference = "DockableSpawnList2";
 			break;
-		case 7: // Experience Window
-			widget = m_expWindow;
 
+		case menuExperienceWindow:
+			widget = m_expWindow;
 			preference = "DockableExperienceWindow";
 			break;
-		case 8: // Combat Window
-			widget = m_combatWindow;
 
+		case menuCombatWindow:
+			widget = m_combatWindow;
 			preference = "DockableCombatWindow";
 			break;
-		case 9: // Guild List Window
-			widget = m_guildListWindow;
 
+		case menuGuildList:
+			widget = m_guildListWindow;
 			preference = "DockableGuildListWindow";
 			break;
-		case 10: // NetDiag
-			widget = m_netDiag;
 
+		case menuNetDiag:
+			widget = m_netDiag;
 			preference = "DockableNetDiag";
 			break;
+
 		default:
 			// use default for maps since the number of them can be changed via a
 			// constant (maxNumMaps)
 			if ((winnum >= mapDockBase) && (winnum < (mapDockBase + maxNumMaps)))
 			{
 				int i = winnum - mapDockBase;
-
-				// reparent teh appropriate map
 				widget = m_map[i];
 
 				QString tmpPrefSuffix = "";
 				if (i > 0)
 					tmpPrefSuffix = QString::number(i + 1);
-
-				// preference
 				preference = "DockableMap" + tmpPrefSuffix;
 			}
 			else if ((winnum >= messageWindowDockBase) &&
@@ -2458,7 +2463,6 @@ void EQInterface::toggleWindowDockable(int id)
 				// preference
 				preference = "DockableMessageWindow" + tmpPrefSuffix;
 			}
-
 			break;
     };
 
@@ -2467,7 +2471,11 @@ void EQInterface::toggleWindowDockable(int id)
 
 	// attempt to undock the window
 	if (widget)
-		widget->setDockEnabled(dockable);
+	{
+		widget->setDockable(dockable);
+		if (!dockable)
+			widget->undock();
+	}
 }
 
 void EQInterface::set_main_WindowCaption(int id)
@@ -2552,11 +2560,8 @@ void EQInterface::set_main_WindowCaption(int id)
 	if (widget != 0)
 	{
 		bool ok = false;
-		QString caption =
-		QInputDialog::getText("ShowEQ " + window + "Caption",
-							  "Enter caption for the " + window + ":",
-							  QLineEdit::Normal, widget->caption(),
-							  &ok, this);
+		QString caption = QInputDialog::getText("ShowEQ " + window + "Caption",
+				"Enter caption for the " + window + ":", QLineEdit::Normal, widget->caption(), &ok, this);
 
 		// if the user entered a caption and clicked ok, set the windows caption
 		if (ok)
@@ -4710,8 +4715,6 @@ void EQInterface::updateViewMenu()
 	m_viewExpWindow->setChecked((m_expWindow != NULL) && m_expWindow->isVisible());
 	m_viewCombatWindow->setChecked((m_combatWindow != NULL) && m_combatWindow->isVisible());
 
-	// need to check for 0 before checking if is visible for dynamically
-	// created windows
 	m_viewPlayerSkills->setChecked((m_skillList != NULL) && m_skillList->isVisible());
 	m_viewPlayerStats->setChecked((m_statList != NULL) && m_statList->isVisible());
 	m_viewSpawnList->setChecked((m_spawnList != NULL) && m_spawnList->isVisible());
@@ -5144,7 +5147,7 @@ void EQInterface::showMap(int i)
 		}
 
 		m_map[i] = new MapFrame(m_filterMgr, m_mapMgr, m_player, m_spawnShell, m_zoneMgr,
-								m_spawnMonitor, mapPrefName, mapCaption, mapName, 0);
+								m_spawnMonitor, mapPrefName, mapCaption, mapName, this);
 
 		if (i != 0)
 		{
@@ -5154,8 +5157,11 @@ void EQInterface::showMap(int i)
 
 			if (!m_isMapDocked[i])
 				m_map[i]->undock();
-		} else {
-			m_map[i]->removeDockingFeatures();
+		}
+		else
+		{
+			m_map[i]->setFeatures(QDockWidget::NoDockWidgetFeatures);
+			m_map[i]->setTitleBarWidget(new QWidget());
 			setCentralWidget(m_map[i]);
 		}
 		connect(this, SIGNAL(saveAllPrefs()), m_map[i], SLOT(savePrefs()));
@@ -5181,7 +5187,8 @@ void EQInterface::showMap(int i)
 	}
 
 	// make sure it's visible
-	m_map[i]->show();
+	if (!m_creating)
+		m_map[i]->show();
 }
 
 void EQInterface::showMessageWindow(int i)
@@ -5200,7 +5207,7 @@ void EQInterface::showMessageWindow(int i)
 		if (i != 0)
 			caption += QString::number(winNum);
 
-		m_messageWindow[i] = new MessageWindow(m_messages, m_messageFilters, prefName, caption, 0, name);
+		m_messageWindow[i] = new MessageWindow(m_messages, m_messageFilters, prefName, caption, this, name);
 
 		setDockEnabled(m_messageWindow[i], pSEQPrefs->getPrefBool(QString("Dockable") + prefName, "Interface", false));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_messageWindow[i]->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5223,7 +5230,8 @@ void EQInterface::showMessageWindow(int i)
 	}
 
 	// make sure it's visible
-	m_messageWindow[i]->show();
+	if (!m_creating)
+		m_messageWindow[i]->show();
 }
 
 void EQInterface::showSpawnList()
@@ -5231,7 +5239,7 @@ void EQInterface::showSpawnList()
 	// if it doesn't exist, create it.
 	if (m_spawnList == NULL)
 	{
-		m_spawnList = new SpawnListWindow (m_player, m_spawnShell, m_categoryMgr, 0, "spawnlist");
+		m_spawnList = new SpawnListWindow (m_player, m_spawnShell, m_categoryMgr, this, "spawnlist");
 
 		setDockEnabled(m_spawnList, pSEQPrefs->getPrefBool("DockableSpawnList", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnList->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5261,7 +5269,8 @@ void EQInterface::showSpawnList()
 	}
 
 	// make sure it's visible
-	m_spawnList->show();
+	if (!m_creating)
+		m_spawnList->show();
 }
 
 void EQInterface::showSpawnList2()
@@ -5269,7 +5278,7 @@ void EQInterface::showSpawnList2()
 	// if it doesn't exist, create it.
 	if (m_spawnList2 == NULL)
 	{
-		m_spawnList2 = new SpawnListWindow2(m_player, m_spawnShell, m_categoryMgr, 0, "spawnlist");
+		m_spawnList2 = new SpawnListWindow2(m_player, m_spawnShell, m_categoryMgr, this, "spawnlist");
 
 		setDockEnabled(m_spawnList2, pSEQPrefs->getPrefBool("DockableSpawnList2", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnList2->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5299,15 +5308,16 @@ void EQInterface::showSpawnList2()
 	}
 
 	// make sure it's visible
-	m_spawnList2->show();
+	if (!m_creating)
+		m_spawnList2->show();
 }
 
 void EQInterface::showSpawnPointList()
 {
 	// if it doesn't exist, create it.
-	if (m_spawnPointList == 0)
+	if (m_spawnPointList == NULL)
 	{
-		m_spawnPointList = new SpawnPointWindow(m_spawnMonitor, 0, "spawnlist");
+		m_spawnPointList = new SpawnPointWindow(m_spawnMonitor, this, "spawnlist");
 
 		setDockEnabled(m_spawnPointList, pSEQPrefs->getPrefBool("DockableSpawnPointList", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnPointList->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5333,7 +5343,8 @@ void EQInterface::showSpawnPointList()
 	}
 
 	// make sure it's visible
-	m_spawnPointList->show();
+	if (!m_creating)
+		m_spawnPointList->show();
 }
 
 void EQInterface::showStatList()
@@ -5341,7 +5352,7 @@ void EQInterface::showStatList()
 	// if it doesn't exist, create it
 	if (m_statList == NULL)
 	{
-		m_statList = new StatListWindow(m_player, 0, "stats");
+		m_statList = new StatListWindow(m_player, this, "stats");
 
 		setDockEnabled(m_statList, pSEQPrefs->getPrefBool("DockablePlayerStats", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_statList->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5367,15 +5378,16 @@ void EQInterface::showStatList()
 	}
 
 	// make sure it's visible
-	m_statList->show();
+	if (!m_creating)
+		m_statList->show();
 }
 
 void EQInterface::showSkillList()
 {
 	// if it doesn't exist, create it
-	if (m_skillList == 0)
+	if (m_skillList == NULL)
 	{
-		m_skillList = new SkillListWindow(m_player, 0, "skills");
+		m_skillList = new SkillListWindow(m_player, this, "skills");
 
 		setDockEnabled(m_skillList, pSEQPrefs->getPrefBool("DockablePlayerSkills", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_skillList->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5401,13 +5413,14 @@ void EQInterface::showSkillList()
 	}
 
 	// make sure it's visible
-	m_skillList->show();
+	if (!m_creating)
+		m_skillList->show();
 }
 
 void EQInterface::showSpellList()
 {
 	// if it doesn't exist, create it
-	if (m_spellList == 0)
+	if (m_spellList == NULL)
 	{
 		m_spellList = new SpellListWindow(m_spellShell, this, "spelllist");
 
@@ -5441,7 +5454,8 @@ void EQInterface::showSpellList()
 	}
 
 	// make sure it's visible
-	m_spellList->show();
+	if (!m_creating)
+		m_spellList->show();
 }
 
 void EQInterface::showCompass()
@@ -5449,7 +5463,7 @@ void EQInterface::showCompass()
 	// if it doesn't exist, create it.
 	if (m_compass == 0)
 	{
-		m_compass = new CompassFrame(m_player, 0, "compass");
+		m_compass = new CompassFrame(m_player, this, "compass");
 
 		setDockEnabled(m_compass, pSEQPrefs->getPrefBool("DockableCompass", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_compass->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5474,14 +5488,15 @@ void EQInterface::showCompass()
 	}
 
 	// make sure it's visible
-	m_compass->show();
+	if (!m_creating)
+		m_compass->show();
 }
 
 void EQInterface::showNetDiag()
 {
 	if (m_netDiag == 0)
 	{
-		m_netDiag = new NetDiag(m_packet, 0, "NetDiag");
+		m_netDiag = new NetDiag(m_packet, this, "NetDiag");
 
 		setDockEnabled(m_netDiag, pSEQPrefs->getPrefBool("DockableNetDiag", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_netDiag->preferenceName(), Qt::BottomDockWidgetArea);
@@ -5503,14 +5518,15 @@ void EQInterface::showNetDiag()
 	}
 
 	// make sure it's visible
-	m_netDiag->show();
+	if (!m_creating)
+		m_netDiag->show();
 }
 
 void EQInterface::showGuildList()
 {
 	if (!m_guildListWindow)
 	{
-		m_guildListWindow = new GuildListWindow(m_player, m_guildShell, 0, "GuildList");
+		m_guildListWindow = new GuildListWindow(m_player, m_guildShell, this, "GuildList");
 
 		setDockEnabled(m_guildListWindow, pSEQPrefs->getPrefBool("DockableGuildListWindow", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_guildListWindow->preferenceName(), Qt::BottomDockWidgetArea);
@@ -5532,7 +5548,8 @@ void EQInterface::showGuildList()
 	}
 
 	// make sure it's visible
-	m_guildListWindow->show();
+	if (!m_creating)
+		m_guildListWindow->show();
 }
 
 void EQInterface::createFilteredSpawnLog()
@@ -5684,7 +5701,6 @@ void EQInterface::createOPCodeMonitorLog(const QString& opCodeList)
 			m_opcodeMonitorLog, SLOT(packet(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
 }
 
-
 void EQInterface::insertWindowMenu(SEQWindow* window)
 {
 	QMenu* menu = window->menu();
@@ -5715,31 +5731,30 @@ void EQInterface::removeWindowMenu(SEQWindow* window)
 
 void EQInterface::setDockEnabled(SEQWindow* dw, bool enable)
 {
-	dw->setDockEnabled(enable);
+	dw->setDockable(enable);
 }
 
 void EQInterface::setupExperienceWindow()
 {
-	QString section = "Interface";
-
 	// Initialize the experience window;
-	m_expWindow = new ExperienceWindow(m_dataLocationMgr, m_player, m_groupMgr, m_zoneMgr);
+	m_expWindow = new ExperienceWindow(m_dataLocationMgr, m_player, m_groupMgr, m_zoneMgr, this, "ExperienceWindow");
 
-	setDockEnabled(m_expWindow, pSEQPrefs->getPrefBool("DockableExperienceWindow", section, false));
-	Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_expWindow->preferenceName(), Qt::NoDockWidgetArea);
+	setDockEnabled(m_expWindow, pSEQPrefs->getPrefBool("DockableExperienceWindow", "Interface", false));
+	//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_expWindow->preferenceName(), Qt::NoDockWidgetArea);
+	Qt::DockWidgetArea edge = Qt::BottomDockWidgetArea;
 	addDockWidget(edge, m_expWindow);
 
-	//m_expWindow->undock();
+	m_expWindow->undock();
 	m_expWindow->restoreSize();
 
 	// move window to new position
-	if (pSEQPrefs->getPrefBool("UseWindowPos", section, true))
+	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
 		m_expWindow->restorePosition();
 
-	if (pSEQPrefs->getPrefBool("ShowExpWindow", section, false))
-		m_expWindow->show();
+	//if (pSEQPrefs->getPrefBool("ShowExpWindow", "Interface", false))
+	//		m_expWindow->show();
 
-    // insert its menu into the window menu
+	// insert its menu into the window menu
 	insertWindowMenu(m_expWindow);
 }
 
@@ -5748,21 +5763,22 @@ void EQInterface::setupCombatWindow()
 	QString section = "Interface";
 
 	// Initialize the combat window
-	m_combatWindow = new CombatWindow(m_player);
+	m_combatWindow = new CombatWindow(m_player, this, "CombatWindow");
 
-	m_combatWindow->setDockEnabled(pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
-	Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_combatWindow->preferenceName(), Qt::NoDockWidgetArea);
+	m_combatWindow->setDockable(pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
+	//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_combatWindow->preferenceName(), Qt::NoDockWidgetArea);
+	Qt::DockWidgetArea edge = Qt::TopDockWidgetArea;
 	addDockWidget(edge, m_combatWindow);
 
-	//m_combatWindow->undock();
-
+	m_combatWindow->undock();
 	m_combatWindow->restoreSize();
+
 	// move window to new position
 	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
 		m_combatWindow->restorePosition();
 
-	if (pSEQPrefs->getPrefBool("ShowCombatWindow", section, false))
-		m_combatWindow->show();
+	//if (pSEQPrefs->getPrefBool("ShowCombatWindow", section, false))
+	//	m_combatWindow->show();
 
     // insert its menu into the window menu
 	insertWindowMenu(m_combatWindow);

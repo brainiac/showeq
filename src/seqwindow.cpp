@@ -58,28 +58,29 @@ void SEQWindow::undock()
 	setFloating(true);
 }
 
-void SEQWindow::setDockEnabled(bool enabled)
+void SEQWindow::setDockable(bool enabled)
 {
 	if (enabled)
+	{
 		setAllowedAreas(Qt::AllDockWidgetAreas);
+	}
 	else
+	{
 		setAllowedAreas(Qt::NoDockWidgetArea);
-}
-
-void SEQWindow::removeDockingFeatures()
-{
-//	setFeatures(QDockWidget::NoDockWidgetFeatures);
-//	setTitleBarWidget(new QWidget());
+		undock();
+	}
+	restoreSize();
 }
 
 void SEQWindow::setCaption(const QString& text)
 {
 	// set the caption
 	//Q3DockWindow::setCaption(text);
-	setName((const char*)caption());
+	//setName((const char*)caption());
+	setWindowTitle(text);
 
 	// set the preference
-	pSEQPrefs->setPrefString("Caption", preferenceName(), caption());
+	pSEQPrefs->setPrefString("Caption", preferenceName(), text);
 }
 
 void SEQWindow::setWindowFont(const QFont& font)
@@ -107,7 +108,7 @@ void SEQWindow::restoreSize()
 	// TODO: FIXME
 	if (!isFloating())
 	{
-		//QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), fixedExtent());
+		QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), size());
 		////setFixedExtentWidth(s.width());
 		//setFixedExtentHeight(s.height());
 	}
@@ -128,12 +129,7 @@ void SEQWindow::restoreSize()
 void SEQWindow::restorePosition()
 {
 	// TODO: FIXME
-	if (!isFloating())
-	{
-		//setNewLine(pSEQPrefs->getPrefBool("DockNewLine", preferenceName(), newLine()));
-		//setOffset(pSEQPrefs->getPrefInt("DockOffset", preferenceName(), offset()));
-	}
-	else
+	if (isFloating())
 	{
 		// retrieve the saved position information
 		QPoint p = pSEQPrefs->getPrefPoint("WindowPos", preferenceName(), pos());
@@ -148,12 +144,9 @@ void SEQWindow::savePrefs()
 	if (pSEQPrefs->getPrefBool("SavePosition", "Interface", true))
 	{
 		// TODO: FIXME
-#if 0
-		if (place() == InDock)
+		if (!isFloating())
 		{
-			pSEQPrefs->setPrefBool("DockNewLine", preferenceName(), newLine());
-			pSEQPrefs->setPrefInt("DockOffset", preferenceName(), offset());
-			pSEQPrefs->setPrefSize("DockFixedExtent", preferenceName(), fixedExtent());
+			pSEQPrefs->setPrefSize("DockFixedExtent", preferenceName(), size());
 		}
 		else
 		{
@@ -161,7 +154,6 @@ void SEQWindow::savePrefs()
 			pSEQPrefs->setPrefSize("WindowSize", preferenceName(), size());
 			pSEQPrefs->setPrefPoint("WindowPos", preferenceName(), pos());
 		}
-#endif
 		pSEQPrefs->setPrefBool("DockVisible", preferenceName(), !isHidden());
 	}
 }
