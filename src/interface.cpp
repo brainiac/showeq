@@ -907,8 +907,6 @@ void EQInterface::createViewMenu()
 	connect(m_dockedWinMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleWindowDocked(QAction*)));
 
 
-
-
 	/*
 	 * Create Menu Entries for Docked Windows
 	 */
@@ -1024,107 +1022,190 @@ void EQInterface::createViewMenu()
 
 void EQInterface::createOptionsMenu()
 {
-	////////////////////////////////////////////////////////////////
-	// Options Menu
+	QMenu* optMenu = new QMenu("&Options", this);
 
-	Q3PopupMenu* pOptMenu = new Q3PopupMenu;
-	menuBar()->insertItem("&Options", pOptMenu);
-	pOptMenu->setCheckable(TRUE);
-	m_id_opt_Fast = pOptMenu->insertItem("Fast Machine?", this, SLOT(toggle_opt_Fast()));
-	m_id_opt_ConSelect = pOptMenu->insertItem("Select on Consider?", this, SLOT(toggle_opt_ConSelect()));
-	m_id_opt_TarSelect = pOptMenu->insertItem("Select on Target?", this, SLOT(toggle_opt_TarSelect()));
-	m_id_opt_KeepSelectedVisible = pOptMenu->insertItem("Keep Selected Visible?"  , this, SLOT(toggle_opt_KeepSelectedVisible()));
-	m_id_opt_LogSpawns = pOptMenu->insertItem("Log Spawns", this, SLOT(toggle_opt_LogSpawns()));
-	m_id_opt_BazaarData    = pOptMenu->insertItem("Bazaar Searches", this, SLOT(toggle_opt_BazaarData()));
-	menuBar()->setItemChecked (m_id_opt_BazaarData, (m_bazaarLog != 0));
-	m_id_opt_ResetMana = pOptMenu->insertItem("Reset Max Mana", this, SLOT(resetMaxMana()));
-	m_id_opt_PvPTeams  = pOptMenu->insertItem("PvP Teams", this, SLOT(toggle_opt_PvPTeams()));
-	m_id_opt_PvPDeity  = pOptMenu->insertItem("PvP Deity", this, SLOT(toggle_opt_PvPDeity()));
-	int x = pOptMenu->insertItem("Create Unknown Spawns", this, SLOT(toggle_opt_CreateUnknownSpawns(int)));
-	menuBar()->setItemChecked (x, showeq_params->createUnknownSpawns);
-	x = pOptMenu->insertItem("Use EQ Retarded Coordinates", this, SLOT(toggle_opt_RetardedCoords(int)));
-	menuBar()->setItemChecked (x, showeq_params->retarded_coords);
-	x = pOptMenu->insertItem("Use Unix System Time for Spawn Time", this, SLOT(toggle_opt_SystimeSpawntime(int)));
-	menuBar()->setItemChecked (x, showeq_params->systime_spawntime);
-	x = pOptMenu->insertItem("Record Spawn Walk Paths", this, SLOT(toggle_opt_WalkPathRecord(int)));
-	menuBar()->setItemChecked (x, showeq_params->walkpathrecord);
+	QAction* action = new QAction("Fast Machine", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->fast_machine);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleFastMachine(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Select on Consider", this);
+	action->setCheckable(true);
+	action->setChecked(m_selectOnConsider);
+	connect(action, SIGNAL(toggled()), this, SLOT(toggleSelectOnConsider(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Select on Target", this);
+	action->setCheckable(true);
+	action->setChecked(m_selectOnTarget);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleSelectOnTarget(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Keep Selected Visible", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->keep_selected_visible);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleKeepSelectedVisible(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Log Spawns", this);
+	action->setCheckable(true);
+	action->setChecked(m_spawnLogger != NULL);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleLogSpawns(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Log Bazaar Searches", this);
+	action->setCheckable(true);
+	action->setChecked(m_bazaarLog != NULL);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleLogBazaarData(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Reset Max Mana", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(resetMaxMana()));
+	optMenu->addAction(action);
+
+	action = new QAction("PvP Teams", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->pvp);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(togglePvPTeams(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("PvP Deity", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->deitypvp);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(togglePvPDeity(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Create Unknown Spawns", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->createUnknownSpawns);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleCreateUnknownSpawns(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Use EQ Retarded Coordinates", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->retarded_coords);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleRetardedCoords(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Use System Time for Spawn Time", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->systime_spawntime);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleSystemSpawnTime(bool)));
+	optMenu->addAction(action);
+
+	action = new QAction("Record Spawn Walk Paths", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->walkpathrecord);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleRecordWalkPaths(bool)));
+	optMenu->addAction(action);
+
 
 	{
-		QMenu* subMenu = new QMenu;
+		// TODO: Get rid of the spin box, replace it with a dialog (or a preferences window!)
+		QMenu* subMenu = new QMenu("Walk Path Length", this);;
 		QSpinBox* spinBox = new QSpinBox(0, 8192, 1, subMenu);
 
 		spinBox->setValue(showeq_params->walkpathlength);
-		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_opt_WalkPathLength(int)));
+		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(setWalkPathLength(int)));
 
 		QWidgetAction* pSpinBoxAction = new QWidgetAction(subMenu);
 		pSpinBoxAction->setDefaultWidget(spinBox);
 		subMenu->addAction(pSpinBoxAction);
-		pOptMenu->insertItem("Walk Path Length", subMenu);
+		optMenu->addMenu(subMenu);
 	}
-
-	menuBar()->setItemChecked (m_id_opt_Fast, showeq_params->fast_machine);
-	menuBar()->setItemChecked (m_id_opt_ConSelect, m_selectOnConsider);
-	menuBar()->setItemChecked (m_id_opt_TarSelect, m_selectOnTarget);
-	menuBar()->setItemChecked (m_id_opt_KeepSelectedVisible, showeq_params->keep_selected_visible);
-	menuBar()->setItemChecked (m_id_opt_LogSpawns, (m_spawnLogger != 0));
-	menuBar()->setItemChecked (m_id_opt_PvPTeams, showeq_params->pvp);
-	menuBar()->setItemChecked (m_id_opt_PvPDeity, showeq_params->deitypvp);
 
 	// SaveState SubMenu
-	Q3PopupMenu* pSaveStateMenu = new Q3PopupMenu;
-	pOptMenu->insertItem("&Save State", pSaveStateMenu);
-	pSaveStateMenu->setCheckable(true);
+	QMenu* saveStateMenu = new QMenu("&Save State", this);
 
-	x = pSaveStateMenu->insertItem("&Player", this, SLOT(toggle_opt_save_PlayerState(int)));
-	pSaveStateMenu->setItemChecked(x, showeq_params->savePlayerState);
+	action = new QAction("&Player", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->savePlayerState);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleSavePlayerState(bool)));
+	saveStateMenu->addAction(action);
 
-	x = pSaveStateMenu->insertItem("&Zone", this, SLOT(toggle_opt_save_ZoneState(int)));
-	pSaveStateMenu->setItemChecked(x, showeq_params->saveZoneState);
+	action = new QAction("&Zone", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->saveZoneState);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleSaveZoneState(bool)));
+	saveStateMenu->addAction(action);
 
-	x = pSaveStateMenu->insertItem("&Spawns", this, SLOT(toggle_opt_save_Spawns(int)));
-	pSaveStateMenu->setItemChecked(x, showeq_params->saveSpawns);
+	action = new QAction("&Spawns", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->saveSpawns);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleSaveSpawnState(bool)));
+	saveStateMenu->addAction(action);
 
-	pSaveStateMenu->insertItem("Base &Filename...", this, SLOT(set_opt_save_BaseFilename()));
-	pSaveStateMenu->insertSeparator(-1);
+	action = new QAction("Base &Filename...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(setSaveBaseFilename()));
+	saveStateMenu->addAction(action);
 
+	saveStateMenu->addSeparator();
 	{
-		QMenu* subMenu = new QMenu;
-		QSpinBox* spinBox = new QSpinBox(1, 320, 1, subMenu);
+		QMenu* subMenu = new QMenu("Spawn Save Frequency (s)", this);
 
+		QSpinBox* spinBox = new QSpinBox(1, 320, 1, subMenu);
 		spinBox->setValue(showeq_params->saveSpawnsFrequency / 1000);
-		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_opt_save_SpawnFrequency(int)));
+		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(setSpawnSaveFrequency(int)));
 
 		QWidgetAction* pSpinBoxAction = new QWidgetAction(subMenu);
 		pSpinBoxAction->setDefaultWidget(spinBox);
 		subMenu->addAction(pSpinBoxAction);
-		pSaveStateMenu->insertItem("Spawn Save Frequency (s)", subMenu);
+		saveStateMenu->addMenu(subMenu);
 	}
+	optMenu->addMenu(saveStateMenu);
 
-	pOptMenu->insertItem("Clear Channel Messages", this, SLOT(opt_clearChannelMsgs(int)));
+	action = new QAction("Clear Channel Messages", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(clearChannelMessages()));
+	optMenu->addAction(action);
 
 	// Con Color base menu
-	Q3PopupMenu* conColorBaseMenu = new Q3PopupMenu;
-	x = conColorBaseMenu->insertItem("Gray Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tGraySpawn);
-	x = conColorBaseMenu->insertItem("Green Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tGreenSpawn);
-	x = conColorBaseMenu->insertItem("Light Blue Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tCyanSpawn);
-	x = conColorBaseMenu->insertItem("Blue Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tBlueSpawn);
-	x = conColorBaseMenu->insertItem("Even Spawn...");
-	conColorBaseMenu->setItemParameter(x, tEvenSpawn);
-	x = conColorBaseMenu->insertItem("Yellow Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tYellowSpawn);
-	x = conColorBaseMenu->insertItem("Red Spawn Base...");
-	conColorBaseMenu->setItemParameter(x, tRedSpawn);
-	x = conColorBaseMenu->insertItem("Unknown Spawn...");
-	conColorBaseMenu->setItemParameter(x, tUnknownSpawn);
-	connect(conColorBaseMenu, SIGNAL(activated(int)), this, SLOT(select_opt_conColorBase(int)));
-	pOptMenu->insertItem("Con &Colors", conColorBaseMenu);
-	m_id_opt_useUpdateRadius = pOptMenu->insertItem("Use EQ's Update Radius", this, SLOT(toggle_opt_UseUpdateRadius()));
-	menuBar()->setItemChecked (m_id_opt_useUpdateRadius, showeq_params->useUpdateRadius);
+	QMenu* conColorMenu = new QMenu("Con &Colors", this);
 
+	action = new QAction("Gray Spawn Base...", this);
+	action->setData(tGraySpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Green Spawn Base...", this);
+	action->setData(tGreenSpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Light Blue Spawn Base...", this);
+	action->setData(tCyanSpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Blue Spawn Base...", this);
+	action->setData(tBlueSpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Even Spawn...", this);
+	action->setData(tEvenSpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Yellow Spawn Base...", this);
+	action->setData(tYellowSpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Red Spawn Base...", this);
+	action->setData(tRedSpawn);
+	conColorMenu->addAction(action);
+
+	action = new QAction("Unknown Spawn...", this);
+	action->setData(tUnknownSpawn);
+	conColorMenu->addAction(action);
+
+	connect(conColorMenu, SIGNAL(triggered(QAction*)), this, SLOT(selectConColorBase(QAction*)));
+	optMenu->addMenu(conColorMenu);
+
+	optMenu->addSeparator();
+
+	action = new QAction("Use EQ Update Radius", this);
+	action->setCheckable(true);
+	action->setChecked(showeq_params->useUpdateRadius);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleUseUpdateRadius(bool)));
+	optMenu->addAction(action);
+
+	menuBar()->addMenu(optMenu);
 }
 
 void EQInterface::createNetworkMenu()
@@ -1205,6 +1286,7 @@ void EQInterface::createNetworkMenu()
 
 void EQInterface::createCharacterMenu()
 {
+#if 0
 	int x;
 	QString section = "Interface";
 
@@ -1274,7 +1356,7 @@ void EQInterface::createCharacterMenu()
 			m_charRaceMenu->setItemChecked(char_RaceID[i], true);
 	}
 	connect(m_charRaceMenu, SIGNAL(activated(int)), this, SLOT(SetDefaultCharacterRace(int)));
-
+#endif
 }
 
 void EQInterface::createFiltersMenu()
@@ -3308,38 +3390,33 @@ void EQInterface::launchZoneFilterEditor()
 	ew->show();
 }
 
-void EQInterface::toggle_opt_ConSelect()
+void EQInterface::toggleSelectOnConsider(bool state)
 {
-	m_selectOnConsider = !(m_selectOnConsider);
-	menuBar()->setItemChecked(m_id_opt_ConSelect, m_selectOnConsider);
+	m_selectOnConsider = state;
 	pSEQPrefs->setPrefBool("SelectOnCon", "Interface", m_selectOnConsider);
 }
 
-void EQInterface::toggle_opt_TarSelect()
+void EQInterface::toggleSelectOnTarget(bool state)
 {
-	m_selectOnTarget = !(m_selectOnTarget);
-	menuBar()->setItemChecked(m_id_opt_TarSelect, m_selectOnTarget);
+	m_selectOnTarget = state;
 	pSEQPrefs->setPrefBool("SelectOnTarget", "Interface", m_selectOnTarget);
 }
 
-void EQInterface::toggle_opt_Fast()
+void EQInterface::toggleFastMachine(bool state)
 {
-	showeq_params->fast_machine = !(showeq_params->fast_machine);
-	menuBar()->setItemChecked(m_id_opt_Fast, showeq_params->fast_machine);
+	showeq_params->fast_machine = state;
 	pSEQPrefs->setPrefBool("FastMachine", "Misc", showeq_params->fast_machine);
 }
 
-void EQInterface::toggle_opt_KeepSelectedVisible()
+void EQInterface::toggleKeepSelectedVisible(bool state)
 {
-	showeq_params->keep_selected_visible = !(showeq_params->keep_selected_visible);
-	menuBar()->setItemChecked(m_id_opt_KeepSelectedVisible, showeq_params->keep_selected_visible);
+	showeq_params->keep_selected_visible = state;
 	pSEQPrefs->setPrefBool("KeepSelected", "Interface", showeq_params->keep_selected_visible);
 }
 
-void EQInterface::toggle_opt_UseUpdateRadius()
+void EQInterface::toggleUseUpdateRadius(bool state)
 {
-	showeq_params->useUpdateRadius = !(showeq_params->useUpdateRadius);
-	menuBar()->setItemChecked(m_id_opt_useUpdateRadius, showeq_params->useUpdateRadius);
+	showeq_params->useUpdateRadius = state;
 	pSEQPrefs->setPrefBool("UseUpdateRadius", "Interface", showeq_params->useUpdateRadius);
 }
 
@@ -3421,19 +3498,19 @@ void EQInterface::toggle_log_Filter_ZoneData_Server()
 	m_filterZoneDataMenu->setItemChecked(m_id_log_Filter_ZoneData_Client, false);
 }
 
-void EQInterface::toggle_opt_BazaarData()
+void EQInterface::toggleLogBazaarData(bool state)
 {
-	if (m_bazaarLog)
+	if (!state && m_bazaarLog)
 	{
-		disconnect(m_bazaarLog,0,0,0);
+		disconnect(m_bazaarLog, 0, 0, 0);
 		delete m_bazaarLog;
 		m_bazaarLog = 0;
 	}
-	else
+	else if (state && !m_bazaarLog)
+	{
 		createBazaarLog();
+	}
 
-	bool state = (m_bazaarLog != 0);
-	menuBar()->setItemChecked(m_id_opt_BazaarData, state);
 	pSEQPrefs->setPrefBool("LogBazaarPackets", "PacketLogging", state);
 }
 
@@ -3967,57 +4044,54 @@ void EQInterface::select_opcode_file()
 void EQInterface::resetMaxMana()
 {
 	if (m_statList != 0)
+	{
 		m_statList->statList()->resetMaxMana();
+	}
 }
 
-void EQInterface::toggle_opt_LogSpawns ()
+void EQInterface::toggleLogSpawns(bool state)
 {
-	bool state = (m_spawnLogger == 0);
-
-    if (state)
+    if (state && m_spawnLogger == NULL)
+    {
 		createSpawnLog();
-    else
+    }
+    else if (!state && m_spawnLogger != NULL)
     {
 		// delete the spawn logger
 		delete m_spawnLogger;
 
-		// make sure to clear it's varialbe
-		m_spawnLogger = 0;
+		// make sure to clear it's variable
+		m_spawnLogger = NULL;
     }
 
-    menuBar()->setItemChecked (m_id_opt_LogSpawns, state);
     pSEQPrefs->setPrefBool("LogSpawns", "Misc", state);
 }
 
-void EQInterface::toggle_opt_PvPTeams ()
+void EQInterface::togglePvPTeams(bool state)
 {
-    showeq_params->pvp = !(showeq_params->pvp);
-    menuBar()->setItemChecked (m_id_opt_PvPTeams, showeq_params->pvp);
-    pSEQPrefs->setPrefBool("PvPTeamColoring", "Interface", showeq_params->pvp);
+    showeq_params->pvp = state;
+    pSEQPrefs->setPrefBool("PvPTeamColoring", "Interface", state);
 }
 
-void EQInterface::toggle_opt_PvPDeity ()
+void EQInterface::togglePvPDeity(bool state)
 {
-    showeq_params->deitypvp = !(showeq_params->deitypvp);
-    menuBar()->setItemChecked (m_id_opt_PvPDeity, showeq_params->deitypvp);
-    pSEQPrefs->setPrefBool("DeityPvPTeamColoring", "Interface", showeq_params->deitypvp);
+    showeq_params->deitypvp = state;
+    pSEQPrefs->setPrefBool("DeityPvPTeamColoring", "Interface", state);
 }
 
-void EQInterface::toggle_opt_CreateUnknownSpawns (int id)
+void EQInterface::toggleCreateUnknownSpawns(bool state)
 {
-    showeq_params->createUnknownSpawns = !showeq_params->createUnknownSpawns;
-    menuBar()->setItemChecked(id, showeq_params->createUnknownSpawns);
-    pSEQPrefs->setPrefBool("CreateUnknownSpawns", "Misc", showeq_params->createUnknownSpawns);
+    showeq_params->createUnknownSpawns = state;
+    pSEQPrefs->setPrefBool("CreateUnknownSpawns", "Misc", state);
 }
 
-void EQInterface::toggle_opt_WalkPathRecord (int id)
+void EQInterface::toggleRecordWalkPaths(bool state)
 {
-    showeq_params->walkpathrecord = !showeq_params->walkpathrecord;
-    menuBar()->setItemChecked(id, showeq_params->walkpathrecord);
-    pSEQPrefs->setPrefBool("WalkPathRecording", "Misc", showeq_params->walkpathrecord);
+    showeq_params->walkpathrecord = state;
+    pSEQPrefs->setPrefBool("WalkPathRecording", "Misc", state);
 }
 
-void EQInterface::set_opt_WalkPathLength(int len)
+void EQInterface::setWalkPathLength(int len)
 {
 	if ((len > 0) && (len <= 8192))
 		showeq_params->walkpathlength = len;
@@ -4025,23 +4099,21 @@ void EQInterface::set_opt_WalkPathLength(int len)
     pSEQPrefs->setPrefInt("WalkPathLength", "Misc", showeq_params->walkpathlength);
 }
 
-void EQInterface::toggle_opt_RetardedCoords (int id)
+void EQInterface::toggleRetardedCoords(bool state)
 {
-    showeq_params->retarded_coords = !showeq_params->retarded_coords;
-    menuBar()->setItemChecked(id, showeq_params->retarded_coords);
-    pSEQPrefs->setPrefBool("RetardedCoords", "Interface", showeq_params->retarded_coords);
+    showeq_params->retarded_coords = state;
+    pSEQPrefs->setPrefBool("RetardedCoords", "Interface", state);
 }
 
-void EQInterface::toggle_opt_SystimeSpawntime (int id)
+void EQInterface::toggleSystemSpawnTime(bool state)
 {
-    showeq_params->systime_spawntime = !showeq_params->systime_spawntime;
-    menuBar()->setItemChecked(id, showeq_params->systime_spawntime);
-    pSEQPrefs->setPrefBool("SystimeSpawntime", "Interface", showeq_params->systime_spawntime);
+    showeq_params->systime_spawntime = state;
+    pSEQPrefs->setPrefBool("SystimeSpawntime", "Interface", state);
 }
 
-void EQInterface::select_opt_conColorBase(int id)
+void EQInterface::selectConColorBase(QAction* action)
 {
-	ColorLevel level = (ColorLevel)menuBar()->itemParameter(id);
+	ColorLevel level = (ColorLevel)action->data().toInt();
 
 	// get the current color
 	QColor color = m_player->conColorBase(level);
@@ -4788,37 +4860,34 @@ void EQInterface::updateViewMenu()
 	}
 }
 
-void EQInterface::toggle_opt_save_PlayerState(int id)
+void EQInterface::toggleSavePlayerState(bool state)
 {
-	showeq_params->savePlayerState = !showeq_params->savePlayerState;
-	menuBar()->setItemChecked(id, showeq_params->savePlayerState);
-	pSEQPrefs->setPrefBool("PlayerState", "SaveState", showeq_params->savePlayerState);
+	showeq_params->savePlayerState = state;
+	pSEQPrefs->setPrefBool("PlayerState", "SaveState", state);
 }
 
-void EQInterface::toggle_opt_save_ZoneState(int id)
+void EQInterface::toggleSaveZoneState(bool state)
 {
-	showeq_params->saveZoneState = !showeq_params->saveZoneState;
-	menuBar()->setItemChecked(id, showeq_params->saveZoneState);
-	pSEQPrefs->setPrefBool("ZoneState", "SaveState", showeq_params->saveZoneState);
+	showeq_params->saveZoneState = state;
+	pSEQPrefs->setPrefBool("ZoneState", "SaveState", state);
 }
 
-void EQInterface::toggle_opt_save_Spawns(int id)
+void EQInterface::toggleSaveSpawnState(bool state)
 {
-	showeq_params->saveSpawns = !showeq_params->saveSpawns;
-	menuBar()->setItemChecked(id, showeq_params->saveSpawns);
-	pSEQPrefs->setPrefBool("Spawns", "SaveState", showeq_params->saveSpawns);
+	showeq_params->saveSpawns = state;
+	pSEQPrefs->setPrefBool("Spawns", "SaveState", state);
 
-	if (showeq_params->saveSpawns)
+	if (state)
 		m_spawnShell->saveSpawns();
 }
 
-void EQInterface::set_opt_save_SpawnFrequency(int frequency)
+void EQInterface::setSpawnSaveFrequency(int frequency)
 {
 	showeq_params->saveSpawnsFrequency = frequency * 1000;
 	pSEQPrefs->setPrefInt("SpawnsFrequency", "SaveState", showeq_params->saveSpawnsFrequency);
 }
 
-void EQInterface::set_opt_save_BaseFilename()
+void EQInterface::setSaveBaseFilename()
 {
 	QString fileName =
     Q3FileDialog::getSaveFileName(showeq_params->saveRestoreBaseFilename, QString::null, this, "SaveBaseFilename", "Save State Base Filename");
@@ -4832,9 +4901,8 @@ void EQInterface::set_opt_save_BaseFilename()
 	}
 }
 
-void EQInterface::opt_clearChannelMsgs(int id)
+void EQInterface::clearChannelMessages()
 {
-	// clear the messages
 	m_messages->clear();
 }
 
@@ -5587,9 +5655,11 @@ void EQInterface::createSpawnLog()
 	// Connect SpawnLog slots to ZoneMgr signals
 	connect(m_zoneMgr, SIGNAL(zoneBegin(const QString&)), m_spawnLogger, SLOT(logNewZone(const QString&)));
 
+	// No longer used as of 5-22-2008
+#if 0
 	// Connect SpawnLog slots to EQPacket signals
-	m_packet->connect2("OP_ZoneSpawns", SP_Zone, DIR_Server, "spawnStruct", SZC_Modulus,
-					   m_spawnLogger, SLOT(logZoneSpawns(const uint8_t*, size_t)));
+	m_packet->connect2("OP_ZoneSpawns", SP_Zone, DIR_Server, "spawnStruct", SZC_Modulus, m_spawnLogger, SLOT(logZoneSpawns(const uint8_t*, size_t)));
+#endif
 
 	// OP_NewSpawn is deprecated in the client
 	//    m_packet->connect2("OP_NewSpawn", SP_Zone, DIR_Server,
@@ -5611,8 +5681,7 @@ void EQInterface::createGlobalLog()
 
 	m_globalLog = new PacketLog(*m_packet, logFileInfo.absFilePath(), this, "GlobalLog");
 
-	connect(m_packet, SIGNAL(newPacket(const EQUDPIPPacketFormat&)),
-			m_globalLog, SLOT(logData(const EQUDPIPPacketFormat&)));
+	connect(m_packet, SIGNAL(newPacket(const EQUDPIPPacketFormat&)), m_globalLog, SLOT(logData(const EQUDPIPPacketFormat&)));
 }
 
 void EQInterface::createWorldLog()

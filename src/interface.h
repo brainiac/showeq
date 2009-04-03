@@ -158,7 +158,6 @@ public slots:
 	void toggleLogAllPackets();
 	void toggleLogWorldData();
 	void toggleLogZoneData();
-	void toggle_opt_BazaarData();
 	void toggle_log_UnknownData();
 	void toggle_log_RawData();
 	void listSpawns();
@@ -239,21 +238,31 @@ private slots:
 	void toggleNetDiag();
 	void toggleGuildList();
 
-	void toggle_opt_Fast();
-	void toggle_opt_ConSelect();
-	void toggle_opt_TarSelect();
-	void toggle_opt_KeepSelectedVisible();
-	void toggle_opt_LogSpawns();
-	void toggle_opt_PvPTeams();
-	void toggle_opt_PvPDeity();
-	void toggle_opt_CreateUnknownSpawns(int);
-	void toggle_opt_WalkPathRecord(int);
-	void set_opt_WalkPathLength(int);
-	void toggle_opt_RetardedCoords(int);
-	void toggle_opt_SystimeSpawntime(int);
-	void select_opt_conColorBase(int);
-	void toggle_view_UnknownData();
+	// Options menu slots
+	void toggleFastMachine(bool);
+	void toggleSelectOnConsider(bool);
+	void toggleSelectOnTarget(bool);
+	void toggleKeepSelectedVisible(bool);
+	void toggleLogSpawns(bool);
+	void togglePvPTeams(bool);
+	void togglePvPDeity(bool);
+	void toggleCreateUnknownSpawns(bool);
+	void toggleRecordWalkPaths(bool);
+	void toggleRetardedCoords(bool);
+	void toggleSystemSpawnTime(bool);
+	void selectConColorBase(QAction*);
+	void setWalkPathLength(int len);
 	void resetMaxMana();
+	void toggleSavePlayerState(bool);
+	void toggleSaveZoneState(bool);
+	void toggleSaveSpawnState(bool);
+	void setSpawnSaveFrequency(int frequency);
+	void setSaveBaseFilename();
+	void clearChannelMessages();
+	void toggleUseUpdateRadius(bool);
+	void toggleLogBazaarData(bool);
+
+	void toggle_view_UnknownData();
 	void select_filter_file();
 	void toggle_filter_Case(int id);
 	void toggle_filter_AlertInfo(int id);
@@ -270,16 +279,12 @@ private slots:
 	void select_main_SpellsFile(int id);
 	void toggle_main_statusbar_Window(int id);
 	void set_main_statusbar_Font(int id);
+
+
+	void updateViewMenu();
+
 	void toggle_main_SavePosition(int id);
 	void toggle_main_UseWindowPos(int id);
-	void toggle_opt_save_PlayerState(int id);
-	void toggle_opt_save_ZoneState(int id);
-	void toggle_opt_save_Spawns(int id);
-	void set_opt_save_SpawnFrequency(int frequency);
-	void set_opt_save_BaseFilename();
-	void opt_clearChannelMsgs(int id);
-	void updateViewMenu();
-	void toggle_opt_UseUpdateRadius();
 
 	void toggleTypeFilter(int);
 	void disableAllTypeFilters();
@@ -449,22 +454,13 @@ private:
 	int m_id_log_RawData;
 	int m_id_log_Items;
 	int m_id_log_ItemPackets;
-	int m_id_opt_BazaarData;
 	int m_id_opt_OptionsDlg;
-	int m_id_opt_Fast;
-	int m_id_opt_ResetMana;
 
 	int m_id_view_UnknownData;
-	int m_id_opt_ConSelect;
-	int m_id_opt_TarSelect;
-	int m_id_opt_KeepSelectedVisible;
-	int m_id_opt_LogSpawns;
-	int m_id_opt_PvPTeams;
-	int m_id_opt_PvPDeity;
+
 	int m_id_net_sessiontrack;
 	int m_packetStartTime;
 	int m_initialcount;
-	int m_id_opt_useUpdateRadius;
 	int m_id_log_Filter_ZoneData_Client;
 	int m_id_log_Filter_ZoneData_Server;
 
