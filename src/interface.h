@@ -191,13 +191,13 @@ public slots:
 	void toggle_log_Filter_ZoneData_Server();
 
 	void selectTheme(int id);
-	void toggleOpcodeMonitoring(int id);
+	void toggleOpcodeMonitoring(bool);
 	void set_opcode_monitored_list();
-	void toggle_opcode_view(int id);
-	void toggle_opcode_log(int id);
+	void toggle_opcode_view(bool);
+	void toggle_opcode_log(bool);
 	void select_opcode_file();
-	void toggle_net_session_tracking();
-	void toggle_net_real_time_thread(int id);
+	void toggle_net_session_tracking(bool);
+	void toggle_net_real_time_thread();
 	void set_net_monitor_next_client();
 	void set_net_client_IP_address();
 	void set_net_client_MAC_address();
@@ -445,24 +445,30 @@ private:
 	QAction* m_playerSkillsMenuAction;
 	QAction* m_playerSkillsLanguages;
 
+	// network menu actions
+	QAction* m_netSessionTracking;
+	QAction* m_netRealTimeThread;
+
+	QAction* m_netLogAllPackets;
+	QAction* m_netLogWorldData;
+	QAction* m_netLogZoneData;
+	QAction* m_netLogUnknownData;
+	QAction* m_netViewUnknownData;
+	QAction* m_netLogRawData;
+
+	QAction* m_netLogItems;
+	QAction* m_netLogItemPackets;
+
+	QAction* m_netLogFilterZoneClient;
+	QAction* m_netLogFilterZoneServer;
+
+	QAction* m_netOpcodeLog;
+	QAction* m_netOpcodeView;
+
 	int char_ClassID[PLAYER_CLASSES];
 	int char_RaceID[PLAYER_RACES];
-	int m_id_log_AllPackets;
-	int m_id_log_WorldData;
-	int m_id_log_ZoneData;
-	int m_id_log_UnknownData;
-	int m_id_log_RawData;
-	int m_id_log_Items;
-	int m_id_log_ItemPackets;
-	int m_id_opt_OptionsDlg;
-
-	int m_id_view_UnknownData;
-
-	int m_id_net_sessiontrack;
 	int m_packetStartTime;
 	int m_initialcount;
-	int m_id_log_Filter_ZoneData_Client;
-	int m_id_log_Filter_ZoneData_Server;
 
 	MenuIDList IDList_StyleMenu;
 

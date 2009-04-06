@@ -110,7 +110,7 @@ public slots:
 	void setRealtime(bool val);
 	void dispatchSessionKey(uint32_t sessionId, EQStreamID streamid, uint32_t sessionKey);
 
-	protected slots:
+protected slots:
 	void closeStream(uint32_t sessionId, EQStreamID streamId);
 	void lockOnClient(in_port_t serverPort, in_port_t clientPort);
 
@@ -127,7 +127,7 @@ signals:
 	void clientPortLatched(in_port_t);
 	void serverPortLatched(in_port_t);
 	void sessionTrackingChanged(uint8_t);
-	void toggle_session_tracking();
+	void toggle_session_tracking(bool);
 	void filterChanged();
 	void stsMessage(const QString &, int = 0);
 

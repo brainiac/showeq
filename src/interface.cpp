@@ -352,7 +352,6 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 		QPoint p = pSEQPrefs->getPrefPoint("WindowPos", "Interface", pos());
 		move(p);
 	}
-	show();
 
 	QAction* toggleStatusBar = new QAction(this);
 	toggleStatusBar->setShortcut(CTRL+ALT+Key_S);
@@ -389,6 +388,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	// TODO: When closing a window, its state should be saved for the session.
 	m_creating = false;
 
+	show();
 } // end constructor
 ////////////////////
 
@@ -1033,7 +1033,7 @@ void EQInterface::createOptionsMenu()
 	action = new QAction("Select on Consider", this);
 	action->setCheckable(true);
 	action->setChecked(m_selectOnConsider);
-	connect(action, SIGNAL(toggled()), this, SLOT(toggleSelectOnConsider(bool)));
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleSelectOnConsider(bool)));
 	optMenu->addAction(action);
 
 	action = new QAction("Select on Target", this);
@@ -1210,78 +1210,161 @@ void EQInterface::createOptionsMenu()
 
 void EQInterface::createNetworkMenu()
 {
-	int x;
-
 	// Network Menu
-	m_netMenu = new Q3PopupMenu;
-	menuBar()->insertItem("&Network", m_netMenu);
-	m_netMenu->insertItem("Monitor &Next EQ Client Seen", this, SLOT(set_net_monitor_next_client()));
-	m_netMenu->insertItem("Monitor EQ Client &IP Address...", this, SLOT(set_net_client_IP_address()));
-	m_netMenu->insertItem("Monitor EQ Client &MAC Address...", this, SLOT(set_net_client_MAC_address()));
-	m_netMenu->insertItem("Set &Device...", this, SLOT(set_net_device()));
-	m_id_net_sessiontrack = m_netMenu->insertItem("Session Tracking", this, SLOT(toggle_net_session_tracking()));
-	m_netMenu->setItemChecked(m_id_net_sessiontrack, m_packet->session_tracking());
-	x = m_netMenu->insertItem("&Real Time Thread", this, SLOT(toggle_net_real_time_thread(int)));
-	m_netMenu->setItemChecked(x, m_packet->realtime());
+	m_netMenu = new QMenu("&Network", this);
 
-	m_netMenu->insertSeparator(-1);
+	// Monitor next eq client seen
+	QAction* action = new QAction("Monitor &Next EQ Client Seen", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_net_monitor_next_client()));
+	m_netMenu->addAction(action);
 
-	// Log menu
-	Q3PopupMenu* pLogMenu = new Q3PopupMenu;
-	m_netMenu->insertItem("Lo&g", pLogMenu);
-	pLogMenu->setCheckable(true);
-	m_id_log_AllPackets  = pLogMenu->insertItem("All Packets", this, SLOT(toggleLogAllPackets()), Key_F5);
-	m_id_log_WorldData   = pLogMenu->insertItem("World Data", this, SLOT(toggleLogWorldData()), Key_F6);
-	m_id_log_ZoneData    = pLogMenu->insertItem("Zone Data", this, SLOT(toggleLogZoneData()), Key_F7);
-	m_id_log_UnknownData = pLogMenu->insertItem("Unknown Data", this, SLOT(toggle_log_UnknownData()), Key_F8);
-	m_id_view_UnknownData = pLogMenu->insertItem("View Unknown Data", this, SLOT(toggle_view_UnknownData()), Key_F9);
-	m_id_log_RawData     = pLogMenu->insertItem("Raw Data", this, SLOT(toggle_log_RawData()), Key_F10);
+	// monitor eq client ip address
+	action = new QAction("Monitor EQ Client &IP Address...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_net_client_IP_address()));
+	m_netMenu->addAction(action);
 
-	m_filterZoneDataMenu = new Q3PopupMenu;
-	pLogMenu->insertItem("Filter Zone Data", m_filterZoneDataMenu);
-	m_id_log_Filter_ZoneData_Client = m_filterZoneDataMenu->insertItem("Client", this, SLOT(toggle_log_Filter_ZoneData_Client()));
-	m_id_log_Filter_ZoneData_Server = m_filterZoneDataMenu->insertItem("Server", this, SLOT(toggle_log_Filter_ZoneData_Server()));
+	// monitor eq client mac address
+	action = new QAction("Monitor EQ Client &MAC Address...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_net_client_MAC_address()));
+	m_netMenu->addAction(action);
 
-	menuBar()->setItemChecked(m_id_log_AllPackets, (m_globalLog != 0));
-	menuBar()->setItemChecked(m_id_log_WorldData, (m_worldLog != 0));
-	menuBar()->setItemChecked(m_id_log_ZoneData, (m_zoneLog != 0));
-	menuBar()->setItemChecked(m_id_log_UnknownData, (m_unknownZoneLog != 0));
-	menuBar()->setItemChecked(m_id_view_UnknownData, pSEQPrefs->getPrefBool("ViewUnknown", "PacketLogging", false));
-	menuBar()->setItemChecked(m_id_log_RawData, pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging", false));
+	// set net device
+	action = new QAction("Set &Device...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_net_device()));
+	m_netMenu->addAction(action);
+
+	// session tracking
+	m_netSessionTracking = new QAction("Session Tracking", this);
+	m_netSessionTracking->setChecked(m_packet->session_tracking());
+	m_netSessionTracking->setCheckable(true);
+	connect(m_netSessionTracking, SIGNAL(toggled(bool)), this, SLOT(toggle_net_session_tracking(bool)));
+	m_netMenu->addAction(m_netSessionTracking);
+
+	// real time thread
+	m_netRealTimeThread = new QAction("&Real Time Thread", this);
+	m_netRealTimeThread->setCheckable(true);
+	m_netRealTimeThread->setChecked(m_packet->realtime());
+	connect(m_netRealTimeThread, SIGNAL(triggered()), this, SLOT(toggle_net_real_time_thread()));
+	m_netMenu->addAction(m_netRealTimeThread);
+
+	m_netMenu->addSeparator();
+
+	// Log sub-menu
+	QMenu* pLogMenu = new QMenu("Lo&g", this);
+
+	// All packets
+	m_netLogAllPackets = new QAction("All Packets", this);
+	m_netLogAllPackets->setShortcut(Key_F5);
+	m_netLogAllPackets->setChecked(m_globalLog != NULL);
+	m_netLogAllPackets->setCheckable(true);
+	connect(m_netLogAllPackets, SIGNAL(triggered()), this, SLOT(toggleLogAllPackets()));
+	pLogMenu->addAction(m_netLogAllPackets);
+
+	// World data
+	m_netLogWorldData = new QAction("World Data", this);
+	m_netLogWorldData->setShortcut(Key_F6);
+	m_netLogWorldData->setChecked(m_worldLog != NULL);
+	m_netLogWorldData->setCheckable(true);
+	connect(m_netLogWorldData, SIGNAL(triggered()), this, SLOT(toggleLogWorldData()));
+	pLogMenu->addAction(m_netLogWorldData);
+
+	// zone data
+	m_netLogZoneData = new QAction("Zone Data", this);
+	m_netLogZoneData->setShortcut(Key_F7);
+	m_netLogZoneData->setChecked(m_zoneLog != NULL);
+	m_netLogZoneData->setCheckable(true);
+	connect(m_netLogZoneData, SIGNAL(triggered()), this, SLOT(toggleLogZoneData()));
+	pLogMenu->addAction(m_netLogZoneData);
+
+	// Unknown data
+	m_netLogUnknownData = new QAction("Unknown Data", this);
+	m_netLogUnknownData->setShortcut(Key_F8);
+	m_netLogUnknownData->setChecked(m_unknownZoneLog != NULL);
+	m_netLogUnknownData->setCheckable(true);
+	connect(m_netLogUnknownData, SIGNAL(triggered()), this, SLOT(toggle_log_UnknownData()));
+	pLogMenu->addAction(m_netLogUnknownData);
+
+	m_netViewUnknownData = new QAction("View Unknown Data", this);
+	m_netViewUnknownData->setShortcut(Key_F9);
+	m_netViewUnknownData->setChecked(pSEQPrefs->getPrefBool("ViewUnknown", "PacketLogging", false));
+	m_netViewUnknownData->setCheckable(true);
+	connect(m_netViewUnknownData, SIGNAL(triggered()), this, SLOT(toggle_view_UnknownData()));
+	pLogMenu->addAction(m_netViewUnknownData);
+
+	// Raw Data
+	m_netLogRawData = new QAction("Raw Data", this);
+	m_netLogRawData->setShortcut(Key_F10);
+	m_netLogRawData->setChecked(pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging", false));
+	m_netLogRawData->setCheckable(true);
+	connect(m_netLogRawData, SIGNAL(triggered()), this, SLOT(toggle_log_RawData()));
+	pLogMenu->addAction(m_netLogRawData);
+
+
+	// Filter Zone Data submenu
+	m_filterZoneDataMenu = new QMenu("Filter Zone Data", this);
+	m_netLogFilterZoneClient = new QAction("Client", this);
+	connect(m_netLogFilterZoneClient, SIGNAL(triggered()), this, SLOT(toggle_log_Filter_ZoneData_Client()));
+	m_filterZoneDataMenu->addAction(m_netLogFilterZoneClient);
+
+	m_netLogFilterZoneServer = new QAction("Server", this);
+	connect(m_netLogFilterZoneServer, SIGNAL(triggered()), this, SLOT(toggle_log_Filter_ZoneData_Server()));
+	m_filterZoneDataMenu->addAction(m_netLogFilterZoneServer);
+	pLogMenu->addMenu(m_filterZoneDataMenu);
+
+	m_netMenu->addMenu(pLogMenu);
 
 	// OpCode Monitor
-	Q3PopupMenu* pOpCodeMenu = new Q3PopupMenu;
-	m_netMenu->insertItem("OpCode Monitor", pOpCodeMenu);
-	x = pOpCodeMenu->insertItem("&OpCode Monitoring", this, SLOT(toggleOpcodeMonitoring(int)), Qt::CTRL+Qt::ALT+Qt::Key_O);
+	QMenu* pOpCodeMenu = new QMenu("OpCode Monitor", this);
 
-	pOpCodeMenu->setItemChecked(x, (m_opcodeMonitorLog != 0));
-	pOpCodeMenu->insertItem("&Reload Monitored OpCode List..", this, SLOT(set_opcode_monitored_list()), CTRL+ALT+Key_R);
-	QString section = "OpCodeMonitoring";
-	x = pOpCodeMenu->insertItem("&View Monitored OpCode Matches", this, SLOT(toggle_opcode_view(int)));
-	pOpCodeMenu->setItemChecked(x, pSEQPrefs->getPrefBool("View", section, false));
-	x = pOpCodeMenu->insertItem("&Log Monitored OpCode Matches", this, SLOT(toggle_opcode_log(int)));
-	pOpCodeMenu->setItemChecked(x, pSEQPrefs->getPrefBool("Log", section, false));
-	pOpCodeMenu->insertItem("Log &Filename...", this, SLOT(select_opcode_file()));
-	m_netMenu->insertSeparator(-1);
+	action = new QAction("&OpCode Monitoring", this);
+	action->setCheckable(true);
+	action->setShortcut(CTRL + ALT + Key_O);
+	action->setChecked(m_opcodeMonitorLog != NULL);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleOpcodeMonitoring(bool)));
+	pOpCodeMenu->addAction(action);
 
-	section = "Interface";
+	action = new QAction("&Reload Monitored OpCode List...", this);
+	action->setShortcut(CTRL + ALT + Key_R);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_opcode_monitored_list()));
+	pOpCodeMenu->addAction(action);
+
+	m_netOpcodeView = new QAction("&View Monitored Opcode Matches", this);
+	m_netOpcodeView->setCheckable(true);
+	m_netOpcodeView->setChecked(pSEQPrefs->getPrefBool("View", "OpCodeMonitoring", false));
+	connect(m_netOpcodeView, SIGNAL(toggled(bool)), this, SLOT(toggle_opcode_view(bool)));
+	pOpCodeMenu->addAction(m_netOpcodeView);
+
+	m_netOpcodeLog = new QAction("&Log Monitored OpCode Matches", this);
+	m_netOpcodeLog->setCheckable(true);
+	m_netOpcodeLog->setChecked(pSEQPrefs->getPrefBool("Log", "OpCodeMonitoring", false));
+	connect(m_netOpcodeLog, SIGNAL(toggled(bool)), this, SLOT(toggle_opcode_log(bool)));
+	pOpCodeMenu->addAction(m_netOpcodeLog);
+
+	action = new QAction("Log &Filename...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(select_opcode_file()));
+	pOpCodeMenu->addAction(action);
+
+	m_netMenu->addMenu(pOpCodeMenu);
+
+	m_netMenu->addSeparator();
 
 	// Advanced menu
-	QMenu* subMenu = new Q3PopupMenu;
-	{
-		QMenu* subSubMenu = new QMenu;
-		QSpinBox* spinBox = new QSpinBox(32, 1024, 8, subSubMenu);
+	QMenu* subMenu = new QMenu("Advanced", this);
 
-		spinBox->setValue(m_packet->arqSeqGiveUp());
-		connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_net_arq_giveup(int)));
+	QMenu* subSubMenu = new QMenu("Arq Seq Give Up", subMenu);
+	QSpinBox* spinBox = new QSpinBox(32, 1024, 8, subSubMenu);
 
-		QWidgetAction* pWidgetAction = new QWidgetAction(subSubMenu);
-		pWidgetAction->setDefaultWidget(spinBox);
-		subSubMenu->addAction(pWidgetAction);
-		subMenu->insertItem("Arq Seq Give Up", subSubMenu);
-	}
+	spinBox->setValue(m_packet->arqSeqGiveUp());
+	connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(set_net_arq_giveup(int)));
 
-	m_netMenu->insertItem("Advanced", subMenu);
+	QWidgetAction* pWidgetAction = new QWidgetAction(subSubMenu);
+	pWidgetAction->setDefaultWidget(spinBox);
+	subSubMenu->addAction(pWidgetAction);
+
+	subMenu->addMenu(subSubMenu);
+	m_netMenu->addMenu(subMenu);
+
+	menuBar()->addMenu(m_netMenu);
 }
 
 void EQInterface::createCharacterMenu()
@@ -2057,8 +2140,7 @@ void EQInterface::connectSignals()
 	connect(m_packet, SIGNAL(moneyThing(const uint8_t*, size_t, uint8_t)), this, SLOT(moneyThing(const uint8_t*)));
 #endif // ZBTEMP
 
-	connect(m_packet, SIGNAL(toggle_session_tracking()),
-			this, SLOT(toggle_net_session_tracking()));
+	connect(m_packet, SIGNAL(toggle_session_tracking(bool)), this, SLOT(toggle_net_session_tracking(bool)));
 
 	// connect EQInterface slots to ZoneMgr signals
 	connect(m_zoneMgr, SIGNAL(zoneBegin(const QString&)), this, SLOT(zoneBegin(const QString&)));
@@ -3426,13 +3508,16 @@ void EQInterface::toggleLogAllPackets()
 	if (m_globalLog)
 	{
 		delete m_globalLog;
-		m_globalLog = 0;
+		m_globalLog = NULL;
 	}
 	else
+	{
 		createGlobalLog();
+	}
 
-	bool state = (m_globalLog != 0);
-	menuBar()->setItemChecked (m_id_log_AllPackets, state);
+	bool state = (m_globalLog != NULL);
+
+	m_netLogAllPackets->setChecked(state);
 	pSEQPrefs->setPrefBool("LogAllPackets", "PacketLogging", state);
 }
 
@@ -3441,13 +3526,15 @@ void EQInterface::toggleLogWorldData()
 	if (m_worldLog)
 	{
 		delete m_worldLog;
-		m_worldLog = 0;
+		m_worldLog = NULL;
 	}
 	else
+	{
 		createWorldLog();
+	}
 
-	bool state = (m_worldLog != 0);
-	menuBar()->setItemChecked (m_id_log_WorldData, state);
+	bool state = (m_worldLog != NULL);
+	m_netLogWorldData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogWorldPackets", "PacketLogging", state);
 }
 
@@ -3456,20 +3543,23 @@ void EQInterface::toggleLogZoneData()
 	if (m_zoneLog)
 	{
 		delete m_zoneLog;
-		m_zoneLog = 0;
+		m_zoneLog = NULL;
 	}
 	else
+	{
 		createZoneLog();
+	}
 
-	bool state = (m_zoneLog != 0);
-	menuBar()->setItemChecked (m_id_log_ZoneData, state);
+	bool state = (m_zoneLog != NULL);
+	m_netLogZoneData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogZonePackets", "PacketLogging", state);
 }
 
 void EQInterface::toggle_log_Filter_ZoneData_Client()
 {
 	bool state = true;
-	if(showeq_params->filterZoneDataLog == DIR_Client)
+
+	if (showeq_params->filterZoneDataLog == DIR_Client)
 	{
 		showeq_params->filterZoneDataLog = 0;
 		state = false;
@@ -3478,14 +3568,16 @@ void EQInterface::toggle_log_Filter_ZoneData_Client()
 	{
 		showeq_params->filterZoneDataLog = DIR_Client;
 	}
-	m_filterZoneDataMenu->setItemChecked(m_id_log_Filter_ZoneData_Client, state);
-	m_filterZoneDataMenu->setItemChecked(m_id_log_Filter_ZoneData_Server, false);
+
+	m_netLogFilterZoneClient->setChecked(state);
+	m_netLogFilterZoneServer->setChecked(false);
 }
 
 void EQInterface::toggle_log_Filter_ZoneData_Server()
 {
 	bool state = true;
-	if(showeq_params->filterZoneDataLog == DIR_Server)
+
+	if (showeq_params->filterZoneDataLog == DIR_Server)
 	{
 		showeq_params->filterZoneDataLog = 0;
 		state = false;
@@ -3494,8 +3586,9 @@ void EQInterface::toggle_log_Filter_ZoneData_Server()
 	{
 		showeq_params->filterZoneDataLog = DIR_Server;
 	}
-	m_filterZoneDataMenu->setItemChecked(m_id_log_Filter_ZoneData_Server, state);
-	m_filterZoneDataMenu->setItemChecked(m_id_log_Filter_ZoneData_Client, false);
+
+	m_netLogFilterZoneServer->setChecked(state);
+	m_netLogFilterZoneClient->setChecked(false);
 }
 
 void EQInterface::toggleLogBazaarData(bool state)
@@ -3519,13 +3612,15 @@ void EQInterface::toggle_log_UnknownData()
 	if (m_unknownZoneLog)
 	{
 		delete m_unknownZoneLog;
-		m_unknownZoneLog = 0;
+		m_unknownZoneLog = NULL;
 	}
 	else
+	{
 		createUnknownZoneLog();
+	}
 
 	bool state = (m_unknownZoneLog != 0);
-	menuBar()->setItemChecked (m_id_log_UnknownData, state);
+	m_netLogUnknownData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogUnknownZonePackets", "PacketLogging", state);
 }
 
@@ -3539,7 +3634,7 @@ void EQInterface::toggle_log_RawData()
 	if (m_zoneLog)
 		m_zoneLog->setRaw(state);
 
-	menuBar()->setItemChecked(m_id_log_RawData, state);
+	m_netLogRawData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogRawPackets", "PacketLogging", state);
 }
 
@@ -3582,13 +3677,12 @@ void EQInterface::toggleChannelMsgs(QAction* action)
 
 void EQInterface::toggle_view_UnknownData ()
 {
-	bool state = !pSEQPrefs->getPrefBool("ViewUnknown", "PacketLogging",
-										 false);
+	bool state = !pSEQPrefs->getPrefBool("ViewUnknown", "PacketLogging", false);
 
 	if (m_unknownZoneLog)
 		m_unknownZoneLog->setView(state);
 
-	menuBar()->setItemChecked (m_id_view_UnknownData, state);
+	m_netViewUnknownData->setChecked(state);
 	pSEQPrefs->setPrefBool("ViewUnknown", "PacketLogging", state);
 }
 
@@ -3945,27 +4039,22 @@ bool EQInterface::getMonitorOpCodeList(const QString& title, QString& opCodeList
 	return ok;
 }
 
-void EQInterface::toggleOpcodeMonitoring(int id)
+void EQInterface::toggleOpcodeMonitoring(bool state)
 {
-	if(m_opcodeMonitorLog == 0)
+	if (state && !m_opcodeMonitorLog)
 	{
-		QString section = "OpCodeMonitoring";
-		QString opCodeList = pSEQPrefs->getPrefString("OpCodeList", section, "");
-		bool ok = getMonitorOpCodeList("ShowEQ - Enable OpCode Monitor", opCodeList);
+		QString opCodeList = pSEQPrefs->getPrefString("OpCodeList", "OpCodeMonitoring", "");
 
-		if (ok && !opCodeList.isEmpty())
+		if (getMonitorOpCodeList("ShowEQ - Enable OpCode Monitor", opCodeList) && !opCodeList.isEmpty())
 		{
 			createOPCodeMonitorLog(opCodeList);
 
 			// set the list of monitored opcodes
-			pSEQPrefs->setPrefString("OpCodeList", section, opCodeList);
-
-
-			seqInfo("OpCode monitoring is now ENABLED...\nUsing list:\t%s",
-					(const char*)opCodeList);
+			pSEQPrefs->setPrefString("OpCodeList", "OpCodeMonitoring", opCodeList);
+			seqInfo("OpCode monitoring is now ENABLED...\nUsing list:\t%s", (const char*)opCodeList);
 		}
 	}
-	else
+	else if (!state && m_opcodeMonitorLog)
 	{
 		delete m_opcodeMonitorLog;
 		m_opcodeMonitorLog = 0;
@@ -3973,72 +4062,61 @@ void EQInterface::toggleOpcodeMonitoring(int id)
 		seqInfo("OpCode monitoring has been DISABLED...");
 	}
 
-	bool state = (m_opcodeMonitorLog != 0);
-	menuBar()->setItemChecked(id, state);
 	pSEQPrefs->setPrefBool("Enable", "OpCodeMonitoring", state);
 }
 
 void EQInterface::set_opcode_monitored_list()
 {
-	QString section = "OpCodeMonitoring";
-	QString opCodeList = pSEQPrefs->getPrefString("OpCodeList", section, "");
-	bool ok = getMonitorOpCodeList("ShowEQ - Reload OpCode Monitor", opCodeList);
+	QString opCodeList = pSEQPrefs->getPrefString("OpCodeList", "OpCodeMonitoring", "");
 
-	if (ok && m_opcodeMonitorLog)
+	if (getMonitorOpCodeList("ShowEQ - Reload OpCode Monitor", opCodeList) && m_opcodeMonitorLog)
 	{
 		m_opcodeMonitorLog->init(opCodeList);
 
-		seqInfo("The monitored OpCode list has been reloaded...\nUsing list:\t%s",
-				(const char*)opCodeList);
+		seqInfo("The monitored OpCode list has been reloaded...\nUsing list:\t%s", (const char*)opCodeList);
 
 		// set the list of monitored opcodes
-		pSEQPrefs->setPrefString("OpCodeList", section, opCodeList);
+		pSEQPrefs->setPrefString("OpCodeList", "OpCodeMonitoring", opCodeList);
 	}
 }
 
 
-void EQInterface::toggle_opcode_log(int id)
+void EQInterface::toggle_opcode_log(bool state)
 {
-	QString section = "OpCodeMonitoring";
-	bool state = !pSEQPrefs->getPrefBool("Log", section, false);
-
 	if (m_opcodeMonitorLog)
 	{
 		m_opcodeMonitorLog->setLog(state);
-
 		state = m_opcodeMonitorLog->log();
 	}
 
-	menuBar()->setItemChecked (id, state);
-	pSEQPrefs->setPrefBool("Log", section, state);
+	m_netOpcodeLog->setChecked(state);
+	pSEQPrefs->setPrefBool("Log", "OpCodeMonitoring", state);
 }
 
-void EQInterface::toggle_opcode_view(int id)
+void EQInterface::toggle_opcode_view(bool state)
 {
-	QString section = "OpCodeMonitoring";
-	bool state = !pSEQPrefs->getPrefBool("View", section, false);
-
 	if (m_opcodeMonitorLog)
+	{
 		m_opcodeMonitorLog->setView(state);
+	}
 
-	menuBar()->setItemChecked (id, state);
-	pSEQPrefs->setPrefBool("View", section, state);
+	m_netOpcodeView->setChecked(state);
+	pSEQPrefs->setPrefBool("View", "OpCodeMonitoring", state);
 }
 
 
 void EQInterface::select_opcode_file()
 {
-	QString section = "OpCodeMonitoring";
-
-	QString logFile = pSEQPrefs->getPrefString("LogFilename", section, "opcodemonitor.log");
-
+	QString logFile = pSEQPrefs->getPrefString("LogFilename", "OpCodeMonitoring", "opcodemonitor.log");
 	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
 
 	logFile = Q3FileDialog::getSaveFileName(logFileInfo.absFilePath(), "*.log", this, "ShowEQ - OpCode Log File");
 
 	// set log filename
 	if (!logFile.isEmpty())
-		pSEQPrefs->setPrefString("LogFilename", section, logFile);
+	{
+		pSEQPrefs->setPrefString("LogFilename", "OpCodeMonitoring", logFile);
+	}
 }
 
 void EQInterface::resetMaxMana()
@@ -4630,11 +4708,12 @@ void EQInterface::saveSpawnPath(Q3TextStream& out, const Item* item)
 	out << endl;
 }
 
-void EQInterface::toggle_net_real_time_thread(int id)
+void EQInterface::toggle_net_real_time_thread()
 {
 	bool realtime = !m_packet->realtime();
+
 	m_packet->setRealtime(realtime);
-	m_netMenu->setItemChecked(id, realtime);
+	m_netRealTimeThread->setChecked(realtime);
 	pSEQPrefs->setPrefBool("RealTimeThread", "Network", realtime);
 }
 
@@ -4727,12 +4806,11 @@ void EQInterface::set_net_arq_giveup(int giveup)
 	pSEQPrefs->setPrefInt("ArqSeqGiveUp", "Network", m_packet->arqSeqGiveUp());
 }
 
-void EQInterface::toggle_net_session_tracking()
+void EQInterface::toggle_net_session_tracking(bool enable)
 {
-	bool enable = !m_packet->session_tracking();
-
+	m_netSessionTracking->setChecked(enable);
 	m_packet->session_tracking(enable);
-	m_netMenu->setItemChecked(m_id_net_sessiontrack, enable);
+
 	pSEQPrefs->setPrefBool("SessionTracking", "Network", enable);
 }
 
