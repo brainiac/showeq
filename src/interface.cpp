@@ -1445,72 +1445,142 @@ void EQInterface::createCharacterMenu()
 void EQInterface::createFiltersMenu()
 {
 	// Filters Menu
-	Q3PopupMenu* filterMenu = new Q3PopupMenu;
-	menuBar()->insertItem("Fi&lters" , filterMenu);
-	filterMenu->setCheckable(true);
+	QMenu* filterMenu = new QMenu("Fi&lters", this);
 
-	filterMenu->insertItem("&Reload Filters", m_filterMgr, SLOT(loadFilters()), Key_F3);
-	filterMenu->insertItem("&Save Filters", m_filterMgr, SLOT(saveFilters()), Key_F4);
-	filterMenu->insertItem("&Edit Filters", this, SLOT(launchFilterEditor()));
-	filterMenu->insertItem("Select Fil&ter File", this, SLOT(select_filter_file()));
+	QAction* action = new QAction("&Reload Filters", this);
+	action->setShortcut(Key_F3);
+	connect(action, SIGNAL(triggered()), this, SLOT(loadFilters()));
+	filterMenu->addAction(action);
 
-	filterMenu->insertItem("Reload &Zone Filters", m_filterMgr, SLOT(loadZoneFilters()), SHIFT+Key_F3);
-	filterMenu->insertItem("S&ave Zone Filters", m_filterMgr, SLOT(saveZoneFilters()), SHIFT+Key_F4);
-	filterMenu->insertItem("Edit Zone Fi&lters", this, SLOT(launchZoneFilterEditor()));
+	action = new QAction("&Save Filters", this);
+	action->setShortcut(Key_F4);
+	connect(action, SIGNAL(triggered()), this, SLOT(saveFilters()));
+	filterMenu->addAction(action);
 
-	filterMenu->insertItem("Re&filter Spawns", m_spawnShell, SLOT(refilterSpawns()));
-	int x = filterMenu->insertItem("&Is Case Sensitive", this, SLOT(toggle_filter_Case(int)));
-	filterMenu->setItemChecked(x, m_filterMgr->caseSensitive());
-	x = filterMenu->insertItem("&Display Alert Info", this, SLOT(toggle_filter_AlertInfo(int)));
-	filterMenu->setItemChecked(x,
-							   pSEQPrefs->getPrefBool("AlertInfo", "Filters"));
-	x = filterMenu->insertItem("&Use System Beep", this, SLOT(toggle_filter_UseSystemBeep(int)));
-	filterMenu->setItemChecked(x, m_filterNotifications->useSystemBeep());
-	x = filterMenu->insertItem("Use &Commands", this, SLOT(toggle_filter_UseCommands(int)));
-	filterMenu->setItemChecked(x, m_filterNotifications->useCommands());
+	action = new QAction("&Edit Filters", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(launchFilterEditor()));
+	filterMenu->addAction(action);
+
+	action = new QAction("Select Fil&ter File", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(select_filter_file()));
+	filterMenu->addAction(action);
+
+	action = new QAction("Reload &Zone Filters", this);
+	action->setShortcut(SHIFT + Key_F3);
+	connect(action, SIGNAL(triggered()), this, SLOT(loadZoneFilters()));
+	filterMenu->addAction(action);
+
+	action = new QAction("S&ave Zone Filters", this);
+	action->setShortcut(SHIFT + Key_F4);
+	connect(action, SIGNAL(triggered()), this, SLOT(saveZoneFilters()));
+	filterMenu->addAction(action);
+
+	action = new QAction("Edit Zone Fi&lters", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(launchZoneFilterEditor()));
+	filterMenu->addAction(action);
+
+	action = new QAction("Re&filter Spawns", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(refilterSpawns()));
+	filterMenu->addAction(action);
+
+	action = new QAction("&Is Case Sensitive", this);
+	action->setCheckable(true);
+	action->setChecked(m_filterMgr->caseSensitive());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_filter_Case(bool)));
+	filterMenu->addAction(action);
+
+	action = new QAction("&Display Alert Info", this);
+	action->setCheckable(true);
+	action->setChecked(pSEQPrefs->getPrefBool("AlertInfo", "Filters"));
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_filter_AlertInfo(bool)));
+	filterMenu->addAction(action);
+
+	action = new QAction("&Use System Beep", this);
+	action->setCheckable(true);
+	action->setChecked(m_filterNotifications->useSystemBeep());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_filter_UseSystemBeep(bool)));
+	filterMenu->addAction(action);
+
+	action = new QAction("Use &Commands", this);
+	action->setCheckable(true);
+	action->setChecked(m_filterNotifications->useCommands());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_filter_UseCOmmands(bool)));
+	filterMenu->addAction(action);
 
 	uint32_t filters = pSEQPrefs->getPrefInt("Log", "Filters", 0);
 
 	// Filter -> Log
-	Q3PopupMenu* filterLogMenu = new Q3PopupMenu;
-	filterLogMenu->setCheckable(true);
-	filterMenu->insertItem("&Log", filterLogMenu);
-	x = filterLogMenu->insertItem( "Alerts");
-	filterLogMenu->setItemParameter(x, FILTER_FLAG_ALERT);
-	filterLogMenu->setItemChecked(x, ((filters & FILTER_FLAG_ALERT) != 0));
-	x = filterLogMenu->insertItem( "Locates");
-	filterLogMenu->setItemParameter(x, FILTER_FLAG_LOCATE);
-	filterLogMenu->setItemChecked(x, ((filters & FILTER_FLAG_LOCATE) != 0));
-	x = filterLogMenu->insertItem( "Hunts");
-	filterLogMenu->setItemParameter(x, FILTER_FLAG_HUNT);
-	filterLogMenu->setItemChecked(x, ((filters & FILTER_FLAG_HUNT) != 0));
-	x = filterLogMenu->insertItem( "Cautions");
-	filterLogMenu->setItemParameter(x, FILTER_FLAG_CAUTION);
-	filterLogMenu->setItemChecked(x, ((filters & FILTER_FLAG_CAUTION) != 0));
-	x = filterLogMenu->insertItem( "Dangers");
-	filterLogMenu->setItemParameter(x, FILTER_FLAG_DANGER);
-	filterLogMenu->setItemChecked(x, ((filters & FILTER_FLAG_DANGER) != 0));
-	connect(filterLogMenu, SIGNAL(activated(int)),
-			this, SLOT(toggle_filter_Log(int)));
+	QMenu* filterLogMenu = new QMenu("&Log", this);
+
+	action = new QAction("Alerts", this);
+	action->setCheckable(true);
+	action->setChecked(filters & FILTER_FLAG_ALERT);
+	action->setData(FILTER_FLAG_ALERT);
+	filterLogMenu->addAction(action);
+
+	action = new QAction("Locates", this);
+	action->setCheckable(true);
+	action->setChecked(filters & FILTER_FLAG_LOCATE);
+	action->setData(FILTER_FLAG_LOCATE);
+	filterLogMenu->addAction(action);
+
+	action = new QAction("Hunts", this);
+	action->setCheckable(true);
+	action->setChecked(filters & FILTER_FLAG_HUNT);
+	action->setData(FILTER_FLAG_HUNT);
+	filterLogMenu->addAction(action);
+
+	action = new QAction("Cautions", this);
+	action->setCheckable(true);
+	action->setChecked(filters & FILTER_FLAG_CAUTION);
+	action->setData(FILTER_FLAG_CAUTION);
+	filterLogMenu->addAction(action);
+
+	action = new QAction("Dangers", this);
+	action->setCheckable(true);
+	action->setChecked(filters & FILTER_FLAG_DANGER);
+	action->setData(FILTER_FLAG_DANGER);
+	filterLogMenu->addAction(action);
+
+	connect(filterLogMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggle_filter_Log(QAction*)));
+	filterMenu->addMenu(filterLogMenu);
 
 	// Filter -> Commands
-	Q3PopupMenu* filterCmdMenu = new Q3PopupMenu;
-	filterMenu->insertItem("&Audio Commands", filterCmdMenu);
-	x = filterCmdMenu->insertItem( "Spawn...");
-	filterCmdMenu->setItemParameter(x, 1);
-	x = filterCmdMenu->insertItem( "DeSpawn...");
-	filterCmdMenu->setItemParameter(x, 2);
-	x = filterCmdMenu->insertItem( "Death...");
-	filterCmdMenu->setItemParameter(x, 3);
-	x = filterCmdMenu->insertItem( "Locate...");
-	filterCmdMenu->setItemParameter(x, 4);
-	x = filterCmdMenu->insertItem( "Caution...");
-	filterCmdMenu->setItemParameter(x, 5);
-	x = filterCmdMenu->insertItem( "Hunt...");
-	filterCmdMenu->setItemParameter(x, 6);
-	x = filterCmdMenu->insertItem( "Danger...");
-	filterCmdMenu->setItemParameter(x, 7);
-	connect(filterCmdMenu, SIGNAL(activated(int)), this, SLOT(set_filter_AudioCommand(int)));
+	QMenu* filterCmdMenu = new QMenu("&Audio Commands", this);
+
+	// TODO: Change these values to an enum
+	action = new QAction("Spawn...", this);
+	action->setData(1);
+	filterCmdMenu->addAction(action);
+
+	action = new QAction("Despawn...", this);
+	action->setData(2);
+	filterCmdMenu->addAction(action);
+
+	action = new QAction("Death...", this);
+	action->setData(3);
+	filterCmdMenu->addAction(action);
+
+	action = new QAction("Locate...", this);
+	action->setData(4);
+	filterCmdMenu->addAction(action);
+
+	action = new QAction("Caution...", this);
+	action->setData(5);
+	filterCmdMenu->addAction(action);
+
+	action = new QAction("Hunt...", this);
+	action->setData(6);
+	filterCmdMenu->addAction(action);
+
+	action = new QAction("Danger...", this);
+	action->setData(7);
+	filterCmdMenu->addAction(action);
+
+	connect(filterCmdMenu, SIGNAL(triggered(QAction*)), this, SLOT(set_filter_AudioCommand(QAction*)));
+	filterMenu->addMenu(filterCmdMenu);
+
+	menuBar()->addMenu(filterMenu);
 }
 
 void EQInterface::createInterfaceMenu()
@@ -3083,45 +3153,40 @@ void EQInterface::loadFormatStrings()
 
 void EQInterface::select_filter_file()
 {
-	QString filterFile = Q3FileDialog::getOpenFileName(m_filterMgr->filterFile(),
-													   QString("ShowEQ Filter Files (*.xml)"),
-													   0, "Select Filter Config...");
+	QString filterFile = Q3FileDialog::getOpenFileName(m_filterMgr->filterFile(), QString("ShowEQ Filter Files (*.xml)"), 0, "Select Filter Config...");
+
 	if (!filterFile.isEmpty())
 		m_filterMgr->loadFilters(filterFile);
 }
 
-void EQInterface::toggle_filter_Case(int id)
+void EQInterface::toggle_filter_Case(bool state)
 {
-	m_filterMgr->setCaseSensitive(!m_filterMgr->caseSensitive());
-	menuBar()->setItemChecked(id, m_filterMgr->caseSensitive());
+	m_filterMgr->setCaseSensitive(state);
 	pSEQPrefs->setPrefBool("IsCaseSensitive", "Filters", m_filterMgr->caseSensitive());
 }
 
-void EQInterface::toggle_filter_AlertInfo(int id)
+void EQInterface::toggle_filter_AlertInfo(bool state)
 {
-	pSEQPrefs->setPrefBool("AlertInfo", "Filters", !pSEQPrefs->getPrefBool("AlertInfo", "Filters"));
-	menuBar()->setItemChecked(id, pSEQPrefs->getPrefBool("AlertInfo", "Filters"));
+	pSEQPrefs->setPrefBool("AlertInfo", "Filters", state);
 }
 
-void EQInterface::toggle_filter_UseSystemBeep(int id)
+void EQInterface::toggle_filter_UseSystemBeep(bool state)
 {
-	m_filterNotifications->setUseSystemBeep(!m_filterNotifications->useSystemBeep());
-	menuBar()->setItemChecked(id, m_filterNotifications->useSystemBeep());
+	m_filterNotifications->setUseSystemBeep(state);
 }
 
-void EQInterface::toggle_filter_UseCommands(int id)
+void EQInterface::toggle_filter_UseCommands(bool state)
 {
-	m_filterNotifications->setUseCommands(!m_filterNotifications->useCommands());
-	menuBar()->setItemChecked(id, m_filterNotifications->useCommands());
+	m_filterNotifications->setUseCommands(state);
 }
 
-void EQInterface::toggle_filter_Log(int id)
+void EQInterface::toggle_filter_Log(QAction* action)
 {
 	if (!m_filteredSpawnLog)
 		createFilteredSpawnLog();
 
 	uint32_t filters = m_filteredSpawnLog->filters();
-	uint32_t filter = menuBar()->itemParameter(id);
+	uint32_t filter = action->data().toUInt();
 
 	if (filters & filter)
 		filters &= ~filter;
@@ -3130,44 +3195,54 @@ void EQInterface::toggle_filter_Log(int id)
 
 	m_filteredSpawnLog->setFilters(filters);
 
-	menuBar()->setItemChecked(id, ((filters & filter) != 0));
+	action->setChecked(filters & filter);
 	pSEQPrefs->setPrefBool("Log", "Filters", filters);
 }
 
-void EQInterface::set_filter_AudioCommand(int id)
+void EQInterface::set_filter_AudioCommand(QAction* action)
 {
 	QString property;
 	QString prettyName;
-	switch(menuBar()->itemParameter(id))
+
+	uint32_t type = action->data().toUInt();
+
+	switch (type)
 	{
 		case 1:
 			property = "SpawnAudioCommand";
 			prettyName = "Spawn";
 			break;
+
 		case 2:
 			property = "DeSpawnAudioCommand";
 			prettyName = "DeSpawn";
 			break;
+
 		case 3:
 			property = "DeathAudioCommand";
 			prettyName = "Death";
 			break;
+
 		case 4:
 			property = "LocateSpawnAudioCommand";
 			prettyName = "Locate Spawn";
 			break;
+
 		case 5:
 			property = "CautionSpawnAudioCommand";
 			prettyName = "Caution Spawn";
 			break;
+
 		case 6:
 			property = "HuntSpawnAudioCommand";
 			prettyName = "Hunt Spawn";
 			break;
+
 		case 7:
 			property = "DangerSpawnAudioCommand";
 			prettyName = "Danger Spawn";
 			break;
+
 		default:
 			return;
 	}
@@ -3177,10 +3252,8 @@ void EQInterface::set_filter_AudioCommand(int id)
 	QString value = pSEQPrefs->getPrefString(property, "Filters", prefstring);
 
 	bool ok = false;
-	QString command =
-    QInputDialog::getText("ShowEQ " + prettyName + "Command",
-						  "Enter command line to use for " + prettyName + "'s:",
-						  QLineEdit::Normal, value, &ok, this);
+	QString command = QInputDialog::getText("ShowEQ " + prettyName + "Command",
+			"Enter command line to use for " + prettyName + "'s:", QLineEdit::Normal, value, &ok, this);
 
 	if (ok)
 		pSEQPrefs->setPrefString(property, "Filters", command);

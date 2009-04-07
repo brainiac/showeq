@@ -264,12 +264,13 @@ private slots:
 
 	void toggle_view_UnknownData();
 	void select_filter_file();
-	void toggle_filter_Case(int id);
-	void toggle_filter_AlertInfo(int id);
-	void toggle_filter_UseSystemBeep(int id);
-	void toggle_filter_UseCommands(int id);
-	void toggle_filter_Log(int id);
-	void set_filter_AudioCommand(int id);
+	void toggle_filter_Case(bool);
+	void toggle_filter_AlertInfo(bool);
+	void toggle_filter_UseSystemBeep(bool);
+	void toggle_filter_UseCommands(bool);
+	void toggle_filter_Log(QAction*);
+	void set_filter_AudioCommand(QAction*);
+
 	void toggle_view_menubar();
 	void toggle_view_statusbar();
 	void set_main_WindowCaption(int id);
