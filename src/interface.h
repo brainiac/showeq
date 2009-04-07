@@ -190,7 +190,6 @@ public slots:
 	void toggle_log_Filter_ZoneData_Client();
 	void toggle_log_Filter_ZoneData_Server();
 
-	void selectTheme(int id);
 	void toggleOpcodeMonitoring(bool);
 	void set_opcode_monitored_list();
 	void toggle_opcode_view(bool);
@@ -303,7 +302,6 @@ private slots:
 
 protected:
 	bool getMonitorOpCodeList(const QString& title, QString& opcodeList);
-	int setTheme(int id);
 	void loadFormatStrings();
 	void showMap(int mapNum);
 	void showMessageWindow(int winNum);
