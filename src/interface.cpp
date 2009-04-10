@@ -113,7 +113,6 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	m_unknownZoneLog(0),
 	m_opcodeMonitorLog(0),
 	m_selectedSpawn(0),
-	m_windowsMenus(11),
 	m_compass(0),
 	m_expWindow(0),
 	m_combatWindow(0),
@@ -127,9 +126,6 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 
 	for (int l = 0; l < maxNumMessageWindows; l++)
 		m_messageWindow[l] = 0;
-
-	// make sure the windows menus list autodeletes
-	m_windowsMenus.setAutoDelete(true);
 
 	// indicate we're constructing the interface
 	m_creating = true;
@@ -288,7 +284,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	}
 
 	// create window menu (this gets used early)
-	m_windowMenu = new Q3PopupMenu;
+	m_windowMenu = new QMenu("&Window", this);
 
 	createInterfaceWidgets();
 
@@ -1449,12 +1445,12 @@ void EQInterface::createFiltersMenu()
 
 	QAction* action = new QAction("&Reload Filters", this);
 	action->setShortcut(Key_F3);
-	connect(action, SIGNAL(triggered()), this, SLOT(loadFilters()));
+	connect(action, SIGNAL(triggered()), m_filterMgr, SLOT(loadFilters()));
 	filterMenu->addAction(action);
 
 	action = new QAction("&Save Filters", this);
 	action->setShortcut(Key_F4);
-	connect(action, SIGNAL(triggered()), this, SLOT(saveFilters()));
+	connect(action, SIGNAL(triggered()), m_filterMgr, SLOT(saveFilters()));
 	filterMenu->addAction(action);
 
 	action = new QAction("&Edit Filters", this);
@@ -1467,12 +1463,12 @@ void EQInterface::createFiltersMenu()
 
 	action = new QAction("Reload &Zone Filters", this);
 	action->setShortcut(SHIFT + Key_F3);
-	connect(action, SIGNAL(triggered()), this, SLOT(loadZoneFilters()));
+	connect(action, SIGNAL(triggered()), m_filterMgr, SLOT(loadZoneFilters()));
 	filterMenu->addAction(action);
 
 	action = new QAction("S&ave Zone Filters", this);
 	action->setShortcut(SHIFT + Key_F4);
-	connect(action, SIGNAL(triggered()), this, SLOT(saveZoneFilters()));
+	connect(action, SIGNAL(triggered()), m_filterMgr, SLOT(saveZoneFilters()));
 	filterMenu->addAction(action);
 
 	action = new QAction("Edit Zone Fi&lters", this);
@@ -1480,7 +1476,7 @@ void EQInterface::createFiltersMenu()
 	filterMenu->addAction(action);
 
 	action = new QAction("Re&filter Spawns", this);
-	connect(action, SIGNAL(triggered()), this, SLOT(refilterSpawns()));
+	connect(action, SIGNAL(triggered()), m_spawnShell, SLOT(refilterSpawns()));
 	filterMenu->addAction(action);
 
 	action = new QAction("&Is Case Sensitive", this);
@@ -1504,7 +1500,7 @@ void EQInterface::createFiltersMenu()
 	action = new QAction("Use &Commands", this);
 	action->setCheckable(true);
 	action->setChecked(m_filterNotifications->useCommands());
-	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_filter_UseCOmmands(bool)));
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_filter_UseCommands(bool)));
 	filterMenu->addAction(action);
 
 	uint32_t filters = pSEQPrefs->getPrefInt("Log", "Filters", 0);
@@ -1585,69 +1581,65 @@ void EQInterface::createFiltersMenu()
 
 void EQInterface::createInterfaceMenu()
 {
-	int x;
-	QString section = "Interface";
+	QMenu* pInterfaceMenu = new QMenu("&Interface", this);
+	QAction* action = NULL;
 
-	// Interface Menu
-	Q3PopupMenu* pInterfaceMenu = new Q3PopupMenu;
-	menuBar()->insertItem( "&Interface" , pInterfaceMenu);
+	// TODO: Why would I want to hide the menu bar?
+	//QAction* action = new QAction("Hide MenuBar", this);
+	//connect(action, SIGNAL(triggered()), this, SLOT(toggle_view_menubar()));
+	//pInterfaceMenu->addAction(action);
 
-	pInterfaceMenu->insertItem("Hide MenuBar", this, SLOT(toggle_view_menubar()));
+	// Status bar menu
+	QMenu* statusBarMenu = new QMenu("&Status Bar", this);
 
-	// Interface -> Status Bar
-	Q3PopupMenu* statusBarMenu = new Q3PopupMenu;
-	statusBarMenu->setCheckable(true);
-	pInterfaceMenu->insertItem("&Status Bar", statusBarMenu);
-	statusBarMenu->insertItem("Show/Hide", this, SLOT(toggle_view_statusbar()));
+	action = new QAction("Show/Hide", this);
+	action->setCheckable(true);
+	connect(action, SIGNAL(triggered()), this, SLOT(toggle_view_statusbar()));
+	statusBarMenu->addAction(action);
 
-	x = statusBarMenu->insertItem("Status");
-	statusBarMenu->setItemParameter(x, 1);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowStatus", "Interface_StatusBar", false));
+	struct actionInfo {
+		int data;
+		QString name;
+		QString setting;
+	} info[] = {
+		{ 1,    "Status",			"ShowStatus" },
+		{ 2,    "Zone",				"ShowZone" },
+		{ 3,    "Spawns",			"ShowSpawns" },
+		{ 4,    "Experience",		"ShowExp" },
+		{ 5,    "AA Experience",	"ShowExpAA" },
+		{ 6,    "Packet Counter",	"ShowPacketCounter" },
+		{ 7,    "EQ Time",			"ShowEQTime" },
+		{ 8,	"Run Speed",		"ShowSpeed" },
+		{ 9,	"ZEM",				"ShowZEM" },
+		{ -1,	NULL,				NULL }
+	};
 
-	x = statusBarMenu->insertItem("Zone");
-	statusBarMenu->setItemParameter(x, 2);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowZone", "Interface_StatusBar", false));
+	for (int idx = 0; info[idx].data != -1; idx++) {
+		action = new QAction(info[idx].name, this);
+		action->setData(info[idx].data);
+		action->setCheckable(true);
+		action->setChecked(pSEQPrefs->getPrefBool(info[idx].setting, "Interface_StatusBar", false));
+		statusBarMenu->addAction(action);
+	}
+	connect(statusBarMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggle_main_statusbar_Window(QAction*)));
+	pInterfaceMenu->addMenu(statusBarMenu);
 
-	x = statusBarMenu->insertItem("Spawns");
-	statusBarMenu->setItemParameter(x, 3);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowSpawns", "Interface_StatusBar", false));
+	// Terminal Submenu
+	m_terminalMenu = new QMenu("&Terminal", this);
+	
+	m_terminalTypeFilterMenu = new QMenu("Message Type Filter", this);
 
-	x = statusBarMenu->insertItem("Experience");
-	statusBarMenu->setItemParameter(x, 4);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowExp", "Interface_StatusBar", false));
+	m_filterTerminalEnableAll = new QAction("&Enable All", this);
+	connect(m_filterTerminalEnableAll, SIGNAL(triggered()), this, SLOT(enableAllTypeFilters()));
+	m_terminalTypeFilterMenu->addAction(m_filterTerminalEnableAll);
 
-	x = statusBarMenu->insertItem("AA Experience");
-	statusBarMenu->setItemParameter(x, 5);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowExpAA", "Interface_StatusBar", false));
+	m_filterTerminalDisableAll = new QAction("&Disable All", this);
+	connect(m_filterTerminalDisableAll, SIGNAL(triggered()), this, SLOT(disableAllTypeFilters()));
+	m_terminalTypeFilterMenu->addAction(m_filterTerminalDisableAll);
 
-	x = statusBarMenu->insertItem("Packet Counter");
-	statusBarMenu->setItemParameter(x, 6);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowPacketCounter", "Interface_StatusBar", false));
+	m_terminalTypeFilterMenu->addSeparator();
 
-	x = statusBarMenu->insertItem("EQ Time");
-	statusBarMenu->setItemParameter(x, 7);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowEQTime", "Interface_StatusBar", false));
-	x = statusBarMenu->insertItem("Run Speed");
-	statusBarMenu->setItemParameter(x, 8);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowSpeed", "Interface_StatusBar", false));
-
-	// ZEM code
-	x = statusBarMenu->insertItem("ZEM");
-	statusBarMenu->setItemParameter(x, 9);
-	statusBarMenu->setItemChecked(x, pSEQPrefs->getPrefBool("ShowZEM", "Interface_StatusBar", false));
-
-	connect(statusBarMenu, SIGNAL(activated(int)), this, SLOT(toggle_main_statusbar_Window(int)));
-
-	m_terminalMenu = new Q3PopupMenu;
-	pInterfaceMenu->insertItem("&Terminal", m_terminalMenu);
-
-	m_terminalTypeFilterMenu = new Q3PopupMenu;
-	m_terminalMenu->insertItem("MessageTypeFilter", m_terminalTypeFilterMenu);
-	m_terminalTypeFilterMenu->insertItem("&Enable All", this, SLOT(enableAllTypeFilters()), 0, 64);
-	m_terminalTypeFilterMenu->insertItem("&Disable All", this, SLOT(disableAllTypeFilters()), 0, 65);
-
-	m_terminalTypeFilterMenu->insertSeparator(-1);
-
+	// Add additional type names
 	QString typeName;
 	uint64_t enabledTypes = m_terminal->enabledTypes();
 
@@ -1658,111 +1650,178 @@ void EQInterface::createInterfaceMenu()
 		typeName = MessageEntry::messageTypeString((MessageType)i);
 		if (!typeName.isEmpty())
 		{
-			m_terminalTypeFilterMenu->insertItem(typeName, i);
-			m_terminalTypeFilterMenu->setItemChecked(i, (((uint64_t(1) << i) & enabledTypes) != 0));
+			action = new QAction(typeName, this);
+			action->setCheckable(true);
+			action->setChecked(((uint64_t)1 << i) & enabledTypes);
+			action->setData(i);
+			m_filterTerminalActionMap[i] = action;
+			m_terminalTypeFilterMenu->addAction(action);
 		}
 	}
+	connect(m_terminalTypeFilterMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleTypeFilter(QAction*)));
+	m_terminalMenu->addMenu(m_terminalTypeFilterMenu);
 
-	connect(m_terminalTypeFilterMenu, SIGNAL(activated(int)), this, SLOT(toggleTypeFilter(int)));
+	// User Filter Menu - Show
+	m_terminalShowUserFilterMenu = new QMenu("User Message Filter - &Show", this);
+	m_filterTerminalShowUserEnableAll = new QAction("&Enable All", this);
+	connect(m_filterTerminalShowUserEnableAll, SIGNAL(triggered()), this, SLOT(enableAllShowUserFilters()));
+	m_terminalShowUserFilterMenu->addAction(m_filterTerminalShowUserEnableAll);
+	m_filterTerminalShowUserDisableAll = new QAction("&Disable All", this);
+	connect(m_filterTerminalShowUserDisableAll, SIGNAL(triggered()), this, SLOT(disableAllShowUserFilters()));
+	m_terminalShowUserFilterMenu->addAction(m_filterTerminalShowUserDisableAll);
+	m_terminalShowUserFilterMenu->addSeparator();
 
-	m_terminalShowUserFilterMenu = new Q3PopupMenu;
-	m_terminalShowUserFilterMenu->insertItem("&Enable All", this, SLOT(enableAllShowUserFilters()), 0, 66);
-	m_terminalShowUserFilterMenu->insertItem("&Disable All", this, SLOT(disableAllShowUserFilters()), 0, 67);
-	m_terminalShowUserFilterMenu->insertSeparator(-1);
-	m_terminalMenu->insertItem("User Message Filter - &Show", m_terminalShowUserFilterMenu);
-
-	m_terminalHideUserFilterMenu = new Q3PopupMenu;
-	m_terminalHideUserFilterMenu->insertItem("&Enable All", this, SLOT(enableAllHideUserFilters()), 0, 66);
-	m_terminalHideUserFilterMenu->insertItem("&Disable All", this, SLOT(disableAllHideUserFilters()), 0, 67);
-	m_terminalHideUserFilterMenu->insertSeparator(-1);
-	m_terminalMenu->insertItem("User Message Filter - &Hide", m_terminalHideUserFilterMenu);
+	// User Filter Menu - Hide
+	m_terminalHideUserFilterMenu = new QMenu("User Message Filter - &Hide", this);
+	m_filterTerminalHideUserEnableAll = new QAction("&Enable All", this);
+	connect(m_filterTerminalHideUserEnableAll, SIGNAL(triggered()), this, SLOT(enableAllHideUserFilters()));
+	m_terminalHideUserFilterMenu->addAction(m_filterTerminalHideUserEnableAll);
+	m_filterTerminalHideUserDisableAll = new QAction("&Disable All", this);
+	connect(m_filterTerminalHideUserDisableAll, SIGNAL(triggered()), this, SLOT(disableAllHideUserFilters()));
+	m_terminalHideUserFilterMenu->addAction(m_filterTerminalHideUserDisableAll);
+	m_terminalHideUserFilterMenu->addSeparator();
 
 	uint32_t enabledShowUserFilters = m_terminal->enabledShowUserFilters();
 	uint32_t enabledHideUserFilters = m_terminal->enabledHideUserFilters();
+
 	const MessageFilter* filter;
-	for(int i = 0; i < maxMessageFilters; i++)
+	for (int i = 0; i < maxMessageFilters; i++)
 	{
 		filter = m_messageFilters->filter(i);
 		if (filter)
 		{
-			m_terminalShowUserFilterMenu->insertItem(filter->name(), i);
-			m_terminalShowUserFilterMenu->setItemChecked(i, (1 << i) & enabledShowUserFilters);
+			action = new QAction(filter->name(), this);
+			action->setCheckable(true);
+			action->setChecked((1 << i) & enabledShowUserFilters);
+			action->setData(i);
+			m_filterTerminalShowUserMap[i] = action;
+			m_terminalShowUserFilterMenu->addAction(action);
 
-			m_terminalHideUserFilterMenu->insertItem(filter->name(), i);
-			m_terminalHideUserFilterMenu->setItemChecked(i, (1 << i) & enabledHideUserFilters);
+			action = new QAction(filter->name(), this);
+			action->setCheckable(true);
+			action->setChecked((1 << i) & enabledHideUserFilters);
+			action->setData(i);
+			m_filterTerminalHideUserMap[i] = action;
+			m_terminalHideUserFilterMenu->addAction(action);
 		}
 	}
+	connect(m_terminalShowUserFilterMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleShowUserFilter(QAction*)));
+	connect(m_terminalHideUserFilterMenu, SIGNAL(triggered(QAction*)), this, SLOT(toggleHideUserFilter(QAction*)));
 
-	connect(m_terminalShowUserFilterMenu, SIGNAL(activated(int)), this, SLOT(toggleShowUserFilter(int)));
-	connect(m_terminalHideUserFilterMenu, SIGNAL(activated(int)), this, SLOT(toggleHideUserFilter(int)));
+	action = new QAction("Edit User &Message Filters...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(showMessageFilterDialog()));
+	m_terminalMenu->addAction(action);
 
-	m_terminalMenu->insertItem("Edit User &Message Filters...", this, SLOT(showMessageFilterDialog()));
-	m_terminalMenu->insertSeparator(-1);
+	m_terminalMenu->addSeparator();
 
-	x = m_terminalMenu->insertItem("&Display Type", this, SLOT(toggleDisplayType(int)));
-	m_terminalMenu->setItemChecked(x, m_terminal->displayType());
+	action = new QAction("&Display Type", this);
+	action->setCheckable(true);
+	action->setChecked(m_terminal->displayType());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleDisplayType(bool)));
+	m_terminalMenu->addAction(action);
 
-	x = m_terminalMenu->insertItem("Display T&ime/Date", this, SLOT(toggleDisplayTime(int)));
-	m_terminalMenu->setItemChecked(x, m_terminal->displayDateTime());
+	action = new QAction("Display T&ime/Date", this);
+	action->setCheckable(true);
+	action->setChecked(m_terminal->displayDateTime());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleDisplayTime(bool)));
+	m_terminalMenu->addAction(action);
 
-	x = m_terminalMenu->insertItem("Display &EQ Date/Time", this, SLOT(toggleEQDisplayTime(int)));
-	m_terminalMenu->setItemChecked(x, m_terminal->displayEQDateTime());
+	action = new QAction("Display &EQ Date/Time", this);
+	action->setCheckable(true);
+	action->setChecked(m_terminal->displayEQDateTime());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleEQDisplayTime(bool)));
+	m_terminalMenu->addAction(action);
 
-	x = m_terminalMenu->insertItem("&Use Color", this, SLOT(toggleUseColor(int)));
-	m_terminalMenu->setItemChecked(x, m_terminal->useColor());
+	action = new QAction("&Use Color", this);
+	action->setCheckable(true);
+	action->setChecked(m_terminal->useColor());
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleUseColor(bool)));
+	m_terminalMenu->addAction(action);
 
+	pInterfaceMenu->addMenu(m_terminalMenu);
 
-	pInterfaceMenu->insertItem( "Formatted Messages File...", this, SLOT(select_main_FormatFile(int)));
-	pInterfaceMenu->insertItem( "Spells File...", this, SLOT(select_main_SpellsFile(int)));
+	// Formatted Messages File
+	action = new QAction("Formatted Messages File...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(select_main_FormatFile()));
+	pInterfaceMenu->addAction(action);
+
+	// Spells File
+	action = new QAction("Spells File...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(select_main_SpellsFile()));
+	pInterfaceMenu->addAction(action);
+
+	menuBar()->addMenu(pInterfaceMenu);
 }
 
 void EQInterface::createWindowMenu()
 {
-	int x;
-	QString section = "Interface";
-
 	// insert Window menu
-	menuBar()->insertItem("&Window", m_windowMenu);
+	//m_windowMenu = new QMenu("&Window", this);
+	QAction* action = NULL;
 
-	// All of the Window menu items that don't automatically get inserted
-	// have to be manually placed in the right positions.
+	// Get the current list of actions
+	QList<QAction*> oldActions = m_windowMenu->actions();
+	QListIterator<QAction*> it(oldActions);
+	while (it.hasNext())
+		m_windowMenu->removeAction(it.next());
 
-	// Interface -> WindowCaption
-	m_windowCaptionMenu = new Q3PopupMenu;
-	m_windowMenu->insertItem( "Window &Caption", m_windowCaptionMenu, -1, 0);
+	// Window Menu -> Set Window Caption
+	// TODO: Why do we care about setting these???
+	m_windowCaptionMenu = new QMenu("Window &Caption", this);
 
-	x = m_windowCaptionMenu->insertItem("&Main Window...");
-	m_windowCaptionMenu->setItemParameter(x, 5);
+	struct WindowInfo {
+		QString name;
+		int data;
+	} captionInfo[] = {
+		{ "&Main Window...",		5 },
+		{ "Spawn &List...",			0 },
+		{ "Spawn List &2...",		10 },
+		{ "Spawn P&oint List...",	9 },
+		{ "&Player Stats...",		1 },
+		{ "Player &Skills...",		2 },
+		{ "Spell L&ist...",			3 },
+		{ "&Compass...",			4 },
+		{ "&Experience Window...",	6 },
+		{ "Comb&at Window...",		7 },
+		{ "&NetWork Diagnostics...", 8 },
+		{ "", -1 }
+	};
+	for (int i = 0; captionInfo[i].data != -1; i++) {
+		action = new QAction(captionInfo[i].name, this);
+		action->setData(captionInfo[i].data);
+		m_windowCaptionMenu->addAction(action);
+	}
 
-	x = m_windowCaptionMenu->insertItem("Spawn &List...");
-	m_windowCaptionMenu->setItemParameter(x, 0);
+	// insert Map docking options
+	// NOTE: Always insert Map docking options at the end of the Docked menu
+	for (int i = 0; i < maxNumMaps; i++)
+	{
+		QString mapName = "Map";
+		if (i > 0)
+			mapName += QString::number(i + 1);
+		action = new QAction(mapName, this);
+		action->setData(i + mapCaptionBase);
+		m_windowCaptionMenu->addAction(action);
+	}
+	connect (m_windowCaptionMenu, SIGNAL(triggered(QAction*)), this, SLOT(set_main_WindowCaption(QAction*)));
+	m_windowMenu->addMenu(m_windowCaptionMenu);
 
-	x = m_windowCaptionMenu->insertItem("Spawn List &2...");
-	m_windowCaptionMenu->setItemParameter(x, 10);
+	// Window Menu -> Set Window Font
+	QMenu* windowFontMenu = new QMenu("&Font", this);
 
-	x = m_windowCaptionMenu->insertItem("Spawn P&oint List...");
-	m_windowCaptionMenu->setItemParameter(x, 9);
+	action = new QAction("&Application Default...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_main_Font()));
+	windowFontMenu->insertItem("&Application Default...", this, SLOT(set_main_Font()));
 
-	x = m_windowCaptionMenu->insertItem("&Player Stats...");
-	m_windowCaptionMenu->setItemParameter(x, 1);
+	action = new QAction("Main Window Status Font...", this);
+	connect(action, SIGNAL(triggered()), this, SLOT(set_main_statusbar_Font()));
+	windowFontMenu->insertItem("Main Window Status Font...", this, SLOT(set_main_statusbar_Font()));
 
-	x = m_windowCaptionMenu->insertItem("Player &Skills...");
-	m_windowCaptionMenu->setItemParameter(x, 2);
-
-	x = m_windowCaptionMenu->insertItem("Spell L&ist...");
-	m_windowCaptionMenu->setItemParameter(x, 3);
-
-	x = m_windowCaptionMenu->insertItem("&Compass...");
-	m_windowCaptionMenu->setItemParameter(x, 4);
-
-	x = m_windowCaptionMenu->insertItem("&Experience Window...");
-	m_windowCaptionMenu->setItemParameter(x, 6);
-
-	x = m_windowCaptionMenu->insertItem("Comb&at Window...");
-	m_windowCaptionMenu->setItemParameter(x, 7);
-
-	x = m_windowCaptionMenu->insertItem("&Network Diagnostics...");
-	m_windowCaptionMenu->setItemParameter(x, 8);
+	for (int i = 1; captionInfo[i].data != -1; i++) {
+		action = new QAction(captionInfo[i].name, this);
+		action->setData(captionInfo[i].data);
+		windowFontMenu->addAction(action);
+	}
 
 	// insert Map docking options
 	// NOTE: Always insert Map docking options at the end of the Docked menu
@@ -1771,96 +1830,61 @@ void EQInterface::createWindowMenu()
         QString mapName = "Map";
         if (i > 0)
             mapName += QString::number(i + 1);
-        x = m_windowCaptionMenu->insertItem(mapName);
-        m_windowCaptionMenu->setItemParameter(x, i + mapCaptionBase);
+
+		action = new QAction(mapName, this);
+		action->setData(i + mapCaptionBase);
+		windowFontMenu->addAction(action);
 	}
+	connect(windowFontMenu, SIGNAL(triggered(QAction*)), this, SLOT(set_main_WindowFont(QAction*)));
+	m_windowMenu->addMenu(windowFontMenu);
 
-	connect (m_windowCaptionMenu, SIGNAL(activated(int)),
-			 this, SLOT(set_main_WindowCaption(int)));
+	// Save Window Sizes & Positions
+	action = new QAction("Save Window Sizes && Positions", this);
+	action->setCheckable(true);
+	action->setChecked(pSEQPrefs->getPrefBool("SavePosition", "Interface", true));
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_main_SavePosition(bool)));
+	m_windowMenu->addAction(action);
 
-	// Interface -> Window Font
-	Q3PopupMenu* windowFontMenu = new Q3PopupMenu;
-	m_windowMenu->insertItem("&Font", windowFontMenu, -1, 1);
+	// Restore Window Positions
+	action = new QAction("Restore Window Positions", this);
+	action->setCheckable(true);
+	action->setChecked(pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true));
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggle_main_UseWindowPos(bool)));
+	m_windowMenu->addAction(action);
 
-	windowFontMenu->insertItem("&Application Default...", this, SLOT(set_main_Font(int)));
+	m_windowMenu->addSeparator();
 
-	windowFontMenu->insertItem("Main Window Status Font...", this, SLOT(set_main_statusbar_Font(int)));
-	//   x = windowFontMenu->insertItem("&Main Window");
-	//   windowFontMenu->setItemParameter(x, 5);
-
-	x = windowFontMenu->insertItem("Spawn &List...");
-	windowFontMenu->setItemParameter(x, 0);
-
-	x = windowFontMenu->insertItem("Spawn List &2...");
-	windowFontMenu->setItemParameter(x, 10);
-
-	x = windowFontMenu->insertItem("Spawn P&oint List...");
-	windowFontMenu->setItemParameter(x, 9);
-
-	x = windowFontMenu->insertItem("&Player Stats...");
-	windowFontMenu->setItemParameter(x, 1);
-
-	x = windowFontMenu->insertItem("Player &Skills...");
-	windowFontMenu->setItemParameter(x, 2);
-
-	x = windowFontMenu->insertItem("Spell L&ist...");
-	windowFontMenu->setItemParameter(x, 3);
-
-	x = windowFontMenu->insertItem("&Compass...");
-	windowFontMenu->setItemParameter(x, 4);
-
-	x = windowFontMenu->insertItem("&Experience Window...");
-	windowFontMenu->setItemParameter(x, 6);
-
-	x = windowFontMenu->insertItem("Comb&at Window...");
-	windowFontMenu->setItemParameter(x, 7);
-
-	x = windowFontMenu->insertItem("&Network Diagnostics...");
-	windowFontMenu->setItemParameter(x, 8);
-
-	// insert Map docking options
-	// NOTE: Always insert Map docking options at the end of the Docked menu
-	for (int i = 0; i < maxNumMaps; i++)
-	{
-        QString mapName = "Map";
-        if (i > 0)
-            mapName += QString::number(i + 1);
-        x = m_windowCaptionMenu->insertItem(mapName);
-        m_windowCaptionMenu->setItemParameter(x, i + mapCaptionBase);
-	}
-
-	connect (windowFontMenu, SIGNAL(activated(int)), this, SLOT(set_main_WindowFont(int)));
+	// Add old actions back
+	m_windowMenu->addActions(oldActions);
 
 
-	x = m_windowMenu->insertItem("Save Window Sizes && Positions", this, SLOT(toggle_main_SavePosition(int)), 0, -1, 2);
-	m_windowMenu->setItemChecked(x, pSEQPrefs->getPrefBool("SavePosition", "Interface", true));
-	x = m_windowMenu->insertItem("Restore Window Positions", this, SLOT(toggle_main_UseWindowPos(int)), 0, -1, 3);
-	m_windowMenu->setItemChecked(x, pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true));
-	m_windowMenu->insertSeparator(4);
+	m_windowBottomAction = m_windowMenu->addSeparator();
+
+
+	menuBar()->addMenu(m_windowMenu);
 }
 
 void EQInterface::createDebugMenu()
 {
 	////////////////////////////////////////////////////////////////
 	// Debug menu
-	QMenu* pDebugMenu = new QMenu;
-	menuBar()->insertItem("&Debug", pDebugMenu);
-	pDebugMenu->insertItem("List I&nterface", this, SLOT(listInterfaceInfo()));
-	pDebugMenu->insertItem("List S&pawns", this, SLOT(listSpawns()), ALT+CTRL+Key_P);
-	pDebugMenu->insertItem("List &Drops", this, SLOT(listDrops()), ALT+CTRL+Key_D);
-	pDebugMenu->insertItem("List &Map Info", this, SLOT(listMapInfo()), ALT+CTRL+Key_M);
-	pDebugMenu->insertItem("List G&uild Info", m_guildmgr, SLOT(listGuildInfo()));
-	pDebugMenu->insertItem("List &Group", this, SLOT(listGroup()), ALT+CTRL+Key_G);
-	pDebugMenu->insertItem("List Guild M&embers", this, SLOT(listGuild()), ALT+CTRL+Key_E);
-	pDebugMenu->insertItem("Dump Spawns", this, SLOT(dumpSpawns()), ALT+SHIFT+CTRL+Key_P);
-	pDebugMenu->insertItem("Dump Drops", this, SLOT(dumpDrops()), ALT+SHIFT+CTRL+Key_D);
-	pDebugMenu->insertItem("Dump Map Info", this, SLOT(dumpMapInfo()), ALT+SHIFT+CTRL+Key_M);
-	pDebugMenu->insertItem("Dump Guild Info", this , SLOT(dumpGuildInfo()));
-	pDebugMenu->insertItem("Dump SpellBook Info", this , SLOT(dumpSpellBook()));
-	pDebugMenu->insertItem("Dump Group", this, SLOT(dumpGroup()), ALT+CTRL+SHIFT+Key_G);
-	pDebugMenu->insertItem("Dump Guild Members", this, SLOT(dumpGuild()), ALT+CTRL+SHIFT+Key_E);
-	pDebugMenu->insertItem("List &Filters", m_filterMgr, SLOT(listFilters()), ALT+CTRL+Key_F);
-	pDebugMenu->insertItem("List &Zone Filters", m_filterMgr, SLOT(listZoneFilters()));
+	QMenu* pDebugMenu = menuBar()->addMenu("&Debug");
+	pDebugMenu->addAction("List I&nterface",		this,		SLOT(listInterfaceInfo()));
+	pDebugMenu->addAction("List S&pawns",			this,		SLOT(listSpawns()),			ALT + CTRL + Key_P);
+	pDebugMenu->addAction("List &Drops",			this,		SLOT(listDrops()),			ALT + CTRL + Key_D);
+	pDebugMenu->addAction("List &Map Info",			this,		SLOT(listMapInfo()),		ALT + CTRL + Key_M);
+	pDebugMenu->addAction("List G&uild Info",		m_guildmgr, SLOT(listGuildInfo()));
+	pDebugMenu->addAction("List &Group",			this,		SLOT(listGroup()),			ALT + CTRL + Key_G);
+	pDebugMenu->addAction("List Guild M&embers",	this,		SLOT(listGuild()),			ALT + CTRL + Key_E);
+	pDebugMenu->addAction("Dump Spawns",			this,		SLOT(dumpSpawns()),			ALT + SHIFT + CTRL + Key_P);
+	pDebugMenu->addAction("Dump Drops",				this,		SLOT(dumpDrops()),			ALT + SHIFT + CTRL + Key_D);
+	pDebugMenu->addAction("Dump Map Info",			this,		SLOT(dumpMapInfo()),		ALT + SHIFT + CTRL + Key_M);
+	pDebugMenu->addAction("Dump Guild Info",		this,		SLOT(dumpGuildInfo()));
+	pDebugMenu->addAction("Dump SpellBook Info",	this,		SLOT(dumpSpellBook()));
+	pDebugMenu->addAction("Dump Group",				this,		SLOT(dumpGroup()),			ALT + CTRL + SHIFT + Key_G);
+	pDebugMenu->addAction("Dump Guild Members",		this,		SLOT(dumpGuild()),			ALT + CTRL + SHIFT + Key_E);
+	pDebugMenu->addAction("List &Filters",			m_filterMgr, SLOT(listFilters()),		ALT + CTRL + Key_F);
+	pDebugMenu->addAction("List &Zone Filters",		m_filterMgr, SLOT(listZoneFilters()));
 }
 
 void EQInterface::createStatusBar()
@@ -2683,14 +2707,11 @@ void EQInterface::toggleWindowDockable(QAction* action)
 	}
 }
 
-void EQInterface::set_main_WindowCaption(int id)
+void EQInterface::set_main_WindowCaption(QAction*  action)
 {
 	QWidget* widget = 0;
-	int winnum;
+	int winnum = action->data().toInt();
 	QString window;
-
-	// get the window number parameter
-	winnum = menuBar()->itemParameter(id);
 
 	switch(winnum)
 	{
@@ -2774,13 +2795,9 @@ void EQInterface::set_main_WindowCaption(int id)
 	}
 }
 
-void EQInterface::set_main_WindowFont(int id)
+void EQInterface::set_main_WindowFont(QAction* action)
 {
-	int winnum;
-
-	// get the window number parameter
-	winnum = menuBar()->itemParameter(id);
-
+	int winnum = action->data().toInt();
 	bool ok = false;
 	QFont newFont;
 	SEQWindow* window = 0;
@@ -2862,9 +2879,7 @@ void EQInterface::set_main_WindowFont(int id)
 	if (window != 0)
 	{
 		// get a new font
-		newFont = QFontDialog::getFont(&ok, window->font(),
-									   this, "ShowEQ " + title + " Font");
-
+		newFont = QFontDialog::getFont(&ok, window->font(), this, "ShowEQ " + title + " Font");
 
 		// if the user entered a font and clicked ok, set the windows font
 		if (ok)
@@ -2872,41 +2887,34 @@ void EQInterface::set_main_WindowFont(int id)
 	}
 }
 
-void EQInterface::set_main_Font(int id)
+void EQInterface::set_main_Font()
 {
 	QString name = "ShowEQ - Application Font";
 	bool ok = false;
 
 	// get a new application font
-	QFont newFont;
-	newFont = QFontDialog::getFont(&ok, QApplication::font(),
-								   this, name);
+	QFont newFont = QFontDialog::getFont(&ok, QApplication::font(), this, name);
 
 	// if the user clicked ok and selected a valid font, set it
 	if (ok)
 	{
 		// set the new application font
-		qApp->setFont( newFont, true );
+		qApp->setFont(newFont, true);
 
 		// set the preference for future sessions
-		pSEQPrefs->setPrefFont("Font", "Interface",
-							   newFont);
+		pSEQPrefs->setPrefFont("Font", "Interface", newFont);
 
 		// make sure the windows that override the application font, do so
 		emit restoreFonts();
 	}
 }
 
-void EQInterface::select_main_FormatFile(int id)
+void EQInterface::select_main_FormatFile()
 {
-	QString formatFile = pSEQPrefs->getPrefString("FormatFile", "Interface",
-												  "eqstr_us.txt");
-
+	QString formatFile = pSEQPrefs->getPrefString("FormatFile", "Interface", "eqstr_us.txt");
 	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", formatFile);
 
-	QString newFormatFile =
-    Q3FileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt",
-								  this, "FormatFile", "Select Format File");
+	QString newFormatFile = Q3FileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
 
 	// if the newFormatFile name is not empty, then the user selected a file
 	if (!newFormatFile.isEmpty())
@@ -2919,16 +2927,12 @@ void EQInterface::select_main_FormatFile(int id)
 	}
 }
 
-void EQInterface::select_main_SpellsFile(int id)
+void EQInterface::select_main_SpellsFile()
 {
-	QString spellsFile = pSEQPrefs->getPrefString("SpellsFile", "Interface",
-												  "spells_us.txt");
-
+	QString spellsFile = pSEQPrefs->getPrefString("SpellsFile", "Interface", "spells_us.txt");
 	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", spellsFile);
 
-	QString newSpellsFile =
-    Q3FileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt",
-								  this, "FormatFile", "Select Format File");
+	QString newSpellsFile = Q3FileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
 
 	// if the newFormatFile name is not empty, then the user selected a file
 	if (!newSpellsFile.isEmpty())
@@ -2941,57 +2945,57 @@ void EQInterface::select_main_SpellsFile(int id)
 	}
 }
 
-void EQInterface::toggle_main_statusbar_Window(int id)
+void EQInterface::toggle_main_statusbar_Window(QAction* action)
 {
 	QWidget* window = 0;
 	QString preference;
 
-	switch (menuBar()->itemParameter(id))
+	int id = action->data().toInt();
+
+	switch (id)
 	{
 		case 1:
 			window = m_stsbarStatus;
-
 			preference = "ShowStatus";
 			break;
+
 		case 2:
 			window = m_stsbarZone;
-
 			preference = "ShowZone";
 			break;
+
 		case 3:
 			window = m_stsbarSpawns;
-
 			preference = "ShowSpawns";
 			break;
+
 		case 4:
 			window = m_stsbarExp;
-
 			preference = "ShowExp";
 			break;
+
 		case 5:
 			window = m_stsbarExpAA;
-
 			preference = "ShowExpAA";
 			break;
+
 		case 6:
 			window = m_stsbarPkt;
-
 			preference = "ShowPacketCounter";
 			break;
+
 		case 7:
 			window = m_stsbarEQTime;
-
 			preference = "ShowEQTime";
 			break;
+
 		case 8:
 			window = m_stsbarSpeed;
-
 			preference = "ShowSpeed";
 			break;
-			// ZEM code
+
 		case 9:
 			window = m_stsbarZEM;
-
 			preference = "ShowZEM";
 			break;
 
@@ -3012,13 +3016,13 @@ void EQInterface::toggle_main_statusbar_Window(int id)
 		window->hide();
 
 	// check/uncheck the menu item
-	menuBar()->setItemChecked(id, show);
+	action->setChecked(show);
 
 	// set the preference for future sessions
 	pSEQPrefs->setPrefBool(preference, "Interface_StatusBar", show);
 }
 
-void EQInterface::set_main_statusbar_Font(int id)
+void EQInterface::set_main_statusbar_Font()
 {
 	QString name = "ShowEQ - Status Font";
 	bool ok = false;
@@ -3041,16 +3045,14 @@ void EQInterface::set_main_statusbar_Font(int id)
 	}
 }
 
-void EQInterface::toggle_main_SavePosition(int id)
+void EQInterface::toggle_main_SavePosition(bool enabled)
 {
-    pSEQPrefs->setPrefBool("SavePosition", "Interface", !pSEQPrefs->getPrefBool("SavePosition", "Interface"));
-    m_windowMenu->setItemChecked(id, pSEQPrefs->getPrefBool("SavePosition", "Interface"));
+	pSEQPrefs->setPrefBool("SavePosition", "Interface", enabled);
 }
 
-void EQInterface::toggle_main_UseWindowPos(int id)
+void EQInterface::toggle_main_UseWindowPos(bool enabled)
 {
-    pSEQPrefs->setPrefBool("UseWindowPos", "Interface", !pSEQPrefs->getPrefBool("UseWindowPos", "Interface"));
-    m_windowMenu->setItemChecked(id, pSEQPrefs->getPrefBool("UseWindowPos", "Interface"));
+	pSEQPrefs->setPrefBool("UseWindowPos", "Interface", enabled);
 }
 
 //
@@ -5039,9 +5041,11 @@ void EQInterface::showMessageFilterDialog()
 	m_messageFilterDialog->show();
 }
 
-void EQInterface::toggleTypeFilter(int id)
+void EQInterface::toggleTypeFilter(QAction* action)
 {
 	uint64_t enabledTypes = m_terminal->enabledTypes();
+	
+	int id = action->data().toInt();
 
 	if (((uint64_t(1) << id) & enabledTypes) != 0)
 		enabledTypes &= ~(uint64_t(1) << id);
@@ -5051,23 +5055,20 @@ void EQInterface::toggleTypeFilter(int id)
 	m_terminal->setEnabledTypes(enabledTypes);
 
 	// (un)check the appropriate menu item
-	m_terminalTypeFilterMenu->setItemChecked(id, ((enabledTypes & (uint64_t(1) << id))));
+	action->setChecked(enabledTypes & ((uint64_t)1 << id));
 }
 
 void EQInterface::disableAllTypeFilters()
 {
 	m_terminal->setEnabledTypes(0);
-	// make sure the All menu items are unchecked
-	m_terminalTypeFilterMenu->setItemChecked(64, false);
-	m_terminalTypeFilterMenu->setItemChecked(65, false);
 
 	// uncheck all the menu items
 	QString typeName;
 	for (int i = MT_Guild; i <= MT_Max; i++)
 	{
 		typeName = MessageEntry::messageTypeString((MessageType)i);
-		if (!typeName.isEmpty())
-			m_terminalTypeFilterMenu->setItemChecked(i, false);
+		if (!typeName.isEmpty() && m_filterTerminalActionMap.contains(i))
+			m_filterTerminalActionMap[i]->setChecked(false);
 	}
 }
 
@@ -5075,23 +5076,21 @@ void EQInterface::enableAllTypeFilters()
 {
 	m_terminal->setEnabledTypes(0xFFFFFFFFFFFFFFFFULL);
 
-	// make sure the All menu items are unchecked
-	m_terminalTypeFilterMenu->setItemChecked(64, false);
-	m_terminalTypeFilterMenu->setItemChecked(65, false);
-
 	// check all the menu items
 	QString typeName;
 	for (int i = MT_Guild; i <= MT_Max; i++)
 	{
 		typeName = MessageEntry::messageTypeString((MessageType)i);
-		if (!typeName.isEmpty())
-			m_terminalTypeFilterMenu->setItemChecked(i, true);
+		if (!typeName.isEmpty() && m_filterTerminalActionMap.contains(i))
+			m_filterTerminalActionMap[i]->setChecked(true);
 	}
 }
 
-void EQInterface::toggleShowUserFilter(int id)
+void EQInterface::toggleShowUserFilter(QAction* action)
 {
 	uint32_t enabledShowUserFilters = m_terminal->enabledShowUserFilters();
+	int id = action->data().toInt();
+
 	// toggle whether the filter is enabled/disabled
 	if (((1 << id) & enabledShowUserFilters) != 0)
 		enabledShowUserFilters &= ~(1 << id);
@@ -5101,7 +5100,8 @@ void EQInterface::toggleShowUserFilter(int id)
 	m_terminal->setEnabledShowUserFilters(enabledShowUserFilters);
 
 	// (un)check the appropriate menu item
-	m_terminalShowUserFilterMenu->setItemChecked(id, ((enabledShowUserFilters & (1 << id)) != 0));
+	if (m_filterTerminalShowUserMap.contains(id))
+		action->setChecked(enabledShowUserFilters & (1 << id));
 }
 
 void EQInterface::disableAllShowUserFilters()
@@ -5109,16 +5109,12 @@ void EQInterface::disableAllShowUserFilters()
 	// set and save all filters disabled setting
 	m_terminal->setEnabledShowUserFilters(0);
 
-	// make sure the All menu items are unchecked
-	m_terminalShowUserFilterMenu->setItemChecked(66, false);
-	m_terminalShowUserFilterMenu->setItemChecked(67, false);
-
 	// uncheck all the menu items
 	QString typeName;
 	for (int i = 0; i <= maxMessageFilters; i++)
 	{
-		if (m_messageFilters->filter(i))
-			m_terminalShowUserFilterMenu->setItemChecked(i, false);
+		if (m_messageFilters->filter(i) && m_filterTerminalShowUserMap.contains(i))
+			m_filterTerminalShowUserMap[i]->setChecked(false);
 	}
 }
 
@@ -5127,22 +5123,19 @@ void EQInterface::enableAllShowUserFilters()
 	// set and save all filters enabled flag
 	m_terminal->setEnabledShowUserFilters(0xFFFFFFFF);
 
-	// make sure the All menu items are unchecked
-	m_terminalShowUserFilterMenu->setItemChecked(66, false);
-	m_terminalShowUserFilterMenu->setItemChecked(67, false);
-
 	// check all the menu items
 	QString typeName;
 	for (int i = 0; i <= maxMessageFilters; i++)
 	{
-		if (m_messageFilters->filter(i))
+		if (m_messageFilters->filter(i) &&  m_filterTerminalShowUserMap.contains(i))
 			m_terminalShowUserFilterMenu->setItemChecked(i, true);
 	}
 }
 
-void EQInterface::toggleHideUserFilter(int id)
+void EQInterface::toggleHideUserFilter(QAction* action)
 {
 	uint32_t enabledHideUserFilters = m_terminal->enabledHideUserFilters();
+	int id = action->data().toInt();
 
 	// toggle whether the filter is enabled/disabled
 	if (((1 << id) & enabledHideUserFilters) != 0)
@@ -5153,7 +5146,7 @@ void EQInterface::toggleHideUserFilter(int id)
 	m_terminal->setEnabledHideUserFilters(enabledHideUserFilters);
 
 	// (un)check the appropriate menu item
-	m_terminalHideUserFilterMenu->setItemChecked(id, ((enabledHideUserFilters & (1 << id)) != 0));
+	action->setChecked(enabledHideUserFilters & (1 << id));
 }
 
 void EQInterface::disableAllHideUserFilters()
@@ -5161,16 +5154,12 @@ void EQInterface::disableAllHideUserFilters()
 	// set and save all filters disabled setting
 	m_terminal->setEnabledHideUserFilters(0);
 
-	// make sure the All menu items are unchecked
-	m_terminalHideUserFilterMenu->setItemChecked(66, false);
-	m_terminalHideUserFilterMenu->setItemChecked(67, false);
-
 	// uncheck all the menu items
 	QString typeName;
 	for (int i = 0; i <= maxMessageFilters; i++)
 	{
-		if (m_messageFilters->filter(i))
-			m_terminalHideUserFilterMenu->setItemChecked(i, false);
+		if (m_messageFilters->filter(i) && m_filterTerminalHideUserMap.contains(i))
+			m_filterTerminalHideUserMap[i]->setChecked(false);
 	}
 }
 
@@ -5179,43 +5168,35 @@ void EQInterface::enableAllHideUserFilters()
 	// set and save all filters enabled flag
 	m_terminal->setEnabledHideUserFilters(0xFFFFFFFF);
 
-	// make sure the All menu items are unchecked
-	m_terminalHideUserFilterMenu->setItemChecked(66, false);
-	m_terminalHideUserFilterMenu->setItemChecked(67, false);
-
 	// check all the menu items
 	QString typeName;
 	for (int i = 0; i <= maxMessageFilters; i++)
 	{
-		if (m_messageFilters->filter(i))
-			m_terminalHideUserFilterMenu->setItemChecked(i, true);
+		if (m_messageFilters->filter(i) && m_filterTerminalHideUserMap.contains(i))
+			m_filterTerminalHideUserMap[i]->setChecked(true);
 	}
 }
 
-void EQInterface::toggleDisplayType(int id)
+void EQInterface::toggleDisplayType(bool state)
 {
 	// toggle the display of message types
-	m_terminal->setDisplayType(m_terminal->displayType());
-	m_terminalMenu->setItemChecked(id, m_terminal->displayType());
+	m_terminal->setDisplayType(state);
 }
 
-void EQInterface::toggleDisplayTime(int id)
+void EQInterface::toggleDisplayTime(bool state)
 {
 	// toggle the display of message time
-	m_terminal->setDisplayDateTime(!m_terminal->displayDateTime());
-	m_terminalMenu->setItemChecked(id, m_terminal->displayDateTime());
+	m_terminal->setDisplayDateTime(state);
 }
 
-void EQInterface::toggleEQDisplayTime(int id)
+void EQInterface::toggleEQDisplayTime(bool state)
 {
-	m_terminal->setDisplayEQDateTime(!m_terminal->displayEQDateTime());
-	m_terminalMenu->setItemChecked(id, m_terminal->displayEQDateTime());
+	m_terminal->setDisplayEQDateTime(state);
 }
 
-void EQInterface::toggleUseColor(int id)
+void EQInterface::toggleUseColor(bool state)
 {
-	m_terminal->setUseColor(!m_terminal->useColor());
-	m_terminalMenu->setItemChecked(id, m_terminal->useColor());
+	m_terminal->setUseColor(state);
 }
 
 void EQInterface::showMap(int i)
@@ -5798,25 +5779,26 @@ void EQInterface::insertWindowMenu(SEQWindow* window)
 	QMenu* menu = window->menu();
 	if (menu)
 	{
-		// insert the windows menu into the window menu
-		int id = m_windowMenu->insertItem(window->caption(), menu);
+		menu->setTitle(window->caption());
+
+		// append it to end of action list
+		m_windowMenu->insertAction(m_windowBottomAction, menu->menuAction());
+
+		seqDebug("Inserting Window Menu: %s", (const char*)window->caption());
 
 		// insert it into the window to window menu id dictionary
-		m_windowsMenus.insert((void*)window, new int(id));
+		m_windowsMenus[window] = menu;
 	}
 }
 
 void EQInterface::removeWindowMenu(SEQWindow* window)
 {
 	// find the windows menu id
-	int* id = m_windowsMenus.find((void*)window);
-
-	// if the window had a menu, then remove it
-	if (id)
+	if (m_windowsMenus.contains(window))
 	{
-		m_windowMenu->removeItem(*id);
+		QMenu* menu = m_windowsMenus[window];
 
-		// remove the item from the list
+		m_windowMenu->removeAction(menu->defaultAction());
 		m_windowsMenus.remove(window);
 	}
 }

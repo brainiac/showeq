@@ -32,6 +32,7 @@
 #include <QTimer>
 #include <QMessageBox>
 #include <QSpinBox>
+#include <QHash>
 
 #include "everquest.h"
 #include "spawnlist.h"
@@ -272,33 +273,34 @@ private slots:
 
 	void toggle_view_menubar();
 	void toggle_view_statusbar();
-	void set_main_WindowCaption(int id);
-	void set_main_WindowFont(int id);
-	void set_main_Font(int id);
-	void select_main_FormatFile(int id);
-	void select_main_SpellsFile(int id);
-	void toggle_main_statusbar_Window(int id);
-	void set_main_statusbar_Font(int id);
+	void set_main_WindowCaption(QAction*);
+	void set_main_WindowFont(QAction*);
+	void set_main_Font();
+	void select_main_FormatFile();
+	void select_main_SpellsFile();
+	void toggle_main_statusbar_Window(QAction*);
+	void set_main_statusbar_Font();
 
 
 	void updateViewMenu();
 
-	void toggle_main_SavePosition(int id);
-	void toggle_main_UseWindowPos(int id);
+	void toggle_main_SavePosition(bool);
+	void toggle_main_UseWindowPos(bool);
 
-	void toggleTypeFilter(int);
+	// Filter Menu Actions
+	void toggleTypeFilter(QAction*);
 	void disableAllTypeFilters();
 	void enableAllTypeFilters();
-	void toggleShowUserFilter(int);
+	void toggleShowUserFilter(QAction*);
 	void disableAllShowUserFilters();
 	void enableAllShowUserFilters();
-	void toggleHideUserFilter(int);
+	void toggleHideUserFilter(QAction*);
 	void disableAllHideUserFilters();
 	void enableAllHideUserFilters();
-	void toggleDisplayType(int);
-	void toggleDisplayTime(int);
-	void toggleEQDisplayTime(int);
-	void toggleUseColor(int);
+	void toggleDisplayType(bool);
+	void toggleDisplayTime(bool);
+	void toggleEQDisplayTime(bool);
+	void toggleUseColor(bool);
 
 protected:
 	bool getMonitorOpCodeList(const QString& title, QString& opcodeList);
@@ -421,7 +423,7 @@ private:
 	QMenu* m_terminalShowUserFilterMenu;
 	QMenu* m_terminalHideUserFilterMenu;
 	QMenu* m_windowMenu;
-	Q3PtrDict<int> m_windowsMenus;
+	QHash<SEQWindow*, QMenu*> m_windowsMenus;
 	QMenu* m_filterZoneDataMenu;
 
 	// View Menu Actions
@@ -464,6 +466,19 @@ private:
 	QAction* m_netOpcodeLog;
 	QAction* m_netOpcodeView;
 
+	// Filter list
+	QAction* m_filterTerminalEnableAll;
+	QAction* m_filterTerminalDisableAll;
+	QMap<int, QAction*> m_filterTerminalActionMap;
+
+	QAction* m_filterTerminalShowUserEnableAll;
+	QAction* m_filterTerminalShowUserDisableAll;
+	QMap<int, QAction*> m_filterTerminalShowUserMap;
+
+	QAction* m_filterTerminalHideUserEnableAll;
+	QAction* m_filterTerminalHideUserDisableAll;
+	QMap<int, QAction*> m_filterTerminalHideUserMap;
+
 	int char_ClassID[PLAYER_CLASSES];
 	int char_RaceID[PLAYER_RACES];
 	int m_packetStartTime;
@@ -483,6 +498,8 @@ private:
 	QLabel* m_stsbarSpeed;
 	// ZEM code
 	QLabel* m_stsbarZEM;
+
+	QAction* m_windowBottomAction;
 
 
 
