@@ -18,7 +18,6 @@
 #include <QPainter>
 #include <QPoint>
 #include <QTimer>
-#include <Q3TextStream>
 #include <Q3PointArray>
 
 using namespace Qt;
@@ -636,7 +635,7 @@ void MapIcons::save()
 		m_mapIcons[k].save(iconTypePrefBaseNames[k], preferenceName());
 }
 
-void MapIcons::dumpInfo(Q3TextStream& out)
+void MapIcons::dumpInfo(QTextStream& out)
 {
 	out << "[" << preferenceName() << " MapIcons]" << endl;
 	out << "ShowSpawnNames: " << m_showSpawnNames << endl;

@@ -30,7 +30,7 @@
 
 #include <Q3IntDict>
 #include <QTimer>
-#include <Q3TextStream>
+#include <QTextStream>
 
 #include "everquest.h"
 #include "spawn.h"
@@ -72,7 +72,7 @@ public:
 	const Item* findClosestItem(spawnItemType type, int16_t x, int16_t y, double& minDistance);
 	Spawn* findSpawnByName(const QString& name);
 
-	void dumpSpawns(spawnItemType type, Q3TextStream& out);
+	void dumpSpawns(spawnItemType type, QTextStream& out);
 	FilterMgr* filterMgr() { return &m_filterMgr; }
 	const ItemMap& getConstMap(spawnItemType type) const;
 	const ItemMap& spawns() const;

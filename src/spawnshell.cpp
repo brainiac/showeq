@@ -298,7 +298,7 @@ bool SpawnShell::updateRuntimeFilterFlags(Item* item)
 	return false;
 }
 
-void SpawnShell::dumpSpawns(spawnItemType type, Q3TextStream& out)
+void SpawnShell::dumpSpawns(spawnItemType type, QTextStream& out)
 {
 	ItemIterator it(getMap(type));
 

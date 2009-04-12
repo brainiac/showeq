@@ -16,11 +16,10 @@
 
 #include <QString>
 #include <Q3Dict>
-#include <Q3TextStream>
+#include <QTextStream>
 
 //----------------------------------------------------------------------
 // forward declarations
-class Q3TextStream;
 
 class NetStream;
 class ZoneMgr;
@@ -88,7 +87,7 @@ public:
 	const GuildMemberDict& members() { return m_members; }
 	size_t maxNameLength() { return m_maxNameLength; }
 
-	void dumpMembers(Q3TextStream& out);
+	void dumpMembers(QTextStream& out);
 	QString zoneString(uint16_t zoneid) const;
 
 public slots:

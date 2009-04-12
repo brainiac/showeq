@@ -15,8 +15,6 @@
 #include "diagnosticmessages.h"
 #include "netstream.h"
 
-#include <Q3TextStream>
-
 GroupMgr::GroupMgr(SpawnShell* spawnShell, Player* player, QObject* parent, const char* name)
   : QObject(parent, name),
 	m_spawnShell(spawnShell),
@@ -307,7 +305,7 @@ void GroupMgr::killSpawn(const Item* item)
 	}
 }
 
-void GroupMgr::dumpInfo(Q3TextStream& out)
+void GroupMgr::dumpInfo(QTextStream& out)
 {
 	// dump general group manager information
 	out << "[GroupMgr]" << endl;

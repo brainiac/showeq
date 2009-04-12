@@ -11,7 +11,7 @@
 #include <stdint.h>
 
 #include <QString>
-#include <Q3TextStream>
+#include <QTextStream>
 
 #include "everquest.h"
 
@@ -52,7 +52,7 @@ public slots:
 	void killSpawn(const Item* item);
 
 	// dump debug info
-	void dumpInfo(Q3TextStream& out);
+	void dumpInfo(QTextStream& out);
 
 signals:
 	void added(const QString& name, const Spawn* mem);

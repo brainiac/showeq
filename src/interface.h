@@ -8,20 +8,6 @@
 #ifndef EQINT_H
 #define EQINT_H
 
-// Deprecated headers
-#include <Q3MainWindow>
-#include <Q3Frame>
-#include <Q3ListView>
-#include <Q3PopupMenu>
-#include <Q3HBox>
-#include <Q3VBox>
-#include <Q3ValueList>
-#include <Q3PtrList>
-#include <Q3TabDialog>
-#include <Q3IntDict>
-#include <Q3PtrDict>
-#include <Q3TextStream>
-
 #include <QPushButton>
 #include <QLCDNumber>
 #include <QLabel>
@@ -87,7 +73,7 @@ class BazaarLog;
 
 //--------------------------------------------------
 // typedefs
-typedef Q3ValueList<int> MenuIDList;
+typedef QList<int> MenuIDList;
 
 //--------------------------------------------------
 // constants
@@ -155,7 +141,7 @@ public slots:
 	void selectPrev();
 	void saveSelectedSpawnPath();
 	void saveSpawnPaths();
-	void saveSpawnPath(Q3TextStream& out, const Item* item);
+	void saveSpawnPath(QTextStream& out, const Item* item);
 	void toggleLogAllPackets();
 	void toggleLogWorldData();
 	void toggleLogZoneData();
@@ -401,7 +387,7 @@ private:
 	QString m_ipstr[5];
 	QString m_macstr[5];
 
-	Q3IntDict<QString> m_formattedMessageStrings;
+	//Q3IntDict<QString> m_formattedMessageStrings;
 
 
 	// Menu Pieces

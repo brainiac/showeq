@@ -61,7 +61,7 @@
 #include <QLabel>
 #include <Q3PopupMenu>
 #include <Q3HBoxLayout>
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QMouseEvent>
 #include <QImageWriter>
 
@@ -665,7 +665,7 @@ void MapMgr::savePrefs()
 #endif
 }
 
-void MapMgr::dumpInfo(Q3TextStream& out)
+void MapMgr::dumpInfo(QTextStream& out)
 {
 	out << "[MapMgr]" << endl;
 	out << "DefaultLineColor: " << m_curLineColor << endl;
@@ -2605,7 +2605,7 @@ void Map::setShowInstanceLocationMarker(bool val)
 		refreshMap();
 }
 
-void Map::dumpInfo(Q3TextStream& out)
+void Map::dumpInfo(QTextStream& out)
 {
 	out << "[" << preferenceName() << "]" << endl;
 	out << "Caption: " << caption() << endl;
@@ -4650,7 +4650,7 @@ void MapFrame::savePrefs()
 		m_map->savePrefs();
 }
 
-void MapFrame::dumpInfo(Q3TextStream& out)
+void MapFrame::dumpInfo(QTextStream& out)
 {
 	// first dump information about the map frame
 	out << "[" << preferenceName() << "]" << endl;

@@ -59,16 +59,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <Q3FileDialog>
-#include <Q3PtrList>
-#include <Q3PopupMenu>
-
 #include <QApplication>
 #include <QFontDialog>
 #include <QColorDialog>
 #include <QInputDialog>
 #include <QStatusBar>
 #include <QWidgetAction>
+#include <QFileDialog>
 
 using namespace Qt;
 
@@ -2914,7 +2911,7 @@ void EQInterface::select_main_FormatFile()
 	QString formatFile = pSEQPrefs->getPrefString("FormatFile", "Interface", "eqstr_us.txt");
 	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", formatFile);
 
-	QString newFormatFile = Q3FileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
+	QString newFormatFile = QFileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
 
 	// if the newFormatFile name is not empty, then the user selected a file
 	if (!newFormatFile.isEmpty())
@@ -2932,7 +2929,7 @@ void EQInterface::select_main_SpellsFile()
 	QString spellsFile = pSEQPrefs->getPrefString("SpellsFile", "Interface", "spells_us.txt");
 	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", spellsFile);
 
-	QString newSpellsFile = Q3FileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
+	QString newSpellsFile = QFileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
 
 	// if the newFormatFile name is not empty, then the user selected a file
 	if (!newSpellsFile.isEmpty())
@@ -3060,33 +3057,25 @@ void EQInterface::toggle_main_UseWindowPos(bool enabled)
 //
 void EQInterface::savePrefs()
 {
-	seqDebug("==> EQInterface::savePrefs()");
+	seqDebug("Saving Preferences...");
 
 	if (isVisible())
 	{
-		seqDebug("\tisVisible()");
-		QString section;
-		QString interfaceSection = "Interface";
-		QString tempStr;
-
-		QString dockPrefs;
-		Q3TextStream ts(&dockPrefs, QIODevice::WriteOnly);
 
 		// save state info
 		QByteArray info = saveState(m_stateVersion);
 		if (!info.isEmpty())
 		{
-			pSEQPrefs->setPrefVariant("DockingInfo", interfaceSection, QVariant(info));
+			pSEQPrefs->setPrefVariant("DockingInfo", "Interface", QVariant(info));
 		}
 
 		// send savePrefs signal out
 		emit saveAllPrefs();
 
-		section = "Interface";
-		if (pSEQPrefs->getPrefBool("SavePosition", interfaceSection, true))
+		if (pSEQPrefs->getPrefBool("SavePosition", "Interface", true))
 		{
-			pSEQPrefs->setPrefPoint("WindowPos", section, topLevelWidget()->pos());
-			pSEQPrefs->setPrefSize("WindowSize", section, topLevelWidget()->size());
+			pSEQPrefs->setPrefPoint("WindowPos", "Interface", topLevelWidget()->pos());
+			pSEQPrefs->setPrefSize("WindowSize", "Interface", topLevelWidget()->size());
 		}
 
 		// save prefs to file
@@ -3094,22 +3083,12 @@ void EQInterface::savePrefs()
 	}
 }
 
-#if 0
-void EQInterface::saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge)
-{
-	QList<Q3DockWindow*> l = a->dockWindowList();
-	for (Q3DockWindow *dw = l.first(); dw; dw = l.next())
-	{
-		if (dw->inherits("SEQWindow"))
-			pSEQPrefs->setPrefInt("Dock", ((SEQWindow*)dw)->preferenceName(), edge);
-	}
-}
-#endif
-
 void EQInterface::setCaption(const QString& text)
 {
-	QMainWindow::setCaption(text);
 	pSEQPrefs->setPrefString("Caption", "Interface", caption());
+
+	// Call off to parent class
+	QMainWindow::setCaption(text);
 }
 
 
@@ -3126,7 +3105,7 @@ void EQInterface::loadFormatStrings()
 
 void EQInterface::select_filter_file()
 {
-	QString filterFile = Q3FileDialog::getOpenFileName(m_filterMgr->filterFile(), QString("ShowEQ Filter Files (*.xml)"), 0, "Select Filter Config...");
+	QString filterFile = QFileDialog::getOpenFileName(m_filterMgr->filterFile(), QString("ShowEQ Filter Files (*.xml)"), 0, "Select Filter Config...");
 
 	if (!filterFile.isEmpty())
 		m_filterMgr->loadFilters(filterFile);
@@ -3241,7 +3220,7 @@ void EQInterface::listSpawns()
 	QString outText;
 
 	// open the output data stream
-	Q3TextStream out(&outText, QIODevice::WriteOnly);
+	QTextStream out(&outText, QIODevice::WriteOnly);
 
 	// dump the spawns
 	m_spawnShell->dumpSpawns(tSpawn, out);
@@ -3257,7 +3236,7 @@ void EQInterface::listDrops()
 	QString outText;
 
 	// open the output data stream
-	Q3TextStream out(&outText, QIODevice::WriteOnly);
+	QTextStream out(&outText, QIODevice::WriteOnly);
 
 	// dump the drops
 	m_spawnShell->dumpSpawns(tDrop, out);
@@ -3273,7 +3252,7 @@ void EQInterface::listMapInfo()
 	QString outText;
 
 	// open the output data stream
-	Q3TextStream out(&outText, QIODevice::WriteOnly);
+	QTextStream out(&outText, QIODevice::WriteOnly);
 
 	// dump map managers info
 	m_mapMgr->dumpInfo(out);
@@ -3298,7 +3277,7 @@ void EQInterface::listInterfaceInfo()
 	QString outText;
 
 	// open the output data stream
-	Q3TextStream out(&outText, QIODevice::WriteOnly);
+	QTextStream out(&outText, QIODevice::WriteOnly);
 
 	out << "Map window layout info:" << endl;
 	out << "-----------------------" << endl;
@@ -3317,7 +3296,7 @@ void EQInterface::listGroup()
 	QString outText;
 
 	// open the output data stream
-	Q3TextStream out(&outText, QIODevice::WriteOnly);
+	QTextStream out(&outText, QIODevice::WriteOnly);
 
 	// dump the drops
 	m_groupMgr->dumpInfo(out);
@@ -3334,7 +3313,7 @@ void EQInterface::listGuild()
 	QString outText;
 
 	// open the output data stream
-	Q3TextStream out(&outText, QIODevice::WriteOnly);
+	QTextStream out(&outText, QIODevice::WriteOnly);
 
 	// dump the drops
 	m_guildShell->dumpMembers(out);
@@ -3355,7 +3334,7 @@ void EQInterface::dumpSpawns()
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
 	file.open(QIODevice::WriteOnly);
-	Q3TextStream out(&file);
+	QTextStream out(&file);
 
 	// dump the spawns
 	m_spawnShell->dumpSpawns(tSpawn, out);
@@ -3373,7 +3352,7 @@ void EQInterface::dumpDrops()
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
 	file.open(QIODevice::WriteOnly);
-	Q3TextStream out(&file);
+	QTextStream out(&file);
 
 	// dump the drops
 	m_spawnShell->dumpSpawns(tDrop, out);
@@ -3392,7 +3371,7 @@ void EQInterface::dumpMapInfo()
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
 	file.open(QIODevice::WriteOnly);
-	Q3TextStream out(&file);
+	QTextStream out(&file);
 
 	// dump map managers info
 	m_mapMgr->dumpInfo(out);
@@ -3426,7 +3405,7 @@ void EQInterface::dumpSpellBook()
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
 	file.open(QIODevice::WriteOnly);
-	Q3TextStream out(&file);
+	QTextStream out(&file);
 	QString txt;
 
 	seqInfo("Dumping Spell Book to '%s'\n", (const char*)file.name().utf8());
@@ -3480,7 +3459,7 @@ void EQInterface::dumpGroup()
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
 	file.open(QIODevice::WriteOnly);
-	Q3TextStream out(&file);
+	QTextStream out(&file);
 
 	// dump the drops
 	m_groupMgr->dumpInfo(out);
@@ -3498,7 +3477,7 @@ void EQInterface::dumpGuild()
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
 	file.open(QIODevice::WriteOnly);
-	Q3TextStream out(&file);
+	QTextStream out(&file);
 
 	// dump the drops
 	m_guildShell->dumpMembers(out);
@@ -4156,7 +4135,7 @@ void EQInterface::select_opcode_file()
 	QString logFile = pSEQPrefs->getPrefString("LogFilename", "OpCodeMonitoring", "opcodemonitor.log");
 	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
 
-	logFile = Q3FileDialog::getSaveFileName(logFileInfo.absFilePath(), "*.log", this, "ShowEQ - OpCode Log File");
+	logFile = QFileDialog::getSaveFileName(logFileInfo.absFilePath(), "*.log", this, "ShowEQ - OpCode Log File");
 
 	// set log filename
 	if (!logFile.isEmpty())
@@ -4677,13 +4656,12 @@ void EQInterface::saveSelectedSpawnPath()
 	fileName.sprintf("%s_mobpath.map",
 					 (const char*)m_zoneMgr->shortZoneName());
 
-	QFileInfo fileInfo = m_dataLocationMgr->findWriteFile("maps", fileName,
-														  false);
+	QFileInfo fileInfo = m_dataLocationMgr->findWriteFile("maps", fileName, false);
 
 	QFile mobPathFile(fileInfo.absFilePath());
 	if (mobPathFile.open(QIODevice::Append | QIODevice::WriteOnly))
 	{
-		Q3TextStream out(&mobPathFile);
+		QTextStream out(&mobPathFile);
 		// append the selected spawns path to the end
 		saveSpawnPath(out, m_selectedSpawn);
 
@@ -4701,7 +4679,7 @@ void EQInterface::saveSpawnPaths()
 	QFile mobPathFile(fileInfo.absFilePath());
 	if (mobPathFile.open(QIODevice::Truncate | QIODevice::WriteOnly))
 	{
-		Q3TextStream out(&mobPathFile);
+		QTextStream out(&mobPathFile);
 		// map header line
 		out << m_zoneMgr->longZoneName() << ","
 			<< m_zoneMgr->shortZoneName() << ",0,0" << endl;
@@ -4721,7 +4699,7 @@ void EQInterface::saveSpawnPaths()
 	}
 }
 
-void EQInterface::saveSpawnPath(Q3TextStream& out, const Item* item)
+void EQInterface::saveSpawnPath(QTextStream& out, const Item* item)
 {
 	if (item == 0)
 		return;
@@ -4801,10 +4779,8 @@ void EQInterface::set_net_client_MAC_address()
 	for( int l = 0; l < 5; l++)
 		maclst += m_macstr[l];
 	bool ok = false;
-	QString address =
-	QInputDialog::getItem("ShowEQ - EQ Client MAC Address",
-						  "Enter MAC address of EQ client",
-						  maclst, 0, TRUE, &ok, this );
+	QString address = QInputDialog::getItem("ShowEQ - EQ Client MAC Address",
+			"Enter MAC address of EQ client", maclst, 0, TRUE, &ok, this );
 	if (ok)
 	{
 		if (address.length() != 17)
@@ -4827,11 +4803,8 @@ void EQInterface::set_net_client_MAC_address()
 void EQInterface::set_net_device()
 {
 	bool ok = false;
-	QString dev =
-    QInputDialog::getText("ShowEQ - Device",
-						  "Enter the device to sniff for EQ Packets:",
-						  QLineEdit::Normal, m_packet->device(),
-						  &ok, this);
+	QString dev = QInputDialog::getText("ShowEQ - Device",
+			"Enter the device to sniff for EQ Packets:", QLineEdit::Normal, m_packet->device(), &ok, this);
 
 	if (ok)
 	{
@@ -5013,8 +4986,7 @@ void EQInterface::setSpawnSaveFrequency(int frequency)
 
 void EQInterface::setSaveBaseFilename()
 {
-	QString fileName =
-    Q3FileDialog::getSaveFileName(showeq_params->saveRestoreBaseFilename, QString::null, this, "SaveBaseFilename", "Save State Base Filename");
+	QString fileName = QFileDialog::getSaveFileName(showeq_params->saveRestoreBaseFilename, QString::null, this, "SaveBaseFilename", "Save State Base Filename");
 	if (!fileName.isEmpty())
 	{
 		// set it to be the new base filename

@@ -25,7 +25,7 @@
 #include <QPen>
 #include <QBrush>
 #include <QString>
-#include <Q3TextStream>
+#include <QTextStream>
 
 #include "spawn.h"
 
@@ -287,7 +287,7 @@ public slots:
 	void setIcon(int iconType, const MapIcon& icon);
 
 	// dump debug info
-	void dumpInfo(Q3TextStream& out);
+	void dumpInfo(QTextStream& out);
 
 	// painting slots
 	void paintIcon(MapParameters& param, QPainter& p, const MapIcon& mapIcon, const Point3D<int16_t>& item, const QString& itemName, const QPoint& point);

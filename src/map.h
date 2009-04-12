@@ -27,7 +27,7 @@
 #include <QToolTip>
 #include <QRegExp>
 #include <Q3IntDict>
-#include <Q3TextStream>
+#include <QTextStream>
 #include <QDateTime>
 #include <QPen>
 #include <QBrush>
@@ -185,7 +185,7 @@ public slots:
 	void savePrefs();
 
 	// dump debug info
-	void dumpInfo(Q3TextStream& out);
+	void dumpInfo(QTextStream& out);
 
 signals:
 	void mapLoaded();
@@ -534,7 +534,7 @@ public slots:
 	void setShowInstanceLocationMarker(bool val);
 
 	// dump debug info
-	void dumpInfo(Q3TextStream& out);
+	void dumpInfo(QTextStream& out);
 
 	void showMapIconDialog();
 
@@ -685,7 +685,7 @@ public slots:
 	virtual void savePrefs();
 
 	// dump debug info
-	void dumpInfo(Q3TextStream& out);
+	void dumpInfo(QTextStream& out);
 
 protected slots:
 	void init_Menu();
