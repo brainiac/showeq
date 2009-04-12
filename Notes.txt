@@ -1,0 +1,249 @@
+Global ShowEQ Data Classes: (classes that are global and don't depend on current session state):
+
+DateTimeMgr:					datetimemgr.cpp/.h
+DataLocationMgr:				datalocationmgr.cpp/.h
+Spells				m_spells	spells.cpp/.h
+EQStr				m_eqStrings
+GuildMgr			m_guildmgr
+
+CategoryMgr
+FilterNotifications?
+MessageFilters?
+Messages?
+Terminal?
+
+
+ShowEQ "Session" classes: (and dependencies)
+
+ZoneMgr
+FilterMgr 		:	m_zoneMgr
+Player			:	m_zoneMgr, m_guildMgr
+GuildShell		:	m_zoneMgr
+SpawnShell		:	m_filterMgr, m_zoneMgr, m_player, m_guildmgr
+MapMgr			:	m_spawnShell, m_player, m_zoneMgr
+SpellShell		:	m_player,  m_spawShell, m_spells
+SpawnMonitor	:	m_zoneMgr, m_spawnShell
+GroupMgr		:	m_spawnShell, m_player
+MesssageShell	:	m_zoneMgr, m_spawnShell, m_player
+
+
+Signals:
+
+interface: restoreFonts -> interface: restoreStatusFont
+interface: saveAllPrefs -> m_mapMgr: savePrefs
+interface: saveAllPrefs -> m_categoryMgr: savePrefs
+
+OP_TargetMouse -> clientTarget
+OP_Action2 -> action2Message
+OP_Death -> combatKillSpawn
+
+m_packet: toggle_session_tracking -> toggle_session_tracking
+
+m_zoneMgr: zoneBegin -> zoneBegin
+m_zoneMgr: zoneEnd -> zoneEnd
+m_zoneMgr: zoneChanged -> zoneChanged
+
+m_spawnShell: addItem -> addItem
+m_spawnShell: delItem -> delItem
+m_spawnShell: killSpawn -> killSpawn
+m_spawnShell: changeItem -> changeItem
+m_spawnShell: spawnConsidered -> spawnConsidered
+
+newZoneName -> m_stsbarZone: setText
+m_packet: stsMessage -> stsMessage
+m_spawnShell: numSpawns -> numSpawns
+m_packet: numPacket -> numPacket
+m_packet: resetPacket -> resetPacket
+m_player: newSpeed -> newSpeed
+m_player: setExp -> setExp
+m_player: newExp -> newExp
+m_player: setAltExp -> setAltExp
+m_player: newAltExp -> newAltExp
+m_player: levelChanged -> levelChanged
+
+ZoneMgr:
+	OP_ZoneEntry -> zoneEntryClient
+	OP_PlayerProfile -> zonePlayer
+	OP_ZoneChange -> zoneChange
+	OP_NewZone -> zoneNew
+	OP_SendZonePoints -> zonePoints
+	OP_DzSwitchInfo -> dynamicZonePoints
+	OP_DzInfo -> dynamicZoneInfo
+
+GroupMgr:
+	m_zoneMgr: playerProfile -> player
+	OP_GroupUpdate -> groupUpdate
+	OP_GroupFollow -> addGroupMember
+	OP_GroupDisband -> removeGroupMember
+	OP_GroupDisband2 -> removeGroupMember
+
+	m_spawnShell: addItem -> addItem
+	m_spawnShell: delItem -> delItem
+	m_spawnShell: killSpawn -> killSpawn
+
+DateTimeMgr:
+	OP_TimeOfDay -> timeOfDay
+	updatedDateTime -> interface: updatedDateTime
+	syncDateTime -> interface: syncDateTime
+
+FilterMgr:
+	m_zoneMgr: zoneBegin -> loadZone
+	m_zoneMgr: zoneEnd -> loadZone	interface: restoreFonts -> restoreFont
+	interface: saveAllPrefs -> savePrefs
+
+	m_zoneMgr: zoneChanged -> loadZone
+
+GuildMgr:
+	OP_GuildList -> worldGuildList
+	interface: guildList2text -> guildList2text
+
+GuildShell:
+	OP_GuildMemberList -> guildMemberList
+	OP_GuildMemberUpdate -> guildMemberUpdate
+
+MessageShell:
+	OP_CommonMessage -> channelMessage
+	OP_FormattedMessage -> formattedMessage
+	OP_SimpleMessage -> simpleMessage
+	OP_SpecialMesg -> specialMessage
+	OP_GuildMOTD -> guildMOTD
+	OP_RandomReq -> randomRequest
+	OP_RandomReply -> random
+	OP_ConsentResponse -> consent
+	OP_DenyResponse -> consent
+	OP_Emote -> emoteText
+	OP_InspectAnswer -> inspectData
+	OP_MoneyOnCorpse -> moneyonCorpse
+	OP_Logout -> logOut
+	OP_NewZone -> zoneNew
+
+	m_zoneMgr: zoneBegin -> zoneEntryClient
+	m_zoneMgr: zoneChanged -> zonechanged
+	m_zoneMgr: zoneBegin -> zoneBegin
+	m_zoneMgr: zoneEnd -> zoneEnd
+	m_zoneMgr: zoneChanged -> zoneChanged
+
+	OP_MOTD -> worldMOTD
+	OP_MemorizeSpell -> handleSpell
+	OP_BeginCast -> beginCast
+	OP_BuffFadeMsg -> spellFaded
+	OP_CastSpell -> startCast
+
+	m_zoneMgr: playerProfile -> player
+
+	OP_SkillUpdate -> increaseSkill
+	OP_LevelUpdate -> updateLevel
+	OP_Consider -> consMessage
+
+	m_player: setExp -> setExp
+	m_player: newExp -> newExp
+	m_player: setAltExp -> setAltExp
+	m_player: newAltExp -> newAltExp
+
+	m_spawnShell: addItem -> addItem
+	m_spawnShell: delItem -> delItem
+	m_spawnShell: killSpawn -> killSpawn
+
+	m_datetimeMgr: syncDateTime -> syncDateTime
+
+	OP_GroupInvite -> groupInvite
+	OP_GroupInvite2 -> groupInvite
+	OP_GroupFollow -> groupFollow	
+	OP_GroupFollow2 -> groupfollow
+	OP_GroupDisband -> groupDisband
+	OP_GroupDisband2 -> groupDisband
+	OP_GroupCancelInvite -> groupDecline
+	OP_GroupLeader -> groupLeaderChange
+
+
+FilterNotification:
+	m_spawnShell: addItem -> addItem
+	m_spawnShell: delItem -> delItem
+	m_spawnShell: killSpawn -> killSpawn
+	m_spawnShell: changeItem -> changeItem
+
+SpawnShell:
+	OP_GroundSpawn -> newGroundItem
+	OP_ClickObject -> removeGroundItem
+	OP_SpawnDoor -> newDoorSpawns
+
+	OP_ZoneEntry -> zoneEntry
+	OP_MobUpdate -> updateSpawns
+	OP_WearChange -> updateSpawnInfo
+	OP_HPUpdate -> updateNpcHP
+	OP_DeleteSpawn -> deleteSpawn
+	OP_SpawnRename -> renameSpawn
+	OP_Illusion -> illusionSpawn
+	OP_SpawnAppearance -> updateSpawnAppearance
+	OP_Death -> killSpawn
+	OP_RespawnFromHover -> respawnFromHover
+	OP_Shroud -> shroudSpawn
+	OP_RemoveSpawn -> removeSpawn
+	OP_Consider -> consMessage
+	OP_NpcMoveUpdate -> npcMoveUpdate
+	OP_ClientUpdate -> playerUpdate
+	OP_CorpseLocResponse -> corpseLoc
+
+	m_zoneMgr: zoneChanged -> zoneChanged
+
+
+SpellShell:
+	m_spawnShell: killSpawn -> killSpawn
+	m_player: newPlayer -> clear
+	m_player: buffLoad -> buffLoad
+
+	OP_CastSpell -> selfStartSpellCast
+	OP_Buff -> buff
+	OP_Action -> action
+	OP_SimpleMessage -> simpleMessage
+
+
+Player:
+	m_zoneMgr: playerProfile -> player
+	OP_SkillUpdate -> increaseSkill
+	OP_ManaChange -> manaChange
+	OP_clientUpdate -> playerUpdateSelf
+	OP_ExpUpdate -> updateExp
+	OP_AAExpUpdate -> updateAltExp
+	OP_LevelUpdate -> updateLevel
+	OP_HPUpdate -> updateNpcHP
+	OP_WearChange -> updateSpawnInfo
+	OP_Stamina -> updateStamina
+	OP_Consider -> consMessage
+	OP_SwapSpell -> tradeSpellBookSlots
+
+
+
+Session "Provider":
+
+EQPacket
+RemotePacket - turn into client...
+
+
+
+Interface Components: (and dependencies)
+
+ExperienceWindow	(m_player, m_groupMgr, m_zoneMgr)
+	m_player: newPlayer -> clear
+	m_player: expGained -> addExpRecord
+
+	interface: restoreFonts -> restoreFont
+	interface: saveAllPrefs -> savePrefs
+
+
+CombatWindow		(m_player)
+	m_player: newPlayer -> clear
+	m_spawnShell: spawnConsidered: resetDPS
+	interface: combatSignal -> addCombatRecord
+
+	interface: restoreFonts -> restoreFont
+	interface: saveAllPrefs -> savePrefs
+
+Map		
+
+
+
+
+
+
+
