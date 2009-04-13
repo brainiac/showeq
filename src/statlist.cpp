@@ -342,7 +342,3 @@ void StatListWindow::savePrefs(void)
 	// make the listview save it's prefs
 	m_statList->savePrefs();
 }
-
-#ifndef QMAKEBUILD
-#include "statlist.moc"
-#endif

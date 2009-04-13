@@ -82,7 +82,3 @@ void Messages::addedFilter(uint32_t mask, uint8_t filterid, const MessageFilter&
 			message.setFilterFlags(message.filterFlags() | mask);
 	}
 }
-
-#ifndef QMAKEBUILD
-#include "messages.moc"
-#endif

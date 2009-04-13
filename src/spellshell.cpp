@@ -527,7 +527,3 @@ void SpellShell::timeout()
 	if (m_spellList.count() == 0)
 		m_timer->stop();
 }
-
-#ifndef QMAKEBUILD
-#include "spellshell.moc"
-#endif

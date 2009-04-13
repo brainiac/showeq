@@ -530,7 +530,3 @@ void SpawnPointWindow::savePrefs()
 	if (m_spawnPointList)
 		m_spawnPointList->savePrefs();
 }
-
-#ifndef QMAKEBUILD
-#include "spawnpointlist.moc"
-#endif

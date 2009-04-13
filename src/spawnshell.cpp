@@ -1646,7 +1646,3 @@ void SpawnShell::restoreSpawns()
 		seqWarn("Failure loading %s: Unable to open!", (const char*)fileName);
 	}
 }
-
-#ifndef QMAKEBUILD
-#include "spawnshell.moc"
-#endif

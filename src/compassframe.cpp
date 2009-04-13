@@ -121,8 +121,3 @@ void CompassFrame::posChanged(int16_t x, int16_t y, int16_t z,
 	m_y->setText(QString::number(y));
 	m_z->setText(QString::number(z));
 }
-
-#ifndef QMAKEBUILD
-#include "compassframe.moc"
-#endif
-

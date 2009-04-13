@@ -1090,7 +1090,3 @@ void MessageWindow::addedFilter(uint32_t mask, uint8_t filterid, const MessageFi
 	// insert a user filter menu item for the new filter
 	m_hideUserFilterMenu->insertItem(filter.name(), filterid);
 }
-
-#ifndef QMAKEBUILD
-#include "messagewindow.moc"
-#endif

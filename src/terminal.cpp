@@ -219,7 +219,3 @@ bool Terminal::isMessageEnabled(const MessageEntry& message)
 			 && ((m_enabledShowUserFilters & message.filterFlags()) == 0))
 			 || ((m_enabledHideUserFilters & message.filterFlags()) != 0));
 }
-
-#ifndef QMAKEBUILD
-#include "terminal.moc"
-#endif

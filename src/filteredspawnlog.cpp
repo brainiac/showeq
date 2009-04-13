@@ -80,8 +80,3 @@ void FilteredSpawnLog::logSpawn(const Item* item, const char* action, uint32_t f
 
 	flush();
 }
-
-#ifndef QMAKEBUILD
-#include "filteredspawnlog.moc"
-#endif
-

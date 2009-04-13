@@ -144,7 +144,3 @@ void GuildMgr::listGuildInfo()
 			seqInfo("%d\t%s", i, (const char*)m_guildMap[i]);
 	}
 }
-
-#ifndef QMAKEBUILD
-#include "guild.moc"
-#endif

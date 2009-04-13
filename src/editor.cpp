@@ -220,7 +220,3 @@ void EditorWindow::closeEvent(QCloseEvent* ce)
 			break;
 	}
 }
-
-#ifndef QMAKEBUILD
-#include "editor.moc"
-#endif

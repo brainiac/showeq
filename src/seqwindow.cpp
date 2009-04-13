@@ -169,7 +169,3 @@ void SEQWindow::mousePressEvent(QMouseEvent* e)
 	else
 		/*Q3DockWindow::*/mousePressEvent(e);
 }
-
-#ifndef QMAKEBUILD
-#include "seqwindow.moc"
-#endif

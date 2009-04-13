@@ -174,7 +174,3 @@ void Compass::paintEvent(QPaintEvent *e)
 		paintCompass(&p);
 }
 
-#ifndef QMAKEBUILD
-#include "compass.moc"
-#endif
-

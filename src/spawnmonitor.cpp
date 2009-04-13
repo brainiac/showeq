@@ -388,7 +388,3 @@ void SpawnMonitor::loadSpawnPoints()
 	seqInfo("Loaded spawn points: %s", (const char*)fileName);
 	m_modified = false;
 }
-
-#ifndef QMAKEBUILD
-#include "spawnmonitor.moc"
-#endif

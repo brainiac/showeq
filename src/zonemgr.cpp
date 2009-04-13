@@ -302,7 +302,3 @@ void ZoneMgr::dynamicZoneInfo(const uint8_t* data, size_t len, uint8_t)
 		m_dzLongName = "";
 	}
 }
-
-#ifndef QMAKEBUILD
-#include "zonemgr.moc"
-#endif

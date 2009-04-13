@@ -243,7 +243,3 @@ void SkillListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_skillList->savePrefs();
 }
-
-#ifndef QMAKEBUILD
-#include "skilllist.moc"
-#endif

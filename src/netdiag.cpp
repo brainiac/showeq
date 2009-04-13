@@ -327,7 +327,3 @@ QString NetDiag::print_addr(in_addr_t  addr)
 				   (addr & 0x00ff0000) >> 16, (addr & 0xff000000) >> 24);
 	return paddr;
 }
-
-#ifndef QMAKEBUILD
-#include "netdiag.moc"
-#endif

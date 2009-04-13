@@ -1147,7 +1147,3 @@ void SpawnListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_spawnList->savePrefs();
 }
-
-#ifndef QMAKEBUILD
-#include "spawnlist.moc"
-#endif

@@ -1105,7 +1105,3 @@ uint16_t EQPacket::serverSeqExp(int stream)
 {
 	return m_streams[stream]->arqSeqExp();
 }
-
-#ifndef QMAKEBUILD
-#include "packet.moc"
-#endif

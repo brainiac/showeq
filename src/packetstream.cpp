@@ -1201,7 +1201,3 @@ uint16_t EQPacketStream::calculateCRC(EQProtocolPacket& packet)
 	// CRC is at the end of the raw payload, 2 bytes.
 	return ::calcCRC16(packet.rawPacket(), packet.rawPacketLength() - 2, m_sessionKey);
 }
-
-#ifndef QMAKEBUILD
-#include "packetstream.moc"
-#endif

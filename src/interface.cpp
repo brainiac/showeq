@@ -5830,7 +5830,3 @@ void EQInterface::setupCombatWindow()
     // insert its menu into the window menu
 	insertWindowMenu(m_combatWindow);
 }
-
-#ifndef QMAKEBUILD
-#include "interface.moc"
-#endif

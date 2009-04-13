@@ -12,9 +12,6 @@
  * Date - 9/7/2001
  */
 
-#include <QPainter>
-#include <QLayout>
-#include <Q3ValueList>
 #include <Q3PopupMenu>
 
 #include "spelllist.h"
@@ -131,7 +128,7 @@ SpellList::SpellList(SpellShell* sshell, QWidget *parent, const char *name)
 	connect(this, SIGNAL(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)), this, SLOT(rightButtonClicked(Q3ListViewItem*, const QPoint&, int)));
 }
 
-Q3PopupMenu* SpellList::menu()
+QMenu* SpellList::menu()
 {
 	// if the menu already exists, return it
 	if (m_menu)
@@ -176,31 +173,34 @@ void SpellList::selectSpell(const SpellItem *item)
 	}
 }
 
-SpellListItem* SpellList::InsertSpell(const SpellItem *item)
+SpellListItem* SpellList::InsertSpell(const SpellItem *finditem)
 {
-	if (!item)
+	if (!finditem)
 		return NULL;
 
-	Q3ValueList<SpellListItem *>::Iterator it;
-	for (it = m_spellList.begin(); it != m_spellList.end(); it++)
-	{
-		if ((*it)->item() == item)
-			break;
+	QListIterator<SpellListItem *> it(m_spellList);
+	SpellListItem* item = NULL;
+
+	while (it.hasNext()) {
+		if (it.peekNext()->item() == finditem)
+			item = it.peekNext();
+		it.next();
 	}
-	if (it != m_spellList.end()) {
-		int sid = (*it)->text(SPELLCOL_SPELLID).toInt();
-		int cid = (*it)->text(SPELLCOL_CASTERID).toInt();
-		int tid = (*it)->text(SPELLCOL_TARGETID).toInt();
-		if ((sid == (*it)->item()->spellId()) &&
-			(cid == (*it)->item()->casterId()) &&
-			(tid == (*it)->item()->targetId()))
+
+	if (item != NULL) {
+		int sid = item->text(SPELLCOL_SPELLID).toInt();
+		int cid = item->text(SPELLCOL_CASTERID).toInt();
+		int tid = item->text(SPELLCOL_TARGETID).toInt();
+		if ((sid == item->item()->spellId()) &&
+			(cid == item->item()->casterId()) &&
+			(tid == item->item()->targetId()))
 		{
-			(*it)->update();
-			return (*it);
+			item->update();
+			return item;
 		}
 		else
 		{
-			DeleteItem((*it)->item());
+			DeleteItem(item->item());
 		}
 	}
 
@@ -208,7 +208,7 @@ SpellListItem* SpellList::InsertSpell(const SpellItem *item)
 	// CJD TODO - checks for putting in appropriate category
 	SpellListItem *j = new SpellListItem(this);
 	m_spellList.append(j);
-	j->setSpellItem(item);
+	j->setSpellItem(finditem);
 
 	//j->setTextColor(pickColorSpawn(item));
 	j->update();
@@ -250,11 +250,11 @@ SpellListItem* SpellList::Find(const SpellItem *item)
 {
 	if (item)
 	{
-		Q3ValueList<SpellListItem*>::Iterator it;
-		for (it = m_spellList.begin(); it != m_spellList.end(); ++it)
-		{
-			if ((*it)->item() == item)
-				return (*it);
+		QListIterator<SpellListItem*> it(m_spellList);
+		while (it.hasNext()) {
+			SpellListItem* next = it.next();
+			if (next->item() == item)
+				return next;
 		}
 	}
 	return NULL;
@@ -282,6 +282,7 @@ void SpellList::changeSpell(const SpellItem *item)
 		int sid = i->text(SPELLCOL_SPELLID).toInt();
 		int cid = i->text(SPELLCOL_CASTERID).toInt();
 		int tid = i->text(SPELLCOL_TARGETID).toInt();
+
 		if ((sid == item->spellId()) &&
 			(cid == item->casterId()) &&
 			(tid == item->targetId()))
@@ -336,7 +337,7 @@ void SpellList::mouseDoubleClicked(Q3ListViewItem *item)
 
 void SpellList::rightButtonClicked(Q3ListViewItem *item, const QPoint& pos, int col)
 {
-	Q3PopupMenu* slMenu = menu();
+	Q3PopupMenu* slMenu = (Q3PopupMenu*)menu();
 
 	if (slMenu)
 		slMenu->popup(pos);
@@ -396,11 +397,8 @@ void SpellList::activated(int mid)
 }
 
 SpellListWindow::SpellListWindow(SpellShell* sshell, QWidget* parent, const char* name)
-  : SEQWindow("SpellList", "ShowEQ - Spell List", parent, name)
+  : SEQWindow("SpellList", "Spell List", parent, name)
 {
-	//QVBoxLayout* layout = new QVBoxLayout(this);
-	//layout->setAutoAdd(true);
-
 	m_spellList = new SpellList(sshell, this, name);
 	setWidget(m_spellList);
 }
@@ -410,7 +408,7 @@ SpellListWindow::~SpellListWindow()
 	delete m_spellList;
 }
 
-Q3PopupMenu* SpellListWindow::menu()
+QMenu* SpellListWindow::menu()
 {
 	return m_spellList->menu();
 }
@@ -423,7 +421,3 @@ void SpellListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_spellList->savePrefs();
 }
-
-#ifndef QMAKEBUILD
-#include "spelllist.moc"
-#endif

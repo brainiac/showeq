@@ -344,7 +344,7 @@ void MapMgr::loadZoneMap(const QString& shortZoneName)
 		if (fileInfo.absFilePath() != m_mapData.fileName())
 			loadFileMap(fileInfo.absFilePath());
 	}
-	else
+	else if (shortZoneName != "unknown")
 	{
 		seqInfo("No Map found for zone '%s'!", (const char*)shortZoneName);
 		seqInfo("    Checked for all variants of '%s.map', '%s.txt', and '%s_1.txt'",
@@ -4848,8 +4848,3 @@ void MapFrame::toggle_depthControls(int id)
 		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_depthControlBox->isVisible());
 	}
 }
-
-
-#ifndef QMAKEBUILD
-#include "map.moc"
-#endif

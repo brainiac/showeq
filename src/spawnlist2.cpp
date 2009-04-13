@@ -934,7 +934,3 @@ void SpawnListWindow2::populateSpawns()
 	seqDebug("* elapsed (post-paint): %d", test.elapsed());
 #endif
 }
-
-#ifndef QMAKEBUILD
-#include "spawnlist2.moc"
-#endif

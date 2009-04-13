@@ -1405,7 +1405,3 @@ void Player::restorePlayerState()
 		clear();
 	}
 }
-
-#ifndef QMAKEBUILD
-#include "player.moc"
-#endif

@@ -13,9 +13,11 @@
 #ifndef SPELLLIST_H
 #define SPELLLIST_H
 
-#include <Q3ValueList>
 #include <Q3ListView>
-#include <Q3PopupMenu>
+#include <QPainter>
+#include <QLayout>
+#include <QList>
+#include <QMenu>
 
 #include <time.h>
 #include <sys/time.h>
@@ -39,6 +41,7 @@ class SpellListItem : public Q3ListViewItem
 public:
 	SpellListItem(Q3ListViewItem *parent);
 	SpellListItem(Q3ListView *parent = NULL);
+
 	virtual void paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment);
 	const QColor textColor();
 	void setTextColor(const QColor &color);
@@ -61,7 +64,8 @@ class SpellList : public SEQListView
 
 public:
 	SpellList(SpellShell* sshell, QWidget *parent = 0, const char *name = 0);
-	Q3PopupMenu* menu();
+
+	QMenu* menu();
 	void SelectItem(const SpellItem *item);
 	SpellListItem* Selected();
 	SpellListItem* InsertSpell(const SpellItem *item);
@@ -95,9 +99,9 @@ protected slots:
 private:
 	void selectAndOpen(SpellListItem *);
 	SpellShell* m_spellShell;
-	Q3ValueList<QString> m_categoryList;
-	Q3ValueList<SpellListItem *> m_spellList;
-	Q3PopupMenu *m_menu;
+	QList<QString> m_categoryList;
+	QList<SpellListItem *> m_spellList;
+	QMenu *m_menu;
 
 	int mid_spellName, mid_spellId;
 	int mid_casterId, mid_casterName;
@@ -112,7 +116,7 @@ class SpellListWindow : public SEQWindow
 public:
 	SpellListWindow(SpellShell* sshell, QWidget* parent = 0, const char* name = 0);
 	~SpellListWindow();
-	virtual Q3PopupMenu* menu();
+	virtual QMenu* menu();
 
 	SpellList* spellList() { return m_spellList; }
 

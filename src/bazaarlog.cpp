@@ -61,8 +61,3 @@ void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 
 	flush();
 }
-
-#ifndef QMAKEBUILD
-#include "bazaarlog.moc"
-#endif
-
