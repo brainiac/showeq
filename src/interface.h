@@ -132,8 +132,6 @@ public slots:
 	void updateSelectedSpawnStatus(const Item* item);
 
 	void savePrefs();
-	//void saveDockAreaPrefs(Q3DockArea* a, Qt::DockWidgetArea edge);
-
 	void addCategory();
 	void reloadCategories();
 	void rebuildSpawnList();
@@ -386,9 +384,6 @@ private:
 
 	QString m_ipstr[5];
 	QString m_macstr[5];
-
-	//Q3IntDict<QString> m_formattedMessageStrings;
-
 
 	// Menu Pieces
 	QMenu* m_netMenu;

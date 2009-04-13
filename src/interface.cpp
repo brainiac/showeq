@@ -218,7 +218,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 
 	// if there is a short zone name already, try to load its filters
 	QString shortZoneName = m_zoneMgr->shortZoneName();
-	if (!shortZoneName.isEmpty())
+	if (!shortZoneName.isEmpty() && shortZoneName != "unknown")
 		m_filterMgr->loadZone(shortZoneName);
 
 	// Create the guild shell
@@ -2210,7 +2210,8 @@ void EQInterface::connectSignals()
 	connect(m_zoneMgr, SIGNAL(zoneChanged(const QString&)), this, SLOT(zoneChanged(const QString&)));
 
 	// connect the SpellShell slots to EQInterface signals
-	connect(this, SIGNAL(spellMessage(QString&)), m_spellShell, SLOT(spellMessage(QString&)));
+	// TODO: Determine if this is actually used, and delete
+	connect(this, SIGNAL(spellMessage(QString&)), m_spellShell, SIGNAL(spellMessage(QString&)));
 
 	// connect EQInterface slots to SpawnShell signals
 	connect(m_spawnShell, SIGNAL(addItem(const Item*)), this, SLOT(addItem(const Item*)));
@@ -2320,12 +2321,12 @@ void EQInterface::connectSignals()
 					   m_player, SLOT(tradeSpellBookSlots(const uint8_t*, size_t, uint8_t)));
 
 	// interface statusbar slots
-	connect (this, SIGNAL(newZoneName(const QString&)), m_stsbarZone, SLOT(setText(const QString&)));
-	connect (m_packet, SIGNAL(stsMessage(const QString &, int)), this, SLOT(stsMessage(const QString &, int)));
-	connect (m_spawnShell, SIGNAL(numSpawns(int)), this, SLOT(numSpawns(int)));
-	connect (m_packet, SIGNAL(numPacket(int, int)), this, SLOT(numPacket(int, int)));
-	connect (m_packet, SIGNAL(resetPacket(int, int)), this, SLOT(resetPacket(int, int)));
-	connect (m_player, SIGNAL(newSpeed(double)), this, SLOT(newSpeed(double)));
+	connect(this, SIGNAL(newZoneName(const QString&)), m_stsbarZone, SLOT(setText(const QString&)));
+	connect(m_packet, SIGNAL(stsMessage(const QString &, int)), this, SLOT(stsMessage(const QString &, int)));
+	connect(m_spawnShell, SIGNAL(numSpawns(int)), this, SLOT(numSpawns(int)));
+	connect(m_packet, SIGNAL(numPacket(int, int)), this, SLOT(numPacket(int, int)));
+	connect(m_packet, SIGNAL(resetPacket(int, int)), this, SLOT(resetPacket(int, int)));
+	connect(m_player, SIGNAL(newSpeed(double)), this, SLOT(newSpeed(double)));
 	connect(m_player, SIGNAL(setExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)),
 			this, SLOT(setExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)));
 	connect(m_player, SIGNAL(newExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)),
@@ -2354,7 +2355,7 @@ void EQInterface::connectSignals()
 		connect(m_player, SIGNAL(newPlayer()), m_combatWindow, SLOT(clear()));
 		connect(this, SIGNAL(combatSignal(int, int, int, int, int, QString, QString)),
 				 m_combatWindow, SLOT(addCombatRecord(int, int, int, int, int, QString, QString)));
-		connect (m_spawnShell, SIGNAL(spawnConsidered(const Item*)), m_combatWindow, SLOT(resetDPS()));
+		connect(m_spawnShell, SIGNAL(spawnConsidered(const Item*)), m_combatWindow, SLOT(resetDPS()));
 		connect(this, SIGNAL(restoreFonts()), m_combatWindow, SLOT(restoreFont()));
 		connect(this, SIGNAL(saveAllPrefs()), m_combatWindow, SLOT(savePrefs()));
 	}

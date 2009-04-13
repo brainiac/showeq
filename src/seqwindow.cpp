@@ -109,14 +109,12 @@ void SEQWindow::restoreSize()
 	if (!isFloating())
 	{
 		QSize s = pSEQPrefs->getPrefSize("DockFixedExtent", preferenceName(), size());
-		////setFixedExtentWidth(s.width());
-		//setFixedExtentHeight(s.height());
+		resize(s);
 	}
 	else
 	{
 		// retrieve the saved size information
 		QSize s = pSEQPrefs->getPrefSize("WindowSize", preferenceName(), size());
-
 		resize(s);
 	}
 

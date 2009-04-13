@@ -46,8 +46,28 @@ XMLPreferences::XMLPreferences(const QString& defaultsFileName, const QString& i
 
 XMLPreferences::~XMLPreferences()
 {
+	// Delete runtime Sections
+	QHashIterator<QString, PreferenceDict*> runtimeIt(m_runtimeSections);
+	while (runtimeIt.hasNext())
+		delete runtimeIt.next().value();
+	m_runtimeSections.clear();
+
+	// Delete user Sections
+	QHashIterator<QString, PreferenceDict*> userIt(m_userSections);
+	while (userIt.hasNext())
+		delete userIt.next().value();
 	m_userSections.clear();
+
+	// Delete defaults sections
+	QHashIterator<QString, PreferenceDict*> defaultIt(m_defaultsSections);
+	while (defaultIt.hasNext())
+		delete defaultIt.next().value();
 	m_defaultsSections.clear();
+
+	// Delete Comments
+	QHashIterator<QString, CommentDict*> commentIt(m_commentSections);
+	while (commentIt.hasNext())
+		delete commentIt.next().value();
 	m_commentSections.clear();
 }
 
