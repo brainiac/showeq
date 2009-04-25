@@ -23,6 +23,7 @@
 
 #include <QStringList>
 #include <QString>
+#include <QHash>
 
 const size_t playerClasses = 15;
 
@@ -53,17 +54,18 @@ private:
 class Spells
 {
 public:
-	Spells(const QString& spellsFile);
+	Spells();
 	~Spells();
 	void loadSpells(const QString& spellsFileName);
 	void unloadSpells();
 
-	const Spell* spell(uint16_t spell) const;
-	uint16_t maxSpell() const { return m_maxSpell; }
+	const Spell* spell(uint32_t spell) const;
+	uint32_t maxSpell() const { return m_maxSpell; }
 
 private:
-	uint16_t m_maxSpell;
-	Spell** m_spells;
+	QHash<uint32_t, Spell*> m_spells;
+	uint32_t m_maxSpell;
+
 };
 
 #endif // SPELLS_H_

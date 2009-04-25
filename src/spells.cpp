@@ -23,9 +23,8 @@
 #include <QString>
 #include <QStringList>
 #include <QFile>
-#include <Q3PtrQueue>
 #include <QRegExp>
-#include <Q3CString>
+#include <QByteArray>
 
 static inline int16_t min(const int16_t& __a,  const int16_t& __b)
 {
@@ -221,11 +220,9 @@ uint8_t Spell::level(uint8_t class_) const
 		return 255;
 }
 
-Spells::Spells(const QString& spellsFileName)
-  : m_maxSpell(0),
-	m_spells(NULL)
+Spells::Spells()
 {
-	loadSpells(spellsFileName);
+	m_maxSpell = 0;
 }
 
 Spells::~Spells()
@@ -244,12 +241,8 @@ void Spells::loadSpells(const QString& spellsFileName)
 	// open the spell file if possible
 	if (spellsFile.open(QIODevice::ReadOnly))
 	{
-		// QPtrQueue to temporarily store our Spells until we know the maxSpell
-		Q3PtrQueue<Spell> spellQueue;
-		spellQueue.setAutoDelete(false);
-
 		// allocate memory in a QCString to hold the entire file contents
-		Q3CString textData(spellsFile.size() + 1);
+		QByteArray textData(spellsFile.size() + 1);
 
 		// read the file as one big chunk
 		spellsFile.readBlock(textData.data(), textData.size());
@@ -268,7 +261,7 @@ void Spells::loadSpells(const QString& spellsFileName)
 		// split the file into at the line termination
 		QStringList lines = QStringList::split(lineTerm, text, false);
 
-		Spell* newSpell;
+		Spell* newSpell = NULL;
 
 		// iterate over the lines and process the spell entries therein.
 		for (QStringList::Iterator it = lines.begin(); it != lines.end(); ++it)
@@ -280,33 +273,10 @@ void Spells::loadSpells(const QString& spellsFileName)
 				m_maxSpell = newSpell->spell();
 
 			// enqueue the new spell entry for later insertion
-			spellQueue.enqueue(newSpell);
+			m_spells.insert(newSpell->spell(), newSpell);
 		}
-
 		seqInfo("Loaded %d spells from '%s' maxSpell=%#.04x",
-				spellQueue.count(), spellsFileName.latin1(), m_maxSpell);
-
-		// allocate the spell array
-		// Notes:  Yeah, it is slightly sparse, but as of this writing there are
-		// only 126 empty entries, so allocating this way for fastest access
-		m_spells = new Spell*[m_maxSpell + 1];
-
-		memset((void*)m_spells, 0, sizeof(Spell*) * (m_maxSpell+1));
-
-		// iterate over the queue, removing spells from it and inserting them into
-		// the spells table
-		while (!spellQueue.isEmpty())
-		{
-			// remove from queue
-			newSpell = spellQueue.dequeue();
-
-			// insert into table. Make sure we don't clobber and lose memory
-			if (m_spells[newSpell->spell()] != NULL)
-			{
-				delete m_spells[newSpell->spell()];
-			}
-			m_spells[newSpell->spell()] = newSpell;
-		}
+			m_spells.count(), spellsFileName.latin1(), m_maxSpell);
 	}
 	else
 		seqWarn("Spells: Failed to open: '%s'", spellsFileName.latin1());
@@ -315,26 +285,17 @@ void Spells::loadSpells(const QString& spellsFileName)
 void Spells::unloadSpells()
 {
 	// if a spell list has been allocated, delete it's elements and then itself
-	if (m_spells)
-	{
-		for (int i = 0; i <= m_maxSpell; i++)
-		{
-			if (m_spells[i] != NULL)
-			{
-				delete m_spells[i];
-			}
-		}
-
-		delete [] m_spells;
-
-		m_spells = NULL;
+	QHashIterator<uint32_t, Spell*> it(m_spells);
+	while (it.hasNext()) {
+		it.next();
+		delete it.value();
 	}
 }
 
-const Spell* Spells::spell(uint16_t spell) const
+const Spell* Spells::spell(uint32_t spell) const
 {
-	// make sure the spell is within range
-	if (spell >= m_maxSpell)
+	// make sure the spell exists
+	if (!m_spells.contains(spell))
 		return NULL;
 
 	// return the appropriate spell

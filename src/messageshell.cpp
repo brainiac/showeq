@@ -20,9 +20,7 @@
 #include "filtermgr.h"
 #include "util.h"
 
-#ifndef HAVE_STRNLEN
-#  include "strnlen.h"
-#endif
+#define strnlen(x,y) strlen((x))
 
 //----------------------------------------------------------------------
 // MessageShell

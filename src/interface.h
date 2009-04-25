@@ -25,6 +25,8 @@
 #include "spawnshell.h"
 #include "packetlog.h"
 
+#include "session.h"
+
 //--------------------------------------------------
 // forward declarations
 class Player;
@@ -93,9 +95,30 @@ const int maxNumMessageWindows = 10;
 class EQInterface : public QMainWindow
 {
 	Q_OBJECT
+	
+	MapMgr* m_mapMgr;
+	EQPacket* m_packet;
+	ZoneMgr* m_zoneMgr;
+	FilterMgr* m_filterMgr;
+	SpawnShell* m_spawnShell;
+	SpellShell* m_spellShell;
+	GroupMgr* m_groupMgr;
+	SpawnMonitor* m_spawnMonitor;
+	GuildMgr* m_guildmgr;
+	GuildShell* m_guildShell;
+	MessageFilters* m_messageFilters;
+	Messages* m_messages;
+	MessageShell* m_messageShell;
+	Terminal* m_terminal;
+	FilteredSpawnLog* m_filteredSpawnLog;
+	FilterNotifications* m_filterNotifications;
+	SpawnLog *m_spawnLogger;
+	Player* m_player;
+	
+	SessionManager* m_sm;
 
 public:
-	EQInterface(DataLocationMgr* dlm, QWidget * parent = 0, const char *name = 0);
+	EQInterface(SessionManager* sm);
 	~EQInterface();
 
 	QFont appFont;
@@ -288,7 +311,6 @@ private slots:
 
 protected:
 	bool getMonitorOpCodeList(const QString& title, QString& opcodeList);
-	void loadFormatStrings();
 	void showMap(int mapNum);
 	void showMessageWindow(int winNum);
 	void showSpawnList();
@@ -333,31 +355,10 @@ protected:
 	};
 
 private:
-	DataLocationMgr* m_dataLocationMgr;
-	MapMgr* m_mapMgr;
-	SpawnPointWindow* m_spawnPointList;
-	EQPacket* m_packet;
-	ZoneMgr* m_zoneMgr;
-	FilterMgr* m_filterMgr;
-	CategoryMgr* m_categoryMgr;
-	SpawnShell* m_spawnShell;
-	Spells* m_spells;
-	SpellShell* m_spellShell;
-	GroupMgr* m_groupMgr;
-	SpawnMonitor* m_spawnMonitor;
-	GuildMgr* m_guildmgr;
-	GuildShell* m_guildShell;
-	DateTimeMgr* m_dateTimeMgr;
-	EQStr* m_eqStrings;
-	MessageFilters* m_messageFilters;
-	Messages* m_messages;
-	MessageShell* m_messageShell;
-	Terminal* m_terminal;
-	FilteredSpawnLog* m_filteredSpawnLog;
-	FilterNotifications* m_filterNotifications;
-	SpawnLog *m_spawnLogger;
-	Player* m_player;
 
+	
+	SpawnPointWindow* m_spawnPointList;
+	
 	PacketLog* m_globalLog;
 	PacketStreamLog* m_worldLog;
 	PacketStreamLog* m_zoneLog;

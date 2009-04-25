@@ -172,55 +172,315 @@ XMLPreferences*      pSEQPrefs = NULL;
 void displayVersion();
 void displayOptions(const char* progName);
 
+void parseArguments(int argc, char **argv)
+{
+	int	opt, temp_int, option_index = 0;
+	bool bOptionHelp = false;
+	
+	/* Parse the commandline for commandline parameters */
+	while ((opt = getopt_long(argc, argv, OPTION_LIST, option_list, &option_index)) != -1)
+	{
+		switch (opt)
+		{
+				/* Set the request to use a despawn list based off the spawn alert list. */
+				
+				/* Set the interface */
+			case 'i':
+				pSEQPrefs->setPrefString("Device", "Network", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Set pcap thread to realtime */
+			case 'r':
+				pSEQPrefs->setPrefBool("RealTimeThread", "Network", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Set the spawn filter file */
+			case 'f':
+				pSEQPrefs->setPrefString("FilterFile", "Filters", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Packet playback mode */
+			case 'j':
+				if (optarg)
+					pSEQPrefs->setPrefString("Filename", "VPacket", optarg, XMLPreferences::Runtime);
+				pSEQPrefs->setPrefInt("Playback", "VPacket", PLAYBACK_FORMAT_SEQ, XMLPreferences::Runtime);
+				pSEQPrefs->setPrefBool("Record", "VPacket", false, XMLPreferences::Runtime);
+				break;
+				
+				/* Packet record mode */
+			case 'g':
+				if (optarg)
+					pSEQPrefs->setPrefString("Filename", "VPacket", optarg, XMLPreferences::Runtime);
+				pSEQPrefs->setPrefInt("Playback", "VPacket", PLAYBACK_OFF, XMLPreferences::Runtime);
+				pSEQPrefs->setPrefBool("Record", "VPacket", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Config file was already taken care of, ignore */
+			case 'o':
+				break;
+				
+				/* Make filter case sensitive */
+			case 'C':
+				pSEQPrefs->setPrefBool("IsCaseSensitive", "Filters", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Use retarded coordinate system yxz */
+			case 'c':
+				showeq_params->retarded_coords = 1;
+				break;
+				
+				/* Fast machine updates.. framerate vs packet based */
+			case 'F':
+				showeq_params->fast_machine = 1;
+				break;
+				
+				/* Show unknown spawns */
+			case 'K':
+				showeq_params->createUnknownSpawns = 1;
+				break;
+				
+				/* Select spawn on 'Consider' */
+			case 'S':
+				pSEQPrefs->setPrefBool("SelectOnCon", "Interface", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Select spawn on 'Target' */
+			case 'e':
+				pSEQPrefs->setPrefBool("SelectOnTarget", "Interface", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Show net info */
+			case 'N':
+				pSEQPrefs->getPrefBool("ShowNetStats", "Interface", true, XMLPreferences::Runtime);
+				break;
+				
+				/* track pathing for mobs */
+			case 't':
+				showeq_params->walkpathrecord = 1;
+				break;
+				
+				/* Maximum spawn path tracking length  */
+			case 'L':
+				showeq_params->walkpathlength = atoi(optarg);
+				break;
+				
+				/* Log spawns! */
+			case 'x':
+				pSEQPrefs->setPrefBool("LogSpawns", "Misc", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Display the version info... */
+			case 'V':
+			case 'v':
+				exit(0);
+				break;
+				
+				/* Don't autodetect character settings */
+			case 'W':
+				pSEQPrefs->getPrefBool("AutoDetectCharSettings", "Defaults", false, XMLPreferences::Runtime);
+				break;
+				
+				/* Set default player level */
+			case 'X':
+				temp_int = atoi(optarg);
+				
+				if (temp_int < 1 || temp_int > 85)
+				{
+					printf ("Invalid default level.  Valid range is 1 - 85.\n");
+					exit(0);
+				}
+				pSEQPrefs->setPrefInt("DefaultLevel", "Defaults", temp_int, XMLPreferences::Runtime);
+				break;
+				
+				/* Set default player race */
+			case 'Y':
+				temp_int = atoi(optarg);
+				
+				if ((temp_int < 1 || temp_int > 12) &&
+					(temp_int != 128) &&
+					(temp_int != 130) &&
+					(temp_int != 26) &&
+					(temp_int != 330))
+				{
+					printf ("Invalid default race, please use showeq -h to list valid race options.\n");
+					exit(0);
+				}
+				
+				pSEQPrefs->setPrefInt("DefaultRace", "Defaults", temp_int, XMLPreferences::Runtime);
+				break;
+				
+				/* Set default player class */
+			case 'Z':
+				temp_int = atoi(optarg);
+				
+				if (temp_int < 1 || temp_int > 16)
+				{
+					printf ("Invalid default class, please use showeq -h to list valid class options.\n");
+					exit(0);
+				}
+				pSEQPrefs->setPrefInt("DefaultClass", "Defaults", temp_int);
+				break;
+				
+				/* IP address to track */
+			case IPADDR_OPTION:
+				pSEQPrefs->setPrefString("IP", "Network", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* MAC address to track for those on DHCP */
+			case MACADDR_OPTION:
+				pSEQPrefs->setPrefString("MAC", "Network", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Filename for logging all packets */
+			case GLOBAL_LOG_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("GlobalLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Filename for logging world change packets */
+			case WORLD_LOG_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("WorldLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Filename for logging zone change packets */
+			case ZONE_LOG_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("ZoneLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Filename for logging unknown zone change packets */
+			case UNKNOWN_LOG_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("UnknownZoneLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
+				break;
+				
+				/* Log everything */
+			case GLOBAL_LOG_OPTION:
+				pSEQPrefs->setPrefBool("LogAllPackets", "PacketLogging", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Log all zone change packets */
+			case ZONE_LOG_OPTION:
+				pSEQPrefs->setPrefBool("LogZonePackets", "PacketLogging", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Log world packets */
+			case WORLD_LOG_OPTION:
+				pSEQPrefs->setPrefBool("LogWorldPackets", "PacketLogging", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Log only unfamiliar zone change packets */
+			case UNKNOWN_ZONE_LOG_OPTION:
+				pSEQPrefs->setPrefBool("LogUnknownZonePackets", "PacketLogging", true, XMLPreferences::Runtime);
+				break;
+				
+				/* TCPDump playback file */
+			case PLAYBACK_TCPDUMP_FILE_OPTION:
+				pSEQPrefs->setPrefString("Filename", "VPacket", optarg, XMLPreferences::Runtime);
+				pSEQPrefs->setPrefInt("Playback", "VPacket", PLAYBACK_FORMAT_TCPDUMP, XMLPreferences::Runtime);
+				pSEQPrefs->setPrefBool("Record", "VPacket", false,  XMLPreferences::Runtime);
+				break;
+				
+			case PLAYBACK_SPEED_OPTION:
+				pSEQPrefs->setPrefInt("PlaybackRate", "VPacket", atoi(optarg),  XMLPreferences::Runtime);
+				break;
+				
+				/* Enable logging of raw packets... */
+			case RAW_LOG_OPTION:
+				pSEQPrefs->setPrefBool("LogRawPackets", "PacketLogging", true, XMLPreferences::Runtime);
+				break;
+				
+				/* Display spawntime in UNIX time (time_t) instead of hh:mm format */
+			case SYSTIME_SPAWNTIME_OPTION:
+				showeq_params->systime_spawntime = 1;
+				break;
+				
+			case SPAWNLOG_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("SpawnLogFilename", "Misc", optarg, XMLPreferences::Runtime);
+				break;
+				
+			case ITEMDB_DATA_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("DataDBFilename", "ItemDB", optarg, XMLPreferences::Runtime);
+				break;
+				
+			case ITEMDB_RAW_FILENAME_OPTION:
+				pSEQPrefs->setPrefString("RawDataDBFilename", "ItemDB", optarg, XMLPreferences::Runtime);
+				break;
+				
+			case ITEMDB_DATABASES_ENABLED:
+				pSEQPrefs->setPrefInt("DatabasesEnabled", "ItemDB", atoi(optarg), XMLPreferences::Runtime);
+				break;
+				
+			case ITEMDB_DISABLE:
+				pSEQPrefs->setPrefBool("Enabled", "ItemDB", false,  XMLPreferences::Runtime);
+				break;
+				
+			case ITEMDB_ENABLE:
+				pSEQPrefs->setPrefBool("Enabled", "ItemDB", true, XMLPreferences::Runtime);
+				break;
+				
+			case RESTORE_PLAYER_STATE:
+				showeq_params->restorePlayerState = true;
+				break;
+				
+			case RESTORE_ZONE_STATE:
+				showeq_params->restoreZoneState = true;
+				break;
+				
+			case RESTORE_SPAWNS:
+				showeq_params->restoreSpawns = true;
+				break;
+				
+			case RESTORE_ALL:
+				showeq_params->restorePlayerState = true;
+				showeq_params->restoreZoneState = true;
+				showeq_params->restoreSpawns = true;
+				break;
+				
+			case REMOTE_PACKET_OPTION:
+				pSEQPrefs->setPrefBool("Enabled", "RemotePacketServer", true, XMLPreferences::Runtime);
+				if (optarg)
+					pSEQPrefs->setPrefInt("Port", "RemotePacketServer", atoi(optarg), XMLPreferences::Runtime);
+				break;
+				
+				/* Spit out the help */
+			case 'h': /* Fall through */
+			default:
+				bOptionHelp = true;
+				break;
+		}
+	}
+	
+	if (bOptionHelp) {
+		displayOptions(argv[0]);
+		exit (0);
+	}	
+}
+
 int main (int argc, char **argv)
 {
-	int		opt;
-	int		temp_int;
-	int		option_index = 0;
+	int ret = 1;
 
-	bool	bOptionHelp = false;
 
 	/* Create application instance */
-	//QApplication::setStyle(new QWindowsStyle);
-	QApplication qapp (argc, argv);
+	QApplication qapp(argc, argv);
 
 	/* Print the version number */
 	displayVersion();
 
-	// create the data location manager (with user data under ~/.showeq
-	DataLocationMgr dataLocMgr(".showeq");
-
-	/* Initialize the parameters with default values */
-	QFileInfo configFileDefInfo = dataLocMgr.findExistingFile(".", "seqdef.xml", true, false);
-
-	if (!configFileDefInfo.exists())
-	{
-		fprintf(stderr, "Fatal: Couldn't find seqdef.xml!\n"
-				        "\tDid you remember to do 'make install'?\n");
-		exit(-1);
-	}
-
-	QString configFileDef = configFileDefInfo.absFilePath();
-	QFileInfo configFileInfo = dataLocMgr.findWriteFile(".", "showeq.xml", true, true);
-
-	// deal with funky border case since we may be running setuid
-	QString configFile;
-	if (configFileInfo.dir() != QDir::root())
-		configFile = configFileInfo.absFilePath();
-	else
-		configFile = QFileInfo(dataLocMgr.userDataDir(".").absPath(), "showeq.xml").absFilePath();
-
 	// scan command line arguments for a specified config file
+	QString configFile;
 	for (int i = 0; i < argc; i++)
 	{
-		if ((argv[i][0] == '-') && (argv[i][1] == 'o'))
+		if (argv[i][0] == '-' && argv[i][1] == 'o')
 			configFile = argv[i + 1];
 	}
+	
+	/* Create the session manager object with an optional user-specified
+	 * configuration filename */
+	SessionManager* sessionMgr = new SessionManager(configFile);
 
-	/* NOTE: See xmlpreference.cpp for info on how to use prefrences class */
-	printf("Using config file '%s'\n", (const char*)configFile);
-	pSEQPrefs = new XMLPreferences(configFileDef, configFile);
+	// For now this will suffice
+	pSEQPrefs = sessionMgr->preferences();
 
+	// TODO: do something with this junk
 	showeq_params = new ShowEQParams;
 
 	QString section = "Interface";
@@ -253,313 +513,26 @@ int main (int argc, char **argv)
 	showeq_params->restorePlayerState = false;
 	showeq_params->restoreZoneState = false;
 	showeq_params->restoreSpawns = false;
-	showeq_params->saveRestoreBaseFilename = dataLocMgr.findWriteFile("tmp", pSEQPrefs->getPrefString("BaseFilename", section, "last")).absFilePath();
+	showeq_params->saveRestoreBaseFilename = sessionMgr->dataLocationMgr()->findWriteFile("tmp", pSEQPrefs->getPrefString("BaseFilename", section, "last")).absFilePath();
 	showeq_params->filterZoneDataLog = 0;
-
-	/* Parse the commandline for commandline parameters */
-	while ((opt = getopt_long(argc, argv, OPTION_LIST, option_list, &option_index)) != -1)
-	{
-		switch (opt)
-		{
-			/* Set the request to use a despawn list based off the spawn alert list. */
-
-			/* Set the interface */
-			case 'i':
-				pSEQPrefs->setPrefString("Device", "Network", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Set pcap thread to realtime */
-			case 'r':
-				pSEQPrefs->setPrefBool("RealTimeThread", "Network", true, XMLPreferences::Runtime);
-				break;
-
-			/* Set the spawn filter file */
-			case 'f':
-				pSEQPrefs->setPrefString("FilterFile", "Filters", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Packet playback mode */
-			case 'j':
-				if (optarg)
-					pSEQPrefs->setPrefString("Filename", "VPacket", optarg, XMLPreferences::Runtime);
-				pSEQPrefs->setPrefInt("Playback", "VPacket", PLAYBACK_FORMAT_SEQ, XMLPreferences::Runtime);
-				pSEQPrefs->setPrefBool("Record", "VPacket", false, XMLPreferences::Runtime);
-				break;
-
-			/* Packet record mode */
-			case 'g':
-				if (optarg)
-					pSEQPrefs->setPrefString("Filename", "VPacket", optarg, XMLPreferences::Runtime);
-				pSEQPrefs->setPrefInt("Playback", "VPacket", PLAYBACK_OFF, XMLPreferences::Runtime);
-				pSEQPrefs->setPrefBool("Record", "VPacket", true, XMLPreferences::Runtime);
-				break;
-
-			/* Config file was already taken care of, ignore */
-			case 'o':
-				break;
-
-			/* Make filter case sensitive */
-			case 'C':
-				pSEQPrefs->setPrefBool("IsCaseSensitive", "Filters", true, XMLPreferences::Runtime);
-				break;
-
-			/* Use retarded coordinate system yxz */
-			case 'c':
-				showeq_params->retarded_coords = 1;
-				break;
-
-			/* Fast machine updates.. framerate vs packet based */
-			case 'F':
-				showeq_params->fast_machine = 1;
-				break;
-
-			/* Show unknown spawns */
-			case 'K':
-				showeq_params->createUnknownSpawns = 1;
-				break;
-
-			/* Select spawn on 'Consider' */
-			case 'S':
-				pSEQPrefs->setPrefBool("SelectOnCon", "Interface", true, XMLPreferences::Runtime);
-				break;
-
-			/* Select spawn on 'Target' */
-			case 'e':
-				pSEQPrefs->setPrefBool("SelectOnTarget", "Interface", true, XMLPreferences::Runtime);
-				break;
-
-			/* Show net info */
-			case 'N':
-				pSEQPrefs->getPrefBool("ShowNetStats", section, true, XMLPreferences::Runtime);
-				break;
-
-			/* track pathing for mobs */
-			case 't':
-				showeq_params->walkpathrecord = 1;
-				break;
-
-			/* Maximum spawn path tracking length  */
-			case 'L':
-				showeq_params->walkpathlength = atoi(optarg);
-				break;
-
-			/* Log spawns! */
-			case 'x':
-				pSEQPrefs->setPrefBool("LogSpawns", "Misc", true, XMLPreferences::Runtime);
-				break;
-
-			/* Display the version info... */
-			case 'V':
-			case 'v':
-				exit(0);
-				break;
-
-			/* Don't autodetect character settings */
-			case 'W':
-				pSEQPrefs->getPrefBool("AutoDetectCharSettings", "Defaults", false, XMLPreferences::Runtime);
-				break;
-
-			/* Set default player level */
-			case 'X':
-				temp_int = atoi(optarg);
-
-				if (temp_int < 1 || temp_int > 85)
-				{
-					printf ("Invalid default level.  Valid range is 1 - 85.\n");
-					exit(0);
-				}
-				pSEQPrefs->setPrefInt("DefaultLevel", "Defaults", temp_int, XMLPreferences::Runtime);
-				break;
-
-			/* Set default player race */
-			case 'Y':
-				temp_int = atoi(optarg);
-
-				if ((temp_int < 1 || temp_int > 12) &&
-					(temp_int != 128) &&
-					(temp_int != 130) &&
-					(temp_int != 26) &&
-					(temp_int != 330))
-				{
-					printf ("Invalid default race, please use showeq -h to list valid race options.\n");
-					exit(0);
-				}
-
-				pSEQPrefs->setPrefInt("DefaultRace", "Defaults", temp_int, XMLPreferences::Runtime);
-				break;
-
-			/* Set default player class */
-			case 'Z':
-				temp_int = atoi(optarg);
-
-				if (temp_int < 1 || temp_int > 16)
-				{
-					printf ("Invalid default class, please use showeq -h to list valid class options.\n");
-					exit(0);
-				}
-				pSEQPrefs->setPrefInt("DefaultClass", "Defaults", temp_int);
-				break;
-
-			/* IP address to track */
-			case IPADDR_OPTION:
-				pSEQPrefs->setPrefString("IP", "Network", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* MAC address to track for those on DHCP */
-			case MACADDR_OPTION:
-				pSEQPrefs->setPrefString("MAC", "Network", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Filename for logging all packets */
-			case GLOBAL_LOG_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("GlobalLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Filename for logging world change packets */
-			case WORLD_LOG_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("WorldLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Filename for logging zone change packets */
-			case ZONE_LOG_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("ZoneLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Filename for logging unknown zone change packets */
-			case UNKNOWN_LOG_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("UnknownZoneLogFilename", "PacketLogging", optarg, XMLPreferences::Runtime);
-				break;
-
-			/* Log everything */
-			case GLOBAL_LOG_OPTION:
-				pSEQPrefs->setPrefBool("LogAllPackets", "PacketLogging", true, XMLPreferences::Runtime);
-				break;
-
-			/* Log all zone change packets */
-			case ZONE_LOG_OPTION:
-				pSEQPrefs->setPrefBool("LogZonePackets", "PacketLogging", true, XMLPreferences::Runtime);
-				break;
-
-			/* Log world packets */
-			case WORLD_LOG_OPTION:
-				pSEQPrefs->setPrefBool("LogWorldPackets", "PacketLogging", true, XMLPreferences::Runtime);
-				break;
-
-			/* Log only unfamiliar zone change packets */
-			case UNKNOWN_ZONE_LOG_OPTION:
-				pSEQPrefs->setPrefBool("LogUnknownZonePackets", "PacketLogging", true, XMLPreferences::Runtime);
-				break;
-
-			/* TCPDump playback file */
-			case PLAYBACK_TCPDUMP_FILE_OPTION:
-				pSEQPrefs->setPrefString("Filename", "VPacket", optarg, XMLPreferences::Runtime);
-				pSEQPrefs->setPrefInt("Playback", "VPacket", PLAYBACK_FORMAT_TCPDUMP, XMLPreferences::Runtime);
-				pSEQPrefs->setPrefBool("Record", "VPacket", false,  XMLPreferences::Runtime);
-				break;
-
-			case PLAYBACK_SPEED_OPTION:
-				pSEQPrefs->setPrefInt("PlaybackRate", "VPacket", atoi(optarg),  XMLPreferences::Runtime);
-				break;
-
-			/* Enable logging of raw packets... */
-			case RAW_LOG_OPTION:
-				pSEQPrefs->setPrefBool("LogRawPackets", "PacketLogging", true, XMLPreferences::Runtime);
-				break;
-
-			/* Display spawntime in UNIX time (time_t) instead of hh:mm format */
-			case SYSTIME_SPAWNTIME_OPTION:
-				showeq_params->systime_spawntime = 1;
-				break;
-
-			case SPAWNLOG_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("SpawnLogFilename", "Misc", optarg, XMLPreferences::Runtime);
-				break;
-
-			case ITEMDB_DATA_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("DataDBFilename", "ItemDB", optarg, XMLPreferences::Runtime);
-				break;
-
-			case ITEMDB_RAW_FILENAME_OPTION:
-				pSEQPrefs->setPrefString("RawDataDBFilename", "ItemDB", optarg, XMLPreferences::Runtime);
-				break;
-
-			case ITEMDB_DATABASES_ENABLED:
-				pSEQPrefs->setPrefInt("DatabasesEnabled", "ItemDB", atoi(optarg), XMLPreferences::Runtime);
-				break;
-
-			case ITEMDB_DISABLE:
-				pSEQPrefs->setPrefBool("Enabled", "ItemDB", false,  XMLPreferences::Runtime);
-				break;
-
-			case ITEMDB_ENABLE:
-				pSEQPrefs->setPrefBool("Enabled", "ItemDB", true, XMLPreferences::Runtime);
-				break;
-
-			case RESTORE_PLAYER_STATE:
-				showeq_params->restorePlayerState = true;
-				break;
-
-			case RESTORE_ZONE_STATE:
-				showeq_params->restoreZoneState = true;
-				break;
-
-			case RESTORE_SPAWNS:
-				showeq_params->restoreSpawns = true;
-				break;
-
-			case RESTORE_ALL:
-				showeq_params->restorePlayerState = true;
-				showeq_params->restoreZoneState = true;
-				showeq_params->restoreSpawns = true;
-				break;
-
-			case REMOTE_PACKET_OPTION:
-				pSEQPrefs->setPrefBool("Enabled", "RemotePacketServer", true, XMLPreferences::Runtime);
-				if (optarg)
-					pSEQPrefs->setPrefInt("Port", "RemotePacketServer", atoi(optarg), XMLPreferences::Runtime);
-				break;
-
-			/* Spit out the help */
-			case 'h': /* Fall through */
-			default:
-				bOptionHelp = true;
-				break;
-		}
-	}
-
-	if (bOptionHelp)
-	{
-		displayOptions(argv[0]);
-		exit (0);
-	}
+	
+	parseArguments(argc, argv);		
 
 #ifdef Q_WS_X11
 	QColor::setAllowX11ColorNames(true);
 #endif
 
-	/* Set up individual files for logging selected packet types based on
-	 a common filename base.   The types to log were found by following
-	 where pre_worked was a precondition for further analysis.
-	 */
-
-	int ret = 1;
-
-	// just to add a scope to better control when the main interface gets destroyed
-	{
-		/* The main interface widget */
-		EQInterface intf(&dataLocMgr, 0, "interface");
-		qapp.setMainWidget (&intf);
-
-		/* Start the main loop */
-		ret = qapp.exec();
-	}
-
-	// delete the preferences data
-	delete pSEQPrefs;
-
-	// delete the showeq_params data
-	delete showeq_params;
-
+	/* Create the main interface. */
+	EQInterface* mainInterface = new EQInterface(sessionMgr);
+	qapp.setMainWidget(mainInterface);
+	
+	/* Start the main program loop */
+	ret = qapp.exec();
+	
+	// Clean up
+	delete mainInterface;
+	delete sessionMgr;
+	
 	return ret;
 }
 

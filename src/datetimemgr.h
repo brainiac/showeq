@@ -28,7 +28,7 @@ class DateTimeMgr : public QObject
 	Q_OBJECT
 
 public:
-	DateTimeMgr(QObject* parent = 0, const char* name = 0);
+	DateTimeMgr();
 	~DateTimeMgr();
 	const QDateTime& eqDateTime() const;
 	const QDateTime& updatedDateTime();

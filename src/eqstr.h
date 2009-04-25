@@ -13,7 +13,7 @@
 
 #include <stdint.h>
 
-#include <Q3IntDict>
+#include <QHash>
 #include <QString>
 
 //----------------------------------------------------------------------
@@ -21,7 +21,7 @@
 class EQStr
 {
 public:
-	EQStr(int size = 8009);
+	EQStr();
 	~EQStr();
 
 	bool load(const QString& eqstrFile);
@@ -30,7 +30,7 @@ public:
 	QString formatMessage(uint32_t formatid, const char* arguments, size_t argslen) const;
 
 protected:
-	Q3IntDict<QString> m_messageStrings;
+	QHash<uint32_t, QString> m_messageStrings;
 	bool m_loaded;
 };
 

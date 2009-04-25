@@ -8,7 +8,7 @@
  *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
-#include "config.h"
+//#include "config.h"
 
 /* Implementation of Packet class */
 #include <stdio.h>

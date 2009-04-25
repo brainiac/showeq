@@ -8,7 +8,7 @@
  *
  */
 
-#include "config.h"
+//#include "config.h"
 #include "datalocationmgr.h"
 #include "diagnosticmessages.h"
 

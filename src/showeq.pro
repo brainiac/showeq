@@ -12,8 +12,9 @@ CONFIG += qt thread stl warn_off debug uic3
 QT += xml qt3support network
 LIBS += -lpcap
 
-DEFINES += PKGDATADIR="\"/usr/local/share/showeq\"" 
+DEFINES += PKGDATADIR="\\\"/usr/local/share/showeqi\\\"""
 DEFINES += QMAKEBUILD
+DEFINES += VERSION="\\\"6.0\\\""
 
 # Include Paths
 INCLUDEPATH += ..
@@ -30,12 +31,14 @@ SOURCES += datalocationmgr.cpp eqstr.cpp xmlconv.cpp xmlpreferences.cpp datetime
 SOURCES += spawnshell.cpp spellshell.cpp messageshell.cpp guildshell.cpp
 SOURCES += player.cpp spawn.cpp group.cpp guild.cpp zonemgr.cpp spawnmonitor.cpp spells.cpp
 SOURCES += messages.cpp message.cpp messagefilter.cpp terminal.cpp diagnosticmessages.cpp
+SOURCES += session.cpp
 
 HEADERS += main.h filter.h spells.h util.h spawn.h spawnshell.h xmlconv.h xmlpreferences.h
 HEADERS += spellshell.h crctab.h diagnosticmessages.h player.h 
 HEADERS += filtermgr.h point.h pointarray.h category.h group.h guild.h fixpt.h
 HEADERS += zonemgr.h spawnmonitor.h datetimemgr.h datalocationmgr.h eqstr.h messages.h
 HEADERS += messagefilter.h messageshell.h terminal.h filternotifications.h guildshell.h message.h
+HEADERS += session.h
 
 # LOGGERS
 SOURCES += bazaarlog.cpp filteredspawnlog.cpp logger.cpp packetlog.cpp spawnlog.cpp

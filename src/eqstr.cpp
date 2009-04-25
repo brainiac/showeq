@@ -17,21 +17,16 @@
 #include <QRegExp>
 #include <QFile>
 #include <QStringList>
-#include <Q3ValueVector>
-#include <Q3CString>
+#include <QVector>
+#include <QByteArray>
 
-EQStr::EQStr(int size)
-  : m_messageStrings(size),
-	m_loaded(false)
+EQStr::EQStr()
 {
-	// make sure strings get deleted
-	m_messageStrings.setAutoDelete(true);
+	m_loaded = false;
 }
 
 EQStr::~EQStr()
 {
-	// not really necessary, but just for completeness sake
-	m_messageStrings.clear();
 }
 
 bool EQStr::load(const QString& fileName)
@@ -45,13 +40,12 @@ bool EQStr::load(const QString& fileName)
 	// open the file read only
 	if (!formatFile.open(QIODevice::ReadOnly))
 	{
-		seqWarn("EQStr: Failed to open '%s'",
-				fileName.latin1());
+		seqWarn("EQStr: Failed to open '%s'", fileName.latin1());
 		return false;
 	}
 
-	// allocate a QCString large enough to hold the entire file
-	Q3CString textData(formatFile.size() + 1);
+	// allocate a buffer large enough to hold the entire file
+	QByteArray textData(formatFile.size() + 1);
 
 	// read in the entire file
 	formatFile.readBlock(textData.data(), textData.size());
@@ -60,8 +54,7 @@ bool EQStr::load(const QString& fileName)
 	QRegExp lineTerm("[\r\n]{1,2}");
 
 	// split the data into lines at the line termination
-	QStringList lines = QStringList::split(lineTerm,
-										   QString::fromUtf8(textData), false);
+	QStringList lines = QStringList::split(lineTerm, QString::fromUtf8(textData), false);
 
 	// start iterating over the lines
 	QStringList::Iterator it = lines.begin();
@@ -89,56 +82,41 @@ bool EQStr::load(const QString& fileName)
 			maxFormatId = formatId;
 
 		// insert the format string into the dictionary.
-		m_messageStrings.insert(formatId, new QString((*it).mid(spc+1)));
+		m_messageStrings.insert(formatId, (*it).mid(spc+1));
 	}
 
 	// note that strings are loaded
 	m_loaded = true;
 
 	seqInfo("Loaded %d message strings from '%s' maxFormat=%d",
-			m_messageStrings.count(), fileName.latin1(),
-			maxFormatId);
+		m_messageStrings.count(), fileName.latin1(),
+		maxFormatId);
 
 	return true;
 }
 
 QString EQStr::find(uint32_t formatid) const
 {
-	// attempt to find the message string
-	QString* res = m_messageStrings.find(formatid);
-
-	// if the message string was found, return it
-	if (res)
-		return *res;
-
-	// otherwise return a NULL/Empty QString
-	return QString();
+	return m_messageStrings.value(formatid);
 }
 
 QString EQStr::message(uint32_t formatid) const
 {
 	// attempt to find the message string
-	QString* res = m_messageStrings.find(formatid);
-
-	// if the message string was found, return it
-	if (res)
-		return *res;
-
+	if (m_messageStrings.contains(formatid))
+		return m_messageStrings[formatid];
+	
 	// otherwise return a fabricated string
 	return QString("Unknown: ") + QString::number(formatid, 16);
 }
 
-QString EQStr::formatMessage(uint32_t formatid,
-							 const char* arguments, size_t argsLen) const
+QString EQStr::formatMessage(uint32_t formatid, const char* arguments, size_t argsLen) const
 {
-	QString* formatStringRes = m_messageStrings.find(formatid);
-
 	QString tempStr;
 
-	if (formatStringRes == NULL)
+	if (!m_messageStrings.contains(formatid))
 	{
-		tempStr.sprintf("Unknown: %04x: ",
-						formatid);
+		tempStr.sprintf("Unknown: %04x: ", formatid);
 		tempStr += QString::fromUtf8(arguments);
 
 		size_t totalArgsLen = strlen(arguments) + 1;
@@ -153,30 +131,28 @@ QString EQStr::formatMessage(uint32_t formatid,
 	}
 	else
 	{
-		Q3ValueVector<QString> argList;
+		QVector<QString> argList;
 		argList.reserve(5); // reserve space for 5 elements to handle most common sizes
 
-		//
 		size_t totalArgsLen = 0;
-		const char* curArg;
 		while (totalArgsLen < argsLen)
 		{
-			curArg = arguments + totalArgsLen;
+			const char* curArg = arguments + totalArgsLen;
+			
 			// insert argument into the argument list
 			argList.push_back(QString::fromUtf8(curArg));
 			totalArgsLen += strlen(curArg) + 1;
 		}
 
-		bool ok;
+		bool ok, ok2;
 		int curPos;
 		size_t substArg;
 		int substArgValue;
-		QString* substFormatStringRes;
 		QString substFormatString;
 
 		////////////////////////////
 		// replace template (%T) arguments in formatted string
-		QString formatString = *formatStringRes;
+		QString formatString = m_messageStrings[formatid];
 		QRegExp rxt("%T(\\d{1,3})", true, false);
 
 		// find first template substitution
@@ -184,21 +160,18 @@ QString EQStr::formatMessage(uint32_t formatid,
 
 		while (curPos != -1)
 		{
-			substFormatStringRes = NULL;
+			ok2 = false;
 			substArg = rxt.cap(1).toInt(&ok);
 			if (ok && (substArg <= argList.size()))
 			{
-				substArgValue = argList[substArg-1].toInt(&ok);
-
-				if (ok)
-					substFormatStringRes = m_messageStrings.find(substArgValue);
+				substArgValue = argList[substArg-1].toInt(&ok2);
 			}
 
-			// replace template argument with subst string
-			if (substFormatStringRes != NULL)
-				formatString.replace(curPos, rxt.matchedLength(), *substFormatStringRes);
+			// Find the message and replace, or skip over if not found.
+			if (ok2 && m_messageStrings.contains(substArgValue))
+				formatString.replace(curPos, rxt.matchedLength(), m_messageStrings[substArgValue]);
 			else
-				curPos += rxt.matchedLength(); // if no replacement string, skip over
+				curPos += rxt.matchedLength();
 
 			// find next substitution
 			curPos = rxt.search(formatString, curPos);

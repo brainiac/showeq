@@ -20,8 +20,8 @@
 #include <QDateTime>
 #include <QTimer>
 
-DateTimeMgr::DateTimeMgr(QObject* parent, const char* name)
-  : QObject(parent, name),
+DateTimeMgr::DateTimeMgr()
+  : QObject(),
 	m_updateFrequency(60 * 1000),
 	m_timer(0)
 {

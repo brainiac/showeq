@@ -73,71 +73,69 @@ using namespace Qt;
 #define ZONE_ORDER_DIAG
 
 /* The main interface widget */
-EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name)
-  : QMainWindow (parent, name),
+EQInterface::EQInterface(SessionManager* sm)
+  : QMainWindow(NULL, "ShowEQ"),
+	m_sm(sm),
 	m_player(0),
-	m_dataLocationMgr(dlm),
 	m_mapMgr(0),
-	m_spawnList(0),
-	m_spawnList2(0),
-	m_spellList(0),
-	m_skillList(0),
-	m_statList(0),
-	m_spawnPointList(0),
 	m_packet(0),
 	m_zoneMgr(0),
 	m_filterMgr(0),
-	m_categoryMgr(0),
 	m_spawnShell(0),
 	m_spellShell(0),
 	m_groupMgr(0),
 	m_spawnMonitor(0),
 	m_guildmgr(0),
 	m_guildShell(0),
-	m_dateTimeMgr(0),
-	m_eqStrings(0),
 	m_messageFilters(0),
 	m_messages(0),
 	m_messageShell(0),
 	m_terminal(0),
-	m_filteredSpawnLog(0),
 	m_filterNotifications(0),
-	m_spawnLogger(0),
-	m_globalLog(0),
-	m_worldLog(0),
-	m_zoneLog(0),
-	m_bazaarLog(0),
-	m_unknownZoneLog(0),
-	m_opcodeMonitorLog(0),
 	m_selectedSpawn(0),
-	m_compass(0),
-	m_expWindow(0),
-	m_combatWindow(0),
-	m_netDiag(0),
-	m_messageFilterDialog(0),
-	m_guildListWindow(0)
+	m_messageFilterDialog(0)
 {
-	// Finish some initialization
+	// Initialize window pointers to NULL
+	m_spawnList = NULL;
+	m_spawnList2 = NULL;
+	m_spellList = NULL;
+	m_skillList = NULL;
+	m_statList = NULL;
+	m_spawnPointList = NULL;
+	m_compass = NULL;
+	m_expWindow = NULL;
+	m_combatWindow = NULL;
+	m_netDiag = NULL;
+	m_guildListWindow = NULL;
+	
 	for (int l = 0; l < maxNumMaps; l++)
-		m_map[l] = 0;
+		m_map[l] = NULL;
 
 	for (int l = 0; l < maxNumMessageWindows; l++)
-		m_messageWindow[l] = 0;
+		m_messageWindow[l] = NULL;
+	
+	// Initialize loggers to NULL
+	m_filteredSpawnLog = NULL;
+	m_spawnLogger = NULL;
+	m_globalLog = NULL;
+	m_worldLog = NULL;
+	m_zoneLog = NULL;
+	m_bazaarLog = NULL;
+	m_unknownZoneLog = NULL;
+	m_opcodeMonitorLog = NULL;
 
+	
 	// indicate we're constructing the interface
 	m_creating = true;
 
 	// saved state version. change it if drastic changes happen.
 	m_stateVersion = 1;
 
-	// Create the date/time manager
-	m_dateTimeMgr = new DateTimeMgr(this, "datetimemgr");
-
 	// Create Message Filters object
 	m_messageFilters = new MessageFilters(this, "messagefilters");
 
 	// Create Messages storage
-	m_messages = new Messages(m_dateTimeMgr, m_messageFilters, this, "messages");
+	m_messages = new Messages(m_sm->dateTimeMgr(), m_messageFilters, this, "messages");
 
 	// Create the terminal object
 	m_terminal = new Terminal(m_messages, this, "terminal");
@@ -148,11 +146,11 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 
 	/* get world opcodes file */
 	QString fileName = pSEQPrefs->getPrefString("WorldOPCodes", "Network", "worldopcodes.xml");
-	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", fileName);
+	QFileInfo fileInfo = m_sm->dataLocationMgr()->findExistingFile(".", fileName);
 
 	/* get zone opcodes file */
 	QString fileName2 = pSEQPrefs->getPrefString("ZoneOPCodes", "Network", "zoneopcodes.xml");
-	QFileInfo fileInfo2 = m_dataLocationMgr->findExistingFile(".", fileName2);
+	QFileInfo fileInfo2 = m_sm->dataLocationMgr()->findExistingFile(".", fileName2);
 
 	// make packet object
 	m_packet = new EQPacket(fileInfo.absFilePath(),
@@ -189,23 +187,14 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	 * Create ShowEQ Objects
 	 **********************************************************************/
 
-	// setup the user directory
-	m_dataLocationMgr->setupUserDirectory();
 
-	// Create the Spells object
-	fileName = pSEQPrefs->getPrefString("SpellsFile", "Interface", "spells_us.txt");
-	fileInfo = m_dataLocationMgr->findExistingFile(".", fileName);
-	m_spells = new Spells(fileInfo.absFilePath());
-
-	// Create the EQStr storage
-	m_eqStrings = new EQStr(maxNumEQStr); // increase if the number of strings exeeds
 
 	// Create the Zone Manager
 	m_zoneMgr = new ZoneMgr(this, "zonemgr");
 
 	// Create GuildMgr object
 	fileName = pSEQPrefs->getPrefString("GuildsFile", "Interface", "guilds2.dat");
-	fileInfo = m_dataLocationMgr->findWriteFile("tmp", fileName);
+	fileInfo = m_sm->dataLocationMgr()->findWriteFile("tmp", fileName);
 	m_guildmgr = new GuildMgr(fileInfo.absFilePath(), this, "guildmgr");
 
 	// Create our player object
@@ -214,7 +203,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	// Create the filter manager
 	QString filterFile = pSEQPrefs->getPrefString("FilterFile", "Interface", "global.xml");
 	bool isCaseSensitive = pSEQPrefs->getPrefBool("IsCaseSensitive", "Interface", false);
-	m_filterMgr = new FilterMgr(m_dataLocationMgr, filterFile, isCaseSensitive);
+	m_filterMgr = new FilterMgr(m_sm->dataLocationMgr(), filterFile, isCaseSensitive);
 
 	// if there is a short zone name already, try to load its filters
 	QString shortZoneName = m_zoneMgr->shortZoneName();
@@ -227,23 +216,20 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	// Create the spawn shell
 	m_spawnShell = new SpawnShell(*m_filterMgr, m_zoneMgr, m_player, m_guildmgr);
 
-	// Create the Category manager
-	m_categoryMgr = new CategoryMgr();
-
 	// Create the map manager
-	m_mapMgr = new MapMgr(m_dataLocationMgr, m_spawnShell, m_player, m_zoneMgr, this);
+	m_mapMgr = new MapMgr(m_sm->dataLocationMgr(), m_spawnShell, m_player, m_zoneMgr, this);
 
 	// Create the spell shell
-	m_spellShell = new SpellShell(m_player, m_spawnShell, m_spells);
+	m_spellShell = new SpellShell(m_player, m_spawnShell, m_sm->spells());
 
 	// Create the Spawn Monitor
-	m_spawnMonitor = new SpawnMonitor(m_dataLocationMgr, m_zoneMgr, m_spawnShell);
+	m_spawnMonitor = new SpawnMonitor(m_sm->dataLocationMgr(), m_zoneMgr, m_spawnShell);
 
 	// Create the Group Manager
 	m_groupMgr = new GroupMgr(m_spawnShell, m_player, this, "groupmgr");
 
 	// Create the message shell
-	m_messageShell = new MessageShell(m_messages, m_eqStrings, m_spells, m_zoneMgr, m_spawnShell, m_player, this, "messageshell");
+	m_messageShell = new MessageShell(m_messages, m_sm->eqStrings(), m_sm->spells(), m_zoneMgr, m_spawnShell, m_player, this, "messageshell");
 
 	// Create the Filter Notifications object
 	m_filterNotifications = new FilterNotifications(this, "filternotifications");
@@ -274,8 +260,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	m_selectOnTarget = pSEQPrefs->getPrefBool("SelectOnTarget", "Interface", false);
 
 	// set the applications default font
-	if (pSEQPrefs->isPreference("Font", "Interface"))
-	{
+	if (pSEQPrefs->isPreference("Font", "Interface")) {
 		QFont appFont = pSEQPrefs->getPrefFont("Font", "Interface", qApp->font());
 		qApp->setFont(appFont, true);
 	}
@@ -340,8 +325,7 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	QSize s = pSEQPrefs->getPrefSize("WindowSize", "Interface", size());
 	resize(s);
 
-	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
-	{
+	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true)) {
 		QPoint p = pSEQPrefs->getPrefPoint("WindowPos", "Interface", pos());
 		move(p);
 	}
@@ -370,9 +354,6 @@ EQInterface::EQInterface(DataLocationMgr* dlm, QWidget* parent, const char *name
 	// TODO: Add % replacement values and a signal to update, for ip address currently being monitored.
 	//setCaption(pSEQPrefs->getPrefString("Caption", "Interface", "ShowEQ " + QString(VERSION)));
 	setCaption("ShowEQ " + QString(VERSION));
-
-	// load the format strings for display
-	loadFormatStrings();
 
 	/* Start the packet capturing */
 	m_packet->start(10);
@@ -2001,7 +1982,7 @@ void EQInterface::connectSignals()
 	connect(this, SIGNAL(saveAllPrefs()), m_mapMgr, SLOT(savePrefs()));
 
 	// connect CategoryMgr slots to interface signals
-	connect(this, SIGNAL(saveAllPrefs()), m_categoryMgr, SLOT(savePrefs()));
+	connect(this, SIGNAL(saveAllPrefs()), m_sm->categoryMgr(), SLOT(savePrefs()));
 
 	if (m_zoneMgr)
 	{
@@ -2042,15 +2023,15 @@ void EQInterface::connectSignals()
 		connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), m_groupMgr, SLOT(killSpawn(const Item*)));
 	}
 
-	if (m_dateTimeMgr)
+	if (m_sm->dateTimeMgr())
 	{
 		// connect DateTimeMgr slots to EQPacket signals
 		m_packet->connect2("OP_TimeOfDay", SP_Zone, DIR_Server,  "timeOfDayStruct", SZC_Match,
-						   m_dateTimeMgr, SLOT(timeOfDay(const uint8_t*)));
+				m_sm->dateTimeMgr(), SLOT(timeOfDay(const uint8_t*)));
 
 		// connect interface slots to DateTimeMgr signals
-		connect(m_dateTimeMgr, SIGNAL(updatedDateTime(const QDateTime&)), this, SLOT(updatedDateTime(const QDateTime&)));
-		connect(m_dateTimeMgr, SIGNAL(syncDateTime(const QDateTime&)), this, SLOT(syncDateTime(const QDateTime&)));
+		connect(m_sm->dateTimeMgr(), SIGNAL(updatedDateTime(const QDateTime&)), this, SLOT(updatedDateTime(const QDateTime&)));
+		connect(m_sm->dateTimeMgr(), SIGNAL(syncDateTime(const QDateTime&)), this, SLOT(syncDateTime(const QDateTime&)));
 	}
 
 	if (m_filterMgr)
@@ -2152,7 +2133,7 @@ void EQInterface::connectSignals()
 		connect(m_spawnShell, SIGNAL(delItem(const Item*)),	m_messageShell, SLOT(delItem(const Item*)));
 		connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), m_messageShell, SLOT(killSpawn(const Item*)));
 
-		connect(m_dateTimeMgr, SIGNAL(syncDateTime(const QDateTime&)), m_messageShell, SLOT(syncDateTime(const QDateTime&)));
+		connect(m_sm->dateTimeMgr(), SIGNAL(syncDateTime(const QDateTime&)), m_messageShell, SLOT(syncDateTime(const QDateTime&)));
 
 		// 9/3/2008 - Removed.  Serialized packet now.
 		//      m_packet->connect2("OP_GroupUpdate", SP_Zone, DIR_Server,
@@ -2420,8 +2401,6 @@ EQInterface::~EQInterface()
 	if (m_spellShell != 0)
 		delete m_spellShell;
 
-	if (m_spells != 0)
-		delete m_spells;
 
 	if (m_mapMgr != 0)
 		delete m_mapMgr;
@@ -2429,14 +2408,9 @@ EQInterface::~EQInterface()
 	if (m_spawnShell != 0)
 		delete m_spawnShell;
 
-	if (m_categoryMgr != 0)
-		delete m_categoryMgr;
 
 	if (m_filterMgr != 0)
 		delete m_filterMgr;
-
-	if (m_eqStrings != 0)
-		delete m_eqStrings;
 
 	if (m_player != 0)
 		delete m_player;
@@ -2449,9 +2423,6 @@ EQInterface::~EQInterface()
 
 	if (m_packet != 0)
 		delete m_packet;
-
-	if (m_dateTimeMgr != 0)
-		delete m_dateTimeMgr;
 }
 
 void EQInterface::restoreStatusFont()
@@ -2909,8 +2880,8 @@ void EQInterface::set_main_Font()
 
 void EQInterface::select_main_FormatFile()
 {
-	QString formatFile = pSEQPrefs->getPrefString("FormatFile", "Interface", "eqstr_us.txt");
-	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", formatFile);
+	QString formatFile = pSEQPrefs->getPrefString("FormatFile", "Resources", "eqstr_us.txt");
+	QFileInfo fileInfo = m_sm->dataLocationMgr()->findExistingFile(".", formatFile);
 
 	QString newFormatFile = QFileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
 
@@ -2918,17 +2889,17 @@ void EQInterface::select_main_FormatFile()
 	if (!newFormatFile.isEmpty())
 	{
 		// set the new format file to use
-		pSEQPrefs->setPrefString("FormatFile", "Interface", newFormatFile);
+		pSEQPrefs->setPrefString("FormatFile", "Resources", newFormatFile);
 
 		// reload the format strings
-		loadFormatStrings();
+		m_sm->loadFormatStrings();
 	}
 }
 
 void EQInterface::select_main_SpellsFile()
 {
-	QString spellsFile = pSEQPrefs->getPrefString("SpellsFile", "Interface", "spells_us.txt");
-	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", spellsFile);
+	QString spellsFile = pSEQPrefs->getPrefString("SpellsFile", "Resources", "spells_us.txt");
+	QFileInfo fileInfo = m_sm->dataLocationMgr()->findExistingFile(".", spellsFile);
 
 	QString newSpellsFile = QFileDialog::getOpenFileName(fileInfo.absFilePath(), "*.txt", this, "FormatFile", "Select Format File");
 
@@ -2936,10 +2907,10 @@ void EQInterface::select_main_SpellsFile()
 	if (!newSpellsFile.isEmpty())
 	{
 		// set the new format file to use
-		pSEQPrefs->setPrefString("SpellsFile", "Interface", newSpellsFile);
+		pSEQPrefs->setPrefString("SpellsFile", "Resources", newSpellsFile);
 
 		// reload the spells
-		m_spells->loadSpells(newSpellsFile);
+		m_sm->spells()->loadSpells(newSpellsFile);
 	}
 }
 
@@ -3092,17 +3063,6 @@ void EQInterface::setCaption(const QString& text)
 	QMainWindow::setCaption(text);
 }
 
-
-void EQInterface::loadFormatStrings()
-{
-	// get the name of the format file
-	QString formatFileName = pSEQPrefs->getPrefString("FormatFile", "Interface", "eqstr_us.txt");
-
-	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", formatFileName);
-
-	// load the strings
-	m_eqStrings->load(fileInfo.absFilePath());
-}
 
 void EQInterface::select_filter_file()
 {
@@ -3330,7 +3290,7 @@ void EQInterface::dumpSpawns()
 
 	QString logFile = pSEQPrefs->getPrefString("DumpSpawnsFilename", "Interface", "dumpspawns.txt");
 
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
@@ -3348,7 +3308,7 @@ void EQInterface::dumpDrops()
 #endif /* DEBUG */
 
 	QString logFile = pSEQPrefs->getPrefString("DumpDropsFilename", "Interface", "dumpdrops.txt");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
@@ -3367,7 +3327,7 @@ void EQInterface::dumpMapInfo()
 
 	QString logFile = pSEQPrefs->getPrefString("DumpMapInfoFilename", "Interface", "mapinfo.txt");
 
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
@@ -3389,7 +3349,7 @@ void EQInterface::dumpMapInfo()
 void EQInterface::dumpGuildInfo()
 {
 	QString logFile = pSEQPrefs->getPrefString("GuildsDumpFile", "Interface", "guilds.txt");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	emit guildList2text(logFileInfo.absFilePath());
 }
@@ -3401,7 +3361,7 @@ void EQInterface::dumpSpellBook()
 #endif /* DEBUG */
 
 	QString logFile = pSEQPrefs->getPrefString("DumpSpellBookFilename", "Interface", "spellbook.txt");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
@@ -3424,7 +3384,7 @@ void EQInterface::dumpSpellBook()
 		if (spellid == 0xffffffff)
 			continue;
 
-		const Spell* spell = m_spells->spell(spellid);
+		const Spell* spell = m_sm->spells()->spell(spellid);
 
 		QString spellName;
 
@@ -3455,7 +3415,7 @@ void EQInterface::dumpGroup()
 
 	QString logFile = pSEQPrefs->getPrefString("DumpGroupFilename", "Interface", "dumpgroup.txt");
 
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
@@ -3473,7 +3433,7 @@ void EQInterface::dumpGuild()
 #endif /* DEBUG */
 
 	QString logFile = pSEQPrefs->getPrefString("DumpGuildFilename", "Interface", "dumpguild.txt");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("dumps", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("dumps", logFile);
 
 	// open the output data stream
 	QFile file(logFileInfo.absFilePath());
@@ -4134,7 +4094,7 @@ void EQInterface::toggle_opcode_view(bool state)
 void EQInterface::select_opcode_file()
 {
 	QString logFile = pSEQPrefs->getPrefString("LogFilename", "OpCodeMonitoring", "opcodemonitor.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 
 	logFile = QFileDialog::getSaveFileName(logFileInfo.absFilePath(), "*.log", this, "ShowEQ - OpCode Log File");
 
@@ -4620,14 +4580,14 @@ void EQInterface::updateSelectedSpawnStatus(const Item* item)
 
 void EQInterface::addCategory()
 {
-	if (m_categoryMgr)
-		m_categoryMgr->addCategory();
+	if (m_sm->categoryMgr())
+		m_sm->categoryMgr()->addCategory();
 }
 
 void EQInterface::reloadCategories()
 {
-	if (m_categoryMgr)
-		m_categoryMgr->reloadCategories();
+	if (m_sm->categoryMgr())
+		m_sm->categoryMgr()->reloadCategories();
 }
 
 void EQInterface::rebuildSpawnList()
@@ -4657,7 +4617,7 @@ void EQInterface::saveSelectedSpawnPath()
 	fileName.sprintf("%s_mobpath.map",
 					 (const char*)m_zoneMgr->shortZoneName());
 
-	QFileInfo fileInfo = m_dataLocationMgr->findWriteFile("maps", fileName, false);
+	QFileInfo fileInfo = m_sm->dataLocationMgr()->findWriteFile("maps", fileName, false);
 
 	QFile mobPathFile(fileInfo.absFilePath());
 	if (mobPathFile.open(QIODevice::Append | QIODevice::WriteOnly))
@@ -4675,7 +4635,7 @@ void EQInterface::saveSpawnPaths()
 	QString fileName;
 	fileName.sprintf("%s_mobpath.map", (const char*)m_zoneMgr->shortZoneName());
 
-	QFileInfo fileInfo = m_dataLocationMgr->findWriteFile("maps", fileName, false);
+	QFileInfo fileInfo = m_sm->dataLocationMgr()->findWriteFile("maps", fileName, false);
 
 	QFile mobPathFile(fileInfo.absFilePath());
 	if (mobPathFile.open(QIODevice::Truncate | QIODevice::WriteOnly))
@@ -5284,7 +5244,7 @@ void EQInterface::showSpawnList()
 	// if it doesn't exist, create it.
 	if (m_spawnList == NULL)
 	{
-		m_spawnList = new SpawnListWindow (m_player, m_spawnShell, m_categoryMgr, this, "spawnlist");
+		m_spawnList = new SpawnListWindow (m_player, m_spawnShell, m_sm->categoryMgr(), this, "spawnlist");
 
 		setDockEnabled(m_spawnList, pSEQPrefs->getPrefBool("DockableSpawnList", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnList->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5323,7 +5283,7 @@ void EQInterface::showSpawnList2()
 	// if it doesn't exist, create it.
 	if (m_spawnList2 == NULL)
 	{
-		m_spawnList2 = new SpawnListWindow2(m_player, m_spawnShell, m_categoryMgr, this, "spawnlist");
+		m_spawnList2 = new SpawnListWindow2(m_player, m_spawnShell, m_sm->categoryMgr(), this, "spawnlist");
 
 		setDockEnabled(m_spawnList2, pSEQPrefs->getPrefBool("DockableSpawnList2", "Interface", true));
 		Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_spawnList2->preferenceName(), Qt::LeftDockWidgetArea);
@@ -5602,9 +5562,9 @@ void EQInterface::createFilteredSpawnLog()
 	if (m_filteredSpawnLog)
 		return;
 
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", "filtered_spawns.log");
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", "filtered_spawns.log");
 
-	m_filteredSpawnLog = new FilteredSpawnLog(m_dateTimeMgr, m_filterMgr, logFileInfo.absFilePath());
+	m_filteredSpawnLog = new FilteredSpawnLog(m_sm->dateTimeMgr(), m_filterMgr, logFileInfo.absFilePath());
 
 	connect(m_spawnShell, SIGNAL(addItem(const Item*)), m_filteredSpawnLog, SLOT(addItem(const Item*)));
 	connect(m_spawnShell, SIGNAL(delItem(const Item*)), m_filteredSpawnLog, SLOT(delItem(const Item*)));
@@ -5618,11 +5578,11 @@ void EQInterface::createSpawnLog()
 		return;
 
 	QString logFile = pSEQPrefs->getPrefString("SpawnLogFilename", "Misc", "spawnlog.txt");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 	logFile = logFileInfo.absFilePath();
 
 	// create the spawn logger
-	m_spawnLogger = new SpawnLog(m_dateTimeMgr, logFile);
+	m_spawnLogger = new SpawnLog(m_sm->dateTimeMgr(), logFile);
 
 	// initialize it with the current state
 	QString shortZoneName = m_zoneMgr->shortZoneName();
@@ -5654,7 +5614,7 @@ void EQInterface::createGlobalLog()
 		return;
 
 	QString logFile = pSEQPrefs->getPrefString("GlobalLogFilename", "PacketLogging", "global.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 
 	m_globalLog = new PacketLog(*m_packet, logFileInfo.absFilePath(), this, "GlobalLog");
 
@@ -5667,7 +5627,7 @@ void EQInterface::createWorldLog()
 		return;
 
 	QString logFile = pSEQPrefs->getPrefString("WorldLogFilename", "PacketLogging", "world.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 
 	m_worldLog = new PacketStreamLog(*m_packet, logFileInfo.absFilePath(), this, "WorldLog");
 	m_worldLog->setRaw(pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging", false));
@@ -5684,7 +5644,7 @@ void EQInterface::createZoneLog()
 		return;
 
 	QString logFile = pSEQPrefs->getPrefString("ZoneLogFilename", "PacketLogging", "zone.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 
 	m_zoneLog = new PacketStreamLog(*m_packet, logFileInfo.absFilePath(), this, "ZoneLog");
 	m_zoneLog->setRaw(pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging", false));
@@ -5702,7 +5662,7 @@ void EQInterface::createBazaarLog()
 		return;
 
 	QString logFile = pSEQPrefs->getPrefString("BazaarLogFilename", "PacketLogging", "bazaar.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 
 	m_bazaarLog = new BazaarLog(*m_packet, logFileInfo.absFilePath(), this, *m_spawnShell, "BazaarLog");
 	m_packet->connect2("OP_BazaarSearch", SP_Zone, DIR_Server, "bazaarSearchResponseStruct", SZC_Modulus,
@@ -5716,7 +5676,7 @@ void EQInterface::createUnknownZoneLog()
 
 	QString section = "PacketLogging";
 	QString logFile = pSEQPrefs->getPrefString("UnknownZoneLogFilename", section, "unknownzone.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 	logFile = logFileInfo.absFilePath();
 
 	m_unknownZoneLog = new UnknownPacketLog(*m_packet, logFile, this, "UnknownLog");
@@ -5735,7 +5695,7 @@ void EQInterface::createOPCodeMonitorLog(const QString& opCodeList)
 
 	QString section = "OpCodeMonitoring";
 	QString logFile = pSEQPrefs->getPrefString("LogFilename", section, "opcodemonitor.log");
-	QFileInfo logFileInfo = m_dataLocationMgr->findWriteFile("logs", logFile);
+	QFileInfo logFileInfo = m_sm->dataLocationMgr()->findWriteFile("logs", logFile);
 	logFile = logFileInfo.absFilePath();
 
 	m_opcodeMonitorLog = new OPCodeMonitorPacketLog(*m_packet, logFile, this, "OpCodeMonitorLog");
@@ -5784,7 +5744,7 @@ void EQInterface::setDockEnabled(SEQWindow* dw, bool enable)
 void EQInterface::setupExperienceWindow()
 {
 	// Initialize the experience window;
-	m_expWindow = new ExperienceWindow(m_dataLocationMgr, m_player, m_groupMgr, m_zoneMgr, this, "ExperienceWindow");
+	m_expWindow = new ExperienceWindow(m_sm->dataLocationMgr(), m_player, m_groupMgr, m_zoneMgr, this, "ExperienceWindow");
 
 	setDockEnabled(m_expWindow, pSEQPrefs->getPrefBool("DockableExperienceWindow", "Interface", false));
 	//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_expWindow->preferenceName(), Qt::NoDockWidgetArea);
