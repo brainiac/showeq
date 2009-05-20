@@ -12,9 +12,9 @@ CONFIG += qt thread stl warn_off debug uic3
 QT += xml qt3support network
 LIBS += -lpcap
 
-DEFINES += PKGDATADIR="\\\"/usr/local/share/showeqi\\\"""
+DEFINES += PKGDATADIR="/usr/local/share/showeq" 
 DEFINES += QMAKEBUILD
-DEFINES += VERSION="\\\"6.0\\\""
+DEFINES += VERSION="6.0"
 
 # Include Paths
 INCLUDEPATH += ..

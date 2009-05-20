@@ -3,34 +3,100 @@
  *  showeq
  *
  *  Created by Stephen Raub on 4/22/09.
- *  Copyright 2009 __MyCompanyName__. All rights reserved.
+ *  Copyright 2009 Vexislogic. All rights reserved.
  *
  */
 
 #ifndef __SESSION_H__
 #define __SESSION_H__
 
-#include "datalocationmgr.h"
-#include "datetimemgr.h"
-#include "eqstr.h"
-#include "spells.h"
-#include "xmlpreferences.h"
-#include "guild.h"
-#include "category.h"
-#include "terminal.h"
 
+#include <QObject>
 #include <QString>
 
-class Session 
+class PacketSource;
+class SessionManager;
+class XMLPreferences;
+
+class ZoneMgr;
+class MapMgr;
+class GroupMgr;
+class GuildMgr;
+class GuildShell;
+class Player;
+class SpawnMonitor;
+class SpawnShell;
+class SpellShell;
+class FilterMgr;
+class Messages;
+class MessageFilters;
+class MessageShell;
+class FilterNotifications;
+class Terminal;
+
+class Session : public QObject
 {
-	// GuildMgr
+	Q_OBJECT
 	
+	// Session constructs
+private:
+	ZoneMgr*			m_zoneMgr;
+	MapMgr*				m_mapMgr;
+	
+	GroupMgr*			m_groupMgr;
+	GuildMgr*			m_guildMgr;
+	GuildShell*			m_guildShell;
+	
+	Player*				m_player;
+	SpawnMonitor*		m_spawnMonitor;
+	SpawnShell*			m_spawnShell;
+	SpellShell*			m_spellShell;
+	
+	FilterMgr*			m_filterMgr;
+	Messages*			m_messages;
+	MessageFilters*		m_messageFilters;
+	MessageShell*		m_messageShell;
+	Terminal*			m_terminal;
+	FilterNotifications*	m_filterNotifications;
+	
+	PacketSource*		m_source;
+	SessionManager*		m_parent;
+	
+	XMLPreferences*		m_preferences;
 	
 public:
+	Session(SessionManager*);
+	Session(SessionManager*, PacketSource*);
+	
+	virtual ~Session();
+	
+	void assignSource(PacketSource*);
 
+public:
+	// Accessors
+	ZoneMgr*			zoneMgr();
+	MapMgr*				mapMgr();
+	GroupMgr*			groupMgr();
+	GuildMgr*			guildMgr(); 
+	GuildShell*			guildShell();
+	Player*				player();
+	SpawnMonitor*		spawnMonitor();
+	SpawnShell*			spawnShell();
+	SpellShell*			spellShell();
+	FilterMgr*			filterMgr();
+	Messages*			messages();
+	MessageFilters*		messageFilters();
+	MessageShell*		messageShell();
 };
 
 
+class DataLocationMgr;
+class DateTimeMgr;
+class XMLPreferences;
+class CategoryMgr;
+class Terminal;
+class Spells;
+class EQStr;
 
 class SessionManager : public QObject
 {
@@ -43,17 +109,22 @@ private:
 	CategoryMgr*		m_categories;
 	Terminal*			m_terminal;
 	
-	// Resources
+	// Session Resources
 	Spells*				m_spells;
 	EQStr*				m_eqStrings;
 	
 	QString getUserDirectory();
 	
+	// Something to store sessions in
+	
 public:
 	SessionManager(QString configFile);
 	virtual ~SessionManager();
 	
-	Session* newSession(class PacketSource*);
+	/* I'm thinking right now, in order to create a new session, we'll require a
+	 * data source which provides the flow of information necessary to create
+	 * the session. */
+	Session* newSession(PacketSource*);
 
 	XMLPreferences* preferences();
 	DataLocationMgr* dataLocationMgr();

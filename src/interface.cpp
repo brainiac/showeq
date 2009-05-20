@@ -139,7 +139,7 @@ EQInterface::EQInterface(SessionManager* sm)
 
 	// Create the terminal object
 	m_terminal = new Terminal(m_messages, this, "terminal");
-
+	
 	/***********************************************************************
 	 * Create Packet Provider Object
 	 **********************************************************************/
@@ -177,11 +177,10 @@ EQInterface::EQInterface(SessionManager* sm)
 	for (int i = 1; i < 5; i++)
 		m_ipstr[i] = "0.0.0.0";
 
-	// REtrieve last MAC used in previous session
+	// Retrieve last MAC used in previous session
 	m_macstr[0] = m_packet->mac();
 	for (int i = 1; i < 5; i++)
 		m_macstr[i] = "00:00:00:00:00:00";
-
 
 	/***********************************************************************
 	 * Create ShowEQ Objects
@@ -233,7 +232,7 @@ EQInterface::EQInterface(SessionManager* sm)
 
 	// Create the Filter Notifications object
 	m_filterNotifications = new FilterNotifications(this, "filternotifications");
-
+	
 	createLogs();
 
 	/***********************************************************************

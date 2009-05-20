@@ -134,7 +134,6 @@ class MapMgr : public QObject
 public:
 	MapMgr(const DataLocationMgr* dataLocMgr,
 		   SpawnShell* spawnShell, Player* player, ZoneMgr* zoneMgr,
-		   QWidget* dialogParent,
 		   QObject* parent = 0, const char* name = "mapmgr");
 	virtual ~MapMgr();
 

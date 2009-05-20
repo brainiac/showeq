@@ -238,12 +238,11 @@ void MapLabel::mousePressEvent(QMouseEvent*)
 //----------------------------------------------------------------------
 // MapMgr
 MapMgr::MapMgr(const DataLocationMgr* dataLocMgr, SpawnShell* spawnShell, Player* player, ZoneMgr* zoneMgr,
-			   QWidget* dialogParent, QObject* parent, const char* name)
+			   QObject* parent, const char* name)
   : QObject(parent, name),
 	m_dataLocMgr(dataLocMgr),
 	m_spawnShell(spawnShell),
-	m_player(player),
-	m_dialogParent(dialogParent)
+	m_player(player)
 {
 	m_dlgLineProps = NULL;
 
