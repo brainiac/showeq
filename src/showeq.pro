@@ -12,10 +12,6 @@ CONFIG += qt thread stl warn_off debug uic3
 QT += xml qt3support network
 LIBS += -lpcap
 
-DEFINES += PKGDATADIR="/usr/local/share/showeq" 
-DEFINES += QMAKEBUILD
-DEFINES += VERSION="6.0"
-
 # Include Paths
 INCLUDEPATH += ..
 INCLUDEPATH += /usr/include/pcap
@@ -61,11 +57,11 @@ HEADERS += spawnlistcommon.h spawnlist2.h messagewindow.h guildlist.h messagefil
 # PACKET SOURCE COMPONENTS
 SOURCES += vpacket.cpp packetfragment.cpp packetstream.cpp packetinfo.cpp
 SOURCES += packet.cpp packetcapture.cpp packetformat.cpp netstream.cpp 
-SOURCES += remotepacket.cpp
+SOURCES += remotepacket.cpp datasource.cpp
 
 HEADERS += vpacket.h packet.h packetcapture.h packetcommon.h packetformat.h 
 HEADERS += packetstream.h packetfragment.h packetinfo.h netstream.h decode.h 
-HEADERS += remotepacket.h
+HEADERS += remotepacket.h datasource.h
 
 
 # EVERQUEST DATA
