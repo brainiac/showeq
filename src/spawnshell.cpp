@@ -474,7 +474,7 @@ int32_t SpawnShell::fillSpawnStruct(spawnStruct *spawn, const uint8_t *data, siz
 	/*
 	 * This reads data from the variable-length spawn struct
 	 */
-	NetStream netStream(data,len);
+	NetStream netStream(data, len);
 	int32_t retVal;
 	uint32_t race;
 	uint8_t i;
@@ -606,7 +606,13 @@ int32_t SpawnShell::fillSpawnStruct(spawnStruct *spawn, const uint8_t *data, siz
 		strcpy(spawn->suffix, name.latin1());
 	}
 
-	netStream.skipBytes(33);
+	// unknowns
+	netStream.skipBytes(8);
+	
+	spawn->isMercenary = netStream.readUInt8();
+	
+	// unknowns
+	netStream.skipBytes(24);
 
 	// now we're at the end
 
@@ -614,7 +620,7 @@ int32_t SpawnShell::fillSpawnStruct(spawnStruct *spawn, const uint8_t *data, siz
 
 	if (checkLen && (int32_t)len != retVal)
 	{
-		seqDebug("SpawnShell::fillSpawnStruct - expected length: %d, read: %d", len, retVal);
+		seqDebug("SpawnShell::fillSpawnStruct - expected length: %d, read: %d for spawn '%s'", len, retVal, spawn->name);
 	}
 	return retVal;
 }

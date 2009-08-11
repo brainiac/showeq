@@ -155,8 +155,6 @@ public slots:
 	void updateSelectedSpawnStatus(const Item* item);
 
 	void savePrefs();
-	void addCategory();
-	void reloadCategories();
 	void rebuildSpawnList();
 	void selectNext();
 	void selectPrev();

@@ -28,9 +28,11 @@
 #include "group.h"
 #include "messageshell.h"
 #include "filternotifications.h"
-
+#include "datasource.h"
 
 #include <QFileInfo>
+
+extern XMLPreferences* pSEQPrefs;
 
 // Session Class
 
@@ -119,7 +121,7 @@ Session::Session(SessionManager* parent)
 	
 }
 
-Session::Session(SessionManager* parent, PacketSource* source)
+Session::Session(SessionManager* parent, DataSource* source)
 {
 	m_zoneMgr = NULL;
 	m_mapMgr = NULL;
@@ -178,7 +180,7 @@ Session::~Session()
 }
 
 
-void Session::assignSource(PacketSource* source)
+void Session::assignSource(DataSource* source)
 {
 	m_source = source;
 }
@@ -224,7 +226,7 @@ SessionManager::SessionManager(QString configFile)
 	printf("Using config file '%s'\n", (const char*)configFile);
 	
 	// Create the preferences object
-	m_preferences = new XMLPreferences(defaultConfigFilePath, userConfigFilePath);
+	pSEQPrefs = m_preferences = new XMLPreferences(defaultConfigFilePath, userConfigFilePath);
 	
 	/* [brainiac] Ok now that preferences are created, we can set up the rest of
 	 * the system. */
@@ -242,30 +244,29 @@ SessionManager::SessionManager(QString configFile)
 	
 	// Load categories
 	m_categories = new CategoryMgr();
+	
+	// Connect some signals
+	connect(this, SLOT(savePrefs()), m_categories, SLOT(savePrefs()));
 }
 
 SessionManager::~SessionManager()
 {
-	assert(m_eqStrings != NULL);
-	delete m_eqStrings;
+	if (m_eqStrings != NULL)
+		delete m_eqStrings;
+	if (m_spells != NULL)
+		delete m_spells;
+	if (m_categories != NULL)
+		delete m_categories;
 	
-	assert(m_spells != NULL);
-	delete m_spells;
-	
-	assert(m_categories != NULL);
-	delete m_categories;
-	
-	assert(m_dateTimeMgr != NULL);
-	delete m_dateTimeMgr;
-	
-	assert(m_preferences != NULL);
-	delete m_preferences;
-	
-	assert(m_dataLocationMgr != NULL);
-	delete m_dataLocationMgr;
+	if (m_dateTimeMgr != NULL)
+		delete m_dateTimeMgr;
+	if (m_preferences != NULL)
+		delete m_preferences;
+	if (m_dataLocationMgr)
+		delete m_dataLocationMgr;
 }
 
-Session* SessionManager::newSession(class PacketSource*)
+Session* SessionManager::newSession(DataSource*)
 {
 }
 
@@ -316,4 +317,18 @@ EQStr* SessionManager::eqStrings()
 
 void SessionManager::savePrefs()
 {
+}
+
+
+// Category Functions
+void SessionManager::addCategory()
+{
+	if (m_categories)
+		m_categories->addCategory();
+}
+
+void SessionManager::reloadCategories()
+{
+	if (m_categories)
+		m_categories->reloadCategories();
 }

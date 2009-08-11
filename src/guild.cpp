@@ -17,6 +17,7 @@
 #include "guild.h"
 #include "packet.h"
 #include "diagnosticmessages.h"
+#include "netstream.h"
 
 #include <QFile>
 #include <QDataStream>
@@ -42,33 +43,69 @@ QString GuildMgr::guildIdToName(uint16_t guildID)
 
 void GuildMgr::worldGuildList(const uint8_t* data, size_t len)
 {
-	const worldGuildListStruct* gls = (const worldGuildListStruct*)data;
-
-	writeGuildList(gls, len);
+	writeGuildList(data, len);
 	readGuildList();
 }
 
-void GuildMgr::writeGuildList(const worldGuildListStruct* gls, size_t len)
+void GuildMgr::writeGuildList(const uint8_t* data, size_t len)
 {
 	QFile guildsfile(guildsFileName);
 
 	if (guildsfile.exists()) {
 		if (!guildsfile.remove()) {
-			seqWarn("GuildMgr: Could not remove old %s, unable to replace with server data!"
-				,
-				guildsFileName.latin1());
+			seqWarn("GuildMgr: Could not remove old %s, unable to replace with server data!", guildsFileName.latin1());
 			return;
 		}
 	}
 
 	if (!guildsfile.open(QIODevice::WriteOnly))
-		seqWarn("GuildMgr: Could not open %s for writing, unable to replace with server data!",
-		guildsFileName.latin1());
+		seqWarn("GuildMgr: Could not open %s for writing, unable to replace with server data!", guildsFileName.latin1());
 
 	QDataStream guildDataStream(&guildsfile);
-
-	guildDataStream.writeRawBytes((char *)gls->guilds, sizeof(gls->guilds));
-
+	
+	NetStream netStream(data, len);
+	QString guildName;
+	uint32_t size = 0; // to keep track of how much we're reading from the packet
+	uint32_t guildId = 0;
+	
+	/* 0x48 in the packet starts the serialized list. See guildListStruct
+	 * and worldGuildListStruct in everquest.h */
+	
+	// Skip the first guild in the list
+	netStream.skipBytes(0x44);
+	size += 0x44;
+	
+	while (!netStream.end())
+	{
+		guildId = netStream.readUInt32NC();
+		guildName = netStream.readText();
+		size += 4;
+		
+		if (guildName.length())
+		{
+			m_guildList[guildId] = guildName;
+			
+			// add guild name length, plus one for the null character
+			size += guildName.length() + 1;
+		}
+		
+		// theres an extra zero at the end of the packet
+		if (size + 1 == len)
+			break;
+	}
+	
+	std::map<uint32_t, QString>::const_iterator it;
+	
+	for (it = m_guildList.begin(); it != m_guildList.end(); it++)
+	{
+		char szGuildName[64] = {0};
+		
+		strcpy(szGuildName, it->second.latin1());
+		
+		// seqDebug("GuildMgr::writeGuildList - add guild '%s' (%d)", szGuildName, it->first);
+		guildDataStream.writeRawBytes(szGuildName, sizeof(szGuildName));
+	}
+	
 	guildsfile.close();
 	seqInfo("GuildMgr: New guildsfile written");
 }
@@ -80,22 +117,14 @@ void GuildMgr::readGuildList()
 	m_guildMap.clear();
 	if (guildsfile.open(QIODevice::ReadOnly))
 	{
-		worldGuildListStruct tmp;
-		if (guildsfile.size() != sizeof(tmp.guilds))
-		{
-			seqWarn("GuildMgr: Guildsfile not loaded, expected size %d got %ld", sizeof(worldGuildListStruct), guildsfile.size());
-			return;
-		}
-
-		struct guildListStruct gl;
-
 		while (!guildsfile.atEnd())
 		{
-			guildsfile.readBlock(reinterpret_cast<char*>(&gl), sizeof(gl));
-			// Commented out until verified that this needs to actually be
-			// removed. -- Ratt
-			// if (strlen(gl.guildName) > 0)
-			m_guildMap.push_back(QString::fromUtf8(gl.guildName));
+			char szGuildName[64] = {0};
+			
+			guildsfile.readBlock(szGuildName, sizeof(szGuildName));
+			
+			// seqDebug("GuildMgr::readGuildList - read guild '%s'", szGuildName);
+			m_guildMap.push_back(QString::fromUtf8(szGuildName));
 		}
 
 		guildsfile.close();

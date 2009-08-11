@@ -186,8 +186,6 @@ EQInterface::EQInterface(SessionManager* sm)
 	 * Create ShowEQ Objects
 	 **********************************************************************/
 
-
-
 	// Create the Zone Manager
 	m_zoneMgr = new ZoneMgr(this, "zonemgr");
 
@@ -539,7 +537,7 @@ void EQInterface::createFileMenu()
 	// Add Spawn Category
 	action = new QAction("Add Spawn Category", this);
 	action->setShortcut(ALT + Key_C);
-	connect(action, SIGNAL(triggered()), this, SLOT(addCategory()));
+	connect(action, SIGNAL(triggered()), m_sm, SLOT(addCategory()));
 	pFileMenu->addAction(action);
 
 	// Rebuild Spawn List
@@ -551,7 +549,7 @@ void EQInterface::createFileMenu()
 	// Reload Categories
 	action = new QAction("Reload Categories", this);
 	action->setShortcut(CTRL + Key_R);
-	connect(action, SIGNAL(triggered()), this, SLOT(reloadCategories()));
+	connect(action, SIGNAL(triggered()), m_sm, SLOT(reloadCategories()));
 	pFileMenu->addAction(action);
 
 	// Select Next
@@ -1981,7 +1979,7 @@ void EQInterface::connectSignals()
 	connect(this, SIGNAL(saveAllPrefs()), m_mapMgr, SLOT(savePrefs()));
 
 	// connect CategoryMgr slots to interface signals
-	connect(this, SIGNAL(saveAllPrefs()), m_sm->categoryMgr(), SLOT(savePrefs()));
+	connect(this, SIGNAL(saveAllPrefs()), m_sm, SLOT(savePrefs()));
 
 	if (m_zoneMgr)
 	{
@@ -2042,7 +2040,7 @@ void EQInterface::connectSignals()
 
 	if (m_guildmgr)
 	{
-		m_packet->connect2("OP_GuildList", SP_World, DIR_Server, "worldGuildListStruct", SZC_Match,
+		m_packet->connect2("OP_GuildList", SP_World, DIR_Server, "worldGuildListStruct", SZC_None,
 						   m_guildmgr, SLOT(worldGuildList(const uint8_t*, size_t)));
 
 		connect(this, SIGNAL(guildList2text(QString)), m_guildmgr, SLOT(guildList2text(QString)));
@@ -2399,8 +2397,7 @@ EQInterface::~EQInterface()
 
 	if (m_spellShell != 0)
 		delete m_spellShell;
-
-
+	
 	if (m_mapMgr != 0)
 		delete m_mapMgr;
 
@@ -4567,26 +4564,11 @@ void EQInterface::updateSelectedSpawnStatus(const Item* item)
 		+ QString::number(item->y()) + "/"
 		+ QString::number(item->z());
 
-	string += QString(" (")
-    + QString::number(item->calcDist(m_player->x(),
-									 m_player->y(),
-									 m_player->z()))
-    + ") " + item->raceString() + " " + item->classString();
+	string += QString(" (") + QString::number(item->calcDist(m_player->x(),
+		m_player->y(), m_player->z())) + ") " + item->raceString() + " " + item->classString();
 
 	// just call the status message method
 	stsMessage(string);
-}
-
-void EQInterface::addCategory()
-{
-	if (m_sm->categoryMgr())
-		m_sm->categoryMgr()->addCategory();
-}
-
-void EQInterface::reloadCategories()
-{
-	if (m_sm->categoryMgr())
-		m_sm->categoryMgr()->reloadCategories();
 }
 
 void EQInterface::rebuildSpawnList()
@@ -4613,8 +4595,7 @@ void EQInterface::selectPrev()
 void EQInterface::saveSelectedSpawnPath()
 {
 	QString fileName;
-	fileName.sprintf("%s_mobpath.map",
-					 (const char*)m_zoneMgr->shortZoneName());
+	fileName.sprintf("%s_mobpath.map", (const char*)m_zoneMgr->shortZoneName());
 
 	QFileInfo fileInfo = m_sm->dataLocationMgr()->findWriteFile("maps", fileName, false);
 

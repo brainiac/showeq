@@ -14,7 +14,6 @@
 #include <QObject>
 #include <QString>
 
-class PacketSource;
 class SessionManager;
 class XMLPreferences;
 
@@ -33,6 +32,7 @@ class MessageFilters;
 class MessageShell;
 class FilterNotifications;
 class Terminal;
+class DataSource;
 
 class Session : public QObject
 {
@@ -59,18 +59,18 @@ private:
 	Terminal*			m_terminal;
 	FilterNotifications*	m_filterNotifications;
 	
-	PacketSource*		m_source;
+	DataSource*		m_source;
 	SessionManager*		m_parent;
 	
 	XMLPreferences*		m_preferences;
 	
 public:
 	Session(SessionManager*);
-	Session(SessionManager*, PacketSource*);
+	Session(SessionManager*, DataSource*);
 	
 	virtual ~Session();
 	
-	void assignSource(PacketSource*);
+	void assignSource(DataSource*);
 
 public:
 	// Accessors
@@ -124,7 +124,7 @@ public:
 	/* I'm thinking right now, in order to create a new session, we'll require a
 	 * data source which provides the flow of information necessary to create
 	 * the session. */
-	Session* newSession(PacketSource*);
+	Session* newSession(DataSource*);
 
 	XMLPreferences* preferences();
 	DataLocationMgr* dataLocationMgr();
@@ -137,6 +137,11 @@ public:
 	void loadFormatStrings();
 	void loadSpells();
 	
+public slots:		/* Functions for Category Manager */
+	void addCategory();
+	void reloadCategories();
+	
+		
 public slots:
 	void savePrefs();
 };

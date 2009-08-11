@@ -18,6 +18,7 @@
 #include <QObject>
 #include <QString>
 #include <vector>
+#include <map>
 
 #include "everquest.h"
 
@@ -40,9 +41,10 @@ public slots:
 	void listGuildInfo();
 
 private:
-	void writeGuildList(const worldGuildListStruct*, size_t);
+	void writeGuildList(const uint8_t*, size_t);
 
 	std::vector<QString> m_guildMap;
+	std::map<uint32_t, QString> m_guildList;
 	QString guildsFileName;
 };
 
