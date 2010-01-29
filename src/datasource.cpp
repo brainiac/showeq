@@ -30,6 +30,10 @@ bool DataSource::connectReceiver(const QString& messageName, const QString& payl
 	return false;
 }
 
+void DataSource::clearConnections()
+{
+}
+
 void DataSource::start()
 {
 }

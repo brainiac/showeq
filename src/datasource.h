@@ -33,6 +33,8 @@ public:
 	virtual bool connectReceiver(const QString& messageName, const QString& payloadName,
 		EQStreamPairs sp, uint8_t dir, EQSizeCheckType szt, const QObject* receiver, const char* member);
 	
+	virtual void clearConnections();
+	
 	/* virtual destructor */
 	virtual ~DataSource();
 	

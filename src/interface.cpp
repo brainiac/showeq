@@ -2020,6 +2020,7 @@ void EQInterface::connectSignals()
 		connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), m_groupMgr, SLOT(killSpawn(const Item*)));
 	}
 
+	// TODO: dateTimeMgr connections
 	if (m_sm->dateTimeMgr())
 	{
 		// connect DateTimeMgr slots to EQPacket signals
@@ -2043,6 +2044,7 @@ void EQInterface::connectSignals()
 		m_packet->connect2("OP_GuildList", SP_World, DIR_Server, "worldGuildListStruct", SZC_None,
 						   m_guildmgr, SLOT(worldGuildList(const uint8_t*, size_t)));
 
+		// TODO: connect this
 		connect(this, SIGNAL(guildList2text(QString)), m_guildmgr, SLOT(guildList2text(QString)));
 	}
 
@@ -2130,6 +2132,7 @@ void EQInterface::connectSignals()
 		connect(m_spawnShell, SIGNAL(delItem(const Item*)),	m_messageShell, SLOT(delItem(const Item*)));
 		connect(m_spawnShell, SIGNAL(killSpawn(const Item*, const Item*, uint16_t)), m_messageShell, SLOT(killSpawn(const Item*)));
 
+		// TODO: connect this
 		connect(m_sm->dateTimeMgr(), SIGNAL(syncDateTime(const QDateTime&)), m_messageShell, SLOT(syncDateTime(const QDateTime&)));
 
 		// 9/3/2008 - Removed.  Serialized packet now.
@@ -2156,6 +2159,7 @@ void EQInterface::connectSignals()
 						   m_messageShell, SLOT(groupLeaderChange(const uint8_t*)));
 	}
 
+	// TODO: connect all the following EQInterface signals/slots:
 	if (m_filterNotifications)
 	{
 		connect(m_spawnShell, SIGNAL(addItem(const Item*)), m_filterNotifications, SLOT(addItem(const Item*)));
@@ -2245,8 +2249,7 @@ void EQInterface::connectSignals()
 	m_packet->connect2("OP_CorpseLocResponse", SP_Zone, DIR_Server, "corpseLocStruct", SZC_Match,
 					   m_spawnShell, SLOT(corpseLoc(const uint8_t*)));
 #if 0 // No longer used as of 5-22-2008
-	m_packet->connect2("OP_ZoneSpawns", SP_Zone, DIR_Server,
-					   "spawnStruct", SZC_None,
+	m_packet->connect2("OP_ZoneSpawns", SP_Zone, DIR_Server, "spawnStruct", SZC_None,
 					   m_spawnShell, SLOT(zoneSpawns(const uint8_t*, size_t)));
 #endif
 
@@ -2298,6 +2301,7 @@ void EQInterface::connectSignals()
 	m_packet->connect2("OP_SwapSpell", SP_Zone, DIR_Server, "tradeSpellBookSlotsStruct", SZC_Match,
 					   m_player, SLOT(tradeSpellBookSlots(const uint8_t*, size_t, uint8_t)));
 
+	// TODO: Attach these signals
 	// interface statusbar slots
 	connect(this, SIGNAL(newZoneName(const QString&)), m_stsbarZone, SLOT(setText(const QString&)));
 	connect(m_packet, SIGNAL(stsMessage(const QString &, int)), this, SLOT(stsMessage(const QString &, int)));
@@ -2315,6 +2319,7 @@ void EQInterface::connectSignals()
 			this, SLOT(newAltExp(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)));
 	connect(m_player, SIGNAL(levelChanged(uint8_t)), this, SLOT(levelChanged(uint8_t)));
 
+	// TODO: Attach these signals
 	if (m_expWindow != NULL)
 	{
 		// connect ExperienceWindow slots to Player signals
@@ -2327,6 +2332,7 @@ void EQInterface::connectSignals()
 		connect(this, SIGNAL(saveAllPrefs()), m_expWindow, SLOT(savePrefs()));
 	}
 
+	// TODO: Attach these signals
 	if (m_combatWindow != NULL)
 	{
 		// connect CombatWindow slots to the signals

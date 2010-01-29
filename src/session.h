@@ -59,14 +59,13 @@ private:
 	Terminal*			m_terminal;
 	FilterNotifications*	m_filterNotifications;
 	
-	DataSource*		m_source;
+	DataSource*			m_source;
 	SessionManager*		m_parent;
 	
 	XMLPreferences*		m_preferences;
 	
 public:
-	Session(SessionManager*);
-	Session(SessionManager*, DataSource*);
+	Session(SessionManager*, DataSource* source = NULL);
 	
 	virtual ~Session();
 	
