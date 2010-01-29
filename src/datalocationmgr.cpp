@@ -8,7 +8,9 @@
  *
  */
 
-#include "config.h"
+#include "compat.h"
+#include "main.h"
+
 #include "datalocationmgr.h"
 #include "diagnosticmessages.h"
 

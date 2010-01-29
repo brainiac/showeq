@@ -658,7 +658,11 @@ int64_t XMLPreferences::getPrefInt64(const QString& inName, const QString& inSec
 		{
 			case QVariant::String:
 				// convert it to a int64_t (in base 16)
+#ifdef _MSC_VER
+				value = _strtoi64(pref.toString(), 0, 16);
+#else
 				value = strtoll(pref.toString(), 0, 16);
+#endif
 				break;
 
 			case QVariant::Int:
@@ -706,7 +710,11 @@ uint64_t XMLPreferences::getPrefUInt64(const QString& inName, const QString& inS
 		{
 			case QVariant::String:
 				// convert it to a uint64_t (in base 16)
+#ifdef _MSC_VER
+				value = _strtoui64(pref.toString(), 0, 16);
+#else
 				value = strtoull(pref.toString(), 0, 16);
+#endif
 				break;
 
 			case QVariant::Int:
@@ -804,3 +812,7 @@ void XMLPreferences::setPrefVariant(const QString& inName, const QString& inSect
 {
 	setPref(inName, inSection, inValue, pers);
 }
+
+#ifdef _WINDOWS
+#include "moc_xmlpreferences.cpp"
+#endif

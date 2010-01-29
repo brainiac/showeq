@@ -17,8 +17,7 @@
 #ifndef _CATEGORY_H_
 #define _CATEGORY_H_
 
-#include <sys/types.h>
-#include <regex.h>
+#include "compat.h"
 
 #include <QString>
 #include <QColor>

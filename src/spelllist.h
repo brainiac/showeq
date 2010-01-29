@@ -20,7 +20,9 @@
 #include <QMenu>
 
 #include <time.h>
+#ifndef Q_OS_WIN
 #include <sys/time.h>
+#endif
 
 #include "seqwindow.h"
 #include "seqlistview.h"

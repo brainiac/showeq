@@ -15,7 +15,11 @@
 // since they are incapable of following standards
 #include <sys/types.h>
 #else
+#ifndef Q_OS_WIN
 #include <stdint.h>
+#else
+# include "compat.h"
+#endif
 #endif
 
 

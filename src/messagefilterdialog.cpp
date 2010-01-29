@@ -12,7 +12,8 @@
 #include "messagefilter.h"
 #include "message.h"
 
-#include <stdint.h>
+#include "compat.h"
+
 #include <stdio.h>
 
 #include <QString>

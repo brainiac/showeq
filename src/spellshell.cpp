@@ -11,7 +11,10 @@
  *
  */
 
+// TODO: Convert time to use Qt classes
+
 #include "spellshell.h"
+
 #include "util.h"
 #include "player.h"
 #include "spawnshell.h"
@@ -34,8 +37,15 @@ SpellItem::SpellItem()
 
 void SpellItem::updateCastTime()
 {
-	struct timezone tz;
-	gettimeofday(&m_castTime,&tz);
+#ifdef Q_OS_WIN
+	time(&m_castTime);
+#else
+	timezone tz;
+	timeval tv;
+	gettimeofday(&tv, &tz);
+
+	m_castTime = tv.tv_sec;
+#endif
 }
 
 QString SpellItem::castTimeStr() const
@@ -50,7 +60,7 @@ QString SpellItem::castTimeStr() const
 	else
 	{
 		/* Friendlier format courtesy of Daisy */
-		struct tm *CreationLocalTime = localtime(&(m_castTime.tv_sec));
+		struct tm *CreationLocalTime = localtime(&m_castTime);
 		/* tzname should be set by localtime() but this doesn't seem to
          work.  cpphack */
 		char buff[256];

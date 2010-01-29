@@ -15,8 +15,8 @@
 #include "zonemgr.h"
 #include "main.h"
 
+#include "compat.h"
 #include <stdio.h>
-#include <unistd.h>
 
 #include <QDir>
 #include <QFile>

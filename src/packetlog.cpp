@@ -11,7 +11,7 @@
 #include <QDateTime>
 
 #include "packetlog.h"
-#include "packetformat.h"
+//#include "packetformat.h"
 #include "packetinfo.h"
 #include "decode.h"
 #include "diagnosticmessages.h"

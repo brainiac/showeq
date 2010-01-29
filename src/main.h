@@ -8,18 +8,32 @@
 #ifndef _SHOWEQ_MAIN_H
 #define _SHOWEQ_MAIN_H
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
+#include "compat.h"
+
 #include <stdlib.h>
 #include <deque>
 
 #include "xmlpreferences.h"
 extern class XMLPreferences *pSEQPrefs;
 
-#include "config.h"
+#ifdef VERSION
+#undef VERSION
+#endif
+
+#define VERSION "6.0.0.0"
+
+#ifdef PKGDATADIR
+#undef PKGDATADIR
+#endif
+
+// TODO: Update file paths for cross platform compatibility
+#ifdef Q_OS_WIN
+#define PKGDATADIR "."
+#else
+#define PKGDATADIR "/usr/local/share/showeq"
+#endif
+
+
 
 // TODO: Look up ID for new races
 

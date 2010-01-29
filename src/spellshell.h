@@ -16,9 +16,9 @@
 #ifndef SPELLSHELL_H
 #define SPELLSHELL_H
 
-#include <time.h>
+#include "compat.h"
+
 #include <stdio.h>
-#include <sys/time.h>
 
 #include <QTimer>
 #include <Q3ValueList>
@@ -83,7 +83,11 @@ private:
 	QString m_casterName;
 	QString m_targetName;
 	int m_duration;
+#ifndef _WINDOWS
 	timeval m_castTime;
+#else
+	time_t m_castTime;
+#endif
 
 	uint16_t m_spellId;
 	uint16_t m_casterId;
@@ -110,7 +114,11 @@ inline uint16_t SpellItem::casterId() const
 
 inline time_t SpellItem::castTime() const
 {
+#ifdef _WINDOWS
+	return m_castTime;
+#else
 	return m_castTime.tv_sec;
+#endif
 }
 
 inline int SpellItem::duration() const

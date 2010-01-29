@@ -11,32 +11,13 @@
 #ifndef _PACKETFORMAT_H_
 #define _PACKETFORMAT_H_
 
+#ifdef _WINDOWS
+#error packetformat.h not supported on windows!
+#endif
+
+
 #include "packetcommon.h"
-
-#if defined (__GLIBC__) && (__GLIBC__ < 2)
-#error "Need glibc 2.1.3 or better"
-#endif
-
-#if (defined(__FreeBSD__) || defined(__linux__)) && defined(__GLIBC__) && (__GLIBC__ == 2) && (__GLIBC_MINOR__ < 2)
-typedef uint16_t in_port_t;
-typedef uint32_t in_addr_t;
-#endif
-
-#include <netinet/in.h>
-#include <netinet/ip.h>
-
-#if defined(__linux__)
-#define __FAVOR_BSD
-#endif
-
-#include <netinet/udp.h>
-
-#ifdef __FAVOR_BSD
-#undef __FAVOR_BSD
-#endif
-
-#include <arpa/inet.h>
-
+#include "compat.h"
 #include "util.h"
 
 // Forward declarations

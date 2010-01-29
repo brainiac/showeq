@@ -15,11 +15,7 @@
 #ifndef SPELLS_H_
 #define SPELLS_H_
 
-#ifdef __FreeBSD__
-# include <sys/types.h>
-#else
-# include <stdint.h>
-#endif
+#include "compat.h"
 
 #include <QStringList>
 #include <QString>

@@ -17,13 +17,7 @@
 #ifndef _SPAWN_H_
 #define _SPAWN_H_
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
-#include <math.h>
-#include <time.h>
+#include "compat.h"
 
 #include <QList>
 #include <QDateTime>

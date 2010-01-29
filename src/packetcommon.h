@@ -26,8 +26,9 @@
 #  endif
 # endif
 #else
-# include <stdint.h>
+# include "compat.h"
 #endif
+
 #ifdef __linux__
 # include <endian.h>
 #endif

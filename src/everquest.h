@@ -19,12 +19,18 @@
 #ifndef EQSTRUCT_H
 #define EQSTRUCT_H
 
+#ifndef Q_WS_WIN
 #include "config.h"
+#endif
 
 #ifdef __FreeBSD__
 #include <sys/types.h>
 #else
+#ifndef Q_OS_WIN
 #include <stdint.h>
+#else
+# include "compat.h"
+#endif
 #endif
 
 /*
@@ -1353,8 +1359,12 @@ struct zonePointStruct
 struct zonePointsStruct
 {
   /*0000*/ uint32_t        count;
+#ifdef Q_OS_WIN
+  /*0004*/ zonePointStruct zonePoints[1];
+#else
   /*0004*/ zonePointStruct zonePoints[0]; 
   /*0xxx*/ uint8_t         unknown0xxx[24];
+#endif
   /*0yyy*/
 };
 
@@ -1567,7 +1577,7 @@ struct channelMessageStruct
 /*0132*/ uint32_t chanNum;                // Channel
 /*0136*/ int8_t   unknown0136[8];        // ***Placeholder
 /*0144*/ uint32_t skillInLanguage;        // senders skill in language
-/*0148*/ char     message[0];             // Variable length message
+/*0148*/ char     message[1];             // Variable length message
 };
 
 /*
@@ -1581,8 +1591,7 @@ struct formattedMessageStruct
 /*0000*/ uint8_t  unknown0002[4];         // ***Placeholder
 /*0004*/ uint32_t messageFormat;          // Indicates the message format
 /*0008*/ ChatColor messageColor;          // Message color
-/*0012*/ char     messages[0];            // messages(NULL delimited)
-/*0???*/ uint8_t  unknownXXXX[8];         // ***Placeholder
+/*0012*/ char     messages[8];            // messages(NULL delimited)
 };
 
 /*
@@ -1611,9 +1620,7 @@ struct specialMessageStruct
   /*0003*/ ChatColor messageColor;    // message color
   /*0007*/ uint16_t  target;          // message target
   /*0009*/ uint16_t  padding;         // padding
-  /*0011*/ char      source[0];       // message text
-  /*0xxx*/ uint32_t  unknown0xxx[3];  //***Placeholder
-  /*0yyy*/ char      message[0];      // message text
+  /*0xxx*/ char      message[1];      // message text
 };
 
 /*
@@ -2031,8 +2038,7 @@ struct spMesgStruct
 struct spellFadedStruct
 {
 /*0000*/ uint32_t color;                  // color of the spell fade message
-/*0004*/ char     message[0];             // fade message
-/*0???*/ uint8_t  paddingXXX[3];          // always 0's 
+/*0004*/ char     message[1];             // fade message
 };
 
 /*
@@ -2580,8 +2586,7 @@ struct worldGuildListStruct
 
 struct worldMOTDStruct
 {
-  /*002*/ char    message[0];
-  /*???*/ uint8_t unknownXXX[3];
+  /*002*/ char    message[1];
 };
 
 // Restore structure packing to default

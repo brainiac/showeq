@@ -48,7 +48,7 @@ void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 		char name[256];
 		strncpy(name, resp.item_name, sizeof(resp.item_name));
 		char *p;
-		if ((p = rindex(name, '(')) != NULL && isdigit(*(p + 1)))
+		if ((p = strrchr(name, '(')) != NULL && isdigit(*(p + 1)))
 			*p = 0;
 		Item *merchant = m_shell.spawns().find(resp.player_id);
 		const char *merchant_name = "unknown";

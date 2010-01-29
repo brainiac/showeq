@@ -11,9 +11,9 @@
 #ifndef _MESSAGESHELL_H_
 #define _MESSAGESHELL_H_
 
-#include "messages.h"
+#include "compat.h"
 
-#include <stdint.h>
+#include "messages.h"
 
 #include <QObject>
 

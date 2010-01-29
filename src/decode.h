@@ -8,11 +8,6 @@
 #ifndef EQDECODE_H
 #define EQDECODE_H
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
 
 #define FLAG_COMP         0x1000 // Compressed packet
 #define FLAG_COMBINED     0x2000 // Combined packet

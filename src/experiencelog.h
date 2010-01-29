@@ -20,10 +20,7 @@
 #include <Q3PopupMenu>
 #include <Q3PtrList>
 
-#include <stdint.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include "compat.h"
 #include <fcntl.h>
 #include <stdio.h>
 

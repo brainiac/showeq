@@ -14,8 +14,6 @@
 #include <QtNetwork/QTcpSocket>
 
 #include "packetinfo.h"
-#include "packetformat.h"
-#include "packetstream.h"
 #include "diagnosticmessages.h"
 
 // Packet structure
@@ -383,3 +381,7 @@ void RemotePacketServer::reset()
 {
 	// TODO: What should be done to reset?
 }
+
+#ifdef _WINDOWS
+#include "moc_remotepacket.cpp"
+#endif

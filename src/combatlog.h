@@ -17,9 +17,11 @@
 #include <QLabel>
 #include <QLayout>
 
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+//#include <sys/time.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
+#include "compat.h"
+
 #include <fcntl.h>
 #include <stdio.h>
 

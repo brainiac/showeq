@@ -11,11 +11,7 @@
 #ifndef _FILTERNOTIFICATIONS_H_
 #define _FILTERNOTIFICATIONS_H_
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
+#include "compat.h"
 
 #include <QObject>
 

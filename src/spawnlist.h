@@ -24,10 +24,9 @@
 #ifndef SPAWNLIST_H
 #define SPAWNLIST_H
 
-#include <time.h>
+#include "compat.h"
 #include <stdio.h>
-#include <sys/time.h>
-#include <regex.h>
+
 
 #include <Q3ValueList>
 #include <Q3ListView>
@@ -44,6 +43,10 @@
 #include "seqlistview.h"
 #include "spawnlistcommon.h"
 #include "spawn.h"
+
+#ifndef Q_WS_WIN
+#include <regex.h>
+#endif
 
 //--------------------------------------------------
 // forward declarations

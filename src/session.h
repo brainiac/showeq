@@ -86,6 +86,9 @@ public:
 	Messages*			messages();
 	MessageFilters*		messageFilters();
 	MessageShell*		messageShell();
+
+signals:
+	void DestroySession();
 };
 
 
@@ -137,8 +140,8 @@ public:
 	void loadSpells();
 	
 public slots:		/* Functions for Category Manager */
-	void addCategory();
-	void reloadCategories();
+	//void addCategory(const Category* category);
+	//void reloadCategories();
 	
 		
 public slots:

@@ -11,7 +11,7 @@
 #ifndef _EQSTR_H_
 #define _EQSTR_H_
 
-#include <stdint.h>
+#include "compat.h"
 
 #include <QHash>
 #include <QString>

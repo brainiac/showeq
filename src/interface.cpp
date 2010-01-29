@@ -25,7 +25,6 @@
 #include "skilllist.h"
 #include "statlist.h"
 #include "group.h"
-#include "netdiag.h"
 #include "spawnmonitor.h"
 #include "spawnpointlist.h"
 #include "spawnlist2.h"
@@ -51,11 +50,11 @@
 #include "diagnosticmessages.h"
 #include "filternotifications.h"
 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/time.h>
-#include <fcntl.h>
-#include <unistd.h>
+#ifndef _WINDOWS
+#include "netdiag.h"
+#endif
+
+#include "compat.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -117,12 +116,14 @@ EQInterface::EQInterface(SessionManager* sm)
 	// Initialize loggers to NULL
 	m_filteredSpawnLog = NULL;
 	m_spawnLogger = NULL;
+	m_bazaarLog = NULL;
+#ifndef _WINDOWS
 	m_globalLog = NULL;
 	m_worldLog = NULL;
 	m_zoneLog = NULL;
-	m_bazaarLog = NULL;
 	m_unknownZoneLog = NULL;
 	m_opcodeMonitorLog = NULL;
+#endif
 
 	
 	// indicate we're constructing the interface
@@ -164,8 +165,13 @@ EQInterface::EQInterface(SessionManager* sm)
 							pSEQPrefs->getPrefBool("Record", "VPacket", false),
 							pSEQPrefs->getPrefInt("Playback", "VPacket", PLAYBACK_OFF),
 							pSEQPrefs->getPrefInt("PlaybackRate", "VPacket", false),
+#ifdef _WINDOWS
+							true,
+							8773,
+#else
 							pSEQPrefs->getPrefBool("Enabled", "RemotePacketServer", false),
 							pSEQPrefs->getPrefUInt("Port", "RemotePacketServer", 8773),
+#endif
 							this, "packet");
 
 	// initialize packet count
@@ -1223,6 +1229,7 @@ void EQInterface::createNetworkMenu()
 	// Log sub-menu
 	QMenu* pLogMenu = new QMenu("Lo&g", this);
 
+#ifndef _WINDOWS
 	// All packets
 	m_netLogAllPackets = new QAction("All Packets", this);
 	m_netLogAllPackets->setShortcut(Key_F5);
@@ -1230,6 +1237,7 @@ void EQInterface::createNetworkMenu()
 	m_netLogAllPackets->setCheckable(true);
 	connect(m_netLogAllPackets, SIGNAL(triggered()), this, SLOT(toggleLogAllPackets()));
 	pLogMenu->addAction(m_netLogAllPackets);
+
 
 	// World data
 	m_netLogWorldData = new QAction("World Data", this);
@@ -1254,6 +1262,7 @@ void EQInterface::createNetworkMenu()
 	m_netLogUnknownData->setCheckable(true);
 	connect(m_netLogUnknownData, SIGNAL(triggered()), this, SLOT(toggle_log_UnknownData()));
 	pLogMenu->addAction(m_netLogUnknownData);
+#endif
 
 	m_netViewUnknownData = new QAction("View Unknown Data", this);
 	m_netViewUnknownData->setShortcut(Key_F9);
@@ -1270,7 +1279,6 @@ void EQInterface::createNetworkMenu()
 	connect(m_netLogRawData, SIGNAL(triggered()), this, SLOT(toggle_log_RawData()));
 	pLogMenu->addAction(m_netLogRawData);
 
-
 	// Filter Zone Data submenu
 	m_filterZoneDataMenu = new QMenu("Filter Zone Data", this);
 	m_netLogFilterZoneClient = new QAction("Client", this);
@@ -1284,15 +1292,17 @@ void EQInterface::createNetworkMenu()
 
 	m_netMenu->addMenu(pLogMenu);
 
+
 	// OpCode Monitor
 	QMenu* pOpCodeMenu = new QMenu("OpCode Monitor", this);
-
+#ifndef _WINDOWS
 	action = new QAction("&OpCode Monitoring", this);
 	action->setCheckable(true);
 	action->setShortcut(CTRL + ALT + Key_O);
 	action->setChecked(m_opcodeMonitorLog != NULL);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleOpcodeMonitoring(bool)));
 	pOpCodeMenu->addAction(action);
+#endif
 
 	action = new QAction("&Reload Monitored OpCode List...", this);
 	action->setShortcut(CTRL + ALT + Key_R);
@@ -2631,10 +2641,12 @@ void EQInterface::toggleWindowDockable(QAction* action)
 			preference = "DockableGuildListWindow";
 			break;
 
+#ifndef _WINDOWS
 		case menuNetDiag:
 			widget = m_netDiag;
 			preference = "DockableNetDiag";
 			break;
+#endif
 
 		default:
 			// use default for maps since the number of them can be changed via a
@@ -2726,11 +2738,15 @@ void EQInterface::set_main_WindowCaption(QAction*  action)
 
 			window = "Combat Window";
 			break;
+
+#ifndef _WINDOWS
 		case 8: // Network Diagnostics
 			widget = m_netDiag;
 
 			window = "Network Diagnostics";
 			break;
+#endif
+
 		case 9: // Spawn Point List
 			widget = m_spawnPointList;
 
@@ -2817,11 +2833,15 @@ void EQInterface::set_main_WindowFont(QAction* action)
 
 			window = m_combatWindow;
 			break;
+
+#ifndef _WINDOWS
 		case 8: // Network Diagnostics
 			title = "Network Diagnostics";
 
 			window = m_netDiag;
 			break;
+#endif
+
 		case 9: // Spawn Point List
 			title = "Spawn Point List";
 
@@ -3493,6 +3513,7 @@ void EQInterface::toggleUseUpdateRadius(bool state)
 /* Check and uncheck Log menu options & set EQPacket logging flags */
 void EQInterface::toggleLogAllPackets()
 {
+#ifndef _WINDOWS
 	if (m_globalLog)
 	{
 		delete m_globalLog;
@@ -3507,10 +3528,12 @@ void EQInterface::toggleLogAllPackets()
 
 	m_netLogAllPackets->setChecked(state);
 	pSEQPrefs->setPrefBool("LogAllPackets", "PacketLogging", state);
+#endif
 }
 
 void EQInterface::toggleLogWorldData()
 {
+#ifndef _WINDOWS
 	if (m_worldLog)
 	{
 		delete m_worldLog;
@@ -3524,10 +3547,12 @@ void EQInterface::toggleLogWorldData()
 	bool state = (m_worldLog != NULL);
 	m_netLogWorldData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogWorldPackets", "PacketLogging", state);
+#endif
 }
 
 void EQInterface::toggleLogZoneData()
 {
+#ifndef _WINDOWS
 	if (m_zoneLog)
 	{
 		delete m_zoneLog;
@@ -3541,10 +3566,12 @@ void EQInterface::toggleLogZoneData()
 	bool state = (m_zoneLog != NULL);
 	m_netLogZoneData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogZonePackets", "PacketLogging", state);
+#endif
 }
 
 void EQInterface::toggle_log_Filter_ZoneData_Client()
 {
+#ifndef _WINDOWS
 	bool state = true;
 
 	if (showeq_params->filterZoneDataLog == DIR_Client)
@@ -3559,10 +3586,12 @@ void EQInterface::toggle_log_Filter_ZoneData_Client()
 
 	m_netLogFilterZoneClient->setChecked(state);
 	m_netLogFilterZoneServer->setChecked(false);
+#endif
 }
 
 void EQInterface::toggle_log_Filter_ZoneData_Server()
 {
+#ifndef _WINDOWS
 	bool state = true;
 
 	if (showeq_params->filterZoneDataLog == DIR_Server)
@@ -3577,10 +3606,12 @@ void EQInterface::toggle_log_Filter_ZoneData_Server()
 
 	m_netLogFilterZoneServer->setChecked(state);
 	m_netLogFilterZoneClient->setChecked(false);
+#endif
 }
 
 void EQInterface::toggleLogBazaarData(bool state)
 {
+#ifndef _WINDOWS
 	if (!state && m_bazaarLog)
 	{
 		disconnect(m_bazaarLog, 0, 0, 0);
@@ -3593,10 +3624,12 @@ void EQInterface::toggleLogBazaarData(bool state)
 	}
 
 	pSEQPrefs->setPrefBool("LogBazaarPackets", "PacketLogging", state);
+#endif
 }
 
 void EQInterface::toggle_log_UnknownData()
 {
+#ifndef _WINDOWS
 	if (m_unknownZoneLog)
 	{
 		delete m_unknownZoneLog;
@@ -3610,10 +3643,12 @@ void EQInterface::toggle_log_UnknownData()
 	bool state = (m_unknownZoneLog != 0);
 	m_netLogUnknownData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogUnknownZonePackets", "PacketLogging", state);
+#endif
 }
 
 void EQInterface::toggle_log_RawData()
 {
+#ifndef _WINDOWS
 	bool state = !pSEQPrefs->getPrefBool("LogRawPackets", "PacketLogging", false);
 
 	if (m_worldLog)
@@ -3624,6 +3659,7 @@ void EQInterface::toggle_log_RawData()
 
 	m_netLogRawData->setChecked(state);
 	pSEQPrefs->setPrefBool("LogRawPackets", "PacketLogging", state);
+#endif
 }
 
 /* Check and uncheck View menu options */
@@ -3665,6 +3701,7 @@ void EQInterface::toggleChannelMsgs(QAction* action)
 
 void EQInterface::toggle_view_UnknownData ()
 {
+#ifndef _WINDOWS
 	bool state = !pSEQPrefs->getPrefBool("ViewUnknown", "PacketLogging", false);
 
 	if (m_unknownZoneLog)
@@ -3672,6 +3709,7 @@ void EQInterface::toggle_view_UnknownData ()
 
 	m_netViewUnknownData->setChecked(state);
 	pSEQPrefs->setPrefBool("ViewUnknown", "PacketLogging", state);
+#endif
 }
 
 void EQInterface::toggleExpWindow()
@@ -3941,6 +3979,7 @@ void EQInterface::toggleMap(QAction* action)
 
 void EQInterface::toggleNetDiag()
 {
+#ifndef _WINDOWS
 	bool wasVisible = ((m_netDiag != 0) && (m_netDiag->isVisible()));
 
 	if (!wasVisible)
@@ -3961,6 +4000,7 @@ void EQInterface::toggleNetDiag()
 	}
 
 	pSEQPrefs->setPrefBool("ShowNetStats", "Interface", !wasVisible);
+#endif
 }
 
 void EQInterface::toggleGuildList()
@@ -4029,6 +4069,7 @@ bool EQInterface::getMonitorOpCodeList(const QString& title, QString& opCodeList
 
 void EQInterface::toggleOpcodeMonitoring(bool state)
 {
+#ifndef _WINDOWS
 	if (state && !m_opcodeMonitorLog)
 	{
 		QString opCodeList = pSEQPrefs->getPrefString("OpCodeList", "OpCodeMonitoring", "");
@@ -4049,12 +4090,13 @@ void EQInterface::toggleOpcodeMonitoring(bool state)
 
 		seqInfo("OpCode monitoring has been DISABLED...");
 	}
-
+#endif
 	pSEQPrefs->setPrefBool("Enable", "OpCodeMonitoring", state);
 }
 
 void EQInterface::set_opcode_monitored_list()
 {
+#ifndef _WINDOWS
 	QString opCodeList = pSEQPrefs->getPrefString("OpCodeList", "OpCodeMonitoring", "");
 
 	if (getMonitorOpCodeList("ShowEQ - Reload OpCode Monitor", opCodeList) && m_opcodeMonitorLog)
@@ -4066,16 +4108,19 @@ void EQInterface::set_opcode_monitored_list()
 		// set the list of monitored opcodes
 		pSEQPrefs->setPrefString("OpCodeList", "OpCodeMonitoring", opCodeList);
 	}
+#endif
 }
 
 
 void EQInterface::toggle_opcode_log(bool state)
 {
+#ifndef _WINDOWS
 	if (m_opcodeMonitorLog)
 	{
 		m_opcodeMonitorLog->setLog(state);
 		state = m_opcodeMonitorLog->log();
 	}
+#endif
 
 	m_netOpcodeLog->setChecked(state);
 	pSEQPrefs->setPrefBool("Log", "OpCodeMonitoring", state);
@@ -4083,10 +4128,12 @@ void EQInterface::toggle_opcode_log(bool state)
 
 void EQInterface::toggle_opcode_view(bool state)
 {
+#ifndef _WINDOWS
 	if (m_opcodeMonitorLog)
 	{
 		m_opcodeMonitorLog->setView(state);
 	}
+#endif
 
 	m_netOpcodeView->setChecked(state);
 	pSEQPrefs->setPrefBool("View", "OpCodeMonitoring", state);
@@ -4838,7 +4885,9 @@ void EQInterface::updateViewMenu()
 	m_viewSpawnPointList->setChecked((m_spawnPointList != NULL) && m_spawnPointList->isVisible());
 	m_viewCompass->setChecked((m_compass != NULL) && m_compass->isVisible());
 	m_viewSpellList->setChecked((m_spellList != NULL) && m_spellList->isVisible());
+#ifndef _WINDOWS
 	m_viewNetDiag->setChecked((m_netDiag != NULL) && m_netDiag->isVisible());
+#endif
 	m_viewGuildList->setChecked((m_guildListWindow != NULL) && m_guildListWindow->isVisible());
 
 	// loop over the maps
@@ -5485,6 +5534,7 @@ void EQInterface::showCompass()
 
 void EQInterface::showNetDiag()
 {
+#ifndef _WINDOWS
 	if (m_netDiag == 0)
 	{
 		m_netDiag = new NetDiag(m_packet, this, "NetDiag");
@@ -5511,6 +5561,7 @@ void EQInterface::showNetDiag()
 	// make sure it's visible
 	if (!m_creating)
 		m_netDiag->show();
+#endif
 }
 
 void EQInterface::showGuildList()
@@ -5596,6 +5647,7 @@ void EQInterface::createSpawnLog()
 
 void EQInterface::createGlobalLog()
 {
+#ifndef _WINDOWS
 	if (m_globalLog)
 		return;
 
@@ -5605,10 +5657,12 @@ void EQInterface::createGlobalLog()
 	m_globalLog = new PacketLog(*m_packet, logFileInfo.absFilePath(), this, "GlobalLog");
 
 	connect(m_packet, SIGNAL(newPacket(const EQUDPIPPacketFormat&)), m_globalLog, SLOT(logData(const EQUDPIPPacketFormat&)));
+#endif
 }
 
 void EQInterface::createWorldLog()
 {
+#ifndef _WINDOWS
 	if (m_worldLog)
 		return;
 
@@ -5622,10 +5676,12 @@ void EQInterface::createWorldLog()
 			m_worldLog, SLOT(rawStreamPacket(const uint8_t*, size_t, uint8_t, uint16_t)));
 	connect(m_packet, SIGNAL(decodedWorldPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)),
 			m_worldLog, SLOT(decodedStreamPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)));
+#endif
 }
 
 void EQInterface::createZoneLog()
 {
+#ifndef _WINDOWS
 	if (m_zoneLog)
 		return;
 
@@ -5640,6 +5696,7 @@ void EQInterface::createZoneLog()
 			m_zoneLog, SLOT(rawStreamPacket(const uint8_t*, size_t, uint8_t, uint16_t)));
 	connect(m_packet, SIGNAL(decodedZonePacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)),
 			m_zoneLog, SLOT(decodedStreamPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*)));
+#endif
 }
 
 void EQInterface::createBazaarLog()
@@ -5657,6 +5714,7 @@ void EQInterface::createBazaarLog()
 
 void EQInterface::createUnknownZoneLog()
 {
+#ifndef _WINDOWS
 	if (m_unknownZoneLog)
 		return;
 
@@ -5672,10 +5730,12 @@ void EQInterface::createUnknownZoneLog()
 			m_unknownZoneLog, SLOT(packet(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
 	connect(m_packet, SIGNAL(decodedWorldPacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)),
 			m_unknownZoneLog, SLOT(packet(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
+#endif
 }
 
 void EQInterface::createOPCodeMonitorLog(const QString& opCodeList)
 {
+#ifndef _WINDOWS
 	if (m_opcodeMonitorLog)
 		return;
 
@@ -5691,6 +5751,7 @@ void EQInterface::createOPCodeMonitorLog(const QString& opCodeList)
 
 	connect(m_packet, SIGNAL(decodedZonePacket(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)),
 			m_opcodeMonitorLog, SLOT(packet(const uint8_t*, size_t, uint8_t, uint16_t, const EQPacketOPCode*, bool)));
+#endif
 }
 
 void EQInterface::insertWindowMenu(SEQWindow* window)

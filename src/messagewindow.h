@@ -9,8 +9,7 @@
 #define _MESSAGEWINDOW_H_
 
 #include "seqwindow.h"
-
-#include <stdint.h>
+#include "compat.h"
 
 #include <Q3TextEdit>
 #include <QRegExp>

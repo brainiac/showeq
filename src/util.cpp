@@ -15,13 +15,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/time.h>
 
-#include <qcolor.h>
-#include <qfileinfo.h>
+#ifndef Q_OS_WIN
+#include <sys/time.h>
+#endif
+
+#include <QColor>
+#include <QFileInfo>
 #include <qdir.h>
 
-#ifdef __FreeBSD__
+#if defined(__FreeBSD__) || defined(_MSC_VER)
 
 // closest int away from 0
 long int lroundf(float x)
@@ -651,9 +654,18 @@ uint32_t calc_exp(int32_t level, uint16_t race, uint8_t class_)
 int mTime(void)
 {
 	static long basetime = 0;
+	int rt;
+#ifdef _WINDOWS
+	int TimeNow = GetTickCount();
+
+	if (basetime == 0)
+		basetime = TimeNow;
+
+	rt = TimeNow - basetime;
+#else	
 	struct timeval TimeNow;
 	struct timezone Zone;
-	int rt;
+
 
 	gettimeofday(&TimeNow, &Zone);
 
@@ -661,7 +673,7 @@ int mTime(void)
 		basetime = TimeNow.tv_sec;
 
 	rt = (TimeNow.tv_sec - basetime) * 1000 + TimeNow.tv_usec / 1000L;
-
+#endif
 	return rt;
 }
 

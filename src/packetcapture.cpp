@@ -8,12 +8,13 @@
  *  Portions Copyright 2001-2003 Zaphod (dohpaz@users.sourceforge.net).
  */
 
-//#include "config.h"
 
 /* Implementation of Packet class */
+#include "compat.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+
 
 #ifdef HAVE_NETINET_IN_H
 # include <netinet/in.h>

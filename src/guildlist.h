@@ -11,11 +11,7 @@
 #ifndef _GUILDLIST_H_
 #define _GUILDLIST_H_
 
-#ifdef __FreeBSD__
-# include <sys/types.h>
-#else
-# include <stdint.h>
-#endif
+#include "compat.h"
 
 #include "seqwindow.h"
 #include "seqlistview.h"

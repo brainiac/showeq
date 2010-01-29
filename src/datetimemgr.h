@@ -15,8 +15,7 @@
 #ifndef _DATETIMEMGR_H_
 #define _DATETIMEMGR_H_
 
-#include <sys/types.h>
-#include <stdint.h>
+#include "compat.h"
 
 #include <QDateTime>
 #include <QTimer>

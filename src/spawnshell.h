@@ -20,11 +20,8 @@
 #ifndef SPAWNSHELL_H
 #define SPAWNSHELL_H
 
-#ifdef __FreeBSD__
-# include <sys/types.h>
-#else
-# include <stdint.h>
-#endif
+#include "compat.h"
+
 #include <stdio.h>
 #include <math.h>
 

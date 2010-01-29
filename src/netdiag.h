@@ -13,7 +13,9 @@
 # include <sys/types.h>
 # include <sys/socket.h>
 #endif
+#ifndef _WINDOWS
 #include <netinet/in.h>
+#endif
 
 #include <QWidget>
 #include <QLayout>

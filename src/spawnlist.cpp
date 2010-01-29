@@ -30,11 +30,7 @@
 #include "diagnosticmessages.h"
 
 #include <stddef.h>
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#endif
-#include <math.h>
-#include <regex.h>
+#include "compat.h"
 
 #include <Q3PopupMenu>
 

@@ -13,8 +13,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include <stdint.h>
-#include <sys/types.h>
+#include "compat.h"
 
 #include <QTextStream>
 #include <QList>

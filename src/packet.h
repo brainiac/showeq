@@ -25,7 +25,7 @@ typedef uint16_t in_port_t;
 typedef uint32_t in_addr_t;
 #endif
 
-#include <netinet/in.h>
+#include "compat.h"
 
 //----------------------------------------------------------------------
 // enumerated types
@@ -141,8 +141,10 @@ signals:
 	void decodedZonePacket(const uint8_t* data, size_t len, uint8_t dir, uint16_t opcode, const EQPacketOPCode* opcodeEntry, bool unknown);
 
 private:
+#ifndef _WINDOWS
 	PacketCaptureThread* m_packetCapture;
 	VPacket* m_vPacket;
+#endif
 	QTimer* m_timer;
 
 	in_port_t m_serverPort;
@@ -151,6 +153,7 @@ private:
 	bool m_detectingClient;
 	in_addr_t m_client_addr;
 
+	// Used for remote packet capture
 	bool m_useRemote;
 	uint32_t m_remotePort;
 	RemotePacketServer* m_remoteServer;
@@ -165,19 +168,23 @@ private:
 	int m_playbackPackets;
 	int8_t m_playbackSpeed; // Should be signed since -1 is pause
 
+#ifndef _WINDOWS
 	EQPacketStream* m_client2WorldStream;
 	EQPacketStream* m_world2ClientStream;
 	EQPacketStream* m_client2ZoneStream;
 	EQPacketStream* m_zone2ClientStream;
 	EQPacketStream* m_streams[MAXSTREAMS];
+#endif
 
 	EQPacketTypeDB* m_packetTypeDB;
 	EQPacketOPCodeDB* m_worldOPCodeDB;
 	EQPacketOPCodeDB* m_zoneOPCodeDB;
 
+#ifndef _WINDOWS
 	void connectStream(EQPacketStream* stream);
 	void dispatchPacket(int size, unsigned char *buffer);
 	void dispatchPacket(EQUDPIPPacketFormat& packet);
+#endif
 
 protected slots:
 	void resetEQPacket();

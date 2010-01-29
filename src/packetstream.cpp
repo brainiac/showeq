@@ -8,6 +8,10 @@
  *  Portions Copyright 2001-2003,2007 Zaphod (dohpaz@users.sourceforge.net).
  */
 
+#ifdef _WINDOWS
+#pragma error packstream.cpp not supported in windows
+#endif
+
 /* Implementation of EQPacketStream class */
 #include "packetstream.h"
 #include "packetformat.h"

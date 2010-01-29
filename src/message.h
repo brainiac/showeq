@@ -11,7 +11,7 @@
 #ifndef _MESSAGE_H_
 #define _MESSAGE_H_
 
-#include <stdint.h>
+# include "compat.h"
 
 #include <QString>
 #include <QDateTime>

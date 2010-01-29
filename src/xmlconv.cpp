@@ -13,7 +13,9 @@
  */
 
 #define __STDC_LIMIT_MACROS
-#include <stdint.h>
+
+#include "compat.h"
+
 
 #include "xmlconv.h"
 
@@ -274,7 +276,7 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 		uint64_t val = 0;
 		const QChar* p = value.unicode();
 		int l = value.length();
-		const uint64_t max_mult = UINT64_MAX / 16;
+		const uint64_t max_mult = 0x0fffffffffffffffull/* UINT64_MAX / 16 */;
 
 		if (!p)
 		{
@@ -304,7 +306,7 @@ bool DomConvenience::elementToVariant(const QDomElement& e, QVariant& v)
 				else
 					dv = p->toAscii() - 'A' + 10;
 			}
-			if ( val > max_mult || (val == max_mult && dv > UINT64_MAX % 16) )
+			if ( val > max_mult || (val == max_mult && dv > 0xf /*UINT64_MAX % 16*/) )
 				return false;
 			val = 16 * val + dv;
 			p++;

@@ -19,6 +19,7 @@
 #include <QFont>
 #include <QPaintEvent>
 
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -52,7 +53,7 @@ void Compass::calcTargetHeading()
 	deltaX = m_cPlayer.x() - m_cTarget.x();
 	deltaY = (m_cPlayer.y() - m_cTarget.y()) * -1;
 
-	quadRads = atan2(deltaY,deltaX);
+	quadRads = atan2((double)deltaY, (double)deltaX);
 
 	// Convert radians to degrees
 	quadDegs = (quadRads/(2 * M_PI)) * 360;

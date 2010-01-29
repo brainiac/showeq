@@ -152,7 +152,7 @@ void MessageShell::formattedMessage(const uint8_t* data, size_t len, uint8_t dir
 	QString tempStr;
 
 
-	size_t messagesLen = len - ((uint8_t*)&fmsg->messages[0] - (uint8_t*)fmsg) - sizeof(fmsg->unknownXXXX);
+	size_t messagesLen = len - ((uint8_t*)&fmsg->messages[0] - (uint8_t*)fmsg) - sizeof(fmsg->messages);
 
 	m_messages->addMessage(chatColor2MessageType(fmsg->messageColor),
 		m_eqStrings->formatMessage(fmsg->messageFormat, fmsg->messages, messagesLen));
@@ -185,19 +185,19 @@ void MessageShell::specialMessage(const uint8_t* data, size_t, uint8_t dir)
 		target = m_spawnShell->findID(tSpawn, smsg->target);
 
 	// calculate the message position
-	const char* message = smsg->source + strlen(smsg->source) + 1 + sizeof(smsg->unknown0xxx);
+	const char* message = smsg->message + strlen(smsg->message) + 1 + /* offset */ 3;
 
 	if (target)
 	{
 		m_messages->addMessage(chatColor2MessageType(smsg->messageColor), QString("Special: '%1' -> '%2' - %3")
-			.arg(smsg->source)
+			.arg(smsg->message)
 			.arg(target->name())
 			.arg(message));
 	}
 	else
 	{
 		m_messages->addMessage(chatColor2MessageType(smsg->messageColor), QString("Special: '%1' - %2")
-			.arg(smsg->source)
+			.arg(smsg->message)
 			.arg(message));
 	}
 }

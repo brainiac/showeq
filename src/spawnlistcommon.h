@@ -13,11 +13,7 @@
 #ifndef SPAWNLISTCOMMON_H
 #define SPAWNLISTCOMMON_H
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
+#include "compat.h"
 
 #include <Q3ListView>
 #include <QString>

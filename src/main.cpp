@@ -20,12 +20,24 @@
 //#endif
 #endif
 
+#ifndef VERSION
+# define VERSION "6.0.1.0"
+#endif
+
+#include <QApplication>
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <sys/utsname.h>
-#include <sys/stat.h>
+#include "compat.h"
 
+#ifdef Q_WS_WIN
+#include <windows.h>
+#include <winver.h>
+#else
+#include <sys/utsname.h>
+#endif
+
+#ifndef _WINDOWS
 // use long GNU-style options
 #ifdef __GNU_LIBRARY__
 # include <getopt.h>
@@ -34,8 +46,8 @@
 # include <getopt.h>
 # undef __GNU_LIBRARY__
 #endif
+#endif
 
-#include <QApplication>
 #include <QWindowsStyle>
 #include <QColor>
 #include <QDir>
@@ -44,7 +56,6 @@
 #include "main.h"
 #include "packetcommon.h"
 #include "xmlpreferences.h"      // prefrence file class
-#include "config.h"              // autoconf/configure definitions
 
 #ifdef ITEM_DB
 # include "itemdb.h"
@@ -54,6 +65,7 @@
 
 static const char *id = "@(#) $Id$";
 
+#ifndef _WINDOWS
 /* **********************************
    defines used for option processing
    ********************************** */
@@ -164,6 +176,7 @@ static struct option option_list[] = {
 	{"remote",                       optional_argument,  NULL,  REMOTE_PACKET_OPTION},
 	{0,                              0,                  0,     0}
 };
+#endif
 
 /* Global parameters, so all parts of ShowEQ has access to it */
 struct ShowEQParams* showeq_params;
@@ -172,6 +185,7 @@ XMLPreferences*      pSEQPrefs = NULL;
 void displayVersion();
 void displayOptions(const char* progName);
 
+#ifndef _WINDOWS
 void parseArguments(int argc, char **argv)
 {
 	int	opt, temp_int, option_index = 0;
@@ -453,6 +467,7 @@ void parseArguments(int argc, char **argv)
 		exit (0);
 	}	
 }
+#endif
 
 int main (int argc, char **argv)
 {
@@ -516,8 +531,9 @@ int main (int argc, char **argv)
 	showeq_params->saveRestoreBaseFilename = sessionMgr->dataLocationMgr()->findWriteFile("tmp", pSEQPrefs->getPrefString("BaseFilename", section, "last")).absFilePath();
 	showeq_params->filterZoneDataLog = 0;
 	
+#ifndef Q_OS_WIN
 	parseArguments(argc, argv);		
-
+#endif
 #ifdef Q_WS_X11
 	QColor::setAllowX11ColorNames(true);
 #endif
@@ -540,7 +556,7 @@ void displayVersion()
 {
 	printf("ShowEQ %s, released under the GPL.\n", VERSION);
 	printf("  SINS 0.5, released under the GPL.\n");
-	printf("All ShowEQ source code is Copyright (C) 2000-2005 by the respective ShowEQ Developers\n");
+	printf("All ShowEQ source code is Copyright (C) 2000-2010 by the respective ShowEQ Developers\n");
 	printf("ShowEQ comes with NO WARRANTY.\n\n");
 
 	printf("You may redistribute copies of ShowEQ under the terms of\n");
@@ -591,11 +607,15 @@ void displayVersion()
 
 	/////////////////////////////////
 	// Display current system environment information
+#ifdef Q_WS_WIN
+    printf("\tRunning on Microsoft Windows\n");
+#else
 	struct utsname utsbuff;
 	if (uname(&utsbuff) == 0)
 		printf ("\tRunning on %s release %s for processor %s\n",
 				utsbuff.sysname, utsbuff.release, 	utsbuff.machine);
 	printf ("\n");
+#endif
 }
 
 void displayOptions(const char* progName)

@@ -16,12 +16,7 @@
 #ifndef EQCOMPASS_H
 #define EQCOMPASS_H
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
-
+#include "compat.h"
 #include "point.h"
 
 #include <QWidget>

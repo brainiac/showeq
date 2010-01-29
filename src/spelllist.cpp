@@ -64,11 +64,11 @@ void SpellListItem::update()
 
 	if (m_item->duration() > 120)
 		this->setTextColor(Qt::black);
-	else if (m_item->duration() <= 120 and m_item->duration() > 60)
+	else if (m_item->duration() <= 120 && m_item->duration() > 60)
 		this->setTextColor(QColor(128,54,193));
-	else if (m_item->duration() <= 60 and m_item->duration() > 30)
+	else if (m_item->duration() <= 60 && m_item->duration() > 30)
 		this->setTextColor(Qt::blue);
-	else if (m_item->duration() <= 30 and m_item->duration() > 12)
+	else if (m_item->duration() <= 30 && m_item->duration() > 12)
 		this->setTextColor(Qt::magenta);
 	else if (m_item->duration() <= 12)
 		this->setTextColor(Qt::red);

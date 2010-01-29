@@ -15,11 +15,7 @@
 #define __STDC_LIMIT_MACROS
 #endif
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
+#include "compat.h"
 
 #include <QColor>
 #include <QPen>

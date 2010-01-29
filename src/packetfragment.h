@@ -11,6 +11,11 @@
 #ifndef _PACKETFRAGMENT_H_
 #define _PACKETFRAGMENT_H_
 
+#ifdef _WINDOWS
+#error packetfragment.h not supported on windows!
+#endif
+
+
 #include <sys/types.h>
 
 #include "packetcommon.h"

@@ -11,8 +11,7 @@
 #ifndef _GUILDSHELL_H_
 #define _GUILDSHELL_H_
 
-#include <stdint.h>
-#include <time.h>
+#include "compat.h"
 
 #include <QString>
 #include <Q3Dict>

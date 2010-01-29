@@ -44,9 +44,7 @@
 #include <Q3Frame>
 #include <QPaintEvent>
 
-#include <time.h>
-#include <sys/time.h>
-#include <unistd.h>
+#include "compat.h"
 
 #include "filtermgr.h"
 #include "mapcore.h"

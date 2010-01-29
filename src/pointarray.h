@@ -16,12 +16,8 @@
 
 #ifndef __POINTARRAY_H_
 #define __POINTARRAY_H_
-#ifdef __FreeBSD__
 
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
+#include "compat.h"
 
 #include <Q3MemArray>
 #include <QPoint>

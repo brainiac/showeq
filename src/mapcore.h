@@ -222,7 +222,7 @@ inline int MapParameters::calcXOffset (int mapCoordinate) const
 
 inline int MapParameters::invertXOffset (int worldX) const
 {
-	return (int)rint((screenCenterX() - worldX) * m_ratio);
+	return (int)lrint((screenCenterX() - worldX) * m_ratio);
 }
 
 inline int MapParameters::calcYOffset (int mapCoordinate) const
@@ -232,7 +232,7 @@ inline int MapParameters::calcYOffset (int mapCoordinate) const
 
 inline int MapParameters::invertYOffset (int worldY) const
 {
-	return (int)rint((screenCenterY() - worldY) * m_ratio);
+	return (int)lrint((screenCenterY() - worldY) * m_ratio);
 }
 
 inline int MapParameters::calcXOffsetI(int mapCoordinate) const

@@ -356,13 +356,14 @@ private:
 
 	
 	SpawnPointWindow* m_spawnPointList;
-	
+	BazaarLog* m_bazaarLog;
+#ifndef _WINDOWS
 	PacketLog* m_globalLog;
 	PacketStreamLog* m_worldLog;
 	PacketStreamLog* m_zoneLog;
-	BazaarLog* m_bazaarLog;
 	UnknownPacketLog* m_unknownZoneLog;
 	OPCodeMonitorPacketLog* m_opcodeMonitorLog;
+#endif
 
 	const Item* m_selectedSpawn;
 

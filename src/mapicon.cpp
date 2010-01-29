@@ -749,7 +749,7 @@ void MapIcons::paintIcon(MapParameters& param, QPainter& p, const MapIcon& mapIc
 	}
 
 	// Calculate distance and draw distance related lines
-	uint32_t distance = UINT32_MAX;
+	uint32_t distance = (uint32_t)0xffffffff;
 	if (mapIcon.line1Distance() || mapIcon.line2Distance())
 	{
 		if (!showeq_params->fast_machine)
@@ -840,7 +840,7 @@ void MapIcons::paintSpawnIcon(MapParameters& param, QPainter& p, const MapIcon& 
 	}
 
 	// calculate distance and draw distance related lines
-	uint32_t distance = UINT32_MAX;
+	uint32_t distance = (uint32_t)0xffffffff;
 	if (mapIcon.line1Distance() || mapIcon.line2Distance() || m_showSpawnNames)
 	{
 		if (!showeq_params->fast_machine)
@@ -932,7 +932,7 @@ void MapIcons::paintSpawnPointIcon(MapParameters& param, QPainter& p, const MapI
 	}
 
 	// calculate distance and draw distance related lines
-	uint32_t distance = UINT32_MAX;
+	uint32_t distance = (uint32_t)0xffffffff;
 	if (mapIcon.line1Distance() || mapIcon.line2Distance())
 	{
 		if (!showeq_params->fast_machine)

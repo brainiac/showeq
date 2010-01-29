@@ -1,0 +1,3151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE seqpreferences SYSTEM 'seqpref.dtd'>
+<seqpreferences version="1.0">
+    <!-- ============================================================= -->
+
+    <section name="SpawnList2">
+        <property name="ShowLevel">
+            <bool value="true"/>
+        </property>
+        <property name="ShowGuildTag">
+            <bool value="true"/>
+        </property>
+        <property name="ShowSpawnTime">
+            <bool value="true"/>
+        </property>
+        <property name="ColumnOrder">
+            <string value="0:1:2:3:4:5:6:7:8:9:10:11:12:13:14:15"/>
+        </property>
+        <property name="ShowID">
+            <bool value="false"/>
+        </property>
+        <property name="ShowClass">
+            <bool value="true"/>
+        </property>
+        <property name="ShowDeity">
+            <bool value="true"/>
+        </property>
+        <property name="GuildTagWidth">
+            <int value="99"/>
+        </property>
+        <property name="SortColumn">
+            <int value="0"/>
+        </property>
+        <property name="ShowMaxHP">
+            <bool value="false"/>
+        </property>
+        <property name="DockFixedExtent">
+            <size width="663" height="451"/>
+        </property>
+        <property name="BodyTypeWidth">
+            <int value="106"/>
+        </property>
+        <property name="CurrentCategory">
+            <int value="0"/>
+        </property>
+        <property name="RaceWidth">
+            <int value="40"/>
+        </property>
+        <property name="ShowName">
+            <bool value="true"/>
+        </property>
+        <property name="ShowDist">
+            <bool value="true"/>
+        </property>
+        <property name="ShowBodyType">
+            <bool value="true"/>
+        </property>
+        <property name="ShowInfo">
+            <bool value="true"/>
+        </property>
+        <property name="DistWidth">
+            <int value="35"/>
+        </property>
+        <property name="SpawnTimeWidth">
+            <int value="40"/>
+        </property>
+        <property name="DeityWidth">
+            <int value="81"/>
+        </property>
+        <property name="NameWidth">
+            <int value="155"/>
+        </property>
+        <property name="LevelWidth">
+            <int value="25"/>
+        </property>
+        <property name="ShowCoord1">
+            <bool value="false"/>
+        </property>
+        <property name="ShowRace">
+            <bool value="true"/>
+        </property>
+        <property name="ShowCoord2">
+            <bool value="false"/>
+        </property>
+        <property name="ShowCoord3">
+            <bool value="false"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="true"/>
+        </property>
+        <property name="ClassWidth">
+            <int value="40"/>
+        </property>
+        <property name="InfoWidth">
+            <int value="40"/>
+        </property>
+        <property name="SortIncreasing">
+            <bool value="true"/>
+        </property>
+        <property name="ShowHP">
+            <bool value="false"/>
+        </property>
+    </section>
+    <section name="Combat">
+        <property name="WindowPos">
+            <point x="103" y="225"/>
+        </property>
+        <property name="WindowSize">
+            <size width="480" height="333"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="false"/>
+        </property>
+    </section>
+    <section name="SpellList">
+        <property name="SortIncreasing">
+            <bool value="true"/>
+        </property>
+        <property name="RemainTimeWidth">
+            <int value="60"/>
+        </property>
+        <property name="TargetNameWidth">
+            <int value="90"/>
+        </property>
+        <property name="ColumnOrder">
+            <string value="0:1:2:3:4:5:6:7"/>
+        </property>
+        <property name="ShowCasterID">
+            <bool value="false"/>
+        </property>
+        <property name="ShowCasterName">
+            <bool value="false"/>
+        </property>
+        <property name="SpellNameWidth">
+            <int value="90"/>
+        </property>
+        <property name="ShowTargetName">
+            <bool value="true"/>
+        </property>
+        <property name="ShowSpellID">
+            <bool value="false"/>
+        </property>
+        <property name="ShowTargetID">
+            <bool value="false"/>
+        </property>
+        <property name="ShowCastTime">
+            <bool value="false"/>
+        </property>
+        <property name="SortColumn">
+            <int value="7"/>
+        </property>
+        <property name="DockFixedExtent">
+            <size width="663" height="295"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="true"/>
+        </property>
+        <property name="ShowSpellName">
+            <bool value="true"/>
+        </property>
+        <property name="ShowRemainTime">
+            <bool value="true"/>
+        </property>
+    </section>
+    <section name="MapFrame">
+        <property name="DockFixedExtent">
+            <size width="757" height="771"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="true"/>
+        </property>
+    </section>
+    <section name="SpawnPointList">
+        <property name="ColumnOrder">
+            <string value="0:1:2:3:4:5:6:7"/>
+        </property>
+        <property name="ShowLast">
+            <bool value="true"/>
+        </property>
+        <property name="ShowRemaining">
+            <bool value="true"/>
+        </property>
+        <property name="RemainingWidth">
+            <int value="60"/>
+        </property>
+        <property name="Coord3Width">
+            <int value="40"/>
+        </property>
+        <property name="SortColumn">
+            <int value="3"/>
+        </property>
+        <property name="DockFixedExtent">
+            <size width="663" height="295"/>
+        </property>
+        <property name="ShowSpawned">
+            <bool value="true"/>
+        </property>
+        <property name="ShowName">
+            <bool value="true"/>
+        </property>
+        <property name="Coord1Width">
+            <int value="40"/>
+        </property>
+        <property name="CountWidth">
+            <int value="35"/>
+        </property>
+        <property name="Coord2Width">
+            <int value="40"/>
+        </property>
+        <property name="NameWidth">
+            <int value="100"/>
+        </property>
+        <property name="LastWidth">
+            <int value="100"/>
+        </property>
+        <property name="ShowCoord1">
+            <bool value="true"/>
+        </property>
+        <property name="ShowCoord2">
+            <bool value="true"/>
+        </property>
+        <property name="ShowCoord3">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnedWidth">
+            <int value="60"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="true"/>
+        </property>
+        <property name="SortIncreasing">
+            <bool value="true"/>
+        </property>
+        <property name="ShowCount">
+            <bool value="true"/>
+        </property>
+    </section>
+    <section name="MapIcons">
+        <property name="FilterFlagLocateImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnConsideredImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagDangerShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3Line0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImageSize">
+            <int value="3"/>
+        </property>
+        <property name="DoorImageStyle">
+            <int value="2"/>
+        </property>
+        <property name="SpawnPlayerTeam1Line1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagHuntHighlightPen">
+            <pen join="64" red="160" blue="164" style="1" cap="16" green="160"/>
+        </property>
+        <property name="SpawnPlayerTeam5Line0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagDangerWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="RuntimeFilteredImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointImageUseSpawnColorPen">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagCautionImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="RuntimeFilteredImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownImageStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerCorpseLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnItemSelectedImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="ZoneSafePointShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnUnknownLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="UnknownImageSize">
+            <int value="2"/>
+        </property>
+        <property name="SpawnPlayerOldLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneDoorImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneSafePointLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="DoorImageSize">
+            <int value="1"/>
+        </property>
+        <property name="SpawnItemSelectedImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="ZoneSafePointImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerCorpseLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="InstanceLocationHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImageStyle">
+            <int value="2"/>
+        </property>
+        <property name="InstanceLocationImageBrush">
+            <brush red="255" blue="255" style="1" green="0"/>
+        </property>
+        <property name="DropLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="DropImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImageSize">
+            <int value="3"/>
+        </property>
+        <property name="FilterFlagHuntImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagHuntHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagCautionImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagCautionUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DropImagePen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnConsideredImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImageStyle">
+            <int value="2"/>
+        </property>
+        <property name="SpawnPointSelectedUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagFilteredShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="UnknownHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImagePen">
+            <pen join="64" red="128" blue="128" style="1" cap="16" green="128"/>
+        </property>
+        <property name="RuntimeFilteredUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerCorpseImagePen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnConsideredLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DropUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredImageBrush">
+            <brush red="0" blue="0" style="3" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightSize">
+            <int value="5"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnItemSelectedUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionLine1Distance">
+            <int value="500"/>
+        </property>
+        <property name="SpawnNPCImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="FilterFlagTracerWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="UnknownShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPointSelectedShowName">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnConsideredWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnConsideredHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImageStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagDangerHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="SpawnPointLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="DoorHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1UseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnConsideredLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DoorLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagDangerUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="InstanceLocationImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedShowWalkPath">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagCautionImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedShowLine0">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnUnknownHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="ZoneDoorUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4UseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagDangerLine2Distance">
+            <int value="1000"/>
+        </property>
+        <property name="SpawnNPCImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightSize">
+            <int value="5"/>
+        </property>
+        <property name="DoorShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="ZoneDoorLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagHuntLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4ShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagLocateWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5ShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam3UseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="DoorHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5UseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam2ShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DoorLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagFilteredImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagCautionHighlightPen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="FilterFlagDangerUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="DoorImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertShowName">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationImageSize">
+            <int value="4"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImageStyle">
+            <int value="5"/>
+        </property>
+        <property name="SpawnPlayerWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="RuntimeFilteredImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3ShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerCorpseUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="DoorUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointSelectedImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnUnknownLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="SpawnPlayerTeam1ShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="DoorImagePen">
+            <pen join="64" red="110" blue="0" style="1" cap="16" green="60"/>
+        </property>
+        <property name="SpawnPlayerOldImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DropHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DropShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightPen">
+            <pen join="64" red="160" blue="164" style="1" cap="16" green="160"/>
+        </property>
+        <property name="ZoneDoorImageStyle">
+            <int value="10"/>
+        </property>
+        <property name="DropUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagFilteredLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnUnknownHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedLine0Pen">
+            <pen join="64" red="0" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnUnknownLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnItemSelectedUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="DropImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="FilterFlagAlertHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnConsideredShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnUnknownLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnItemSelectedShowLine0">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagAlertImageSize">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointImageSize">
+            <int value="2"/>
+        </property>
+        <property name="FilterFlagDangerImageSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5Line2Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnItemSelectedLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImageStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DropHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="UnknownImagePen">
+            <pen join="64" red="160" blue="164" style="1" cap="16" green="160"/>
+        </property>
+        <property name="FilterFlagAlertImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="FilterFlagCautionUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerShowName">
+            <bool value="false"/>
+        </property>
+        <property name="DropHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnItemSelectedLine0Pen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagLocateHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPointSelectedLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightSize">
+            <int value="5"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagHuntImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnUnknownImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="RuntimeFilteredWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagTracerShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledShowName">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4Line2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightStyle">
+            <int value="2"/>
+        </property>
+        <property name="InstanceLocationHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImageSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagLocateHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCCorpseImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImageSize">
+            <int value="5"/>
+        </property>
+        <property name="FilterFlagTracerImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagDangerImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImageStyle">
+            <int value="6"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagCautionHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagFilteredUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="ZoneDoorUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="DoorHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightSize">
+            <int value="5"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightPen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnConsideredHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointSelectedImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="FilterFlagHuntLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="ZoneDoorLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnConsideredImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="DropHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3Line2Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagLocateLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointImageStyle">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnUnknownHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnUnknownUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagCautionShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagAlertImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorShowName">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerHighlightPen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImageSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagTracerImageSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagHuntHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2Line2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="DropImageStyle">
+            <int value="4"/>
+        </property>
+        <property name="InstanceLocationHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4Line1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="RuntimeFilteredLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointImagePen">
+            <pen join="64" red="128" blue="128" style="1" cap="16" green="128"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagHuntHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DropWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorImageBrush">
+            <brush red="110" blue="104" style="1" green="26"/>
+        </property>
+        <property name="ZoneSafePointHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2Line1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="RuntimeFilteredLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnItemSelectedImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerOldImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DropHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4Line2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="RuntimeFilteredLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorImageSize">
+            <int value="2"/>
+        </property>
+        <property name="SpawnItemSelectedImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="ZoneSafePointUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2Line2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1UseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="FilterFlagCautionImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5UseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam2Line0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightUseSpawnColorPen">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4UseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImageStyle">
+            <int value="5"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredImageStyle">
+            <int value="1"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3UseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="InstanceLocationHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCImageStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerCorpseShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="ZoneSafePointImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="DropShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="UnknownHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4Line0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="InstanceLocationShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightPen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCCorpseImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPointImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="RuntimeFilteredHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeam1Line2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPointUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneDoorHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="FilterFlagHuntShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3WalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerCorpseShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagCautionHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="FilterFlagDangerImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnUnknownLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagDangerHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2UseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneSafePointLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1UseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DropLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="DropLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagLocateLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnItemSelectedImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagHuntImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerCorpseImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagDangerHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagTracerLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagDangerHighlightPen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5UseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCNoUpdateHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam1WalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnUnknownHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DoorHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="DropLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagHuntImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="UnknownImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="DoorShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagLocateImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="DropLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3UseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagCautionLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="DoorImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightPen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4WalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam2UseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPetPvPEnabledUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="DoorHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="UnknownHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagHuntLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceShowName">
+            <bool value="false"/>
+        </property>
+        <property name="DropImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1ShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3ShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagLocateLine0Pen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="255"/>
+        </property>
+        <property name="RuntimeFilteredShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagDangerLine1Distance">
+            <int value="500"/>
+        </property>
+        <property name="ZoneSafePointShowName">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam5ShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="UnknownLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="DoorHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="DropImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImageStyle">
+            <int value="8"/>
+        </property>
+        <property name="SpawnPlayerTeam4UseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1ShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="InstanceLocationHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImageSize">
+            <int value="0"/>
+        </property>
+        <property name="InstanceLocationShowName">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPointShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2WalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4ShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="InstanceLocationImageStyle">
+            <int value="4"/>
+        </property>
+        <property name="UnknownHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldImageStyle">
+            <int value="3"/>
+        </property>
+        <property name="SpawnNPCCorpseImageStyle">
+            <int value="3"/>
+        </property>
+        <property name="FilterFlagFilteredImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="InstanceLocationImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeam2ShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnUnknownShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightSize">
+            <int value="5"/>
+        </property>
+        <property name="ZoneSafePointShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2ShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4HighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagDangerHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneDoorShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="UnknownHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnConsideredHighlightStyle">
+            <int value="2"/>
+        </property>
+        <property name="SpawnUnknownImageStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagTracerImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnConsideredImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeam5WalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCCorpseWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerOldShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneDoorHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagCautionHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="FilterFlagCautionWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneDoorUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneSafePointUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagLocateHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateShowLine0">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagHuntWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagCautionHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="DropHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagCautionHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="InstanceLocationHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerCorpseHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="DoorShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="DoorImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredHighlightPen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredImageSize">
+            <int value="2"/>
+        </property>
+        <property name="FilterFlagDangerShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeam5Line1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagAlertLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagLocateHighlightPen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnNPCShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnNPCHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2HighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnItemSelectedLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnUnknownImageBrush">
+            <brush red="160" blue="164" style="1" green="160"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="DropShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="ZoneSafePointImageStyle">
+            <int value="4"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3ImageStyle">
+            <int value="7"/>
+        </property>
+        <property name="FilterFlagAlertLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointSelectedWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5HighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerOldImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagHuntHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagDangerLine1Pen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImageFlash">
+            <bool value="true"/>
+        </property>
+        <property name="InstanceLocationLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam4Line1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnUnknownImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagAlertHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="SpawnUnknownHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagAlertShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagCautionShowName">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagAlertImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagFilteredShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam1HighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnUnknownUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerLine2Pen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnNPCCorpseImagePen">
+            <pen join="64" red="0" blue="255" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagDangerImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="FilterFlagTracerHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnUnknownImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagCautionLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagLocateShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagHuntShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam3HighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCNoUpdateImageBrush">
+            <brush red="160" blue="164" style="1" green="160"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightSize">
+            <int value="1"/>
+        </property>
+        <property name="UnknownLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPetPvPEnabledImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3ShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPointSelectedImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagDangerUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPointHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagLocateHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="SpawnPlayerTeam3Line1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagCautionLine1Pen">
+            <pen join="64" red="255" blue="0" style="1" cap="16" green="255"/>
+        </property>
+        <property name="FilterFlagLocateLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerUseImage">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRaceLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="InstanceLocationWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DoorUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="DoorImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImageBrush">
+            <brush red="160" blue="164" style="1" green="160"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetImageUseSpawnColorPen">
+            <bool value="true"/>
+        </property>
+        <property name="ZoneDoorImagePen">
+            <pen join="64" red="110" blue="104" style="1" cap="16" green="26"/>
+        </property>
+        <property name="FilterFlagHuntUseHighlight">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityPetUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagDangerImageStyle">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagDangerHighlightStyle">
+            <int value="1"/>
+        </property>
+        <property name="UnknownLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagFilteredImagePen">
+            <pen join="64" red="160" blue="164" style="1" cap="16" green="160"/>
+        </property>
+        <property name="FilterFlagLocateImagePen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCNoUpdateLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="DropUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPetPvPEnabledLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="DropHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagCautionLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightPen">
+            <pen join="64" red="0" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="DropImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCWalkPathPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeam1Line2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4ImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3Line1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagFilteredLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointLine1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityHighlightFlash">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5Line1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="UnknownLine2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagTracerShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam4ShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCCorpseUseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnNPCLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPointSelectedHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2ImagePen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerCorpseImageStyle">
+            <int value="2"/>
+        </property>
+        <property name="FilterFlagTracerImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam1Line1Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPointImageUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnConsideredUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagLocateUseImage">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerImageStyle">
+            <int value="2"/>
+        </property>
+        <property name="SpawnNPCNoUpdateShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2Line1Distance">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagFilteredHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="RuntimeFilteredHighlightPen">
+            <pen join="64" red="255" blue="255" style="1" cap="16" green="255"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherRacePetHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam3Line2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="FilterFlagTracerLine1Distance">
+            <int value="0"/>
+        </property>
+        <property name="ZoneSafePointLine0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnPlayerTeam5ImageSize">
+            <int value="3"/>
+        </property>
+        <property name="SpawnPlayerTeam1ImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnItemSelectedHighlightSize">
+            <int value="6"/>
+        </property>
+        <property name="InstanceLocationShowWalkPath">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnUnknownHighlightSize">
+            <int value="0"/>
+        </property>
+        <property name="FilterFlagLocateHighlightSize">
+            <int value="4"/>
+        </property>
+        <property name="SpawnPlayerTeam5Line2Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeamOtherDeityLine2Distance">
+            <int value="0"/>
+        </property>
+        <property name="UnknownImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="UnknownImageFlash">
+            <bool value="false"/>
+        </property>
+        <property name="FilterFlagTracerHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="FilterFlagLocateImageSize">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerHighlightStyle">
+            <int value="0"/>
+        </property>
+        <property name="SpawnPlayerTeam1Line0Pen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnNPCCorpseImageBrush">
+            <brush red="0" blue="0" style="1" green="0"/>
+        </property>
+        <property name="ZoneDoorHighlightPen">
+            <pen join="64" red="0" blue="0" style="1" cap="16" green="0"/>
+        </property>
+        <property name="SpawnConsideredHighlightBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledHighlightUseSpawnColorBrush">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam2UseHighlight">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointImageBrush">
+            <brush red="0" blue="0" style="0" green="0"/>
+        </property>
+        <property name="SpawnNPCHighlightUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerOldHighlightFlash">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledImageUseSpawnColorBrush">
+            <bool value="true"/>
+        </property>
+        <property name="SpawnPlayerPvPEnabledShowName">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerNoUpdateUseWalkPathPen">
+            <bool value="false"/>
+        </property>
+        <property name="SpawnPlayerTeam5ShowLine0">
+            <bool value="false"/>
+        </property>
+        <property name="ZoneSafePointImageUseSpawnColorPen">
+            <bool value="false"/>
+        </property>
+    </section>
+    <section name="Interface">
+        <property name="DockingInfo">
+            <data value="000000ff00000001fd00000003000000000000029700000303fc0200000002fc000000150000013c0000006501000014fa000000000100000002fb000000120073007000610077006e006c0069007300740100000000ffffffff0000005600fffffffb00000012007300700065006c006c006c0069007300740100000000000002970000005000fffffffb000000120073007000610077006e006c0069007300740100000155000001c30000006000ffffff000000020000000000000000fc0100000001fb000000180043006f006d00620061007400570069006e0064006f00770200000067000000e1000001e00000014d000000030000000000000000fc0100000001fb000000200045007800700065007200690065006e0063006500570069006e0064006f0077020000000000000000000000640000001e000002f50000030300000001000000020000000100000002fc00000000"/>
+        </property>
+        <property name="WindowPos">
+            <point x="275" y="275"/>
+        </property>
+        <property name="WindowSize">
+            <size width="1424" height="812"/>
+        </property>
+        <property name="Caption">
+            <string value=""/>
+        </property>
+    </section>
+    <section name="Experience">
+        <property name="WindowPos">
+            <point x="0" y="0"/>
+        </property>
+        <property name="WindowSize">
+            <size width="100" height="30"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="false"/>
+        </property>
+    </section>
+</seqpreferences>

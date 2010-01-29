@@ -8,7 +8,7 @@
 #ifndef _MESSAGEFILTERDIALOG_H_
 #define _MESSAGEFILTERDIALOG_H_
 
-#include <stdint.h>
+#include "compat.h"
 
 #include <QDialog>
 #include <QLabel>

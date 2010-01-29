@@ -26,10 +26,12 @@
 #include <QRegExp>
 #include <QByteArray>
 
+#ifndef _MSC_VER
 static inline int16_t min(const int16_t& __a,  const int16_t& __b)
 {
 	if (__b < __a) return __b; return __a;
 }
+#endif
 
 // Spell item ^ delmited fields
 // 0   - SpellID

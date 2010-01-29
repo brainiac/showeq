@@ -235,7 +235,7 @@ void Session::assignSource(DataSource* source)
 		m_source->connectReceiver("OP_FormattedMessage", "formattedMessageStruct", SP_Zone, DIR_Server, SZC_None,
 								  m_messageShell, SLOT(formattedMessage(const uint8_t*, size_t, uint8_t)));
 		m_source->connectReceiver("OP_SimpleMessage", "simpleMessageStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_mesageShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t)));
+								  m_messageShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t)));
 		m_source->connectReceiver("OP_SpecialMesg", "specialMessageStruct", SP_Zone, DIR_Server, SZC_None,
 								  m_messageShell, SLOT(specialMessage(const uint8_t*, size_t, uint8_t)));
 		m_source->connectReceiver("OP_GuildMOTD", "guildMOTDStruct", SP_Zone, DIR_Server, SZC_None,
@@ -423,14 +423,20 @@ SessionManager::SessionManager(QString configFile)
 	m_dataLocationMgr->setupUserDirectory();
 	
 	// Set up preferences
+#ifdef _WINDOWS
+	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile("D:\\Projects\\ShowEQ-Qt4\\Temp", "seqdef.xml", true, false);
+#else
 	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile(".", "seqdef.xml", true, false);
-	
+#endif
+
 	/* [brainiac] I'm not sure why this has to exist. I think it should be
 	 * permissible to load without a default config file. Defaults should be
 	 * hardcoded somewhere IMO. */
 	if (!defaultConfigFile.exists()) {
 		fprintf(stderr, "Fatal: Couldn't find seqdef.xml!\n"
 				"\tDid you remember to do 'make install'?\n");
+
+		/* maybe throw an exception to make this better handleable */
 		exit(-1);
 	}
 	QString defaultConfigFilePath = defaultConfigFile.absFilePath();
@@ -494,11 +500,16 @@ SessionManager::~SessionManager()
 
 Session* SessionManager::newSession(DataSource*)
 {
+	return NULL;
 }
 
 QString SessionManager::getUserDirectory()
 {
+#ifdef _WINDOWS
+	return "D:\\Projects\\ShowEQ-Qt4\\Temp";
+#else
 	return ".showeq";
+#endif
 }
 
 // Loads the format strings stored in eqstr_us.txt
@@ -545,16 +556,4 @@ void SessionManager::savePrefs()
 {
 }
 
-
-// Category Functions
-void SessionManager::addCategory()
-{
-	if (m_categories)
-		m_categories->addCategory();
-}
-
-void SessionManager::reloadCategories()
-{
-	if (m_categories)
-		m_categories->reloadCategories();
-}
+#include "moc_session.cpp"

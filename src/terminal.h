@@ -13,7 +13,11 @@
 
 #include "messages.h"
 
+#ifndef Q_OS_WIN
 #include <stdint.h>
+#else
+# include "compat.h"
+#endif
 
 #include <QObject>
 #include <QRegExp>

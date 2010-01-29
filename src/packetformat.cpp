@@ -13,7 +13,9 @@
 #include "packetformat.h"
 #include "diagnosticmessages.h"
 
+#ifndef _WINDOWS
 #include <zlib.h>
+#endif
 
 //----------------------------------------------------------------------
 // EQProtocolPacket class methods

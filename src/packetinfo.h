@@ -11,7 +11,7 @@
 #ifndef _PACKETINFO_H_
 #define _PACKETINFO_H_
 
-#include <stdint.h>
+#include "compat.h"
 
 #include <Q3PtrDict>
 #include <Q3PtrList>

@@ -18,6 +18,10 @@
 #include "packetinfo.h"
 #include "packet.h"
 
+#ifdef _WINDOWS
+#pragma once
+#endif
+
 class EQPacketOPCode;
 class EQPacketOPCodeDB;
 

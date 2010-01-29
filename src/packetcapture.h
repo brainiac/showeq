@@ -11,6 +11,10 @@
 #ifndef _PACKETCAPTURE_H_
 #define _PACKETCAPTURE_H_
 
+#ifdef _WINDOWS
+#error packetcapture.h not supported on windows!
+#endif
+
 #include <pthread.h>
 
 #ifdef __FreeBSD__

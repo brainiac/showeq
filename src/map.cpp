@@ -9,12 +9,8 @@
  */
 
 #define __STDC_LIMIT_MACROS
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#include <stdint.h>
-#endif
 
+#include "compat.h"
 
 #include "map.h"
 #include "mapicondialog.h"
@@ -2707,6 +2703,8 @@ void Map::dumpInfo(QTextStream& out)
 
 void Map::showMapIconDialog()
 {
+#ifndef _MSC_VER	// TODO: something is wrong...
+#if 0
 	if (!m_mapIconDialog)
 	{
 		// first create the dialog
@@ -2718,6 +2716,8 @@ void Map::showMapIconDialog()
 
 	// show the dialog
 	m_mapIconDialog->show();
+#endif
+#endif
 }
 
 void Map::resizeEvent(QResizeEvent *qs)
@@ -4323,6 +4323,7 @@ MapFrame::MapFrame(FilterMgr* filterMgr, MapMgr* mapMgr, Player* player,  SpawnS
 	m_mouseLocation->setText("0      0      ");
 	m_mouseLocation->setMinimumWidth(70);
 
+	m_mouseLocationBox = new QWidget();
 	tmpLabel = new QLabel();
 	tmpLabel->setText("Cursor:");
 	tmpLabel->setBuddy(m_mouseLocationBox);
@@ -4333,7 +4334,7 @@ MapFrame::MapFrame(FilterMgr* filterMgr, MapMgr* mapMgr, Player* player,  SpawnS
 	mouseLocationBoxLayout->addWidget(tmpLabel);
 	mouseLocationBoxLayout->addWidget(m_mouseLocation);
 
-	m_mouseLocationBox = new QWidget();
+	
 	m_mouseLocationBox->setLayout(mouseLocationBoxLayout);
 	if (!pSEQPrefs->getPrefBool("ShowMouseLocation", prefString, 1))
 		m_mouseLocationBox->hide();
@@ -4847,3 +4848,7 @@ void MapFrame::toggle_depthControls(int id)
 		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_depthControlBox->isVisible());
 	}
 }
+
+#ifdef _WINDOWS
+#include "moc_map.cpp"
+#endif

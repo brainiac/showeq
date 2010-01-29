@@ -11,7 +11,7 @@
 #ifndef _NETSTREAM_H_
 #define _NETSTREAM_H_
 
-#include <stdint.h>
+#include "compat.h"
 #include <QString>
 
 class NetStream

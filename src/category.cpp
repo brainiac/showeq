@@ -43,17 +43,15 @@ Category::Category(const QString& name, const QString& filter, const QString& fi
 		m_filterout = filterout;
 	m_color = color;
 
-	int cFlags = REG_EXTENDED | REG_ICASE;
-
 	// allocate the filter item
-	m_filterItem = new FilterItem(filter, cFlags);
+	m_filterItem = new FilterItem(filter, true);
 	m_filteredFilter = (filter.find(":Filtered:", 0, false) != -1);
 
 	// allocate the filter out item
 	if (m_filterout.isEmpty())
 		m_filterOutItem = NULL;
 	else
-		m_filterOutItem = new FilterItem(filterout, cFlags);
+		m_filterOutItem = new FilterItem(filterout, true);
 }
 
 Category::~Category()

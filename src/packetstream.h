@@ -11,6 +11,11 @@
 #ifndef _PACKETSTREAM_H_
 #define _PACKETSTREAM_H_
 
+#ifdef _WINDOWS
+#error packetstream.h not supported on windows!
+#endif
+
+
 #include <QObject>
 #include <map>
 
@@ -23,7 +28,7 @@ typedef uint16_t in_port_t;
 typedef uint32_t in_addr_t;
 #endif
 
-#include <netinet/in.h>
+#include "compat.h"
 
 class EQUDPIPPacketFormat;
 class EQProtocolPacket;

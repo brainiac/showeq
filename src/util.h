@@ -12,7 +12,8 @@
 #include <sys/types.h>
 #include <math.h>
 #else
-#include <stdint.h>
+# include "compat.h"
+
 #endif
 #include <stdio.h>
 #include <QString>

@@ -10,24 +10,25 @@
 
 /* Implementation of Packet class */
 #include <stdio.h>
-#include <unistd.h>
-#include <netdb.h>
+
+#include "compat.h"
 
 #ifdef __FreeBSD__
 #include "packet.h"
 #endif
-#include <netinet/if_ether.h>
 
 #include <QTimer>
 #include <QFileInfo>
 
 #include "everquest.h"
 #include "packet.h"
+#ifndef _WINDOWS		/* No Support for Live Packet Capture in windows yet */
 #include "packetcapture.h"
 #include "packetformat.h"
 #include "packetstream.h"
-#include "packetinfo.h"
 #include "vpacket.h"
+#endif
+#include "packetinfo.h"
 #include "everquest.h"
 #include "diagnosticmessages.h"
 #include "remotepacket.h"
@@ -94,8 +95,10 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		uint32_t portNum,
 		QObject * parent, const char *name)
   : QObject (parent, name),
+#ifndef _WINDOWS
 	m_packetCapture(NULL),
 	m_vPacket(NULL),
+#endif
 	m_timer(NULL),
 	m_busy_decoding(false),
 	m_useRemote(useRemote),
@@ -140,7 +143,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 #endif
 
 	// ** Setup the data streams **
-
+#ifndef _WINDOWS
 	// Setup client -> world stream
 	m_client2WorldStream = new EQPacketStream(client2world, DIR_Client, m_arqSeqGiveUp, *m_worldOPCodeDB, this, "client2world");
 	connectStream(m_client2WorldStream);
@@ -162,6 +165,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 	m_streams[world2client] = m_world2ClientStream;
 	m_streams[client2zone] = m_client2ZoneStream;
 	m_streams[zone2client] = m_zone2ClientStream;
+#endif
 
 	// no client/server ports yet
 	m_clientPort = 0;
@@ -174,6 +178,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 
 	/* remote capture doesn't use the ip based packet capture system.
 	 * so don't bother setting it up. */
+#ifndef _WINDOWS
 	if (!m_ip.isEmpty() && m_playbackPackets != PLAYBACK_REMOTE)
 	{
 		/* Substitute "special" IP which is interpreted
@@ -203,6 +208,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			seqInfo("Listening for client: %s", (const char*)m_ip);
 		}
 	}
+#endif
 
 	m_remoteServer = NULL;
 	if (m_playbackPackets == PLAYBACK_REMOTE)
@@ -211,6 +217,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		m_remoteServer->start(m_remotePort);
 		seqInfo("Remote capture mode enabled. ShowEQ will listen for a connection on port %i", m_remotePort);
 	}
+#ifndef _WINDOWS
 	else if (m_playbackPackets == PLAYBACK_OFF)
 	{
 		// create the pcap object and initialize, either with MAC or IP
@@ -233,14 +240,17 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		m_packetCapture->startOffline(filename, m_playbackSpeed);
 		seqInfo("Playing back packets from '%s' at speed '%d'", filename, m_playbackSpeed);
 	}
+#endif
 
 	// Flag session tracking properly on streams
 	session_tracking(sessionTrackingFlag);
 
+#ifndef _WINDOWS
 	// if running setuid root, then give up root access, since the PacketCapture
 	// is the only thing that needed it.
 	if ((geteuid() == 0) && (getuid() != geteuid()))
 		setuid(getuid());
+#endif
 
 	/* Create timer object */
 	m_timer = new QTimer(this);
@@ -252,6 +262,7 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		// Normal pcap packet handler
 		connect(m_timer, SIGNAL(timeout()), this, SLOT(processPackets()));
 	}
+#ifndef _WINDOWS
 	else
 	{
 		// Special internal playback handler
@@ -261,12 +272,11 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 	/* setup VPacket */
 	m_vPacket = NULL;
 
-	QString section = "VPacket";
 	// First param to VPacket is the filename
 	// Second param is playback speed:  0 = fast as poss, 1 = 1X, 2 = 2X etc
-	if (pSEQPrefs->isPreference("Filename", section))
+	if (pSEQPrefs->isPreference("Filename", "VPacket"))
 	{
-		const char *filename = pSEQPrefs->getPrefString("Filename", section);
+		const char *filename = pSEQPrefs->getPrefString("Filename", "VPacket");
 
 		if (m_recordPackets)
 		{
@@ -274,13 +284,13 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			// Must appear befire next call to getPrefString, which uses a static string
 			seqInfo("Recording packets to '%s' for future playback", filename);
 
-			if (!pSEQPrefs->getPrefString("FlushPackets", section).isEmpty())
+			if (!pSEQPrefs->getPrefString("FlushPackets", "VPacket").isEmpty())
 				m_vPacket->setFlushPacket(true);
 		}
 		else if (m_playbackPackets == PLAYBACK_FORMAT_SEQ)
 		{
 			m_vPacket = new VPacket(filename, 1, false);
-			m_vPacket->setCompressTime(pSEQPrefs->getPrefInt("CompressTime", section, 0));
+			m_vPacket->setCompressTime(pSEQPrefs->getPrefInt("CompressTime", "VPacket", 0));
 			m_vPacket->setPlaybackSpeed(m_playbackSpeed);
 
 			seqInfo("Playing back packets from '%s' at speed '%d'", filename, m_playbackSpeed);
@@ -291,12 +301,14 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		m_recordPackets = 0;
 		m_playbackPackets = PLAYBACK_OFF;
 	}
+#endif
 }
 
 ////////////////////////////////////////////////////
 // Destructor
 EQPacket::~EQPacket()
 {
+#ifndef _WINDOWS
 	if (m_packetCapture != NULL)
 	{
 		// stop any packet capture
@@ -305,6 +317,7 @@ EQPacket::~EQPacket()
 		// delete the object
 		delete m_packetCapture;
 	}
+#endif
 
 	if (m_remoteServer != NULL)
 	{
@@ -315,6 +328,7 @@ EQPacket::~EQPacket()
 		delete m_remoteServer;
 	}
 
+#ifndef _WINDOWS
 	// try to close down VPacket cleanly
 	if (m_vPacket != NULL)
 	{
@@ -324,6 +338,7 @@ EQPacket::~EQPacket()
 		// delete VPacket
 		delete m_vPacket;
 	}
+#endif
 
 	if (m_timer != NULL)
 	{
@@ -336,10 +351,12 @@ EQPacket::~EQPacket()
 
 	resetEQPacket();
 
+#ifndef _WINDOWS
 	delete m_client2WorldStream;
 	delete m_world2ClientStream;
 	delete m_client2ZoneStream;
 	delete m_zone2ClientStream;
+#endif
 
 	if (m_packetTypeDB)
 	{
@@ -386,6 +403,7 @@ void EQPacket::processPackets()
 	{
 		m_remoteServer->processPackets();
 	}
+#ifndef _WINDOWS
 	else
 	{
 		/* Set flag that we are busy decoding */
@@ -415,6 +433,7 @@ void EQPacket::processPackets()
 	}
 	/* Clear decoding flag */
 	m_busy_decoding = false;
+#endif
 }
 
 ////////////////////////////////////////////////////
@@ -428,6 +447,7 @@ void EQPacket::processPlaybackPackets()
 	if (m_busy_decoding)
 		return;
 
+#ifndef _WINDOWS
 	/* Set flag that we are busy decoding */
 	m_busy_decoding = true;
 
@@ -480,8 +500,10 @@ void EQPacket::processPlaybackPackets()
 
 	/* Clear decoding flag */
 	m_busy_decoding = false;
+#endif
 }
 
+#ifndef _WINDOWS
 /////////////////////////////////////////////////////////
 // Connect the given stream's signals to the proper slots
 void EQPacket::connectStream(EQPacketStream* stream)
@@ -628,11 +650,13 @@ void EQPacket::dispatchPacket(EQUDPIPPacketFormat& packet)
 		}
 	}
 } /* end dispatchPacket() */
+#endif
 
 ////////////////////////////////////////////////////
 // Handle zone2client stream closing
 void EQPacket::closeStream(uint32_t sessionId, EQStreamID streamId)
 {
+#ifndef _WINDOWS
 	// If this is the zone server session closing, reset the pcap filter to
 	// a non-exclusive form
 	if ((streamId == zone2client || streamId == client2zone) &&
@@ -659,12 +683,14 @@ void EQPacket::closeStream(uint32_t sessionId, EQStreamID streamId)
 		seqInfo("EQPacket: SessionDisconnect detected, awaiting next zone session,  pcap filter: EQ Client %s",
 				(const char*)m_ip);
 	}
+#endif
 }
 
 ////////////////////////////////////////////////////
 // Locks onto a specific client port (for session tracking)
 void EQPacket::lockOnClient(in_port_t serverPort, in_port_t clientPort)
 {
+#ifndef _WINDOWS
 	m_serverPort = serverPort;
 	m_clientPort = clientPort;
 
@@ -696,14 +722,17 @@ void EQPacket::lockOnClient(in_port_t serverPort, in_port_t clientPort)
 	}
 
 	emit clientPortLatched(m_clientPort);
+#endif
 }
 
 void EQPacket::dispatchSessionKey(uint32_t sessionId, EQStreamID streamid, uint32_t sessionKey)
 {
+#ifndef _WINDOWS
 	m_client2WorldStream->receiveSessionKey(sessionId, streamid, sessionKey);
 	m_world2ClientStream->receiveSessionKey(sessionId, streamid, sessionKey);
 	m_client2ZoneStream->receiveSessionKey(sessionId, streamid, sessionKey);
 	m_zone2ClientStream->receiveSessionKey(sessionId, streamid, sessionKey);
+#endif
 }
 
 ///////////////////////////////////////////
@@ -731,10 +760,12 @@ void EQPacket::dispatchWorldChatData(size_t len, uint8_t *data, uint8_t dir)
 // Returns the current playback speed
 int EQPacket::playbackSpeed()
 {
+#ifndef _WINDOWS
 	if (m_vPacket)
 		return m_vPacket->playbackSpeed();
 	if (m_packetCapture)
 		return m_packetCapture->getPlaybackSpeed();
+#endif
 	return 0;
 }
 
@@ -742,6 +773,7 @@ int EQPacket::playbackSpeed()
 // Set the packet playback speed
 void EQPacket::setPlayback(int speed)
 {
+#ifndef _WINDOWS
 	if (m_vPacket)
 	{
 		m_vPacket->setPlaybackSpeed(speed);
@@ -770,12 +802,14 @@ void EQPacket::setPlayback(int speed)
 	emit resetPacket(m_zone2ClientStream->packetCount(), zone2client);
 
 	emit playbackSpeedChanged(speed);
+#endif
 }
 
 ///////////////////////////////////////////
 // Increment the packet playback speed
 void EQPacket::incPlayback()
 {
+#ifndef _WINDOWS
 	int x;
 
 	if (m_vPacket)
@@ -808,12 +842,14 @@ void EQPacket::incPlayback()
 	}
 
 	setPlayback(x);
+#endif
 }
 
 ///////////////////////////////////////////
 // Decrement the packet playback speed
 void EQPacket::decPlayback()
 {
+#ifndef _WINDOWS
 	int x;
 
 	if (m_vPacket)
@@ -848,6 +884,7 @@ void EQPacket::decPlayback()
 	}
 
 	setPlayback(x);
+#endif
 }
 
 ///////////////////////////////////////////
@@ -855,19 +892,23 @@ void EQPacket::decPlayback()
 void EQPacket::monitorIPClient(const QString& ip)
 {
 	m_ip = ip;
+#ifndef _WINDOWS
 	struct in_addr  ia;
 	inet_aton(m_ip, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
+#endif
 
 	resetEQPacket();
 
 	seqInfo("Listening for IP client: %s", (const char*)m_ip);
+#ifndef _WINDOWS
 	if (m_playbackPackets == PLAYBACK_OFF || m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		m_packetCapture->setFilter(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE, 0, 0);
 		emit filterChanged();
 	}
+#endif
 }
 
 ///////////////////////////////////////////
@@ -876,20 +917,23 @@ void EQPacket::monitorMACClient(const QString& mac)
 {
 	m_mac = mac;
 	m_detectingClient = true;
+#ifndef _WINDOWS
 	struct in_addr  ia;
 	inet_aton(AUTOMATIC_CLIENT_IP, &ia);
 	m_client_addr = ia.s_addr;
 	emit clientChanged(m_client_addr);
+#endif
 
 	resetEQPacket();
 
 	seqInfo("Listening for MAC client: %s", (const char*)m_mac);
-
+#ifndef _WINDOWS
 	if (m_playbackPackets == PLAYBACK_OFF || m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		m_packetCapture->setFilter(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE, 0, 0);
 		emit filterChanged();
 	}
+#endif
 }
 
 ///////////////////////////////////////////
@@ -898,21 +942,24 @@ void EQPacket::monitorNextClient()
 {
 	m_detectingClient = true;
 	m_ip = AUTOMATIC_CLIENT_IP;
+#ifndef _WINDOWS
 	struct in_addr  ia;
 	inet_aton(m_ip, &ia);
 	m_client_addr = ia.s_addr;
 
 	emit clientChanged(m_client_addr);
+#endif
 
 	resetEQPacket();
 
 	seqInfo("Listening for next client seen. (you must zone for this to work!)");
-
+#ifndef _WINDOWS
 	if (m_playbackPackets == PLAYBACK_OFF || m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		m_packetCapture->setFilter(m_device, NULL, m_realtime, DEFAULT_ADDRESS_TYPE, 0, 0);
 		emit filterChanged();
 	}
+#endif
 }
 
 ///////////////////////////////////////////
@@ -928,6 +975,7 @@ void EQPacket::monitorDevice(const QString& dev)
 	if (m_useRemote)
 		return;
 
+#ifndef _WINDOWS
 	// stop the current packet capture
 	m_packetCapture->stop();
 
@@ -961,19 +1009,21 @@ void EQPacket::monitorDevice(const QString& dev)
 		else
 		{
 			m_detectingClient = false;
-			seqInfo("Listening for client: %s",
-					(const char*)m_ip);
+			seqInfo("Listening for client: %s", (const char*)m_ip);
 		}
 	}
+#endif
 
 	resetEQPacket();
 
+#ifndef _WINDOWS
 	// restart packet capture
 	if (m_mac.length() == 17)
 		m_packetCapture->start(m_device, m_mac, m_realtime, MAC_ADDRESS_TYPE);
 	else
 		m_packetCapture->start(m_device, m_ip, m_realtime, IP_ADDRESS_TYPE);
 	emit filterChanged();
+#endif
 }
 
 ///////////////////////////////////////////
@@ -981,11 +1031,12 @@ void EQPacket::monitorDevice(const QString& dev)
 void EQPacket::session_tracking(bool enable)
 {
 	m_session_tracking = enable;
+#ifndef _WINDOWS
 	m_client2WorldStream->setSessionTracking(m_session_tracking);
 	m_world2ClientStream->setSessionTracking(m_session_tracking);
 	m_client2ZoneStream->setSessionTracking(m_session_tracking);
 	m_zone2ClientStream->setSessionTracking(m_session_tracking);
-
+#endif
 	emit sessionTrackingChanged(m_session_tracking);
 }
 
@@ -1003,10 +1054,12 @@ void EQPacket::setArqSeqGiveUp(uint16_t giveUp)
 	else
 		giveUp = 32;
 
+#ifndef _WINDOWS
 	m_client2WorldStream->setArqSeqGiveUp(giveUp);
 	m_world2ClientStream->setArqSeqGiveUp(giveUp);
 	m_client2ZoneStream->setArqSeqGiveUp(giveUp);
 	m_zone2ClientStream->setArqSeqGiveUp(giveUp);
+#endif
 }
 
 void EQPacket::setRealtime(bool val)
@@ -1025,6 +1078,7 @@ bool EQPacket::connect2(const QString& opcodeName, EQStreamPairs sp,
 		return m_remoteServer->connect2(opcodeName, payload, sp, dir, szt, receiver, member);
 	}
 
+#ifndef _WINDOWS
 	if (sp & SP_World)
 	{
 		if (dir & DIR_Client)
@@ -1039,7 +1093,7 @@ bool EQPacket::connect2(const QString& opcodeName, EQStreamPairs sp,
 		if (dir & DIR_Server)
 			res = m_zone2ClientStream->connect2(opcodeName, payload, szt, receiver, member);
 	}
-
+#endif
 	return res;
 }
 
@@ -1052,6 +1106,7 @@ void EQPacket::resetEQPacket()
 		m_remoteServer->reset();
 	}
 
+#ifndef _WINDOWS
 	m_client2WorldStream->reset();
 	m_client2WorldStream->setSessionTracking(m_session_tracking);
 	m_world2ClientStream->reset();
@@ -1060,7 +1115,7 @@ void EQPacket::resetEQPacket()
 	m_client2ZoneStream->setSessionTracking(m_session_tracking);
 	m_zone2ClientStream->reset();
 	m_zone2ClientStream->setSessionTracking(m_session_tracking);
-
+#endif
 	m_clientPort = 0;
 	m_serverPort = 0;
 
@@ -1076,32 +1131,57 @@ const QString EQPacket::pcapFilter()
 		return QString("Remote");
 	if (m_playbackPackets != PLAYBACK_OFF)
 		return QString("Playback");
-
+#ifndef _WINDOWS
 	return m_packetCapture->getFilter();
+#endif
 }
 
 
 int EQPacket::packetCount(int stream)
 {
+#ifndef _WINDOWS
 	return m_streams[stream]->packetCount();
+#else
+	return 0;
+#endif
 }
 
 uint8_t EQPacket::session_tracking_enabled()
 {
+#ifndef _WINDOWS
 	return m_zone2ClientStream->sessionTracking();
+#else
+	return 0;
+#endif
 }
 
 size_t EQPacket::currentCacheSize(int stream)
 {
+#ifndef _WINDOWS
 	return m_streams[stream]->currentCacheSize();
+#else
+	return 0;
+#endif
 }
 
 uint32_t EQPacket::currentMaxLength(int streamId)
 {
+#ifndef _WINDOWS
     return m_streams[streamId]->getMaxLength();
+#else
+	return 0;
+#endif
 }
 
 uint16_t EQPacket::serverSeqExp(int stream)
 {
+#ifndef _WINDOWS
 	return m_streams[stream]->arqSeqExp();
+#else
+	return 0;
+#endif
 }
+
+#ifdef _WINDOWS
+#include "moc_packet.cpp"
+#endif
