@@ -13,6 +13,12 @@
 
 // TODO: Convert time to use Qt classes
 
+#include "compat.h"
+
+#ifndef _WINDOWS
+#include <sys/time.h>
+#endif
+
 #include "spellshell.h"
 
 #include "util.h"
@@ -40,11 +46,8 @@ void SpellItem::updateCastTime()
 #ifdef Q_OS_WIN
 	time(&m_castTime);
 #else
-	timezone tz;
-	timeval tv;
-	gettimeofday(&tv, &tz);
-
-	m_castTime = tv.tv_sec;
+	struct timezone tz;
+	gettimeofday(&m_castTime, &tz);
 #endif
 }
 
@@ -60,7 +63,11 @@ QString SpellItem::castTimeStr() const
 	else
 	{
 		/* Friendlier format courtesy of Daisy */
+#ifndef _WINDOWS
+		struct tm* CreationLocalTime = localtime(&(m_castTime.tv_sec));
+#else
 		struct tm *CreationLocalTime = localtime(&m_castTime);
+#endif
 		/* tzname should be set by localtime() but this doesn't seem to
          work.  cpphack */
 		char buff[256];

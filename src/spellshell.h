@@ -84,7 +84,7 @@ private:
 	QString m_targetName;
 	int m_duration;
 #ifndef _WINDOWS
-	timeval m_castTime;
+	struct timeval m_castTime;
 #else
 	time_t m_castTime;
 #endif

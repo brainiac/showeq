@@ -9,7 +9,7 @@
 #ifndef __COMPAT_H__
 #define __COMPAT_H__
 
-#define _WINDOWS
+//#define _WINDOWS
 
 #if defined(_WINDOWS) || defined (Q_OS_WIN) || defined(_MSV_VER)
 

@@ -556,4 +556,6 @@ void SessionManager::savePrefs()
 {
 }
 
+#ifdef _WINDOWS
 #include "moc_session.cpp"
+#endif

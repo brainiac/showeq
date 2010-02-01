@@ -12,10 +12,12 @@ CONFIG += qt \
     stl \
     warn_off \
     debug \
-    uic3
+    uic
+
 QT += xml \
     qt3support \
     network
+
 !win32:LIBS += -lpcap
 DEFINES += PKGDATADIR="/usr/local/share/showeq"
 DEFINES += QMAKEBUILD
@@ -26,7 +28,7 @@ INCLUDEPATH += ..
 INCLUDEPATH += /usr/include/pcap
 
 # Interface form definitions
-FORMS3 += mapicondialog.ui 
+FORMS += mapicondialog_qt4.ui 
 
 HEADERS += ../config.h
 
