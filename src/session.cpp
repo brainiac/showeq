@@ -276,8 +276,8 @@ void Session::assignSource(DataSource* source)
 								  m_messageShell, SLOT(consMessage(const uint8_t*, size_t, uint8_t)));
 		m_source->connectReceiver("OP_GroupInvite", "groupInviteStruct", SP_Zone, DIR_Client, SZC_Match,
 								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupInvite", "groupAltInviteStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
+//		m_source->connectReceiver("OP_GroupInvite", "groupAltInviteStruct", SP_Zone, DIR_Server, SZC_Match,
+//								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
 		m_source->connectReceiver("OP_GroupInvite2", "groupInviteStruct", SP_Zone, DIR_Client, SZC_Match,
 								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
 		m_source->connectReceiver("OP_GroupFollow", "groupFollowStruct", SP_Zone, DIR_Server, SZC_Match,
@@ -318,8 +318,8 @@ void Session::assignSource(DataSource* source)
 								  m_spawnShell, SLOT(updateSpawnAppearance(const uint8_t*)));
 		m_source->connectReceiver("OP_Death", "newCorpseStruct", SP_Zone, DIR_Server, SZC_Match,
 								  m_spawnShell, SLOT(killSpawn(const uint8_t*)));
-		m_source->connectReceiver("OP_RespawnFromHover", "uint8_t", SP_Zone, DIR_Server | DIR_Client, SZC_None,
-								  m_spawnShell, SLOT(respawnFromHover(const uint8_t*, size_t, uint8_t)));
+//		m_source->connectReceiver("OP_RespawnFromHover", "uint8_t", SP_Zone, DIR_Server | DIR_Client, SZC_None,
+//								  m_spawnShell, SLOT(respawnFromHover(const uint8_t*, size_t, uint8_t)));
 		m_source->connectReceiver("OP_Shroud", "spawnShroudSelf", SP_Zone, DIR_Server, SZC_None,
 								  m_spawnShell, SLOT(shroudSpawn(const uint8_t*, size_t, uint8_t)));
 		m_source->connectReceiver("OP_RemoveSpawn", "removeSpawnStruct", SP_Zone, DIR_Server | DIR_Client, SZC_None,
@@ -424,7 +424,7 @@ SessionManager::SessionManager(QString configFile)
 	
 	// Set up preferences
 #ifdef _WINDOWS
-	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile("D:\\Projects\\ShowEQ-Qt4\\Temp", "seqdef.xml", true, false);
+	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile("D:\\Projects\\ShowEQ-Qt4\\conf", "seqdef.xml", true, false);
 #else
 	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile(".", "seqdef.xml", true, false);
 #endif
@@ -506,7 +506,7 @@ Session* SessionManager::newSession(DataSource*)
 QString SessionManager::getUserDirectory()
 {
 #ifdef _WINDOWS
-	return "D:\\Projects\\ShowEQ-Qt4\\Temp";
+	return "D:\\Projects\\ShowEQ-Qt4\\conf";
 #else
 	return ".showeq";
 #endif

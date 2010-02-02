@@ -77,7 +77,7 @@ public slots:
 	void startCast(const uint8_t* cast);
 
 	void groupUpdate(const uint8_t* gmem, size_t, uint8_t);
-	void groupInvite(const uint8_t* gmem);
+	void groupInvite(const uint8_t* gmem, size_t, uint8_t);
 	void groupDecline(const uint8_t* gmem);
 	void groupFollow(const uint8_t* gmem);
 	void groupDisband(const uint8_t* gmem);

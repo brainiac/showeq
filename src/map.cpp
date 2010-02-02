@@ -2703,7 +2703,7 @@ void Map::dumpInfo(QTextStream& out)
 
 void Map::showMapIconDialog()
 {
-#ifndef _MSC_VER	// TODO: something is wrong...
+#ifndef Q_OS_WIN	// TODO: something is wrong...
 #if 0
 	if (!m_mapIconDialog)
 	{

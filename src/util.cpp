@@ -24,7 +24,7 @@
 #include <QFileInfo>
 #include <qdir.h>
 
-#if defined(__FreeBSD__) || defined(_MSC_VER)
+#if defined(__FreeBSD__) || defined(Q_OS_WIN)
 
 // closest int away from 0
 long int lroundf(float x)

@@ -658,7 +658,7 @@ int64_t XMLPreferences::getPrefInt64(const QString& inName, const QString& inSec
 		{
 			case QVariant::String:
 				// convert it to a int64_t (in base 16)
-#ifdef _MSC_VER
+#ifdef Q_OS_WIN
 				value = _strtoi64(pref.toString(), 0, 16);
 #else
 				value = strtoll(pref.toString(), 0, 16);
@@ -710,7 +710,7 @@ uint64_t XMLPreferences::getPrefUInt64(const QString& inName, const QString& inS
 		{
 			case QVariant::String:
 				// convert it to a uint64_t (in base 16)
-#ifdef _MSC_VER
+#ifdef Q_OS_WIN
 				value = _strtoui64(pref.toString(), 0, 16);
 #else
 				value = strtoull(pref.toString(), 0, 16);

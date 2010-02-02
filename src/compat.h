@@ -9,9 +9,9 @@
 #ifndef __COMPAT_H__
 #define __COMPAT_H__
 
-//#define _WINDOWS
+#include <QObject.h>
 
-#if defined(_WINDOWS) || defined (Q_OS_WIN) || defined(_MSV_VER)
+#if defined (Q_OS_WIN)
 
 
 #include <windows.h>

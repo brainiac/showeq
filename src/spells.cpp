@@ -26,7 +26,7 @@
 #include <QRegExp>
 #include <QByteArray>
 
-#ifndef _MSC_VER
+#ifndef Q_OS_WIN
 static inline int16_t min(const int16_t& __a,  const int16_t& __b)
 {
 	if (__b < __a) return __b; return __a;

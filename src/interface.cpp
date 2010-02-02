@@ -2149,12 +2149,12 @@ void EQInterface::connectSignals()
 		//      m_packet->connect2("OP_GroupUpdate", SP_Zone, DIR_Server,
 		// 			"groupUpdateStruct", SZC_None,
 		// 			m_messageShell, SLOT(groupUpdate(const uint8_t*, size_t, uint8_t)));
-		m_packet->connect2("OP_GroupInvite", SP_Zone, DIR_Client, "groupInviteStruct", SZC_Match,
-						   m_messageShell, SLOT(groupInvite(const uint8_t*)));
-		m_packet->connect2("OP_GroupInvite", SP_Zone, DIR_Server, "groupAltInviteStruct", SZC_Match,
-						   m_messageShell, SLOT(groupInvite(const uint8_t*)));
+		m_packet->connect2("OP_GroupInvite", SP_Zone, DIR_Client | DIR_Server, "groupInviteStruct", SZC_None,
+						   m_messageShell, SLOT(groupInvite(const uint8_t*, size_t, uint8_t)));
+//		m_packet->connect2("OP_GroupInvite", SP_Zone, DIR_Server, "groupAltInviteStruct", SZC_Match,
+//						   m_messageShell, SLOT(groupInvite(const uint8_t*)));
 		m_packet->connect2("OP_GroupInvite2", SP_Zone, DIR_Client, "groupInviteStruct", SZC_Match,
-						   m_messageShell, SLOT(groupInvite(const uint8_t*)));
+						   m_messageShell, SLOT(groupInvite(const uint8_t*, size_t, uint8_t)));
 		m_packet->connect2("OP_GroupFollow", SP_Zone, DIR_Server, "groupFollowStruct", SZC_Match,
 						   m_messageShell, SLOT(groupFollow(const uint8_t*)));
 		m_packet->connect2("OP_GroupFollow2", SP_Zone, DIR_Server, "groupFollowStruct", SZC_Match,
@@ -2241,8 +2241,8 @@ void EQInterface::connectSignals()
 					   m_spawnShell, SLOT(updateSpawnAppearance(const uint8_t*)));
 	m_packet->connect2("OP_Death", SP_Zone, DIR_Server, "newCorpseStruct", SZC_Match,
 					   m_spawnShell, SLOT(killSpawn(const uint8_t*)));
-	m_packet->connect2("OP_RespawnFromHover", SP_Zone, DIR_Server|DIR_Client, "uint8_t", SZC_None,
-					   m_spawnShell, SLOT(respawnFromHover(const uint8_t*, size_t, uint8_t)));
+//	m_packet->connect2("OP_RespawnFromHover", SP_Zone, DIR_Server|DIR_Client, "uint8_t", SZC_None,
+//					   m_spawnShell, SLOT(respawnFromHover(const uint8_t*, size_t, uint8_t)));
 	m_packet->connect2("OP_Shroud", SP_Zone, DIR_Server, "spawnShroudSelf", SZC_None,
 					   m_spawnShell, SLOT(shroudSpawn(const uint8_t*, size_t, uint8_t)));
 	m_packet->connect2("OP_RemoveSpawn", SP_Zone, DIR_Server|DIR_Client, "removeSpawnStruct", SZC_None,
@@ -4251,7 +4251,7 @@ void EQInterface::setExp(uint32_t totalExp, uint32_t totalTick,
 {
 	if (m_stsbarExp)
 	{
-		char expperc[5];
+		char expperc[32];
 		sprintf(expperc, "%.2f", totalTick*100.0/330.0);
 
 		m_stsbarExp->setText(QString("Exp: %1 (%2/330, %3%)")
@@ -4280,7 +4280,7 @@ void EQInterface::newExp(uint32_t newExp, uint32_t totalExp,
 
 		if (m_stsbarExp)
 		{
-			char expperc[5];
+			char expperc[32];
 			sprintf(expperc, "%.2f", totalTick*100.0/330.0);
 
 			m_stsbarExp->setText(QString("Exp: %1 (%2/330, %3%)")
@@ -4297,7 +4297,7 @@ void EQInterface::newExp(uint32_t newExp, uint32_t totalExp,
 
 		if (m_stsbarExp)
 		{
-			char expperc[5];
+			char expperc[32];
 			sprintf(expperc, "%.2f", totalTick*100.0/330.0);
 
 			m_stsbarExp->setText(QString("Exp: %1 (%2/330, %3%)")
@@ -4316,7 +4316,7 @@ void EQInterface::newAltExp(uint32_t newExp, uint32_t totalExp, uint32_t totalTi
 {
 	if (m_stsbarExpAA)
 	{
-		char aaperc[5];
+		char aaperc[32];
 		sprintf(aaperc, "%.2f", totalTick*100.0/330.0);
 
 		m_stsbarExpAA->setText(QString("ExpAA: %1 (%2/330, %3%)").arg(Commanate(totalExp)).arg(totalTick).arg(aaperc));
