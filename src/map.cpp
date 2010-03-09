@@ -2678,8 +2678,6 @@ void Map::dumpInfo(QTextStream& out)
 
 void Map::showMapIconDialog()
 {
-#ifndef Q_OS_WIN	// TODO: something is wrong...
-#if 0
 	if (!m_mapIconDialog)
 	{
 		// first create the dialog
@@ -2691,8 +2689,6 @@ void Map::showMapIconDialog()
 
 	// show the dialog
 	m_mapIconDialog->show();
-#endif
-#endif
 }
 
 void Map::resizeEvent(QResizeEvent *qs)
