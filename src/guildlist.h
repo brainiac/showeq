@@ -11,16 +11,12 @@
 #ifndef _GUILDLIST_H_
 #define _GUILDLIST_H_
 
-#include "compat.h"
-
 #include "seqwindow.h"
 #include "seqlistview.h"
 
 #include <Q3ListView>
 #include <Q3PtrDict>
 #include <QString>
-#include <QLabel>
-#include <QMenu>
 
 //----------------------------------------------------------------------
 // forward declarations

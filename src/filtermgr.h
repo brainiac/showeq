@@ -15,10 +15,6 @@
 #ifndef FILTERMGR_H
 #define FILTERMGR_H
 
-#include "compat.h"
-
-
-#include <QObject>
 #include "everquest.h"
 
 //----------------------------------------------------------------------

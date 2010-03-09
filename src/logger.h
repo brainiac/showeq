@@ -8,20 +8,7 @@
 #ifndef SEQLOGGER_H
 #define SEQLOGGER_H
 
-#include <QFile>
 #include <Q3TextStream>
-
-#ifdef __FreeBSD__
-// since they are incapable of following standards
-#include <sys/types.h>
-#else
-#ifndef Q_OS_WIN
-#include <stdint.h>
-#else
-# include "compat.h"
-#endif
-#endif
-
 
 class SEQLogger : public QObject
 {

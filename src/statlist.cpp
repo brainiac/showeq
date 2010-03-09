@@ -7,7 +7,7 @@
  *  Copyright 2000-2007 by the respective ShowEQ Developers
  */
 
-#include <QLayout>
+#include "pch.h"
 
 #include "player.h"
 #include "statlist.h"
@@ -342,3 +342,6 @@ void StatListWindow::savePrefs(void)
 	// make the listview save it's prefs
 	m_statList->savePrefs();
 }
+
+
+#include "moc_statlist.cpp"

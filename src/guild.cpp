@@ -14,13 +14,13 @@
  *
  */
 
+#include "pch.h"
+
 #include "guild.h"
 #include "packet.h"
 #include "diagnosticmessages.h"
 #include "netstream.h"
 
-#include <QFile>
-#include <QDataStream>
 #include <Q3TextStream>
 
 GuildMgr::GuildMgr(QString fn, QObject* parent, const char* name)
@@ -173,3 +173,5 @@ void GuildMgr::listGuildInfo()
 			seqInfo("%d\t%s", i, (const char*)m_guildMap[i]);
 	}
 }
+
+#include "moc_guild.cpp"

@@ -8,17 +8,11 @@
  *
  */
 
+#include "pch.h"
 
 #include "eqstr.h"
 #include "diagnosticmessages.h"
 
-#include <stdio.h>
-
-#include <QRegExp>
-#include <QFile>
-#include <QStringList>
-#include <QVector>
-#include <QByteArray>
 
 EQStr::EQStr()
 {

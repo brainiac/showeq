@@ -41,7 +41,6 @@
 
 #include <time.h>
 
-#include <QObject>
 #include <Q3AsciiDict>
 
 #include "spawn.h"

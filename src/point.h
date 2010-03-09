@@ -17,11 +17,6 @@
 #ifndef __POINT_H_
 #define __POINT_H_
 
-#include "compat.h"
-
-#include <math.h>
-#include <stdarg.h>
-
 #include <QPoint>
 
 template <class _T>

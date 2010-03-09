@@ -10,10 +10,6 @@
 #ifndef __SESSION_H__
 #define __SESSION_H__
 
-
-#include <QObject>
-#include <QString>
-
 class SessionManager;
 class XMLPreferences;
 
@@ -143,7 +139,6 @@ public slots:		/* Functions for Category Manager */
 	//void addCategory(const Category* category);
 	//void reloadCategories();
 	
-		
 public slots:
 	void savePrefs();
 };

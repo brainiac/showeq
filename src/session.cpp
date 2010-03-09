@@ -7,8 +7,9 @@
  *
  */
 
-#include "session.h"
+#include "pch.h"
 
+#include "session.h"
 #include "datalocationmgr.h"
 #include "datetimemgr.h"
 #include "eqstr.h"
@@ -29,8 +30,6 @@
 #include "messageshell.h"
 #include "filternotifications.h"
 #include "datasource.h"
-
-#include <QFileInfo>
 
 extern XMLPreferences* pSEQPrefs;
 
@@ -506,7 +505,7 @@ Session* SessionManager::newSession(DataSource*)
 QString SessionManager::getUserDirectory()
 {
 #ifdef _WINDOWS
-	return "D:\\Projects\\ShowEQ-Qt4\\conf";
+	return "../conf";
 #else
 	return ".showeq";
 #endif
@@ -528,7 +527,7 @@ void SessionManager::loadSpells()
 	QFileInfo fileInfo = m_dataLocationMgr->findExistingFile(".", fileName);
 	
 	// load the spells
-	m_spells->loadSpells(fileInfo.absFilePath());
+	//m_spells->loadSpells(fileInfo.absFilePath());
 }
 
 // "Getters"
@@ -556,6 +555,4 @@ void SessionManager::savePrefs()
 {
 }
 
-#ifdef _WINDOWS
 #include "moc_session.cpp"
-#endif

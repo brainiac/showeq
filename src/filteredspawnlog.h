@@ -11,7 +11,6 @@
 #ifndef _FILTEREDSPAWNLOG_H_
 #define _FILTEREDSPAWNLOG_H_
 
-#include <QObject>
 #include "logger.h"
 
 //----------------------------------------------------------------------

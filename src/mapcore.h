@@ -25,13 +25,6 @@
 #ifndef _MAPCORE_H
 #define _MAPCORE_H
 
-#include <stdlib.h>
-#include <stdio.h>
-
-#include <QString>
-#include <QColor>
-#include <QFont>
-#include <QPixmap>
 #include <Q3PtrList>
 #include <Q3PointArray>
 

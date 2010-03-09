@@ -7,6 +7,8 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
+
 #include "messagefilterdialog.h"
 #include "messagewindow.h"
 #include "messagefilter.h"
@@ -14,26 +16,12 @@
 #include "main.h"
 
 #include <Q3PopupMenu>
-#include <QInputDialog>
-#include <QFontDialog>
-#include <QColorDialog>
-#include <QRegExp>
-#include <QLayout>
-#include <QPushButton>
-#include <QCheckBox>
-#include <QLabel>
-#include <QLineEdit>
 #include <Q3GroupBox>
 #include <Q3FileDialog>
-#include <QFile>
 #include <Q3TextStream>
 #include <Q3HBoxLayout>
-#include <QKeyEvent>
 #include <Q3GridLayout>
 #include <Q3Frame>
-#include <QMouseEvent>
-#include <QEvent>
-
 
 using namespace Qt;
 
@@ -1090,3 +1078,5 @@ void MessageWindow::addedFilter(uint32_t mask, uint8_t filterid, const MessageFi
 	// insert a user filter menu item for the new filter
 	m_hideUserFilterMenu->insertItem(filter.name(), filterid);
 }
+
+#include "moc_messagewindow.cpp"

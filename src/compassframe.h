@@ -13,8 +13,6 @@
 #include "compass.h"
 #include "seqwindow.h"
 
-#include <QLabel>
-
 class CompassFrame : public SEQWindow
 {
 	Q_OBJECT

@@ -12,8 +12,9 @@
  *
  */
 
+#include "pch.h"
+
 #include <Q3Header>
-#include <QSizePolicy>
 
 #include "seqlistview.h"
 #include "main.h"
@@ -216,3 +217,5 @@ void SEQListView::setColumnVisible(int column, bool visible)
 	// trigger an update, otherwise things may look messy
 	triggerUpdate();
 }
+
+#include "moc_seqlistview.cpp"

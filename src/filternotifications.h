@@ -11,11 +11,6 @@
 #ifndef _FILTERNOTIFICATIONS_H_
 #define _FILTERNOTIFICATIONS_H_
 
-#include "compat.h"
-
-#include <QObject>
-
-class QString;
 class Item;
 
 class FilterNotifications : public QObject

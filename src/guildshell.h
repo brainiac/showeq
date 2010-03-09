@@ -11,11 +11,7 @@
 #ifndef _GUILDSHELL_H_
 #define _GUILDSHELL_H_
 
-#include "compat.h"
-
-#include <QString>
 #include <Q3Dict>
-#include <QTextStream>
 
 //----------------------------------------------------------------------
 // forward declarations

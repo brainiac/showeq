@@ -8,21 +8,11 @@
  *
  */
 
+#include "pch.h"
+
 #include "util.h"
 #include "diagnosticmessages.h"
 #include "main.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#ifndef Q_OS_WIN
-#include <sys/time.h>
-#endif
-
-#include <QColor>
-#include <QFileInfo>
-#include <qdir.h>
 
 #if defined(__FreeBSD__) || defined(Q_OS_WIN)
 

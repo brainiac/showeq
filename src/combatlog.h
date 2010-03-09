@@ -8,22 +8,7 @@
 #ifndef COMBATLOG_H
 #define COMBATLOG_H
 
-#include <QObject>
-#include <QWidget>
-#include <QTabWidget>
-#include <QList>
 #include <Q3ListView>
-#include <QComboBox>
-#include <QLabel>
-#include <QLayout>
-
-//#include <sys/time.h>
-//#include <sys/types.h>
-//#include <sys/stat.h>
-#include "compat.h"
-
-#include <fcntl.h>
-#include <stdio.h>
 
 #include "seqwindow.h"
 #include "seqlistview.h"

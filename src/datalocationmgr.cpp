@@ -8,17 +8,11 @@
  *
  */
 
-#include "compat.h"
-#include "main.h"
+#include "pch.h"
 
+#include "main.h"
 #include "datalocationmgr.h"
 #include "diagnosticmessages.h"
-
-#include <stdio.h>
-
-#include <QDir>
-#include <QFileInfo>
-#include <QRegExp>
 
 DataLocationMgr::DataLocationMgr(const QString& homeSubDir)
 {
@@ -26,7 +20,11 @@ DataLocationMgr::DataLocationMgr(const QString& homeSubDir)
 	m_pkgData = PKGDATADIR;
 
 	// create the user directory object
+#ifndef Q_OS_WIN
 	m_userData = QDir::homeDirPath() + "/" + homeSubDir;
+#else
+	m_userData = QDir::currentPath() + "/" + homeSubDir;
+#endif
 }
 
 DataLocationMgr::~DataLocationMgr()

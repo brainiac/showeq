@@ -8,6 +8,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "netstream.h"
 #include "packetcommon.h"
 

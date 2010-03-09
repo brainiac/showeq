@@ -6,21 +6,15 @@
  *
  */
 
-#include <QString>
-#include <QObject>
-#include <QByteArray>
+#ifndef __REMOTEPACKET_H__
+#define __REMOTEPACKET_H__
 
-#include <QThread>
 #include <QtNetwork/QTcpServer>
-#include <QDataStream>
+#include <QThread>
 
 #include "packetcommon.h"
 #include "packetinfo.h"
 #include "packet.h"
-
-#ifdef _WINDOWS
-#pragma once
-#endif
 
 class EQPacketOPCode;
 class EQPacketOPCodeDB;
@@ -82,3 +76,5 @@ protected:
 
 	static uint8_t s_tempBuffer[TEMP_BUFFER_SIZE];
 };
+
+#endif // __REMOTEPACKET_H__

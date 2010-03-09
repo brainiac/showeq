@@ -16,8 +16,6 @@
 #define SEQLISTVIEW_H
 
 #include <Q3ListView>
-#include <QString>
-#include <QStringList>
 
 class SEQListView : public Q3ListView
 {

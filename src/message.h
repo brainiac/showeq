@@ -11,10 +11,6 @@
 #ifndef _MESSAGE_H_
 #define _MESSAGE_H_
 
-# include "compat.h"
-
-#include <QString>
-#include <QDateTime>
 #include <Q3ValueVector>
 
 //----------------------------------------------------------------------

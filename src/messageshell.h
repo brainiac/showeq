@@ -11,11 +11,7 @@
 #ifndef _MESSAGESHELL_H_
 #define _MESSAGESHELL_H_
 
-#include "compat.h"
-
 #include "messages.h"
-
-#include <QObject>
 
 //----------------------------------------------------------------------
 // forward declarations

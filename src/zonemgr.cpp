@@ -14,15 +14,13 @@
  *
  */
 
+#include "pch.h"
+
 #include "zonemgr.h"
 #include "packet.h"
 #include "main.h"
 #include "everquest.h"
 #include "diagnosticmessages.h"
-
-#include <QFile>
-#include <QDataStream>
-#include <QRegExp>
 
 //----------------------------------------------------------------------
 // constants
@@ -302,3 +300,5 @@ void ZoneMgr::dynamicZoneInfo(const uint8_t* data, size_t len, uint8_t)
 		m_dzLongName = "";
 	}
 }
+
+#include "moc_zonemgr.cpp"

@@ -17,10 +17,7 @@
 #ifndef __POINTARRAY_H_
 #define __POINTARRAY_H_
 
-#include "compat.h"
-
 #include <Q3MemArray>
-#include <QPoint>
 #include <Q3PointArray>
 
 #include "point.h"

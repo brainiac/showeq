@@ -7,6 +7,7 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
 
 #include "experiencelog.h"
 #include "map.h"
@@ -17,18 +18,10 @@
 #include "diagnosticmessages.h"
 #include "zonemgr.h"
 
-#include <stdio.h>
-#include <time.h>
-
 #include <Q3Grid>
-#include <QTimer>
 #include <Q3HBox>
 #include <Q3VGroupBox>
-#include <QMessageBox>
-#include <QFileInfo>
-#include <QResizeEvent>
 #include <Q3GridLayout>
-#include <QLabel>
 #include <Q3PopupMenu>
 #include <Q3VBoxLayout>
 
@@ -693,3 +686,5 @@ void ExperienceWindow::calculateZEM(long xp_gained, int mob_level)
 	seqInfo("xpgained: %ld group_ag: %d myLevel: %d gbonus: %d mob_level: %d penalty: %d ", xp_gained, group_ag, myLevel, gbonus, mob_level, penalty);
 	seqInfo("ZEM - ZEM - ZEM ===== %d ", ZEM);
 }
+
+#include "moc_experiencelog.cpp"

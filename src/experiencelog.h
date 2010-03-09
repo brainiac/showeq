@@ -8,21 +8,10 @@
 #ifndef EXPERIENCELOG_H
 #define EXPERIENCELOG_H
 
-#include <QWidget>
-#include <QList>
 #include <Q3ListView>
-#include <QComboBox>
-#include <QLabel>
-#include <QLayout>
-#include <QMenuBar>
-#include <QResizeEvent>
 #include <Q3VBoxLayout>
 #include <Q3PopupMenu>
 #include <Q3PtrList>
-
-#include "compat.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 #include "seqwindow.h"
 #include "seqlistview.h"

@@ -16,12 +16,7 @@
 #ifndef EQCOMPASS_H
 #define EQCOMPASS_H
 
-#include "compat.h"
 #include "point.h"
-
-#include <QWidget>
-#include <QSize>
-#include <QPaintEvent>
 
 ///////////////////////////////////////////
 // type definitions

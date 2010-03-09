@@ -13,15 +13,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include "compat.h"
-
-#include <QTextStream>
-#include <QList>
-#include <QString>
-#include <QRegExp>
 #include <QtXml/qxml.h>
-
-#include <map>
 
 //--------------------------------------------------
 // forward declarations

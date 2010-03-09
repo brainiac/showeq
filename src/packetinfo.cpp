@@ -8,17 +8,13 @@
  *
  */
 
-#include <stdio.h>
+#include "pch.h"
 
-#include <QObject>
-#include <QMetaObject>
 #include <Q3StrList>
-#include <QFile>
-#include <QtXml/qxml.h>
 #include <Q3TextStream>
 #include <Q3CString>
 
-#include <map>
+#include <QtXml/qxml.h>
 
 #include "packetinfo.h"
 #include "packetcommon.h"
@@ -726,3 +722,6 @@ bool OPCodeXmlContentHandler::endDocument()
 {
 	return true;
 }
+
+
+#include "moc_packetinfo.cpp"

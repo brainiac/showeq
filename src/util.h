@@ -8,16 +8,6 @@
 #ifndef EQUTIL_H
 #define EQUTIL_H
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#include <math.h>
-#else
-# include "compat.h"
-
-#endif
-#include <stdio.h>
-#include <QString>
-
 #include "everquest.h"
 #include "main.h"
 

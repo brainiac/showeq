@@ -11,6 +11,8 @@
  * options and initializes the application
  */
 
+#include "pch.h"
+
 #ifdef __linux__
 #include <linux/version.h>
 
@@ -23,12 +25,6 @@
 #ifndef VERSION
 # define VERSION "6.0.1.0"
 #endif
-
-#include <QApplication>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include "compat.h"
 
 #ifdef Q_WS_WIN
 #include <windows.h>
@@ -49,8 +45,6 @@
 #endif
 
 #include <QWindowsStyle>
-#include <QColor>
-#include <QDir>
 
 #include "interface.h"
 #include "main.h"
@@ -703,3 +697,4 @@ void displayOptions(const char* progName)
   printf ("                                        player state, and spawns   \n");
   printf ("                                        from a previous session    \n");
 }
+

@@ -8,6 +8,8 @@
  *  Portions Copyright 2001-2007 Zaphod (dohpaz@users.sourceforge.net). 
  */
 
+#include "pch.h"
+
 #include "filteredspawnlog.h"
 #include "filtermgr.h"
 #include "spawn.h"
@@ -80,3 +82,5 @@ void FilteredSpawnLog::logSpawn(const Item* item, const char* action, uint32_t f
 
 	flush();
 }
+
+#include "moc_filteredspawnlog.cpp"

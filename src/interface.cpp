@@ -7,6 +7,8 @@
  *  Copyright 2000-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
+
 #include "interface.h"
 #include "util.h"
 #include "main.h"
@@ -53,18 +55,6 @@
 #ifndef _WINDOWS
 #include "netdiag.h"
 #endif
-
-#include "compat.h"
-#include <stdlib.h>
-#include <stdio.h>
-
-#include <QApplication>
-#include <QFontDialog>
-#include <QColorDialog>
-#include <QInputDialog>
-#include <QStatusBar>
-#include <QWidgetAction>
-#include <QFileDialog>
 
 using namespace Qt;
 
@@ -543,7 +533,7 @@ void EQInterface::createFileMenu()
 	// Add Spawn Category
 	action = new QAction("Add Spawn Category", this);
 	action->setShortcut(ALT + Key_C);
-	connect(action, SIGNAL(triggered()), m_sm, SLOT(addCategory()));
+	connect(action, SIGNAL(triggered()), m_sm->categoryMgr(), SLOT(addCategory()));
 	pFileMenu->addAction(action);
 
 	// Rebuild Spawn List
@@ -555,7 +545,7 @@ void EQInterface::createFileMenu()
 	// Reload Categories
 	action = new QAction("Reload Categories", this);
 	action->setShortcut(CTRL + Key_R);
-	connect(action, SIGNAL(triggered()), m_sm, SLOT(reloadCategories()));
+	connect(action, SIGNAL(triggered()), m_sm->categoryMgr(), SLOT(reloadCategories()));
 	pFileMenu->addAction(action);
 
 	// Select Next
@@ -2203,7 +2193,7 @@ void EQInterface::connectSignals()
 
 	// connect the SpellShell slots to EQInterface signals
 	// TODO: Determine if this is actually used, and delete
-	connect(this, SIGNAL(spellMessage(QString&)), m_spellShell, SIGNAL(spellMessage(QString&)));
+	connect(this, SIGNAL(spellMessage(QString&)), m_spellShell, SLOT(spellMessage(QString&)));
 
 	// connect EQInterface slots to SpawnShell signals
 	connect(m_spawnShell, SIGNAL(addItem(const Item*)), this, SLOT(addItem(const Item*)));
@@ -5837,3 +5827,5 @@ void EQInterface::setupCombatWindow()
     // insert its menu into the window menu
 	insertWindowMenu(m_combatWindow);
 }
+
+#include "moc_interface.cpp"

@@ -15,11 +15,6 @@
 #ifndef _GUILD_H_
 #define _GUILD_H_
 
-#include <QObject>
-#include <QString>
-#include <vector>
-#include <map>
-
 #include "everquest.h"
 
 //------------------------------

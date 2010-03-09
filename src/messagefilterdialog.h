@@ -8,11 +8,6 @@
 #ifndef _MESSAGEFILTERDIALOG_H_
 #define _MESSAGEFILTERDIALOG_H_
 
-#include "compat.h"
-
-#include <QDialog>
-#include <QLabel>
-
 //----------------------------------------------------------------------
 // forward declarations
 class MessageFilter;

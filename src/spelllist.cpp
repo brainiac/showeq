@@ -12,6 +12,8 @@
  * Date - 9/7/2001
  */
 
+#include "pch.h"
+
 #include <Q3PopupMenu>
 
 #include "spelllist.h"
@@ -421,3 +423,6 @@ void SpellListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_spellList->savePrefs();
 }
+
+
+#include "moc_spelllist.cpp"

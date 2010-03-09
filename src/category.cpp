@@ -16,19 +16,15 @@
 // dependencies will be migrated out.
 //
 
+#include "pch.h"
+
 #include "category.h"
 #include "filter.h"
 #include "diagnosticmessages.h"
-
-// ZBTEMP: Temporarily use pSEQPrefs for data
 #include "main.h"
 
-#include <stdio.h>
-
-#include <QColorDialog>
 #include <Q3HBoxLayout>
 #include <Q3BoxLayout>
-#include <QLabel>
 #include <Q3VBoxLayout>
 
 using namespace Qt;
@@ -355,3 +351,5 @@ void CategoryMgr::savePrefs()
 		pSEQPrefs->setPrefColor(prefBaseName + "Color", section, black);
 	}
 }
+
+#include "moc_category.cpp"

@@ -11,27 +11,21 @@
  */
 
 /* Implementation of text editor class */
-#include <sys/types.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
-#include <QApplication>
-#include <Q3ToolBar>
+#include "pch.h"
+
 #include <QStatusBar>
-#include <Q3PopupMenu>
-#include <QMenuBar>
 #include <Q3MainWindow>
-#include <Q3FileDialog>
 #include <QToolButton>
+#include <QToolButton>
+#include <QCloseEvent>
+
+#include <Q3ToolBar>
+#include <Q3PopupMenu>
+#include <Q3FileDialog>
 #include <Q3TextStream>
 #include <QPaintDevice>
-#include <QObject>
 #include <Q3MultiLineEdit>
-#include <QMessageBox>
-#include <QPixmap>
-#include <QCloseEvent>
 
 #include "util.h"
 #include "editor.h"
@@ -220,3 +214,5 @@ void EditorWindow::closeEvent(QCloseEvent* ce)
 			break;
 	}
 }
+
+#include "moc_editor.cpp"

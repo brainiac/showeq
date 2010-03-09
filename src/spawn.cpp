@@ -14,14 +14,7 @@
 //   Based on stuff from CJD's SpawnShell{} and stuff from SpawnList and
 //   from Map.  Some optimization ideas adapted from SINS.
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#endif
-
-#include <limits.h>
-#include <math.h>
-
-#include <QRegExp>
+#include "pch.h"
 
 #include "spawnshell.h"
 #include "fixpt.h"
@@ -1057,3 +1050,4 @@ QString Drop::classString() const
 {
 	return "Thing";
 }
+

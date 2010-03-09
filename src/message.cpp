@@ -8,6 +8,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "message.h"
 
 QString MessageEntry::s_messageTypeStrings[MT_Max+1] =

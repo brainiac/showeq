@@ -12,15 +12,14 @@
  *
  */
 
+#include "pch.h"
+
 #include "spawnmonitor.h"
 #include "main.h"
 #include "util.h"
 #include "datalocationmgr.h"
 #include "diagnosticmessages.h"
 
-#include <QDir>
-#include <QFile>
-#include <QFileInfo>
 #include <Q3TextStream>
 
 
@@ -388,3 +387,5 @@ void SpawnMonitor::loadSpawnPoints()
 	seqInfo("Loaded spawn points: %s", (const char*)fileName);
 	m_modified = false;
 }
+
+#include "moc_spawnmonitor.cpp"

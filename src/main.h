@@ -8,11 +8,6 @@
 #ifndef _SHOWEQ_MAIN_H
 #define _SHOWEQ_MAIN_H
 
-#include "compat.h"
-
-#include <stdlib.h>
-#include <deque>
-
 #include "xmlpreferences.h"
 extern class XMLPreferences *pSEQPrefs;
 

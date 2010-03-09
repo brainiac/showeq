@@ -11,7 +11,6 @@
 #ifndef _SPAWNLOG_H_
 #define _SPAWNLOG_H_
 
-#include <qobject.h>
 #include "logger.h"
 #include "everquest.h"
 

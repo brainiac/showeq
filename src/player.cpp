@@ -7,6 +7,8 @@
  *  Copyright 2000-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
+
 #include "player.h"
 #include "util.h"
 #include "packetcommon.h"
@@ -14,13 +16,6 @@
 #include "guild.h"
 #include "zonemgr.h"
 #include "main.h"
-
-#include "compat.h"
-#include <stdio.h>
-
-#include <QDir>
-#include <QFile>
-#include <QDataStream>
 
 using namespace Qt;
 // #define DEBUG_PLAYER
@@ -1405,3 +1400,5 @@ void Player::restorePlayerState()
 		clear();
 	}
 }
+
+#include "moc_player.cpp"

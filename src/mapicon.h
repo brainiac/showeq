@@ -15,14 +15,6 @@
 #define __STDC_LIMIT_MACROS
 #endif
 
-#include "compat.h"
-
-#include <QColor>
-#include <QPen>
-#include <QBrush>
-#include <QString>
-#include <QTextStream>
-
 #include "spawn.h"
 
 //----------------------------------------------------------------------

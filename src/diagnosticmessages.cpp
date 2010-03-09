@@ -8,15 +8,11 @@
  *
  */
 
+#include "pch.h"
+
 #include "diagnosticmessages.h"
 #include "message.h"
 #include "messages.h"
-
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <qstring.h>
 
 //----------------------------------------------------------------------
 // constants
@@ -33,9 +29,14 @@ static int seqMessage(MessageType type, const char* format, va_list ap)
 	// if the message object exists, use it, otherwise dump to stderr
 	if (messages)
 		messages->addMessage(type, buff);
-	else
+	else {
+#ifdef Q_OS_WIN
+		OutputDebugStringA(buff);
+		OutputDebugStringA("\n");
+#else
 		fprintf(stderr, "%s\n", buff);
-
+#endif
+	}
 	return ret;
 }
 

@@ -12,6 +12,8 @@
  * Date   - 3/16/00
  */
 
+#include "pch.h"
+
 #include "seqwindow.h"
 #include "seqlistview.h"
 #include "spawnlistcommon.h"
@@ -22,13 +24,6 @@
 #include "player.h"
 #include "diagnosticmessages.h"
 
-#include <string.h>
-
-#include <QFontDialog>
-#include <QInputDialog>
-#include <QMessageBox>
-#include <QFont>
-#include <QPainter>
 #include <Q3PopupMenu>
 
 SpawnListItem::SpawnListItem(Q3ListViewItem *parent) : Q3ListViewItem(parent)
@@ -716,3 +711,6 @@ void SpawnListMenu::set_caption(int id)
 	if (ok)
 		m_spawnlistWindow->setCaption(caption);
 }
+
+
+#include "moc_spawnlistcommon.cpp"

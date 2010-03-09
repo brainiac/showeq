@@ -17,11 +17,6 @@
 #ifndef _SPAWN_H_
 #define _SPAWN_H_
 
-#include "compat.h"
-
-#include <QList>
-#include <QDateTime>
-#include <QDataStream>
 #include <Q3PtrList>
 
 #include "everquest.h"

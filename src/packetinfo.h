@@ -11,15 +11,12 @@
 #ifndef _PACKETINFO_H_
 #define _PACKETINFO_H_
 
-#include "compat.h"
-
 #include <Q3PtrDict>
 #include <Q3PtrList>
 #include <Q3AsciiDict>
 #include <Q3IntDict>
 #include <Q3CString>
 #include <Q3StrList>
-#include <QStringList>
 #include <Q3Dict>
 #include <Q3TextStream>
 

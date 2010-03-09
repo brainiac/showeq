@@ -35,7 +35,7 @@
             <bool value="false"/>
         </property>
         <property name="DockFixedExtent">
-            <size width="663" height="451"/>
+            <size width="413" height="385"/>
         </property>
         <property name="BodyTypeWidth">
             <int value="106"/>
@@ -150,7 +150,7 @@
             <int value="7"/>
         </property>
         <property name="DockFixedExtent">
-            <size width="663" height="295"/>
+            <size width="413" height="152"/>
         </property>
         <property name="DockVisible">
             <bool value="true"/>
@@ -164,7 +164,7 @@
     </section>
     <section name="MapFrame">
         <property name="DockFixedExtent">
-            <size width="757" height="771"/>
+            <size width="1007" height="771"/>
         </property>
         <property name="DockVisible">
             <bool value="true"/>
@@ -190,7 +190,7 @@
             <int value="3"/>
         </property>
         <property name="DockFixedExtent">
-            <size width="663" height="295"/>
+            <size width="413" height="385"/>
         </property>
         <property name="ShowSpawned">
             <bool value="true"/>
@@ -3125,7 +3125,7 @@
     </section>
     <section name="Interface">
         <property name="DockingInfo">
-            <data value="000000ff00000001fd00000003000000000000029700000303fc0200000002fc000000150000013c0000006501000014fa000000000100000002fb000000120073007000610077006e006c0069007300740100000000ffffffff0000005600fffffffb00000012007300700065006c006c006c0069007300740100000000000002970000005000fffffffb000000120073007000610077006e006c0069007300740100000155000001c30000006000ffffff000000020000000000000000fc0100000001fb000000180043006f006d00620061007400570069006e0064006f00770200000067000000e1000001e00000014d000000030000000000000000fc0100000001fb000000200045007800700065007200690065006e0063006500570069006e0064006f0077020000000000000000000000640000001e000002f50000030300000001000000020000000100000002fc00000000"/>
+            <data value="000000ff00000001fd00000003000000000000019d00000303fc0200000003fc00000015000001960000007501000014fa000000000100000002fb000000120073007000610077006e006c0069007300740100000000ffffffff0000005600fffffffb000000120073007000610077006e006c00690073007401000000000000019d000000a200fffffffb00000012007300700065006c006c006c00690073007401000001af000000980000004c00fffffffb0000001c006d00650073007300610067006500570069006e0064006f00770031010000024b000000cd0000004c00ffffff000000020000000000000000fc0100000001fb000000180043006f006d00620061007400570069006e0064006f00770200000067000000e1000001e00000014d000000030000000000000000fc0100000001fb000000200045007800700065007200690065006e0063006500570069006e0064006f0077020000000000000000000000640000001e000003ef0000030300000001000000020000000100000002fc00000000"/>
         </property>
         <property name="WindowPos">
             <point x="275" y="275"/>
@@ -3135,6 +3135,9 @@
         </property>
         <property name="Caption">
             <string value=""/>
+        </property>
+        <property name="ShowMessageWindow">
+            <bool value="true"/>
         </property>
     </section>
     <section name="Experience">
@@ -3146,6 +3149,14 @@
         </property>
         <property name="DockVisible">
             <bool value="false"/>
+        </property>
+    </section>
+    <section name="MessageWindow1">
+        <property name="DockFixedExtent">
+            <size width="413" height="205"/>
+        </property>
+        <property name="DockVisible">
+            <bool value="true"/>
         </property>
     </section>
 </seqpreferences>

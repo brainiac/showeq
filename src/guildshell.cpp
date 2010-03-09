@@ -8,15 +8,14 @@
  *
  */
 
+#include "pch.h"
+
 #include "guildshell.h"
 #include "netstream.h"
 #include "util.h"
 #include "zonemgr.h"
 #include "everquest.h"
 #include "diagnosticmessages.h"
-
-#include <QDateTime>
-#include <QTextStream>
 
 //----------------------------------------------------------------------
 // diagnostic defines
@@ -323,3 +322,5 @@ void GuildShell::guildMemberUpdate(const uint8_t* data, size_t len)
 #endif // GUILDSHELL_DIAG
 	}
 }
+
+#include "moc_guildshell.cpp"

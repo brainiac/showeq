@@ -16,11 +16,6 @@
 #ifndef SPELLSHELL_H
 #define SPELLSHELL_H
 
-#include "compat.h"
-
-#include <stdio.h>
-
-#include <QTimer>
 #include <Q3ValueList>
 #include <Q3ListView>
 

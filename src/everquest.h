@@ -19,20 +19,6 @@
 #ifndef EQSTRUCT_H
 #define EQSTRUCT_H
 
-#ifndef Q_WS_WIN
-#include "config.h"
-#endif
-
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#else
-#ifndef Q_OS_WIN
-#include <stdint.h>
-#else
-# include "compat.h"
-#endif
-#endif
-
 /*
 ** ShowEQ specific definitions
 */
@@ -1437,8 +1423,8 @@ struct spawnPositionUpdate
 {
 /*0000*/ int16_t  spawnId;
 /*0002*/ int64_t  y:19, z:19, x:19, u3:7;
-         unsigned heading:12;
-         signed unused2:4;
+         int32_t heading:12;
+         int32_t unused2:4;
 /*0010*/
 };
 

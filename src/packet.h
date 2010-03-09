@@ -11,8 +11,6 @@
 #ifndef _PACKET_H_
 #define _PACKET_H_
 
-#include <QTimer>
-
 #include "packetcommon.h"
 #include "packetinfo.h"
 
@@ -24,8 +22,6 @@
 typedef uint16_t in_port_t;
 typedef uint32_t in_addr_t;
 #endif
-
-#include "compat.h"
 
 //----------------------------------------------------------------------
 // enumerated types

@@ -15,7 +15,6 @@
 #ifndef SPAWNPOINTLIST_H
 #define SPAWNPOINTLIST_H
 
-#include <QTimer>
 #include <Q3PopupMenu>
 
 #include "seqlistview.h"

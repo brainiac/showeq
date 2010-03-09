@@ -20,14 +20,7 @@
 #ifndef SPAWNSHELL_H
 #define SPAWNSHELL_H
 
-#include "compat.h"
-
-#include <stdio.h>
-#include <math.h>
-
 #include <Q3IntDict>
-#include <QTimer>
-#include <QTextStream>
 
 #include "everquest.h"
 #include "spawn.h"
@@ -100,7 +93,7 @@ public slots:
 	void newSpawn(const spawnStruct& s);
 	void playerUpdate(const uint8_t*pupdate, size_t, uint8_t);
 	void npcMoveUpdate(const uint8_t*npcupdate, size_t, uint8_t);
-	void updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,int16_t xVel, int16_t yVel, int16_t zVel,
+	bool updateSpawn(uint16_t id, Point3D<int16_t> pos, Point3D<int16_t> vel,
 					 int8_t heading, int8_t deltaHeading, uint8_t animation);
 	void updateSpawns(const uint8_t* updates);
 	void updateSpawnInfo(const uint8_t* spawnupdate);
@@ -116,6 +109,11 @@ public slots:
 	void killSpawn(const uint8_t* deadspawn);
 	void respawnFromHover(const uint8_t* respawn, size_t len, uint8_t dir);
 	void corpseLoc(const uint8_t* corpseLoc);
+	bool updateIndividualSpawn(const spawnPositionUpdate* update)
+	{
+		return updateSpawn(update->spawnId, Point3D<int16_t>(update->x >> 3, update->y >> 3, update->z >> 3),
+			Point3D<int16_t>(0, 0, 0), update->heading, 0, 0);
+	}
 
 	void playerChangedID(uint16_t playerID);
 	void refilterSpawns();

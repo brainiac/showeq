@@ -14,22 +14,9 @@
 
 #define __STDC_LIMIT_MACROS
 
-#include "compat.h"
-
+#include "pch.h"
 
 #include "xmlconv.h"
-
-#include <QColor>
-#include <QPen>
-#include <QBrush>
-#include <QFont>
-#include <QPoint>
-#include <QRect>
-#include <QSize>
-#include <QSizePolicy>
-#include <QCursor>
-#include <QKeySequence>
-#include <QStringList>
 
 static bool ok_in_hex(QChar c)
 {

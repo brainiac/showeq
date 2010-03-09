@@ -7,19 +7,12 @@
  *  http://www.sourceforge.net/projects/seq
  */
 
+#include "pch.h"
+
 /* Implementation of filter class */
 #include "filter.h"
 #include "diagnosticmessages.h"
 #include "everquest.h"
-
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "compat.h"
-
-
-#include <QFile>
 
 #define MAXLEN   5000
 

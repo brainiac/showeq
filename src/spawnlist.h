@@ -24,20 +24,12 @@
 #ifndef SPAWNLIST_H
 #define SPAWNLIST_H
 
-#include "compat.h"
-#include <stdio.h>
-
-
 #include <Q3ValueList>
 #include <Q3ListView>
 #include <Q3PtrDict>
 #include <Q3TextStream>
-#include <QMenu>
-#include <QLabel>
-#include <QLayout>
 #include <Q3HBox>
 #include <Q3VBox>
-#include <QPushButton>
 
 #include "seqwindow.h"
 #include "seqlistview.h"

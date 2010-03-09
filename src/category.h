@@ -17,19 +17,8 @@
 #ifndef _CATEGORY_H_
 #define _CATEGORY_H_
 
-#include "compat.h"
-
-#include <QString>
-#include <QColor>
-#include <QList>
-#include <QDialog>
-#include <QLineEdit>
-#include <QComboBox>
-#include <QLabel>
-#include <QLayout>
 #include <Q3HBox>
 #include <Q3VBox>
-#include <QPushButton>
 #include <Q3Button>
 #include <Q3PtrList>
 

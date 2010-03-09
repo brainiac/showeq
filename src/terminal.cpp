@@ -8,6 +8,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "terminal.h"
 #include "main.h"
 
@@ -219,3 +221,5 @@ bool Terminal::isMessageEnabled(const MessageEntry& message)
 			 && ((m_enabledShowUserFilters & message.filterFlags()) == 0))
 			 || ((m_enabledHideUserFilters & message.filterFlags()) != 0));
 }
+
+#include "moc_terminal.cpp"

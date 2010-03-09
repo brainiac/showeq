@@ -8,16 +8,12 @@
  *
  */
 
+#include "pch.h"
+
 #include "filternotifications.h"
 #include "filtermgr.h"
 #include "spawn.h"
 #include "main.h"
-
-#include <stdio.h>
-
-#include <QString>
-#include <QRegExp>
-#include <QApplication>
 
 FilterNotifications::FilterNotifications(QObject* parent, const char* name)
  : QObject(parent, name),
@@ -119,3 +115,5 @@ void FilterNotifications::executeCommand(const Item* item, const QString& rawCom
 	// fire off the command
 	system ((const char*)command);
 }
+
+#include "moc_filternotifications.cpp"

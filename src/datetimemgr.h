@@ -15,11 +15,6 @@
 #ifndef _DATETIMEMGR_H_
 #define _DATETIMEMGR_H_
 
-#include "compat.h"
-
-#include <QDateTime>
-#include <QTimer>
-
 struct timeOfDayStruct;
 
 class DateTimeMgr : public QObject

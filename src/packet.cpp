@@ -8,17 +8,13 @@
  *  Portions Copyright 2001-2004,2007 Zaphod (dohpaz@users.sourceforge.net).
  */
 
-/* Implementation of Packet class */
-#include <stdio.h>
+#include "pch.h"
 
-#include "compat.h"
+/* Implementation of Packet class */
 
 #ifdef __FreeBSD__
 #include "packet.h"
 #endif
-
-#include <QTimer>
-#include <QFileInfo>
 
 #include "everquest.h"
 #include "packet.h"
@@ -1182,6 +1178,5 @@ uint16_t EQPacket::serverSeqExp(int stream)
 #endif
 }
 
-#ifdef _WINDOWS
 #include "moc_packet.cpp"
-#endif
+

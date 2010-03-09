@@ -8,9 +8,6 @@
 #ifndef EQPLAYER_H
 #define EQPLAYER_H
 
-#include <QObject>
-#include <QColor>
-
 #include "everquest.h"
 #include "spawn.h"
 

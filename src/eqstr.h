@@ -11,11 +11,6 @@
 #ifndef _EQSTR_H_
 #define _EQSTR_H_
 
-#include "compat.h"
-
-#include <QHash>
-#include <QString>
-
 //----------------------------------------------------------------------
 // EQStr
 class EQStr

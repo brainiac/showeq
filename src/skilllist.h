@@ -8,7 +8,6 @@
 #ifndef EQSKILLLIST_H
 #define EQSKILLLIST_H
 
-#include <QWidget>
 #include <Q3ListView>
 
 #include "seqlistview.h"

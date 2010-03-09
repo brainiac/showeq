@@ -13,15 +13,11 @@
  *
  */
 
+#include "pch.h"
 
 #include "xmlpreferences.h"
 #include "xmlconv.h"
 #include "diagnosticmessages.h"
-
-#include <QDir>
-#include <QFile>
-#include <QTextStream>
-#include <QRegExp>
 
 const float seqPrefVersion = 1.0;
 const char* seqPrefName = "seqpreferences";
@@ -813,6 +809,4 @@ void XMLPreferences::setPrefVariant(const QString& inName, const QString& inSect
 	setPref(inName, inSection, inValue, pers);
 }
 
-#ifdef _WINDOWS
 #include "moc_xmlpreferences.cpp"
-#endif

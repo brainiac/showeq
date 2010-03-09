@@ -12,16 +12,13 @@
 // to be reused for other Show{} style projects.  Any existing ShowEQ/EQ
 // dependencies will be migrated out.
 //
+
+#include "pch.h"
+
 #include "filtermgr.h"
 #include "filter.h"
 #include "datalocationmgr.h"
 #include "diagnosticmessages.h"
-
-#include <errno.h>
-
-#include <QRegExp>
-#include <QString>
-#include <QFileInfo>
 
 //
 // ZBTEMP: predefined filters and filter mask will be migrated out
@@ -304,3 +301,5 @@ void FilterMgr::runtimeFilterCommit(uint8_t type)
 	// notify that the runtime filters have changed
 	emit runtimeFiltersChanged(type);
 }
+
+#include "moc_filtermgr.cpp"

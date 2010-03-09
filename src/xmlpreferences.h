@@ -15,21 +15,6 @@
 #ifndef __XMLPREFERENCE_H__
 #define __XMLPREFERENCE_H__
 
-#include "compat.h"
-
-#include <QObject>
-
-#include <QColor>
-#include <QPen>
-#include <QBrush>
-#include <QFont>
-#include <QKeySequence>
-#include <QSizePolicy>
-#include <QCursor>
-#include <QStringList>
-#include <QString>
-#include <QVariant>
-#include <QHash>
 #include <QtXml/qdom.h>
 
 // XMLPreferences is a generic class that implements a persistant config

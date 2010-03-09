@@ -7,14 +7,13 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
+
 #include "player.h"
 #include "skilllist.h"
 #include "util.h"
 #include "main.h" // for pSEQPrefs & showeq_params
 #include "diagnosticmessages.h"
-
-#include <QLayout>
-
 
 SkillList::SkillList(Player* player, QWidget* parent, const char* name)
   : SEQListView("SkillList", parent, name),
@@ -243,3 +242,6 @@ void SkillListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_skillList->savePrefs();
 }
+
+
+#include "moc_skilllist.cpp"

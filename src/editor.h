@@ -12,7 +12,6 @@
 #define EDITOR_H
 
 #include <Q3MainWindow>
-#include <QCloseEvent>
 #include <Q3PopupMenu>
 
 class Q3MultiLineEdit;

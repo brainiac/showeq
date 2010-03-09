@@ -16,35 +16,12 @@
 #define UINT32_MAX UINT_MAX
 #endif
 
-#include <QWidget>
-#include <QPixmap>
-#include <QSize>
-#include <QMap>
-#include <QDialog>
-#include <QComboBox>
-#include <QLineEdit>
-#include <QLabel>
-#include <QToolTip>
-#include <QRegExp>
 #include <Q3IntDict>
-#include <QTextStream>
-#include <QDateTime>
-#include <QPen>
-#include <QBrush>
 #include <Q3PopupMenu>
-#include <QLayout>
 #include <Q3VBox>
 #include <Q3HBox>
-#include <QSpinBox>
-#include <QList>
-#include <QResizeEvent>
-#include <QMouseEvent>
-#include <QEvent>
 #include <Q3VBoxLayout>
 #include <Q3Frame>
-#include <QPaintEvent>
-
-#include "compat.h"
 
 #include "filtermgr.h"
 #include "mapcore.h"

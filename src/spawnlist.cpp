@@ -21,6 +21,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "spawnlist.h"
 #include "category.h"
 #include "spawnshell.h"
@@ -28,9 +30,6 @@
 #include "util.h"
 #include "player.h"
 #include "diagnosticmessages.h"
-
-#include <stddef.h>
-#include "compat.h"
 
 #include <Q3PopupMenu>
 
@@ -1143,3 +1142,5 @@ void SpawnListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_spawnList->savePrefs();
 }
+
+#include "moc_spawnlist.cpp"

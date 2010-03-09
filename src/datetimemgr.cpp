@@ -12,13 +12,13 @@
  *
  *
  */
+
+#include "pch.h"
+
 #include "datetimemgr.h"
 #include "everquest.h"
-
 #include "diagnosticmessages.h"
 
-#include <QDateTime>
-#include <QTimer>
 
 DateTimeMgr::DateTimeMgr()
   : QObject(),
@@ -78,3 +78,5 @@ void DateTimeMgr::update()
 		emit updatedDateTime(m_eqDateTime);
 	}
 }
+
+#include "moc_datetimemgr.cpp"

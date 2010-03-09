@@ -8,8 +8,9 @@
  *
  */
 
-#include "messagefilter.h"
+#include "pch.h"
 
+#include "messagefilter.h"
 #include "main.h"
 
 //----------------------------------------------------------------------
@@ -188,3 +189,5 @@ uint32_t MessageFilters::filterMessage(uint64_t messageTypeMask, const QString& 
 	// return the filter mask
 	return mask;
 }
+
+#include "moc_messagefilter.cpp"

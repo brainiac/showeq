@@ -13,15 +13,7 @@
  * Date   - 7/31/2001
  */
 
-#ifdef __FreeBSD__
-#include <sys/types.h>
-#endif
-#include <limits.h>
-#include <math.h>
-
-#include <QFile>
-#include <QDataStream>
-#include <Q3TextStream>
+#include "pch.h"
 
 #include "spawnshell.h"
 #include "filtermgr.h"
@@ -816,7 +808,7 @@ void SpawnShell::playerUpdate(const uint8_t* data, size_t len, uint8_t dir)
 			   p->padding0006, p->padding0014);
 #endif
 
-		updateSpawn(pupdate->spawnId, x, y, z, dx, dy, dz,
+		updateSpawn(pupdate->spawnId, Point3D<int16_t>(x, y, z), Point3D<int16_t>(dx, dy, dz),
 					pupdate->heading, pupdate->deltaHeading,pupdate->animation);
 	}
 }
@@ -924,12 +916,11 @@ void SpawnShell::npcMoveUpdate(const uint8_t* data, size_t len, uint8_t dir)
     }
 
     // And send the update.
-	updateSpawn(spawnId, x, y, z,
-				deltaX, deltaY, deltaZ, heading, deltaHeading, velocity);
+	updateSpawn(spawnId, Point3D<int16_t>(x, y, z), Point3D<int16_t>(deltaX, deltaY, deltaZ),
+		heading, deltaHeading, velocity);
 }
 
-void SpawnShell::updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,
-							 int16_t xVel, int16_t yVel, int16_t zVel, int8_t heading,
+bool SpawnShell::updateSpawn(uint16_t id, Point3D<int16_t> pos, Point3D<int16_t> vel, int8_t heading,
 							 int8_t deltaHeading, uint8_t animation)
 {
 #ifdef SPAWNSHELL_DIAG
@@ -952,11 +943,11 @@ void SpawnShell::updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,
 	{
 		Spawn* spawn = (Spawn*)item;
 
-		spawn->setPos(x, y, z,
+		spawn->setPos(pos.x(), pos.y(), pos.z(),
 					  showeq_params->walkpathrecord,
 					  showeq_params->walkpathlength);
 		spawn->setAnimation(animation);
-		spawn->setDeltas(xVel, yVel, zVel);
+		spawn->setDeltas(vel.x(), vel.y(), vel.z());
 		spawn->setHeading(heading, deltaHeading);
 
 		// Distance
@@ -972,7 +963,7 @@ void SpawnShell::updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,
 	else if (showeq_params->createUnknownSpawns)
 	{
 		// not the player, so check if it's a recently deleted spawn
-		for (int i =0; i < m_cntDeadSpawnIDs; i++)
+		for (int i = 0; i < m_cntDeadSpawnIDs; i++)
 		{
 			// check dead spawn list for spawnID, if it was deleted, shouldn't
 			// see new position updates, so therefore this is probably
@@ -983,11 +974,11 @@ void SpawnShell::updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,
 				m_deadSpawnID[i] = 0;
 
 				seqInfo("(%d) had been removed from the zone, but saw a position update on it, so assuming bogus update.", id);
-                return;
+                return false;
 			}
 		}
 
-		item = new Spawn(id, x, y, z, xVel, yVel, zVel, heading, deltaHeading, animation);
+		item = new Spawn(id, pos.x(), pos.y(), pos.z(), vel.x(), vel.y(), vel.z(), heading, deltaHeading, animation);
 		updateFilterFlags(item);
 		updateRuntimeFilterFlags(item);
 		m_spawns.insert(id, item);
@@ -999,17 +990,8 @@ void SpawnShell::updateSpawn(uint16_t id, int16_t x, int16_t y, int16_t z,
 		// send notification of new spawn count
 		emit numSpawns(m_spawns.count());
     }
-}
 
-void SpawnShell::updateSpawns(const uint8_t* data)
-{
-	// if zoning, then don't do anything
-	if (m_zoneMgr->isZoning())
-		return;
-
-	const spawnPositionUpdate* updates = (const spawnPositionUpdate*)data;
-	updateSpawn(updates->spawnId, updates->x >> 3, updates->y >> 3, updates->z >> 3,
-				0, 0, 0, updates->heading, 0, 0);
+	return true;
 }
 
 void SpawnShell::updateSpawnInfo(const uint8_t* data)
@@ -1031,6 +1013,16 @@ void SpawnShell::updateSpawnInfo(const uint8_t* data)
 				emit changeItem(item, tSpawnChangedHP);
 				break;
 		}
+	}
+}
+
+void SpawnShell::updateSpawns(const uint8_t* data)
+{
+	// if zoning, then don't do anything
+	if (!m_zoneMgr->isZoning())
+	{
+		const spawnPositionUpdate* updates = (const spawnPositionUpdate*)data;
+		updateIndividualSpawn(updates);
 	}
 }
 
@@ -1652,3 +1644,5 @@ void SpawnShell::restoreSpawns()
 		seqWarn("Failure loading %s: Unable to open!", (const char*)fileName);
 	}
 }
+
+#include "moc_spawnshell.cpp"

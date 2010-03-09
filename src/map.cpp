@@ -10,7 +10,7 @@
 
 #define __STDC_LIMIT_MACROS
 
-#include "compat.h"
+#include "pch.h"
 
 #include "map.h"
 #include "mapicondialog.h"
@@ -24,42 +24,17 @@
 #include "datalocationmgr.h"
 #include "diagnosticmessages.h"
 
-#include <math.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 
-#include <QApplication>
-#include <QPainter>
-#include <QPixmap>
-#include <QFont>
 #include <Q3FileDialog>
-#include <QEvent>
-#include <QPushButton>
-#include <QLayout>
 #include <Q3ToolBar>
 #include <Q3Accel>
-#include <QColorDialog>
-#include <QFontDialog>
-#include <QTimer>
 #include <Q3StrList>
-#include <QImage>
-#include <QInputDialog>
 #include <Q3BoxLayout>
-#include <QPaintEvent>
 #include <Q3VBoxLayout>
 #include <Q3PointArray>
 #include <Q3Frame>
-#include <QResizeEvent>
-#include <QLabel>
 #include <Q3PopupMenu>
 #include <Q3HBoxLayout>
-#include <QTextStream>
-#include <QMouseEvent>
-#include <QImageWriter>
 
 using namespace Qt;
 
@@ -4849,6 +4824,5 @@ void MapFrame::toggle_depthControls(int id)
 	}
 }
 
-#ifdef _WINDOWS
+
 #include "moc_map.cpp"
-#endif

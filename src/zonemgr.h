@@ -15,9 +15,6 @@
 #ifndef ZONEMGR_H
 #define ZONEMGR_H
 
-#include <QObject>
-#include <QString>
-
 #include "point.h"
 
 //----------------------------------------------------------------------

@@ -8,17 +8,7 @@
 #ifndef EQINT_H
 #define EQINT_H
 
-#include <QPushButton>
-#include <QLCDNumber>
-#include <QLabel>
-#include <QLayout>
-#include <QMenuBar>
 #include <QMainWindow>
-#include <QSplitter>
-#include <QTimer>
-#include <QMessageBox>
-#include <QSpinBox>
-#include <QHash>
 
 #include "everquest.h"
 #include "spawnlist.h"

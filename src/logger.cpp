@@ -9,14 +9,7 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-
-#include <QString>
-#include <QList>
+#include "pch.h"
 
 #include "logger.h"
 
@@ -141,3 +134,5 @@ void SEQLogger::outputData(uint32_t len, const uint8_t* data)
 
 	fprintf (m_fp, "%03d | %-48s | %s \n\n", c, hex, asc);
 }
+
+#include "moc_logger.cpp"

@@ -12,19 +12,11 @@
  *
  */
 
+#include "pch.h"
+
 #include "spells.h"
 #include "util.h"
 #include "diagnosticmessages.h"
-
-#include <stdio.h>
-#include <math.h>
-
-#include <QDateTime>
-#include <QString>
-#include <QStringList>
-#include <QFile>
-#include <QRegExp>
-#include <QByteArray>
 
 #ifndef Q_OS_WIN
 static inline int16_t min(const int16_t& __a,  const int16_t& __b)
@@ -165,6 +157,7 @@ Spell::Spell(const QString& spells_enLine)
 
 	for (size_t i = 0; i < playerClasses; i++)
 		m_classLevels[i] = uint8_t(spellInfo[104 + i].toUShort());
+
 #if 0 // ZBTEMP
 	seqDebug("Spell: %d  Fields: %d", m_spell, spellInfo.count());
 #endif

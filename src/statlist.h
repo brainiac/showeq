@@ -8,7 +8,6 @@
 #ifndef EQSTATLIST_H
 #define EQSTATLIST_H
 
-#include <QWidget>
 #include <Q3ListView>
 
 #include "seqwindow.h"

@@ -7,6 +7,8 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
+
 #include "combatlog.h"
 #include "player.h"
 #include "util.h"
@@ -20,15 +22,6 @@
 #include <Q3VBoxLayout>
 
 #include <QVBoxLayout>
-
-#include <QPushButton>
-#include <QMessageBox>
-#include <QLayout>
-#include <QLabel>
-#include <QTimer>
-
-#include <stdio.h>
-#include <time.h>
 
 //#define DEBUGCOMBAT
 
@@ -1046,3 +1039,8 @@ void CombatWindow::clear()
 	updateDefense();
 	resetDPS();
 }
+
+
+//////////////////////////////////////////////////////////////////////////
+
+#include "moc_combatlog.cpp"

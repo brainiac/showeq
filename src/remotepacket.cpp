@@ -7,6 +7,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "remotepacket.h"
 #include "packet.h"
 
@@ -341,8 +343,6 @@ void RemotePacketServer::processPackets()
 
 			input >> m_nextBufferSize;
 			input >> m_nextMessageType;
-
-			m_nextBufferSize = m_nextBufferSize - 8;
 		}
 
 		if (m_socket->bytesAvailable() < m_nextBufferSize)
@@ -382,6 +382,5 @@ void RemotePacketServer::reset()
 	// TODO: What should be done to reset?
 }
 
-#ifdef _WINDOWS
+
 #include "moc_remotepacket.cpp"
-#endif

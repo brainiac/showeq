@@ -7,8 +7,7 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
-#include <QDateTime>
-#include <ctype.h>
+#include "pch.h"
 
 #include "bazaarlog.h"
 #include "spawnshell.h"
@@ -61,3 +60,5 @@ void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 
 	flush();
 }
+
+#include "moc_bazaarlog.cpp"

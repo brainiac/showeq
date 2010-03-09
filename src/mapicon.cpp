@@ -8,6 +8,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "mapicon.h"
 #include "mapcore.h"
 #include "spawn.h"
@@ -15,9 +17,6 @@
 #include "player.h"
 #include "main.h"
 
-#include <QPainter>
-#include <QPoint>
-#include <QTimer>
 #include <Q3PointArray>
 
 using namespace Qt;
@@ -1060,3 +1059,6 @@ QColor MapIcons::pickSpawnColor(const Spawn* spawn)
 
 	return m_player->pickConColor(spawn->level());
 }
+
+
+#include "moc_mapicon.cpp"

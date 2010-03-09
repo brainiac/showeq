@@ -11,10 +11,6 @@
 #ifndef _DATALOCATIONMGR_H_
 #define _DATALOCATIONMGR_H_
 
-#include <QString>
-#include <QDir>
-#include <QFileInfo>
-
 class DataLocationMgr
 {
 public:

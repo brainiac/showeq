@@ -8,11 +8,6 @@
 #ifndef _GROUP_H_
 #define _GROUP_H_
 
-#include "compat.h"
-
-#include <QString>
-#include <QTextStream>
-
 #include "everquest.h"
 
 

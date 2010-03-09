@@ -12,6 +12,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "seqwindow.h"
 #include "main.h"
 #include "diagnosticmessages.h"
@@ -169,3 +171,6 @@ void SEQWindow::mousePressEvent(QMouseEvent* e)
 	else
 		QDockWidget::mousePressEvent(e);
 }
+
+
+#include "moc_seqwindow.cpp"

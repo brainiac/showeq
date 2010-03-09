@@ -7,6 +7,8 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
+#include "pch.h"
+
 #include "group.h"
 #include "player.h"
 #include "spawn.h"
@@ -410,3 +412,5 @@ const Spawn* GroupMgr::memberBySlot(uint16_t slot)
 	// return the spawn object associated with the group slot, if any
 	return m_members[slot]->m_spawn;
 }
+
+#include "moc_group.cpp"

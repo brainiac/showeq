@@ -13,14 +13,9 @@
 
 // TODO: Convert time to use Qt classes
 
-#include "compat.h"
-
-#ifndef _WINDOWS
-#include <sys/time.h>
-#endif
+#include "pch.h"
 
 #include "spellshell.h"
-
 #include "util.h"
 #include "player.h"
 #include "spawnshell.h"
@@ -31,7 +26,7 @@
 
 #include <Q3ValueList>
 
-//#define DIAG_SPELLSHELL 1
+#define DIAG_SPELLSHELL 1
 
 SpellItem::SpellItem()
   : m_duration(0),
@@ -544,3 +539,5 @@ void SpellShell::timeout()
 	if (m_spellList.count() == 0)
 		m_timer->stop();
 }
+
+#include "moc_spellshell.cpp"

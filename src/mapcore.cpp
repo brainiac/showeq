@@ -18,17 +18,10 @@
 //
 
 //#define DEBUGMAPLOAD
-#include <errno.h>
+#include "pch.h"
 
-#include <QPainter>
-#include <QString>
-#include <QStringList>
-#include <QFileInfo>
-#include <QFile>
-#include <QRegExp>
 #include <Q3PointArray>
 #include <Q3CString>
-#include <QPixmap>
 
 #include "mapcore.h"
 #include "diagnosticmessages.h"

@@ -8,6 +8,8 @@
  *
  */
 
+#include "pch.h"
+
 #include "messages.h"
 #include "datetimemgr.h"
 
@@ -82,3 +84,5 @@ void Messages::addedFilter(uint32_t mask, uint8_t filterid, const MessageFilter&
 			message.setFilterFlags(message.filterFlags() | mask);
 	}
 }
+
+#include "moc_messages.cpp"

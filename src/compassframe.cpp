@@ -7,8 +7,7 @@
  *  Copyright 2003-2007 by the respective ShowEQ Developers
  */
 
-#include <QVBoxLayout>
-#include <QLabel>
+#include "pch.h"
 
 #include "main.h"
 #include "compassframe.h"
@@ -121,3 +120,5 @@ void CompassFrame::posChanged(int16_t x, int16_t y, int16_t z,
 	m_y->setText(QString::number(y));
 	m_z->setText(QString::number(z));
 }
+
+#include "moc_compassframe.cpp"

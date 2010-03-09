@@ -6,6 +6,9 @@
  *
  *  Copyright 2000-2007 by the respective ShowEQ Developers
  */
+
+#include "pch.h"
+
 #include "spawnlist2.h"
 #include "category.h"
 #include "spawnshell.h"
@@ -14,14 +17,6 @@
 #include "diagnosticmessages.h"
 #include "main.h"
 
-#include <QComboBox>
-#include <QSpinBox>
-#include <QTimer>
-#include <QLayout>
-#include <QMenu>
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 
 using namespace Qt;
 
@@ -934,3 +929,5 @@ void SpawnListWindow2::populateSpawns()
 	seqDebug("* elapsed (post-paint): %d", test.elapsed());
 #endif
 }
+
+#include "moc_spawnlist2.cpp"

@@ -9,16 +9,9 @@
 #define _MESSAGEWINDOW_H_
 
 #include "seqwindow.h"
-#include "compat.h"
 
 #include <Q3TextEdit>
-#include <QRegExp>
-#include <QDialog>
-#include <QLabel>
-#include <QMouseEvent>
-#include <QMenu>
-#include <QKeyEvent>
-#include <QEvent>
+
 
 //----------------------------------------------------------------------
 // forward declarations

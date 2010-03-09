@@ -12,17 +12,10 @@
 // to be reused for other Show{} style projects.  Any existing ShowEQ/EQ
 // dependencies will be migrated out.
 //
+
+#include "pch.h"
+
 #include "compass.h"
-
-#include <QPainter>
-#include <QPixmap>
-#include <QFont>
-#include <QPaintEvent>
-
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 using namespace Qt;
 
@@ -175,3 +168,4 @@ void Compass::paintEvent(QPaintEvent *e)
 		paintCompass(&p);
 }
 
+#include "moc_compass.cpp"

@@ -15,12 +15,6 @@
 #ifndef SPELLS_H_
 #define SPELLS_H_
 
-#include "compat.h"
-
-#include <QStringList>
-#include <QString>
-#include <QHash>
-
 const size_t playerClasses = 15;
 
 class Spell

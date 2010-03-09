@@ -8,21 +8,13 @@
  *
  */
 
+#include "pch.h"
+
 #include "messagefilterdialog.h"
 #include "messagefilter.h"
 #include "message.h"
 
-#include "compat.h"
-
-#include <stdio.h>
-
-#include <QString>
-#include <QRegExp>
-#include <QLayout>
 #include <Q3GroupBox>
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
 #include <Q3ListBox>
 #include <Q3HBoxLayout>
 #include <Q3GridLayout>
@@ -456,3 +448,5 @@ void MessageFilterDialog::checkState()
 	// only enable delete if editing an existing filter
 	m_delete->setEnabled(m_currentFilter != 0);
 }
+
+#include "moc_messagefilterdialog.cpp"

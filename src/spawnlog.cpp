@@ -8,6 +8,8 @@
  *  Portions Copyright 2001-2003,2007 Zaphod (dohpaz@users.sourceforge.net).
  */
 
+#include "pch.h"
+
 #include "spawn.h"
 #include "datetimemgr.h"
 #include "everquest.h"
@@ -112,3 +114,6 @@ void SpawnLog::logNewZone(const QString& zonename)
 	flush();
 	zoneShortName = zonename;
 }
+
+
+#include "moc_spawnlog.cpp"

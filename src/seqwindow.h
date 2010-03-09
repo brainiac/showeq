@@ -15,11 +15,6 @@
 #ifndef SEQWINDOW_H
 #define SEQWINDOW_H
 
-#include <QWidget>
-#include <QString>
-#include <QMenu>
-#include <QMouseEvent>
-#include <QDockWidget>
 
 class SEQWindow : public QDockWidget
 {
