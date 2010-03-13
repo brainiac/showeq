@@ -301,5 +301,3 @@ void FilterMgr::runtimeFilterCommit(uint8_t type)
 	// notify that the runtime filters have changed
 	emit runtimeFiltersChanged(type);
 }
-
-#include "moc_filtermgr.cpp"

@@ -173,5 +173,3 @@ void GuildMgr::listGuildInfo()
 			seqInfo("%d\t%s", i, (const char*)m_guildMap[i]);
 	}
 }
-
-#include "moc_guild.cpp"

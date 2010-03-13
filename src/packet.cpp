@@ -1177,6 +1177,3 @@ uint16_t EQPacket::serverSeqExp(int stream)
 	return 0;
 #endif
 }
-
-#include "moc_packet.cpp"
-

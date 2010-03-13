@@ -78,5 +78,3 @@ void seqFatal(const char* format, ...)
 	va_end(ap);
 	exit (-1);
 }
-
-

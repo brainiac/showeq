@@ -929,5 +929,3 @@ void SpawnListWindow2::populateSpawns()
 	seqDebug("* elapsed (post-paint): %d", test.elapsed());
 #endif
 }
-
-#include "moc_spawnlist2.cpp"

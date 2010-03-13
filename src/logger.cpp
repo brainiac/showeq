@@ -134,5 +134,3 @@ void SEQLogger::outputData(uint32_t len, const uint8_t* data)
 
 	fprintf (m_fp, "%03d | %-48s | %s \n\n", c, hex, asc);
 }
-
-#include "moc_logger.cpp"

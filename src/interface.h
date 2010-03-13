@@ -9,6 +9,7 @@
 #define EQINT_H
 
 #include <QMainWindow>
+#include <QToolBar>
 
 #include "everquest.h"
 #include "spawnlist.h"
@@ -472,6 +473,7 @@ private:
 
 	QAction* m_windowBottomAction;
 
+	QToolBar* m_toolBar;
 
 
 	// ===================================================

@@ -4819,6 +4819,3 @@ void MapFrame::toggle_depthControls(int id)
 		pSEQPrefs->setPrefBool(tmpPrefString, preferenceName(), m_depthControlBox->isVisible());
 	}
 }
-
-
-#include "moc_map.cpp"

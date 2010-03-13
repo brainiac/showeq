@@ -214,5 +214,3 @@ void EditorWindow::closeEvent(QCloseEvent* ce)
 			break;
 	}
 }
-
-#include "moc_editor.cpp"

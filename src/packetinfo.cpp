@@ -722,6 +722,3 @@ bool OPCodeXmlContentHandler::endDocument()
 {
 	return true;
 }
-
-
-#include "moc_packetinfo.cpp"

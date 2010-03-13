@@ -19,7 +19,7 @@ QT += xml \
     network
 
 !win32:LIBS += -lpcap
-DEFINES += PKGDATADIR="/usr/local/share/showeq"
+!win32:DEFINES += PKGDATADIR="/usr/local/share/showeq"
 DEFINES += QMAKEBUILD
 DEFINES += VERSION="6.0"
 

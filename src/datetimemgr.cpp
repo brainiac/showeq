@@ -78,5 +78,3 @@ void DateTimeMgr::update()
 		emit updatedDateTime(m_eqDateTime);
 	}
 }
-
-#include "moc_datetimemgr.cpp"

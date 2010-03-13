@@ -217,5 +217,3 @@ void SEQListView::setColumnVisible(int column, bool visible)
 	// trigger an update, otherwise things may look messy
 	triggerUpdate();
 }
-
-#include "moc_seqlistview.cpp"

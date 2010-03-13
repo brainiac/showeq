@@ -1050,4 +1050,3 @@ QString Drop::classString() const
 {
 	return "Thing";
 }
-

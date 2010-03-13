@@ -322,5 +322,3 @@ void GuildShell::guildMemberUpdate(const uint8_t* data, size_t len)
 #endif // GUILDSHELL_DIAG
 	}
 }
-
-#include "moc_guildshell.cpp"

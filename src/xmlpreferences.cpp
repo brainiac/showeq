@@ -808,5 +808,3 @@ void XMLPreferences::setPrefVariant(const QString& inName, const QString& inSect
 {
 	setPref(inName, inSection, inValue, pers);
 }
-
-#include "moc_xmlpreferences.cpp"

@@ -412,5 +412,3 @@ const Spawn* GroupMgr::memberBySlot(uint16_t slot)
 	// return the spawn object associated with the group slot, if any
 	return m_members[slot]->m_spawn;
 }
-
-#include "moc_group.cpp"

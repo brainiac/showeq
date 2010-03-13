@@ -381,6 +381,3 @@ void RemotePacketServer::reset()
 {
 	// TODO: What should be done to reset?
 }
-
-
-#include "moc_remotepacket.cpp"

@@ -519,5 +519,3 @@ void GuildListWindow::updateCount()
 	QString text(" %1 on/%2 total ");
 	m_guildTotals->setText(text.arg(m_membersOn).arg(m_guildShell->members().count()));
 }
-
-#include "moc_guildlist.cpp"

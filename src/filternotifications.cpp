@@ -115,5 +115,3 @@ void FilterNotifications::executeCommand(const Item* item, const QString& rawCom
 	// fire off the command
 	system ((const char*)command);
 }
-
-#include "moc_filternotifications.cpp"

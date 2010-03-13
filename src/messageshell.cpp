@@ -1035,5 +1035,3 @@ void MessageShell::filterMessage(const QString& prefix, MessageType type, const 
 		.arg(item->x()).arg(item->y()).arg(item->z())
 		.arg(spawnInfo));
 }
-
-#include "moc_messageshell.cpp"

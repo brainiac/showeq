@@ -235,6 +235,7 @@ EQInterface::EQInterface(SessionManager* sm)
 
 	// set central widget to a QMainWindow so we can stack left and right
 	// over the top and bottom...
+	m_toolBar = new QToolBar(this, "MainToolBar");
 
 	// TODO: Figure out how to handle main center gadget thing...
 	m_filler = new QWidget(this, "filler");
@@ -244,6 +245,8 @@ EQInterface::EQInterface(SessionManager* sm)
 	setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
 	setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
 	setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
+
+	
 
 	QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum, false);
 	setSizePolicy(sizePolicy);
@@ -5827,5 +5830,3 @@ void EQInterface::setupCombatWindow()
     // insert its menu into the window menu
 	insertWindowMenu(m_combatWindow);
 }
-
-#include "moc_interface.cpp"

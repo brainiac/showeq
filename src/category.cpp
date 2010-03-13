@@ -351,5 +351,3 @@ void CategoryMgr::savePrefs()
 		pSEQPrefs->setPrefColor(prefBaseName + "Color", section, black);
 	}
 }
-
-#include "moc_category.cpp"

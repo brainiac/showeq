@@ -539,5 +539,3 @@ void SpellShell::timeout()
 	if (m_spellList.count() == 0)
 		m_timer->stop();
 }
-
-#include "moc_spellshell.cpp"

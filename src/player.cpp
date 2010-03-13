@@ -1400,5 +1400,3 @@ void Player::restorePlayerState()
 		clear();
 	}
 }
-
-#include "moc_player.cpp"

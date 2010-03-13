@@ -697,4 +697,3 @@ void displayOptions(const char* progName)
   printf ("                                        player state, and spawns   \n");
   printf ("                                        from a previous session    \n");
 }
-

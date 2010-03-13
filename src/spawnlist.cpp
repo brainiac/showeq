@@ -1142,5 +1142,3 @@ void SpawnListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_spawnList->savePrefs();
 }
-
-#include "moc_spawnlist.cpp"

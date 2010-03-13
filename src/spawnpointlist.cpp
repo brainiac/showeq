@@ -525,5 +525,3 @@ void SpawnPointWindow::savePrefs()
 	if (m_spawnPointList)
 		m_spawnPointList->savePrefs();
 }
-
-#include "moc_spawnpointlist.cpp"

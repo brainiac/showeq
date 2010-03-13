@@ -82,5 +82,3 @@ void FilteredSpawnLog::logSpawn(const Item* item, const char* action, uint32_t f
 
 	flush();
 }
-
-#include "moc_filteredspawnlog.cpp"

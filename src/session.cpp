@@ -554,5 +554,3 @@ EQStr* SessionManager::eqStrings()
 void SessionManager::savePrefs()
 {
 }
-
-#include "moc_session.cpp"

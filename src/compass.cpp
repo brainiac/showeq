@@ -167,5 +167,3 @@ void Compass::paintEvent(QPaintEvent *e)
 	if (updateR.intersects(compassRect()))
 		paintCompass(&p);
 }
-
-#include "moc_compass.cpp"

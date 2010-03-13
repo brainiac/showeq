@@ -242,6 +242,3 @@ void SkillListWindow::savePrefs()
 	// make the listview save it's prefs
 	m_skillList->savePrefs();
 }
-
-
-#include "moc_skilllist.cpp"

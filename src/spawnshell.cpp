@@ -1644,5 +1644,3 @@ void SpawnShell::restoreSpawns()
 		seqWarn("Failure loading %s: Unable to open!", (const char*)fileName);
 	}
 }
-
-#include "moc_spawnshell.cpp"
