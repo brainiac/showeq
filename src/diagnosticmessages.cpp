@@ -29,14 +29,12 @@ static int seqMessage(MessageType type, const char* format, va_list ap)
 	// if the message object exists, use it, otherwise dump to stderr
 	if (messages)
 		messages->addMessage(type, buff);
-	else {
 #ifdef Q_OS_WIN
-		OutputDebugStringA(buff);
-		OutputDebugStringA("\n");
+	OutputDebugStringA(buff);
+	OutputDebugStringA("\n");
 #else
 		fprintf(stderr, "%s\n", buff);
 #endif
-	}
 	return ret;
 }
 

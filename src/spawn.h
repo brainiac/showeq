@@ -42,7 +42,7 @@ enum spawnItemType
 	tPlayer
 };
 
-// slots that an item can be warn in
+// slots that an item can be worn in
 enum itemWearSlot
 {
 	tHead          = 0,
@@ -215,8 +215,8 @@ public:
 	int16_t deltaZ() const { return m_deltaZ; }
 	int8_t deltaHeading() const { return m_deltaHeading; }
 	uint8_t animation() const { return m_animation; }
-	int16_t HP() const { return m_curHP; }
-	int16_t maxHP() const { return m_maxHP; }
+	int32_t HP() const { return m_curHP; }
+	int32_t maxHP() const { return m_maxHP; }
 	uint16_t guildID() const { return m_guildID; }
 	QString guildTag() const { return m_guildTag; }
 	uint16_t petOwnerID() const { return m_petOwnerID; }
@@ -322,8 +322,8 @@ public:
 	void setConsidered(bool considered) { m_considered = considered; }
 	void setRace(uint16_t race) { m_race = race; calcRaceTeam(); }
 	void setClassVal(uint8_t classVal) { m_class = classVal; }
-	void setHP(int16_t HP) { m_curHP = HP; }
-	void setMaxHP(int16_t maxHP) { m_maxHP = maxHP; }
+	void setHP(int32_t HP) { m_curHP = HP; }
+	void setMaxHP(int32_t maxHP) { m_maxHP = maxHP; }
 	void setGuildID(uint16_t GuildID) { m_guildID = GuildID; }
 	void setGuildTag(QString GuildTag) { m_guildTag = GuildTag; }
 	void setLevel(uint8_t level) { m_level = level; }
@@ -355,8 +355,8 @@ protected:
 
 	// persisted info below
 	uint16_t m_petOwnerID;
-	int16_t m_curHP;
-	int16_t m_maxHP;
+	int32_t m_curHP;
+	int32_t m_maxHP;
 	uint16_t m_guildID;
 	uint16_t m_deity;
 	int16_t m_deityTeam;

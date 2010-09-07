@@ -102,6 +102,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Copy configuration files to output directory"
+				CommandLine="copy $(SolutionDir)conf $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -3839,6 +3841,30 @@
 						Outputs="&quot;.\GeneratedFiles\ui_$(InputName).h&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="Configuration"
+			>
+			<File
+				RelativePath="..\conf\seqdef.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\conf\seqopcodes.dtd"
+				>
+			</File>
+			<File
+				RelativePath="..\conf\seqpref.dtd"
+				>
+			</File>
+			<File
+				RelativePath="..\conf\worldopcodes.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\conf\zoneopcodes.xml"
+				>
 			</File>
 		</Filter>
 	</Files>

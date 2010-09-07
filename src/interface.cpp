@@ -2206,7 +2206,7 @@ void EQInterface::connectSignals()
 	connect(m_spawnShell, SIGNAL(spawnConsidered(const Item*)), this, SLOT(spawnConsidered(const Item*)));
 
 	// connect the SpawnShell slots to Packet signals
-	m_packet->connect2("OP_GroundSpawn", SP_Zone, DIR_Server, "makeDropStruct", SZC_Match,
+	m_packet->connect2("OP_GroundSpawn", SP_Zone, DIR_Server, "makeDropStruct", SZC_None,
 					   m_spawnShell, SLOT(newGroundItem(const uint8_t*, size_t, uint8_t)));
 	m_packet->connect2("OP_ClickObject", SP_Zone, DIR_Server, "remDropStruct", SZC_Match,
 					   m_spawnShell, SLOT(removeGroundItem(const uint8_t*, size_t, uint8_t)));
