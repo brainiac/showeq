@@ -20,11 +20,9 @@ DataLocationMgr::DataLocationMgr(const QString& homeSubDir)
 	m_pkgData = PKGDATADIR;
 
 	// create the user directory object
-#ifndef Q_OS_WIN
-	m_userData = QDir::homeDirPath() + "/" + homeSubDir;
-#else
-	m_userData = QDir::currentPath() + "/" + homeSubDir;
-#endif
+	m_userData = QDir::currentDirPath() + "/" + homeSubDir + "/";
+
+	seqDebug("User Data Directory: %s\n", qPrintable(m_userData));
 }
 
 DataLocationMgr::~DataLocationMgr()

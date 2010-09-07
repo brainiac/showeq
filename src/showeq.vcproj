@@ -485,7 +485,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;category.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\category.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;category.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\category.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -563,7 +563,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;datetimemgr.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\datetimemgr.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;datetimemgr.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\datetimemgr.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -693,7 +693,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;filtermgr.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\filtermgr.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;filtermgr.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\filtermgr.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -719,7 +719,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;filternotifications.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\filternotifications.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;filternotifications.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\filternotifications.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -771,7 +771,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;group.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\group.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;group.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\group.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -797,7 +797,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;guild.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\guild.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;guild.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\guild.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -823,7 +823,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;guildshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\guildshell.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;guildshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\guildshell.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -901,7 +901,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;mapicon.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\mapicon.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;mapicon.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\mapicon.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -953,7 +953,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;messagefilter.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messagefilter.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;messagefilter.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messagefilter.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -979,7 +979,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;messages.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messages.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;messages.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messages.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1005,7 +1005,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;messageshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messageshell.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;messageshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messageshell.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1035,7 +1035,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;player.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\player.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;player.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\player.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1139,7 +1139,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;session.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\session.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;session.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\session.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1191,7 +1191,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnmonitor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnmonitor.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnmonitor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnmonitor.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1217,7 +1217,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnshell.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnshell.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1269,7 +1269,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spellshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spellshell.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spellshell.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spellshell.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1295,7 +1295,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;terminal.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\terminal.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;terminal.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\terminal.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1373,7 +1373,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;xmlpreferences.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\xmlpreferences.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;xmlpreferences.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\xmlpreferences.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1399,7 +1399,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;zonemgr.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\zonemgr.h&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;zonemgr.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\zonemgr.h&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1878,7 +1878,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;combatlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\combatlog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;combatlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\combatlog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1904,7 +1904,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;compass.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\compass.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;compass.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\compass.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1930,7 +1930,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;compassframe.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\compassframe.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;compassframe.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\compassframe.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1956,7 +1956,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;editor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\editor.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;editor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\editor.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1982,7 +1982,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;experiencelog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\experiencelog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;experiencelog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\experiencelog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2008,7 +2008,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;guildlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\guildlist.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;guildlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\guildlist.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2034,7 +2034,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;interface.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\interface.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;interface.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\interface.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2060,7 +2060,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;map.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\map.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;map.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\map.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2086,7 +2086,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;.\mapicondialog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\mapicondialog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;.\mapicondialog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\mapicondialog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2112,7 +2112,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;messagefilterdialog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messagefilterdialog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;messagefilterdialog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messagefilterdialog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2138,7 +2138,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;messagewindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messagewindow.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;messagewindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\messagewindow.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2164,7 +2164,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;seqlistview.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\seqlistview.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;seqlistview.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\seqlistview.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2190,7 +2190,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;seqwindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\seqwindow.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;seqwindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\seqwindow.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2216,7 +2216,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;skilllist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\skilllist.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;skilllist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\skilllist.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2242,7 +2242,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlist.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlist.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2268,7 +2268,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnlist2.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlist2.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnlist2.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlist2.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2294,7 +2294,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnlistcommon.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlistcommon.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnlistcommon.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlistcommon.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2320,7 +2320,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnpointlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnpointlist.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnpointlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnpointlist.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2346,7 +2346,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spelllist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spelllist.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spelllist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spelllist.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2372,7 +2372,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;statlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\statlist.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;statlist.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\statlist.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2402,7 +2402,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;bazaarlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\bazaarlog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;bazaarlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\bazaarlog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2428,7 +2428,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;filteredspawnlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\filteredspawnlog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;filteredspawnlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\filteredspawnlog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2454,7 +2454,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;logger.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\logger.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;logger.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\logger.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2480,7 +2480,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;spawnlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlog.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;spawnlog.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\spawnlog.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2536,7 +2536,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;packet.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\packet.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;packet.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\packet.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2588,7 +2588,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;packetinfo.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\packetinfo.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;packetinfo.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\packetinfo.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2614,7 +2614,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG  -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtNetwork\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;$(QTDIR)\include\QtXml\.&quot; -I&quot;$(QTDIR)\include\Qt3Support\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;$(QTDIR)\include\ActiveQt\.&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008\.&quot; -I&quot;.\GeneratedFiles\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;.\.&quot; &quot;remotepacket.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\remotepacket.h&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DVERSION=6.0 -DQT_THREAD_SUPPORT -DQT_DLL -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQT_XML_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB  -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;.&quot; &quot;remotepacket.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-fpch.h&quot; &quot;-f..\..\remotepacket.h&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -2648,13 +2648,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_bazaarlog.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2666,13 +2659,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_category.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2686,13 +2672,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_combatlog.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2704,13 +2683,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_compass.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2724,13 +2696,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_compassframe.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2742,13 +2707,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_datetimemgr.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2762,13 +2720,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_editor.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2780,13 +2731,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_experiencelog.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2800,13 +2744,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_filteredspawnlog.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2818,13 +2755,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_filtermgr.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2838,13 +2768,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_filternotifications.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2856,13 +2779,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_group.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2876,13 +2792,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_guild.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2894,13 +2803,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_guildlist.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2914,13 +2816,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_guildshell.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2932,13 +2827,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_interface.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2952,13 +2840,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_logger.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -2970,13 +2851,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_map.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -2990,13 +2864,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_mapicon.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3008,13 +2875,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_mapicondialog.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3028,13 +2888,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_messagefilter.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3046,13 +2899,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_messagefilterdialog.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3066,13 +2912,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_messages.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3084,13 +2923,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_messageshell.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3104,13 +2936,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_messagewindow.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3122,13 +2947,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_packet.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3142,13 +2960,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_packetinfo.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3160,13 +2971,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_player.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3180,13 +2984,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_remotepacket.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3198,13 +2995,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_seqlistview.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3218,13 +3008,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_seqwindow.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3236,13 +3019,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_session.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3256,13 +3032,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_skilllist.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3274,13 +3043,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnlist.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3294,13 +3056,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnlist2.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3312,13 +3067,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnlistcommon.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3332,13 +3080,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnlog.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3350,13 +3091,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnmonitor.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3370,13 +3104,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnpointlist.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3388,13 +3115,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_spawnshell.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3408,13 +3128,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_spelllist.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3426,13 +3139,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_spellshell.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3446,13 +3152,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_statlist.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3464,13 +3163,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_terminal.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3484,13 +3176,6 @@
 					RelativePath=".\GeneratedFiles\Debug\moc_xmlpreferences.cpp"
 					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -3502,13 +3187,6 @@
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_zonemgr.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
@@ -3535,13 +3213,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_category.cpp"
@@ -3549,13 +3220,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3573,13 +3237,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_compass.cpp"
@@ -3587,13 +3244,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3611,13 +3261,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_datetimemgr.cpp"
@@ -3625,13 +3268,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3649,13 +3285,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_experiencelog.cpp"
@@ -3663,13 +3292,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3687,13 +3309,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_filtermgr.cpp"
@@ -3701,13 +3316,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3725,13 +3333,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_group.cpp"
@@ -3739,13 +3340,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3763,13 +3357,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_guildlist.cpp"
@@ -3777,13 +3364,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3801,13 +3381,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_interface.cpp"
@@ -3815,13 +3388,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3839,13 +3405,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_map.cpp"
@@ -3853,13 +3412,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3877,13 +3429,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_mapicondialog.cpp"
@@ -3891,13 +3436,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3915,13 +3453,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_messagefilterdialog.cpp"
@@ -3929,13 +3460,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3953,13 +3477,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_messageshell.cpp"
@@ -3967,13 +3484,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -3991,13 +3501,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_packet.cpp"
@@ -4005,13 +3508,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4029,13 +3525,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_player.cpp"
@@ -4043,13 +3532,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4067,13 +3549,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_seqlistview.cpp"
@@ -4081,13 +3556,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4105,13 +3573,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_session.cpp"
@@ -4119,13 +3580,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4143,13 +3597,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_spawnlist.cpp"
@@ -4157,13 +3604,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4181,13 +3621,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_spawnlistcommon.cpp"
@@ -4195,13 +3628,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4219,13 +3645,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_spawnmonitor.cpp"
@@ -4233,13 +3652,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4257,13 +3669,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_spawnshell.cpp"
@@ -4271,13 +3676,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4295,13 +3693,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_spellshell.cpp"
@@ -4309,13 +3700,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4333,13 +3717,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_terminal.cpp"
@@ -4347,13 +3724,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -4371,13 +3741,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_zonemgr.cpp"
@@ -4385,13 +3748,6 @@
 					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"

@@ -9,6 +9,7 @@
 
 #include "pch.h"
 
+#include "diagnosticmessages.h"
 #include "session.h"
 #include "datalocationmgr.h"
 #include "datetimemgr.h"
@@ -423,7 +424,7 @@ SessionManager::SessionManager(QString configFile)
 	
 	// Set up preferences
 #ifdef _WINDOWS
-	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile("D:\\Projects\\ShowEQ-Qt4\\conf", "seqdef.xml", true, false);
+	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile(".", "seqdef.xml", true, false);
 #else
 	QFileInfo defaultConfigFile = m_dataLocationMgr->findExistingFile(".", "seqdef.xml", true, false);
 #endif
@@ -432,10 +433,10 @@ SessionManager::SessionManager(QString configFile)
 	 * permissible to load without a default config file. Defaults should be
 	 * hardcoded somewhere IMO. */
 	if (!defaultConfigFile.exists()) {
-		fprintf(stderr, "Fatal: Couldn't find seqdef.xml!\n"
+		seqWarn("Fatal: Couldn't find seqdef.xml!\n"
 				"\tDid you remember to do 'make install'?\n");
 
-		/* maybe throw an exception to make this better handleable */
+		/* maybe throw an exception to make this better handleable? */
 		exit(-1);
 	}
 	QString defaultConfigFilePath = defaultConfigFile.absFilePath();
@@ -446,15 +447,15 @@ SessionManager::SessionManager(QString configFile)
 		QFileInfo userConfigFile = m_dataLocationMgr->findExistingFile(".", "showeq.xml", true, true);
 
 		/* deal with funky border case since we may be running setuid */
-		if (userConfigFile.dir() != QDir::root())
-			userConfigFilePath = userConfigFile.absFilePath();
-		else
+// 		if (userConfigFile.dir() != QDir::root())
+// 			userConfigFilePath = userConfigFile.absFilePath();
+// 		else
 			userConfigFilePath = QFileInfo(m_dataLocationMgr->userDataDir(".").absPath(), "showeq.xml").absFilePath();
 	} else {
 		/* TODO: Validate the path provided by the user */
 		userConfigFilePath = configFile;
 	}	
-	printf("Using config file '%s'\n", (const char*)configFile);
+	seqInfo("Using config file '%s'\n", qPrintable(userConfigFilePath));
 	
 	// Create the preferences object
 	pSEQPrefs = m_preferences = new XMLPreferences(defaultConfigFilePath, userConfigFilePath);
@@ -505,7 +506,9 @@ Session* SessionManager::newSession(DataSource*)
 QString SessionManager::getUserDirectory()
 {
 #ifdef _WINDOWS
-	return "../conf";
+	/* userDirectory should be the working directory. In windows, just get the current working directory
+	 * and use that as the user directory. I don't see why this needs to be user specific. at this time. */
+	return ".";
 #else
 	return ".showeq";
 #endif
