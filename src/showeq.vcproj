@@ -425,6 +425,10 @@
 				Name="Network"
 				>
 				<File
+					RelativePath=".\datasource.cpp"
+					>
+				</File>
+				<File
 					RelativePath="netstream.cpp"
 					>
 				</File>
@@ -2493,6 +2497,32 @@
 				Name="Network"
 				>
 				<File
+					RelativePath=".\datasource.h"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-D -D_WINDOWS -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT_THREAD_SUPPORT -DQT_XML_LIB -DQT3_SUPPORT -DUNICODE -DVERSION=6.0 -DWIN32 -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.&quot; -I&quot;.\..&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; Q_OS_WIN&quot; &quot;-fpch.h&quot; &quot;-f..\..\datasource.h&quot;&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; -D_WINDOWS -DNDEBUG -DPKGDATADIR=/usr/local/share/showeq -DQMAKEBUILD -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_QT3SUPPORT_LIB -DQT_THREAD_SUPPORT -DQT_XML_LIB -DQT3_SUPPORT -DUNICODE -DVERSION=6.0 -DWIN32 -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot; -I&quot;.&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; &quot;-fpch.h&quot; &quot;-f..\..\datasource.h&quot;&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="netstream.h"
 					>
 					<FileConfiguration
@@ -2696,6 +2726,18 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_compassframe.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_datasource.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
@@ -3254,6 +3296,18 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_compassframe.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_datasource.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"

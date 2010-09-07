@@ -499,6 +499,33 @@ private:
 	QWidget* m_filler;
 
 private:
+
+	// TODO: Migrate this to DataSource once the framework is ready
+	typedef QObject* EQInterface::* ObjectMember;
+
+	struct DataSourceRegistrationInfo
+	{
+		const char* opcodeName;
+		EQStreamPairs sp;
+		uint8_t dir;
+		const char* payload;
+		EQSizeCheckType szt;
+		ObjectMember receiver;	// TODO: This will change
+		const char* member;
+	};
+	typedef void (*DataSourceRegistrationHandler)(DataSourceRegistrationInfo*, void* param);
+
+	static void EnumerateDataSourceRegistration(DataSourceRegistrationHandler handler, void* param);
+	static void ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, void* param);
+
+	// Network initialization
+	void initializeDataSource();
+	void shutdownDataSource();
+
+private:
+
+	void initializeInterface();
+
 	// create interface widgets
 	void setupExperienceWindow();
 	void setupCombatWindow();
