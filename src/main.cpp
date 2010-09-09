@@ -471,6 +471,11 @@ int main (int argc, char **argv)
 	/* Create application instance */
 	QApplication qapp(argc, argv);
 
+#ifdef Q_OS_WIN
+	AllocConsole();
+	freopen("CONOUT$", "wb", stdout);
+#endif
+
 	/* Print the version number */
 	displayVersion();
 

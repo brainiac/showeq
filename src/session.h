@@ -30,6 +30,8 @@ class FilterNotifications;
 class Terminal;
 class DataSource;
 
+class EQPacket;
+
 class Session : public QObject
 {
 	Q_OBJECT
@@ -55,33 +57,60 @@ private:
 	Terminal*			m_terminal;
 	FilterNotifications*	m_filterNotifications;
 	
-	DataSource*			m_source;
 	SessionManager*		m_parent;
 	
 	XMLPreferences*		m_preferences;
+
+private:
+
+	DataSource*			m_source;
+
+	// TODO: This is only temporary until DataSource is implemented
+	EQPacket*			m_packet;
 	
+	typedef QObject* Session::* ObjectMember;
+	struct DataSourceRegistrationInfo
+	{
+		const char* opcodeName;
+		uint8_t sp;
+		uint8_t dir;
+		const char* payload;
+		uint8_t szt;
+		ObjectMember receiver;	// TODO: This will change
+		const char* member;
+	};
+	typedef void (*DataSourceRegistrationHandler)(DataSourceRegistrationInfo*, void* param);
+
+	static void EnumerateDataSourceRegistration(DataSourceRegistrationHandler handler, void* param);
+	static void ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, void* param);
+
+	void attachSignals();
+
 public:
 	Session(SessionManager*, DataSource* source = NULL);
 	
 	virtual ~Session();
 	
 	void assignSource(DataSource*);
+	void initializeDataSource();
 
 public:
 	// Accessors
-	ZoneMgr*			zoneMgr();
-	MapMgr*				mapMgr();
-	GroupMgr*			groupMgr();
-	GuildMgr*			guildMgr(); 
-	GuildShell*			guildShell();
-	Player*				player();
-	SpawnMonitor*		spawnMonitor();
-	SpawnShell*			spawnShell();
-	SpellShell*			spellShell();
-	FilterMgr*			filterMgr();
-	Messages*			messages();
-	MessageFilters*		messageFilters();
-	MessageShell*		messageShell();
+	ZoneMgr*			zoneMgr() { return m_zoneMgr; }
+	MapMgr*				mapMgr() { return m_mapMgr; }
+	GroupMgr*			groupMgr() { return m_groupMgr; }
+	GuildMgr*			guildMgr() { return m_guildMgr; }
+	GuildShell*			guildShell() { return m_guildShell; }
+	Player*				player() { return m_player; }
+	SpawnMonitor*		spawnMonitor() { return m_spawnMonitor; }
+	SpawnShell*			spawnShell() { return m_spawnShell; }
+	SpellShell*			spellShell() { return m_spellShell; }
+	FilterMgr*			filterMgr() { return m_filterMgr; }
+	Messages*			messages() { return m_messages; }
+	MessageFilters*		messageFilters() { return m_messageFilters; }
+	MessageShell*		messageShell() { return m_messageShell; }
+	FilterNotifications* filterNotifications() { return m_filterNotifications; }
+	Terminal*			terminal() { return m_terminal; }
 
 signals:
 	void DestroySession();

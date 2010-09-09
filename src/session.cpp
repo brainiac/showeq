@@ -32,6 +32,8 @@
 #include "filternotifications.h"
 #include "datasource.h"
 
+#include "packet.h"
+
 extern XMLPreferences* pSEQPrefs;
 
 // Session Class
@@ -84,6 +86,11 @@ Session::Session(SessionManager* parent, DataSource* source)
 	// Create the Player Object
 	m_player = new Player(this, m_zoneMgr, m_guildMgr);
 	
+	// Create the filter manager
+	QString filterFile = pSEQPrefs->getPrefString("FilterFile", "Interface", "global.xml");
+	bool isCaseSensitive = pSEQPrefs->getPrefBool("IsCaseSensitive", "Interface", false);
+	m_filterMgr = new FilterMgr(m_parent->dataLocationMgr(), filterFile, isCaseSensitive);
+
 	// if there is a short zone name already, try to load its filters
 	// (there isn't one, this should be removed)
 	QString shortZoneName = m_zoneMgr->shortZoneName();
@@ -115,9 +122,14 @@ Session::Session(SessionManager* parent, DataSource* source)
 	
 	// Create the Filter Notification object
 	m_filterNotifications = new FilterNotifications(this, "filternotifications");
+
+	attachSignals();
+
+	assignSource(source);
+}
 	
-	// attach signals
-	
+void Session::attachSignals()
+{
 	// zoneManager -> group Manager
 	connect(m_zoneMgr, SIGNAL(playerProfile(const charProfileStruct*)),
 			m_groupMgr, SLOT(player(const charProfileStruct*)));
@@ -182,8 +194,6 @@ Session::Session(SessionManager* parent, DataSource* source)
 			m_spellShell, SLOT(buffLoad(const spellBuff *)));
 	
 	connect(m_zoneMgr, SIGNAL(playerProfile(const charProfileStruct*)), m_player, SLOT(player(const charProfileStruct*)));
-	
-	assignSource(source);
 }
 
 void Session::assignSource(DataSource* source)
@@ -193,184 +203,298 @@ void Session::assignSource(DataSource* source)
 	
 	if (m_source != NULL)
 	{	
-		// attach signals to zone manager
-		m_source->connectReceiver("OP_ZoneEntry", "ClientZoneEntryStruct", SP_Zone, DIR_Client, SZC_Match,
-								  m_zoneMgr, SLOT(zoneEntryClient(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_PlayerProfile", "charProfileStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_zoneMgr, SLOT(zonePlayer(const uint8_t*)));
-		m_source->connectReceiver("OP_ZoneChange", "zoneChangeStruct", SP_Zone, DIR_Client | DIR_Server, SZC_Match,
-								  m_zoneMgr, SLOT(zoneChange(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_NewZone", "newZoneStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_zoneMgr, SLOT(zoneNew(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_SendZonePoints", "zonePointsStruct", SP_Zone, DIR_Server, SZC_None,
-								  m_zoneMgr, SLOT(zonePoints(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_DzSwitchInfo", "dzSwitchInfo", SP_Zone, DIR_Server, SZC_None,
-								  m_zoneMgr, SLOT(dynamicZonePoints(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_DzInfo", "dzInfo", SP_Zone, DIR_Server, SZC_Match,
-								  m_zoneMgr, SLOT(dynamicZoneInfo(const uint8_t*, size_t, uint8_t)));
-		
-		// attach signals to group manager
-		m_source->connectReceiver("OP_GroupUpdate", "uint8_t", SP_Zone, DIR_Server, SZC_None,
-								  m_groupMgr, SLOT(groupUpdate(const uint8_t*, size_t)));
-		m_source->connectReceiver("OP_GroupFollow", "groupFollowStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_groupMgr, SLOT(addGroupMember(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupDisband", "groupDisbandStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_groupMgr, SLOT(removeGroupMember(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupDisband2", "groupDisbandStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_groupMgr, SLOT(removeGroupMember(const uint8_t*)));
-		
-		// attach signals to guild manager
-		m_source->connectReceiver("OP_GuildList", "worldGuildListStruct", SP_World, DIR_Server, SZC_None,
-								  m_guildMgr, SLOT(worldGuildList(const uint8_t*, size_t)));
-		
-		// attach signals to guild shell
-		m_source->connectReceiver("OP_GuildMemberList", "uint8_t", SP_Zone, DIR_Server, SZC_None,
-								  m_guildShell, SLOT(guildMemberList(const uint8_t*, size_t)));
-		m_source->connectReceiver("OP_GuildMemberUpdate", "GuildMemberUpdate", SP_Zone, DIR_Server, SZC_Match,
-								  m_guildShell, SLOT(guildMemberUpdate(const uint8_t*, size_t)));
-		
-		// attach signals to message shell
-		m_source->connectReceiver("OP_CommonMessage", "channelMessageStruct", SP_Zone, DIR_Client | DIR_Server, SZC_None,
-								  m_messageShell, SLOT(channelMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_FormattedMessage", "formattedMessageStruct", SP_Zone, DIR_Server, SZC_None,
-								  m_messageShell, SLOT(formattedMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_SimpleMessage", "simpleMessageStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_SpecialMesg", "specialMessageStruct", SP_Zone, DIR_Server, SZC_None,
-								  m_messageShell, SLOT(specialMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_GuildMOTD", "guildMOTDStruct", SP_Zone, DIR_Server, SZC_None,
-								  m_messageShell, SLOT(guildMOTD(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_RandomReq", "randomReqStruct", SP_Zone, DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(randomRequest(const uint8_t*)));
-		m_source->connectReceiver("OP_RandomReply", "randomStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(random(const uint8_t*)));
-		m_source->connectReceiver("OP_ConsentResponse", "consentResponseStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(consent(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_DenyResponse", "consentResponseStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(consent(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_Emote", "emoteTextStruct", SP_Zone, DIR_Server | DIR_Client, SZC_None,
-								  m_messageShell, SLOT(emoteText(const uint8_t*)));
-		m_source->connectReceiver("OP_InspectAnswer", "inspectDataStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(inspectData(const uint8_t*)));
-		m_source->connectReceiver("OP_MoneyOnCorpse", "moneyOnCorpseStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(moneyOnCorpse(const uint8_t*)));
-		m_source->connectReceiver("OP_Logout", "none", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(logOut(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_NewZone", "newZoneStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(zoneNew(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_MOTD", "worldMOTDStruct", SP_World, DIR_Server, SZC_None,
-								  m_messageShell, SLOT(worldMOTD(const uint8_t*)));
-		m_source->connectReceiver("OP_MemorizeSpell", "memSpellStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(handleSpell(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_BeginCast", "beginCastStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(beginCast(const uint8_t*)));
-		m_source->connectReceiver("OP_BuffFadeMsg", "spellFadedStruct", SP_Zone, DIR_Server | DIR_Client, SZC_None,
-								  m_messageShell, SLOT(spellFaded(const uint8_t*)));
-		m_source->connectReceiver("OP_CastSpell", "startCastStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(startCast(const uint8_t*)));
-		m_source->connectReceiver("OP_SkillUpdate", "skillIncStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(increaseSkill(const uint8_t*)));
-		m_source->connectReceiver("OP_LevelUpdate", "levelUpUpdateStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(updateLevel(const uint8_t*)));
-		m_source->connectReceiver("OP_Consider", "considerStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(consMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_GroupInvite", "groupInviteStruct", SP_Zone, DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
-//		m_source->connectReceiver("OP_GroupInvite", "groupAltInviteStruct", SP_Zone, DIR_Server, SZC_Match,
-//								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupInvite2", "groupInviteStruct", SP_Zone, DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(groupInvite(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupFollow", "groupFollowStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(groupFollow(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupFollow2", "groupFollowStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(groupFollow(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupDisband", "groupDisbandStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(groupDisband(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupDisband2", "groupDisbandStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(groupDisband(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupCancelInvite", "groupDeclineStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_messageShell, SLOT(groupDecline(const uint8_t*)));
-		m_source->connectReceiver("OP_GroupLeader", "groupLeaderChangeStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_messageShell, SLOT(groupLeaderChange(const uint8_t*)));
-		
-		// attach signals to spawnshell
-		m_source->connectReceiver("OP_GroundSpawn", "makeDropStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spawnShell, SLOT(newGroundItem(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_ClickObject", "remDropStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spawnShell, SLOT(removeGroundItem(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_SpawnDoor", "doorStruct", SP_Zone, DIR_Server, SZC_Modulus,
-								  m_spawnShell, SLOT(newDoorSpawns(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_ZoneEntry", "uint8_t", SP_Zone, DIR_Server, SZC_None,
-								  m_spawnShell, SLOT(zoneEntry(const uint8_t*, size_t)));
-		m_source->connectReceiver("OP_MobUpdate", "spawnPositionUpdate", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(updateSpawns(const uint8_t*)));
-		m_source->connectReceiver("OP_WearChange", "SpawnUpdateStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(updateSpawnInfo(const uint8_t*)));
-		m_source->connectReceiver("OP_HPUpdate", "hpNpcUpdateStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(updateNpcHP(const uint8_t*)));
-		m_source->connectReceiver("OP_DeleteSpawn", "deleteSpawnStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(deleteSpawn(const uint8_t*)));
-		m_source->connectReceiver("OP_SpawnRename", "spawnRenameStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spawnShell, SLOT(renameSpawn(const uint8_t*)));
-		m_source->connectReceiver("OP_Illusion", "spawnIllusionStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(illusionSpawn(const uint8_t*)));
-		m_source->connectReceiver("OP_SpawnAppearance", "spawnAppearanceStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(updateSpawnAppearance(const uint8_t*)));
-		m_source->connectReceiver("OP_Death", "newCorpseStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spawnShell, SLOT(killSpawn(const uint8_t*)));
-//		m_source->connectReceiver("OP_RespawnFromHover", "uint8_t", SP_Zone, DIR_Server | DIR_Client, SZC_None,
-//								  m_spawnShell, SLOT(respawnFromHover(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_Shroud", "spawnShroudSelf", SP_Zone, DIR_Server, SZC_None,
-								  m_spawnShell, SLOT(shroudSpawn(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_RemoveSpawn", "removeSpawnStruct", SP_Zone, DIR_Server | DIR_Client, SZC_None,
-								  m_spawnShell, SLOT(removeSpawn(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_Consider", "considerStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spawnShell, SLOT(consMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_NpcMoveUpdate", "uint8_t", SP_Zone, DIR_Server, SZC_None,
-								  m_spawnShell, SLOT(npcMoveUpdate(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_ClientUpdate", "playerSpawnPosStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spawnShell, SLOT(playerUpdate(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_CorpseLocResponse", "corpseLocStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spawnShell, SLOT(corpseLoc(const uint8_t*)));
-		
-		// attach signals to spell shell
-		m_source->connectReceiver("OP_CastSpell", "startCastStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spellShell, SLOT(selfStartSpellCast(const uint8_t*)));
-		m_source->connectReceiver("OP_Buff", "buffStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spellShell, SLOT(buff(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_Action", "actionStruct", SP_Zone, DIR_Server|DIR_Client, SZC_Match,
-								  m_spellShell, SLOT(action(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_Action", "actionAltStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_spellShell, SLOT(action(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_SimpleMessage", "simpleMessageStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_spellShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t)));
-		
-		// attach signals to player object
-		m_source->connectReceiver("OP_SkillUpdate", "skillIncStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(increaseSkill(const uint8_t*)));
-		m_source->connectReceiver("OP_ManaChange", "manaDecrementStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(manaChange(const uint8_t*)));
-		m_source->connectReceiver("OP_ClientUpdate", "playerSelfPosStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_player, SLOT(playerUpdateSelf(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_ExpUpdate", "expUpdateStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(updateExp(const uint8_t*)));
-		m_source->connectReceiver("OP_AAExpUpdate", "altExpUpdateStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(updateAltExp(const uint8_t*)));
-		m_source->connectReceiver("OP_LevelUpdate", "levelUpUpdateStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(updateLevel(const uint8_t*)));
-		m_source->connectReceiver("OP_HPUpdate", "hpNpcUpdateStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_player, SLOT(updateNpcHP(const uint8_t*)));
-		m_source->connectReceiver("OP_WearChange", "SpawnUpdateStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_player, SLOT(updateSpawnInfo(const uint8_t*)));
-		m_source->connectReceiver("OP_Stamina", "staminaStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(updateStamina(const uint8_t*)));
-		m_source->connectReceiver("OP_Consider", "considerStruct", SP_Zone, DIR_Server | DIR_Client, SZC_Match,
-								  m_player, SLOT(consMessage(const uint8_t*, size_t, uint8_t)));
-		m_source->connectReceiver("OP_SwapSpell", "tradeSpellBookSlotsStruct", SP_Zone, DIR_Server, SZC_Match,
-								  m_player, SLOT(tradeSpellBookSlots(const uint8_t*, size_t, uint8_t)));
+		EnumerateDataSourceRegistration(&Session::ConnectNetworkSignalsCallback, this);
 	}
 }
 
+void Session::ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, void* param)
+{
+	Session* pThis = (Session*)param;
+
+	if (pThis->*(dsri->receiver))
+	{
+		//pThis->m_source->connectReceiver(dsri->opcodeName, dsri->payload,
+		//	(EQStreamPairs)dsri->sp, dsri->dir, 
+		//	(EQSizeCheckType)dsri->szt,	pThis->*(dsri->receiver), dsri->member);
+		pThis->m_packet->connect2(dsri->opcodeName, (EQStreamPairs)dsri->sp,
+			dsri->dir, dsri->payload, (EQSizeCheckType)dsri->szt,
+			pThis->*(dsri->receiver), dsri->member);
+	}
+}
+
+void Session::initializeDataSource()
+{
+	/***********************************************************************
+	 * Create Packet Provider Object
+	 **********************************************************************/
+
+	/* get world opcodes file */
+	QString fileName = pSEQPrefs->getPrefString("WorldOPCodes", "Network", "worldopcodes.xml");
+	QFileInfo worldOpcodes = m_parent->dataLocationMgr()->findExistingFile(".", fileName);
+
+	/* get zone opcodes file */
+	QString fileName2 = pSEQPrefs->getPrefString("ZoneOPCodes", "Network", "zoneopcodes.xml");
+	QFileInfo zoneOpcodes = m_parent->dataLocationMgr()->findExistingFile(".", fileName2);
+
+	// make packet object
+	m_packet = new EQPacket(worldOpcodes.absFilePath(),
+		zoneOpcodes.absFilePath(),
+		pSEQPrefs->getPrefInt("ArqSeqGiveUp", "Network", 512),
+		pSEQPrefs->getPrefString("Device", "Network", "eth0"),
+		pSEQPrefs->getPrefString("IP", "Network", AUTOMATIC_CLIENT_IP),
+		pSEQPrefs->getPrefString("MAC", "Network", "0"),
+		pSEQPrefs->getPrefBool("RealTimeThread", "Network", false),
+		pSEQPrefs->getPrefBool("SessionTracking", "Network", false),
+		pSEQPrefs->getPrefBool("Record", "VPacket", false),
+		pSEQPrefs->getPrefInt("Playback", "VPacket", PLAYBACK_OFF),
+		pSEQPrefs->getPrefInt("PlaybackRate", "VPacket", false),
+#ifdef _WINDOWS
+		true,
+		8773,
+#else
+		pSEQPrefs->getPrefBool("Enabled", "RemotePacketServer", false),
+		pSEQPrefs->getPrefUInt("Port", "RemotePacketServer", 8773),
+#endif
+		this, "packet");
+
+	// initialize packet count
+	//m_initialcount = 0;
+	//m_packetStartTime = 0;
+
+	// Retrieve last IP usd in previous session
+	//m_ipstr[0] = m_packet->ip();
+	//for (int i = 1; i < 5; i++)
+	//	m_ipstr[i] = "0.0.0.0";
+
+	// Retrieve last MAC used in previous session
+	//m_macstr[0] = m_packet->mac();
+	//for (int i = 1; i < 5; i++)
+	//	m_macstr[i] = "00:00:00:00:00:00";
+
+	// Create the network menu
+	//createNetworkMenu();
+
+	// connect network signals
+	EnumerateDataSourceRegistration(&Session::ConnectNetworkSignalsCallback, this);
+
+	// TODO: dateTimeMgr connections
+	if (m_parent->dateTimeMgr())
+	{
+		// connect DateTimeMgr slots to EQPacket signals
+		m_packet->connect2("OP_TimeOfDay", SP_Zone, DIR_Server,  "timeOfDayStruct", SZC_Match,
+			m_parent->dateTimeMgr(), SLOT(timeOfDay(const uint8_t*)));
+	}
+
+	// connect interface slots to Packet signals
+	m_packet->connect2("OP_TargetMouse", SP_Zone, DIR_Client|DIR_Server, "clientTargetStruct", SZC_Match,
+		this, SLOT(clientTarget(const uint8_t*)));
+	m_packet->connect2("OP_Action2", SP_Zone, DIR_Client|DIR_Server, "action2Struct", SZC_Match,
+		this, SLOT(action2Message(const uint8_t*)));
+	m_packet->connect2("OP_Death", SP_Zone, DIR_Server, "newCorpseStruct", SZC_Match,
+		this, SLOT(combatKillSpawn(const uint8_t*)));
+
+	// TODO: Attach these signals (these aren't packet signals, but rather signals related to the packet manager)
+	//connect(m_packet, SIGNAL(toggle_session_tracking(bool)), this, SLOT(toggle_net_session_tracking(bool)));
+	//connect(m_packet, SIGNAL(stsMessage(const QString &, int)), this, SLOT(stsMessage(const QString &, int)));
+	//connect(m_packet, SIGNAL(numPacket(int, int)), this, SLOT(numPacket(int, int)));
+	//connect(m_packet, SIGNAL(resetPacket(int, int)), this, SLOT(resetPacket(int, int)));
+
+	/* Start the packet capturing */
+	m_packet->start(10);
+}
+
+
+void Session::EnumerateDataSourceRegistration(DataSourceRegistrationHandler handler, void* param)
+{
+	// TODO: Set this up so that services register for messages they want to receive, not the 
+	// other way around, like it is right now?
+	DataSourceRegistrationInfo registrations[] =
+	{
+		// ZoneManager Opcode Handlers
+		{"OP_ZoneEntry",		SP_Zone, DIR_Client, "ClientZoneEntryStruct", SZC_Match,
+		(ObjectMember)&Session::m_zoneMgr, SLOT(zoneEntryClient(const uint8_t*, size_t, uint8_t))},
+		{"OP_PlayerProfile",	SP_Zone, DIR_Server, "charProfileStruct", SZC_Match,
+		(ObjectMember)&Session::m_zoneMgr, SLOT(zonePlayer(const uint8_t*))},
+		{"OP_ZoneChange",		SP_Zone, DIR_Client | DIR_Server, "zoneChangeStruct", SZC_Match,
+		(ObjectMember)&Session::m_zoneMgr, SLOT(zoneChange(const uint8_t*, size_t, uint8_t))},
+		{"OP_NewZone",			SP_Zone, DIR_Server, "newZoneStruct", SZC_Match,
+		(ObjectMember)&Session::m_zoneMgr, SLOT(zoneNew(const uint8_t*, size_t, uint8_t))},
+		{"OP_SendZonePoints",	SP_Zone, DIR_Server, "zonePointsStruct", SZC_None,
+		(ObjectMember)&Session::m_zoneMgr, SLOT(zonePoints(const uint8_t*, size_t, uint8_t))},
+		{"OP_DzSwitchInfo",		SP_Zone, DIR_Server, "dzSwitchInfo", SZC_None,
+		(ObjectMember)&Session::m_zoneMgr, SLOT(dynamicZonePoints(const uint8_t*, size_t, uint8_t))},
+		{"OP_DzInfo",			SP_Zone, DIR_Server, "dzInfo", SZC_Match, 
+		(ObjectMember)&Session::m_zoneMgr, SLOT(dynamicZoneInfo(const uint8_t*, size_t, uint8_t))},
+
+		// GroupManager Opcode Handlers
+		{"OP_GroupUpdate",		SP_Zone, DIR_Server, "uint8_t", SZC_None,
+		(ObjectMember)&Session::m_groupMgr, SLOT(groupUpdate(const uint8_t*, size_t))},
+		{"OP_GroupFollow",		SP_Zone, DIR_Server, "groupFollowStruct", SZC_Match,
+		(ObjectMember)&Session::m_groupMgr, SLOT(addGroupMember(const uint8_t*))},
+		{"OP_GroupDisband",		SP_Zone, DIR_Server, "groupDisbandStruct", SZC_Match,
+		(ObjectMember)&Session::m_groupMgr, SLOT(removeGroupMember(const uint8_t*))},
+		{"OP_GroupDisband2",	SP_Zone, DIR_Server, "groupDisbandStruct", SZC_Match,
+		(ObjectMember)&Session::m_groupMgr, SLOT(removeGroupMember(const uint8_t*))},
+
+		// GuildShell Opcode Handlers
+		{"OP_GuildMemberList",	SP_Zone, DIR_Server, "uint8_t", SZC_None,
+		(ObjectMember)&Session::m_guildShell, SLOT(guildMemberList(const uint8_t*, size_t))},
+		{"OP_GuildMemberUpdate",	SP_Zone, DIR_Server, "GuildMemberUpdate", SZC_Match,
+		(ObjectMember)&Session::m_guildShell, SLOT(guildMemberUpdate(const uint8_t*, size_t))},
+
+		// MessageShell Opcode Handlers
+		{"OP_CommonMessage",	SP_Zone, DIR_Client | DIR_Server, "channelMessageStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(channelMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_FormattedMessage",	SP_Zone, DIR_Server, "formattedMessageStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(formattedMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_SimpleMessage",	SP_Zone, DIR_Server, "simpleMessageStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_SpecialMesg",		SP_Zone, DIR_Server, "specialMessageStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(specialMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_GuildMOTD",		SP_Zone, DIR_Server, "guildMOTDStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(guildMOTD(const uint8_t*, size_t, uint8_t))},
+		{"OP_RandomReq",		SP_Zone, DIR_Client, "randomReqStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(randomRequest(const uint8_t*))},
+		{"OP_RandomReply",		SP_Zone, DIR_Server, "randomStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(random(const uint8_t*))},
+		{"OP_ConsentResponse",	SP_Zone, DIR_Server, "consentResponseStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(consent(const uint8_t*, size_t, uint8_t))},
+		{"OP_DenyResponse",		SP_Zone, DIR_Server, "consentResponseStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(consent(const uint8_t*, size_t, uint8_t))},
+		{"OP_Emote",			SP_Zone, DIR_Server | DIR_Client, "emoteTextStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(emoteText(const uint8_t*))},
+		{"OP_InspectAnswer",	SP_Zone, DIR_Server, "inspectDataStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(inspectData(const uint8_t*))},
+		{"OP_MoneyOnCorpse",	SP_Zone, DIR_Server, "moneyOnCorpseStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(moneyOnCorpse(const uint8_t*))},
+		{"OP_Logout",			SP_Zone, DIR_Server, "none", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(logOut(const uint8_t*, size_t, uint8_t))},
+		{"OP_NewZone",			SP_Zone, DIR_Server, "newZoneStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(zoneNew(const uint8_t*, size_t, uint8_t))},
+		{"OP_MOTD",				SP_World, DIR_Server, "worldMOTDStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(worldMOTD(const uint8_t*))},
+		{"OP_MemorizeSpell",	SP_Zone, DIR_Server|DIR_Client, "memSpellStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(handleSpell(const uint8_t*, size_t, uint8_t))},
+		{"OP_BeginCast",		SP_Zone, DIR_Server|DIR_Client, "beginCastStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(beginCast(const uint8_t*))},
+		{"OP_BuffFadeMsg",		SP_Zone, DIR_Server|DIR_Client, "spellFadedStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(spellFaded(const uint8_t*))},	
+		{"OP_CastSpell",		SP_Zone, DIR_Server|DIR_Client, "startCastStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(startCast(const uint8_t*))},	
+		{"OP_SkillUpdate",		SP_Zone, DIR_Server, "skillIncStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(increaseSkill(const uint8_t*))},		
+		{"OP_LevelUpdate",		SP_Zone, DIR_Server, "levelUpUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(updateLevel(const uint8_t*))},		
+		{"OP_Consider",			SP_Zone, DIR_Server, "considerStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(consMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_GroupInvite",		SP_Zone, DIR_Client | DIR_Server, "groupInviteStruct", SZC_None,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupInvite(const uint8_t*, size_t, uint8_t))},		
+		{"OP_GroupInvite2",		SP_Zone, DIR_Client, "groupInviteStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupInvite(const uint8_t*, size_t, uint8_t))},		
+		{"OP_GroupFollow",		SP_Zone, DIR_Server, "groupFollowStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupFollow(const uint8_t*))},		
+		{"OP_GroupFollow2",		SP_Zone, DIR_Server, "groupFollowStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupFollow(const uint8_t*))},		
+		{"OP_GroupDisband",		SP_Zone, DIR_Server, "groupDisbandStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupDisband(const uint8_t*))},		
+		{"OP_GroupDisband2",	SP_Zone, DIR_Server, "groupDisbandStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupDisband(const uint8_t*))},	
+		{"OP_GroupCancelInvite",	SP_Zone, DIR_Server|DIR_Client, "groupDeclineStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupDecline(const uint8_t*))},		
+		{"OP_GroupLeader",		SP_Zone, DIR_Server, "groupLeaderChangeStruct", SZC_Match,
+		(ObjectMember)&Session::m_messageShell, SLOT(groupLeaderChange(const uint8_t*))},
+
+		// SpawnShell Opcode Handlers
+		{"OP_GroundSpawn",		SP_Zone, DIR_Server, "makeDropStruct", SZC_None,
+		(ObjectMember)&Session::m_spawnShell, SLOT(newGroundItem(const uint8_t*, size_t, uint8_t))},
+		{"OP_ClickObject",		SP_Zone, DIR_Server, "remDropStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(removeGroundItem(const uint8_t*, size_t, uint8_t))},
+		{"OP_SpawnDoor",		SP_Zone, DIR_Server, "doorStruct", SZC_Modulus,
+		(ObjectMember)&Session::m_spawnShell, SLOT(newDoorSpawns(const uint8_t*, size_t, uint8_t))},
+		{"OP_ZoneEntry",		SP_Zone, DIR_Server, "uint8_t", SZC_None,
+		(ObjectMember)&Session::m_spawnShell, SLOT(zoneEntry(const uint8_t*, size_t))},
+		{"OP_MobUpdate",		SP_Zone, DIR_Server|DIR_Client, "spawnPositionUpdate", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(updateSpawns(const uint8_t*))},
+		{"OP_WearChange",		SP_Zone, DIR_Server|DIR_Client, "SpawnUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(updateSpawnInfo(const uint8_t*))},
+		{"OP_HPUpdate",			SP_Zone, DIR_Server|DIR_Client, "hpNpcUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(updateNpcHP(const uint8_t*))},
+		{"OP_DeleteSpawn",		SP_Zone, DIR_Server|DIR_Client, "deleteSpawnStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(deleteSpawn(const uint8_t*))},
+		{"OP_SpawnRename",		SP_Zone, DIR_Server, "spawnRenameStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(renameSpawn(const uint8_t*))},
+		{"OP_Illusion",			SP_Zone, DIR_Server|DIR_Client, "spawnIllusionStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(illusionSpawn(const uint8_t*))},
+		{"OP_SpawnAppearance",	SP_Zone, DIR_Server|DIR_Client, "spawnAppearanceStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(updateSpawnAppearance(const uint8_t*))},
+		{"OP_Death",			SP_Zone, DIR_Server, "newCorpseStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(killSpawn(const uint8_t*))},
+		{"OP_Shroud",			SP_Zone, DIR_Server, "spawnShroudSelf", SZC_None,
+		(ObjectMember)&Session::m_spawnShell, SLOT(shroudSpawn(const uint8_t*, size_t, uint8_t))},
+		{"OP_RemoveSpawn",		SP_Zone, DIR_Server|DIR_Client, "removeSpawnStruct", SZC_None,
+		(ObjectMember)&Session::m_spawnShell, SLOT(removeSpawn(const uint8_t*, size_t, uint8_t))},
+		{"OP_Consider",			SP_Zone, DIR_Server|DIR_Client, "considerStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(consMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_NpcMoveUpdate",	SP_Zone, DIR_Server, "uint8_t", SZC_None,
+		(ObjectMember)&Session::m_spawnShell, SLOT(npcMoveUpdate(const uint8_t*, size_t, uint8_t))},
+		{"OP_ClientUpdate",		SP_Zone, DIR_Server, "playerSpawnPosStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(playerUpdate(const uint8_t*, size_t, uint8_t))},
+		{"OP_CorpseLocResponse",	SP_Zone, DIR_Server, "corpseLocStruct", SZC_Match,
+		(ObjectMember)&Session::m_spawnShell, SLOT(corpseLoc(const uint8_t*))},
+
+		// SpellShell Opcode Handlers
+		{"OP_CastSpell",		SP_Zone, DIR_Server|DIR_Client, "startCastStruct", SZC_Match,
+		(ObjectMember)&Session::m_spellShell, SLOT(selfStartSpellCast(const uint8_t*))},
+		{"OP_Buff",				SP_Zone, DIR_Server|DIR_Client, "buffStruct", SZC_Match,
+		(ObjectMember)&Session::m_spellShell, SLOT(buff(const uint8_t*, size_t, uint8_t))},
+		{"OP_Action",			SP_Zone, DIR_Server|DIR_Client, "actionStruct", SZC_Match,
+		(ObjectMember)&Session::m_spellShell, SLOT(action(const uint8_t*, size_t, uint8_t))},
+		{"OP_Action",			SP_Zone, DIR_Server|DIR_Client, "actionAltStruct", SZC_Match,
+		(ObjectMember)&Session::m_spellShell, SLOT(action(const uint8_t*, size_t, uint8_t))},
+		{"OP_SimpleMessage",	SP_Zone, DIR_Server, "simpleMessageStruct", SZC_Match,
+		(ObjectMember)&Session::m_spellShell, SLOT(simpleMessage(const uint8_t*, size_t, uint8_t))},
+
+		// Player Opcode Handlers
+		{"OP_SkillUpdate",		SP_Zone, DIR_Server, "skillIncStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(increaseSkill(const uint8_t*))},
+		{"OP_ManaChange",		SP_Zone, DIR_Server, "manaDecrementStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(manaChange(const uint8_t*))},
+		{"OP_ClientUpdate",		SP_Zone, DIR_Server|DIR_Client, "playerSelfPosStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(playerUpdateSelf(const uint8_t*, size_t, uint8_t))},
+		{"OP_ExpUpdate",		SP_Zone, DIR_Server, "expUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(updateExp(const uint8_t*))},
+		{"OP_AAExpUpdate",		SP_Zone, DIR_Server, "altExpUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(updateAltExp(const uint8_t*))},
+		{"OP_LevelUpdate",		SP_Zone, DIR_Server, "levelUpUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(updateLevel(const uint8_t*))},
+		{"OP_HPUpdate",			SP_Zone, DIR_Server|DIR_Client, "hpNpcUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(updateNpcHP(const uint8_t*))},
+		{"OP_WearChange",		SP_Zone, DIR_Server|DIR_Client, "SpawnUpdateStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(updateSpawnInfo(const uint8_t*))},
+		{"OP_Stamina",			SP_Zone, DIR_Server, "staminaStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(updateStamina(const uint8_t*))},
+		{"OP_Consider",			SP_Zone, DIR_Server|DIR_Client, "considerStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(consMessage(const uint8_t*, size_t, uint8_t))},
+		{"OP_SwapSpell",		SP_Zone, DIR_Server, "tradeSpellBookSlotsStruct", SZC_Match,
+		(ObjectMember)&Session::m_player, SLOT(tradeSpellBookSlots(const uint8_t*, size_t, uint8_t))},
+
+		// TODO: This needs to be handled elsewhere? (or not at all?)
+		// GuildManager Opcode Handlers
+		//{"OP_GuildList",		SP_World, DIR_Server, "worldGuildListStruct", SZC_None,
+		//(ObjectMember)&Session::m_guildmgr, SLOT(worldGuildList(const uint8_t*, size_t))},
+
+		// Terminator
+		{NULL}
+	};
+
+
+	DataSourceRegistrationInfo* dsri = registrations;
+	while (dsri->opcodeName != NULL)
+	{
+		handler(dsri, param);
+		dsri++;
+	}
+}
 
 Session::~Session()
 {
@@ -498,9 +622,9 @@ SessionManager::~SessionManager()
 		delete m_dataLocationMgr;
 }
 
-Session* SessionManager::newSession(DataSource*)
+Session* SessionManager::newSession(DataSource* dataSource)
 {
-	return NULL;
+	return new Session(this, dataSource);
 }
 
 QString SessionManager::getUserDirectory()

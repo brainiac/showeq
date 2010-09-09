@@ -54,11 +54,8 @@ class UnknownPacketLog;
 class OPCodeMonitorPacketLog;
 class DataLocationMgr;
 class EQStr;
-class MessageFilters;
-class Messages;
 class MessageShell;
 class MessageWindow;
-class Terminal;
 class MessageFilterDialog;
 class GuildShell;
 class GuildListWindow;
@@ -87,26 +84,10 @@ class EQInterface : public QMainWindow
 {
 	Q_OBJECT
 	
-	MapMgr* m_mapMgr;
-	EQPacket* m_packet;
-	ZoneMgr* m_zoneMgr;
-	FilterMgr* m_filterMgr;
-	SpawnShell* m_spawnShell;
-	SpellShell* m_spellShell;
-	GroupMgr* m_groupMgr;
-	SpawnMonitor* m_spawnMonitor;
-	GuildMgr* m_guildmgr;
-	GuildShell* m_guildShell;
-	MessageFilters* m_messageFilters;
-	Messages* m_messages;
-	MessageShell* m_messageShell;
-	Terminal* m_terminal;
-	FilteredSpawnLog* m_filteredSpawnLog;
-	FilterNotifications* m_filterNotifications;
-	SpawnLog *m_spawnLogger;
-	Player* m_player;
-	
 	SessionManager* m_sm;
+
+	// TODO: At some point, this will become an array of some kind.
+	Session* m_session;
 
 public:
 	EQInterface(SessionManager* sm);
@@ -344,8 +325,8 @@ protected:
 	};
 
 private:
-
-	
+	SpawnLog *m_spawnLogger;
+	FilteredSpawnLog* m_filteredSpawnLog;
 	SpawnPointWindow* m_spawnPointList;
 	BazaarLog* m_bazaarLog;
 #ifndef _WINDOWS
@@ -373,8 +354,8 @@ private:
 	MessageFilterDialog* m_messageFilterDialog;
 	GuildListWindow* m_guildListWindow;
 
-	QString m_ipstr[5];
-	QString m_macstr[5];
+	//QString m_ipstr[5];
+	//QString m_macstr[5];
 
 	// Menu Pieces
 	QMenu* m_netMenu;
@@ -499,24 +480,6 @@ private:
 	QWidget* m_filler;
 
 private:
-
-	// TODO: Migrate this to DataSource once the framework is ready
-	typedef QObject* EQInterface::* ObjectMember;
-
-	struct DataSourceRegistrationInfo
-	{
-		const char* opcodeName;
-		EQStreamPairs sp;
-		uint8_t dir;
-		const char* payload;
-		EQSizeCheckType szt;
-		ObjectMember receiver;	// TODO: This will change
-		const char* member;
-	};
-	typedef void (*DataSourceRegistrationHandler)(DataSourceRegistrationInfo*, void* param);
-
-	static void EnumerateDataSourceRegistration(DataSourceRegistrationHandler handler, void* param);
-	static void ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, void* param);
 
 	// Network initialization
 	void initializeDataSource();
