@@ -58,12 +58,12 @@
 //----------------------------------------------------------------------
 // constants
 
-const in_port_t WorldServerGeneralPort = 9000;
-const in_port_t WorldServerChatPort = 9876;
-const in_port_t WorldServerChat2Port = 9875; // xgame tells, mail
-const in_port_t LoginServerMinPort = 15900;
-const in_port_t LoginServerMaxPort = 15910;
-const in_port_t ChatServerPort = 5998;
+const in_port_t WorldServerGeneralPort		= 9000;
+const in_port_t WorldServerChatPort			= 9876;
+const in_port_t WorldServerChat2Port		= 9875; // xgame tells, mail
+const in_port_t LoginServerMinPort			= 15900;
+const in_port_t LoginServerMaxPort			= 15910;
+const in_port_t ChatServerPort				= 5998;
 
 //----------------------------------------------------------------------
 // Here begins the code
@@ -76,8 +76,9 @@ const in_port_t ChatServerPort = 5998;
 
 ////////////////////////////////////////////////////
 // Constructor
-EQPacket::EQPacket(const QString& worldopcodesxml,
-		const QString& zoneopcodesxml,
+EQPacket::EQPacket(
+		EQPacketOPCodeDB* worldOPCodeDB,
+		EQPacketOPCodeDB* zoneOPCodeDB,
 		uint16_t arqSeqGiveUp,
 		QString device,
 		QString ip,
@@ -87,8 +88,6 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		bool recordPackets,
 		int playbackPackets,
 		int8_t playbackSpeed,
-		bool useRemote,
-		uint32_t portNum,
 		QObject * parent, const char *name)
   : QObject (parent, name),
 #ifndef _WINDOWS
@@ -97,8 +96,6 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 #endif
 	m_timer(NULL),
 	m_busy_decoding(false),
-	m_useRemote(useRemote),
-	m_remotePort(portNum),
 	m_arqSeqGiveUp(arqSeqGiveUp),
 	m_device(device),
 	m_ip(ip),
@@ -109,32 +106,12 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 	m_playbackPackets(playbackPackets),
 	m_playbackSpeed(playbackSpeed)
 {
-	if (m_useRemote)
-	{
-		m_playbackPackets = PLAYBACK_REMOTE;
-	}
+	m_worldOPCodeDB = worldOPCodeDB;
+	m_zoneOPCodeDB  = zoneOPCodeDB;
 
-	// create the packet type db
-	m_packetTypeDB = new EQPacketTypeDB();
 #ifdef PACKET_OPCODEDB_DIAG
 	m_packetTypeDB->list();
-#endif
-
-	// create the world opcode db (with hash size of 29)
-	m_worldOPCodeDB = new EQPacketOPCodeDB(29);
-	// load the world opcode db
-	if (!m_worldOPCodeDB->load(*m_packetTypeDB, worldopcodesxml))
-		seqFatal("Error loading '%s'!", (const char*)worldopcodesxml);
-#ifdef PACKET_OPCODEDB_DIAG
 	m_worldOPCodeDB->list();
-#endif
-
-	// create the zone opcode db (with hash size of 211)
-	m_zoneOPCodeDB = new EQPacketOPCodeDB(211);
-	// load the zone opcode db
-	if (!m_zoneOPCodeDB->load(*m_packetTypeDB, zoneopcodesxml))
-		seqFatal("Error loading '%s'!", (const char*)zoneopcodesxml);
-#ifdef PACKET_OPCODEDB_DIAG
 	m_zoneOPCodeDB->list();
 #endif
 
@@ -204,16 +181,6 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			seqInfo("Listening for client: %s", (const char*)m_ip);
 		}
 	}
-#endif
-
-	m_remoteServer = NULL;
-	if (m_playbackPackets == PLAYBACK_REMOTE)
-	{
-		m_remoteServer = new RemotePacketServer(*m_zoneOPCodeDB, *m_worldOPCodeDB, this, "RemotePacketServer");
-		m_remoteServer->start(m_remotePort);
-		seqInfo("Remote capture mode enabled. ShowEQ will listen for a connection on port %i", m_remotePort);
-	}
-#ifndef _WINDOWS
 	else if (m_playbackPackets == PLAYBACK_OFF)
 	{
 		// create the pcap object and initialize, either with MAC or IP
@@ -236,29 +203,24 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 		m_packetCapture->startOffline(filename, m_playbackSpeed);
 		seqInfo("Playing back packets from '%s' at speed '%d'", filename, m_playbackSpeed);
 	}
-#endif
 
 	// Flag session tracking properly on streams
 	session_tracking(sessionTrackingFlag);
 
-#ifndef _WINDOWS
 	// if running setuid root, then give up root access, since the PacketCapture
 	// is the only thing that needed it.
 	if ((geteuid() == 0) && (getuid() != geteuid()))
 		setuid(getuid());
-#endif
 
 	/* Create timer object */
 	m_timer = new QTimer(this);
 
 	if (m_playbackPackets == PLAYBACK_OFF ||
-		m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP ||
-		m_playbackPackets == PLAYBACK_REMOTE)
+		m_playbackPackets == PLAYBACK_FORMAT_TCPDUMP)
 	{
 		// Normal pcap packet handler
 		connect(m_timer, SIGNAL(timeout()), this, SLOT(processPackets()));
 	}
-#ifndef _WINDOWS
 	else
 	{
 		// Special internal playback handler
@@ -292,11 +254,9 @@ EQPacket::EQPacket(const QString& worldopcodesxml,
 			seqInfo("Playing back packets from '%s' at speed '%d'", filename, m_playbackSpeed);
 		}
 	}
-	else if (m_playbackPackets != PLAYBACK_REMOTE)
-	{
-		m_recordPackets = 0;
-		m_playbackPackets = PLAYBACK_OFF;
-	}
+		
+	m_recordPackets = 0;
+	m_playbackPackets = PLAYBACK_OFF;
 #endif
 }
 
@@ -313,18 +273,6 @@ EQPacket::~EQPacket()
 		// delete the object
 		delete m_packetCapture;
 	}
-#endif
-
-	if (m_remoteServer != NULL)
-	{
-		// stop the packet capture server
-		m_remoteServer->stop();
-
-		// delete the object
-		delete m_remoteServer;
-	}
-
-#ifndef _WINDOWS
 	// try to close down VPacket cleanly
 	if (m_vPacket != NULL)
 	{
@@ -334,7 +282,6 @@ EQPacket::~EQPacket()
 		// delete VPacket
 		delete m_vPacket;
 	}
-#endif
 
 	if (m_timer != NULL)
 	{
@@ -347,27 +294,11 @@ EQPacket::~EQPacket()
 
 	resetEQPacket();
 
-#ifndef _WINDOWS
 	delete m_client2WorldStream;
 	delete m_world2ClientStream;
 	delete m_client2ZoneStream;
 	delete m_zone2ClientStream;
 #endif
-
-	if (m_packetTypeDB)
-	{
-		delete m_packetTypeDB;
-	}
-
-	if (m_zoneOPCodeDB)
-	{
-		delete m_zoneOPCodeDB;
-	}
-
-	if (m_worldOPCodeDB)
-	{
-		delete m_worldOPCodeDB;
-	}
 }
 
 /* Start the timer to process packets */
@@ -395,12 +326,7 @@ void EQPacket::processPackets()
 	if (m_busy_decoding)
 		return;
 
-	if (m_playbackPackets == PLAYBACK_REMOTE)
-	{
-		m_remoteServer->processPackets();
-	}
 #ifndef _WINDOWS
-	else
 	{
 		/* Set flag that we are busy decoding */
 		m_busy_decoding = true;
@@ -968,8 +894,6 @@ void EQPacket::monitorDevice(const QString& dev)
 	// make sure we aren't playing back packets
 	if (m_playbackPackets != PLAYBACK_OFF)
 		return;
-	if (m_useRemote)
-		return;
 
 #ifndef _WINDOWS
 	// stop the current packet capture
@@ -1069,11 +993,6 @@ bool EQPacket::connect2(const QString& opcodeName, EQStreamPairs sp,
 {
 	bool res = false;
 
-	if (m_playbackPackets == PLAYBACK_REMOTE)
-	{
-		return m_remoteServer->connect2(opcodeName, payload, sp, dir, szt, receiver, member);
-	}
-
 #ifndef _WINDOWS
 	if (sp & SP_World)
 	{
@@ -1097,11 +1016,6 @@ bool EQPacket::connect2(const QString& opcodeName, EQStreamPairs sp,
 // Reset EQPacket's state
 void EQPacket::resetEQPacket()
 {
-	if (m_playbackPackets == PLAYBACK_REMOTE)
-	{
-		m_remoteServer->reset();
-	}
-
 #ifndef _WINDOWS
 	m_client2WorldStream->reset();
 	m_client2WorldStream->setSessionTracking(m_session_tracking);
@@ -1123,8 +1037,6 @@ void EQPacket::resetEQPacket()
 const QString EQPacket::pcapFilter()
 {
 	// make sure we aren't playing back packets
-	if (m_playbackPackets == PLAYBACK_REMOTE)
-		return QString("Remote");
 	if (m_playbackPackets != PLAYBACK_OFF)
 		return QString("Playback");
 #ifndef _WINDOWS

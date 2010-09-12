@@ -10,6 +10,7 @@
 #ifndef __SESSION_H__
 #define __SESSION_H__
 
+
 class SessionManager;
 class XMLPreferences;
 
@@ -31,6 +32,8 @@ class Terminal;
 class DataSource;
 
 class EQPacket;
+class EQPacketTypeDB;
+class EQPacketOPCodeDB;
 
 class Session : public QObject
 {
@@ -58,16 +61,15 @@ private:
 	FilterNotifications*	m_filterNotifications;
 	
 	SessionManager*		m_parent;
-	
+	QTimer*				m_timer;
+	int					m_delay;
+
 	XMLPreferences*		m_preferences;
 
 private:
 
-	DataSource*			m_source;
+	DataSource*			m_dataSource;
 
-	// TODO: This is only temporary until DataSource is implemented
-	EQPacket*			m_packet;
-	
 	typedef QObject* Session::* ObjectMember;
 	struct DataSourceRegistrationInfo
 	{
@@ -85,6 +87,10 @@ private:
 	static void ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, void* param);
 
 	void attachSignals();
+
+public slots:
+	//void begin();
+	void updateSource();
 
 public:
 	Session(SessionManager*, DataSource* source = NULL);
@@ -141,17 +147,20 @@ private:
 	EQStr*				m_eqStrings;
 	
 	QString getUserDirectory();
-	
-	// Something to store sessions in
+
+	// Common packet data
+	EQPacketTypeDB*		m_packetTypeDB;
+	EQPacketOPCodeDB*	m_worldOPCodeDB;
+	EQPacketOPCodeDB*	m_zoneOPCodeDB;
 	
 public:
 	SessionManager(QString configFile);
 	virtual ~SessionManager();
 	
-	/* I'm thinking right now, in order to create a new session, we'll require a
-	 * data source which provides the flow of information necessary to create
-	 * the session. */
-	Session* newSession(DataSource*);
+	/* Calling newSession should trigger some sort of interface through 
+	 * an interface controller type class, that enumerates interfaces for
+	 * DataSourceFactory objects. */
+	Session* newSession();
 
 	XMLPreferences* preferences();
 	DataLocationMgr* dataLocationMgr();
@@ -167,7 +176,7 @@ public:
 public slots:		/* Functions for Category Manager */
 	//void addCategory(const Category* category);
 	//void reloadCategories();
-	
+
 public slots:
 	void savePrefs();
 };

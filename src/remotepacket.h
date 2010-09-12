@@ -11,10 +11,13 @@
 
 #include <QtNetwork/QTcpServer>
 #include <QThread>
+#include <QTimer>
 
 #include "packetcommon.h"
 #include "packetinfo.h"
 #include "packet.h"
+
+#include "datasource.h"
 
 class EQPacketOPCode;
 class EQPacketOPCodeDB;
@@ -23,23 +26,25 @@ class QTcpSocket;
 
 #define TEMP_BUFFER_SIZE 512
 
-class RemotePacketServer : public QObject
+class RemotePacketServer : public DataSource
 {
 	Q_OBJECT
 
 public:
 	RemotePacketServer(EQPacketOPCodeDB& zoneOPCodeDB, EQPacketOPCodeDB& worldOPCodeDB,
-					   QObject* parent = NULL, const char *name = NULL);
-	~RemotePacketServer();
+					   QObject* parent = NULL);
+	virtual ~RemotePacketServer();
 
 	// connect a opcode handler to a received opcode
-	bool connect2(const QString& opcodeName, const char* payloadType,
-				  EQStreamPairs sp, uint8_t dir, EQSizeCheckType szt,
-				  const QObject* receiver, const char* member);
+	virtual bool connectReceiver(const QString& opcodeName, const QString& payloadType,
+		EQStreamPairs sp, uint8_t dir, EQSizeCheckType szt,
+		const QObject* receiver, const char* member);
 
-	void start(uint16_t portNum);
-	void stop();
-	void reset();
+	//void start(uint16_t portNum);
+	virtual void start();
+	virtual void stop();
+
+	virtual void update();
 
 	uint16_t getPort() { return m_port; }
 
@@ -51,7 +56,6 @@ signals:
 	void connected(const QString& peer);
 
 public slots:
-	void processPackets();
 	void newConnection();
 	void clientDisconnected();
 
@@ -60,7 +64,6 @@ protected:
 
 	bool assignDispatcher(Dispatcher* dispatcher, const QString& opcodeName, EQPacketPayload* payload,
 			const QObject* receiver, const char* member);
-
 
 	uint16_t m_port;
 	QTcpSocket* m_socket;

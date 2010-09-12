@@ -87,7 +87,7 @@ public:
 	EQPacketPayload();
 	~EQPacketPayload();
 
-	const Q3CString& typeName() const;
+	const QString& typeName() const;
 	bool setType(const EQPacketTypeDB& db, const char* typeName);
 	size_t typeSize() const;
 	EQSizeCheckType sizeCheckType() const;
@@ -98,7 +98,7 @@ public:
 	bool match(const uint8_t* data, size_t size, uint8_t dir) const;
 
 protected:
-	Q3CString m_typeName;
+	QString m_typeName;
 	size_t m_typeSize;
 	EQSizeCheckType m_sizeCheckType;
 	uint8_t m_dir;
@@ -108,7 +108,7 @@ protected:
 typedef Q3PtrList<EQPacketPayload> EQPayloadList;
 typedef Q3PtrListIterator<EQPacketPayload> EQPayloadListIterator;
 
-inline const Q3CString& EQPacketPayload::typeName() const
+inline const QString& EQPacketPayload::typeName() const
 {
 	return m_typeName;
 }

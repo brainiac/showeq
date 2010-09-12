@@ -105,13 +105,14 @@ EQInterface::EQInterface(SessionManager* sm)
 
 	m_creating = true;			// indicate we're constructing the interface
 	m_stateVersion = 1;			// saved state version. change it if drastic changes happen.
-	m_session = m_sm->newSession(NULL);
 
 	createLogs();
 
-	initializeInterface();
+	// TODO: Refactor this part, too
+	m_session = m_sm->newSession();
 
-	m_session->initializeDataSource();
+	// TODO: For now, interface requires a session. but eventually it won't.
+	initializeInterface();
 
 	show();
 

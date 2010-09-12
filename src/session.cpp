@@ -32,7 +32,7 @@
 #include "filternotifications.h"
 #include "datasource.h"
 
-#include "packet.h"
+#include "remotepacket.h"
 
 extern XMLPreferences* pSEQPrefs;
 
@@ -56,6 +56,10 @@ Session::Session(SessionManager* parent, DataSource* source)
 	
 	m_parent = parent;
 	m_preferences = parent->preferences();
+
+	m_timer = new QTimer(this);
+	m_delay = 0;
+	m_dataSource = 0;
 	
 	/***********************************************************************
 	 * Create Message Objects
@@ -199,12 +203,23 @@ void Session::attachSignals()
 void Session::assignSource(DataSource* source)
 {
 	// connects signals from the source to the objects that consume packets
-	m_source = source;
+	m_dataSource = source;
 	
-	if (m_source != NULL)
+	if (m_dataSource != NULL)
 	{	
 		EnumerateDataSourceRegistration(&Session::ConnectNetworkSignalsCallback, this);
+		
+		connect(m_timer, SIGNAL(timeout()), this, SLOT(updateSource()));
+		m_timer->start(m_delay);
+
+		m_dataSource->start();
 	}
+}
+
+void Session::updateSource()
+{
+	if (m_dataSource)
+		m_dataSource->update();
 }
 
 void Session::ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, void* param)
@@ -213,12 +228,9 @@ void Session::ConnectNetworkSignalsCallback(DataSourceRegistrationInfo* dsri, vo
 
 	if (pThis->*(dsri->receiver))
 	{
-		//pThis->m_source->connectReceiver(dsri->opcodeName, dsri->payload,
-		//	(EQStreamPairs)dsri->sp, dsri->dir, 
-		//	(EQSizeCheckType)dsri->szt,	pThis->*(dsri->receiver), dsri->member);
-		pThis->m_packet->connect2(dsri->opcodeName, (EQStreamPairs)dsri->sp,
-			dsri->dir, dsri->payload, (EQSizeCheckType)dsri->szt,
-			pThis->*(dsri->receiver), dsri->member);
+		pThis->m_dataSource->connectReceiver(dsri->opcodeName, dsri->payload,
+			(EQStreamPairs)dsri->sp, dsri->dir, 
+			(EQSizeCheckType)dsri->szt,	pThis->*(dsri->receiver), dsri->member);
 	}
 }
 
@@ -228,15 +240,8 @@ void Session::initializeDataSource()
 	 * Create Packet Provider Object
 	 **********************************************************************/
 
-	/* get world opcodes file */
-	QString fileName = pSEQPrefs->getPrefString("WorldOPCodes", "Network", "worldopcodes.xml");
-	QFileInfo worldOpcodes = m_parent->dataLocationMgr()->findExistingFile(".", fileName);
-
-	/* get zone opcodes file */
-	QString fileName2 = pSEQPrefs->getPrefString("ZoneOPCodes", "Network", "zoneopcodes.xml");
-	QFileInfo zoneOpcodes = m_parent->dataLocationMgr()->findExistingFile(".", fileName2);
-
 	// make packet object
+#if 0
 	m_packet = new EQPacket(worldOpcodes.absFilePath(),
 		zoneOpcodes.absFilePath(),
 		pSEQPrefs->getPrefInt("ArqSeqGiveUp", "Network", 512),
@@ -248,31 +253,24 @@ void Session::initializeDataSource()
 		pSEQPrefs->getPrefBool("Record", "VPacket", false),
 		pSEQPrefs->getPrefInt("Playback", "VPacket", PLAYBACK_OFF),
 		pSEQPrefs->getPrefInt("PlaybackRate", "VPacket", false),
-#ifdef _WINDOWS
-		true,
-		8773,
-#else
-		pSEQPrefs->getPrefBool("Enabled", "RemotePacketServer", false),
-		pSEQPrefs->getPrefUInt("Port", "RemotePacketServer", 8773),
-#endif
 		this, "packet");
-
 	// initialize packet count
-	//m_initialcount = 0;
-	//m_packetStartTime = 0;
+	m_initialcount = 0;
+	m_packetStartTime = 0;
 
 	// Retrieve last IP usd in previous session
-	//m_ipstr[0] = m_packet->ip();
-	//for (int i = 1; i < 5; i++)
-	//	m_ipstr[i] = "0.0.0.0";
+	m_ipstr[0] = m_packet->ip();
+	for (int i = 1; i < 5; i++)
+		m_ipstr[i] = "0.0.0.0";
 
 	// Retrieve last MAC used in previous session
-	//m_macstr[0] = m_packet->mac();
-	//for (int i = 1; i < 5; i++)
-	//	m_macstr[i] = "00:00:00:00:00:00";
+	m_macstr[0] = m_packet->mac();
+	for (int i = 1; i < 5; i++)
+		m_macstr[i] = "00:00:00:00:00:00";
 
 	// Create the network menu
 	//createNetworkMenu();
+#endif
 
 	// connect network signals
 	EnumerateDataSourceRegistration(&Session::ConnectNetworkSignalsCallback, this);
@@ -281,16 +279,16 @@ void Session::initializeDataSource()
 	if (m_parent->dateTimeMgr())
 	{
 		// connect DateTimeMgr slots to EQPacket signals
-		m_packet->connect2("OP_TimeOfDay", SP_Zone, DIR_Server,  "timeOfDayStruct", SZC_Match,
+		m_dataSource->connectReceiver("OP_TimeOfDay", "timeOfDayStruct", SP_Zone, DIR_Server, SZC_Match,
 			m_parent->dateTimeMgr(), SLOT(timeOfDay(const uint8_t*)));
 	}
 
 	// connect interface slots to Packet signals
-	m_packet->connect2("OP_TargetMouse", SP_Zone, DIR_Client|DIR_Server, "clientTargetStruct", SZC_Match,
+	m_dataSource->connectReceiver("OP_TargetMouse", "clientTargetStruct", SP_Zone, DIR_Client | DIR_Server, SZC_Match,
 		this, SLOT(clientTarget(const uint8_t*)));
-	m_packet->connect2("OP_Action2", SP_Zone, DIR_Client|DIR_Server, "action2Struct", SZC_Match,
+	m_dataSource->connectReceiver("OP_Action2", "action2Struct", SP_Zone, DIR_Client|DIR_Server, SZC_Match,
 		this, SLOT(action2Message(const uint8_t*)));
-	m_packet->connect2("OP_Death", SP_Zone, DIR_Server, "newCorpseStruct", SZC_Match,
+	m_dataSource->connectReceiver("OP_Death", "newCorpseStruct", SP_Zone, DIR_Server, SZC_Match,
 		this, SLOT(combatKillSpawn(const uint8_t*)));
 
 	// TODO: Attach these signals (these aren't packet signals, but rather signals related to the packet manager)
@@ -300,7 +298,7 @@ void Session::initializeDataSource()
 	//connect(m_packet, SIGNAL(resetPacket(int, int)), this, SLOT(resetPacket(int, int)));
 
 	/* Start the packet capturing */
-	m_packet->start(10);
+	//m_packet->start(10);
 }
 
 
@@ -529,8 +527,8 @@ Session::~Session()
 	
 	m_parent = NULL;
 	
-	if (m_source != NULL)
-		delete m_source;
+	if (m_dataSource != NULL)
+		delete m_dataSource;
 }
 
 
@@ -603,6 +601,27 @@ SessionManager::SessionManager(QString configFile)
 	
 	// Connect some signals
 	connect(this, SLOT(savePrefs()), m_categories, SLOT(savePrefs()));
+
+	
+	/* get world opcodes file */
+	QString fileName = pSEQPrefs->getPrefString("WorldOPCodes", "Network", "worldopcodes.xml");
+	QFileInfo worldOpcodes = m_dataLocationMgr->findExistingFile(".", fileName);
+
+	/* get zone opcodes file */
+	QString fileName2 = pSEQPrefs->getPrefString("ZoneOPCodes", "Network", "zoneopcodes.xml");
+	QFileInfo zoneOpcodes = m_dataLocationMgr->findExistingFile(".", fileName2);
+
+	m_packetTypeDB		= new EQPacketTypeDB();	
+	m_worldOPCodeDB		= new EQPacketOPCodeDB(29);
+	m_zoneOPCodeDB		= new EQPacketOPCodeDB(211);
+
+	// load the world opcode db
+	if (!m_worldOPCodeDB->load(*m_packetTypeDB, worldOpcodes.absFilePath()))
+		seqFatal("Error loading '%s'!", (const char*)worldOpcodes.absFilePath());
+
+	// load the zone opcode db
+	if (!m_zoneOPCodeDB->load(*m_packetTypeDB, zoneOpcodes.absFilePath()))
+		seqFatal("Error loading '%s'!", (const char*)zoneOpcodes.absFilePath());
 }
 
 SessionManager::~SessionManager()
@@ -622,9 +641,17 @@ SessionManager::~SessionManager()
 		delete m_dataLocationMgr;
 }
 
-Session* SessionManager::newSession(DataSource* dataSource)
+Session* SessionManager::newSession()
 {
-	return new Session(this, dataSource);
+	// TODO: implement data source selection code
+	Session* session		= new Session(this);
+	DataSource* dataSource	= new RemotePacketServer(*m_zoneOPCodeDB, *m_worldOPCodeDB, session);
+
+	// This might want to go elsewhere
+	session->assignSource(dataSource);
+	session->initializeDataSource();
+
+	return session;
 }
 
 QString SessionManager::getUserDirectory()

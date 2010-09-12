@@ -11,7 +11,7 @@
 #include "datasource.h"
 
 
-DataSource::DataSource()
+DataSource::DataSource(QObject* parent) : QObject(parent)
 {
 }
 
@@ -19,30 +19,8 @@ DataSource::~DataSource()
 {
 }
 
-bool DataSource::connectReceiver(const QString& messageName, const QString& payloadName,
-		const QObject* receiver, const char* member)
-{
-	return false;
-}
-
-bool DataSource::connectReceiver(const QString& messageName, const QString& payloadName,
-		EQStreamPairs sp, uint8_t dir, EQSizeCheckType szt, const QObject* receiver, const char* member)
-{
-	return false;
-}
-
-void DataSource::clearConnections()
-{
-}
-
-void DataSource::start()
-{
-}
-
-void DataSource::stop()
-{
-}
-
 void DataSource::reset()
 {
+	stop();
+	start();
 }

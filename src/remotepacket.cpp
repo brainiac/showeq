@@ -44,27 +44,21 @@ struct TransferPacketStruct
 uint8_t RemotePacketServer::s_tempBuffer[TEMP_BUFFER_SIZE] = { 0 };
 
 // RemotePacketServer implementation
-RemotePacketServer::RemotePacketServer(EQPacketOPCodeDB& zoneOPCodeDB, EQPacketOPCodeDB& worldOPCodeDB,
-									   QObject* parent, const char* name)
-  : QObject(parent, name),
+RemotePacketServer::RemotePacketServer(EQPacketOPCodeDB& zoneOPCodeDB, EQPacketOPCodeDB& worldOPCodeDB, QObject* parent)
+  : DataSource(parent),
 	m_zoneOPCodeDB(zoneOPCodeDB),
 	m_worldOPCodeDB(worldOPCodeDB)
 {
 	m_socket = NULL;
-	m_port = 0;
+	m_port = 8773;
 	m_nextMessageType = MSG_Invalid;
 	m_nextBufferSize = 0;
-
-	// create the tcp server with parent
-	m_server = new QTcpServer(this);
-	m_server->setMaxPendingConnections(1);
-	connect(m_server, SIGNAL(newConnection()), this, SLOT(newConnection()));
+	m_server = NULL;
 }
 
 RemotePacketServer::~RemotePacketServer()
 {
-	if (m_socket)
-		delete m_socket;
+	stop();
 
 	if (!m_sendDispatchers.isEmpty())
 	{
@@ -93,7 +87,7 @@ RemotePacketServer::~RemotePacketServer()
 
 // Dispatcher framework, copied from packetstream.cpp.
 // TODO: Factor out this code from here and packetstream.cpp into a new subclass.
-bool RemotePacketServer::connect2(const QString& opcodeName, const char* payloadType,
+bool RemotePacketServer::connectReceiver(const QString& opcodeName, const QString& payloadType,
 		EQStreamPairs sp, uint8_t dir, EQSizeCheckType szt,
 		const QObject* receiver, const char* member)
 {
@@ -323,7 +317,7 @@ void RemotePacketServer::handlePacket(uint32_t type, const uint8_t* data, uint32
 	}
 }
 
-void RemotePacketServer::processPackets()
+void RemotePacketServer::update()
 {
 	if (!m_socket)
 		return;
@@ -366,18 +360,25 @@ void RemotePacketServer::processPackets()
 	}
 }
 
-void RemotePacketServer::start(uint16_t port)
+void RemotePacketServer::start()
 {
-	m_port = port;
-	m_server->listen(QHostAddress::Any, port);
+	if (!m_server)
+	{
+		// create the tcp server with parent
+		m_server = new QTcpServer(this);
+		m_server->setMaxPendingConnections(1);
+		m_server->listen(QHostAddress::Any, m_port);
+
+		connect(m_server, SIGNAL(newConnection()), this, SLOT(newConnection()));
+		seqInfo("Remote capture mode enabled. ShowEQ will listen for a connection on port %i", m_port);
+	}
 }
 
 void RemotePacketServer::stop()
 {
-	// TODO: What should be done to stop?
-}
-
-void RemotePacketServer::reset()
-{
-	// TODO: What should be done to reset?
+	if (m_server)
+	{
+		delete m_server;
+		m_server = NULL;
+	}
 }

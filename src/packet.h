@@ -51,8 +51,8 @@ class EQPacket : public QObject
 	Q_OBJECT
 
 public:
-	EQPacket(const QString& worldopcodesxml,
-			 const QString& zoneopcodesxml,
+	EQPacket(EQPacketOPCodeDB* worldOPCodeDB,
+			 EQPacketOPCodeDB* zoneOPCodeDB,
 			 uint16_t m_arqSeqGiveUp,
 			 QString m_device,
 			 QString m_ip,
@@ -62,8 +62,6 @@ public:
 			 bool m_recordPackets,
 			 int m_playbackPackets,
 			 int8_t m_playbackSpeed,
-			 bool useRemote,
-			 uint32_t remotePort,
 			 QObject *parent,
 			 const char *name);
 	~EQPacket();
@@ -142,18 +140,14 @@ private:
 	VPacket* m_vPacket;
 #endif
 	QTimer* m_timer;
+	EQPacketOPCodeDB*	m_worldOPCodeDB;
+	EQPacketOPCodeDB*	m_zoneOPCodeDB;
 
 	in_port_t m_serverPort;
 	in_port_t m_clientPort;
 	bool m_busy_decoding;
 	bool m_detectingClient;
 	in_addr_t m_client_addr;
-
-	// Used for remote packet capture
-	bool m_useRemote;
-	uint32_t m_remotePort;
-	RemotePacketServer* m_remoteServer;
-
 	uint16_t m_arqSeqGiveUp;
 	QString m_device;
 	QString m_ip;
@@ -170,13 +164,7 @@ private:
 	EQPacketStream* m_client2ZoneStream;
 	EQPacketStream* m_zone2ClientStream;
 	EQPacketStream* m_streams[MAXSTREAMS];
-#endif
 
-	EQPacketTypeDB* m_packetTypeDB;
-	EQPacketOPCodeDB* m_worldOPCodeDB;
-	EQPacketOPCodeDB* m_zoneOPCodeDB;
-
-#ifndef _WINDOWS
 	void connectStream(EQPacketStream* stream);
 	void dispatchPacket(int size, unsigned char *buffer);
 	void dispatchPacket(EQUDPIPPacketFormat& packet);
