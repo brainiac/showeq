@@ -36,23 +36,26 @@ class SpawnListMenu;
 
 //--------------------------------------------------
 // constants
-const int tSpawnColName = 0;
-const int tSpawnColLevel = 1;
-const int tSpawnColHP = 2;
-const int tSpawnColMaxHP = 3;
-const int tSpawnColXPos = 4;
-const int tSpawnColYPos = 5;
-const int tSpawnColZPos = 6;
-const int tSpawnColID   = 7;
-const int tSpawnColDist = 8;
-const int tSpawnColRace = 9;
-const int tSpawnColClass = 10;
-const int tSpawnColInfo = 11;
-const int tSpawnColSpawnTime =12;
-const int tSpawnColDeity = 13;
-const int tSpawnColBodyType = 14;
-const int tSpawnColGuildID = 15;
-const int tSpawnColMaxCols = 16;
+enum SpawnColumns
+{
+	tSpawnColName,
+	tSpawnColLevel,
+	tSpawnColHP,
+	tSpawnColMaxHP,
+	tSpawnColXPos,
+	tSpawnColYPos,
+	tSpawnColZPos,
+	tSpawnColID,
+	tSpawnColDist,
+	tSpawnColRace,
+	tSpawnColClass,
+	tSpawnColInfo,
+	tSpawnColSpawnTime,
+	tSpawnColDeity,
+	tSpawnColBodyType,
+	tSpawnColGuildID,
+	tSpawnColMaxCols
+};
 
 //--------------------------------------------------
 // SpawnListItem

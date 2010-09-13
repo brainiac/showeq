@@ -390,20 +390,15 @@ void MapMgr::loadFileMap (const QString& fileName, bool import, bool force)
 		m_mapData.loadSOEMap(fileName, import);
 
 	const ItemMap& itemMap = m_spawnShell->spawns();
-	ItemConstIterator it(itemMap);
-	const Item* item;
-	uint16_t range;
 
 	// iterate over the exixsting spawns to adjust the map size and find
 	// ones with aggro information
-	for (; it.current(); ++it)
+	foreach(const Item* item, itemMap)
 	{
-		// get the item from the list
-		item = it.current();
-
 		// Adjust X and Y for spawns on map
 		m_mapData.quickCheckPos(item->x(), item->y());
 
+		uint16_t range = 0;
 		if (m_mapData.isAggro(item->transformedName(), &range))
 		{
 			// create a range to insert into the dictionary
@@ -3130,23 +3125,15 @@ void Map::paintDrops(MapParameters& param, QPainter& p)
 	seqDebug("Paint the dropped items");
 #endif
 	const ItemMap& itemMap = m_spawnShell->drops();
-	ItemConstIterator it(itemMap);
-	const Item* item;
 	const QRect& screenBounds = m_param.screenBounds();
-	MapIcon mapIcon;
-	uint32_t filterFlags;
-	uint8_t flag;
 
 	// all drops are the same color
 	p.setPen(yellow);
 
 	/* Paint the dropped items */
-	for (; it.current(); ++it)
+	foreach(const Item* item, itemMap)
 	{
-		// get the item from the list
-		item = it.current();
-
-		filterFlags = item->filterFlags();
+		uint32_t filterFlags = item->filterFlags();
 
 		// make sure drop is within bounds
 		if (!inRect(screenBounds, item->x(), item->y())
@@ -3157,14 +3144,14 @@ void Map::paintDrops(MapParameters& param, QPainter& p)
 			continue;
 		}
 
-		mapIcon = m_mapIcons->icon(tIconTypeDrop);
+		MapIcon mapIcon = m_mapIcons->icon(tIconTypeDrop);
 
 		// only bother checking for specific flags if any are set...
 		if (filterFlags != 0)
 		{
 			for (int i = 0; i < SIZEOF_FILTERS; i++)
 			{
-				flag = m_filterCheckOrdering[i];
+				uint8_t flag = m_filterCheckOrdering[i];
 				if (filterFlags & (1 << flag))
 					mapIcon.combine(m_mapIcons->icon(tIconTypeFilterFlagBase + flag));
 			}
@@ -3185,37 +3172,30 @@ void Map::paintDoors(MapParameters& param, QPainter& p)
 	seqDebug("Paint the door items");
 #endif
 	const ItemMap& itemMap = m_spawnShell->doors();
-	ItemConstIterator it(itemMap);
-	const Door* item;
 	const QRect& screenBounds = m_param.screenBounds();
-	MapIcon mapIcon;
-	uint32_t filterFlags;
-	uint8_t flag;
 
 	// doors only come in one color
 	p.setPen(QColor (110, 60, 0));
 
 	/* Paint the door items */
-	for (; it.current(); ++it)
+	foreach(const Item* item, itemMap)
 	{
-		// get the item from the list
-		item = (const Door*)it.current();
-
-		filterFlags = item->filterFlags();
+		Door* door = (Door*)item;
+		uint32_t filterFlags = door->filterFlags();
 
 		// make sure doors are within bounds
-		if (!inRect(screenBounds, item->x(), item->y())
+		if (!inRect(screenBounds, door->x(), door->y())
 			|| (m_spawnDepthFilter &&
-				((item->z() > m_param.playerHeadRoom()) || (item->z() < m_param.playerFloorRoom())))
+				((door->z() > m_param.playerHeadRoom()) || (door->z() < m_param.playerFloorRoom())))
 			|| (!m_showFiltered && (filterFlags & FILTER_FLAG_FILTERED)))
 		{
 			continue;
 		}
 
-		mapIcon = m_mapIcons->icon(tIconTypeDoor);
+		MapIcon mapIcon = m_mapIcons->icon(tIconTypeDoor);
 
 		// add zone door effects
-		if (item->zonePoint() != 0xFFFFFFFF)
+		if (door->zonePoint() != 0xFFFFFFFF)
 			mapIcon.combine(m_mapIcons->icon(tIconTypeZoneDoor));
 
 		// only bother checking for specific flags if any are set...
@@ -3223,18 +3203,18 @@ void Map::paintDoors(MapParameters& param, QPainter& p)
 		{
 			for (int i = 0; i < SIZEOF_FILTERS; i++)
 			{
-				flag = m_filterCheckOrdering[i];
+				uint8_t flag = m_filterCheckOrdering[i];
 				if (filterFlags & (1 << flag))
 					mapIcon.combine(m_mapIcons->icon(tIconTypeFilterFlagBase + flag));
 			}
 		}
 
 		// check runtime filter flags
-		if (item->runtimeFilterFlags() & m_runtimeFilterFlagMask)
+		if (door->runtimeFilterFlags() & m_runtimeFilterFlagMask)
 			mapIcon.combine(m_mapIcons->icon(tIconTypeRuntimeFiltered));
 
 		// paint the icon
-		m_mapIcons->paintItemIcon(param, p, mapIcon, item, QPoint(param.calcXOffsetI(item->x()), param.calcYOffsetI(item->y())));
+		m_mapIcons->paintItemIcon(param, p, mapIcon, door, QPoint(param.calcXOffsetI(door->x()), param.calcYOffsetI(door->y())));
 	}
 }
 
@@ -3374,8 +3354,6 @@ void Map::paintSpawns(MapParameters& param, QPainter& p, const QTime& drawTime)
 	seqDebug("Paint the spawns");
 #endif
 	const ItemMap& itemMap = m_spawnShell->spawns();
-	ItemConstIterator it(itemMap);
-	const Item* item;
 	Q3PointArray  atri(3);
 	QString spawnNameText;
 	QFontMetrics fm(param.font());
@@ -3387,7 +3365,6 @@ void Map::paintSpawns(MapParameters& param, QPainter& p, const QTime& drawTime)
 	uint16_t range;
 	int scaledRange;
 	int sizeWH;
-	uint32_t filterFlags;
 	const QRect& screenBounds = m_param.screenBounds();
 	MapIcon mapIcon;
 	bool up2date = false;
@@ -3395,14 +3372,8 @@ void Map::paintSpawns(MapParameters& param, QPainter& p, const QTime& drawTime)
 	/* Paint the spawns */
 	const Spawn* spawn;
 	// iterate over all spawns in of the current type
-	while (it.current())
+	foreach (const Item* item, itemMap)
 	{
-		// get the item from the list
-		item = it.current();
-
-		// increment iterator to the next spawn
-		++it;
-
 #ifdef DEBUGMAP
 		spawn = spawnType(item);
 
@@ -3417,7 +3388,7 @@ void Map::paintSpawns(MapParameters& param, QPainter& p, const QTime& drawTime)
 		spawn = (const Spawn*)item;
 #endif
 
-		filterFlags = item->filterFlags();
+		uint32_t filterFlags = item->filterFlags();
 
 		if (((m_spawnDepthFilter && ((item->z() > m_param.playerHeadRoom()) || (item->z() < m_param.playerFloorRoom())))
 			|| (!m_showFiltered && (filterFlags & FILTER_FLAG_FILTERED))
@@ -4048,7 +4019,6 @@ const Item* Map::closestSpawnToPoint(const QPoint& pt, uint32_t& closestDistance
 	EQPoint location;
 	EQPoint testPoint;
 
-	const Item* item;
 	spawnItemType itemTypes[] = { tSpawn, tDrop, tDoors, tPlayer };
 	const bool* showType[] = { &m_showSpawns, &m_showDrops, &m_showDoors, &m_showPlayer };
 
@@ -4058,18 +4028,16 @@ const Item* Map::closestSpawnToPoint(const QPoint& pt, uint32_t& closestDistance
 			continue;
 
 		const ItemMap& itemMap = m_spawnShell->getConstMap(itemTypes[i]);
-		ItemConstIterator it(itemMap);
 
 		// iterate over all spawns in of the current type
-		for (; it.current(); ++it)
+		foreach(const Item* item, itemMap)
 		{
-			// get the item from the list
-			item = it.current();
-
-			if (m_spawnDepthFilter &&
-				((item->z() > m_param.playerHeadRoom()) ||
-				(item->z() < m_param.playerFloorRoom())))
+			if (m_spawnDepthFilter
+				&& ((item->z() > m_param.playerHeadRoom())
+					|| (item->z() < m_param.playerFloorRoom())))
+			{
 				continue;
+			}
 
 			if (!m_showFiltered && (item->filterFlags() & FILTER_FLAG_FILTERED))
 				continue;

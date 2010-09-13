@@ -108,7 +108,7 @@ spawnItemType SpawnListItem::type()
 
 int SpawnListItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 {
-	if (col == 0) // Name
+	if (col == tSpawnColName) // Name
 		return key(col, ascending).compare(i->key(col, ascending));
 
 	if (m_item == NULL)
@@ -141,17 +141,17 @@ int SpawnListItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 	{
 		switch (col)
 		{
-			case 1: // Level
+			case tSpawnColLevel: // Level
 				if (spawn->level() == other_spawn->level())
 					return 0;
 				else
 					return spawn->level() < other_spawn->level() ? -1 : 1;
-			case 2: // Current HP
+			case tSpawnColHP: // Current HP
 				if (spawn->HP() == other_spawn->HP())
 					return 0;
 				else
 					return spawn->HP() < other_spawn->HP() ? -1 : 1;
-			case 3: // Max HP
+			case tSpawnColMaxHP: // Max HP
 				if (spawn->maxHP() == other_spawn->maxHP())
 					return 0;
 				else
@@ -173,27 +173,27 @@ int SpawnListItem::compare(Q3ListViewItem *i, int col, bool ascending) const
 	// Generic Item compares
 	switch (col)
 	{
-		case 4:   // X Position
+		case tSpawnColXPos:   // X Position
 			if (item->x() == other_item->x())
 				return 0;
 			else
 				return item->x() < other_item->x() ? -1 : 1;
-		case 5:   // Y Position
+		case tSpawnColYPos:   // Y Position
 			if (item->y() == other_item->y())
 				return 0;
 			else
 				return item->y() < other_item->y() ? -1 : 1;
-		case 6:   // Z Position
+		case tSpawnColZPos:   // Z Position
 			if (item->z() == other_item->z())
 				return 0;
 			else
 				return item->z() < other_item->z() ? -1 : 1;
-		case 7:   // ID
+		case tSpawnColID:   // ID
 			if (item->id() == other_item->id())
 				return 0;
 			else
 				return item->id() < other_item->id() ? -1 : 1;
-		case 8:   // Distance
+		case tSpawnColDist:   // Distance
 			if (item->getIDistanceToPlayer() == other_item->getIDistanceToPlayer())
 				return 0;
 			else

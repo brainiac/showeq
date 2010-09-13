@@ -49,10 +49,14 @@ void BazaarLog::bazaarSearch(const uint8_t* data, size_t len, uint8_t dir)
 		char *p;
 		if ((p = strrchr(name, '(')) != NULL && isdigit(*(p + 1)))
 			*p = 0;
-		Item *merchant = m_shell.spawns().find(resp.player_id);
+
 		const char *merchant_name = "unknown";
-		if (merchant)
+
+		if (Item* merchant = m_shell.spawns().value(resp.player_id))
+		{
 			merchant_name = merchant->name();
+		}
+
 		QString csv;
 		csv.sprintf("1^%d^%d^%d^%s^%s", int(time(NULL)), resp.price, resp.count, merchant_name, name);
 		m_out << csv << endl;

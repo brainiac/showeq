@@ -848,25 +848,17 @@ void SpawnList::populateCategory(const Category* cat)
 	spawnItemType types[] = { tSpawn, tDrop, tDoors, tPlayer};
 
 	int flags = 0;
-	const ItemMap& itemMap = m_spawnShell->spawns();
-	ItemConstIterator it(itemMap);
-	const Item* item;
-	SpawnListItem* litem;
 	SpawnListItem* catlitem = m_categoryListItems.find((void*)cat);
 
 	// iterate over all spawn types
 	for (uint8_t i = 0; i < (sizeof(types) / sizeof(spawnItemType)); i++)
 	{
 		const ItemMap& itemMap = m_spawnShell->getConstMap(types[i]);
-		ItemConstIterator it(itemMap);
 		uint8_t level = 0;
 
 		// iterate over all spawns in of the current type
-		for (; it.current(); ++it)
+		foreach(const Item* item, itemMap)
 		{
-			// get the item from the list
-			item = it.current();
-
 			// skip filtered spawns
 			if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
 				!cat->isFilteredFilter())
@@ -880,7 +872,7 @@ void SpawnList::populateCategory(const Category* cat)
 			if (cat->isFiltered(filterString(item, flags), level))
 			{
 				// yes, add it
-				litem = new SpawnListItem(catlitem);
+				SpawnListItem* litem = new SpawnListItem(catlitem);
 
 				// set up the list item
 				litem->setShellItem(item);
@@ -913,30 +905,22 @@ void SpawnList::populateSpawns()
 	// only deal with categories if there are some to deal with
 	if (m_categoryMgr->count() != 0)
 	{
-		const ItemMap& itemMap = m_spawnShell->spawns();
-		ItemConstIterator it(itemMap);
-		const Category* cat;
-		QString filterStr;
 		CategoryListIterator cit(m_categoryMgr->getCategories());
 
 		// iterate over all spawn types
 		for (uint8_t i = 0; i < (sizeof(types) / sizeof(spawnItemType)); i++)
 		{
 			const ItemMap& itemMap = m_spawnShell->getConstMap(types[i]);
-			ItemConstIterator it(itemMap);
 			uint8_t level = 0;
 
 			// iterate over all spawns in of the current type
-			for (; it.current(); ++it)
+			foreach(const Item* item, itemMap)
 			{
-				// get the item from the list
-				item = it.current();
-
 				// retrieve the filter string
-				filterStr = filterString(item, flags);
+				QString filterStr = filterString(item, flags);
 
 				// iterate over all the categories
-				for (cat = cit.toFirst(); cat != NULL; cat = ++cit)
+				for (const Category* cat = cit.toFirst(); cat != NULL; cat = ++cit)
 				{
 					// skip filtered spawns
 					if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
@@ -969,7 +953,7 @@ void SpawnList::populateSpawns()
 
 		// done adding items, now iterate over all the categories and
 		// update the counts
-		for (cat = cit.toFirst(); cat != NULL; cat = ++cit)
+		for (const Category* cat = cit.toFirst(); cat != NULL; cat = ++cit)
 		{
 			catlitem =  m_categoryListItems.find((void*)cat);
 			catlitem->updateTitle(cat->name());
@@ -983,14 +967,10 @@ void SpawnList::populateSpawns()
 		for (uint8_t i = 0; i < (sizeof(types) / sizeof(spawnItemType)); i++)
 		{
 			const ItemMap& itemMap = m_spawnShell->getConstMap(types[i]);
-			ItemConstIterator it(itemMap);
 
 			// iterate over all spawns in of the current type
-			for (; it.current(); ++it)
+			foreach(const Item* item, itemMap)
 			{
-				// get the item from the list
-				item = it.current();
-
 				// just create a new SpawnListItem
 				litem = new SpawnListItem(this);
 				litem->setShellItem(item);

@@ -8,12 +8,15 @@
 #ifndef SPAWNLIST2_H
 #define SPAWNLIST2_H
 
-#include <Q3PtrDict>
-#include <Q3PopupMenu>
+#include <QHash>
+#include <QTableView>
+#include <QTreeView>
 
 #include "seqwindow.h"
 #include "seqlistview.h"
 #include "spawnlistcommon.h"
+
+//#define NEW_SPAWNLIST
 
 //--------------------------------------------------
 // forward declarations
@@ -27,6 +30,8 @@ class QComboBox;
 class QTimer;
 class QSpinBox;
 class QLabel;
+
+class Item;
 
 class SpawnListWindow2 : public SEQWindow
 {
@@ -72,7 +77,8 @@ public slots:
 	void rebuildSpawnList();
 	void refresh();
 	virtual void savePrefs();
-	private slots:
+
+private slots:
 	// category combo box signals
 	void categorySelected(int index);
 
@@ -108,14 +114,19 @@ private:
 	const Item* m_selectedItem;
 
 	// GUI Items
-	QComboBox* m_categoryCombo;
-	QSpinBox* m_fpmSpinBox;
-	SEQListView* m_spawnList;
-	SpawnListMenu* m_menu;
-	QLineEdit* m_totalSpawns;
+	QComboBox*		m_categoryCombo;
+	QSpinBox*		m_fpmSpinBox;
+#ifndef NEW_SPAWNLIST
+	SEQListView*	m_spawnList;
+#else
+	QTreeView*		m_tableView;
+#endif
+	SpawnListMenu*	m_menu;
+	QLineEdit*		m_totalSpawns;
+
 
 	// index dictionary for retrieving SpawnListItems by Item
-	Q3PtrDict<SpawnListItem> m_spawnListItemDict;
+	QHash<const Item*, SpawnListItem*> m_spawnListItemDict;
 
 	// timer used
 	QTimer* m_timer;

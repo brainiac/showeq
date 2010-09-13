@@ -4234,14 +4234,15 @@ void EQInterface::saveSpawnPaths()
 			<< m_session->zoneMgr()->shortZoneName() << ",0,0" << endl;
 
 		// iterate over the spawns adding their paths to the file
-		ItemConstIterator it(m_session->spawnShell()->getConstMap(tSpawn));
-		const Item* item;
-		for (item = it.current(); item != 0; item = ++it)
+		const ItemMap& itemMap = m_session->spawnShell()->getConstMap(tSpawn);
+		foreach(const Item* item, itemMap)
 		{
-			if ((item->NPC() == SPAWN_NPC) ||
-				(item->NPC() == SPAWN_NPC_CORPSE) ||
-				(item->NPC() == SPAWN_NPC_UNKNOWN))
-				saveSpawnPath(out, it.current());
+			if ((item->NPC() == SPAWN_NPC)
+				|| (item->NPC() == SPAWN_NPC_CORPSE)
+				|| (item->NPC() == SPAWN_NPC_UNKNOWN))
+			{
+				saveSpawnPath(out, item);
+			}
 		}
 
 		seqInfo("Finished writing '%s'!\n", (const char*)fileName);
@@ -4897,7 +4898,7 @@ void EQInterface::showSpawnList2()
 		connect(this, SIGNAL(restoreFonts()), m_spawnList2, SLOT(restoreFont()));
 
 		// insert its menu into the window menu
-		insertWindowMenu(m_spawnList2);
+		//insertWindowMenu(m_spawnList2);
 	}
 
 	// make sure it's visible

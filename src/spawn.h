@@ -138,35 +138,13 @@ public:
 	void setDistanceToPlayer(uint32_t);
 	void setPos(int16_t x, int16_t y, int16_t z);
 	void setHeading(int8_t heading) { m_heading = heading; }
+	void setName(const char *name) { m_name = QString::fromUtf8(name); }
+	void setName(const QString& name) { m_name = name; }
+	void setFilterFlags(uint32_t filterFlags) { m_filterFlags = filterFlags; }
+	void setRuntimeFilterFlags(uint32_t filterFlags) { m_runtimeFilterFlags = filterFlags; }
 
-	void setName(const char *name)
-	{
-		m_name = QString::fromUtf8(name);
-	}
-
-	void setName(const QString& name)
-	{
-		m_name = name;
-	}
-
-	void updateLast()
-	{
-		m_lastUpdate.restart();
-	}
-	void updateLastChanged()
-	{
-		m_lastChanged = time(NULL);
-	}
-
-	void setFilterFlags(uint32_t filterFlags)
-	{
-		m_filterFlags = filterFlags;
-	}
-
-	void setRuntimeFilterFlags(uint32_t filterFlags)
-	{
-		m_runtimeFilterFlags = filterFlags;
-	}
+	void updateLast() {	m_lastUpdate.restart(); }
+	void updateLastChanged() { m_lastChanged = time(NULL); }
 
 protected:
 	void setNPC(uint8_t NPC) { m_NPC = NPC; }
@@ -256,45 +234,14 @@ public:
 	virtual QString dumpString() const;
 
 	// convenience test methods
-	bool isSelf() const
-	{
-		return (m_NPC == SPAWN_SELF);
-	}
-
-	bool isCorpse() const
-	{
-		return ((m_NPC == SPAWN_PC_CORPSE) || (m_NPC == SPAWN_NPC_CORPSE));
-	}
-
-	bool isPlayer() const
-	{
-		return ((m_NPC == SPAWN_PLAYER) || (m_NPC == SPAWN_SELF));
-	}
-
-	bool isOtherPlayer() const
-	{
-		return (m_NPC == SPAWN_PLAYER);
-	}
-
-	bool isNPC() const
-	{
-		return (m_NPC == SPAWN_NPC);
-	}
-
-	bool isUnknown() const
-	{
-		return (m_NPC == SPAWN_NPC_UNKNOWN);
-	}
-
-	bool isSameRaceTeam(const Spawn* spawn) const
-	{
-		return (raceTeam() == spawn->raceTeam());
-	}
-
-	bool isSameDeityTeam(const Spawn* spawn) const
-	{
-		return (deityTeam() == spawn->deityTeam());
-	}
+	bool isSelf() const { return (m_NPC == SPAWN_SELF); }
+	bool isCorpse() const { return ((m_NPC == SPAWN_PC_CORPSE) || (m_NPC == SPAWN_NPC_CORPSE)); }
+	bool isPlayer() const { return ((m_NPC == SPAWN_PLAYER) || (m_NPC == SPAWN_SELF)); }
+	bool isOtherPlayer() const { return (m_NPC == SPAWN_PLAYER); }
+	bool isNPC() const { return (m_NPC == SPAWN_NPC); }
+	bool isUnknown() const { return (m_NPC == SPAWN_NPC_UNKNOWN); }
+	bool isSameRaceTeam(const Spawn* spawn) const { return (raceTeam() == spawn->raceTeam()); }
+	bool isSameDeityTeam(const Spawn* spawn) const { return (deityTeam() == spawn->deityTeam()); }
 
 	// virtual set method overload
 	void setPos(int16_t x, int16_t Pos, int16_t z, bool walkpathrecord = false, size_t walkpathlength = 0);

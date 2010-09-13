@@ -16,8 +16,9 @@
 #ifndef SPELLSHELL_H
 #define SPELLSHELL_H
 
-#include <Q3ValueList>
-#include <Q3ListView>
+#include <QList>
+#include <QString>
+#include <QTimer>
 
 #include "everquest.h"
 
@@ -204,13 +205,12 @@ protected:
 	void deleteSpell(SpellItem *);
 	SpellItem* findSpell(uint16_t spellId, uint16_t targetId, const QString& targetName);
 	SpellItem* findSpell(int spell_id);
-	SpellItem* FindSpell(int spell_id, int target_id);
 
 private:
 	Player* m_player;
 	SpawnShell* m_spawnShell;
 	Spells* m_spells;
-	Q3ValueList<SpellItem *> m_spellList;
+	QList<SpellItem *> m_spellList;
 	SpellItem* m_lastPlayerSpell;
 	QTimer *m_timer;
 };

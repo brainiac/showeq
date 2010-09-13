@@ -20,10 +20,9 @@
 #ifndef SPAWNSHELL_H
 #define SPAWNSHELL_H
 
-#include <Q3IntDict>
-
 #include "everquest.h"
 #include "spawn.h"
+#include "spawnmodel.h"
 
 //----------------------------------------------------------------------
 // forward declarations
@@ -31,7 +30,6 @@ class Player;
 class ZoneMgr;
 class FilterMgr;
 class SpawnShell;
-class EQItemDB;
 class GuildMgr;
 
 //----------------------------------------------------------------------
@@ -45,9 +43,9 @@ const int MAX_DEAD_SPAWNIDS = 50;
 
 //----------------------------------------------------------------------
 // type definitions
-typedef Q3IntDict<Item> ItemMap;
-typedef Q3IntDictIterator<Item> ItemIterator;
-typedef Q3IntDictIterator<Item> ItemConstIterator;
+typedef QHash<uint32_t, Item*> ItemMap;
+typedef QHash<uint32_t, Item*>::iterator ItemIterator;
+typedef QHash<uint32_t, Item*>::const_iterator ItemConstIterator;
 
 //----------------------------------------------------------------------
 // SpawnShell
@@ -68,6 +66,8 @@ public:
 	const ItemMap& spawns() const;
 	const ItemMap& drops() const;
 	const ItemMap& doors() const;
+
+	SpawnModel* spawnModel() { return m_spawnModel; }
 
 signals:
 	void addItem(const Item* item);
@@ -150,6 +150,8 @@ private:
 
 	// timer for saving spawns
 	QTimer* m_timer;
+
+	SpawnModel* m_spawnModel;
 };
 
 inline const ItemMap& SpawnShell::getConstMap(spawnItemType type) const
