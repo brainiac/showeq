@@ -50,7 +50,8 @@ RemotePacketServer::RemotePacketServer(EQPacketOPCodeDB& zoneOPCodeDB, EQPacketO
 	m_worldOPCodeDB(worldOPCodeDB)
 {
 	m_socket = NULL;
-	m_port = 8773;
+	m_port = 8773;		// TODO: This is hardcoded now. It needs to be assigned by the DataSourceFactory when
+						// it creates a RemotePacketServer object
 	m_nextMessageType = MSG_Invalid;
 	m_nextBufferSize = 0;
 	m_server = NULL;

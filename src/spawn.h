@@ -17,7 +17,7 @@
 #ifndef _SPAWN_H_
 #define _SPAWN_H_
 
-#include <Q3PtrList>
+#include <QList>
 
 #include "everquest.h"
 #include "point.h"
@@ -87,8 +87,8 @@ enum changeType
 // type definitions
 typedef Point3D<int16_t> EQPoint;
 typedef EQPoint SpawnTrackPoint;
-typedef Q3PtrList<SpawnTrackPoint> SpawnTrackList;
-typedef Q3PtrListIterator<SpawnTrackPoint> SpawnTrackListIterator;
+typedef QList<SpawnTrackPoint> SpawnTrackList;
+typedef QListIterator<SpawnTrackPoint> SpawnTrackListIterator;
 
 //----------------------------------------------------------------------
 // constants

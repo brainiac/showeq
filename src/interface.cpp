@@ -106,14 +106,13 @@ EQInterface::EQInterface(SessionManager* sm)
 	m_creating = true;			// indicate we're constructing the interface
 	m_stateVersion = 1;			// saved state version. change it if drastic changes happen.
 
-	createLogs();
-
-	// TODO: Refactor this part, too
+	// TODO: Refactor this part, too. It can start now, or be triggered by an event of some sort...
 	m_session = m_sm->newSession();
 
-	// TODO: For now, interface requires a session. but eventually it won't.
+	createLogs();
 	initializeInterface();
 
+	initializeSessionInterface();
 	show();
 
 	splash->finish(this);
@@ -130,7 +129,7 @@ void EQInterface::initializeInterface()
 
 	// set central widget to a QMainWindow so we can stack left and right
 	// over the top and bottom...
-	m_toolBar = new QToolBar(this, "MainToolBar");
+	//m_toolBar = new QToolBar(this, "MainToolBar");
 
 	// TODO: Figure out how to handle main center gadget thing...
 	m_filler = new QWidget(this, "filler");
@@ -157,8 +156,6 @@ void EQInterface::initializeInterface()
 	// create window menu (this gets used early)
 	m_windowMenu = new QMenu("&Window", this);
 
-	createInterfaceWidgets();
-
 	/***********************************************************************
 	 * Create Main Menu Widgets
 	 **********************************************************************/
@@ -174,21 +171,11 @@ void EQInterface::initializeInterface()
 	createWindowMenu();
 	createDebugMenu();
 
-
-
 	/***********************************************************************
 	 * Create Status Bar Widget
 	 **********************************************************************/
 
 	createStatusBar();
-
-
-
-
-	/***********************************************************************
-	 * Connect Interface Signals
-	 **********************************************************************/
-	connectSignals();
 
 	/***********************************************************************
 	 * Configure Geometry and finalize setup
@@ -231,6 +218,16 @@ void EQInterface::initializeInterface()
 	// TODO: Some windows are initialized but hidden.
 	// TODO: When closing a window, its state should be saved for the session.
 	m_creating = false;
+}
+
+void EQInterface::initializeSessionInterface()
+{	
+	/***********************************************************************
+	 * Connect Interface Signals
+	 **********************************************************************/
+
+	createInterfaceWidgets();
+	connectSignals();
 }
 
 
@@ -3758,6 +3755,7 @@ void EQInterface::toggleCreateUnknownSpawns(bool state)
 
 void EQInterface::toggleRecordWalkPaths(bool state)
 {
+	seqInfo("Set RecordWalkPaths: %i\n", state);
     showeq_params->walkpathrecord = state;
     pSEQPrefs->setPrefBool("WalkPathRecording", "Misc", state);
 }
@@ -4268,17 +4266,15 @@ void EQInterface::saveSpawnPath(QTextStream& out, const Item* item)
 	if (cnt < 2)
 		return;
 
-	const SpawnTrackPoint* trackPoint;
-
 	out << "M," << spawn->realName() << ",blue," << trackList.count();
 	//iterate over the track, writing out the points
-	for (trackPoint = trackIt.current();
-		 trackPoint;
-		 trackPoint = ++trackIt)
+
+	while (trackIt.hasNext())
 	{
-		out << "," << trackPoint->x()
-		<< "," <<  trackPoint->y()
-		<< "," << trackPoint->z();
+		const SpawnTrackPoint& trackPoint = trackIt.next();
+		out << "," << trackPoint.x()
+			<< "," << trackPoint.y()
+			<< "," << trackPoint.z();
 	}
 	out << endl;
 }
@@ -5378,7 +5374,7 @@ void EQInterface::setupCombatWindow()
 
 	m_combatWindow->setDockable(pSEQPrefs->getPrefBool("DockableCombatWindow", section, false));
 	//Qt::DockWidgetArea edge = (Qt::DockWidgetArea)pSEQPrefs->getPrefInt("Dock", m_combatWindow->preferenceName(), Qt::NoDockWidgetArea);
-	Qt::DockWidgetArea edge = Qt::TopDockWidgetArea;
+	Qt::DockWidgetArea edge = Qt::NoDockWidgetArea;
 	addDockWidget(edge, m_combatWindow);
 
 	m_combatWindow->undock();
@@ -5387,9 +5383,6 @@ void EQInterface::setupCombatWindow()
 	// move window to new position
 	if (pSEQPrefs->getPrefBool("UseWindowPos", "Interface", true))
 		m_combatWindow->restorePosition();
-
-	//if (pSEQPrefs->getPrefBool("ShowCombatWindow", section, false))
-	//	m_combatWindow->show();
 
     // insert its menu into the window menu
 	insertWindowMenu(m_combatWindow);

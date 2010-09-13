@@ -488,6 +488,7 @@ private:
 private:
 
 	void initializeInterface();
+	void initializeSessionInterface();
 
 	// create interface widgets
 	void setupExperienceWindow();

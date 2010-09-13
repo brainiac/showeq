@@ -9,6 +9,7 @@
 #define COMBATLOG_H
 
 #include <Q3ListView>
+#include <Q3PtrList>
 
 #include "seqwindow.h"
 #include "seqlistview.h"

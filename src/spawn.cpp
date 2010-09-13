@@ -293,9 +293,6 @@ Spawn::Spawn()
 Spawn::Spawn(const spawnStruct* s)
   : Item(tSpawn, s->spawnId)
 {
-	// turn on auto delete for the track list
-	m_spawnTrackList.setAutoDelete(true);
-
 	// have update initialize everything
 	update(s);
 }
@@ -332,9 +329,6 @@ Spawn::Spawn(uint16_t id, int16_t x, int16_t y, int16_t z, int16_t deltaX, int16
 	setTypeflag(0);
 	setGM(0);
 	setConsidered(false);
-
-	// turn on auto delete for the track list
-	m_spawnTrackList.setAutoDelete(true);
 
 	// Finally, note when this update ocurred
 	updateLast();
@@ -388,11 +382,7 @@ Spawn::Spawn(Spawn* s, uint16_t id) : Item(tSpawn, id)
 	setHeading(s->heading(), s->deltaHeading());
 	setConsidered(s->considered());
 
-	// the new copy will own the spawn track list
-	m_spawnTrackList.setAutoDelete(false);
 	m_spawnTrackList = s->m_spawnTrackList;
-	s->m_spawnTrackList.setAutoDelete(false);
-	m_spawnTrackList.setAutoDelete(true);
 }
 
 Spawn::~Spawn()
@@ -556,14 +546,14 @@ void Spawn::setPos(int16_t x, int16_t y, int16_t z, bool walkpathrecord, size_t 
 			return;
 
 		// only insert if the change includes either an x or y change, not just z
-		if ((count == 0) || ((m_spawnTrackList.getLast()->x() != x) || (m_spawnTrackList.getLast()->y() != y)))
+		if ((count == 0) || ((m_spawnTrackList.last().x() != x) || (m_spawnTrackList.last().y() != y)))
 		{
 			// if the walk path length is limited, make sure not to exceed the limit
 			if ((walkpathlength > 0) && (count > 2) && (count > walkpathlength))
 				m_spawnTrackList.removeFirst();
 
 			// append the new entry to the end of the list
-			m_spawnTrackList.append(new SpawnTrackPoint(x, y, z));
+			m_spawnTrackList.append(SpawnTrackPoint(x, y, z));
 		}
 	}
 }

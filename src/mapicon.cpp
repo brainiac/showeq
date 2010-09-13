@@ -151,24 +151,24 @@ MapIcon::IconImageFunction MapIcon::s_iconImageFunctions[] =
 //----------------------------------------------------------------------
 // MapIcon
 MapIcon::MapIcon()
-: m_line1Distance(0),
-m_line2Distance(0),
-m_imageStyle(tIconStyleNone),
-m_imageSize(tIconSizeNone),
-m_highlightStyle(tIconStyleNone),
-m_highlightSize(tIconSizeNone),
-m_image(false),
-m_imageUseSpawnColorPen(false),
-m_imageUseSpawnColorBrush(false),
-m_imageFlash(false),
-m_highlight(false),
-m_highlightUseSpawnColorPen(false),
-m_highlightUseSpawnColorBrush(false),
-m_highlightFlash(false),
-m_showLine0(false),
-m_useWalkPathPen(false),
-m_showWalkPath(false),
-m_showName(false)
+  : m_line1Distance(0),
+	m_line2Distance(0),
+	m_imageStyle(tIconStyleNone),
+	m_imageSize(tIconSizeNone),
+	m_highlightStyle(tIconStyleNone),
+	m_highlightSize(tIconSizeNone),
+	m_image(false),
+	m_imageUseSpawnColorPen(false),
+	m_imageUseSpawnColorBrush(false),
+	m_imageFlash(false),
+	m_highlight(false),
+	m_highlightUseSpawnColorPen(false),
+	m_highlightUseSpawnColorBrush(false),
+	m_highlightFlash(false),
+	m_showLine0(false),
+	m_useWalkPathPen(false),
+	m_showWalkPath(false),
+	m_showName(false)
 {
 }
 
@@ -178,32 +178,32 @@ MapIcon::~MapIcon()
 
 MapIcon& MapIcon::operator=(const MapIcon& mapIcon)
 {
-	m_imageBrush = mapIcon.m_imageBrush;
-	m_highlightBrush = mapIcon.m_highlightBrush;
-	m_imagePen = mapIcon.m_imagePen;
-	m_highlightPen = mapIcon.m_highlightPen;
-	m_line0Pen = mapIcon.m_line0Pen;
-	m_line1Pen = mapIcon.m_line1Pen;
-	m_line2Pen = mapIcon.m_line2Pen;
-	m_walkPathPen = mapIcon.m_walkPathPen;
-	m_line1Distance = mapIcon.m_line1Distance;
-	m_line2Distance = mapIcon.m_line2Distance;
-	m_imageStyle = mapIcon.m_imageStyle;
-	m_imageSize = mapIcon.m_imageSize;
-	m_highlightStyle = mapIcon.m_highlightStyle;
-	m_highlightSize = mapIcon.m_highlightSize;
-	m_image = mapIcon.m_image;
-	m_imageUseSpawnColorPen = mapIcon.m_imageUseSpawnColorPen;
-	m_imageUseSpawnColorBrush = mapIcon.m_imageUseSpawnColorBrush;
-	m_imageFlash = mapIcon.m_imageFlash;
-	m_highlight = mapIcon.m_highlight;
-	m_highlightUseSpawnColorPen = mapIcon.m_highlightUseSpawnColorPen;
-	m_highlightUseSpawnColorBrush = mapIcon.m_highlightUseSpawnColorPen;
-	m_highlightFlash = mapIcon.m_highlightFlash;
-	m_showLine0 = mapIcon.m_showLine0;
-	m_useWalkPathPen = mapIcon.m_useWalkPathPen;
-	m_showWalkPath = mapIcon.m_showWalkPath;
-	m_showName = mapIcon.m_showName;
+	m_imageBrush					= mapIcon.m_imageBrush;
+	m_highlightBrush				= mapIcon.m_highlightBrush;
+	m_imagePen						= mapIcon.m_imagePen;
+	m_highlightPen					= mapIcon.m_highlightPen;
+	m_line0Pen						= mapIcon.m_line0Pen;
+	m_line1Pen						= mapIcon.m_line1Pen;
+	m_line2Pen						= mapIcon.m_line2Pen;
+	m_walkPathPen					= mapIcon.m_walkPathPen;
+	m_line1Distance					= mapIcon.m_line1Distance;
+	m_line2Distance					= mapIcon.m_line2Distance;
+	m_imageStyle					= mapIcon.m_imageStyle;
+	m_imageSize						= mapIcon.m_imageSize;
+	m_highlightStyle				= mapIcon.m_highlightStyle;
+	m_highlightSize					= mapIcon.m_highlightSize;
+	m_image							= mapIcon.m_image;
+	m_imageUseSpawnColorPen			= mapIcon.m_imageUseSpawnColorPen;
+	m_imageUseSpawnColorBrush		= mapIcon.m_imageUseSpawnColorBrush;
+	m_imageFlash					= mapIcon.m_imageFlash;
+	m_highlight						= mapIcon.m_highlight;
+	m_highlightUseSpawnColorPen		= mapIcon.m_highlightUseSpawnColorPen;
+	m_highlightUseSpawnColorBrush	= mapIcon.m_highlightUseSpawnColorPen;
+	m_highlightFlash				= mapIcon.m_highlightFlash;
+	m_showLine0						= mapIcon.m_showLine0;
+	m_useWalkPathPen				= mapIcon.m_useWalkPathPen;
+	m_showWalkPath					= mapIcon.m_showWalkPath;
+	m_showName						= mapIcon.m_showName;
 
 	return *this;
 }
@@ -247,8 +247,8 @@ void MapIcon::combine(const MapIcon& mapIcon)
 	// use walk path pen info iff set
 	if (mapIcon.m_useWalkPathPen)
 	{
-		m_useWalkPathPen = mapIcon.m_useWalkPathPen;
-		m_walkPathPen = mapIcon.m_walkPathPen;
+		m_useWalkPathPen	= mapIcon.m_useWalkPathPen;
+		m_walkPathPen		= mapIcon.m_walkPathPen;
 	}
 
 	// use showWalkPath info iff set
@@ -312,9 +312,9 @@ void MapIcon::load(const QString& prefBase, const QString& section)
 	m_line2Distance = pSEQPrefs->getPrefInt(prefBase + "Line2Distance", section, m_line2Distance);
 
 	// Initialize the Walk Path related member variables
-	m_walkPathPen = pSEQPrefs->getPrefPen(prefBase + "WalkPathPen", section, m_walkPathPen);
-	m_useWalkPathPen = pSEQPrefs->getPrefBool(prefBase + "UseWalkPathPen", section, m_useWalkPathPen);
-	m_showWalkPath = pSEQPrefs->getPrefBool(prefBase + "ShowWalkPath", section, m_showWalkPath);
+	m_walkPathPen		= pSEQPrefs->getPrefPen(prefBase + "WalkPathPen", section, m_walkPathPen);
+	m_useWalkPathPen	= pSEQPrefs->getPrefBool(prefBase + "UseWalkPathPen", section, m_useWalkPathPen);
+	m_showWalkPath		= pSEQPrefs->getPrefBool(prefBase + "ShowWalkPath", section, m_showWalkPath);
 
 	// Initialize whatever's left
 	m_showName = pSEQPrefs->getPrefBool(prefBase + "ShowName", section, m_showName);
@@ -810,24 +810,26 @@ void MapIcons::paintSpawnIcon(MapParameters& param, QPainter& p, const MapIcon& 
 	if (mapIcon.showWalkPath() || (m_showNPCWalkPaths && spawn->isNPC()))
 	{
 		SpawnTrackListIterator trackIt(spawn->trackList());
-
-		const SpawnTrackPoint* trackPoint = trackIt.current();
-		if (trackPoint)
+		if (trackIt.hasNext())
 		{
+			const SpawnTrackPoint* trackPoint = &trackIt.next();
+
 			if (!mapIcon.useWalkPathPen())
 				p.setPen(blue);
 			else
 				p.setPen(mapIcon.walkPathPen());
 
-			QPainterPath path;
-			path.moveTo (param.calcXOffsetI(trackPoint->x()), param.calcYOffsetI(trackPoint->y()));
-
-			while ((trackPoint = ++trackIt) != NULL)
+			while (trackIt.hasNext())
 			{
-				path.lineTo (param.calcXOffsetI (trackPoint->x()), param.calcYOffsetI (trackPoint->y()));
+				const SpawnTrackPoint* nextPoint = &trackIt.next();
+				p.drawLine(param.calcXOffsetI(trackPoint->x()), param.calcYOffsetI(trackPoint->y()),
+						   param.calcXOffsetI(nextPoint->x()), param.calcYOffsetI(nextPoint->y()));
+
+				trackPoint = nextPoint;
 			}
-			path.lineTo (point.x(), point.y());
-			p.drawPath(path);
+
+			p.drawLine(param.calcXOffsetI(trackPoint->x()), param.calcYOffsetI(trackPoint->y()),
+					   point.x(), point.y());
 		}
 	}
 
