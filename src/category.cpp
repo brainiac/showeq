@@ -23,6 +23,8 @@
 #include "diagnosticmessages.h"
 #include "main.h"
 
+#include "categorydialog.h"
+
 #include <Q3HBoxLayout>
 #include <Q3BoxLayout>
 #include <Q3VBoxLayout>
@@ -66,82 +68,6 @@ bool Category::isFiltered(const QString& filterString, int level) const
 			return true;
 	}
 	return false;
-}
-
-// ------------------------------------------------------
-// CategoryDlg
-CategoryDlg::CategoryDlg(QWidget *parent, QString name)
-  : QDialog(parent, name, TRUE)
-{
-	QFont labelFont;
-	labelFont.setBold(true);
-
-	Q3BoxLayout* topLayout = new Q3VBoxLayout(this);
-	Q3BoxLayout* row4Layout = new Q3HBoxLayout(topLayout);
-	Q3BoxLayout* row3Layout = new Q3HBoxLayout(topLayout);
-	Q3BoxLayout* row2Layout = new Q3HBoxLayout(topLayout);
-	Q3BoxLayout* row1Layout = new Q3HBoxLayout(topLayout);
-	Q3BoxLayout* row0Layout = new Q3HBoxLayout(topLayout);
-
-	QLabel *colorLabel = new QLabel ("Color", this);
-	colorLabel->setFont(labelFont);
-	colorLabel->setAlignment(AlignRight | AlignVCenter);
-	row1Layout->addWidget(colorLabel, 0, AlignLeft);
-
-	m_Color = (Q3Button*)new QPushButton(this, "color");
-	m_Color->setText("...");
-	m_Color->setFont(labelFont);
-	connect(m_Color, SIGNAL(clicked()), this, SLOT(select_color()));
-	row1Layout->addWidget(m_Color);
-
-	QLabel *nameLabel = new QLabel ("Name", this);
-	nameLabel->setFont(labelFont);
-	nameLabel->setAlignment(AlignLeft | AlignVCenter);
-	row4Layout->addWidget(nameLabel);
-
-	m_Name = new QLineEdit(this, "Name");
-	m_Name->setFont(labelFont);
-	row4Layout->addWidget(m_Name);
-
-	QLabel *filterLabel = new QLabel ("Filter", this);
-	filterLabel->setFont(labelFont);
-	filterLabel->setAlignment(AlignLeft | AlignVCenter);
-	row3Layout->addWidget(filterLabel);
-
-	m_Filter  = new QLineEdit(this, "Filter");
-	m_Filter->setFont(labelFont);
-	row3Layout->addWidget(m_Filter);
-
-	QLabel *filteroutLabel = new QLabel ("FilterOut", this);
-	filteroutLabel->setFont(labelFont);
-	filteroutLabel->setAlignment(AlignLeft | AlignVCenter);
-	row2Layout->addWidget(filteroutLabel);
-
-	m_FilterOut  = new QLineEdit(this, "FilterOut");
-	m_FilterOut->setFont(labelFont);
-	row2Layout->addWidget(m_FilterOut);
-
-	QPushButton *ok = new QPushButton("OK", this);
-	row0Layout->addWidget(ok, 0, AlignLeft);
-
-	QPushButton *cancel = new QPushButton("Cancel", this);
-	row0Layout->addWidget(cancel, 0, AlignRight);
-
-	// Hook on pressing the buttons
-	connect(ok, SIGNAL(clicked()), SLOT(accept()));
-	connect(cancel, SIGNAL(clicked()), SLOT(reject()));
-}
-
-CategoryDlg::~CategoryDlg()
-{
-}
-
-void CategoryDlg::select_color()
-{
-	QColor newColor = QColorDialog::getColor(m_Color->backgroundColor(), this, "Category Color");
-
-	if (newColor.isValid())
-		m_Color->setPalette(QPalette(QColor(newColor)));
 }
 
 // ------------------------------------------------------
@@ -239,27 +165,26 @@ void CategoryMgr::addCategory(QWidget* parent)
 void CategoryMgr::editCategories(const Category* cat, QWidget* parent)
 {
 	// Create the filter dialog
-	CategoryDlg* dlg = new CategoryDlg(parent, "CategoryDlg");
+	CategoryDialog* dialog = new CategoryDialog(parent);
 
 	// editing an existing category?
 	if (cat != NULL)
 	{
 		// yes, use it's info for the defaults
-		dlg->m_Name->setText(cat->name());
-		dlg->m_Filter->setText(cat->filter());
-		dlg->m_FilterOut->setText(cat->filterout());
-		dlg->m_Color->setPalette(QPalette(QColor(cat->color())));
+		dialog->setName(cat->name());
+		dialog->setFilterIn(cat->filter());
+		dialog->setFilterOut(cat->filterout());
+		dialog->setColor(cat->color());
 	}
 	else
 	{
-		dlg->m_Name->setText("");
-		dlg->m_Filter->setText(".");
-		dlg->m_FilterOut->setText("");
-		dlg->m_Color->setPalette(QPalette(QColor("black")));
+		dialog->setName("");
+		dialog->setFilterIn(".");
+		dialog->setFilterOut("");
 	}
 
 	// execute the dialog
-	int res = dlg->exec();
+	int res = dialog->exec();
 
 	// if the dialog wasn't accepted, don't add/change a category
 	if (res != QDialog::Accepted)
@@ -270,16 +195,16 @@ void CategoryMgr::editCategories(const Category* cat, QWidget* parent)
 		remCategory(cat);
 
 	// Add Category
-	QString name = dlg->m_Name->text();
-	QString filter = dlg->m_Filter->text();
+	QString name   = dialog->getName();
+	QString filter = dialog->getFilterIn();
 
 	//seqDebug("Got name: '%s', filter '%s', filterout '%s', color '%s'",
 	//  name?name:"", color?color:"", filter?filter:"", filterout?filterout:"");
 
 	if (!name.isEmpty() && !filter.isEmpty())
-		addCategory(name, filter, dlg->m_FilterOut->text(), dlg->m_Color->backgroundColor());
+		addCategory(name, filter, dialog->getFilterOut(), dialog->getColor());
 
-	delete dlg;
+	delete dialog;
 }
 
 void CategoryMgr::reloadCategories()

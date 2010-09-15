@@ -54,26 +54,6 @@ private:
 	bool m_filteredFilter;
 };
 
-// ------------------------------------------------------
-// CategoryDlg
-class CategoryDlg : public QDialog
-{
-	Q_OBJECT
-
-public:
-	CategoryDlg(QWidget *parent, QString name);
-	virtual ~CategoryDlg();
-
-public slots:
-	void select_color();
-
-public:
-	QLineEdit* m_Name;
-	QLineEdit* m_Filter;
-	QLineEdit* m_FilterOut;
-	Q3Button* m_Color;
-};
-
 typedef Q3PtrList<Category> CategoryList;
 typedef Q3PtrListIterator<Category> CategoryListIterator;
 typedef Q3PtrListIterator<const Category> CategoryListConstIterator;

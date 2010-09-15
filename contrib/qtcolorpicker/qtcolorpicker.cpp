@@ -438,7 +438,7 @@ void QtColorPicker::setCurrentColor(const QColor &color)
 
     ColorPickerItem *item = popup->find(color);
     if (!item) {
-	insertColor(color, tr("Custom"));
+	insertColor(color, QString("(%1,%2,%3)").arg(color.red()).arg(color.green()).arg(color.blue()));
 	item = popup->find(color);
     }
 
@@ -896,7 +896,7 @@ void ColorPickerPopup::getColorFromDialog()
 	return;
 
     QColor col = QColor::fromRgba(rgb);
-    insertColor(col, tr("Custom"), -1);
+    insertColor(col, QString("(%1,%2,%3)").arg(col.red()).arg(col.green()).arg(col.blue()), -1);
     lastSel = col;
     emit selected(col);
 }

@@ -235,11 +235,6 @@ void EQInterface::initializeSessionInterface()
 	slw3->undock();
 	slw3->show();
 
-
-	CategoryDialog* dlg = new CategoryDialog(this);
-	dlg->show();
-
-
 	createInterfaceWidgets();
 	connectSignals();
 }

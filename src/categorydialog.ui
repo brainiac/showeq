@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>CategoryDialog</string>
+   <string>Category Editor</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
