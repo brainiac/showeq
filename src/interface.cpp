@@ -49,6 +49,7 @@
 #include "filternotifications.h"
 
 #include "spawnlist3.h"
+#include "categorydialog.h"
 
 #include <QSplashScreen>
 
@@ -233,6 +234,10 @@ void EQInterface::initializeSessionInterface()
 	addDockWidget(Qt::LeftDockWidgetArea, slw3);
 	slw3->undock();
 	slw3->show();
+
+
+	CategoryDialog* dlg = new CategoryDialog(this);
+	dlg->show();
 
 
 	createInterfaceWidgets();

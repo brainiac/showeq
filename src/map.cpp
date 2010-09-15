@@ -3387,6 +3387,11 @@ void Map::paintSpawns(MapParameters& param, QPainter& p, const QTime& drawTime)
 		// just do a quicky conversion
 		spawn = (const Spawn*)item;
 #endif
+		if (spawn == NULL)
+		{
+			seqWarn("Got null item from map paint iterator!!");
+			continue;
+		}
 
 		uint32_t filterFlags = item->filterFlags();
 
