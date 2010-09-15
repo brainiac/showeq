@@ -48,6 +48,7 @@
 #include "diagnosticmessages.h"
 #include "filternotifications.h"
 
+#include "spawnlist3.h"
 
 #include <QSplashScreen>
 
@@ -225,6 +226,14 @@ void EQInterface::initializeSessionInterface()
 	/***********************************************************************
 	 * Connect Interface Signals
 	 **********************************************************************/
+	SpawnListWindow3* slw3 = new SpawnListWindow3(m_session->player(), m_session->spawnShell(),
+		m_sm->categoryMgr(), this);
+	
+	setDockEnabled(slw3, true);
+	addDockWidget(Qt::LeftDockWidgetArea, slw3);
+	slw3->undock();
+	slw3->show();
+
 
 	createInterfaceWidgets();
 	connectSignals();
