@@ -25,10 +25,6 @@
 
 #include "categorydialog.h"
 
-#include <Q3HBoxLayout>
-#include <Q3BoxLayout>
-#include <Q3VBoxLayout>
-
 using namespace Qt;
 
 // ------------------------------------------------------
@@ -75,23 +71,15 @@ bool Category::isFiltered(const QString& filterString, int level) const
 CategoryMgr::CategoryMgr(QObject* parent, const char* name)
   : QObject(parent, name)
 {
-	m_categories.setAutoDelete(false);
 	reloadCategories();
 }
 
 CategoryMgr::~CategoryMgr()
 {
 	// Clear the categories list. Since AutoDelete is off. This is manual.
-	if (m_categories.first())
+	foreach (Category* category, m_categories)
 	{
-		Category* deleteMe;
-
-		while ((deleteMe = m_categories.current()))
-		{
-			m_categories.remove();
-
-			delete deleteMe;
-		}
+		delete category;
 	}
 }
 
@@ -100,14 +88,12 @@ const CategoryList CategoryMgr::findCategories(const QString& filterString, int 
 	CategoryList tmpList;
 
 	// iterate over all the categories looking for a match
-	CategoryListIterator it(m_categories);
-	for (Category* curCategory = it.toFirst(); curCategory != NULL; curCategory = ++it)
+	foreach (Category* category, m_categories)
 	{
 		// if it matches the category add it to the dictionary
-		if (curCategory->isFiltered(filterString, level))
-			tmpList.append(curCategory);
+		if (category->isFiltered(filterString, level))
+			tmpList << category;
 	}
-
 	return tmpList;
 }
 
@@ -119,14 +105,13 @@ const Category* CategoryMgr::addCategory(const QString& name, const QString& fil
 	if (!name.isEmpty() && !filter.isEmpty())
 	{
 		Category* newcat = new Category(name, filter, filterout, color);
-
-		m_categories.append(newcat);
-
-		emit addCategory(newcat);
+		m_categories << newcat;
 
 		//seqDebug("Added '%s'-'%s' '%s' %d", newcat->name, newcat->filter, newcat->listitem->text(0).ascii(), newcat->listitem);
+		emit addCategory(newcat);
 		return newcat;
 	}
+
 	return NULL;
 }
 
@@ -140,7 +125,9 @@ void CategoryMgr::remCategory(const Category* cat)
 		emit delCategory(cat);
 
 		// remove the category from the list
-		m_categories.remove(cat);
+		CategoryListIterator it = m_categories.find(const_cast<Category*>(cat));
+		if (it != m_categories.end())
+			m_categories.remove(it);
 
 		// delete the category
 		delete cat;
@@ -151,6 +138,11 @@ void CategoryMgr::clearCategories()
 {
 	//seqDebug("clearCategories()");
 	emit clearedCategories();
+
+	foreach (Category* category, m_categories)
+	{
+		delete category;
+	}
 
 	m_categories.clear();
 	m_changed = true;
@@ -256,14 +248,13 @@ void CategoryMgr::savePrefs()
 	QString section = "CategoryMgr";
 	QString prefBaseName;
 
-	CategoryListIterator it(m_categories);
-	for (Category* curCategory = it.toFirst(); curCategory != NULL; curCategory = ++it)
+	foreach (Category* category, m_categories)
 	{
 		prefBaseName.sprintf("Category%d_", count++);
-		pSEQPrefs->setPrefString(prefBaseName + "Name", section, curCategory->name());
-		pSEQPrefs->setPrefString(prefBaseName + "Filter", section, curCategory->filter());
-		pSEQPrefs->setPrefString(prefBaseName + "FilterOut", section, curCategory->filterout());
-		pSEQPrefs->setPrefColor(prefBaseName + "Color", section, curCategory->color());
+		pSEQPrefs->setPrefString(prefBaseName + "Name", section, category->name());
+		pSEQPrefs->setPrefString(prefBaseName + "Filter", section, category->filter());
+		pSEQPrefs->setPrefString(prefBaseName + "FilterOut", section, category->filterout());
+		pSEQPrefs->setPrefColor(prefBaseName + "Color", section, category->color());
 	}
 
 	QColor black("black");

@@ -32,6 +32,7 @@
 #include "diagnosticmessages.h"
 
 #include <Q3PopupMenu>
+#include <Q3PtrList>
 
 // ------------------------------------------------------
 SpawnList::SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr,
@@ -326,7 +327,7 @@ void SpawnList::addItem(const Item* item)
 				j = Find(it, i);
 			}
 		}
-	} // if petOwnerId
+	}
 
 	// get the filter string for use in filtering by category
 	QString filterStr = filterString(item, flags);
@@ -334,23 +335,17 @@ void SpawnList::addItem(const Item* item)
 	// Next, add the spawn to each appropriate category
 	if (m_categoryMgr->count())
 	{
-		CategoryListIterator cit(m_categoryMgr->getCategories());
-		const Category* cat;
-		SpawnListItem* catlitem;
-
 		// iterate over all the categories
-		for (cat = cit.toFirst(); cat != NULL; cat = ++cit)
+		foreach (const Category* cat, m_categoryMgr->getCategories())
 		{
 			// skip filtered spawns, if this isn't a filtered filter category
 			if ((item->filterFlags() & FILTER_FLAG_FILTERED) && !cat->isFilteredFilter())
-			{
 				continue;
-			}
 
 			if (cat->isFiltered(filterStr, level))
 			{
 				// retrieve the list item associated with the category
-				catlitem = m_categoryListItems.find((void*)cat);
+				SpawnListItem* catlitem = m_categoryListItems.find((void*)cat);
 
 				// We have a good category, add spawn as it's child
 				j = new SpawnListItem(catlitem);
@@ -366,9 +361,9 @@ void SpawnList::addItem(const Item* item)
 
 				// update childcount in header
 				catlitem->updateTitle(cat->name());
-			} // end if spawn should be in this category
+			}
 		}
-	} // end if categories
+	}
 	else
 	{
 		// just create a new SpawnListItem
@@ -378,10 +373,10 @@ void SpawnList::addItem(const Item* item)
 		// color spawn
 		j->pickTextColor(item, m_player);
 		j->update(m_player, tSpawnChangedALL);
-	} // else
+	}
 
 	return;
-} // end addItem
+}
 
 void SpawnList::delItem(const Item* item)
 {
@@ -679,13 +674,10 @@ void SpawnList::clear()
 	m_categoryListItems.clear();
 
 	// rebuild headers
-	CategoryListIterator it(m_categoryMgr->getCategories());
-	SpawnListItem* litem;
-	const Category* cat;
-	for (cat = it.toFirst(); cat != NULL; cat = ++it)
+	foreach (const Category* cat, m_categoryMgr->getCategories())
 	{
 		// create the spawn list item
-		litem = new SpawnListItem(this);
+		SpawnListItem* litem = new SpawnListItem(this);
 
 		// insert the category and it's respective list item
 		m_categoryListItems.insert((void*)cat, litem);
@@ -895,32 +887,27 @@ void SpawnList::populateCategory(const Category* cat)
 void SpawnList::populateSpawns()
 {
 	// types of items to populate category with
-	spawnItemType types[] = { tSpawn, tDrop, tDoors, tPlayer };
-
-	int flags = 0;
-	const Item* item;
-	SpawnListItem* litem;
-	SpawnListItem* catlitem;
+	QList<spawnItemType> types;
+	types << tSpawn << tDrop << tDoors << tPlayer;
 
 	// only deal with categories if there are some to deal with
 	if (m_categoryMgr->count() != 0)
 	{
-		CategoryListIterator cit(m_categoryMgr->getCategories());
-
 		// iterate over all spawn types
-		for (uint8_t i = 0; i < (sizeof(types) / sizeof(spawnItemType)); i++)
+		foreach (spawnItemType iType, types)
 		{
-			const ItemMap& itemMap = m_spawnShell->getConstMap(types[i]);
+			const ItemMap& itemMap = m_spawnShell->getConstMap(iType);
 			uint8_t level = 0;
 
 			// iterate over all spawns in of the current type
 			foreach(const Item* item, itemMap)
 			{
 				// retrieve the filter string
+				int flags = 0;
 				QString filterStr = filterString(item, flags);
 
 				// iterate over all the categories
-				for (const Category* cat = cit.toFirst(); cat != NULL; cat = ++cit)
+				foreach (const Category* cat, m_categoryMgr->getCategories())
 				{
 					// skip filtered spawns
 					if ((item->filterFlags() & FILTER_FLAG_FILTERED) &&
@@ -935,10 +922,10 @@ void SpawnList::populateSpawns()
 					if (cat->isFiltered(filterStr, level))
 					{
 						// retrieve the category list item
-						catlitem = m_categoryListItems.find((void*)cat);
+						SpawnListItem* catlitem = m_categoryListItems.find((void*)cat);
 
 						// yes, add it
-						litem = new SpawnListItem(catlitem);
+						SpawnListItem* litem = new SpawnListItem(catlitem);
 
 						// set up the list item
 						litem->setShellItem(item);
@@ -953,9 +940,9 @@ void SpawnList::populateSpawns()
 
 		// done adding items, now iterate over all the categories and
 		// update the counts
-		for (const Category* cat = cit.toFirst(); cat != NULL; cat = ++cit)
+		foreach (const Category* cat, m_categoryMgr->getCategories())
 		{
-			catlitem =  m_categoryListItems.find((void*)cat);
+			SpawnListItem* catlitem = m_categoryListItems.find((void*)cat);
 			catlitem->updateTitle(cat->name());
 		}
 	}
@@ -972,7 +959,7 @@ void SpawnList::populateSpawns()
 			foreach(const Item* item, itemMap)
 			{
 				// just create a new SpawnListItem
-				litem = new SpawnListItem(this);
+				SpawnListItem* litem = new SpawnListItem(this);
 				litem->setShellItem(item);
 
 				// color spawn

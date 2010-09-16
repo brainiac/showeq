@@ -17,11 +17,6 @@
 #ifndef _CATEGORY_H_
 #define _CATEGORY_H_
 
-#include <Q3HBox>
-#include <Q3VBox>
-#include <Q3Button>
-#include <Q3PtrList>
-
 //----------------------------------------------------------------------
 // forward declarations
 class FilterItem;
@@ -54,9 +49,9 @@ private:
 	bool m_filteredFilter;
 };
 
-typedef Q3PtrList<Category> CategoryList;
-typedef Q3PtrListIterator<Category> CategoryListIterator;
-typedef Q3PtrListIterator<const Category> CategoryListConstIterator;
+typedef QList<Category*> CategoryList;
+typedef QList<Category*>::iterator CategoryListIterator;
+typedef QList<Category*>::const_iterator CategoryListConstIterator;
 
 // ------------------------------------------------------
 // CategoryMgr

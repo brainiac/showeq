@@ -7,14 +7,10 @@ CategoryDialog::CategoryDialog(QWidget *parent)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
-
-	delete ui.m_colorPicker;
-	ui.m_colorPicker = new QtColorPicker(this);
 	ui.m_colorPicker->setFixedHeight(37);
 	ui.m_colorPicker->setStandardColors();
-	ui.gridLayout->addWidget(ui.m_colorPicker, 0, 1, Qt::AlignVCenter);
-	ui.gridLayout->setRowMinimumHeight(0, 100);
-	ui.gridLayout->setRowStretch(0, 2);
+	ui.gridLayout->setRowMinimumHeight(1, 100);
+	ui.gridLayout->setRowStretch(1, 2);
 }
 
 CategoryDialog::~CategoryDialog()

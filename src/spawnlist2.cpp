@@ -472,10 +472,8 @@ void SpawnListWindow2::loadedCategories()
 	m_categoryCombo->clear();
 
 	// fill in the category combo box
-	CategoryListIterator it(m_categoryMgr->getCategories());
-	const Category* cat;
-	for (cat = it.toFirst(); cat != NULL; cat = ++it)
-		m_categoryCombo->insertItem(cat->name());
+	foreach (Category* category, m_categoryMgr->getCategories())
+		m_categoryCombo->insertItem(category->name());
 
 	int n = pSEQPrefs->getPrefInt("CurrentCategory", preferenceName(), 0);
 	m_categoryCombo->setCurrentItem(n);
@@ -728,17 +726,16 @@ void SpawnListWindow2::savePrefs()
 
 void SpawnListWindow2::categorySelected(int index)
 {
-	CategoryListIterator it(m_categoryMgr->getCategories());
-	Category* cat = it.toFirst();
-	int i = 0;
-	while ((cat != NULL) && (i < index))
-	{
-		cat = ++it;
-		++i;
-	}
+	const CategoryList& list = m_categoryMgr->getCategories();
+	Category* category = NULL;
+
+	if (list.length() > 0)
+		category = list[0];
+	if (index < list.length() && index >= 0)
+		category = list[index];
 
 	// set the current category
-	m_currentCategory = cat;
+	m_currentCategory = category;
 
 	// clear the spawn list contents
 	clear();
@@ -749,7 +746,6 @@ void SpawnListWindow2::categorySelected(int index)
 
 void SpawnListWindow2::selChanged(Q3ListViewItem* litem)
 {
-#ifndef NEW_SPAWNLIST
 	if (litem == NULL)
 		return;
 
@@ -758,7 +754,6 @@ void SpawnListWindow2::selChanged(Q3ListViewItem* litem)
 	// it might have been a category title selected, only select if it's an item
 	if (m_selectedItem != NULL)
 		emit spawnSelected(m_selectedItem);
-#endif
 }
 
 void SpawnListWindow2::mousePressEvent(int button, Q3ListViewItem* litem, const QPoint &point, int col)
