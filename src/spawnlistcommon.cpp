@@ -664,7 +664,7 @@ void SpawnListMenu::add_category(int id)
 void SpawnListMenu::edit_category(int id)
 {
 	// edit the current category
-	m_categoryMgr->editCategories(m_currentCategory, m_spawnlist);
+	m_categoryMgr->editCategories(const_cast<Category*>(m_currentCategory), m_spawnlist);
 }
 
 void SpawnListMenu::delete_category(int id)
@@ -683,7 +683,7 @@ void SpawnListMenu::delete_category(int id)
 void SpawnListMenu::reload_categories(int id)
 {
 	// reload the categories
-	m_categoryMgr->reloadCategories();
+	m_categoryMgr->loadCategories();
 }
 
 

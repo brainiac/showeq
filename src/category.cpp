@@ -66,12 +66,32 @@ bool Category::isFiltered(const QString& filterString, int level) const
 	return false;
 }
 
+void Category::set(const Category& other)
+{
+	delete m_filterItem;
+	delete m_filterOutItem;
+
+	m_name		= other.m_name;
+	m_filter	= other.m_filter;
+	m_color		= other.m_color;
+	m_filterout	= other.m_filterout;
+
+	m_filterItem = new FilterItem(m_filter, true);
+	m_filteredFilter = (m_filter.find(":Filtered:", 0, false) != -1);
+
+	if (m_filterout.isEmpty())
+		m_filterOutItem = NULL;
+	else
+		m_filterOutItem = new FilterItem(m_filterout, true);
+
+}
+
 // ------------------------------------------------------
 // CategoryMgr
-CategoryMgr::CategoryMgr(QObject* parent, const char* name)
-  : QObject(parent, name)
+CategoryMgr::CategoryMgr(QObject* parent)
+  : QAbstractTableModel(parent)
 {
-	reloadCategories();
+	loadCategories();
 }
 
 CategoryMgr::~CategoryMgr()
@@ -102,10 +122,17 @@ const Category* CategoryMgr::addCategory(const QString& name, const QString& fil
 	//seqDebug("addCategory() '%s' - '%s':'%s'", name, filter, filterout?filterout:"null");
 	// TODO, need to add check for duplicate category name
 	m_changed = true;
+
 	if (!name.isEmpty() && !filter.isEmpty())
 	{
 		Category* newcat = new Category(name, filter, filterout, color);
-		m_categories << newcat;
+
+		int count = m_categories.size();
+		beginInsertRows(QModelIndex(), count, count);
+
+		m_categories.insert(count, newcat);
+
+		endInsertRows();
 
 		//seqDebug("Added '%s'-'%s' '%s' %d", newcat->name, newcat->filter, newcat->listitem->text(0).ascii(), newcat->listitem);
 		emit addCategory(newcat);
@@ -124,10 +151,15 @@ void CategoryMgr::remCategory(const Category* cat)
 		// signal that the category is being deleted
 		emit delCategory(cat);
 
-		// remove the category from the list
-		CategoryListIterator it = m_categories.find(const_cast<Category*>(cat));
-		if (it != m_categories.end())
-			m_categories.remove(it);
+		int position = m_categories.indexOf(const_cast<Category*>(cat));
+		if (position != -1)
+		{
+			beginRemoveRows(QModelIndex(), position, position);
+
+			m_categories.removeAt(position);
+
+			endRemoveRows();
+		}
 
 		// delete the category
 		delete cat;
@@ -139,12 +171,16 @@ void CategoryMgr::clearCategories()
 	//seqDebug("clearCategories()");
 	emit clearedCategories();
 
+	beginResetModel();
+
 	foreach (Category* category, m_categories)
 	{
 		delete category;
 	}
-
 	m_categories.clear();
+
+	endResetModel();
+	 
 	m_changed = true;
 }
 
@@ -154,7 +190,7 @@ void CategoryMgr::addCategory(QWidget* parent)
 	editCategories(NULL, parent);
 }
 
-void CategoryMgr::editCategories(const Category* cat, QWidget* parent)
+void CategoryMgr::editCategories(Category* cat, QWidget* parent)
 {
 	// Create the filter dialog
 	CategoryDialog* dialog = new CategoryDialog(parent);
@@ -182,10 +218,6 @@ void CategoryMgr::editCategories(const Category* cat, QWidget* parent)
 	if (res != QDialog::Accepted)
 		return;
 
-	// remove the old category
-	if (cat != NULL)
-		remCategory(cat);
-
 	// Add Category
 	QString name   = dialog->getName();
 	QString filter = dialog->getFilterIn();
@@ -194,32 +226,48 @@ void CategoryMgr::editCategories(const Category* cat, QWidget* parent)
 	//  name?name:"", color?color:"", filter?filter:"", filterout?filterout:"");
 
 	if (!name.isEmpty() && !filter.isEmpty())
-		addCategory(name, filter, dialog->getFilterOut(), dialog->getColor());
+	{
+		if (cat != NULL)
+		{
+			Category newcat(name, filter, dialog->getFilterOut(), dialog->getColor());
+
+			cat->set(newcat);
+
+			int row = m_categories.indexOf(cat);
+			seqDebug("[cat] row changed: %i", row);
+			dataChanged(index(row, 0), index(row, tCatColMax));
+
+			emit updateCategory(cat);
+		}
+		else
+		{
+			addCategory(name, filter, dialog->getFilterOut(), dialog->getColor());
+		}
+	}
 
 	delete dialog;
 }
 
-void CategoryMgr::reloadCategories()
+void CategoryMgr::loadCategories()
 {
 	clearCategories();
-	m_changed = false;
 
+	QList<Category*> tempList;
 	QString section = "CategoryMgr";
-	int i = 0;
-	QString prefBaseName;
-	QString tempStr;
-	for (i = 1; i <= tMaxNumCategories; i++)
+	for (int i = 1; i <= tMaxNumCategories; i++)
 	{
+		QString prefBaseName;
 		prefBaseName.sprintf("Category%d_", i);
 
 		// attempt to pull a button title from the preferences
-		tempStr = prefBaseName + "Name";
+		QString tempStr = prefBaseName + "Name";
 		if (pSEQPrefs->isPreference(tempStr, section))
 		{
 			QString name   = pSEQPrefs->getPrefString(tempStr, section);
 			QString filter = pSEQPrefs->getPrefString(prefBaseName + "Filter", section);
 			QColor color   = pSEQPrefs->getPrefColor(prefBaseName + "Color", section, QColor("black"));
 			tempStr = prefBaseName + "FilterOut";
+
 			QString filterout;
 			if (pSEQPrefs->isPreference(tempStr, section))
 				filterout = pSEQPrefs->getPrefString(tempStr, section);
@@ -228,10 +276,20 @@ void CategoryMgr::reloadCategories()
 			if (!name.isEmpty() && !filter.isEmpty())
 			{
 				Category* newcat = new Category(name, filter, filterout, color);
-				m_categories.append(newcat);
+				int count = m_categories.count();
+
+				tempList.append(newcat);
 			}
 		}
 	}
+
+	// Insert all the new rows in one go.
+	beginInsertRows(QModelIndex(), 0, tempList.count());
+	m_categories = tempList;
+	endInsertRows();
+
+	// Reset changed so that they aren't saved (we just loaded)
+	m_changed = false;
 
 	// signal that the categories have been loaded
 	emit loadedCategories();
@@ -266,4 +324,75 @@ void CategoryMgr::savePrefs()
 		pSEQPrefs->setPrefString(prefBaseName + "FilterOut", section, "");
 		pSEQPrefs->setPrefColor(prefBaseName + "Color", section, black);
 	}
+}
+
+
+QVariant CategoryMgr::data(const QModelIndex& index, int role /* = Qt::DisplayRole */) const
+{
+	if (!index.isValid())
+		return QVariant();
+
+	const Category* category = m_categories.at(index.row());
+
+	if (role == Qt::DisplayRole)
+	{
+		switch (index.column())
+		{
+		case tCatColName:
+			return category->name();
+		case tCatColFilter:
+			return category->filter();
+		case tCatColFilterOut:
+			return category->filterout();
+		case tCatColColor:
+			{
+				QColor color = category->color();
+				return QString("(%1,%2,%3)")
+					.arg(color.red())
+					.arg(color.green())
+					.arg(color.blue());
+			}
+		}
+	}
+	else if (role == Qt::ForegroundRole)
+	{
+		if (index.column() == tCatColColor)
+		{
+			return QBrush(category->color());
+		}
+	}
+	return QVariant();
+}
+
+QVariant CategoryMgr::headerData(int section, Qt::Orientation orientation, int role /* = Qt::DisplayRole*/) const
+{
+	if (role != Qt::DisplayRole)
+		return QVariant();
+
+	if (orientation != Qt::Horizontal)
+		return QVariant();
+
+	switch (section)
+	{
+	case tCatColName:
+		return "Name";
+	case tCatColFilter:
+		return "Filter";
+	case tCatColFilterOut:
+		return "FilterOut";
+	case tCatColColor:
+		return "Color";
+	}
+
+	return QVariant();
+}
+
+int CategoryMgr::rowCount(const QModelIndex &parent) const
+{
+	return parent.isValid() ? 0 : m_categories.count();
+}
+
+int CategoryMgr::columnCount(const QModelIndex& parent) const
+{
+	return parent.isValid() ? 0 : tCatColMax;
 }

@@ -11,10 +11,12 @@
 #include <SEQWindow.h>
 #include "ui_spawnlist3.h"
 
+
+#include <QTreeView>
 // Forward Declarations
 class Player;
 class SpawnShell;
-class SpawnModel;
+class FilteredSpawnModel;
 class CategoryMgr;
 class Category;
 class Item;
@@ -38,7 +40,7 @@ private:
 	Player*			m_player;
 	CategoryMgr*	m_categoryMgr;
 	SpawnShell*		m_spawnShell;
-	SpawnModel*		m_spawnModel;
+	FilteredSpawnModel*		m_spawnModel;
 
 	// This may be migrated to another model
 	Category*		m_currentCategory;
@@ -49,8 +51,14 @@ private:
 	// UI Implementation
 	Ui::SpawnList3Class ui;
 
+
 public slots:
 	void updateCount();
+	void categorySelected(int index);
+
+private slots:
+	void doubleClicked(const QModelIndex& index);
+	void updateFilterBox();
 
 };
 

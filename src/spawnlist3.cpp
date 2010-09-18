@@ -10,7 +10,12 @@
 #include "pch.h"
 
 #include "spawnlist3.h"
+
+#include "category.h"
+#include "filteredspawnmodel.h"
 #include "spawnshell.h"
+
+#include "diagnosticmessages.h"
 
 
 
@@ -30,22 +35,69 @@ SpawnListWindow3::SpawnListWindow3(Player* player, SpawnShell* spawnShell, Categ
 
 	ui.m_label->setText("");
 
-	m_spawnModel = m_spawnShell->spawnModel();
+	m_spawnModel = new FilteredSpawnModel(m_spawnShell, this);
+	m_spawnModel->setDynamicSortFilter(true);
+
 	ui.m_treeView->setModel(m_spawnModel);
 	ui.m_treeView->setSortingEnabled(true);
 	ui.m_treeView->setRootIsDecorated(false);
 
+	delete ui.m_filterBox->model();
+	ui.m_filterBox->setModel(categoryMgr);
+	ui.m_filterBox->setModelColumn(tCatColName);
+
+	connect(ui.m_filterBox, SIGNAL(currentIndexChanged(int)), this, SLOT(categorySelected(int)));
+	connect(categoryMgr, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)), this, SLOT(updateFilterBox()));
+
+
 	connect(m_spawnModel, SIGNAL(rowsInserted(const QModelIndex&, int, int)), this, SLOT(updateCount()));
 	connect(m_spawnModel, SIGNAL(rowsRemoved(const QModelIndex&, int, int)),  this, SLOT(updateCount()));
+
+	connect(ui.m_treeView, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(doubleClicked(const QModelIndex&)));
 }
 
 SpawnListWindow3::~SpawnListWindow3()
 {
+}
 
+void SpawnListWindow3::updateFilterBox()
+{
+	int row = ui.m_filterBox->currentIndex();
+	seqDebug("filterbox updated, index: %i", row);
+
+	ui.m_filterBox->setModel(m_categoryMgr);
+	ui.m_filterBox->setCurrentIndex(row);
 }
 
 void SpawnListWindow3::updateCount()
 {
 	int count = m_spawnModel->rowCount();
-	ui.m_label->setText(QString("%1").arg(count));
+	ui.m_label->setText(QString::number(count));
+}
+
+
+void SpawnListWindow3::categorySelected(int index)
+{
+	const CategoryList& list = m_categoryMgr->getCategories();
+	Category* category = NULL;
+
+	seqDebug("category selected: %i", index);
+	if (index >= 0 && index < list.count())
+		category = list[index];
+
+	if (category != NULL)
+	{
+		seqDebug("category: %s", (const char*)category->name());
+	}
+
+	m_spawnModel->setCategory(category);
+}
+
+void SpawnListWindow3::doubleClicked(const QModelIndex& index)
+{
+	const Item* item = m_spawnModel->item(index);
+	if (item != NULL)
+	{
+		seqInfo("%s", (const char*)m_spawnModel->filterString(item));
+	}
 }

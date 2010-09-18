@@ -16,6 +16,7 @@
 #include <QColor>
 #include <QList>
 
+
 class SpawnModel : public QAbstractTableModel
 {
 	Q_OBJECT
@@ -29,6 +30,9 @@ public:
 
 	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
 	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+
+	const Item* item(int index) { return m_items.at(index); }
+	const Item* item(const QModelIndex& index) { return index.isValid() ? m_items.at(index.row()) : NULL; }
 
 public slots:
 	void addItem(const Item* item);

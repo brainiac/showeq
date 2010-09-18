@@ -77,21 +77,10 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 	hBox->setLayout(hLayout);
 
 	// create the spawn listview
-#ifndef NEW_SPAWNLIST
 	m_spawnList = new SEQListView(preferenceName(), this, "spawnlistview");
-#else
-	m_tableView = new QTreeView(this);
-	m_tableView->setModel(m_spawnShell->spawnModel());
-	m_tableView->setSortingEnabled(true);
-	m_tableView->setRootIsDecorated(false);
-#endif
 	QVBoxLayout* vLayout = new QVBoxLayout();
 	vLayout->addWidget(hBox);
-#ifndef NEW_SPAWNLIST
 	vLayout->addWidget(m_spawnList);
-#else
-	vLayout->addWidget(m_tableView);
-#endif
 	vLayout->setContentsMargins(0, 0, 0, 0);
 	vLayout->setSpacing(0);
 
@@ -99,7 +88,6 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 	pWidget->setLayout(vLayout);
 	setWidget(pWidget);
 
-#ifndef NEW_SPAWNLIST
 	m_spawnList->addColumn("Name");
 	m_spawnList->addColumn("Lvl", "Level");
 	m_spawnList->addColumn("Hp", "HP");
@@ -127,13 +115,11 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 
 	// restore the columns settings from preferences
 	m_spawnList->restoreColumns();
-#endif
 
 	// setup timer for refreshing the spawn list
 	m_timer = new QTimer(this, "spawnlist2timer");
 
 	// connect a QListView signal to ourselves
-#ifndef NEW_SPAWNLIST
 	connect(m_spawnList, SIGNAL(selectionChanged(Q3ListViewItem*)),	this, SLOT(selChanged(Q3ListViewItem*)));
 	connect(m_spawnList, SIGNAL(mouseButtonPressed(int, Q3ListViewItem*, const QPoint&, int)), this, SLOT(mousePressEvent(int, Q3ListViewItem*, const QPoint&, int)));
 	connect(m_spawnList, SIGNAL(doubleClicked(Q3ListViewItem*)), this, SLOT(mouseDoubleClickEvent(Q3ListViewItem*)));
@@ -144,7 +130,7 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 	connect(m_spawnShell, SIGNAL(killSpawn(const Item *, const Item*, uint16_t)), this, SLOT(killSpawn(const Item *)));
 	connect(m_spawnShell, SIGNAL(selectSpawn(const Item *)), this, SLOT(selectSpawn(const Item *)));
 	connect(m_spawnShell, SIGNAL(clearItems()), this, SLOT(clear()));
-#endif
+	
 	if (m_immediateUpdate)
 		connect(m_spawnShell, SIGNAL(changeItem(const Item *, uint32_t)), this, SLOT(changeItem(const Item *, uint32_t)));
 
@@ -156,6 +142,7 @@ SpawnListWindow2::SpawnListWindow2(Player* player, SpawnShell* spawnShell, Categ
 	// connect SpawnList slots to CategoryMgr signals
 	connect(m_categoryMgr, SIGNAL(addCategory(const Category*)), this, SLOT(addCategory(const Category*)));
 	connect(m_categoryMgr, SIGNAL(delCategory(const Category*)), this, SLOT(delCategory(const Category*)));
+	connect(m_categoryMgr, SIGNAL(updatecategory(const Category* cat)), this, SLOT(updatecategory(const Category* cat)));
 	connect(m_categoryMgr, SIGNAL(clearedCategories()), this, SLOT(clearedCategories()));
 	connect(m_categoryMgr, SIGNAL(loadedCategories()), this, SLOT(loadedCategories()));
 
@@ -175,20 +162,12 @@ SpawnListWindow2::~SpawnListWindow2()
 
 SpawnListItem* SpawnListWindow2::selected()
 {
-#ifndef NEW_SPAWNLIST
 	return ((SpawnListItem*) m_spawnList->selectedItem());
-#else
-	return NULL;
-#endif
 }
 
 SpawnListItem* SpawnListWindow2::find(const Item* item)
 {
-#ifndef NEW_SPAWNLIST
 	return m_spawnListItemDict.value(item);
-#else
-	return NULL;
-#endif
 }
 
 QString SpawnListWindow2::filterString(const Item* item)
@@ -213,7 +192,6 @@ QString SpawnListWindow2::filterString(const Item* item)
 
 QMenu* SpawnListWindow2::menu()
 {
-#ifndef NEW_SPAWNLIST
 	if (m_menu != NULL)
 	{
 		// make sure the menu is setup
@@ -234,16 +212,11 @@ QMenu* SpawnListWindow2::menu()
 	m_menu->setCurrentCategory(m_currentCategory);
 
 	return m_menu;
-#else
-	return NULL;
-#endif
 }
 
 void SpawnListWindow2::updateCount()
 {
-#ifndef NEW_SPAWNLIST
 	m_totalSpawns->setText(QString::number(m_spawnList->childCount()));
-#endif
 }
 
 void SpawnListWindow2::addItem(const Item* item)
@@ -254,7 +227,6 @@ void SpawnListWindow2::addItem(const Item* item)
 
 void SpawnListWindow2::delItem(const Item* item)
 {
-#ifndef NEW_SPAWNLIST
 	if (!item)
 		return;
 
@@ -272,12 +244,10 @@ void SpawnListWindow2::delItem(const Item* item)
 
 	if (item == m_selectedItem)
 		m_selectedItem = NULL;
-#endif
 }
 
 void SpawnListWindow2::changeItem(const Item* item, uint32_t changeItem)
 {
-#ifndef NEW_SPAWNLIST
 	if (!item)
 		return;
 
@@ -377,7 +347,6 @@ void SpawnListWindow2::changeItem(const Item* item, uint32_t changeItem)
 
 	// update the displayed count
 	updateCount();
-#endif
 }
 
 void SpawnListWindow2::killSpawn(const Item* item)
@@ -388,7 +357,6 @@ void SpawnListWindow2::killSpawn(const Item* item)
 
 void SpawnListWindow2::selectSpawn(const Item *item)
 {
-#ifndef NEW_SPAWNLIST
 	if (!item)
 		return;
 
@@ -409,18 +377,15 @@ void SpawnListWindow2::selectSpawn(const Item *item)
 		if (m_keepSelectedVisible)
 			m_spawnList->ensureItemVisible(litem);
 	}
-#endif
 }
 
 void SpawnListWindow2::clear()
 {
-#ifndef NEW_SPAWNLIST
 	// clear out the spawn list item dictionary
 	m_spawnListItemDict.clear();
 
 	// clear the spawn list contents
 	m_spawnList->clear();
-#endif
 }
 
 void SpawnListWindow2::addCategory(const Category* cat)
@@ -452,6 +417,13 @@ void SpawnListWindow2::delCategory(const Category* cat)
 		if (cat == m_currentCategory)
 			categorySelected(m_categoryCombo->currentItem());
 	}
+}
+
+void SpawnListWindow2::updateCategory(const Category* cat)
+{
+	// re-populate the spawn list
+	clear();
+	populateSpawns();
 }
 
 void SpawnListWindow2::clearedCategories()
@@ -492,7 +464,6 @@ void SpawnListWindow2::loadedCategories()
 
 void SpawnListWindow2::playerLevelChanged(uint8_t)
 {
-#ifndef NEW_SPAWNLIST
 	if (m_currentCategory == NULL)
 		return;
 
@@ -514,12 +485,10 @@ void SpawnListWindow2::playerLevelChanged(uint8_t)
 
 		++it;
 	}
-#endif
 }
 
 void SpawnListWindow2::setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees)
 {
-#ifndef NEW_SPAWNLIST
 	Q3ListViewItemIterator it(m_spawnList);
 	SpawnListItem* litem;
 	QString buff;
@@ -560,18 +529,15 @@ void SpawnListWindow2::setPlayer(int16_t x, int16_t y, int16_t z, int16_t deltaX
 			++it;
 		}
 	}
-#endif
 }
 
 void SpawnListWindow2::rebuildSpawnList()
 {
-#ifndef NEW_SPAWNLIST
 	// clear the spawn list contents
 	clear();
 
 	// re-populate the spawn list
 	populateSpawns();
-#endif
 }
 
 void SpawnListWindow2::refresh()
@@ -584,8 +550,6 @@ void SpawnListWindow2::refresh()
 			 test.hour(), test.minute(), test.second());
 	test.start();
 #endif
-#ifndef NEW_SPAWNLIST
-
 	if (m_currentCategory == NULL)
 		return;
 
@@ -705,7 +669,6 @@ void SpawnListWindow2::refresh()
 
 	if (!m_immediateUpdate)
 		m_timer->start(m_delay, true);
-#endif
 }
 
 void SpawnListWindow2::savePrefs()
@@ -716,11 +679,8 @@ void SpawnListWindow2::savePrefs()
 	// save the underlying SEQWindows prefs
 	SEQWindow::savePrefs();
 
-#ifndef NEW_SPAWNLIST
-
 	// save the SEQListViews prefs
 	m_spawnList->savePrefs();
-#endif
 }
 
 
@@ -758,7 +718,6 @@ void SpawnListWindow2::selChanged(Q3ListViewItem* litem)
 
 void SpawnListWindow2::mousePressEvent(int button, Q3ListViewItem* litem, const QPoint &point, int col)
 {
-#ifndef NEW_SPAWNLIST
 	// Left Mouse Button Events
 	if (button  == LeftButton && litem != NULL)
 	{
@@ -776,12 +735,10 @@ void SpawnListWindow2::mousePressEvent(int button, Q3ListViewItem* litem, const 
 		spawnMenu->setCurrentItem(item);
 		spawnMenu->popup(point);
 	}
-#endif
 }
 
 void SpawnListWindow2::mouseDoubleClickEvent(Q3ListViewItem* litem)
 {
-#ifndef NEW_SPAWNLIST
 	//print spawn info to console
 	if (litem == NULL)
 		return;
@@ -789,7 +746,6 @@ void SpawnListWindow2::mouseDoubleClickEvent(Q3ListViewItem* litem)
 	const Item* item = ((SpawnListItem*)litem)->item();
 	if (item != NULL)
 		seqInfo("%s",(const char*)filterString(item));
-#endif
 }
 
 

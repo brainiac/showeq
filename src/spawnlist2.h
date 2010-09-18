@@ -67,6 +67,7 @@ public slots:
 	// CategoryMgr signals
 	void addCategory(const Category* cat);
 	void delCategory(const Category* cat);
+	void updateCategory(const Category* cat);
 	void clearedCategories();
 	void loadedCategories();
 

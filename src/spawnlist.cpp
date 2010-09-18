@@ -97,6 +97,7 @@ SpawnList::SpawnList(Player* player, SpawnShell* spawnShell, CategoryMgr* catego
 	// connect SpawnList slots to CategoryMgr signals
 	connect(m_categoryMgr, SIGNAL(addCategory(const Category*)), this, SLOT(addCategory(const Category*)));
 	connect(m_categoryMgr, SIGNAL(delCategory(const Category*)), this, SLOT(delCategory(const Category*)));
+	connect(m_categoryMgr, SIGNAL(updatecategory(const Category* cat)), this, SLOT(updatecategory(const Category* cat)));
 	connect(m_categoryMgr, SIGNAL(clearedCategories()), this, SLOT(clearedCategories()));
 	connect(m_categoryMgr, SIGNAL(loadedCategories()), this, SLOT(loadedCategories()));
 
@@ -698,10 +699,7 @@ void SpawnList::addCategory(const Category* cat)
 	// associate the new spawn list item with the category
 	m_categoryListItems.insert((void*)cat, litem);
 
-	// set color
 	litem->setTextColor(cat->color());
-
-	// update count
 	litem->updateTitle(cat->name());
 
 	// populate the category
@@ -742,6 +740,45 @@ void SpawnList::delCategory(const Category* cat)
 		// delete the list item
 		delete litem;
 	}
+}
+
+void SpawnList::updateCategory(const Category* cat)
+{
+	// retrieve the list item associated with the category
+	SpawnListItem* litem = m_categoryListItems.find((void*)cat);
+
+	// if there's a list item associated with this category, clean it out
+	if (litem != NULL)
+	{
+		SpawnListItem *next;
+		SpawnListItem *child;
+
+		// remove all children from list
+		// start with the first child
+		child = (SpawnListItem *) litem->firstChild();
+
+		// iterate until the category is out of children
+		while (child)
+		{
+			// get the next child
+			next = (SpawnListItem *) child->nextSibling();
+
+			// delete the current child
+			delete child;
+
+			// the next child is now the current child
+			child = next;
+		}
+
+		// delete the list item
+		delete litem;
+	}
+
+	litem->setTextColor(cat->color());
+	litem->updateTitle(cat->name());
+
+	// populate the category
+	populateCategory(cat);
 }
 
 void SpawnList::clearedCategories()

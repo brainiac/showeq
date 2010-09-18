@@ -235,6 +235,7 @@ int SpawnModel::findItemIndex(const Item* item)
 	return -1;
 }
 
+// TODO: Improve me!
 QColor SpawnModel::pickTextColor(const Item* item) const
 {
 	if (item == NULL)

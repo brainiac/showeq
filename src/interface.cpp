@@ -427,7 +427,7 @@ void EQInterface::createFileMenu()
 	// Reload Categories
 	action = new QAction("Reload Categories", this);
 	action->setShortcut(CTRL + Key_R);
-	connect(action, SIGNAL(triggered()), m_sm->categoryMgr(), SLOT(reloadCategories()));
+	connect(action, SIGNAL(triggered()), m_sm->categoryMgr(), SLOT(loadCategories()));
 	pFileMenu->addAction(action);
 
 	// Select Next

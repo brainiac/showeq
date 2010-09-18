@@ -20,9 +20,20 @@
 //----------------------------------------------------------------------
 // forward declarations
 class FilterItem;
+
 class Category;
 class CategoryMgr;
-class CategoryDlg;
+class CategoryDialog;
+class CategoryModel;
+
+enum tCategoryColumn
+{
+	tCatColName,
+	tCatColFilter,
+	tCatColFilterOut,
+	tCatColColor,
+	tCatColMax
+};
 
 // ------------------------------------------------------
 // Category
@@ -38,6 +49,8 @@ public:
 
 	bool isFilteredFilter() const { return m_filteredFilter; };
 	bool isFiltered(const QString& filterString, int level = 0) const;
+
+	void set(const Category& other);
 
 private:
 	QString m_name;
@@ -55,14 +68,15 @@ typedef QList<Category*>::const_iterator CategoryListConstIterator;
 
 // ------------------------------------------------------
 // CategoryMgr
-class CategoryMgr : public QObject
+class CategoryMgr : public QAbstractTableModel
 {
 	Q_OBJECT
 
 public:
+	// TODO: Remove category limit
 	enum { tMaxNumCategories = 32 };
 
-	CategoryMgr(QObject* parent = 0, const char* name = 0);
+	CategoryMgr(QObject* parent = 0);
 	virtual ~CategoryMgr();
 
 	const CategoryList findCategories(const QString& filterString, int level) const;
@@ -72,21 +86,30 @@ public:
 	const Category* addCategory(const QString& name, const QString& filter, const QString& filterout, QColor color = Qt::black);
 	void remCategory(const Category* cat);
 
+	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+
+	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
+	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+
 public slots:
 	void clearCategories();
 	void addCategory(QWidget* parent = 0);
-	void editCategories(const Category* cat, QWidget* parent = 0);
-	void reloadCategories();
+	void editCategories(Category* cat, QWidget* parent = 0);
+
+	void loadCategories();
 	void savePrefs();
 
 signals:
 	void addCategory(const Category* cat);
 	void delCategory(const Category* cat);
+	void updateCategory(const Category* cat);
+
 	void clearedCategories();
 	void loadedCategories();
 
 private:
-	CategoryList m_categories;
+	CategoryList	m_categories;
 	bool m_changed;
 };
 
