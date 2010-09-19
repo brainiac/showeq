@@ -18,6 +18,9 @@ SpawnModel::SpawnModel(Player* player, QObject *parent)
 {
 	m_defaultColor = Qt::black;
 
+	connect(m_player, SIGNAL(posChanged(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)),
+		this, SLOT(updatePosition(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)));
+	connect(m_player, SIGNAL(levelChanged(uint8_t)), this, SLOT(updateLevel(uint8_t)));
 }
 
 SpawnModel::~SpawnModel()
@@ -83,7 +86,14 @@ QVariant SpawnModel::data(const QModelIndex& index, int role) const
 			return (int)item->id();
 
 		case tSpawnColDist:
-			return showeq_params->fast_machine ? item->getFDistanceToPlayer() : item->getIDistanceToPlayer();
+			return showeq_params->fast_machine ?
+					item->calcDist(
+						m_player->x(),
+						m_player->y(),
+						m_player->z()) :
+					item->calcDist2DInt(
+						m_player->x(),
+						m_player->y());
 
 		case tSpawnColRace:
 			return item->raceString();
@@ -299,4 +309,17 @@ QColor SpawnModel::pickTextColor(const Item* item) const
 		return QColor(206, 151, 33);
 
 	return color;
+}
+
+void SpawnModel::updatePosition(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees)
+{
+	QModelIndex start = index(0, tSpawnColDist);
+	QModelIndex finish = index(rowCount() - 1, tSpawnColDist);
+
+	dataChanged(start, finish);
+}
+
+void SpawnModel::updateLevel(uint8_t level)
+{
+
 }
