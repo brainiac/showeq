@@ -18,7 +18,6 @@
 #include "diagnosticmessages.h"
 
 
-
 SpawnListWindow3::SpawnListWindow3(Player* player, SpawnShell* spawnShell, CategoryMgr* categoryMgr, QWidget *parent)
 	: SEQWindow("SpawnList3", "ShowEQ - Spawns", parent),
 	m_player(player),
@@ -41,6 +40,7 @@ SpawnListWindow3::SpawnListWindow3(Player* player, SpawnShell* spawnShell, Categ
 	ui.m_treeView->setModel(m_spawnModel);
 	ui.m_treeView->setSortingEnabled(true);
 	ui.m_treeView->setRootIsDecorated(false);
+	ui.m_treeView->setSelectionMode(QAbstractItemView::SingleSelection);
 
 	delete ui.m_filterBox->model();
 	ui.m_filterBox->setModel(categoryMgr);
@@ -63,7 +63,6 @@ SpawnListWindow3::~SpawnListWindow3()
 void SpawnListWindow3::updateFilterBox()
 {
 	int row = ui.m_filterBox->currentIndex();
-	seqDebug("filterbox updated, index: %i", row);
 
 	ui.m_filterBox->setModel(m_categoryMgr);
 	ui.m_filterBox->setCurrentIndex(row);
@@ -81,14 +80,9 @@ void SpawnListWindow3::categorySelected(int index)
 	const CategoryList& list = m_categoryMgr->getCategories();
 	Category* category = NULL;
 
-	seqDebug("category selected: %i", index);
+	//seqDebug("category selected: %i", index);
 	if (index >= 0 && index < list.count())
 		category = list[index];
-
-	if (category != NULL)
-	{
-		seqDebug("category: %s", (const char*)category->name());
-	}
 
 	m_spawnModel->setCategory(category);
 }

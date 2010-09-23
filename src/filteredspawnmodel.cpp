@@ -104,3 +104,41 @@ const Item* FilteredSpawnModel::item(const QModelIndex& index)
 	}
 	return NULL;
 }
+
+QVariant FilteredSpawnModel::data(const QModelIndex& index, int role) const
+{
+	if (role == Qt::ForegroundRole)
+	{
+		QModelIndex sourceIndex = mapToSource(index);
+		
+		const Item* item = m_spawnModel->item(sourceIndex);
+		uint32_t filterFlags = 0;
+
+		if (item != NULL)
+			filterFlags = item->filterFlags();
+
+		if (filterFlags & FILTER_FLAG_FILTERED)
+			return QBrush(Qt::gray);
+
+		return m_spawnModel->data(sourceIndex, role);
+	}
+	else if (role == Qt::FontRole)
+	{
+		QModelIndex sourceIndex = mapToSource(index);
+		const Item* item = m_spawnModel->item(sourceIndex);
+		uint32_t filterFlags = 0;
+
+		if (item != NULL)
+			filterFlags = item->filterFlags();
+
+	
+		QFont font;
+		font.setBold((filterFlags & FILTER_FLAG_ALERT) != 0);
+		font.setItalic((filterFlags & FILTER_FLAG_LOCATE) != 0);
+		font.setUnderline((filterFlags & FILTER_FLAG_CAUTION) || (filterFlags & FILTER_FLAG_DANGER));
+		
+		return font;
+	}
+
+	return QSortFilterProxyModel::data(index, role);
+}

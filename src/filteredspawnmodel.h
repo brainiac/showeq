@@ -22,6 +22,8 @@ public:
 
 	const Item* item(const QModelIndex& index);
 
+	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+
 public slots:
 	void setCategory(const Category* category);
 	void clearFilters();

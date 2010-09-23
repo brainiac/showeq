@@ -13,11 +13,11 @@
 #include "main.h"
 #include "spawnmodel.h"
 
+QColor SpawnModel::s_defaultColor = Qt::black;
+
 SpawnModel::SpawnModel(Player* player, QObject *parent)
 	: QAbstractTableModel(parent), m_player(player)
 {
-	m_defaultColor = Qt::black;
-
 	connect(m_player, SIGNAL(posChanged(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)),
 		this, SLOT(updatePosition(int16_t,int16_t,int16_t, int16_t,int16_t,int16_t,int32_t)));
 	connect(m_player, SIGNAL(levelChanged(uint8_t)), this, SLOT(updateLevel(uint8_t)));
@@ -126,7 +126,7 @@ QVariant SpawnModel::data(const QModelIndex& index, int role) const
 	}
 	else if (role == Qt::ForegroundRole)
 	{
-		return QBrush(pickTextColor(item));
+		return QBrush(pickTextColor(item, m_player));
 	}
 	else if (role == Qt::FontRole)
 	{
@@ -246,17 +246,17 @@ int SpawnModel::findItemIndex(const Item* item)
 }
 
 // TODO: Improve me!
-QColor SpawnModel::pickTextColor(const Item* item) const
+QColor SpawnModel::pickTextColor(const Item* item, const Player* player)
 {
 	if (item == NULL)
-		return m_defaultColor;
+		return s_defaultColor;
 
 	const Spawn* spawn = NULL;
 	if (item->type() == tSpawn || item->type() == tPlayer)
 		spawn = (const Spawn*)item;
 
 	if (spawn == NULL)
-		return m_defaultColor;
+		return s_defaultColor;
 
 	switch (spawn->typeflag())
 	{
@@ -300,15 +300,20 @@ QColor SpawnModel::pickTextColor(const Item* item) const
 		}
 	}
 
-	QColor color = m_player->pickConColor(spawn->level());
+	if (player != NULL)
+	{
+		QColor color = player->pickConColor(spawn->level());
 
-	if (color == Qt::white)
-		return Qt::black;
+		if (color == Qt::white)
+			return Qt::black;
 
-	if (color == Qt::yellow)
-		return QColor(206, 151, 33);
+		if (color == Qt::yellow)
+			return QColor(206, 151, 33);
 
-	return color;
+		return color;
+	}
+
+	return s_defaultColor;
 }
 
 void SpawnModel::updatePosition(int16_t x, int16_t y, int16_t z, int16_t deltaX, int16_t deltaY, int16_t deltaZ, int32_t degrees)

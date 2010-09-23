@@ -45,11 +45,11 @@ public slots:
 
 protected:
 	int findItemIndex(const Item* item);
-	QColor pickTextColor(const Item* item) const;
+	static QColor pickTextColor(const Item* item, const Player* player = NULL);
 
 	Player*					m_player;
 	QList<const Item*>		m_items;
-	QColor					m_defaultColor;
+	static QColor			s_defaultColor;
 };
 
 #endif // SPAWNMODEL_H
