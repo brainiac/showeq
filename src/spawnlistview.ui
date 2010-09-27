@@ -1,0 +1,23 @@
+<UI version="4.0" >
+ <class>SpawnListViewClass</class>
+ <widget class="QTreeView" name="SpawnListViewClass" >
+  <property name="objectName" >
+   <string notr="true">SpawnListViewClass</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>400</width>
+	<height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>SpawnListView</string>
+  </property>  
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</UI>

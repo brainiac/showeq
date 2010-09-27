@@ -78,7 +78,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QTreeView" name="m_treeView">
+     <widget class="SpawnListView" name="m_treeView">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>100</horstretch>
@@ -112,6 +112,11 @@
    <extends>QWidget</extends>
    <header>seqwindow.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SpawnListView</class>
+   <extends>QTreeView</extends>
+   <header>spawnlistview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
