@@ -1,3 +1,15 @@
+ShowEQ v6.x
+-----------
+
+This is a work in progress. ShowEQ has been ported from Qt3 to Qt4.6
+and has been proven to be in a workable state on Linux, Mac, and Windows.
+
+Mac and Linux might be currently broken. Most development has taken
+place using windows.
+
+Development for Windows has been using the visual studio 2010 Qt addin.
+
+
 ShowEQ v5.x
 -----------
 Realtime packet analyzer for Everquest
