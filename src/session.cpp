@@ -58,7 +58,7 @@ Session::Session(SessionManager* parent, DataSource* source)
 	m_preferences = parent->preferences();
 
 	m_timer = new QTimer(this);
-	m_delay = 0;
+	m_delay = 1000;
 	m_dataSource = 0;
 	
 	/***********************************************************************

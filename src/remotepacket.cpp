@@ -123,7 +123,7 @@ bool RemotePacketServer::connectReceiver(const QString& opcodeName, const QStrin
 	if (!payload)
 	{
 		seqDebug("RemotePacketServer::connect2: Warning! opcode '%s' has no matching payload.", (const char*)opcodeName);
-		seqDebug("\tdir 'any' payload '%s' szt '%d'", payloadType, szt);
+		seqDebug("\tdir 'any' payload '%s' szt '%d'", (const char*)payloadType, szt);
 		seqDebug("\tfor receiver '%s' of type '%s' to member '%s'", receiver->name(), receiver->className(), member);
 		return false;
 	}
@@ -132,14 +132,12 @@ bool RemotePacketServer::connectReceiver(const QString& opcodeName, const QStrin
 
 	if (dir & DIR_Client)
 	{
-		result = assignDispatcher(&m_sendDispatchers, opcodeName, payload,
-				receiver, member);
+		result = assignDispatcher(&m_sendDispatchers, opcodeName, payload, receiver, member);
 	}
 
 	if (dir & DIR_Server)
 	{
-		result = result && assignDispatcher(&m_recvDispatchers, opcodeName, payload,
-				receiver, member);
+		result = result && assignDispatcher(&m_recvDispatchers, opcodeName, payload, receiver, member);
 	}
 
 	return result;
@@ -284,7 +282,7 @@ void RemotePacketServer::handlePacket(uint32_t type, const uint8_t* data, uint32
 			// this message type is for when the client sends a packet to the
 			// server. The equivalent EQ_DIR would be DIR_Client.
 			TransferPacketStruct* packet = (TransferPacketStruct*)data;
-			//seqInfo("\e[0;32m" "SendPacket with Opcode %x, Length: %i" "\e[0m", packet->opcode, packet->size);
+			seqInfo("\e[0;32m" "SendPacket with Opcode %x, Length: %i" "\e[0m", packet->opcode, packet->size);
 
 			dispatchPacket(packet->opcode, packet->data, packet->size, DIR_Client);
 			break;

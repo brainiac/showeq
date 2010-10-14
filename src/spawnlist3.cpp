@@ -42,6 +42,10 @@ SpawnListWindow3::SpawnListWindow3(Player* player, SpawnShell* spawnShell, Categ
 	ui.m_treeView->setRootIsDecorated(false);
 	ui.m_treeView->setSelectionMode(QAbstractItemView::SingleSelection);
 
+	ui.m_treeView->setPreferenceName("SpawnList3");
+	ui.m_treeView->saveColumnPreferences();
+	connect(ui.m_treeView, SIGNAL(clicked(const QModelIndex&)), ui.m_treeView, SLOT(saveColumnPreferences()));
+
 	delete ui.m_filterBox->model();
 	ui.m_filterBox->setModel(categoryMgr);
 	ui.m_filterBox->setModelColumn(tCatColName);

@@ -13,6 +13,17 @@ class SpawnListView : public QTreeView, public SpawnListViewClass
 public:
 	SpawnListView(QWidget *parent = 0);
 	~SpawnListView();
+
+
+	void setPreferenceName(const QString& preferenceName) { m_preferenceName = preferenceName; }
+	QString getPreferenceName() const { return m_preferenceName; }
+
+public slots:
+	void saveColumnPreferences();
+	void loadColumnPreferences();
+
+private:
+	QString		m_preferenceName;
 };
 
 #endif // SPAWNLISTVIEW_H

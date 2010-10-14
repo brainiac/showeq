@@ -14,6 +14,9 @@
 
 #include "pch.h"
 #include "spawnlistview.h"
+#include "diagnosticmessages.h"
+
+#include <QHeaderView>
 
 SpawnListView::SpawnListView(QWidget *parent)
 	: QTreeView(parent)
@@ -24,6 +27,38 @@ SpawnListView::SpawnListView(QWidget *parent)
 }
 
 SpawnListView::~SpawnListView()
+{
+}
+
+
+void SpawnListView::saveColumnPreferences()
+{
+	if (m_preferenceName.isEmpty())
+		return;
+
+	QHeaderView* headerView = this->header();
+
+	int sortIndex		= headerView->sortIndicatorSection();
+	Qt::SortOrder order = headerView->sortIndicatorOrder();
+
+	for (int i = 0; i < headerView->count(); i++)
+	{
+		int visualIndex = headerView->visualIndex(i);
+		int size		= headerView->sectionSize(i);
+		bool hidden		= headerView->isSectionHidden(i);
+
+		QVariant headerData = this->model()->headerData(i, Qt::Horizontal);
+
+		seqInfo("Index: %i: %s, %i (size=%i) hidden=%i", i, (const char*)headerData.asString(), visualIndex, size, hidden);
+
+		if (i == sortIndex)
+		{
+			seqInfo("\tSorted: %s", order == Qt::AscendingOrder ? "ascending" : "descending");
+		}
+	}
+}
+
+void SpawnListView::loadColumnPreferences()
 {
 
 }
